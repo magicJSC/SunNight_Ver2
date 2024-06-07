@@ -86,8 +86,6 @@ public class BuildController : MonoBehaviour
             ChoiceBuild(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0));
             return;
         }
-        Managers.Game.tower.build.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), info.tile);
-        Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].count--;
 
         if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].count == 0)
         {
