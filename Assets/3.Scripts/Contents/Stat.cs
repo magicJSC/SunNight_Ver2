@@ -14,7 +14,12 @@ public class Stat : MonoBehaviour
 
     private void Start()
     {
-        hpBar = Util.FindChild(gameObject,"UI_HpBar").GetComponent<UI_HpBar>();
+        GameObject go = Util.FindChild(gameObject, "UI_HpBar");
+        if(go == null)
+        {
+            go = Instantiate(Resources.Load<GameObject>("UI/UI_HpBar"),transform);
+        }
+        hpBar = go.GetComponent<UI_HpBar>();
         maxHP = Hp;
     }
 }

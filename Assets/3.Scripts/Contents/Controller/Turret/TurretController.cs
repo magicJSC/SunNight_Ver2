@@ -56,15 +56,19 @@ public class TurretController : MonoBehaviour
             isWorking = true;
             atkCurTime = 0;
             anim.Play("Attack");
-            _target.GetComponent<MonsterStat>().Hp -= _stat.Dmg;
-            if (_target.GetComponent<MonsterStat>().Hp <= 0)
-            {
-                _targets.Remove(_target);
-                Destroy(_target);
-            }
         }
         else
             atkCurTime += Time.deltaTime;
+    }
+
+    void Atk()
+    {
+        _target.GetComponent<MonsterStat>().Hp -= _stat.Dmg;
+        if (_target.GetComponent<MonsterStat>().Hp <= 0)
+        {
+            _targets.Remove(_target);
+            Destroy(_target);
+        }
     }
 
     void EndAtk()

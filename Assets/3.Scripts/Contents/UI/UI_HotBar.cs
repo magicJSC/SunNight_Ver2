@@ -73,7 +73,8 @@ public class UI_HotBar : UI_Base
         int a =5;
         Managers.Inven.hotBar_itemInfo[0] = new InvenManager.ItemInfo(3, 10);
         Managers.Inven.hotBar_itemInfo[1] = new InvenManager.ItemInfo(4, 1);
-        for(int i = 2; i < a; i++)
+        Managers.Inven.hotBar_itemInfo[2] = new InvenManager.ItemInfo(5, 3);
+        for(int i = 3; i < a; i++)
         {
             Managers.Inven.hotBar_itemInfo[i] = new InvenManager.ItemInfo(0, 0);
         }
