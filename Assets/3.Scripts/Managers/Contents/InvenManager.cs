@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 using UnityEngine.Tilemaps;
+using UnityEditor.Profiling.Memory.Experimental;
 
 public class InvenManager : MonoBehaviour
 {
@@ -13,27 +14,25 @@ public class InvenManager : MonoBehaviour
     public class ItemInfo
     {
         public int id;
+        public string objName;
         public int count;
         public Sprite icon;
         public ItemType itemType;
         public KeyType keyType;
         public TileBase tile;
 
-        public ItemInfo(int id, int count)
+        public ItemInfo(int count,string _name = "")
         {
-
-            if (id == 0)
+            if(_name == "")
             {
-                this.id = id;
-                this.count = 0;
+                id = 0;
                 keyType = KeyType.Empty;
                 return;
             }
-            Item i = Resources.Load<GameObject>($"Prefabs/Items/{id}").GetComponent<Item>(); //id에 따른 아이템 정보
-            if (i == null)
-                Debug.Log($"id가 {id}인 아이템은 없습니다");
+
+            Item i = Resources.Load<GameObject>($"Prefabs/Items/{_name}").GetComponent<Item>(); //이름으로 가져오기
             keyType = KeyType.Exist;
-            this.id = id;
+            id = i.id;
             itemType = i.itemType;
             icon = i.itemIcon;
             this.count = count;

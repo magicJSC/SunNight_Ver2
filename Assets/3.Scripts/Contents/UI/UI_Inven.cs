@@ -62,7 +62,7 @@ public class UI_Inven : UI_Base
     {
         for (int i = 0; i < Managers.Inven.inven_itemInfo.Length; i++)
         {
-            Managers.Inven.inven_itemInfo[i] = new InvenManager.ItemInfo(1,10);
+            Managers.Inven.inven_itemInfo[i] = new InvenManager.ItemInfo(0);
         }
     }
 

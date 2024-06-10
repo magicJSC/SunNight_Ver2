@@ -71,12 +71,12 @@ public class UI_HotBar : UI_Base
     public void GetData()
     {
         int a =5;
-        Managers.Inven.hotBar_itemInfo[0] = new InvenManager.ItemInfo(3, 10);
-        Managers.Inven.hotBar_itemInfo[1] = new InvenManager.ItemInfo(4, 1);
-        Managers.Inven.hotBar_itemInfo[2] = new InvenManager.ItemInfo(5, 3);
+        Managers.Inven.hotBar_itemInfo[0] = new InvenManager.ItemInfo(10,"Fence");
+        Managers.Inven.hotBar_itemInfo[1] = new InvenManager.ItemInfo(1,"Sword");
+        Managers.Inven.hotBar_itemInfo[2] = new InvenManager.ItemInfo(3, "Turret");
         for(int i = 3; i < a; i++)
         {
-            Managers.Inven.hotBar_itemInfo[i] = new InvenManager.ItemInfo(0, 0);
+            Managers.Inven.hotBar_itemInfo[i] = new InvenManager.ItemInfo(0);
         }
     }
 
