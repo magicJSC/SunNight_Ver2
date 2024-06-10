@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class GameScene : BaseScene
 {
-    
+    protected override bool Init()
+    {
+        if (base.Init() == false)
+            return false;
+
+        Managers.Game.Init();
+        return true;
+    }
+
 }
