@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurretController : MonoBehaviour
 {
-    TurretStat _stat;
+    BuildStat _stat;
     Animator anim;
 
 
@@ -17,7 +17,7 @@ public class TurretController : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        _stat = GetComponent<TurretStat>();
+        _stat = GetComponent<BuildStat>();
         if (_stat == null)
             Debug.Log($"{name}포탑에 TurretStat이 존재하지 않습니다");
         GetComponent<CircleCollider2D>().radius = _stat._range;

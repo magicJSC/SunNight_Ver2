@@ -41,7 +41,6 @@ public class Managers : MonoBehaviour
 
             instance._network.Init();
             instance._inven.Init();
-            instance._game.Init();
         }
     }
 
