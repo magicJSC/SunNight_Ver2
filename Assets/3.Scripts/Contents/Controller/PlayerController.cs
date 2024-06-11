@@ -47,7 +47,7 @@ public class PlayerController : CreatureController
     {
         for (int i = 0; i < matters.Count; i++)
         {
-            if (Managers.Inven.AddItem(matters[i].GetComponent<Item_Matter>().id))
+            if (Managers.Inven.AddItem(matters[i].GetComponent<Item_Matter>().objName))
                 matters[i].GetComponent<Item_Matter>().DestroyThis();
         }
     }

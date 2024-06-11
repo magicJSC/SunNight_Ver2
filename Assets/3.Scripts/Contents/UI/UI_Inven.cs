@@ -20,7 +20,6 @@ public class UI_Inven : UI_Base
         Hide
     }
 
-    bool _init;
 
     public override void Init()
     {
