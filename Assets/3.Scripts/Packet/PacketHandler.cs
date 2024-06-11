@@ -2,7 +2,6 @@
 using Google.Protobuf;
 using ServerCore;
 using Protocol;
-using System;
 
 class PacketHandler
 {
