@@ -4,7 +4,6 @@ using ServerCore;
 using System;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using UnityEngine;
 
 public class ServerSession : PacketSession

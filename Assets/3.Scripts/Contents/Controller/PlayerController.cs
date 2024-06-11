@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : CreatureController
 {
-    [SerializeField] float speed;
     Rigidbody2D rigid;
 
     [HideInInspector]

@@ -14,10 +14,10 @@ public class GameManager : MonoBehaviour
     {
         if(grid == null)
         {
-            grid = FindAnyObjectByType<GridManager>();
+            grid = FindAnyObjectByType<MapManager>();
             if(grid == null)
             {
-                grid = Instantiate(Resources.Load<GameObject>("Prefabs/Grid")).GetComponent<GridManager>();
+                grid = Instantiate(Resources.Load<GameObject>("Prefabs/Grid")).GetComponent<MapManager>();
             }
             grid.Init();
         }
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     public BuildController build;
     public MouseController mouse;
-    public GridManager grid;
+    public MapManager grid;
    
 
    

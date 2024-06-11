@@ -21,7 +21,9 @@ public class Managers : MonoBehaviour
 
     InputManager _input = new InputManager();
     SceneManagerEx _scene = new SceneManagerEx();
+    MapManager _map = new MapManager();
 
+    public static MapManager Map { get { return Instance._map; } }
     public static InputManager Input { get {  return Instance._input; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
 

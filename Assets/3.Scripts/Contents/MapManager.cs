@@ -3,12 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class GridManager : MonoBehaviour
+public struct Pos
 {
+    public Pos(int y, int x) { Y = y; X = x; }
+    public int Y;
+    public int X;
+}
+
+public class MapManager : MonoBehaviour 
+{
+    public Grid CurrentGrid { get; private set; }
+
     public Tilemap walls;
     public Tilemap matter;
     public Tilemap building;
     public TileBase banTile;
+
     public void Init()
     {
         GameObject go = Util.FindChild(gameObject, "Wall");
@@ -31,5 +41,20 @@ public class GridManager : MonoBehaviour
             return false;
 
         return true;
+    }
+
+    public void LoadMap(int mapId)
+    {
+        DestroyMap();
+
+        string mapName = "Map_" + mapId.ToString("000");
+
+    }
+
+    public void DestroyMap()
+    {
+        GameObject map = GameObject.Find("Map");
+        if (map != null)
+            GameObject.Destroy(map);
     }
 }
