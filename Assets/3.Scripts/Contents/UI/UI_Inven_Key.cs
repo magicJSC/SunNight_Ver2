@@ -74,6 +74,12 @@ public class UI_Inven_Key : UI_Base
 
     public void SetIcon()
     {
+        if (Inven.inven_itemInfo[keyId].keyType == Define.KeyType.Empty)
+        {
+            EmptyKey();
+            return;
+        }
+
         icon.sprite = Inven.inven_itemInfo[keyId].icon; 
         count.text = Inven.inven_itemInfo[keyId].count.ToString();
 
