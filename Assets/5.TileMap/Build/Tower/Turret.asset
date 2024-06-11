@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Turret
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 2104973452535747052, guid: 0ccceba75b0fb664d86f78f1e418ae0c, type: 3}
+  m_DefaultGameObject: {fileID: 2184196247624334751, guid: 638588bfab471e944a9c4b86f5bf8eae, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []

@@ -88,7 +88,7 @@ public class InvenManager : MonoBehaviour
                 break;
             case ItemType.Tool:
                 Managers.Game.mouse.CursorType = CursorType.Normal;
-                Instantiate(Resources.Load<GameObject>($"Prefabs/Items/{hotBar_itemInfo[hotBar_choice].id}"), Managers.Game.player.toolParent.transform);
+                Instantiate(Resources.Load<GameObject>($"Prefabs/Items/{hotBar_itemInfo[hotBar_choice].objName}"), Managers.Game.player.toolParent.transform);
                 Managers.Game.build.HideSample();
                 break;
             default:
@@ -100,9 +100,9 @@ public class InvenManager : MonoBehaviour
 
 
 
-    public bool AddItem(int id, int count = 1)
+    public bool AddItem(string _name,int count = 1)
     {
-        Item item = Resources.Load<Item>($"Prefabs/Items/{id}");
+        Item item = Resources.Load<Item>($"Prefabs/Items/{_name}");
         return Add_Item_Inven(item, count);
     }
 
@@ -115,7 +115,7 @@ public class InvenManager : MonoBehaviour
             {
                 if (item.id == hotBar_itemInfo[i].id && hotBar_itemInfo[i].count < 99)
                 {
-                    hotBar.Set_HotBar_Info(i, item.id, hotBar_itemInfo[i].count + count);
+                    hotBar.Set_HotBar_Info(i,hotBar_itemInfo[i].count + count,item.objName);
                     return true;
                 }
                 else
@@ -127,7 +127,7 @@ public class InvenManager : MonoBehaviour
             //추가 하지 못했다면 비어있는 칸에 넣기
             if (empty != -1)
             {
-                hotBar.Set_HotBar_Info(empty, item.id, hotBar_itemInfo[empty].count + count);
+                hotBar.Set_HotBar_Info(empty,hotBar_itemInfo[empty].count + count,item.objName);
                 return true;
             }
 
@@ -139,7 +139,7 @@ public class InvenManager : MonoBehaviour
             {
                 if (KeyType.Empty == hotBar_itemInfo[i].keyType)
                 {
-                    hotBar.Set_HotBar_Info(i, item.id, 1);
+                    hotBar.Set_HotBar_Info(i, 1,item.objName);
                     return true;
                 }
             }
@@ -156,7 +156,7 @@ public class InvenManager : MonoBehaviour
             {
                 if (item.id == inven_itemInfo[i].id && inven_itemInfo[i].count < 99)
                 {
-                    inven.Set_Inven_Info(i, item.id, inven_itemInfo[i].count + count);
+                    inven.Set_Inven_Info(i, inven_itemInfo[i].count + count,item.objName);
                     return true;
                 }
                 else
@@ -168,7 +168,7 @@ public class InvenManager : MonoBehaviour
             //추가 하지 못했다면 비어있는 칸에 넣기
             if (empty != -1)
             {
-                inven.Set_Inven_Info(empty, item.id, inven_itemInfo[empty].count + count);
+                inven.Set_Inven_Info(empty, inven_itemInfo[empty].count + count,item.objName);
                 return true;
             }
 
@@ -181,7 +181,7 @@ public class InvenManager : MonoBehaviour
             {
                 if (KeyType.Empty == inven_itemInfo[i].keyType)
                 {
-                    inven.Set_Inven_Info(i, item.id, 1);
+                    inven.Set_Inven_Info(i, 1,item.objName);
                     return true;
                 }
             }
