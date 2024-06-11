@@ -83,22 +83,22 @@ public class UI_Inven : UI_Base
         keys[i].GetComponent<UI_Inven_Key>().SetIcon();
     }
 
-    public void Set_Inven_Info(int key_index, int id, int count)
+    public void Set_Inven_Info(int key_index,int count,string _name="")
     {
-        if (id == 0)
+        if (_name == "")
         {
             keys[key_index].GetComponent<UI_Inven_Key>().EmptyKey();
             return;
         }
 
-        Item item = Resources.Load<GameObject>($"Prefabs/Items/{id}").GetComponent<Item>(); //id에 따른 아이템 정보
+        Item item = Resources.Load<GameObject>($"Prefabs/Items/{_name}").GetComponent<Item>(); //id에 따른 아이템 정보
 
-        Managers.Inven.inven_itemInfo[key_index].id = id;
+        //Managers.Inven.inven_itemInfo[key_index].id = id;
         Managers.Inven.inven_itemInfo[key_index].itemType = item.itemType;
 
         if(count > 99)
         {
-            Managers.Inven.AddItem(id,count - 99);
+            Managers.Inven.AddItem(_name,count - 99);
             count = 99;
         }
         Managers.Inven.inven_itemInfo[key_index].count = count;

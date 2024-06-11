@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BuildStat : Stat
 {
-    public float _level;
-
     public float Dmg { get { return _dmg; } set { _dmg = value; } }
     [SerializeField]
     float _dmg;

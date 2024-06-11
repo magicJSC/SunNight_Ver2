@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: -157942333, guid: c7198cf7fc0cfb54b90a8ffeefc122cf, type: 3}
   id: 4
+  objName: Sword
   itemType: 2
   tile: {fileID: 0}
 --- !u!95 &5033025128389586287

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Item_Buliding : Item
 {
+    [Header("Building")]
+    public int level;
+
     [HideInInspector]
     public Vector2 pos;
 

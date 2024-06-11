@@ -108,7 +108,7 @@ public class BuildController : MonoBehaviour
         GameObject go = Managers.Game.tower.build.GetInstantiatedObject(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0));
         if (go != null)
         {
-            Managers.Inven.AddItem(go.GetComponent<Item>().id);
+            Managers.Inven.AddItem(go.GetComponent<Item>().objName);
             Managers.Inven.Set_HotBar_Choice();
             go.GetComponent<Item_Buliding>().DeleteBuilding();
         }

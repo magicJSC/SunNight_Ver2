@@ -133,49 +133,49 @@ public class UI_Inven_Key : UI_Base
         if (Inven.changeSpot.invenType == Define.InvenType.None)
            ShowIcon();
         //키 자신의 값
-        int id = Inven.inven_itemInfo[keyId].id;
+        string _name = Inven.inven_itemInfo[keyId].objName;
         int count = Inven.inven_itemInfo[keyId].count;
         if (Inven.changeSpot.invenType == Define.InvenType.Inven)
         {
-            Inven.inven.Set_Inven_Info(keyId, Inven.inven_itemInfo[Inven.changeSpot.index].id, Inven.inven_itemInfo[Inven.changeSpot.index].count);
-            Inven.inven.Set_Inven_Info(Inven.changeSpot.index, id, count);
+            Inven.inven.Set_Inven_Info(keyId,Inven.inven_itemInfo[Inven.changeSpot.index].count, Inven.inven_itemInfo[Inven.changeSpot.index].objName);
+            Inven.inven.Set_Inven_Info(Inven.changeSpot.index,count,_name);
         }
         else
         {
-            Inven.inven.Set_Inven_Info(keyId, Inven.hotBar_itemInfo[Inven.changeSpot.index].id, Inven.hotBar_itemInfo[Inven.changeSpot.index].count);
-            Inven.hotBar.Set_HotBar_Info(Inven.changeSpot.index, id, count);
+            Inven.inven.Set_Inven_Info(keyId, Inven.hotBar_itemInfo[Inven.changeSpot.index].count, Inven.hotBar_itemInfo[Inven.changeSpot.index].objName);
+            Inven.hotBar.Set_HotBar_Info(Inven.changeSpot.index, count, _name);
         }
     }
 
     void MoveItemSpot()
     {
-        int id = Inven.inven_itemInfo[keyId].id;
+        string _name = Inven.inven_itemInfo[keyId].objName;
         int count = Inven.inven_itemInfo[keyId].count;
         if (Inven.changeSpot.invenType == Define.InvenType.Inven)
         {
-            Inven.inven.Set_Inven_Info(keyId, 0, 0);
-            Inven.inven.Set_Inven_Info(Inven.changeSpot.index, id, count);
+            Inven.inven.Set_Inven_Info(keyId, 0);
+            Inven.inven.Set_Inven_Info(Inven.changeSpot.index, count, _name);
         }
         else
         {
-            Inven.inven.Set_Inven_Info(keyId, 0, 0);
-            Inven.hotBar.Set_HotBar_Info(Inven.changeSpot.index, id, count);
+            Inven.inven.Set_Inven_Info(keyId, 0);
+            Inven.hotBar.Set_HotBar_Info(Inven.changeSpot.index, count, _name);
         }
     }
 
     void CombineItem()
     {
-        int id = Inven.inven_itemInfo[keyId].id;
+        string _name = Inven.inven_itemInfo[keyId].objName;
         int count = Inven.inven_itemInfo[keyId].count;
         if (Inven.changeSpot.invenType == Define.InvenType.Inven)
         {
-            Inven.inven.Set_Inven_Info(keyId, 0, 0);
-            Inven.inven.Set_Inven_Info(Inven.changeSpot.index, id, count + Inven.inven_itemInfo[Inven.changeSpot.index].count);
+            Inven.inven.Set_Inven_Info(keyId, 0);
+            Inven.inven.Set_Inven_Info(Inven.changeSpot.index, count + Inven.inven_itemInfo[Inven.changeSpot.index].count,_name);
         }
         else
         {
-            Inven.inven.Set_Inven_Info(keyId, 0, 0);
-            Inven.hotBar.Set_HotBar_Info(Inven.changeSpot.index, id, count + Inven.hotBar_itemInfo[Inven.changeSpot.index].count);
+            Inven.inven.Set_Inven_Info(keyId, 0);
+            Inven.hotBar.Set_HotBar_Info(Inven.changeSpot.index, count + Inven.hotBar_itemInfo[Inven.changeSpot.index].count,_name);
         }
     }
 }
