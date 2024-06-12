@@ -92,10 +92,10 @@ public class UI_Inven : UI_Base
 
         Item item = Resources.Load<GameObject>($"Prefabs/Items/{_name}").GetComponent<Item>(); //id에 따른 아이템 정보
 
-        //Managers.Inven.inven_itemInfo[key_index].id = id;
+        Managers.Inven.inven_itemInfo[key_index].id = item.id;
         Managers.Inven.inven_itemInfo[key_index].itemType = item.itemType;
-
-        if(count > 99)
+        Managers.Inven.inven_itemInfo[key_index].objName = _name;
+        if (count > 99)
         {
             Managers.Inven.AddItem(_name,count - 99);
             count = 99;

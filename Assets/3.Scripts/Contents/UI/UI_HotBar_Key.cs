@@ -127,6 +127,7 @@ public class UI_HotBar_Key : UI_Base
     public void EmptyKey()  //키 비어있게 만들기
     {
         HideIcon();
+        Inven.hotBar_itemInfo[keyId].objName = "";
         Inven.hotBar_itemInfo[keyId].keyType = Define.KeyType.Empty;
         Inven.hotBar_itemInfo[keyId].itemType = Define.ItemType.None;
         Inven.hotBar_itemInfo[keyId].count = 0;

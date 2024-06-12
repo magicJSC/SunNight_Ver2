@@ -92,6 +92,7 @@ public class UI_Inven_Key : UI_Base
     public void EmptyKey()  //키 비어있게 만들기
     {
         HideIcon();
+        Inven.inven_itemInfo[keyId].objName = "";
         Inven.inven_itemInfo[keyId].keyType = Define.KeyType.Empty;
         Inven.inven_itemInfo[keyId].itemType = Define.ItemType.None;
         Inven.inven_itemInfo[keyId].count = 0;

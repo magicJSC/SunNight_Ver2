@@ -12,6 +12,9 @@ public class PlayerController : CreatureController
     [HideInInspector]
     public GameObject toolParent;
 
+    Animator anim;
+    SpriteRenderer sprite;
+
     List<GameObject> matters = new List<GameObject>();
 
     public void Init()
@@ -19,6 +22,8 @@ public class PlayerController : CreatureController
         toolParent = Util.FindChild(gameObject, "Tool");
         rigid = GetComponent<Rigidbody2D>();
         Camera.main.GetComponent<CameraController>().target = transform;
+        anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();  
     }
 
     void Update()
@@ -40,6 +45,22 @@ public class PlayerController : CreatureController
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
+        if(x !=0)
+        sprite.flipX = x < 0;
+
+        if (y < 0)
+            anim.Play("DownWalk");
+        else if (y > 0)
+            anim.Play("UpWalk");
+        if (x != 0)
+        {
+            if (y > 0)
+                anim.Play("UpWalk");
+            else
+                anim.Play("DownWalk");
+        }
+        anim.SetInteger("X", (int)x);
+        anim.SetInteger("Y", (int)y);
         rigid.velocity = new Vector3(x, y, 0) * speed;
     }
 
