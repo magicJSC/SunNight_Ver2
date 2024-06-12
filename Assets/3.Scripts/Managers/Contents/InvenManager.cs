@@ -33,6 +33,7 @@ public class InvenManager : MonoBehaviour
             Item i = Resources.Load<GameObject>($"Prefabs/Items/{_name}").GetComponent<Item>(); //이름으로 가져오기
             keyType = KeyType.Exist;
             id = i.id;
+            objName = _name;
             itemType = i.itemType;
             icon = i.itemIcon;
             this.count = count;

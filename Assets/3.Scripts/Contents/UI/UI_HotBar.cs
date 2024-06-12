@@ -103,6 +103,7 @@ public class UI_HotBar : UI_Base
             count = 99;
         }
         Managers.Inven.hotBar_itemInfo[key_index].id = item.id;
+        Managers.Inven.hotBar_itemInfo[key_index].objName = _name;
         Managers.Inven.hotBar_itemInfo[key_index].itemType = item.itemType;
         Managers.Inven.hotBar_itemInfo[key_index].count = count;
         Managers.Inven.hotBar_itemInfo[key_index].icon = item.itemIcon;
