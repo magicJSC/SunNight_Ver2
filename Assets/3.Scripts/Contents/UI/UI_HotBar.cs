@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class UI_HotBar : UI_Base
@@ -108,7 +109,7 @@ public class UI_HotBar : UI_Base
         Managers.Inven.hotBar_itemInfo[key_index].count = count;
         Managers.Inven.hotBar_itemInfo[key_index].icon = item.itemIcon;
         if (Managers.Inven.hotBar_itemInfo[key_index].itemType == Define.ItemType.Building)   //건설 아이템은 타일을 따로 가지고 있는다
-            Managers.Inven.hotBar_itemInfo[key_index].tile = item.tile;
+            Managers.Inven.hotBar_itemInfo[key_index].tile = Resources.Load<TileBase>($"TileMap/{_name}");
         Managers.Inven.hotBar_itemInfo[key_index].keyType = Define.KeyType.Exist;
 
         Managers.Inven.hotBar.SetKeys(key_index);
