@@ -10,5 +10,5 @@ public class Item : MonoBehaviour
     public int id;
     public string objName;
     public Define.ItemType itemType;
-    public TileBase tile;
+    public string explain;
 }

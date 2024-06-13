@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -48536599, guid: afc2c551094877845bdf6a96aed9bcf6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
   id: 3
   objName: Fence
   itemType: 5
-  tile: {fileID: 11400000, guid: 1d642f2b034d0bc4ba5f979f8443b431, type: 2}
+  explain: 
   level: 0
   pos: {x: 0, y: 0}
 --- !u!1001 &2877678753158301833

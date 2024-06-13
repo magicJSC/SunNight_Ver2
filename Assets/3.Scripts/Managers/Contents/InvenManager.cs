@@ -38,7 +38,7 @@ public class InvenManager : MonoBehaviour
             icon = i.itemIcon;
             this.count = count;
             if (itemType == ItemType.Building)
-                tile = i.tile;
+                tile = Resources.Load<TileBase>($"TileMap/{_name}");
         }
     }
 

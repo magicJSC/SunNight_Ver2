@@ -31,6 +31,7 @@ public class UI_Build : UI_Base
     Image icon;
     Image upgrade;
     Image close;
+    Image background;
 
     GameObject matGrid;
 
@@ -48,6 +49,7 @@ public class UI_Build : UI_Base
         Icon,
         Upgrade,
         Close,
+        Background
     }
 
     enum GameObjects
@@ -70,6 +72,7 @@ public class UI_Build : UI_Base
         icon = Get<Image>((int)Images.Icon);
         upgrade = Get<Image>((int)Images.Upgrade);
         close = Get<Image>((int)Images.Close);
+        background = Get<Image>((int)Images.Background);
 
         matGrid = Get<GameObject>((int)GameObjects.MatterGrid);
 
@@ -80,9 +83,20 @@ public class UI_Build : UI_Base
         evt._OnClick += (PointerEventData p) => {  };
 
         evt = close.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { Close(); };
+        evt._OnClick += (PointerEventData p) => { Close(); Managers.Inven.Set_HotBar_Choice(); };
+
+        evt = background.GetComponent<UI_EventHandler>();
+        evt._OnEnter += (PointerEventData p) => 
+        {
+            Managers.Game.mouse.CursorType = Define.CursorType.Normal; 
+        };
+        evt._OnExit += (PointerEventData p) =>
+        {
+            Managers.Inven.Set_HotBar_Choice();
+        };
 
         InitData();
+        gameObject.SetActive(false);
     }
 
     void InitData()

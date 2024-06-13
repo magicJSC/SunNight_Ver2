@@ -156,7 +156,7 @@ public class UI_HotBar_Key : UI_Base
             return;
         }
         icon.gameObject.SetActive(true);
-        icon.sprite = Inven.GetComponent<SpriteRenderer>().sprite;
+        icon.sprite = Managers.Game.tower.GetComponent<SpriteRenderer>().sprite;
     }
 
     Define.DropType Drop()
