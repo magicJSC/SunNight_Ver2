@@ -985,6 +985,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaterialScroll
       objectReference: {fileID: 0}
+    - target: {fileID: 5857659448782052417, guid: 6e88d5ee14bb4bb468b97c06ae916b6a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6689974572362177726, guid: 6e88d5ee14bb4bb468b97c06ae916b6a, type: 3}
       propertyPath: m_Name
       value: Content_Mat

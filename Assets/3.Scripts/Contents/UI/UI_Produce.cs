@@ -88,7 +88,7 @@ public class UI_Produce : UI_Base
         toMake.gameObject.SetActive(true);
         toMake.sprite = Resources.Load<Item>($"Prefabs/Items/{itemName}").itemIcon;
         toMake_idName = itemName;
-        
+            content_Mat.GetComponent<RectTransform>().offsetMax = new Vector2(content_Mat.GetComponent<RectTransform>().offsetMax.x + 100 * matters.Count -200, 0);
         for( int i = 0; i < matters.Count; i++)
         {
             UI_Produce_Mat ma = Instantiate(Resources.Load<GameObject>("UI/UI_Produce_Mat"),content_Mat.transform).GetComponent<UI_Produce_Mat>();
