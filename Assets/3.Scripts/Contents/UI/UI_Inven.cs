@@ -12,13 +12,18 @@ public class UI_Inven : UI_Base
     GameObject back;
     GameObject grid;
     GameObject hide;
+    GameObject produce;
+    GameObject produceUI;
+
     Vector3 startPos;
 
     enum GameObjects 
     {
         Background,
         Grid,
-        Hide
+        Hide,
+        Produce,
+        UI_Produce
     }
 
 
@@ -32,6 +37,8 @@ public class UI_Inven : UI_Base
         back = Get<GameObject>((int)GameObjects.Background);
         grid = Get<GameObject>((int)GameObjects.Grid);
         hide = Get<GameObject>((int)GameObjects.Hide);
+        produce = Get<GameObject>((int)GameObjects.Produce);
+        produceUI = Get<GameObject>((int)GameObjects.UI_Produce);
         GetComponent<Canvas>().worldCamera = Camera.main;
 
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
@@ -52,6 +59,12 @@ public class UI_Inven : UI_Base
 
         evt = hide.GetComponent<UI_EventHandler>();
         evt._OnClick += (PointerEventData p) => { gameObject.SetActive(false); };
+
+
+
+        evt = produce.GetComponent<UI_EventHandler>();
+        evt._OnClick += (PointerEventData p) => { produceUI.SetActive(true); };
+
         GetData();
         MakeKeys();
 
@@ -60,7 +73,9 @@ public class UI_Inven : UI_Base
 
     void GetData()
     {
-        for (int i = 0; i < Managers.Inven.inven_itemInfo.Length; i++)
+        Managers.Inven.inven_itemInfo[0] = new InvenManager.ItemInfo(5,"Branch");
+        Managers.Inven.inven_itemInfo[1] = new InvenManager.ItemInfo(5,"Bone");
+        for (int i = 2; i < Managers.Inven.inven_itemInfo.Length; i++)
         {
             Managers.Inven.inven_itemInfo[i] = new InvenManager.ItemInfo(0);
         }
@@ -85,7 +100,7 @@ public class UI_Inven : UI_Base
 
     public void Set_Inven_Info(int key_index,int count,string _name="")
     {
-        if (_name == "")
+        if (_name == "" || count == 0)
         {
             keys[key_index].GetComponent<UI_Inven_Key>().EmptyKey();
             return;
@@ -95,7 +110,8 @@ public class UI_Inven : UI_Base
 
         Managers.Inven.inven_itemInfo[key_index].id = item.id;
         Managers.Inven.inven_itemInfo[key_index].itemType = item.itemType;
-        Managers.Inven.inven_itemInfo[key_index].objName = _name;
+        Managers.Inven.inven_itemInfo[key_index].idName = _name;
+        Managers.Inven.inven_itemInfo[key_index].itemName = item.itemName;
         if (count > 99)
         {
             Managers.Inven.AddItem(_name,count - 99);

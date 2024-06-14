@@ -166,9 +166,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: -157942333, guid: c7198cf7fc0cfb54b90a8ffeefc122cf, type: 3}
   id: 4
-  objName: Sword
+  idName: Sword
+  itemName: "\uB098\uBB34\uAC80"
   itemType: 2
-  tile: {fileID: 0}
+  explain: "\uB098\uBB34\uB85C \uB9CC\uB4E0 \uAC80\uC774\uB2E4"
 --- !u!95 &5033025128389586287
 Animator:
   serializedVersion: 5

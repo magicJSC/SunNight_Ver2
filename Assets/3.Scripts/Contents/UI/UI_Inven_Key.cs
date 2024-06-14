@@ -47,6 +47,9 @@ public class UI_Inven_Key : UI_Base
         };
         evt._OnUp += (PointerEventData p) => 
         {
+            if (Game.mouse.CursorType != Define.CursorType.Drag)
+                return;
+
             Define.DropType drop = Drop();
             switch (drop)
             {
@@ -92,7 +95,7 @@ public class UI_Inven_Key : UI_Base
     public void EmptyKey()  //키 비어있게 만들기
     {
         HideIcon();
-        Inven.inven_itemInfo[keyId].objName = "";
+        Inven.inven_itemInfo[keyId].idName = "";
         Inven.inven_itemInfo[keyId].keyType = Define.KeyType.Empty;
         Inven.inven_itemInfo[keyId].itemType = Define.ItemType.None;
         Inven.inven_itemInfo[keyId].count = 0;
@@ -115,9 +118,9 @@ public class UI_Inven_Key : UI_Base
     {
         if (Inven.changeSpot.invenType == Define.InvenType.Inven)
         {
-            if (Inven.changeSpot.invenType == Define.InvenType.None)
+            if (Inven.changeSpot.invenType == Define.InvenType.None || keyId == Inven.changeSpot.index)
                 return Define.DropType.Return;
-            else if (Inven.inven_itemInfo[Inven.changeSpot.index].id == Inven.inven_itemInfo[keyId].id)
+            else if (Inven.inven_itemInfo[Inven.changeSpot.index].idName == Inven.inven_itemInfo[keyId].idName)
                 return Define.DropType.Add;
             else if (Inven.inven_itemInfo[Inven.changeSpot.index].keyType == Define.KeyType.Empty)
                 return Define.DropType.Move;
@@ -126,7 +129,7 @@ public class UI_Inven_Key : UI_Base
         {
             if (Inven.changeSpot.invenType == Define.InvenType.None)
                 return Define.DropType.Return;
-            else if (Inven.hotBar_itemInfo[Inven.changeSpot.index].id == Inven.inven_itemInfo[keyId].id)
+            else if (Inven.hotBar_itemInfo[Inven.changeSpot.index].idName == Inven.inven_itemInfo[keyId].idName)
                 return Define.DropType.Add;
             else if (Inven.hotBar_itemInfo[Inven.changeSpot.index].keyType == Define.KeyType.Empty)
                 return Define.DropType.Move;
@@ -140,23 +143,23 @@ public class UI_Inven_Key : UI_Base
         if (Inven.changeSpot.invenType == Define.InvenType.None)
            ShowIcon();
         //키 자신의 값
-        string _name = Inven.inven_itemInfo[keyId].objName;
+        string _name = Inven.inven_itemInfo[keyId].idName;
         int count = Inven.inven_itemInfo[keyId].count;
         if (Inven.changeSpot.invenType == Define.InvenType.Inven)
         {
-            Inven.inven.Set_Inven_Info(keyId,Inven.inven_itemInfo[Inven.changeSpot.index].count, Inven.inven_itemInfo[Inven.changeSpot.index].objName);
+            Inven.inven.Set_Inven_Info(keyId,Inven.inven_itemInfo[Inven.changeSpot.index].count, Inven.inven_itemInfo[Inven.changeSpot.index].idName);
             Inven.inven.Set_Inven_Info(Inven.changeSpot.index,count,_name);
         }
         else
         {
-            Inven.inven.Set_Inven_Info(keyId, Inven.hotBar_itemInfo[Inven.changeSpot.index].count, Inven.hotBar_itemInfo[Inven.changeSpot.index].objName);
+            Inven.inven.Set_Inven_Info(keyId, Inven.hotBar_itemInfo[Inven.changeSpot.index].count, Inven.hotBar_itemInfo[Inven.changeSpot.index].idName);
             Inven.hotBar.Set_HotBar_Info(Inven.changeSpot.index, count, _name);
         }
     }
 
     void MoveItemSpot()
     {
-        string _name = Inven.inven_itemInfo[keyId].objName;
+        string _name = Inven.inven_itemInfo[keyId].idName;
         int count = Inven.inven_itemInfo[keyId].count;
         if (Inven.changeSpot.invenType == Define.InvenType.Inven)
         {
@@ -172,7 +175,7 @@ public class UI_Inven_Key : UI_Base
 
     void CombineItem()
     {
-        string _name = Inven.inven_itemInfo[keyId].objName;
+        string _name = Inven.inven_itemInfo[keyId].idName;
         int count = Inven.inven_itemInfo[keyId].count;
         if (Inven.changeSpot.invenType == Define.InvenType.Inven)
         {

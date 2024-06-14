@@ -100,11 +100,12 @@ public class UI_HotBar : UI_Base
 
         if (count > 99)
         {
-            Managers.Inven.AddItem(item.objName,count - 99);
+            Managers.Inven.AddItem(item.idName,count - 99);
             count = 99;
         }
         Managers.Inven.hotBar_itemInfo[key_index].id = item.id;
-        Managers.Inven.hotBar_itemInfo[key_index].objName = _name;
+        Managers.Inven.hotBar_itemInfo[key_index].idName = _name;
+        Managers.Inven.hotBar_itemInfo[key_index].itemName = item.itemName;
         Managers.Inven.hotBar_itemInfo[key_index].itemType = item.itemType;
         Managers.Inven.hotBar_itemInfo[key_index].count = count;
         Managers.Inven.hotBar_itemInfo[key_index].icon = item.itemIcon;
