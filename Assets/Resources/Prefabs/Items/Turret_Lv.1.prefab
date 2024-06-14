@@ -236,9 +236,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 1600583313, guid: 091841c68626a5e40b20e8eb2c1da606, type: 3}
   id: 5
-  objName: Turret_Lv.1
+  idName: Turret_Lv.1
+  itemName: "\uACE0\uCCA0 \uD130\uB81B"
   itemType: 5
-  tile: {fileID: 11400000, guid: dc36533147163a94fa26902aa14f09e8, type: 2}
+  explain: "\uC9C0\uC0C1 \uC720\uB2DB\uC744 \uACF5\uACA9 \uD558\uB294 \uB0A1\uC740
+    \uB300\uD3EC"
   level: 1
   pos: {x: 0, y: 0}
 --- !u!1 &5944550990788216208

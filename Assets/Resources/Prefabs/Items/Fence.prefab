@@ -161,10 +161,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: -48536599, guid: afc2c551094877845bdf6a96aed9bcf6, type: 3}
   id: 3
-  objName: Fence
+  idName: Fence
+  itemName: "\uC6B8\uD0C0\uB9AC"
   itemType: 5
-  explain: 
-  level: 0
+  explain: "\uB098\uBB34\uB85C \uB9CC\uB4E0 \uC6B8\uD0C0\uB9AC\uB2E4"
+  level: 1
   pos: {x: 0, y: 0}
 --- !u!1001 &2877678753158301833
 PrefabInstance:

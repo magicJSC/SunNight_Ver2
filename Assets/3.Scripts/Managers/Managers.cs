@@ -8,10 +8,10 @@ public class Managers : MonoBehaviour
     public static Managers Instance { get { return instance; } }
 
     #region Contents
-    GameManager _game = new GameManager();
-    ObjectMananger _obj = new ObjectMananger();
-    NetworkManager _network = new NetworkManager();
-    InvenManager _inven = new InvenManager();
+    GameManager _game = new();
+    ObjectMananger _obj = new();
+    NetworkManager _network = new();
+    InvenManager _inven = new();
 
     public static ObjectMananger Object { get { return Instance._obj; } }
     public static NetworkManager Network { get { return Instance._network; } }
@@ -19,9 +19,9 @@ public class Managers : MonoBehaviour
     public static InvenManager Inven { get { return Instance._inven; } }
     #endregion
 
-    InputManager _input = new InputManager();
-    SceneManagerEx _scene = new SceneManagerEx();
-    MapManager _map = new MapManager();
+    InputManager _input = new();
+    SceneManagerEx _scene = new();
+    MapManager _map = new();
 
     public static MapManager Map { get { return Instance._map; } }
     public static InputManager Input { get {  return Instance._input; } }

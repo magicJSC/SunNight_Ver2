@@ -101,7 +101,7 @@ public class UI_Build : UI_Base
 
     void InitData()
     {
-        nameT.text = $"{itemData.objName}";
+        nameT.text = $"{itemData.idName}";
         hpT.text = buildStat.Hp.ToString();
         dmgT.text = buildStat.Dmg.ToString();
         atkCoolT.text = buildStat._atkCool.ToString();
