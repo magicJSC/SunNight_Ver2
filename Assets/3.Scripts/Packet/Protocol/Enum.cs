@@ -31,10 +31,10 @@ namespace Protocol {
             "EFBLVF9TX0VOVEVSX0dBTUUQAhIUChBQS1RfQ19MRUFWRV9HQU1FEAMSFAoQ",
             "UEtUX1NfTEVBVkVfR0FNRRAEEg8KC1BLVF9TX1NQQVdOEAUSEQoNUEtUX1Nf",
             "REVTUEFXThAGEg4KClBLVF9DX01PVkUQBxIOCgpQS1RfU19NT1ZFEAgSDgoK",
-            "UEtUX0NfQ0hBVBAJEg4KClBLVF9TX0NIQVQQCio6Cg1DcmVhdHVyZVN0YXRl",
-            "EggKBElETEUQABIKCgZNT1ZJTkcQARIJCgVTS0lMTBACEggKBERFQUQQAyo6",
-            "CgdNb3ZlRGlyEggKBE5PTkUQABIGCgJVUBABEggKBERPV04QAhIICgRMRUZU",
-            "EAMSCQoFUklHSFQQBGIGcHJvdG8z"));
+            "UEtUX0NfQ0hBVBAJEg4KClBLVF9TX0NIQVQQCio7Cg1DcmVhdHVyZVN0YXRl",
+            "EggKBElETEUQABIKCgZNT1ZJTkcQARIKCgZBVFRBQ0sQAhIICgRERUFEEAMq",
+            "OgoHTW92ZURpchIICgROT05FEAASBgoCVVAQARIICgRET1dOEAISCAoETEVG",
+            "VBADEgkKBVJJR0hUEARiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.PlayerType), typeof(global::Protocol.PacketId), typeof(global::Protocol.CreatureState), typeof(global::Protocol.MoveDir), }, null, null));
@@ -67,7 +67,7 @@ namespace Protocol {
   public enum CreatureState {
     [pbr::OriginalName("IDLE")] Idle = 0,
     [pbr::OriginalName("MOVING")] Moving = 1,
-    [pbr::OriginalName("SKILL")] Skill = 2,
+    [pbr::OriginalName("ATTACK")] Attack = 2,
     [pbr::OriginalName("DEAD")] Dead = 3,
   }
 
