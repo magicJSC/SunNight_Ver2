@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 using UnityEngine.Tilemaps;
-using UnityEditor.Profiling.Memory.Experimental;
 
 public class InvenManager : MonoBehaviour
 {
+    public int Coin {  get { return _coin; } set 
+        {
+            _coin = value;
 
+            if(inven != null)
+                inven.SetCoin();
+        }
+    }
+    int _coin =0;
+
+
+    //ItemInfo대신 Item으로 바꾸기
     public ItemInfo[] hotBar_itemInfo = new ItemInfo[5];
     public ItemInfo[] inven_itemInfo = new ItemInfo[24];
 
@@ -17,6 +27,7 @@ public class InvenManager : MonoBehaviour
         public string idName;
         public string itemName;
         public int count;
+        public string explain;
         public Sprite icon;
         public ItemType itemType;
         public KeyType keyType;
@@ -37,6 +48,7 @@ public class InvenManager : MonoBehaviour
             idName = _name;
             itemName = i.itemName;
             itemType = i.itemType;
+            explain = i.explain;
             icon = i.itemIcon;
             this.count = count;
             if (itemType == ItemType.Building)

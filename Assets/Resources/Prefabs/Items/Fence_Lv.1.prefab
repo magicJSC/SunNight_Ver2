@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7130278110846843075}
   - component: {fileID: -7301309093528487254}
   m_Layer: 9
-  m_Name: Fence
+  m_Name: Fence_Lv.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: -48536599, guid: afc2c551094877845bdf6a96aed9bcf6, type: 3}
   id: 3
-  idName: Fence
+  idName: Fence_Lv.1
   itemName: "\uC6B8\uD0C0\uB9AC"
   itemType: 5
   explain: "\uB098\uBB34\uB85C \uB9CC\uB4E0 \uC6B8\uD0C0\uB9AC\uB2E4"

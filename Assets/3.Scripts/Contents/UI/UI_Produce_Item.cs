@@ -28,7 +28,6 @@ public class UI_Produce_Item : UI_Base
     Text explainText;
     Text nameText;
 
-   
 
     public new void Init()
     {
@@ -37,7 +36,7 @@ public class UI_Produce_Item : UI_Base
 
         _init = true;
         itemInfo = Resources.Load<Item>($"Prefabs/Items/{itemName}");
-        explain = produce.explain;
+        explain = produce.explain_Item;
         explainText = Util.FindChild(explain, "ExplainText", true).GetComponent<Text>();
         nameText = Util.FindChild(explain, "NameText", true).GetComponent<Text>();
 
@@ -53,12 +52,11 @@ public class UI_Produce_Item : UI_Base
             }
             produce.Set_ToMake(itemName); 
         };
-
-        explain.SetActive(false);
     }
 
-    void Set_Explain()
+    public void Set_Explain()
     {
+        explain.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + new Vector2(-515, 450);
         explainText.text = itemInfo.explain;
         nameText.text = itemInfo.itemName;
     }

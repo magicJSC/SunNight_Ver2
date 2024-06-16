@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static InvenManager;
 using static Managers;
 
 public class UI_HotBar_Key : UI_Base
@@ -51,13 +52,22 @@ public class UI_HotBar_Key : UI_Base
                 }
             }
             else
-                Game.mouse.CursorType = Define.CursorType.Normal;
+            {
+                if (Managers.Inven.hotBar_itemInfo[keyId].keyType == Define.KeyType.Empty)
+                    return;
+                //Managers.Inven.inven.explain.SetActive(true);
+                //Managers.Inven.inven.Set_Explain(Managers.Inven.hotBar_itemInfo[keyId].explain, Managers.Inven.hotBar_itemInfo[keyId].itemName);
+                //Managers.Inven.inven.explain.GetComponent<RectTransform>().anchoredPosition = transform.position;
+            }
             
         };
         evt._OnExit += (PointerEventData p) => 
         {
             if (Game.mouse.CursorType == Define.CursorType.Drag)
+            {
                 Inven.changeSpot.invenType = Define.InvenType.None;
+                //Managers.Inven.inven.explain.SetActive(false);
+            }
             else
                 Inven.Set_HotBar_Choice();
         };
@@ -65,6 +75,11 @@ public class UI_HotBar_Key : UI_Base
         {
             if (Inven.hotBar_itemInfo[keyId].keyType == Define.KeyType.Empty)
                 return;
+            if (keyId != Inven.hotBar_itemInfo.Length - 1)
+            {
+                Inven.changeSpot.index = keyId;
+                Inven.changeSpot.invenType = Define.InvenType.HotBar;
+            }
             Game.mouse.CursorType = Define.CursorType.Drag;
             Game.mouse.Set_Mouse_ItemIcon(icon,count);
         };
@@ -145,12 +160,11 @@ public class UI_HotBar_Key : UI_Base
     public void ShowIcon()
     {
         icon.gameObject.SetActive(true);
-        if(Inven.hotBar_itemInfo[keyId].itemType == Define.ItemType.Tool)
-        count.gameObject.SetActive(true);
+        if(Inven.hotBar_itemInfo[keyId].itemType != Define.ItemType.Tool)
+            count.gameObject.SetActive(true);
     }
     public void SetTowerIcon()
     {
-
         if (Inven.hotBar_itemInfo[Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Empty)
         {
             icon.gameObject.SetActive(false);
@@ -188,8 +202,6 @@ public class UI_HotBar_Key : UI_Base
 
     public void ChangeItemSpot()
     {
-        if (Inven.changeSpot.invenType == Define.InvenType.None)
-            ShowIcon();
         //키 자신의 값
         string _name = Inven.hotBar_itemInfo[keyId].idName;
         int count = Inven.hotBar_itemInfo[keyId].count;
