@@ -12,6 +12,7 @@ public class UI_Produce_Mat : UI_Base
     Image icon;
 
     Text count;
+
     enum Texts
     {
         Count
@@ -30,8 +31,8 @@ public class UI_Produce_Mat : UI_Base
         Bind<Text>(typeof(Texts));
        icon = GetComponent<Image>();
         count = Get<Text>((int)Texts.Count);
-        
-        explain = produce.explain;
+
+        explain = produce.explain_Mat;
         explainText = Util.FindChild(explain, "ExplainText", true).GetComponent<Text>();
         nameText = Util.FindChild(explain, "NameText", true).GetComponent<Text>();
 
@@ -44,8 +45,9 @@ public class UI_Produce_Mat : UI_Base
         count.text = _cnt.ToString();
     }
 
-    void Set_Explain()
+    public void Set_Explain()
     {
+        explain.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + new Vector2(-390, 225);
         explainText.text = itemInfo.explain;
         nameText.text = itemInfo.itemName;
     }

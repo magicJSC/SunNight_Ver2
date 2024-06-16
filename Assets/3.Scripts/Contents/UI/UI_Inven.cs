@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using static InvenManager;
 
 public class UI_Inven : UI_Base
 {
@@ -14,6 +15,10 @@ public class UI_Inven : UI_Base
     GameObject hide;
     GameObject produce;
     GameObject produceUI;
+    public GameObject explain;
+
+    public Text coin;
+   
 
     Vector3 startPos;
 
@@ -23,7 +28,9 @@ public class UI_Inven : UI_Base
         Grid,
         Hide,
         Produce,
-        UI_Produce
+        UI_Produce,
+        Coin,
+        Explain_Inven
     }
 
 
@@ -39,6 +46,10 @@ public class UI_Inven : UI_Base
         hide = Get<GameObject>((int)GameObjects.Hide);
         produce = Get<GameObject>((int)GameObjects.Produce);
         produceUI = Get<GameObject>((int)GameObjects.UI_Produce);
+        coin = Get<GameObject>((int)GameObjects.Coin).GetComponent<Text>();
+        explain = Get<GameObject>((int)GameObjects.Explain_Inven);
+        
+
         GetComponent<Canvas>().worldCamera = Camera.main;
 
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
@@ -68,6 +79,10 @@ public class UI_Inven : UI_Base
         GetData();
         MakeKeys();
 
+        SetCoin();
+
+        produceUI.SetActive(false);
+        explain.SetActive(false);
         gameObject.SetActive(false);
     }
 
@@ -87,6 +102,7 @@ public class UI_Inven : UI_Base
         {
             GameObject go = Instantiate(Resources.Load<GameObject>("UI/UI_Inven/UI_Inven_Key"), grid.transform);
             keys.Add(go);
+            go.GetComponent<UI_Inven_Key>().inven = this;
             go.GetComponent<UI_Inven_Key>().Init();
             go.GetComponent<UI_Inven_Key>().keyId = i;
             go.GetComponent<UI_Inven_Key>().SetIcon();
@@ -123,6 +139,11 @@ public class UI_Inven : UI_Base
             Managers.Inven.inven_itemInfo[key_index].tile = Resources.Load<TileBase>($"TileMap/{_name}");
         Managers.Inven.inven_itemInfo[key_index].keyType = Define.KeyType.Exist;
         SetKeys(key_index);
+    }
+
+    public void SetCoin()
+    {
+        coin.text = "ÄÚÀÎ : " + Managers.Inven.Coin.ToString();
     }
 
    

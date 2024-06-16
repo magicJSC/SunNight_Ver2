@@ -20,7 +20,8 @@ public class UI_Produce : UI_Base
     GameObject content_Item;
     GameObject produce;
     GameObject hide;
-    public GameObject explain;
+    public GameObject explain_Mat;
+    public GameObject explain_Item;
 
     enum GameObjects
     {
@@ -30,7 +31,8 @@ public class UI_Produce : UI_Base
         ToMake,
         Produce,
         Hide,
-        Explain
+        Explain_Mat,
+        Explain_Item
     }
 
     public override void Init()
@@ -46,7 +48,9 @@ public class UI_Produce : UI_Base
         toMake = Get<GameObject>((int)GameObjects.ToMake).GetComponent<Image>();
         produce = Get<GameObject>((int)GameObjects.Produce);
         hide = Get<GameObject>((int)GameObjects.Hide);
-        explain = Get<GameObject>((int)GameObjects.Explain);
+        explain_Mat = Get<GameObject>((int)GameObjects.Explain_Mat);
+        explain_Item = Get<GameObject>((int)GameObjects.Explain_Item);
+        
         
 
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
@@ -73,8 +77,10 @@ public class UI_Produce : UI_Base
             it.produce = this;
             it.Init();
         }
-        explain.SetActive(false);
+
         Remove_ToMake();
+        explain_Mat.SetActive(false);
+        explain_Item.SetActive(false);
     }
 
     private void OnEnable()
@@ -88,7 +94,7 @@ public class UI_Produce : UI_Base
         toMake.gameObject.SetActive(true);
         toMake.sprite = Resources.Load<Item>($"Prefabs/Items/{itemName}").itemIcon;
         toMake_idName = itemName;
-            content_Mat.GetComponent<RectTransform>().offsetMax = new Vector2(content_Mat.GetComponent<RectTransform>().offsetMax.x + 100 * matters.Count -200, 0);
+        content_Mat.GetComponent<RectTransform>().offsetMax = new Vector2(100 * matters.Count -200, 0);
         for( int i = 0; i < matters.Count; i++)
         {
             UI_Produce_Mat ma = Instantiate(Resources.Load<GameObject>("UI/UI_Produce_Mat"),content_Mat.transform).GetComponent<UI_Produce_Mat>();
