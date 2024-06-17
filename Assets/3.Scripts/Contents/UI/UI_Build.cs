@@ -83,7 +83,7 @@ public class UI_Build : UI_Base
         evt._OnClick += (PointerEventData p) => {  };
 
         evt = close.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { Close(); Managers.Inven.Set_HotBar_Choice(); };
+        evt._OnClick += (PointerEventData p) => { Managers.Inven.Set_HotBar_Choice(); Destroy(gameObject); };
 
         evt = background.GetComponent<UI_EventHandler>();
         evt._OnEnter += (PointerEventData p) => 
@@ -96,16 +96,25 @@ public class UI_Build : UI_Base
         };
 
         InitData();
-        gameObject.SetActive(false);
     }
 
     void InitData()
     {
         nameT.text = $"{itemData.idName}";
         hpT.text = buildStat.Hp.ToString();
-        dmgT.text = buildStat.Dmg.ToString();
-        atkCoolT.text = buildStat._atkCool.ToString();
-        rangeT.text = buildStat._range.ToString();
+
+        if (buildStat.Dmg != 0)
+            dmgT.text = buildStat.Dmg.ToString();
+        else
+            dmgT.text = "-";
+        if (buildStat._atkCool != 0)
+            atkCoolT.text = buildStat._atkCool.ToString();
+        else
+            atkCoolT.text = "-";
+        if(buildStat._range != 0)
+            rangeT.text = buildStat._range.ToString();
+        else
+            rangeT.text = "-";
 
         icon.sprite = itemData.itemIcon;
 
@@ -136,9 +145,4 @@ public class UI_Build : UI_Base
     //{
 
     //}
-
-    void Close()
-    {
-        gameObject.SetActive(false);
-    }
 }

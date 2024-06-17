@@ -119,6 +119,7 @@ public class BuildController : MonoBehaviour
     {
         Vector2 towerPos = Managers.Game.tower.transform.position;
         GameObject go = Managers.Game.grid.building.GetInstantiatedObject(new Vector3Int(pos.x - (int)towerPos.x,pos.y - (int)towerPos.y));
+        Instantiate(Resources.Load<GameObject>("UI/UI_Build"),go.transform);
     }
 
     public void ShowBuildSample()
