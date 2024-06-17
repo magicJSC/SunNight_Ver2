@@ -1,8 +1,6 @@
-using Google.Protobuf.WellKnownTypes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -50,16 +48,22 @@ public class UI_HotBar : UI_Base
 
     void MakeKeys()
     {
-        for (int i = 0; i < Managers.Inven.hotBar_itemInfo.Length; i++)
+        UI_HotBar_Key go;
+        for (int i = 0; i < Managers.Inven.hotBar_itemInfo.Length-1; i++)
         {
-            UI_HotBar_Key go = Instantiate(Resources.Load<GameObject>("UI/UI_Hotbar/Key"), transform.GetChild(0)).GetComponent<UI_HotBar_Key>();
+            go = Instantiate(Resources.Load<GameObject>("UI/UI_Hotbar/Key"), transform.GetChild(0)).GetComponent<UI_HotBar_Key>();
             keys.Add(go);
             keys[i].GetComponent<UI_HotBar_Key>().Init();
             go.keyId = i;
             SetKeys(i);
         }
+        go = Instantiate(Resources.Load<GameObject>("UI/UI_Hotbar/Key"), transform.GetChild(0)).GetComponent<UI_HotBar_Key>();
+        keys.Add(go);
+        keys[Managers.Inven.hotBar_itemInfo.Length - 1].GetComponent<UI_HotBar_Key>().Init();
+        go.keyId = Managers.Inven.hotBar_itemInfo.Length - 1;
     }
 
+    //선택한 핫바키를 바꿔주는 함수
     void ChangeChoice(int change)
     {
         keys[Managers.Inven.HotBar_Choice].GetComponent<UI_HotBar_Key>().UnChoice();
@@ -72,12 +76,12 @@ public class UI_HotBar : UI_Base
     public void GetData()
     {
         int a =5;
-        Managers.Inven.hotBar_itemInfo[0] = new InvenManager.ItemInfo(10,"Fence_Lv.1");
-        Managers.Inven.hotBar_itemInfo[1] = new InvenManager.ItemInfo(1,"Sword");
-        Managers.Inven.hotBar_itemInfo[2] = new InvenManager.ItemInfo(3, "Turret_Lv.1");
+        Managers.Inven.hotBar_itemInfo[0] = new InvenManager.ItemInfo(10,Define.InvenType.HotBar,"Fence_Lv.1");
+        Managers.Inven.hotBar_itemInfo[1] = new InvenManager.ItemInfo(1, Define.InvenType.HotBar,"Sword");
+        Managers.Inven.hotBar_itemInfo[2] = new InvenManager.ItemInfo(3, Define.InvenType.HotBar, "Turret_Lv.1");
         for(int i = 3; i < a; i++)
         {
-            Managers.Inven.hotBar_itemInfo[i] = new InvenManager.ItemInfo(0);
+            Managers.Inven.hotBar_itemInfo[i] = new InvenManager.ItemInfo(0, Define.InvenType.HotBar);
         }
     }
 
@@ -88,32 +92,27 @@ public class UI_HotBar : UI_Base
     }
 
     //아이템 정보를 넣어줌
-    public void Set_HotBar_Info(int key_index, int count,string _name ="")
+    public void Set_HotBar_Info(int key_index, int count,Item item = null)
     {
-        if(_name == "")
+        Managers.Inven.hotBar_itemInfo[key_index].itemInfo = item;
+        if(item == null)
         {
             keys[key_index].GetComponent<UI_HotBar_Key>().EmptyKey();
             return;
         }
-
-        Item item = Resources.Load<GameObject>($"Prefabs/Items/{_name}").GetComponent<Item>(); //id에 따른 아이템 정보
 
         if (count > 99)
         {
             Managers.Inven.AddItem(item.idName,count - 99);
             count = 99;
         }
-        Managers.Inven.hotBar_itemInfo[key_index].id = item.id;
-        Managers.Inven.hotBar_itemInfo[key_index].idName = _name;
-        Managers.Inven.hotBar_itemInfo[key_index].itemName = item.itemName;
-        Managers.Inven.hotBar_itemInfo[key_index].itemType = item.itemType;
+        
         Managers.Inven.hotBar_itemInfo[key_index].count = count;
-        Managers.Inven.hotBar_itemInfo[key_index].icon = item.itemIcon;
-        if (Managers.Inven.hotBar_itemInfo[key_index].itemType == Define.ItemType.Building)   //건설 아이템은 타일을 따로 가지고 있는다
-            Managers.Inven.hotBar_itemInfo[key_index].tile = Resources.Load<TileBase>($"TileMap/{_name}");
+        if (item.itemType == Define.ItemType.Building)   //건설 아이템은 타일을 따로 가지고 있는다
+            Managers.Inven.hotBar_itemInfo[key_index].tile = Resources.Load<TileBase>($"TileMap/{item.itemName}");
         Managers.Inven.hotBar_itemInfo[key_index].keyType = Define.KeyType.Exist;
 
-        Managers.Inven.hotBar.SetKeys(key_index);
+        SetKeys(key_index);
     }
     #endregion
 
@@ -121,11 +120,10 @@ public class UI_HotBar : UI_Base
 
     public void GetTower()
     {
-        Managers.Inven.hotBar_itemInfo[keys.Count - 1].itemType = Define.ItemType.Tower;
+        Managers.Inven.hotBar_itemInfo[keys.Count - 1].itemInfo.itemType = Define.ItemType.Tower;
         Managers.Inven.hotBar_itemInfo[keys.Count - 1].keyType = Define.KeyType.Exist;
         keys[keys.Count - 1].SetTowerIcon();
         Managers.Inven.Set_HotBar_Choice();
-        
     } 
     #endregion
 }

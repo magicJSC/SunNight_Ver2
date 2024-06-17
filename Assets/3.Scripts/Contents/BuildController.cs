@@ -34,7 +34,7 @@ public class BuildController : MonoBehaviour
 
     void MoveTower()
     {
-        if (info.itemType != ItemType.Tower)
+        if (info.itemInfo.itemType != ItemType.Tower)
             return;
         Managers.Game.tower.transform.position = transform.position;
 
@@ -61,7 +61,7 @@ public class BuildController : MonoBehaviour
         Managers.Input.mouse0Act = null;
         Managers.Input.mouse1Act = null;
 
-       if(info.itemType == ItemType.Building)
+       if(info.itemInfo.itemType == ItemType.Building)
         {
             Managers.Input.mouse0Act -= DrawTile;
             Managers.Input.mouse1Act -= DeleteTile;
@@ -90,9 +90,12 @@ public class BuildController : MonoBehaviour
         Managers.Game.tower.build.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), info.tile);
         Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].count--;
         if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].count <= 0)
-            Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].keyType = Define.KeyType.Empty;
+        {
+            Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].keyType = Define.KeyType.Empty; 
+            Managers.Game.mouse.CursorType = CursorType.Normal;
+        }
         Managers.Inven.hotBar.SetKeys(Managers.Inven.hotBar_choice);
-        Managers.Inven.Set_HotBar_Choice();
+        //Managers.Inven.Set_HotBar_Choice();
         
     }
 
@@ -128,7 +131,7 @@ public class BuildController : MonoBehaviour
         if (Managers.Inven.hotBar_itemInfo[Managers.Inven.HotBar_Choice].keyType == Define.KeyType.Exist)
         {
             sample.SetActive(true);
-            sample.GetComponent<SpriteRenderer>().sprite = Managers.Inven.hotBar_itemInfo[Managers.Inven.HotBar_Choice].icon;
+            sample.GetComponent<SpriteRenderer>().sprite = Managers.Inven.hotBar_itemInfo[Managers.Inven.HotBar_Choice].itemInfo.itemIcon;
         }
 
         //건축 모드가 아닐때 소장하고 있을때 
