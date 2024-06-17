@@ -131,7 +131,8 @@ public class UI_Produce : UI_Base
                 for (int j = 0; j < inven_m[matters[i].Item1].Count; j++)
                 {
                     //제발 InvenManager에서 바로 사용 할 수 있게 해라 성찬아
-                    Managers.Inven.inven.Set_Inven_Info(inven_m[matters[i].Item1][j].Item1, Mathf.Clamp(inven_m[matters[i].Item1][j].Item2 - count, 0, inven_m[matters[i].Item1][j].Item2), matters[i].Item1);
+                    Item item = Resources.Load<Item>($"Prefabs/Items/{matters[i].Item1}");
+                    Managers.Inven.inven.Set_Inven_Info(inven_m[matters[i].Item1][j].Item1, Mathf.Clamp(inven_m[matters[i].Item1][j].Item2 - count, 0, inven_m[matters[i].Item1][j].Item2), item);
                 }
             }
             Managers.Inven.AddItem(toMake_idName);
@@ -149,7 +150,7 @@ public class UI_Produce : UI_Base
             int _count = 0;
             for (int j = 0; j < Managers.Inven.inven_itemInfo.Length - 1; j++)
             {
-                if (matters[i].Item1 == Managers.Inven.inven_itemInfo[j].idName)
+                if (matters[i].Item1 == Managers.Inven.inven_itemInfo[j].itemInfo.idName)
                 {
                     _count += Managers.Inven.inven_itemInfo[j].count;
                     info_m = new()

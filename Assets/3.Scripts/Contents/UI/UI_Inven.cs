@@ -88,11 +88,11 @@ public class UI_Inven : UI_Base
 
     void GetData()
     {
-        Managers.Inven.inven_itemInfo[0] = new InvenManager.ItemInfo(5,"Branch");
-        Managers.Inven.inven_itemInfo[1] = new InvenManager.ItemInfo(5,"Bone");
+        Managers.Inven.inven_itemInfo[0] = new InvenManager.ItemInfo(5,Define.InvenType.Inven, "Branch");
+        Managers.Inven.inven_itemInfo[1] = new InvenManager.ItemInfo(5,Define.InvenType.Inven, "Bone");
         for (int i = 2; i < Managers.Inven.inven_itemInfo.Length; i++)
         {
-            Managers.Inven.inven_itemInfo[i] = new InvenManager.ItemInfo(0);
+            Managers.Inven.inven_itemInfo[i] = new InvenManager.ItemInfo(0, Define.InvenType.Inven);
         }
     }
 
@@ -114,29 +114,22 @@ public class UI_Inven : UI_Base
         keys[i].GetComponent<UI_Inven_Key>().SetIcon();
     }
 
-    public void Set_Inven_Info(int key_index,int count,string _name="")
+    public void Set_Inven_Info(int key_index,int count,Item item =null)
     {
-        if (_name == "" || count == 0)
+        Managers.Inven.inven_itemInfo[key_index].itemInfo = item;
+        if (item == null || count == 0)
         {
             keys[key_index].GetComponent<UI_Inven_Key>().EmptyKey();
             return;
         }
-
-        Item item = Resources.Load<GameObject>($"Prefabs/Items/{_name}").GetComponent<Item>(); //id에 따른 아이템 정보
-
-        Managers.Inven.inven_itemInfo[key_index].id = item.id;
-        Managers.Inven.inven_itemInfo[key_index].itemType = item.itemType;
-        Managers.Inven.inven_itemInfo[key_index].idName = _name;
-        Managers.Inven.inven_itemInfo[key_index].itemName = item.itemName;
         if (count > 99)
         {
-            Managers.Inven.AddItem(_name,count - 99);
+            Managers.Inven.AddItem(item.itemName,count - 99);
             count = 99;
         }
         Managers.Inven.inven_itemInfo[key_index].count = count;
-        Managers.Inven.inven_itemInfo[key_index].icon = item.itemIcon;
-        if (Managers.Inven.inven_itemInfo[key_index].itemType == Define.ItemType.Building)   //건설 아이템은 타일을 따로 가지고 있는다
-            Managers.Inven.inven_itemInfo[key_index].tile = Resources.Load<TileBase>($"TileMap/{_name}");
+        if (item.itemType == Define.ItemType.Building)   //건설 아이템은 타일을 따로 가지고 있는다
+            Managers.Inven.inven_itemInfo[key_index].tile = Resources.Load<TileBase>($"TileMap/{item.itemName}");
         Managers.Inven.inven_itemInfo[key_index].keyType = Define.KeyType.Exist;
         SetKeys(key_index);
     }
