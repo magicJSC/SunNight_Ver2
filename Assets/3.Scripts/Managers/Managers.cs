@@ -19,10 +19,12 @@ public class Managers : MonoBehaviour
     public static InvenManager Inven { get { return Instance._inven; } }
     #endregion
 
+    UIManager _ui = new();
     InputManager _input = new();
     SceneManagerEx _scene = new();
     MapManager _map = new();
 
+    public static UIManager UI { get { return Instance._ui; } }
     public static MapManager Map { get { return Instance._map; } }
     public static InputManager Input { get {  return Instance._input; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }

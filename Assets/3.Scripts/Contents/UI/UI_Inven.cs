@@ -10,7 +10,7 @@ public class UI_Inven : UI_Base
 {
     List<GameObject> keys = new List<GameObject>();
 
-    GameObject back;
+    public GameObject back;
     GameObject grid;
     GameObject hide;
     GameObject produce;
@@ -28,7 +28,6 @@ public class UI_Inven : UI_Base
         Grid,
         Hide,
         Produce,
-        UI_Produce,
         Coin,
         Explain_Inven
     }
@@ -45,7 +44,6 @@ public class UI_Inven : UI_Base
         grid = Get<GameObject>((int)GameObjects.Grid);
         hide = Get<GameObject>((int)GameObjects.Hide);
         produce = Get<GameObject>((int)GameObjects.Produce);
-        produceUI = Get<GameObject>((int)GameObjects.UI_Produce);
         coin = Get<GameObject>((int)GameObjects.Coin).GetComponent<Text>();
         explain = Get<GameObject>((int)GameObjects.Explain_Inven);
         
@@ -53,18 +51,25 @@ public class UI_Inven : UI_Base
         GetComponent<Canvas>().worldCamera = Camera.main;
 
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
-        evt._OnDrag += (PointerEventData p) => { back.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(p.position).x + startPos.x, Camera.main.ScreenToWorldPoint(p.position).y + startPos.y);};
+        evt._OnDrag += (PointerEventData p) =>
+        {
+            back.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(p.position).x + startPos.x, Camera.main.ScreenToWorldPoint(p.position).y + startPos.y);
+            float x = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.x,-640,680);
+            float y = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.y,-60,110);
+            back.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+        };
         evt._OnDown += (PointerEventData p) => { startPos = new Vector3(back.transform.position.x - Camera.main.ScreenToWorldPoint(p.position).x, back.transform.position.y - Camera.main.ScreenToWorldPoint(p.position).y); };
         evt._OnEnter += (PointerEventData p) =>
         {
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
                 return;
-            Managers.Game.mouse.CursorType = Define.CursorType.Normal;
+            Managers.Game.mouse.CursorType = Define.CursorType.UI;
         };
         evt._OnExit += (PointerEventData p) => 
         {
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
                 return;
+            Managers.Game.mouse.CursorType = Define.CursorType.Normal;
             Managers.Inven.Set_HotBar_Choice();
         };
 
@@ -74,14 +79,20 @@ public class UI_Inven : UI_Base
 
 
         evt = produce.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { produceUI.SetActive(true); };
+        evt._OnClick += (PointerEventData p) => 
+        {
+            produceUI = Managers.UI.Show_UI("UI_Produce");
+            produceUI.GetComponent<UI_Produce>().Init();
+            RectTransform r = produceUI.GetComponent<UI_Produce>().back.GetComponent<RectTransform>();
+            RectTransform bb = back.GetComponent<RectTransform>();
+            r.anchoredPosition = new Vector2(bb.anchoredPosition.x - 615, bb.anchoredPosition.y-60);
+        };
 
         GetData();
         MakeKeys();
 
         SetCoin();
 
-        produceUI.SetActive(false);
         explain.SetActive(false);
         gameObject.SetActive(false);
     }

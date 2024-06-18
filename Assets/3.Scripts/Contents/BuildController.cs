@@ -22,6 +22,8 @@ public class BuildController : MonoBehaviour
     {
         Managers.Game.build = this;
         sample = Util.FindChild(gameObject, "Sample");
+        Managers.Input.mouse0Act += DrawTile;
+        Managers.Input.mouse1Act += DeleteTile;
     }
 
     private void Update()
@@ -57,17 +59,6 @@ public class BuildController : MonoBehaviour
     public void SetInfo()
     {
         info = Managers.Inven.hotBar_itemInfo[Managers.Inven.HotBar_Choice];
-
-        Managers.Input.mouse0Act = null;
-        Managers.Input.mouse1Act = null;
-
-       if(info.itemInfo.itemType == ItemType.Building)
-        {
-            Managers.Input.mouse0Act -= DrawTile;
-            Managers.Input.mouse1Act -= DeleteTile;
-            Managers.Input.mouse0Act += DrawTile;
-            Managers.Input.mouse1Act += DeleteTile;
-        }
     }
 
     #region ∞«√‡

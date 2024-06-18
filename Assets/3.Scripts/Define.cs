@@ -55,6 +55,7 @@ public class Define : MonoBehaviour
         Normal,
         Builder,
         Drag,
+        UI
     }
 
     public enum TimeType

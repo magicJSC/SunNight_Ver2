@@ -85,7 +85,7 @@ public class UI_HotBar : UI_Base
         }
     }
 
-    //핫바에 정보 보여주기
+   //핫바에 정보 보여주기
    public void SetKeys(int index)
     {
         keys[index].GetComponent<UI_HotBar_Key>().SetIcon();
