@@ -54,6 +54,7 @@ public class UI_HotBar_Key : UI_Base
             }
             else
             {
+                Managers.Game.mouse.CursorType = Define.CursorType.UI;
                 if (Managers.Inven.hotBar_itemInfo[keyId].keyType == Define.KeyType.Empty)
                     return;
                 //Managers.Inven.inven.explain.SetActive(true);
@@ -70,7 +71,10 @@ public class UI_HotBar_Key : UI_Base
                 //Managers.Inven.inven.explain.SetActive(false);
             }
             else
-                Inven.Set_HotBar_Choice();
+            {
+                Managers.Game.mouse.CursorType = Define.CursorType.Normal;
+                Inven.Set_HotBar_Choice(); 
+            }
         };
         evt._OnDown += (PointerEventData p) => 
         {
@@ -82,7 +86,7 @@ public class UI_HotBar_Key : UI_Base
                 Inven.changeSpot.invenType = Define.InvenType.HotBar;
             }
             Game.mouse.CursorType = Define.CursorType.Drag;
-            Game.mouse.Set_Mouse_ItemIcon(icon,count);
+            Game.mouse.Set_Mouse_ItemIcon_HotBar(icon,count);
         };
         evt._OnUp += (PointerEventData p) => 
         {
@@ -105,7 +109,7 @@ public class UI_HotBar_Key : UI_Base
                     ShowIcon();
                     break;
             }
-            Game.mouse.CursorType = Define.CursorType.Normal;
+            Game.mouse.CursorType = Define.CursorType.UI;
         };
     }
 
@@ -179,7 +183,7 @@ public class UI_HotBar_Key : UI_Base
         {
             if (Inven.inven_itemInfo[Inven.changeSpot.index].itemInfo == null)
                 return Define.DropType.Move;
-            else if (Inven.changeSpot.invenType == Define.InvenType.None)
+            else if (-1 == Inven.changeSpot.index)
                 return Define.DropType.Return;
             else if (Inven.inven_itemInfo[Inven.changeSpot.index].itemInfo.idName == Inven.hotBar_itemInfo[keyId].itemInfo.idName)
                 return Define.DropType.Add;
@@ -188,7 +192,7 @@ public class UI_HotBar_Key : UI_Base
         {
             if (Inven.hotBar_itemInfo[Inven.changeSpot.index].itemInfo == null)
                 return Define.DropType.Move;
-            else if (Inven.changeSpot.invenType == Define.InvenType.None || keyId == Inven.changeSpot.index)
+            else if (-1 == Inven.changeSpot.index || keyId == Inven.changeSpot.index)
                 return Define.DropType.Return;
             else if (Inven.hotBar_itemInfo[Inven.changeSpot.index].itemInfo.idName == Inven.hotBar_itemInfo[keyId].itemInfo.idName)
                 return Define.DropType.Add;

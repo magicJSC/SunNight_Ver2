@@ -38,14 +38,30 @@ public class MouseController : UI_Base
         transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition)+new Vector3(0,0,10);
     }
 
-    public void Set_Mouse_ItemIcon(Image icon,Text count)
+    public void Set_Mouse_ItemIcon_HotBar(Image icon,Text count)
     {
         if(_icon == null)
             Init();
         icon.gameObject.SetActive(false);
         count.gameObject.SetActive(false);
         _icon.GetComponent<SpriteRenderer>().sprite = icon.sprite;
+        if (Managers.Inven.hotBar_itemInfo[Managers.Inven.changeSpot.index].itemInfo.itemType != Define.ItemType.Tool)
+            _count.GetComponent<Text>().text = count.text;
+        else
+            _count.GetComponent<Text>().text = "";
+    }
+
+    public void Set_Mouse_ItemIcon_Inven(Image icon, Text count)
+    {
+        if (_icon == null)
+            Init();
+        icon.gameObject.SetActive(false);
+        count.gameObject.SetActive(false);
+        _icon.GetComponent<SpriteRenderer>().sprite = icon.sprite;
+        if (Managers.Inven.inven_itemInfo[Managers.Inven.changeSpot.index].itemInfo.itemType != Define.ItemType.Tool)
         _count.GetComponent<Text>().text = count.text;
+        else
+            _count.GetComponent<Text>().text = "";
     }
 
     #region 플레이 타입
@@ -68,6 +84,9 @@ public class MouseController : UI_Base
                 case Define.CursorType.Drag:
                     SetDragMode();
                     break;
+                case Define.CursorType.UI:
+                    SetUIMode();
+                    break;
             }
         }
     }
@@ -79,8 +98,6 @@ public class MouseController : UI_Base
     {
         gameObject.SetActive(false);
         Cursor.SetCursor(normal, Vector2.zero, CursorMode.Auto);
-        Managers.Input.mouse0Act = null;
-        Managers.Input.mouse1Act = null;
         Managers.Game.build.gameObject.SetActive(false);
     }
 
@@ -94,8 +111,13 @@ public class MouseController : UI_Base
     {
         gameObject.SetActive(true);
         Cursor.SetCursor(drag, Vector2.zero,CursorMode.Auto);
-        Managers.Input.mouse0Act = null;
-        Managers.Input.mouse1Act = null;
+        Managers.Game.build.gameObject.SetActive(false);
+    }
+
+    void SetUIMode()
+    {
+        gameObject.SetActive(false);
+        Cursor.SetCursor(normal, Vector2.zero, CursorMode.Auto);
         Managers.Game.build.gameObject.SetActive(false);
     }
     #endregion

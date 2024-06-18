@@ -48,7 +48,7 @@ public class UI_Inven_Key : UI_Base
             Managers.Inven.changeSpot.index = keyId;
             Managers.Inven.changeSpot.invenType = Define.InvenType.Inven;
             Managers.Game.mouse.CursorType = Define.CursorType.Drag;
-            Managers.Game.mouse.Set_Mouse_ItemIcon(icon,count);
+            Managers.Game.mouse.Set_Mouse_ItemIcon_Inven(icon,count);
         };
         evt._OnEnter += (PointerEventData p) =>
         {
@@ -93,15 +93,26 @@ public class UI_Inven_Key : UI_Base
         };
         evt._OnExit += (PointerEventData p) =>
         {
-            //if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
-            // //Managers.Inven.changeSpot.invenType = Define.InvenType.None;
+            if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
+                Managers.Inven.changeSpot.index = -1;
             explain.SetActive(false);
         };
     }
 
     public void Set_Explain()
     {
-        explain.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + new Vector2(-545, 565);
+        int x, y;
+        if (inven.back.GetComponent<RectTransform>().anchoredPosition.x < -290)
+            x = -25;
+        else
+            x = -545;
+        if (inven.back.GetComponent<RectTransform>().anchoredPosition.y > -40)
+            y = 180;
+        else
+            y = 565;
+
+
+        explain.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + new Vector2(x, y);
 
         explainText.text = invenInfo.itemInfo.explain;
         nameText.text = invenInfo.itemInfo.itemName;
@@ -150,7 +161,7 @@ public class UI_Inven_Key : UI_Base
         {
             if (Managers.Inven.inven_itemInfo[Managers.Inven.changeSpot.index].itemInfo == null)
                 return Define.DropType.Move;
-            else if (Managers.Inven.changeSpot.invenType == Define.InvenType.None || keyId == Managers.Inven.changeSpot.index)
+            else if (-1 == Managers.Inven.changeSpot.index || keyId == Managers.Inven.changeSpot.index)
                 return Define.DropType.Return;
             else if (Managers.Inven.inven_itemInfo[Managers.Inven.changeSpot.index].itemInfo.idName == invenInfo.itemInfo.idName)
                 return Define.DropType.Add;
@@ -159,7 +170,7 @@ public class UI_Inven_Key : UI_Base
         {
             if (Managers.Inven.hotBar_itemInfo[Managers.Inven.changeSpot.index].itemInfo == null)
                 return Define.DropType.Move;
-            else if (Managers.Inven.changeSpot.invenType == Define.InvenType.None)
+            else if (-1 == Managers.Inven.changeSpot.index)
                 return Define.DropType.Return;
             else if (Managers.Inven.hotBar_itemInfo[Managers.Inven.changeSpot.index].itemInfo.idName == invenInfo.itemInfo.idName)
                 return Define.DropType.Add;

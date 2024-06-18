@@ -15,13 +15,15 @@ public class UI_Produce : UI_Base
     [Header("UI")]
     Image toMake;
 
-    GameObject back;
+    public GameObject back;
     GameObject content_Mat;
     GameObject content_Item;
     GameObject produce;
     GameObject hide;
     public GameObject explain_Mat;
     public GameObject explain_Item;
+
+    Vector2 startPos;
 
     enum GameObjects
     {
@@ -50,10 +52,22 @@ public class UI_Produce : UI_Base
         hide = Get<GameObject>((int)GameObjects.Hide);
         explain_Mat = Get<GameObject>((int)GameObjects.Explain_Mat);
         explain_Item = Get<GameObject>((int)GameObjects.Explain_Item);
-        
-        
+
+        GetComponent<Canvas>().worldCamera = Camera.main;
+
+        float x = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.x, -665, 665);
+        float y = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.y, -135, 135);
+        back.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
 
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
+        evt._OnDrag += (PointerEventData p) =>
+        {
+            back.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(p.position).x + startPos.x, Camera.main.ScreenToWorldPoint(p.position).y + startPos.y);
+            float x = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.x, -665, 665);
+            float y = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.y, -135, 135);
+            back.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+        };
+        evt._OnDown += (PointerEventData p) => { startPos = new Vector3(back.transform.position.x - Camera.main.ScreenToWorldPoint(p.position).x, back.transform.position.y - Camera.main.ScreenToWorldPoint(p.position).y); };
         evt._OnEnter += (PointerEventData p) => 
         {
             if(Managers.Game.mouse.CursorType != Define.CursorType.Drag)

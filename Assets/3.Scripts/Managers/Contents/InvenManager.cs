@@ -55,7 +55,7 @@ public class InvenManager : MonoBehaviour
             hotBar = FindAnyObjectByType<UI_HotBar>();
             if (hotBar == null)
             {
-                hotBar = Instantiate(Resources.Load<GameObject>("UI/UI_HotBar/UI_HotBar")).GetComponent<UI_HotBar>();
+                hotBar = Managers.UI.Show_UI("UI_HotBar/UI_HotBar").GetComponent<UI_HotBar>();
             }
             hotBar.Init();
         }
@@ -64,7 +64,7 @@ public class InvenManager : MonoBehaviour
             inven = FindAnyObjectByType<UI_Inven>();
             if (inven == null)
             {
-                inven = Instantiate(Resources.Load<GameObject>("UI/UI_Inven/UI_Inven")).GetComponent<UI_Inven>();
+                inven = Managers.UI.Show_UI("UI_Inven/UI_Inven").GetComponent<UI_Inven>();
             }
             inven.Init();
         }
@@ -86,10 +86,14 @@ public class InvenManager : MonoBehaviour
         switch (hotBar_itemInfo[hotBar_choice].itemInfo.itemType)
         {
             case ItemType.Building:
+                if (Managers.Game.mouse.CursorType == CursorType.UI)
+                    break;
                 Managers.Game.mouse.CursorType = CursorType.Builder;
                 Managers.Game.build.ShowBuildSample();
                 break;
             case ItemType.Tower:
+                if (Managers.Game.mouse.CursorType == CursorType.UI)
+                    break;
                 Managers.Game.mouse.CursorType = CursorType.Builder;
                 Managers.Game.build.ShowTowerSample();
                 break;
@@ -112,48 +116,6 @@ public class InvenManager : MonoBehaviour
         Item item = Resources.Load<Item>($"Prefabs/Items/{_name}");
         return Add_Item_Inven(item, count);
     }
-
-    bool Add_Item_HotBar(Item item, int count = 1)
-    {
-        if (item.itemType != ItemType.Tool)   //재료 아이템일때
-        {
-            int empty = -1;
-            for (int i = 0; i < hotBar_itemInfo.Length - 1; i++)
-            {
-                if (item.id == hotBar_itemInfo[i].itemInfo.id && hotBar_itemInfo[i].count < 99)
-                {
-                    hotBar.Set_HotBar_Info(i,hotBar_itemInfo[i].count + count,item);
-                    return true;
-                }
-                else
-                {
-                    if (empty == -1 && KeyType.Empty == hotBar_itemInfo[i].keyType)
-                        empty = i;
-                }
-            }
-            //추가 하지 못했다면 비어있는 칸에 넣기
-            if (empty != -1)
-            {
-                hotBar.Set_HotBar_Info(empty,hotBar_itemInfo[empty].count + count,item);
-                return true;
-            }
-
-            return false;
-        }
-        else //도구 아이템일때
-        {
-            for (int i = 0; i < hotBar_itemInfo.Length - 1; i++)
-            {
-                if (KeyType.Empty == hotBar_itemInfo[i].keyType)
-                {
-                    hotBar.Set_HotBar_Info(i, 1,item);
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
-
     bool Add_Item_Inven(Item item, int count = 1)
     {
         if (item.itemType != ItemType.Tool)   //재료 아이템일때
@@ -161,7 +123,9 @@ public class InvenManager : MonoBehaviour
             int empty = -1;
             for (int i = 0; i < inven_itemInfo.Length - 1; i++)
             {
-                if (item.id == inven_itemInfo[i].itemInfo.id && inven_itemInfo[i].count < 99)
+                if (inven_itemInfo[i].itemInfo == null)
+                    continue; ;
+                if (item.idName == inven_itemInfo[i].itemInfo.idName && inven_itemInfo[i].count < 99)
                 {
                     inven.Set_Inven_Info(i, inven_itemInfo[i].count + count,item);
                     return true;
@@ -180,7 +144,7 @@ public class InvenManager : MonoBehaviour
             }
 
             //추가 하지 못했는데 비어있는 칸도 없을때
-            return Add_Item_HotBar(item, count);
+            return false;
         }
         else //도구 아이템일때
         {
@@ -193,7 +157,7 @@ public class InvenManager : MonoBehaviour
                 }
             }
 
-            return Add_Item_HotBar(item, count);
+            return false;
         }
     }
     #endregion
