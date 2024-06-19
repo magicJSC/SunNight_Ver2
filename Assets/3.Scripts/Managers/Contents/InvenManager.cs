@@ -124,16 +124,16 @@ public class InvenManager : MonoBehaviour
             for (int i = 0; i < inven_itemInfo.Length - 1; i++)
             {
                 if (inven_itemInfo[i].itemInfo == null)
-                    continue; ;
+                {
+                    if(empty == -1)
+                        empty = i;
+                    continue;
+                }
+
                 if (item.idName == inven_itemInfo[i].itemInfo.idName && inven_itemInfo[i].count < 99)
                 {
                     inven.Set_Inven_Info(i, inven_itemInfo[i].count + count,item);
                     return true;
-                }
-                else
-                {
-                    if (empty == -1 && KeyType.Empty == inven_itemInfo[i].keyType)
-                        empty = i;
                 }
             }
             //추가 하지 못했다면 비어있는 칸에 넣기
