@@ -14,8 +14,8 @@ public class UI_Inven : UI_Base
     GameObject grid;
     GameObject hide;
     GameObject produce;
-    GameObject produceUI;
     public GameObject explain;
+    UI_Produce produceUI;
 
     public Text coin;
    
@@ -46,7 +46,7 @@ public class UI_Inven : UI_Base
         produce = Get<GameObject>((int)GameObjects.Produce);
         coin = Get<GameObject>((int)GameObjects.Coin).GetComponent<Text>();
         explain = Get<GameObject>((int)GameObjects.Explain_Inven);
-        
+       
 
         GetComponent<Canvas>().worldCamera = Camera.main;
 
@@ -81,11 +81,14 @@ public class UI_Inven : UI_Base
         evt = produce.GetComponent<UI_EventHandler>();
         evt._OnClick += (PointerEventData p) => 
         {
-            produceUI = Managers.UI.Show_UI("UI_Produce");
-            produceUI.GetComponent<UI_Produce>().Init();
+            if (produceUI != null)
+                return;
+            produceUI = Managers.UI.Show_UI("UI_Produce").GetComponent<UI_Produce>();
+            produceUI.Init();
             RectTransform r = produceUI.GetComponent<UI_Produce>().back.GetComponent<RectTransform>();
             RectTransform bb = back.GetComponent<RectTransform>();
             r.anchoredPosition = new Vector2(bb.anchoredPosition.x - 615, bb.anchoredPosition.y-60);
+            produceUI.Set_Position();
         };
 
         GetData();

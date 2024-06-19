@@ -25,6 +25,8 @@ public class UI_Produce : UI_Base
 
     Vector2 startPos;
 
+    RectTransform backR;
+
     enum GameObjects
     {
         Background,
@@ -55,17 +57,13 @@ public class UI_Produce : UI_Base
 
         GetComponent<Canvas>().worldCamera = Camera.main;
 
-        float x = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.x, -665, 665);
-        float y = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.y, -135, 135);
-        back.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+        backR = back.GetComponent<RectTransform>();
 
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
         evt._OnDrag += (PointerEventData p) =>
         {
             back.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(p.position).x + startPos.x, Camera.main.ScreenToWorldPoint(p.position).y + startPos.y);
-            float x = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.x, -665, 665);
-            float y = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.y, -135, 135);
-            back.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+            Set_Position();
         };
         evt._OnDown += (PointerEventData p) => { startPos = new Vector3(back.transform.position.x - Camera.main.ScreenToWorldPoint(p.position).x, back.transform.position.y - Camera.main.ScreenToWorldPoint(p.position).y); };
         evt._OnEnter += (PointerEventData p) => 
@@ -83,7 +81,7 @@ public class UI_Produce : UI_Base
         evt._OnClick += (PointerEventData p) => { OnProduce(); };
 
         evt = hide.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { gameObject.SetActive(false); };
+        evt._OnClick += (PointerEventData p) => { Destroy(gameObject); };
 
         for(int i = 0; i < content_Item.transform.childCount; i++)
         {
@@ -101,6 +99,13 @@ public class UI_Produce : UI_Base
     {
         if(_init)
             Remove_ToMake();    
+    }
+
+    public void Set_Position()
+    {
+        float x = Mathf.Clamp(backR.anchoredPosition.x, -665, 665);
+        float y = Mathf.Clamp(backR.anchoredPosition.y, -135, 135);
+        back.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
     }
 
     public void Set_ToMake(string itemName)
