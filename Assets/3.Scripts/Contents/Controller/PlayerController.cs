@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Define;
 
 public class PlayerController : CreatureController
 {
@@ -28,19 +27,18 @@ public class PlayerController : CreatureController
 
     void Update()
     {
-        Move();
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (!Managers.Inven.inven.gameObject.activeSelf)
-                Managers.Inven.inven.gameObject.SetActive(true);
+            if (!Managers.Inven.inventoryUI.gameObject.activeSelf)
+                Managers.Inven.inventoryUI.gameObject.SetActive(true);
             else
-                Managers.Inven.inven.gameObject.SetActive(false);
+                Managers.Inven.inventoryUI.gameObject.SetActive(false);
         }
         if (Input.GetKeyDown(KeyCode.Q))
-            Gather();
+            Pick();
     }
 
-    void Move()
+    void OnMove()
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
@@ -64,11 +62,11 @@ public class PlayerController : CreatureController
         rigid.velocity = new Vector3(x, y, 0) * speed;
     }
 
-    void Gather()
+    void Pick()
     {
         for (int i = 0; i < matters.Count; i++)
         {
-            if (Managers.Inven.AddItem(matters[i].GetComponent<Item_Matter>().idName))
+            if (Managers.Inven.AddOneItem(matters[i].GetComponent<Item_Matter>().idName))
                 matters[i].GetComponent<Item_Matter>().DestroyThis();
         }
     }

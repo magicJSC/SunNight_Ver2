@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static InvenManager;
+using static StorageManager;
 
 public class UI_Produce_Item : UI_Base
 {

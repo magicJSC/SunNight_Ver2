@@ -64,11 +64,12 @@ public class Define : MonoBehaviour
         Night
     }
 
-    public enum InvenType
+    public enum SlotType
     {
         None,
         Inven,
-        HotBar
+        HotBar,
+        Smelt
     }
 
     public enum DropType

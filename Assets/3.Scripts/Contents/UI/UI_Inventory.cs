@@ -4,19 +4,21 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
-using static InvenManager;
+using static StorageManager;
 
-public class UI_Inven : UI_Base
+public class UI_Inventory : UI_Base
 {
-    List<GameObject> keys = new List<GameObject>();
+    public List<UI_InventorySlot> slotList = new List<UI_InventorySlot>();
 
-    public GameObject back;
     GameObject grid;
     GameObject hide;
     GameObject produce;
+    [HideInInspector]
+    public GameObject back;
+    [HideInInspector]
     public GameObject explain;
     UI_Produce produceUI;
-
+    [HideInInspector]
     public Text coin;
    
 
@@ -47,18 +49,15 @@ public class UI_Inven : UI_Base
         coin = Get<GameObject>((int)GameObjects.Coin).GetComponent<Text>();
         explain = Get<GameObject>((int)GameObjects.Explain_Inven);
        
-
-        GetComponent<Canvas>().worldCamera = Camera.main;
-
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
         evt._OnDrag += (PointerEventData p) =>
         {
-            back.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(p.position).x + startPos.x, Camera.main.ScreenToWorldPoint(p.position).y + startPos.y);
+            back.transform.position =startPos+Input.mousePosition;
             float x = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.x,-640,680);
             float y = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.y,-60,110);
             back.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
         };
-        evt._OnDown += (PointerEventData p) => { startPos = new Vector3(back.transform.position.x - Camera.main.ScreenToWorldPoint(p.position).x, back.transform.position.y - Camera.main.ScreenToWorldPoint(p.position).y); };
+        evt._OnDown += (PointerEventData p) => { startPos = back.transform.position - Input.mousePosition; };
         evt._OnEnter += (PointerEventData p) =>
         {
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
@@ -70,7 +69,7 @@ public class UI_Inven : UI_Base
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
                 return;
             Managers.Game.mouse.CursorType = Define.CursorType.Normal;
-            Managers.Inven.Set_HotBar_Choice();
+            Managers.Inven.CheckHotBarChoice();
         };
 
         evt = hide.GetComponent<UI_EventHandler>();
@@ -83,7 +82,7 @@ public class UI_Inven : UI_Base
         {
             if (produceUI != null)
                 return;
-            produceUI = Managers.UI.Show_UI("UI_Produce").GetComponent<UI_Produce>();
+            produceUI = Managers.UI.ShowUI("UI_Produce").GetComponent<UI_Produce>();
             produceUI.Init();
             RectTransform r = produceUI.GetComponent<UI_Produce>().back.GetComponent<RectTransform>();
             RectTransform bb = back.GetComponent<RectTransform>();
@@ -102,56 +101,28 @@ public class UI_Inven : UI_Base
 
     void GetData()
     {
-        Managers.Inven.inven_itemInfo[0] = new InvenManager.ItemInfo(5,Define.InvenType.Inven, "Branch");
-        Managers.Inven.inven_itemInfo[1] = new InvenManager.ItemInfo(5,Define.InvenType.Inven, "Bone");
-        for (int i = 2; i < Managers.Inven.inven_itemInfo.Length; i++)
+        Managers.Inven.inventorySlotInfo[0] = new SlotInfo(5, "Branch");
+        Managers.Inven.inventorySlotInfo[1] = new SlotInfo(5, "Bone");
+        for (int i = 2; i < Managers.Inven.inventorySlotInfo.Length; i++)
         {
-            Managers.Inven.inven_itemInfo[i] = new InvenManager.ItemInfo(0, Define.InvenType.Inven);
+            Managers.Inven.inventorySlotInfo[i] = new SlotInfo(5, "Branch");
         }
     }
 
     void MakeKeys()
     {
-        for (int i = 0; i < Managers.Inven.inven_itemInfo.Length; i++)
+        for (int i = 0; i < Managers.Inven.inventorySlotInfo.Length; i++)
         {
-            GameObject go = Instantiate(Resources.Load<GameObject>("UI/UI_Inven/UI_Inven_Key"), grid.transform);
-            keys.Add(go);
-            go.GetComponent<UI_Inven_Key>().inven = this;
-            go.GetComponent<UI_Inven_Key>().Init();
-            go.GetComponent<UI_Inven_Key>().keyId = i;
-            go.GetComponent<UI_Inven_Key>().SetIcon();
+            UI_InventorySlot go = Instantiate(Resources.Load<GameObject>("UI/UI_Inven_Slot"), grid.transform).GetComponent<UI_InventorySlot>();
+            slotList.Add(go);
+            go.inven = this;
+            go.Init();
+            go.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.inventorySlotInfo[i];
         }
-    }
-
-    public void SetKeys(int i)
-    {
-        keys[i].GetComponent<UI_Inven_Key>().SetIcon();
-    }
-
-    public void Set_Inven_Info(int key_index,int count,Item item =null)
-    {
-        Managers.Inven.inven_itemInfo[key_index].itemInfo = item;
-        if (item == null || count == 0)
-        {
-            keys[key_index].GetComponent<UI_Inven_Key>().EmptyKey();
-            return;
-        }
-        if (count > 99)
-        {
-            Managers.Inven.AddItem(item.itemName,count - 99);
-            count = 99;
-        }
-        Managers.Inven.inven_itemInfo[key_index].count = count;
-        if (item.itemType == Define.ItemType.Building)   //건설 아이템은 타일을 따로 가지고 있는다
-            Managers.Inven.inven_itemInfo[key_index].tile = Resources.Load<TileBase>($"TileMap/{item.itemName}");
-        Managers.Inven.inven_itemInfo[key_index].keyType = Define.KeyType.Exist;
-        SetKeys(key_index);
     }
 
     public void SetCoin()
     {
         coin.text = "코인 : " + Managers.Inven.Coin.ToString();
     }
-
-   
 }

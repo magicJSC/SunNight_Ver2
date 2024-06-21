@@ -11,12 +11,12 @@ public class Managers : MonoBehaviour
     GameManager _game = new();
     ObjectMananger _obj = new();
     NetworkManager _network = new();
-    InvenManager _inven = new();
+    StorageManager _inven = new();
 
     public static ObjectMananger Object { get { return Instance._obj; } }
     public static NetworkManager Network { get { return Instance._network; } }
     public static GameManager Game { get { return Instance._game; } }
-    public static InvenManager Inven { get { return Instance._inven; } }
+    public static StorageManager Inven { get { return Instance._inven; } }
     #endregion
 
     UIManager _ui = new();
@@ -44,13 +44,13 @@ public class Managers : MonoBehaviour
             instance = go.GetComponent<Managers>();
 
             instance._network.Init();
+            instance._game.Init();
             instance._inven.Init();
         }
     }
 
     private void Update()
     {
-        _input.OnUpdate();
         _game.OnUpdate();
     }
 }

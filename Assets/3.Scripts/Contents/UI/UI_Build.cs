@@ -83,7 +83,7 @@ public class UI_Build : UI_Base
         evt._OnClick += (PointerEventData p) => {  };
 
         evt = close.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { Managers.Inven.Set_HotBar_Choice(); Destroy(gameObject); };
+        evt._OnClick += (PointerEventData p) => { Managers.Inven.CheckHotBarChoice(); Destroy(gameObject); };
 
         evt = background.GetComponent<UI_EventHandler>();
         evt._OnEnter += (PointerEventData p) => 
@@ -92,7 +92,7 @@ public class UI_Build : UI_Base
         };
         evt._OnExit += (PointerEventData p) =>
         {
-            Managers.Inven.Set_HotBar_Choice();
+            Managers.Inven.CheckHotBarChoice();
         };
 
         InitData();

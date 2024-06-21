@@ -74,7 +74,7 @@ public class UI_Produce : UI_Base
         evt._OnExit += (PointerEventData p) =>
         {
             if (Managers.Game.mouse.CursorType != Define.CursorType.Drag)
-                Managers.Inven.Set_HotBar_Choice(); 
+                Managers.Inven.CheckHotBarChoice(); 
         };
 
         evt = produce.GetComponent<UI_EventHandler>();
@@ -149,12 +149,11 @@ public class UI_Produce : UI_Base
                 int count = matters[i].Item2;
                 for (int j = 0; j < inven_m[matters[i].Item1].Count; j++)
                 {
-                    //제발 InvenManager에서 바로 사용 할 수 있게 해라 성찬아
                     Item item = Resources.Load<Item>($"Prefabs/Items/{matters[i].Item1}");
-                    Managers.Inven.inven.Set_Inven_Info(inven_m[matters[i].Item1][j].Item1, Mathf.Clamp(inven_m[matters[i].Item1][j].Item2 - count, 0, inven_m[matters[i].Item1][j].Item2), item);
+                    //Managers.Inven.inventoryUI.Set_Inven_Info(inven_m[matters[i].Item1][j].Item1, Mathf.Clamp(inven_m[matters[i].Item1][j].Item2 - count, 0, inven_m[matters[i].Item1][j].Item2), item);
                 }
             }
-            Managers.Inven.AddItem(toMake_idName);
+            Managers.Inven.AddOneItem(toMake_idName);
         }
         else
             Debug.Log("재료가 부족합니다");
@@ -167,14 +166,14 @@ public class UI_Produce : UI_Base
         {
             bool correct = false;
             int _count = 0;
-            for (int j = 0; j < Managers.Inven.inven_itemInfo.Length - 1; j++)
+            for (int j = 0; j < Managers.Inven.inventorySlotInfo.Length - 1; j++)
             {
-                if (matters[i].Item1 == Managers.Inven.inven_itemInfo[j].itemInfo.idName)
+                if (matters[i].Item1 == Managers.Inven.inventorySlotInfo[j].itemInfo.idName)
                 {
-                    _count += Managers.Inven.inven_itemInfo[j].count;
+                    _count += Managers.Inven.inventorySlotInfo[j].count;
                     info_m = new()
                     {
-                        (j, Managers.Inven.inven_itemInfo[j].count)
+                        (j, Managers.Inven.inventorySlotInfo[j].count)
                     };
 
                     if(_count >= matters[i].Item2)

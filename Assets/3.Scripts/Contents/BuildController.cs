@@ -7,7 +7,7 @@ using static Define;
 
 public class BuildController : MonoBehaviour
 {
-    public InvenManager.ItemInfo info;
+    public StorageManager.SlotInfo info;
 
     public GameObject sample;
 
@@ -22,32 +22,30 @@ public class BuildController : MonoBehaviour
     {
         Managers.Game.build = this;
         sample = Util.FindChild(gameObject, "Sample");
-        Managers.Input.mouse0Act += DrawTile;
-        Managers.Input.mouse1Act += DeleteTile;
     }
 
-    private void Update()
-    {
-        if (info == null)
-            return;
-        MoveMouse();
-        MoveTower();
-    }
+    //private void Update()
+    //{
+    //    if (info == null)
+    //        return;
+    //    MoveMouse();
+    //    MoveTower();
+    //}
 
-    void MoveTower()
-    {
-        if (info.itemInfo.itemType != ItemType.Tower)
-            return;
-        Managers.Game.tower.transform.position = transform.position;
+    //void MoveTower()
+    //{
+    //    if (info.itemInfo.itemType != ItemType.Tower)
+    //        return;
+    //    Managers.Game.tower.transform.position = transform.position;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            if (Managers.Inven.hotBar_choice == Managers.Inven.hotBar_itemInfo.Length - 1)
-            {
-                BuildTower();
-            }
-        }
-    }
+    //    if (Input.GetKeyDown(KeyCode.Mouse0))
+    //    {
+    //        if (Managers.Inven.hotBar_choice == Managers.Inven.hotBar_itemInfo.Length - 1)
+    //        {
+    //            BuildTower();
+    //        }
+    //    }
+    //}
 
     void MoveMouse()
     {
@@ -56,126 +54,123 @@ public class BuildController : MonoBehaviour
         transform.position = mousePosition;
     }
 
-    public void SetInfo()
-    {
-        info = Managers.Inven.hotBar_itemInfo[Managers.Inven.HotBar_Choice];
-    }
+    //public void SetInfo()
+    //{
+    //    info = Managers.Inven.hotBar_itemInfo[Managers.Inven.HotBar_Choice];
+    //}
 
     #region 건축
-    void DrawTile()
-    {
-        if (Managers.Game.mouse.CursorType != CursorType.Builder)
-            return;
-        //타워를 소장 하고 있을때
-        if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist)
-            return;
+    //void DrawTile()
+    //{
+    //    if (Managers.Game.mouse.CursorType != CursorType.Builder)
+    //        return;
+    //    //타워를 소장 하고 있을때
+    //    if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist)
+    //        return;
 
-        Vector2 tower = Managers.Game.tower.transform.position; //기지 위치 받아오기
-        if (!Managers.Game.grid.CheckCanBuild(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0)))
-        {
-            //건축물 선택
-            ChoiceBuild(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0));
-            return;
-        }
+    //    Vector2 tower = Managers.Game.tower.transform.position; //기지 위치 받아오기
+    //    if (!Managers.Game.grid.CheckCanBuild(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0)))
+    //    {
+    //        //건축물 선택
+    //        ChoiceBuild(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0));
+    //        return;
+    //    }
 
-        Managers.Game.tower.build.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), info.tile);
-        Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].count--;
-        if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].count <= 0)
-        {
-            Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].keyType = Define.KeyType.Empty; 
-            Managers.Game.mouse.CursorType = CursorType.Normal;
-        }
-        Managers.Inven.hotBar.SetKeys(Managers.Inven.hotBar_choice);
-        //Managers.Inven.Set_HotBar_Choice();
-        
-    }
+    //    Managers.Game.tower.build.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), info.tile);
+    //    Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].count--;
+    //    if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].count <= 0)
+    //    {
+    //        Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].keyType = Define.KeyType.Empty;
+    //        Managers.Game.mouse.CursorType = CursorType.Normal;
+    //    }
 
-    void DeleteTile()
-    {
-        if (Managers.Game.mouse.CursorType != CursorType.Builder)
-            return;
-        //타워를 소장 하고 있을때
-        if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist)
-            return;
+    //}
 
-        Vector2 tower = Managers.Game.tower.transform.position; //기지 위치 받아오기
-        GameObject go = Managers.Game.tower.build.GetInstantiatedObject(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0));
-        if (go != null)
-        {
-            Managers.Inven.AddItem(go.GetComponent<Item>().idName);
-            Managers.Inven.Set_HotBar_Choice();
-            go.GetComponent<Item_Buliding>().DeleteBuilding();
-        }
-    }
+    //void DeleteTile()
+    //{
+    //    if (Managers.Game.mouse.CursorType != CursorType.Builder)
+    //        return;
+    //    //타워를 소장 하고 있을때
+    //    if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist)
+    //        return;
 
-    //강화 할수 있는 UI 생성
-    void ChoiceBuild(Vector3Int pos)
-    {
-        Vector2 towerPos = Managers.Game.tower.transform.position;
-        GameObject go = Managers.Game.grid.building.GetInstantiatedObject(new Vector3Int(pos.x - (int)towerPos.x,pos.y - (int)towerPos.y));
-        Instantiate(Resources.Load<GameObject>("UI/UI_Build"),go.transform);
-    }
+    //    Vector2 tower = Managers.Game.tower.transform.position; //기지 위치 받아오기
+    //    GameObject go = Managers.Game.tower.build.GetInstantiatedObject(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0));
+    //    if (go != null)
+    //    {
+    //        Managers.Inven.AddItem(go.GetComponent<Item>().idName);
+    //        Managers.Inven.Set_HotBar_Choice();
+    //        go.GetComponent<Item_Buliding>().DeleteBuilding();
+    //    }
+    //}
 
-    public void ShowBuildSample()
-    {
-        //아이템이 설치 아이템일때
-        if (Managers.Inven.hotBar_itemInfo[Managers.Inven.HotBar_Choice].keyType == Define.KeyType.Exist)
-        {
-            sample.SetActive(true);
-            sample.GetComponent<SpriteRenderer>().sprite = Managers.Inven.hotBar_itemInfo[Managers.Inven.HotBar_Choice].itemInfo.itemIcon;
-        }
+    ////강화 할수 있는 UI 생성
+    //void ChoiceBuild(Vector3Int pos)
+    //{
+    //    Vector2 towerPos = Managers.Game.tower.transform.position;
+    //    GameObject go = Managers.Game.grid.building.GetInstantiatedObject(new Vector3Int(pos.x - (int)towerPos.x,pos.y - (int)towerPos.y));
+    //    Instantiate(Resources.Load<GameObject>("UI/UI_Build"),go.transform);
+    //}
 
-        //건축 모드가 아닐때 소장하고 있을때 
-        if (Managers.Game.mouse.CursorType != Define.CursorType.Builder && Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == KeyType.Exist)
-            Managers.Game.tower.gameObject.SetActive(false);
+    //public void ShowBuildSample()
+    //{
+    //    //아이템이 설치 아이템일때
+    //    if (Managers.Inven.hotBar_itemInfo[Managers.Inven.HotBar_Choice].keyType == Define.KeyType.Exist)
+    //    {
+    //        sample.SetActive(true);
+    //        sample.GetComponent<SpriteRenderer>().sprite = Managers.Inven.hotBar_itemInfo[Managers.Inven.HotBar_Choice].itemInfo.itemIcon;
+    //    }
 
-        //건축 모드일때 기지를 소장하고 있고 다른 선택을 하고 있을때
-        if (Managers.Game.mouse.CursorType == Define.CursorType.Builder && Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == KeyType.Exist && Managers.Inven.HotBar_Choice != Managers.Inven.hotBar_itemInfo.Length - 1)
-            Managers.Game.tower.gameObject.SetActive(false);
-    } 
+    //    //건축 모드가 아닐때 소장하고 있을때 
+    //    if (Managers.Game.mouse.CursorType != Define.CursorType.Builder && Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == KeyType.Exist)
+    //        Managers.Game.tower.gameObject.SetActive(false);
 
-   
+    //    //건축 모드일때 기지를 소장하고 있고 다른 선택을 하고 있을때
+    //    if (Managers.Game.mouse.CursorType == Define.CursorType.Builder && Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == KeyType.Exist && Managers.Inven.HotBar_Choice != Managers.Inven.hotBar_itemInfo.Length - 1)
+    //        Managers.Game.tower.gameObject.SetActive(false);
+    //} 
 
-    public void BuildTower(bool force = false)
-    {
-        //강제 설치
-        if (force)
-            Managers.Game.tower.transform.position = Managers.Game.player.transform.position;
 
-        Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType = Define.KeyType.Empty;
-        Managers.Inven.hotBar.SetKeys(Managers.Inven.hotBar_itemInfo.Length - 1);
-        Managers.Game.tower.gameObject.SetActive(true);
-        Managers.Game.tower.GetComponent<SpriteRenderer>().color = new Color(1,1,1,1);
-        Managers.Game.tower.build.color = new Color(1,1,1,1);
-        Managers.Inven.Set_HotBar_Choice();
-        Managers.Game.tower.ChangeVisable();
-    }
 
-    public void ShowTowerSample()
-    {
-         //기지를 선택할때 기지가 존재한다면
-        if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist)
-        {
-            Managers.Game.tower.gameObject.SetActive(true);
-            Managers.Game.tower.GetComponent<SpriteRenderer>().color = new Color32(225, 225, 225, 120);
-            Managers.Game.tower.build.color = new Color32(225, 225, 225, 120);
-            Managers.Game.tower.ChangeInvisable();
-        }
-        sample.SetActive(false);
-    }
+    //public void BuildTower(bool force = false)
+    //{
+    //    //강제 설치
+    //    if (force)
+    //        Managers.Game.tower.transform.position = Managers.Game.player.transform.position;
 
-    public void HideSample()
-    {
-        //건축 모드가 아닐때 소장하고 있을때 
-        if (Managers.Game.mouse.CursorType != Define.CursorType.Builder && Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist)
-            Managers.Game.tower.gameObject.SetActive(false);
-        
-        //건축 모드일때 기지를 소장하고 있고 다른 선택을 하고 있을때
-        if (Managers.Game.mouse.CursorType == Define.CursorType.Builder && Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist && Managers.Inven.HotBar_Choice != Managers.Inven.hotBar_itemInfo.Length - 1)
-            Managers.Game.tower.gameObject.SetActive(false);
-        sample.SetActive(false);
-    }
+    //    Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType = Define.KeyType.Empty;
+    //    Managers.Game.tower.gameObject.SetActive(true);
+    //    Managers.Game.tower.GetComponent<SpriteRenderer>().color = new Color(1,1,1,1);
+    //    Managers.Game.tower.build.color = new Color(1,1,1,1);
+    //    Managers.Inven.Set_HotBar_Choice();
+    //    Managers.Game.tower.ChangeVisable();
+    //}
+
+    //public void ShowTowerSample()
+    //{
+    //     //기지를 선택할때 기지가 존재한다면
+    //    if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist)
+    //    {
+    //        Managers.Game.tower.gameObject.SetActive(true);
+    //        Managers.Game.tower.GetComponent<SpriteRenderer>().color = new Color32(225, 225, 225, 120);
+    //        Managers.Game.tower.build.color = new Color32(225, 225, 225, 120);
+    //        Managers.Game.tower.ChangeInvisable();
+    //    }
+    //    sample.SetActive(false);
+    //}
+
+    //public void HideSample()
+    //{
+    //    //건축 모드가 아닐때 소장하고 있을때 
+    //    if (Managers.Game.mouse.CursorType != Define.CursorType.Builder && Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist)
+    //        Managers.Game.tower.gameObject.SetActive(false);
+
+    //    //건축 모드일때 기지를 소장하고 있고 다른 선택을 하고 있을때
+    //    if (Managers.Game.mouse.CursorType == Define.CursorType.Builder && Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist && Managers.Inven.HotBar_Choice != Managers.Inven.hotBar_itemInfo.Length - 1)
+    //        Managers.Game.tower.gameObject.SetActive(false);
+    //    sample.SetActive(false);
+    //}
     #endregion
 
-   
+
 }
