@@ -7,9 +7,9 @@ public class MouseController : UI_Base
 {
     //마우스
     [HideInInspector]
-    public GameObject _icon;
+    public GameObject icon;
     [HideInInspector]
-    public GameObject _count;
+    public GameObject count;
 
     enum GameObjects
     {
@@ -24,8 +24,8 @@ public class MouseController : UI_Base
 
         _init = true;
         Bind<GameObject>(typeof(GameObjects));
-        _icon = Get<GameObject>((int)GameObjects.Icon);
-        _count = Get<GameObject>((int)GameObjects.Count);
+        icon = Get<GameObject>((int)GameObjects.Icon);
+        count = Get<GameObject>((int)GameObjects.Count);
     }
 
     private void OnEnable()
@@ -38,31 +38,6 @@ public class MouseController : UI_Base
         transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition)+new Vector3(0,0,10);
     }
 
-    public void Set_Mouse_ItemIcon_HotBar(Image icon,Text count)
-    {
-        if(_icon == null)
-            Init();
-        icon.gameObject.SetActive(false);
-        count.gameObject.SetActive(false);
-        _icon.GetComponent<SpriteRenderer>().sprite = icon.sprite;
-        if (Managers.Inven.hotBar_itemInfo[Managers.Inven.changeSpot.index].itemInfo.itemType != Define.ItemType.Tool)
-            _count.GetComponent<Text>().text = count.text;
-        else
-            _count.GetComponent<Text>().text = "";
-    }
-
-    public void Set_Mouse_ItemIcon_Inven(Image icon, Text count)
-    {
-        if (_icon == null)
-            Init();
-        icon.gameObject.SetActive(false);
-        count.gameObject.SetActive(false);
-        _icon.GetComponent<SpriteRenderer>().sprite = icon.sprite;
-        if (Managers.Inven.inven_itemInfo[Managers.Inven.changeSpot.index].itemInfo.itemType != Define.ItemType.Tool)
-        _count.GetComponent<Text>().text = count.text;
-        else
-            _count.GetComponent<Text>().text = "";
-    }
 
     #region 플레이 타입
     Define.CursorType _cursorType = Define.CursorType.Normal;
@@ -109,8 +84,8 @@ public class MouseController : UI_Base
 
     void SetDragMode()
     {
-        gameObject.SetActive(true);
-        Cursor.SetCursor(drag, Vector2.zero,CursorMode.Auto);
+        //gameObject.SetActive(true);
+        Cursor.SetCursor(drag, Vector2.zero, CursorMode.Auto);
         Managers.Game.build.gameObject.SetActive(false);
     }
 

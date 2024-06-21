@@ -75,7 +75,7 @@ public class MonsterController : MonoBehaviour
     //저녁과 아침이 목표 우선순위를 다르게 하기
     public Transform SetTarget()
     {
-        if (Define.KeyType.Exist != Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType)
+        if (Define.KeyType.Exist != Managers.Inven.hotBarSlotInfo[Managers.Inven.hotBarSlotInfo.Length - 1].keyType)
             return Managers.Game.tower.transform;
         else
             return Managers.Game.player.transform;
@@ -88,7 +88,7 @@ public class MonsterController : MonoBehaviour
         else
             target = SetTarget();
 
-       if(Define.KeyType.Exist == Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType)
+       if(Define.KeyType.Exist == Managers.Inven.hotBarSlotInfo[Managers.Inven.hotBarSlotInfo.Length - 1].keyType)
             target = SetTarget();
 
         if (Vector2.Distance(target.transform.position, transform.position) < _stat._range)

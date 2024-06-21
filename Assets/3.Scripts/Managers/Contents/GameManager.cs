@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
             mouse = FindAnyObjectByType<MouseController>();
             if (mouse == null)
             {
-                mouse = Instantiate(Resources.Load<GameObject>("Prefabs/Mouse")).GetComponent<MouseController>();
+                mouse = Resources.Load<GameObject>("Prefabs/Mouse").GetComponent<MouseController>();
             }
             mouse.Init();
         }
@@ -67,8 +67,6 @@ public class GameManager : MonoBehaviour
             }
             lights.Init();
         }
-
-        Managers.Inven.Set_HotBar_Choice();
     }
    
     public void OnUpdate()
@@ -108,8 +106,8 @@ public class GameManager : MonoBehaviour
                 {
                     timeType = TimeType.Night;
 
-                    if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length-1].keyType == KeyType.Exist)
-                     build.BuildTower(true);
+                    //if (Managers.Inven.hotBarSlotInfo[Managers.Inven.hotBarSlotInfo.Length - 1].keyType == KeyType.Exist)
+                    // build.BuildTower(true);
                 }
                 if (hour == 24)
                     hour = 0;
@@ -118,4 +116,8 @@ public class GameManager : MonoBehaviour
         else
             curTime += Time.deltaTime;
     }
+
+    public bool isKeepingTower;
+
+    public GameObject weapon;
 }

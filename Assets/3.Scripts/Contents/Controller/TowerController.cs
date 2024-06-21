@@ -31,7 +31,7 @@ public class TowerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F) && canHold)
         {
-            Managers.Inven.hotBar.GetTower();
+            Managers.Inven.hotBarUI.GetTower();
         }
     }
 

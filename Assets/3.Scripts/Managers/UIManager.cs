@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
     GameObject Root { get { return root; } set { root = value; root.name = "Root";  } }
     GameObject root;
 
-    public GameObject Show_UI(string path)
+    public GameObject ShowUI(string path)
     {
         if(Root == null)
             Root = new GameObject();
