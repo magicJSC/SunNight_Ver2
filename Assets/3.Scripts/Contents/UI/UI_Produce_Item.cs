@@ -36,7 +36,7 @@ public class UI_Produce_Item : UI_Base
 
         _init = true;
         itemInfo = Resources.Load<Item>($"Prefabs/Items/{itemName}");
-        explain = produce.explain_Item;
+        explain = produce.explainItem;
         explainText = Util.FindChild(explain, "ExplainText", true).GetComponent<Text>();
         nameText = Util.FindChild(explain, "NameText", true).GetComponent<Text>();
 

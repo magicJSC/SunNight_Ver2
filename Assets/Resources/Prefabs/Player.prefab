@@ -206,7 +206,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  hotBar: {fileID: 0}
   toolParent: {fileID: 0}
 --- !u!95 &5181808167504846212
 Animator:

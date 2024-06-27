@@ -2,89 +2,77 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using static Define;
 
 public class BuildController : MonoBehaviour
 {
-    public StorageManager.SlotInfo info;
+    public UI_Item itemUI;
 
-    public GameObject sample;
+    SpriteRenderer buildItemIcon;
 
-    public bool canBuild;
-    private void Start()
-    {
-        if(Managers.Game.mouse == null)
-         Init();
-    }
 
     public void Init()
     {
         Managers.Game.build = this;
-        sample = Util.FindChild(gameObject, "Sample");
+        buildItemIcon = Util.FindChild(gameObject, "Sample").GetComponent<SpriteRenderer>();
     }
 
-    //private void Update()
-    //{
-    //    if (info == null)
-    //        return;
-    //    MoveMouse();
-    //    MoveTower();
-    //}
+    private void Update()
+    {
+        MoveBuilder();
+    }
 
-    //void MoveTower()
-    //{
-    //    if (info.itemInfo.itemType != ItemType.Tower)
-    //        return;
-    //    Managers.Game.tower.transform.position = transform.position;
+    public void GetBuildItemInfo(UI_Item uI_Item)
+    {
+        itemUI = uI_Item;
+        buildItemIcon.sprite = itemUI.slotInfo.itemInfo.itemIcon;
+    }
 
-    //    if (Input.GetKeyDown(KeyCode.Mouse0))
-    //    {
-    //        if (Managers.Inven.hotBar_choice == Managers.Inven.hotBar_itemInfo.Length - 1)
-    //        {
-    //            BuildTower();
-    //        }
-    //    }
-    //}
-
-    void MoveMouse()
+    void MoveBuilder()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition = new Vector2(Mathf.Round(mousePosition.x), Mathf.Round(mousePosition.y));
         transform.position = mousePosition;
     }
 
-    //public void SetInfo()
-    //{
-    //    info = Managers.Inven.hotBar_itemInfo[Managers.Inven.HotBar_Choice];
-    //}
+    public void BuildTower()
+    {
+        Managers.Game.tower.transform.parent = null;
+        Managers.Game.isKeepingTower = false;
+        Managers.Inven.hotBarUI.towerSlot.HideTowerIcon();
+    }
+
+    public void BuildItem()
+    {
+        Vector2 tower = Managers.Game.tower.transform.position; //기지 위치 받아오기
+        if (!Managers.Game.grid.CheckCanBuild(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0)))
+            ShowBuildUI(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0));
+        else
+        {
+            Managers.Game.tower.build.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), itemUI.slotInfo.tile);
+            itemUI.slotInfo.count--;
+            if (itemUI.slotInfo.count <= 0)
+            {
+                itemUI.MakeEmptySlot();
+                itemUI.SetEmptyItem();
+                Managers.Game.mouse.CursorType = CursorType.Normal;
+            }
+            else
+                itemUI.SetInfo();
+        }
+    }
+
+    public void ShowBuildIcon()
+    {
+        buildItemIcon.gameObject.SetActive(true);
+    }
+
+    public void HideBuildIcon()
+    {
+        buildItemIcon.gameObject.SetActive(false);
+    }
 
     #region 건축
-    //void DrawTile()
-    //{
-    //    if (Managers.Game.mouse.CursorType != CursorType.Builder)
-    //        return;
-    //    //타워를 소장 하고 있을때
-    //    if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist)
-    //        return;
-
-    //    Vector2 tower = Managers.Game.tower.transform.position; //기지 위치 받아오기
-    //    if (!Managers.Game.grid.CheckCanBuild(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0)))
-    //    {
-    //        //건축물 선택
-    //        ChoiceBuild(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0));
-    //        return;
-    //    }
-
-    //    Managers.Game.tower.build.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), info.tile);
-    //    Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].count--;
-    //    if (Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].count <= 0)
-    //    {
-    //        Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_choice].keyType = Define.KeyType.Empty;
-    //        Managers.Game.mouse.CursorType = CursorType.Normal;
-    //    }
-
-    //}
 
     //void DeleteTile()
     //{
@@ -104,13 +92,13 @@ public class BuildController : MonoBehaviour
     //    }
     //}
 
-    ////강화 할수 있는 UI 생성
-    //void ChoiceBuild(Vector3Int pos)
-    //{
-    //    Vector2 towerPos = Managers.Game.tower.transform.position;
-    //    GameObject go = Managers.Game.grid.building.GetInstantiatedObject(new Vector3Int(pos.x - (int)towerPos.x,pos.y - (int)towerPos.y));
-    //    Instantiate(Resources.Load<GameObject>("UI/UI_Build"),go.transform);
-    //}
+    //강화 할수 있는 UI 생성
+    void ShowBuildUI(Vector3Int pos)
+    {
+        Vector2 towerPos = Managers.Game.tower.transform.position;
+        GameObject go = Managers.Game.grid.building.GetInstantiatedObject(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y));
+        Instantiate(Resources.Load<GameObject>("UI/UI_Build"), go.transform);
+    }
 
     //public void ShowBuildSample()
     //{

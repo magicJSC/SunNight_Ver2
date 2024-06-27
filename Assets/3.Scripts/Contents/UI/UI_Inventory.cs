@@ -105,7 +105,7 @@ public class UI_Inventory : UI_Base
         Managers.Inven.inventorySlotInfo[1] = new SlotInfo(5, "Bone");
         for (int i = 2; i < Managers.Inven.inventorySlotInfo.Length; i++)
         {
-            Managers.Inven.inventorySlotInfo[i] = new SlotInfo(5, "Branch");
+            Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);
         }
     }
 
@@ -118,6 +118,7 @@ public class UI_Inventory : UI_Base
             go.inven = this;
             go.Init();
             go.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.inventorySlotInfo[i];
+            go.GetComponentInChildren<UI_Item>().index = i;
         }
     }
 

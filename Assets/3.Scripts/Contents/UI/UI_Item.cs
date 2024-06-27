@@ -9,10 +9,12 @@ public class UI_Item : UI_Base
     public Transform parDragBefore;
     public Transform dropingSlot;
     public StorageManager.SlotInfo slotInfo;
-
+    public int index;
 
     Image icon;
     Text count;
+
+    RectTransform rect;
 
     public override void Init()
     {
@@ -20,23 +22,23 @@ public class UI_Item : UI_Base
             return;
 
         _init = true;
-        count = Util.FindChild(gameObject,"Count",true).GetComponent<Text>();
+        count = Util.FindChild(gameObject, "Count", true).GetComponent<Text>();
         icon = Util.FindChild(gameObject, "Icon", true).GetComponent<Image>();
 
         parDragBefore = transform.parent;
-
+        rect = GetComponent<RectTransform>();
         UI_EventHandler evt = icon.GetComponent<UI_EventHandler>();
-        evt._OnBeginDrag += (PointerEventData p) => 
+        evt._OnBeginDrag += (PointerEventData p) =>
         {
             Managers.Game.mouse.CursorType = Define.CursorType.Drag;
             transform.parent = transform.root.GetChild(0);
             icon.raycastTarget = false;
         };
-        evt._OnDrag += (PointerEventData p) => { transform.position = Input.mousePosition;   };
-        evt._OnEndDrag += (PointerEventData p) => 
+        evt._OnDrag += (PointerEventData p) => { transform.position = Input.mousePosition; };
+        evt._OnEndDrag += (PointerEventData p) =>
         {
             transform.parent = parDragBefore;
-            GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            rect.anchoredPosition = Vector2.zero;
             icon.raycastTarget = true;
             Drop();
             Managers.Inven.CheckHotBarChoice();
@@ -48,7 +50,7 @@ public class UI_Item : UI_Base
             if (item.transform.parent.GetComponent<UI_Item>() != null)
                 item.transform.parent.GetComponent<UI_Item>().dropingSlot = transform;
         };
-        if(slotInfo.itemInfo != null)
+        if (slotInfo.itemInfo != null)
             SetInfo();
         else
             SetEmptyItem();
@@ -57,18 +59,15 @@ public class UI_Item : UI_Base
 
     public void SetInfo()
     {
-        if (slotInfo.keyType == Define.KeyType.Empty)
-        { 
+        if (slotInfo.keyType == Define.KeyType.Empty || slotInfo.count == 0)
             SetEmptyItem();
-            return;
-        }
         else
+        {
             SetExistItem();
-        count.text = slotInfo.count.ToString();
-        icon.sprite = slotInfo.itemInfo.itemIcon;
-        GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-        gameObject.SetActive(false);
-        gameObject.SetActive(true);
+            count.text = slotInfo.count.ToString();
+            icon.sprite = slotInfo.itemInfo.itemIcon;
+            rect.anchoredPosition = Vector2.zero;
+        }
     }
 
     public void MakeEmptySlot()
@@ -80,6 +79,7 @@ public class UI_Item : UI_Base
 
     public void SetEmptyItem()
     {
+        MakeEmptySlot();
         icon.gameObject.SetActive(false);
         count.gameObject.SetActive(false);
     }
@@ -96,13 +96,20 @@ public class UI_Item : UI_Base
     void Drop()
     {
         if (dropingSlot == null)
+        {
+            rect.anchoredPosition = Vector2.zero;
             return;
+        }
 
         UI_Item s2 = dropingSlot.GetComponentInChildren<UI_Item>();
 
-        if(s2.slotInfo.itemInfo.idName != slotInfo.itemInfo.idName)
+        if(s2.slotInfo.itemInfo == null)
+            Managers.Inven.ChangeItem(this, s2);
+        else if (s2.slotInfo.itemInfo.idName != slotInfo.itemInfo.idName)
             Managers.Inven.ChangeItem(this, s2);
         else
             Managers.Inven.AddItem(this, s2);
+
+        dropingSlot = null;
     }
 }

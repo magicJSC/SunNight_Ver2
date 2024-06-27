@@ -23,17 +23,11 @@ public class UI_InventorySlot : UI_Base
         itemUI = transform.GetComponentInChildren<UI_Item>();
 
         UI_EventHandler evt = GetComponent<UI_EventHandler>();
-        evt._OnEnter += (PointerEventData p) =>
-        {
-                if (itemUI.slotInfo.keyType == Define.KeyType.Empty)
-                    return;
-                inven.explain.SetActive(true);
-                Set_Explain();
-            
-        };
+        evt._OnEnter += ShowSlotInfo;
+
+      
         evt._OnExit += (PointerEventData p) =>
         {
-           
             explain.SetActive(false);
         };
         evt._OnDrop += (PointerEventData p) =>
@@ -45,6 +39,14 @@ public class UI_InventorySlot : UI_Base
         };
     }
 
+    private void ShowSlotInfo(PointerEventData data)
+    {
+        if (itemUI.slotInfo.keyType == Define.KeyType.Empty)
+            return;
+        inven.explain.SetActive(true);
+        Set_Explain();
+    }
+
     public void Set_Explain()
     {
         int x, y;
@@ -52,6 +54,7 @@ public class UI_InventorySlot : UI_Base
             x = -25;
         else
             x = -545;
+
         if (inven.back.GetComponent<RectTransform>().anchoredPosition.y > -40)
             y = 180;
         else

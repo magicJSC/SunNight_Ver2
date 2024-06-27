@@ -38,7 +38,7 @@ public class Weapon : ToolController
             if (col.gameObject.layer == monsterLayer)
             {
                 MonsterStat stat = col.GetComponent<MonsterStat>();
-                stat.Hp = Util.GetTotalHp(stat.Hp, stat.Def, _damage);
+                stat.Hp = Util.GetTotalHp(stat.Hp, stat.Defence, _damage);
                 if (stat.Hp <= 0)
                 {
                     Destroy(col.gameObject);

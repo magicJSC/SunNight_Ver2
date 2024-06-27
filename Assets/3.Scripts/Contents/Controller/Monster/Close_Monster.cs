@@ -9,7 +9,7 @@ public class Close_Monster : MonsterController
         Collider2D col = Physics2D.OverlapBox(transform.position + (target.position - transform.position).normalized / 2, new Vector2(1, 1), (target.position - transform.position).normalized.z, buildLayer | playerLayer);
         if (col != null)
         {
-            col.GetComponent<Stat>().Hp -= _stat.Dmg;
+            col.GetComponent<Stat>().Hp -= _stat.Damage;
             if (col.GetComponent<Stat>().Hp <= 0)
             {
                 if (col.GetComponent<Item>())

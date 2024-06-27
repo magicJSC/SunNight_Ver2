@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 using UnityEngine.Tilemaps;
-using System.Threading;
-using static StorageManager;
 
 public class StorageManager : MonoBehaviour
 {
     public int Coin {  get { return _coin; } set 
         {
             _coin = value;
-
             if(inventoryUI != null)
                 inventoryUI.SetCoin();
         }
@@ -75,38 +72,41 @@ public class StorageManager : MonoBehaviour
     #region 인벤토리
     public UI_HotBar hotBarUI;
     public int choiceIndex = 0;
-
+    public bool choicingTower = false;
 
     //선택한 값에 따라 다르게 실행
     public void CheckHotBarChoice()
     {
         Item info = hotBarUI.slotList[choiceIndex].UI_item.slotInfo.itemInfo;
-
+        if (info == null)
+            return;
         //체크할 때 플레이어의 검이 있을 때마다 지운다(수정 필요) -> 무기는 공격이 끝나면 사라져서 안보이고
+        if (Managers.Game.weapon != null)
+            Destroy(Managers.Game.weapon);
         switch (info.itemType)
         {
             case ItemType.Building:
                 Managers.Game.mouse.CursorType = CursorType.Builder;
+                Managers.Game.build.GetBuildItemInfo(hotBarUI.slotList[choiceIndex].UI_item);
+                Managers.Game.build.ShowBuildIcon();
                 break;
             case ItemType.Tower:
                 Managers.Game.mouse.CursorType = CursorType.Builder;
+                Managers.Game.build.HideBuildIcon();
                 break;
             case ItemType.Tool:
                 Managers.Game.mouse.CursorType = CursorType.Normal;
-                if (Managers.Game.weapon != null)
-                    Destroy(Managers.Game.weapon);
                 Managers.Game.weapon = Instantiate(Resources.Load<GameObject>($"Prefabs/Items/{info.idName}"), Managers.Game.player.toolParent.transform);
                 break;
             default:
                 Managers.Game.mouse.CursorType = CursorType.Normal;
-
                 break;
         }
     }
 
     public void CheckHotBarTowerSlot()
     {
-
+        
     }
 
     public bool AddOneItem(string _name)
@@ -114,20 +114,20 @@ public class StorageManager : MonoBehaviour
         Item item = Resources.Load<Item>($"Prefabs/Items/{_name}");
         if (item.itemType != ItemType.Tool)   //재료 아이템일때
         {
-            SlotInfo emptySlot = null;
+            UI_Item emptySlot = null;
             for (int i = 0; i < inventoryUI.slotList.Count - 1; i++)
             {
-                SlotInfo slotInfo = inventoryUI.slotList[i].itemUI.slotInfo;
-                if (slotInfo.itemInfo == null)
+                UI_Item itemUI = inventoryUI.slotList[i].itemUI;
+                if (itemUI.slotInfo.itemInfo == null)
                 {
                     if (emptySlot == null)
-                        emptySlot = slotInfo;
+                        emptySlot = itemUI;
                     continue;
                 }
 
-                if (item.idName == slotInfo.itemInfo.idName && slotInfo.count < 99)
+                if (item.idName == itemUI.slotInfo.itemInfo.idName && itemUI.slotInfo.count < 99)
                 {
-                    SetSlot(item,slotInfo, slotInfo.count + 1);
+                    SetSlot(item,itemUI, itemUI.slotInfo.count + 1);
                     return true;
                 }
             }
@@ -145,10 +145,10 @@ public class StorageManager : MonoBehaviour
         {
             for (int i = 0; i < inventoryUI.slotList.Count - 1; i++)
             {
-                SlotInfo slotInfo = inventoryUI.slotList[i].itemUI.slotInfo;
-                if (KeyType.Empty == slotInfo.keyType)
+                UI_Item itemUI = inventoryUI.slotList[i].itemUI;
+                if (KeyType.Empty == itemUI.slotInfo.keyType)
                 {
-                    SetSlot(item, slotInfo,1);
+                    SetSlot(item, itemUI,1);
                     return true;
                 }
             }
@@ -162,34 +162,35 @@ public class StorageManager : MonoBehaviour
     public UI_Inventory inventoryUI;
 
     //i1 : 드래그하는 아이템, i2 : 드래그를 드랍한 아이템
-    public void ChangeItem(UI_Item i1, UI_Item i2)
+    public void ChangeItem(UI_Item drag, UI_Item drop)
     {
-        SlotInfo change1 = i1.slotInfo;
-        SlotInfo change2 = i2.slotInfo;
-        i1.slotInfo = change2;
-        i2.slotInfo = change1;
-        i1.SetInfo();
-        i2.SetInfo();
+        SlotInfo change1 = drag.slotInfo;
+        SlotInfo change2 = drop.slotInfo;
+        drag.slotInfo = change2;
+        drop.slotInfo = change1;
+        drag.SetInfo();
+        drop.SetInfo();
     }
 
-    public void AddItem(UI_Item i1,UI_Item i2)
+    public void AddItem(UI_Item drag, UI_Item drop)
     {
-        i2.slotInfo.count += i1.slotInfo.count;
-        if(i2.slotInfo.count > 99)
+        drop.slotInfo.count += drag.slotInfo.count;
+        if(drop.slotInfo.count > 99)
         {
-            i1.slotInfo.count = i2.slotInfo.count - 99;
-            i2.slotInfo.count = 99;
+            drag.slotInfo.count = drop.slotInfo.count - 99;
+            drop.slotInfo.count = 99;
         }
-        else i1.MakeEmptySlot();
-        i1.SetInfo();
-        i2.SetInfo();
+        else drag.MakeEmptySlot();
+        drag.SetInfo();
+        drop.SetInfo();
     }
 
-    public void SetSlot(Item item,SlotInfo slotInfo,int count)
+    public void SetSlot(Item item,UI_Item itemUI,int count)
     {
-        slotInfo.itemInfo = item;
-        slotInfo.keyType = KeyType.Exist;
-        slotInfo.count = count;
+        itemUI.slotInfo.itemInfo = item;
+        itemUI.slotInfo.keyType = KeyType.Exist;
+        itemUI.slotInfo.count = count;
+        itemUI.SetInfo();
     }
 }
 

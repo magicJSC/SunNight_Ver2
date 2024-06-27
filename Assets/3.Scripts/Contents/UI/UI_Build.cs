@@ -52,16 +52,10 @@ public class UI_Build : UI_Base
         Background
     }
 
-    enum GameObjects
-    {
-        MatterGrid
-    }
-
     public override void Init()
     {
         Bind<Image>(typeof(Images));
         Bind<Text>(typeof(Texts));
-        Bind<GameObject>(typeof(GameObjects));
 
         nameT = Get<Text>((int)Texts.Name);
         hpT = Get<Text>((int)Texts.Hp);
@@ -74,7 +68,7 @@ public class UI_Build : UI_Base
         close = Get<Image>((int)Images.Close);
         background = Get<Image>((int)Images.Background);
 
-        matGrid = Get<GameObject>((int)GameObjects.MatterGrid);
+        matGrid = Util.FindChild(gameObject,"MatterGrid",true);
 
         itemData = transform.parent.GetComponent<Item_Buliding>();
         buildStat = transform.parent.GetComponent<BuildStat>();
@@ -96,6 +90,8 @@ public class UI_Build : UI_Base
         };
 
         InitData();
+
+        gameObject.SetActive(false);
     }
 
     void InitData()
@@ -103,16 +99,16 @@ public class UI_Build : UI_Base
         nameT.text = $"{itemData.idName}";
         hpT.text = buildStat.Hp.ToString();
 
-        if (buildStat.Dmg != 0)
-            dmgT.text = buildStat.Dmg.ToString();
+        if (buildStat.Damage != 0)
+            dmgT.text = buildStat.Damage.ToString();
         else
             dmgT.text = "-";
-        if (buildStat._atkCool != 0)
-            atkCoolT.text = buildStat._atkCool.ToString();
+        if (buildStat.attackCool != 0)
+            atkCoolT.text = buildStat.attackCool.ToString();
         else
             atkCoolT.text = "-";
-        if(buildStat._range != 0)
-            rangeT.text = buildStat._range.ToString();
+        if(buildStat.range != 0)
+            rangeT.text = buildStat.range.ToString();
         else
             rangeT.text = "-";
 

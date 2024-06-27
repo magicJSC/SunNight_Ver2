@@ -75,10 +75,16 @@ public class UI_HotBar : UI_Base
         choice.GetComponent<RectTransform>().anchoredPosition = new Vector2(-330+change*160,-443);
 
         Managers.Inven.choiceIndex = change;
-        if (change != Managers.Inven.hotBarSlotInfo.Length - 1)
+        bool choiceTower = change == Managers.Inven.hotBarSlotInfo.Length - 1;
+        if (!choiceTower)
             Managers.Inven.CheckHotBarChoice();
         else
             Managers.Inven.CheckHotBarTowerSlot();
+
+        Managers.Inven.choicingTower = choiceTower;
+        if (Managers.Game.isKeepingTower)
+            Managers.Game.tower.gameObject.SetActive(choiceTower);
+
     }
 
     #region 아이템 관련

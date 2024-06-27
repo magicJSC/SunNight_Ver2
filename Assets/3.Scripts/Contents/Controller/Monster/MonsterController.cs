@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+interface IMonsterController 
+{
+        
+}
+
 public class MonsterController : MonoBehaviour
 {
+
     Rigidbody2D rigid;
     public LayerMask playerLayer;
     public LayerMask buildLayer;
@@ -52,7 +58,7 @@ public class MonsterController : MonoBehaviour
         _stat = GetComponent<MonsterStat>();
         rigid = GetComponent<Rigidbody2D>();
         sprite =GetComponent<SpriteRenderer>();
-        curAtkCool = _stat._atkCool;
+        curAtkCool = _stat.attackCool;
     }
 
     
@@ -91,10 +97,10 @@ public class MonsterController : MonoBehaviour
        if(Define.KeyType.Exist == Managers.Inven.hotBarSlotInfo[Managers.Inven.hotBarSlotInfo.Length - 1].keyType)
             target = SetTarget();
 
-        if (Vector2.Distance(target.transform.position, transform.position) < _stat._range)
+        if (Vector2.Distance(target.transform.position, transform.position) < _stat.range)
         {
             rigid.velocity = Vector2.zero;
-            if (curAtkCool >= _stat._atkCool)
+            if (curAtkCool >= _stat.attackCool)
             {
                 curAtkCool = 0;
                 State = Define.State.Attack;
@@ -118,12 +124,12 @@ public class MonsterController : MonoBehaviour
 
         if(onfight == OnFight.Battle)
         {
-            if (Vector2.Distance(target.transform.position, transform.position) > _stat._range)
+            if (Vector2.Distance(target.transform.position, transform.position) > _stat.range)
                 rigid.velocity = (target.transform.position - transform.position).normalized * _stat.Speed;
             else
                 State = Define.State.Idle;
 
-            if (curAtkCool < _stat._atkCool)
+            if (curAtkCool < _stat.attackCool)
                 curAtkCool += Time.deltaTime;
         }
 
@@ -137,8 +143,8 @@ public class MonsterController : MonoBehaviour
 
     void CheckObstacle()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, (target.position - transform.position).normalized, _stat._range, buildLayer);
-        Debug.DrawRay(transform.position, (target.position - transform.position).normalized * _stat._range,Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (target.position - transform.position).normalized, _stat.range, buildLayer);
+        Debug.DrawRay(transform.position, (target.position - transform.position).normalized * _stat.range,Color.red);
         if(hit)
         {
             target = hit.transform;

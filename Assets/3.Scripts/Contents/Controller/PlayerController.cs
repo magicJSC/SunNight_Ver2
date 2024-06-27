@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : CreatureController
 {
     Rigidbody2D rigid;
-
-    [HideInInspector]
-    public UI_HotBar hotBar;
-    [HideInInspector]
-    public GameObject toolParent;
-
     Animator anim;
     SpriteRenderer sprite;
 
+
+    [Header("Contents")]
+    Vector2 dir;
+    bool canGetTower = false;
+
+    [HideInInspector]
+    public GameObject toolParent;
+
     List<GameObject> matters = new List<GameObject>();
+
+
 
     public void Init()
     {
@@ -22,47 +27,28 @@ public class PlayerController : CreatureController
         rigid = GetComponent<Rigidbody2D>();
         Camera.main.GetComponent<CameraController>().target = transform;
         anim = GetComponent<Animator>();
-        sprite = GetComponent<SpriteRenderer>();  
+        sprite = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    void OnMove(InputValue value)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        dir = value.Get<Vector2>();
+
+        if (dir.x != 0 || dir.y != 0)
         {
-            if (!Managers.Inven.inventoryUI.gameObject.activeSelf)
-                Managers.Inven.inventoryUI.gameObject.SetActive(true);
-            else
-                Managers.Inven.inventoryUI.gameObject.SetActive(false);
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-            Pick();
-    }
-
-    void OnMove()
-    {
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
-
-        if(x !=0)
-        sprite.flipX = x < 0;
-
-        if (y < 0)
-            anim.Play("DownWalk");
-        else if (y > 0)
-            anim.Play("UpWalk");
-        if (x != 0)
-        {
-            if (y > 0)
+            if (dir.x != 0)
+                sprite.flipX = dir.x < 0;
+            if (dir.y > 0)
                 anim.Play("UpWalk");
             else
                 anim.Play("DownWalk");
         }
-        anim.SetInteger("X", (int)x);
-        anim.SetInteger("Y", (int)y);
-        rigid.velocity = new Vector3(x, y, 0) * speed;
+        else
+            anim.SetTrigger("Stop");
+        rigid.velocity = new Vector3(dir.x, dir.y, 0) * speed;
     }
 
-    void Pick()
+    void OnPick()
     {
         for (int i = 0; i < matters.Count; i++)
         {
@@ -71,12 +57,42 @@ public class PlayerController : CreatureController
         }
     }
 
+    void OnShowInventory()
+    {
+        Managers.Inven.inventoryUI.gameObject.SetActive(!Managers.Inven.inventoryUI.gameObject.activeSelf);
+    }
+
+    void OnGetTower()
+    {
+        if (!canGetTower || Managers.Game.isKeepingTower)
+            return;
+
+        Managers.Game.tower.gameObject.SetActive(false);
+        Managers.Game.isKeepingTower = true;
+        Managers.Inven.hotBarUI.towerSlot.ShowTowerIcon();
+        Managers.Game.tower.transform.SetParent(Managers.Game.build.transform);
+        Managers.Game.tower.transform.position = Managers.Game.build.transform.position;
+    }
+
+    void OnBuild()
+    {
+        if (Managers.Inven.choicingTower)
+            Managers.Game.build.BuildTower();
+        else
+            Managers.Game.build.BuildItem(); 
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Item_Matter>())
         {
             matters.Add(collision.gameObject);
             collision.gameObject.GetComponent<Item_Matter>().ChangeTake();
+        }
+        else if (collision.gameObject.GetComponent<TowerController>())
+        {
+            canGetTower = true;
         }
     }
 
@@ -86,6 +102,10 @@ public class PlayerController : CreatureController
         {
             matters.Remove(collision.gameObject);
             collision.gameObject.GetComponent<Item_Matter>().ChangeOrigin();
+        }
+        else if (collision.gameObject.GetComponent<TowerController>())
+        {
+            canGetTower = false;
         }
     }
 }
