@@ -215,10 +215,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 50
   maxHP: 0
-  _def: 5
-  _dmg: 15
-  _atkCool: 1.5
-  _range: 1
+  _defence: 1
+  _damage: 5
+  attackCool: 1
+  range: 1
   _speed: 5
 --- !u!1001 &6914328826274419481
 PrefabInstance:

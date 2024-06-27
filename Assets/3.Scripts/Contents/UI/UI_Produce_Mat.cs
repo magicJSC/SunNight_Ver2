@@ -13,11 +13,6 @@ public class UI_Produce_Mat : UI_Base
 
     Text count;
 
-    enum Texts
-    {
-        Count
-    }
-
     GameObject explain;
     Text explainText;
     Text nameText;
@@ -28,11 +23,10 @@ public class UI_Produce_Mat : UI_Base
     {
         itemInfo = Resources.Load<Item>($"Prefabs/Items/{matterName}");
 
-        Bind<Text>(typeof(Texts));
        icon = GetComponent<Image>();
-        count = Get<Text>((int)Texts.Count);
+        count = Util.FindChild(gameObject, "Count",true).GetComponent<Text>();
 
-        explain = produce.explain_Mat;
+        explain = produce.explainMat;
         explainText = Util.FindChild(explain, "ExplainText", true).GetComponent<Text>();
         nameText = Util.FindChild(explain, "NameText", true).GetComponent<Text>();
 

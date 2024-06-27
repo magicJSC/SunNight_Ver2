@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BuildStat : Stat
 {
-    public float Dmg { get { return _dmg; } set { _dmg = value; } }
+    public float Damage { get { return _damage; } set { _damage = value; } }
     [SerializeField]
-    float _dmg;
+    float _damage;
 
-    public float _atkCool;
-    public float _range;
+    public float attackCool;
+    public float range;
 }

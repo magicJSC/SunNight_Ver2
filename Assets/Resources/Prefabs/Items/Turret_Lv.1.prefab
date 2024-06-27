@@ -117,9 +117,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 100
   maxHP: 0
-  _dmg: 5
-  _atkCool: 1
-  _range: 4
+  _damage: 5
+  attackCool: 1.5
+  range: 8
 --- !u!61 &4748543396620772949
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class UI_EventHandler : MonoBehaviour,IPointerClickHandler,IDragHandler,IPointerDownHandler,IPointerEnterHandler,IPointerExitHandler,IPointerUpHandler,IBeginDragHandler,IEndDragHandler,IDropHandler
 {
-    public Action<PointerEventData> _OnClick;
+    public event Action<PointerEventData> _OnClick;
     public Action<PointerEventData> _OnDrag;
     public Action<PointerEventData> _OnDown;
     public Action<PointerEventData> _OnExit;

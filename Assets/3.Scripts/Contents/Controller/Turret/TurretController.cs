@@ -20,7 +20,7 @@ public class TurretController : MonoBehaviour
         _stat = GetComponent<BuildStat>();
         if (_stat == null)
             Debug.Log($"{name}포탑에 TurretStat이 존재하지 않습니다");
-        GetComponent<CircleCollider2D>().radius = _stat._range;
+        GetComponent<CircleCollider2D>().radius = _stat.range;
         GetComponent<CircleCollider2D>().isTrigger = true;
         face = Util.FindChild(gameObject, "Face", true).transform;
     }
@@ -39,7 +39,7 @@ public class TurretController : MonoBehaviour
             SetTarget();
             return;
         }
-        else if (Vector2.Distance(_target.transform.position, transform.position) > _stat._range)
+        else if (Vector2.Distance(_target.transform.position, transform.position) > _stat.range)
         {
             SetTarget();
             return;
@@ -51,7 +51,7 @@ public class TurretController : MonoBehaviour
 
     protected virtual void Attack()
     {
-        if (atkCurTime > _stat._atkCool)
+        if (atkCurTime > _stat.attackCool)
         {
             isWorking = true;
             atkCurTime = 0;
@@ -63,7 +63,7 @@ public class TurretController : MonoBehaviour
 
     void Atk()
     {
-        _target.GetComponent<MonsterStat>().Hp -= _stat.Dmg;
+        _target.GetComponent<MonsterStat>().Hp -= _stat.Damage;
         if (_target.GetComponent<MonsterStat>().Hp <= 0)
         {
             _targets.Remove(_target);
@@ -120,6 +120,6 @@ public class TurretController : MonoBehaviour
         if (_stat == null)
             return;
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, _stat._range);
+        Gizmos.DrawWireSphere(transform.position, _stat.range);
     }
 }

@@ -7,27 +7,21 @@ public class UI_TowerSlot : UI_Base
 {
     Image icon;
 
-    enum Images
-    {
-        Icon
-    }
 
     public new void Init()
     {
-        Bind<Image>(typeof(Images));
-        icon = Get<Image>((int)Images.Icon);
-
+        icon = Util.FindChild(gameObject,"Icon",true).GetComponent<Image>();
         GetComponent<Image>().color = Color.yellow;
-        //icon.sprite = Managers.Game.tower.GetComponent<SpriteRenderer>().sprite;
-        Hide_Tower_Icon();
+        icon.sprite = Managers.Game.tower.GetComponent<SpriteRenderer>().sprite;
+        HideTowerIcon();
     }
 
-    public void Show_Tower_Icon()
+    public void ShowTowerIcon()
     {
         icon.gameObject.SetActive(true);
     }
 
-    public void Hide_Tower_Icon()
+    public void HideTowerIcon()
     {
         icon.gameObject.SetActive(false);
     }

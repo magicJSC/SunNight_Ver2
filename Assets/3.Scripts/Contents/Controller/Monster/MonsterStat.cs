@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class MonsterStat : Stat
 {
-   
-    public float Def { get { return _def; } set { _def = value; } }
+    public float Defence { get { return _defence; } set { _defence = value; } }
     [SerializeField]
-    float _def;
+    float _defence;
 
-    public float Dmg { get { return _dmg; } set { _dmg = value; } }
+    public float Damage { get { return _damage; } set { _damage = value; } }
     [SerializeField]
-    float _dmg;
+    float _damage;
 
-    public float _atkCool;
-    public float _range;
+    public float attackCool;
+    public float range;
     public float Speed { get { return _speed; } set { _speed = value; } }
     [SerializeField]
     float _speed;
-
-    
 }
