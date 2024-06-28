@@ -58,6 +58,7 @@ public class UI_HotBar : UI_Base
             slot1 = Instantiate(Resources.Load<GameObject>("UI/UI_HotBar_Slot"), grid.transform).GetComponent<UI_HotbarSlot>();
             slotList.Add(slot1);
             slot1.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.hotBarSlotInfo[i];
+            slot1.GetComponentInChildren<UI_Item>().Init();
             slotList[i].GetComponent<UI_HotbarSlot>().Init();
             slot1.keyId = i;
         }

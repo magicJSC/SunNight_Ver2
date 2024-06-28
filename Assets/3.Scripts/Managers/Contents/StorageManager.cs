@@ -19,6 +19,8 @@ public class StorageManager : MonoBehaviour
     //ItemInfo대신 Item으로 바꾸기
     public SlotInfo[] hotBarSlotInfo = new SlotInfo[5];
     public SlotInfo[] inventorySlotInfo = new SlotInfo[24];
+    public SlotInfo smeltSlotInfo = new SlotInfo(0);
+    public SlotInfo grillingSlotInfo = new SlotInfo(0);
 
     public class SlotInfo
     {
@@ -67,10 +69,22 @@ public class StorageManager : MonoBehaviour
             }
             inventoryUI.Init();
         }
+        if (smeltUI == null)
+        {
+            smeltUI = FindAnyObjectByType<UI_Smelt>();
+            if (smeltUI == null)
+            {
+                GameObject go = Managers.UI.ShowUI("UI_Storage");
+                smeltUI = Util.FindChild(go, "UI_Inven").GetComponent<UI_Smelt>();
+            }
+        }
     }
 
     #region 인벤토리
     public UI_HotBar hotBarUI;
+    public UI_Inventory inventoryUI;
+    public UI_Smelt smeltUI;
+
     public int choiceIndex = 0;
     public bool choicingTower = false;
 
@@ -109,9 +123,9 @@ public class StorageManager : MonoBehaviour
         
     }
 
-    public bool AddOneItem(string _name)
+    public bool AddOneItem(string name)
     {
-        Item item = Resources.Load<Item>($"Prefabs/Items/{_name}");
+        Item item = Resources.Load<Item>($"Prefabs/Items/{name}");
         if (item.itemType != ItemType.Tool)   //재료 아이템일때
         {
             UI_Item emptySlot = null;
@@ -156,10 +170,46 @@ public class StorageManager : MonoBehaviour
             return false;
         }
     }
+
+    public void AddItems(string name,int count)
+    {
+        Item item = Resources.Load<Item>($"Prefabs/Items/{name}");
+        UI_Item emptySlot = null;
+        for (int i = 0; i < inventoryUI.slotList.Count - 1; i++)
+        {
+            UI_Item itemUI = inventoryUI.slotList[i].itemUI;
+            if (itemUI.slotInfo.itemInfo == null)
+            {
+                if (emptySlot == null)
+                    emptySlot = itemUI;
+                continue;
+            }
+
+            if (item.idName == itemUI.slotInfo.itemInfo.idName)
+            {
+                if (itemUI.slotInfo.count + count > 99)
+                {
+                    int lefting = itemUI.slotInfo.count + count - 99;
+                    SetSlot(item, itemUI, 99);
+                }
+                else
+                {
+                    SetSlot(item, itemUI, itemUI.slotInfo.count + count);
+                    break;
+                }
+            }
+        }
+        //추가 하지 못했다면 비어있는 칸에 넣기
+        if (emptySlot != null)
+        {
+            SetSlot(item, emptySlot, count);
+        }
+    }
     #endregion
 
 
-    public UI_Inventory inventoryUI;
+
+
 
     //i1 : 드래그하는 아이템, i2 : 드래그를 드랍한 아이템
     public void ChangeItem(UI_Item drag, UI_Item drop)
