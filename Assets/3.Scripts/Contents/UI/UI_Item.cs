@@ -9,14 +9,13 @@ public class UI_Item : UI_Base
     public Transform parDragBefore;
     public Transform dropingSlot;
     public StorageManager.SlotInfo slotInfo;
-    public int index;
 
     Image icon;
     Text count;
 
     RectTransform rect;
 
-    public override void Init()
+    public new void Init()
     {
         if (_init)
             return;
@@ -30,11 +29,18 @@ public class UI_Item : UI_Base
         UI_EventHandler evt = icon.GetComponent<UI_EventHandler>();
         evt._OnBeginDrag += (PointerEventData p) =>
         {
+            if (p.pointerDrag.transform.parent.GetComponentInParent<IDragable>() == null)
+                return;
             Managers.Game.mouse.CursorType = Define.CursorType.Drag;
             transform.parent = transform.root.GetChild(0);
             icon.raycastTarget = false;
         };
-        evt._OnDrag += (PointerEventData p) => { transform.position = Input.mousePosition; };
+        evt._OnDrag += (PointerEventData p) => 
+        {
+            if (p.pointerDrag.transform.parent.GetComponentInParent<IDragable>() != null)
+                return;
+            transform.position = Input.mousePosition;
+        };
         evt._OnEndDrag += (PointerEventData p) =>
         {
             transform.parent = parDragBefore;
@@ -59,7 +65,7 @@ public class UI_Item : UI_Base
 
     public void SetInfo()
     {
-        if (slotInfo.keyType == Define.KeyType.Empty || slotInfo.count == 0)
+        if (slotInfo.count == 0)
             SetEmptyItem();
         else
         {
@@ -75,11 +81,11 @@ public class UI_Item : UI_Base
         slotInfo.keyType = Define.KeyType.Empty;
         slotInfo.count = 0;
         slotInfo.itemInfo = null;
+        SetEmptyItem();
     }
 
     public void SetEmptyItem()
     {
-        MakeEmptySlot();
         icon.gameObject.SetActive(false);
         count.gameObject.SetActive(false);
     }
@@ -97,13 +103,14 @@ public class UI_Item : UI_Base
     {
         if (dropingSlot == null)
         {
-            rect.anchoredPosition = Vector2.zero;
+            ReturnItemToSlot();
             return;
         }
-
         UI_Item s2 = dropingSlot.GetComponentInChildren<UI_Item>();
-
-        if(s2.slotInfo.itemInfo == null)
+        
+        if(s2 == this)
+            ReturnItemToSlot();
+        else if(s2.slotInfo.itemInfo == null)
             Managers.Inven.ChangeItem(this, s2);
         else if (s2.slotInfo.itemInfo.idName != slotInfo.itemInfo.idName)
             Managers.Inven.ChangeItem(this, s2);
@@ -111,5 +118,10 @@ public class UI_Item : UI_Base
             Managers.Inven.AddItem(this, s2);
 
         dropingSlot = null;
+    }
+
+    void ReturnItemToSlot()
+    {
+        rect.anchoredPosition = Vector2.zero;
     }
 }

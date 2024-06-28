@@ -12,4 +12,6 @@ public class Item : MonoBehaviour
     public string itemName;
     public Define.ItemType itemType;
     public string explain;
+    public bool canSmelt;
+    public Item smelt;
 }
