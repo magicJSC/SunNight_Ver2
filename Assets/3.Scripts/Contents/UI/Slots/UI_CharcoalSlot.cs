@@ -14,7 +14,7 @@ public class UI_CharcoalSlot : UI_BaseSlot
     {
         icon = Util.FindChild(gameObject, "Icon",true).GetComponent<Image>();
         count = Util.FindChild(gameObject, "Count",true).GetComponent<Text>();
-        icon.sprite = Resources.Load<Item>("Prefabs/Items/Charcoal").itemIcon; 
+        icon.sprite = Resources.Load<Item>("Prefabs/Items/Coal").itemSo.itemIcon; 
     }
 
     public void SetSlot()
@@ -30,7 +30,7 @@ public class UI_CharcoalSlot : UI_BaseSlot
     public void SetExistSlot()
     {
         icon.gameObject.SetActive(true);
-        count.gameObject.SetActive(true);
+        count.gameObject.SetActive(charcoalCount != 1);
     }
 
     void SetEmptySlot()

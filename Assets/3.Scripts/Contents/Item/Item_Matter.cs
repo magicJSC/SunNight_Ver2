@@ -6,7 +6,7 @@ public class Item_Matter : Item
 {
     SpriteRenderer s;
     Sprite origin;
-    Sprite take;
+    Sprite pickTarget;
 
 
     private void Start()
@@ -14,7 +14,7 @@ public class Item_Matter : Item
         s = GetComponent<SpriteRenderer>();
         Managers.Game.grid.matter.SetTile(new Vector3Int((int)transform.position.x, (int)transform.position.y), Managers.Game.grid.banTile);
         origin = s.sprite;
-        take = itemIcon;
+        pickTarget = itemSo.itemIcon;
     }
 
     public void ChangeOrigin()
@@ -24,7 +24,7 @@ public class Item_Matter : Item
 
     public void ChangeTake()
     {
-        s.sprite = take;
+        s.sprite = pickTarget;
     }
 
     public void DestroyThis()

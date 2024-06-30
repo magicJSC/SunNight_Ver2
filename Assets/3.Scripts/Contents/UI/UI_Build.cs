@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -33,6 +34,7 @@ public class UI_Build : UI_Base
     Image close;
     Image background;
 
+    GameObject panel;
     GameObject matGrid;
 
     enum Texts
@@ -49,7 +51,6 @@ public class UI_Build : UI_Base
         Icon,
         Upgrade,
         Close,
-        Background
     }
 
     public override void Init()
@@ -66,9 +67,9 @@ public class UI_Build : UI_Base
         icon = Get<Image>((int)Images.Icon);
         upgrade = Get<Image>((int)Images.Upgrade);
         close = Get<Image>((int)Images.Close);
-        background = Get<Image>((int)Images.Background);
 
         matGrid = Util.FindChild(gameObject,"MatterGrid",true);
+        panel = Util.FindChild(gameObject,"Panel",true);
 
         itemData = transform.parent.GetComponent<Item_Buliding>();
         buildStat = transform.parent.GetComponent<BuildStat>();
@@ -77,26 +78,22 @@ public class UI_Build : UI_Base
         evt._OnClick += (PointerEventData p) => {  };
 
         evt = close.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { Managers.Inven.CheckHotBarChoice(); Destroy(gameObject); };
+        evt._OnClick += Close;
 
-        evt = background.GetComponent<UI_EventHandler>();
+        evt = panel.GetComponent<UI_EventHandler>();
         evt._OnEnter += (PointerEventData p) => 
         {
+            Managers.Game.isHandleUI = true;
             Managers.Game.mouse.CursorType = Define.CursorType.Normal; 
-        };
-        evt._OnExit += (PointerEventData p) =>
-        {
-            Managers.Inven.CheckHotBarChoice();
         };
 
         InitData();
-
         gameObject.SetActive(false);
     }
 
     void InitData()
     {
-        nameT.text = $"{itemData.idName}";
+        nameT.text = $"{itemData.itemSo.idName}";
         hpT.text = buildStat.Hp.ToString();
 
         if (buildStat.Damage != 0)
@@ -112,12 +109,12 @@ public class UI_Build : UI_Base
         else
             rangeT.text = "-";
 
-        icon.sprite = itemData.itemIcon;
+        icon.sprite = itemData.itemSo.itemIcon;
 
         for (int i = 0; i < matters.Count; i++)
         {
             GameObject go = Instantiate(Resources.Load<GameObject>("UI/UI_Build_Matter"), matGrid.transform);
-            go.GetComponent<Image>().sprite = Resources.Load<Item>($"Prefabs/Items/{matters[i].itemName}").itemIcon;
+            go.GetComponent<Image>().sprite = Resources.Load<Item>($"Prefabs/Items/{matters[i].itemName}").itemSo.itemIcon;
             go.transform.GetChild(0).GetComponent<Text>().text = matters[i].count.ToString();
         }
     }
@@ -125,6 +122,13 @@ public class UI_Build : UI_Base
     void UpgradeStat()
     {
 
+    }
+
+    void Close(PointerEventData p)
+    {
+        Managers.Game.isHandleUI = false;
+        Managers.Inven.CheckHotBarChoice(); 
+        gameObject.SetActive(false);
     }
 
     //bool Check_Materials()

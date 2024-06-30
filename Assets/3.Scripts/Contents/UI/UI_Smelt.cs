@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using static StorageManager;
+using System;
 
 /// <summary>
 /// 제련 할 때 생성되는 UI입니다
@@ -15,8 +16,12 @@ public class UI_Smelt : UI_Base
     UI_SmeltSlot smeltSlot;
     GameObject doSmelt;
     UI_CharcoalSlot charcoalSlot;
-    Image timer;
+    GameObject back;
+    public Image timer;
     public GameObject explain;
+
+    public FurnanceController furnanace;
+    public bool isSmelting;
 
     enum GameObjects
     {
@@ -26,7 +31,8 @@ public class UI_Smelt : UI_Base
         DoSmelt,
         CharcoalSlot,
         ExplainSmelt,
-        Timer
+        Timer,
+        Background
     }
 
     public override void Init()
@@ -38,6 +44,7 @@ public class UI_Smelt : UI_Base
         Bind<GameObject>(typeof(GameObjects));
         grillingSlot = Get<GameObject>((int)GameObjects.GrillingSlot).GetComponent<UI_GrillingSlot>();
         close = Get<GameObject>((int)GameObjects.CloseSmelt);
+        back = Get<GameObject>((int)GameObjects.Background);
         smeltSlot = Get<GameObject>((int)GameObjects.SmeltSlot).GetComponent<UI_SmeltSlot>();
         doSmelt = Get<GameObject>((int)GameObjects.DoSmelt);
         charcoalSlot = Get<GameObject>((int)GameObjects.CharcoalSlot).GetComponent<UI_CharcoalSlot>();
@@ -53,10 +60,14 @@ public class UI_Smelt : UI_Base
         charcoalSlot.Init();
 
         UI_EventHandler evt = doSmelt.GetComponent<UI_EventHandler>();
-        evt._OnClick += CheckCanSmelt;
+        evt._OnClick += (PointerEventData p)=> { CheckCanSmelt(); };
 
         evt = close.GetComponent<UI_EventHandler>();
         evt._OnClick += Close;
+
+        evt = back.GetComponent<UI_EventHandler>();
+        evt._OnEnter += (PointerEventData p) => { Managers.Game.isHandleUI = true; };
+        evt._OnExit += (PointerEventData p) => { Managers.Game.isHandleUI = false; };
 
         SetData();  
         
@@ -81,8 +92,12 @@ public class UI_Smelt : UI_Base
         grillingSlot.GetComponentInChildren<UI_Item>().Init();
     }
 
-    void CheckCanSmelt(PointerEventData p)
+
+
+    void CheckCanSmelt()
     {
+        if (isSmelting)
+            return;
         SlotInfo slotInfo = grillingSlot.GetComponentInChildren<UI_Item>().slotInfo;
         if (slotInfo != null)
         {
@@ -110,17 +125,16 @@ public class UI_Smelt : UI_Base
                 Debug.Log("제련 후 아이템 슬롯에 공간이 없습니다");
                 return;
             }
-            else if(slotInfo.count > 99)
+            else if(slotInfo.count > slotInfo.itemInfo.maxAmount)
             {
                 Debug.Log("제련 후 아이템 슬롯에 공간이 없습니다");
                 return;
             }
         }
-
-        Smelt();
+        furnanace.StartSmelt();
     }
 
-    void Smelt()
+    public void FinishSmelt()
     {
         UI_Item grillItem = grillingSlot.GetComponentInChildren<UI_Item>();
         UI_Item smeltItem = smeltSlot.GetComponentInChildren<UI_Item>();
@@ -148,16 +162,16 @@ public class UI_Smelt : UI_Base
             SlotInfo slotInfo  = Managers.Inven.inventoryUI.slotList[i].itemUI.slotInfo;
             if (slotInfo.itemInfo != null)
             {
-                if (slotInfo.itemInfo.idName == "Charcoal")
+                if (slotInfo.itemInfo.idName == "Coal")
                 {
                     totalCount += slotInfo.count;
-                    Managers.Inven.inventoryUI.slotList[i].itemUI.MakeEmptySlot();
-                    if (totalCount > 99)
+                    if (totalCount > slotInfo.itemInfo.maxAmount)
                     {
-                        Managers.Inven.AddItems("Charcoal",totalCount - 99);
-                        charcoalSlot.charcoalCount = 99;
+                        Managers.Inven.AddItems(slotInfo.itemInfo.idName,totalCount - slotInfo.itemInfo.maxAmount);
+                        charcoalSlot.charcoalCount = slotInfo.itemInfo.maxAmount;
                         break;
                     }
+                    Managers.Inven.inventoryUI.slotList[i].itemUI.MakeEmptySlot();
                     charcoalSlot.charcoalCount = totalCount;
                 }
             }

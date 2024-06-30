@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class PlayerController : CreatureController
 
     List<GameObject> matters = new List<GameObject>();
 
-
+    public Action interact;
 
     public void Init()
     {
@@ -52,7 +53,7 @@ public class PlayerController : CreatureController
     {
         for (int i = 0; i < matters.Count; i++)
         {
-            if (Managers.Inven.AddOneItem(matters[i].GetComponent<Item_Matter>().idName))
+            if (Managers.Inven.AddOneItem(matters[i].GetComponent<Item_Matter>().itemSo.idName))
                 matters[i].GetComponent<Item_Matter>().DestroyThis();
         }
     }
@@ -64,6 +65,7 @@ public class PlayerController : CreatureController
 
     void OnGetTower()
     {
+        interact.Invoke();
         if (!canGetTower || Managers.Game.isKeepingTower)
             return;
 
@@ -76,11 +78,19 @@ public class PlayerController : CreatureController
 
     void OnBuild()
     {
+        if (Managers.Game.isHandleUI)
+            return;
+
         if (Managers.Inven.choicingTower)
             Managers.Game.build.BuildTower();
         else
             Managers.Game.build.BuildItem(); 
     }
+
+    //void OnInterface()
+    //{
+    //    interact.Invoke();
+    //}
 
 
     private void OnTriggerEnter2D(Collider2D collision)

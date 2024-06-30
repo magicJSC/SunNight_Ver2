@@ -93,7 +93,7 @@ public class UI_Item : UI_Base
     public void SetExistItem()
     {
         icon.gameObject.SetActive(true);
-        if (slotInfo.itemInfo.itemType != Define.ItemType.Tool)
+        if (slotInfo.count != 1)
             count.gameObject.SetActive(true);
         else
             count.gameObject.SetActive(false);
