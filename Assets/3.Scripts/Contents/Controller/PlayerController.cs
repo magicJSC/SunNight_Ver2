@@ -65,12 +65,12 @@ public class PlayerController : CreatureController
 
     void OnGetTower()
     {
-        interact.Invoke();
+        interact?.Invoke();
         if (!canGetTower || Managers.Game.isKeepingTower)
             return;
 
-        Managers.Game.tower.gameObject.SetActive(false);
         Managers.Game.isKeepingTower = true;
+        Managers.Inven.hotBarUI.CheckChoice();
         Managers.Inven.hotBarUI.towerSlot.ShowTowerIcon();
         Managers.Game.tower.transform.SetParent(Managers.Game.build.transform);
         Managers.Game.tower.transform.position = Managers.Game.build.transform.position;
