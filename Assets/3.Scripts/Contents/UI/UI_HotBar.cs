@@ -76,7 +76,12 @@ public class UI_HotBar : UI_Base
         choice.GetComponent<RectTransform>().anchoredPosition = new Vector2(-330+change*160,-443);
 
         Managers.Inven.choiceIndex = change;
-        bool choiceTower = change == Managers.Inven.hotBarSlotInfo.Length - 1;
+        CheckChoice();
+    }
+
+    public void CheckChoice()
+    {
+        bool choiceTower = choiceIndex == Managers.Inven.hotBarSlotInfo.Length - 1;
         if (!choiceTower)
             Managers.Inven.CheckHotBarChoice();
         else
@@ -85,7 +90,6 @@ public class UI_HotBar : UI_Base
         Managers.Inven.choicingTower = choiceTower;
         if (Managers.Game.isKeepingTower)
             Managers.Game.tower.gameObject.SetActive(choiceTower);
-
     }
 
     #region 아이템 관련
@@ -106,7 +110,6 @@ public class UI_HotBar : UI_Base
 
     public void GetTower()
     {
-        Managers.Inven.hotBarSlotInfo[slotList.Count - 1].itemInfo.itemType = Define.ItemType.Tower;
         Managers.Inven.hotBarSlotInfo[slotList.Count - 1].keyType = Define.KeyType.Exist;
     } 
     #endregion
