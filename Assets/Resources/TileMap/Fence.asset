@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: Fence_Lv.1
+  m_Name: Fence
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: -425035285, guid: afc2c551094877845bdf6a96aed9bcf6, type: 3}
   m_DefaultGameObject: {fileID: 1401656500125335703, guid: b9489f24752ab384ea9bd925c1b9ff25, type: 3}

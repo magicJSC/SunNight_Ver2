@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 using UnityEngine.Tilemaps;
+using static StorageManager;
+using static UnityEditor.Progress;
 
 public class StorageManager : MonoBehaviour
 {
@@ -24,12 +26,12 @@ public class StorageManager : MonoBehaviour
 
     public class SlotInfo
     {
-        public Item itemInfo;
+        public ItemSO itemInfo;
         public int count;
         public KeyType keyType;
         public TileBase tile;
 
-        public SlotInfo(int _count,string _name = "")
+        public SlotInfo(int count,string _name = "")
         {
             if(_name == "")
             {
@@ -39,9 +41,9 @@ public class StorageManager : MonoBehaviour
                 return;
             }
 
-            itemInfo = Resources.Load<GameObject>($"Prefabs/Items/{_name}").GetComponent<Item>(); //이름으로 가져오기
+            itemInfo = Resources.Load<GameObject>($"Prefabs/Items/{_name}").GetComponent<Item>().itemSo; //이름으로 가져오기
             keyType = KeyType.Exist;
-            this.count = _count;
+            this.count = count;
             if (itemInfo.itemType == ItemType.Building)
                 tile = Resources.Load<TileBase>($"TileMap/{_name}");
         }
@@ -91,7 +93,7 @@ public class StorageManager : MonoBehaviour
     //선택한 값에 따라 다르게 실행
     public void CheckHotBarChoice()
     {
-        Item info = hotBarUI.slotList[choiceIndex].UI_item.slotInfo.itemInfo;
+        ItemSO info = hotBarUI.slotList[choiceIndex].UI_item.slotInfo.itemInfo;
         if (info == null)
             return;
         //체크할 때 플레이어의 검이 있을 때마다 지운다(수정 필요) -> 무기는 공격이 끝나면 사라져서 안보이고
@@ -125,7 +127,7 @@ public class StorageManager : MonoBehaviour
 
     public bool AddOneItem(string name)
     {
-        Item item = Resources.Load<Item>($"Prefabs/Items/{name}");
+        ItemSO item = Resources.Load<Item>($"Prefabs/Items/{name}").itemSo;
         if (item.itemType != ItemType.Tool)   //재료 아이템일때
         {
             UI_Item emptySlot = null;
@@ -139,7 +141,7 @@ public class StorageManager : MonoBehaviour
                     continue;
                 }
 
-                if (item.idName == itemUI.slotInfo.itemInfo.idName && itemUI.slotInfo.count < 99)
+                if (item.idName == itemUI.slotInfo.itemInfo.idName && itemUI.slotInfo.count < itemUI.slotInfo.itemInfo.maxAmount)
                 {
                     SetSlot(item,itemUI, itemUI.slotInfo.count + 1);
                     return true;
@@ -173,7 +175,7 @@ public class StorageManager : MonoBehaviour
 
     public void AddItems(string name,int count)
     {
-        Item item = Resources.Load<Item>($"Prefabs/Items/{name}");
+        ItemSO item = Resources.Load<Item>($"Prefabs/Items/{name}").itemSo;
         UI_Item emptySlot = null;
         for (int i = 0; i < inventoryUI.slotList.Count - 1; i++)
         {
@@ -187,10 +189,10 @@ public class StorageManager : MonoBehaviour
 
             if (item.idName == itemUI.slotInfo.itemInfo.idName)
             {
-                if (itemUI.slotInfo.count + count > 99)
+                if (itemUI.slotInfo.count + count > itemUI.slotInfo.itemInfo.maxAmount)
                 {
-                    int lefting = itemUI.slotInfo.count + count - 99;
-                    SetSlot(item, itemUI, 99);
+                    int lefting = itemUI.slotInfo.count + count - itemUI.slotInfo.itemInfo.maxAmount;
+                    SetSlot(item, itemUI, itemUI.slotInfo.itemInfo.maxAmount);
                 }
                 else
                 {
@@ -225,17 +227,17 @@ public class StorageManager : MonoBehaviour
     public void AddItem(UI_Item drag, UI_Item drop)
     {
         drop.slotInfo.count += drag.slotInfo.count;
-        if(drop.slotInfo.count > 99)
+        if(drop.slotInfo.count > drop.slotInfo.itemInfo.maxAmount)
         {
-            drag.slotInfo.count = drop.slotInfo.count - 99;
-            drop.slotInfo.count = 99;
+            drag.slotInfo.count = drop.slotInfo.count - drop.slotInfo.itemInfo.maxAmount;
+            drop.slotInfo.count = drop.slotInfo.itemInfo.maxAmount;
         }
         else drag.MakeEmptySlot();
         drag.SetInfo();
         drop.SetInfo();
     }
 
-    public void SetSlot(Item item,UI_Item itemUI,int count)
+    public void SetSlot(ItemSO item,UI_Item itemUI,int count)
     {
         itemUI.slotInfo.itemInfo = item;
         itemUI.slotInfo.keyType = KeyType.Exist;

@@ -68,11 +68,13 @@ public class UI_Produce : UI_Base
         evt._OnDown += (PointerEventData p) => { startPos = new Vector3(back.transform.position.x - Camera.main.ScreenToWorldPoint(p.position).x, back.transform.position.y - Camera.main.ScreenToWorldPoint(p.position).y); };
         evt._OnEnter += (PointerEventData p) => 
         {
+            Managers.Game.isHandleUI = true;
             if(Managers.Game.mouse.CursorType != Define.CursorType.Drag)
             Managers.Game.mouse.CursorType = Define.CursorType.Normal;
         };
         evt._OnExit += (PointerEventData p) =>
         {
+            Managers.Game.isHandleUI = false;
             if (Managers.Game.mouse.CursorType != Define.CursorType.Drag)
                 Managers.Inven.CheckHotBarChoice(); 
         };
@@ -111,7 +113,7 @@ public class UI_Produce : UI_Base
     public void Set_ToMake(string itemName)
     {
         toMake.gameObject.SetActive(true);
-        toMake.sprite = Resources.Load<Item>($"Prefabs/Items/{itemName}").itemIcon;
+        toMake.sprite = Resources.Load<Item>($"Prefabs/Items/{itemName}").itemSo.itemIcon;
         toMakeIDName = itemName;
         contentMat.GetComponent<RectTransform>().offsetMax = new Vector2(100 * matters.Count -200, 0);
         for( int i = 0; i < matters.Count; i++)
@@ -149,7 +151,7 @@ public class UI_Produce : UI_Base
                 int count = matters[i].Item2;
                 for (int j = 0; j < inven_m[matters[i].Item1].Count; j++)
                 {
-                    Item item = Resources.Load<Item>($"Prefabs/Items/{matters[i].Item1}");
+                    ItemSO item = Resources.Load<Item>($"Prefabs/Items/{matters[i].Item1}").itemSo;
                     Managers.Inven.SetSlot(item, Managers.Inven.inventoryUI.slotList[inven_m[matters[i].Item1][j].Item1].itemUI, Mathf.Clamp(info_m[j].Item2 - count,0, matters[i].Item2));
                     count -= info_m[j].Item2;
                 }

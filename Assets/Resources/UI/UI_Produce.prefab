@@ -1021,10 +1021,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37c61e2acf397a4eaaa0f2ef02647d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toMake_idName: 
+  toMakeIDName: 
   back: {fileID: 0}
-  explain_Mat: {fileID: 0}
-  explain_Item: {fileID: 0}
+  explainMat: {fileID: 0}
+  explainItem: {fileID: 0}
 --- !u!1 &3653706608623293832
 GameObject:
   m_ObjectHideFlags: 0
@@ -2008,7 +2008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7465a678989ea8488989c4b52e11ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Turret_Lv.1
+  itemName: Turret
   material:
   - matterName: Branch
     count: 4

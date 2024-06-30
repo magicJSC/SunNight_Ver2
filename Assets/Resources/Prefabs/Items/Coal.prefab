@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2681134758017424783}
   - component: {fileID: 9172983123310737036}
   m_Layer: 0
-  m_Name: MetalStone
+  m_Name: Coal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -554138036, guid: 15c1a23359c99764e8e3eecbecb0dd20, type: 3}
+  m_Sprite: {fileID: 1590927557, guid: 15c1a23359c99764e8e3eecbecb0dd20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,7 +122,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8333333, y: 0.5416667}
+    oldSize: {x: 0.75, y: 0.7083333}
     newSize: {x: 1.2, y: 1.15}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -143,11 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6066a4a4a83f9c43a8d3b930c947a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 1817248939, guid: ef4c13ca7ab71b343884c89ddde836d9, type: 3}
-  id: 6
-  idName: MetalStone
-  itemName: "\uCCA0 \uC6D0\uC11D"
-  itemType: 3
-  explain: "\uCCA0 \uC6D0\uC11D\uC774\uB2E4"
-  canSmelt: 1
-  smelt: {fileID: 9172983123310737036, guid: 7658d93d31fcafd468e033d4ca04ea0a, type: 3}
+  itemSo: {fileID: 11400000, guid: 4efdbac0b67ce9540852415c7b1b0d0b, type: 2}

@@ -45,8 +45,10 @@ public class BuildController : MonoBehaviour
     public void BuildItem()
     {
         Vector2 tower = Managers.Game.tower.transform.position; //기지 위치 받아오기
-        if (!Managers.Game.grid.CheckCanBuild(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0)))
-            ShowBuildUI(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0));
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition = new Vector2(Mathf.Round(mousePosition.x), Mathf.Round(mousePosition.y));
+        if (!Managers.Game.grid.CheckCanBuild(new Vector3Int((int)(mousePosition.x), (int)(mousePosition.y), 0)))
+            ShowBuildUI(new Vector3Int((int)(mousePosition.x), (int)(mousePosition.y), 0));
         else
         {
             Managers.Game.tower.build.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), itemUI.slotInfo.tile);
@@ -97,7 +99,7 @@ public class BuildController : MonoBehaviour
     {
         Vector2 towerPos = Managers.Game.tower.transform.position;
         GameObject go = Managers.Game.grid.building.GetInstantiatedObject(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y));
-        Instantiate(Resources.Load<GameObject>("UI/UI_Build"), go.transform);
+        go.GetComponent<Item_Buliding>().buildUI.SetActive(true);
     }
 
     //public void ShowBuildSample()

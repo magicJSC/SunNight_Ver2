@@ -164,12 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6066a4a4a83f9c43a8d3b930c947a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: -157942333, guid: c7198cf7fc0cfb54b90a8ffeefc122cf, type: 3}
-  id: 4
-  idName: Sword
-  itemName: "\uB098\uBB34\uAC80"
-  itemType: 2
-  explain: "\uB098\uBB34\uB85C \uB9CC\uB4E0 \uAC80\uC774\uB2E4"
+  itemSo: {fileID: 11400000, guid: f42bb57683464b14c8b19fb9aedf4a0f, type: 2}
 --- !u!95 &5033025128389586287
 Animator:
   serializedVersion: 5

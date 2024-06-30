@@ -22,7 +22,7 @@ public class UI_Produce_Item : UI_Base
 
     [HideInInspector]
     public UI_Produce produce;
-    Item itemInfo;
+    ItemSO itemInfo;
 
     GameObject explain;
     Text explainText;
@@ -35,7 +35,7 @@ public class UI_Produce_Item : UI_Base
             return;
 
         _init = true;
-        itemInfo = Resources.Load<Item>($"Prefabs/Items/{itemName}");
+        itemInfo = Resources.Load<Item>($"Prefabs/Items/{itemName}").itemSo;
         explain = produce.explainItem;
         explainText = Util.FindChild(explain, "ExplainText", true).GetComponent<Text>();
         nameText = Util.FindChild(explain, "NameText", true).GetComponent<Text>();

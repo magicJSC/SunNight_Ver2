@@ -11,11 +11,13 @@ public class Item_Buliding : Item
     [HideInInspector]
     public Vector2 pos;
 
+    public GameObject buildUI;
+
     private void Start()
     {
-        itemType = Define.ItemType.Building;
         pos = transform.position - Managers.Game.tower.transform.position;
-        Managers.Game.buildData.Add(pos, id);
+        buildUI = Util.FindChild(gameObject, "UI_Build",true);
+        Managers.Game.buildData.Add(pos, itemSo.idName);
     }
 
     public void DeleteBuilding()

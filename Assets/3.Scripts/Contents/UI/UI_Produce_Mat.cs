@@ -17,11 +17,11 @@ public class UI_Produce_Mat : UI_Base
     Text explainText;
     Text nameText;
 
-    Item itemInfo;
+    ItemSO itemInfo;
 
     public void Init(string matterName,int _cnt)
     {
-        itemInfo = Resources.Load<Item>($"Prefabs/Items/{matterName}");
+        itemInfo = Resources.Load<Item>($"Prefabs/Items/{matterName}").itemSo;
 
        icon = GetComponent<Image>();
         count = Util.FindChild(gameObject, "Count",true).GetComponent<Text>();
