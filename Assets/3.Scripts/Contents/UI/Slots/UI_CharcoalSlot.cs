@@ -33,7 +33,7 @@ public class UI_CharcoalSlot : UI_BaseSlot
         count.gameObject.SetActive(charcoalCount != 1);
     }
 
-    void SetEmptySlot()
+    public void SetEmptySlot()
     {
         icon.gameObject.SetActive(false);
         count.gameObject.SetActive(false);

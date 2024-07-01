@@ -39,7 +39,7 @@ public class BuildController : MonoBehaviour
     {
         Managers.Game.tower.transform.parent = null;
         Managers.Game.isKeepingTower = false;
-        Managers.Inven.hotBarUI.towerSlot.HideTowerIcon();
+        Managers.Inven.hotBarUI.CheckChoice();
     }
 
     public void BuildItem()
@@ -148,18 +148,6 @@ public class BuildController : MonoBehaviour
     //        Managers.Game.tower.build.color = new Color32(225, 225, 225, 120);
     //        Managers.Game.tower.ChangeInvisable();
     //    }
-    //    sample.SetActive(false);
-    //}
-
-    //public void HideSample()
-    //{
-    //    //건축 모드가 아닐때 소장하고 있을때 
-    //    if (Managers.Game.mouse.CursorType != Define.CursorType.Builder && Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist)
-    //        Managers.Game.tower.gameObject.SetActive(false);
-
-    //    //건축 모드일때 기지를 소장하고 있고 다른 선택을 하고 있을때
-    //    if (Managers.Game.mouse.CursorType == Define.CursorType.Builder && Managers.Inven.hotBar_itemInfo[Managers.Inven.hotBar_itemInfo.Length - 1].keyType == Define.KeyType.Exist && Managers.Inven.HotBar_Choice != Managers.Inven.hotBar_itemInfo.Length - 1)
-    //        Managers.Game.tower.gameObject.SetActive(false);
     //    sample.SetActive(false);
     //}
     #endregion

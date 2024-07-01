@@ -61,6 +61,7 @@ public class PlayerController : CreatureController
     void OnShowInventory()
     {
         Managers.Inven.inventoryUI.gameObject.SetActive(!Managers.Inven.inventoryUI.gameObject.activeSelf);
+        Managers.Game.isHandleUI = false;
     }
 
     void OnGetTower()
