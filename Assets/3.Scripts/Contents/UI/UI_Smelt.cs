@@ -66,8 +66,8 @@ public class UI_Smelt : UI_Base
         evt._OnClick += Close;
 
         evt = back.GetComponent<UI_EventHandler>();
-        evt._OnEnter += (PointerEventData p) => { Managers.Game.isHandleUI = true; };
-        evt._OnExit += (PointerEventData p) => { Managers.Game.isHandleUI = false; };
+        evt._OnEnter += (PointerEventData p) => { Managers.Game.isHandleUI = true; Managers.Game.mouse.CursorType = Define.CursorType.Normal; };
+        evt._OnExit += (PointerEventData p) => { Managers.Game.isHandleUI = false; Managers.Inven.CheckHotBarChoice(); };
 
         SetData();  
         

@@ -111,7 +111,7 @@ public class StorageManager : MonoBehaviour
                 Managers.Game.build.HideBuildIcon();
                 break;
             case ItemType.Tool:
-                Managers.Game.mouse.CursorType = CursorType.Normal;
+                Managers.Game.mouse.CursorType = CursorType.Battle;
                 Managers.Game.weapon = Instantiate(Resources.Load<GameObject>($"Prefabs/Items/{info.idName}"), Managers.Game.player.toolParent.transform);
                 break;
             default:

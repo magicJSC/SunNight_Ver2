@@ -4,7 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : CreatureController
+public interface IGetDamage
+{
+
+}
+
+public class PlayerController : CreatureController,IGetDamage
 {
     Rigidbody2D rigid;
     Animator anim;

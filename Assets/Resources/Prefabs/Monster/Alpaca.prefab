@@ -195,9 +195,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555b14ce38fec534ca171dd482a5b28a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player:
+  playerLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+  buildLayer:
+    serializedVersion: 2
+    m_Bits: 0
   go: {fileID: 0}
 --- !u!114 &2297774022771462896
 MonoBehaviour:
@@ -213,10 +216,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 30
   maxHP: 0
-  _def: 5
-  _dmg: 10
-  _atkCool: 2
-  _range: 3
+  _defence: 3
+  _damage: 8
+  attackCool: 1
+  range: 7
   _speed: 4
 --- !u!1001 &7957829608352504143
 PrefabInstance:

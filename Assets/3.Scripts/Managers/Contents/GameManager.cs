@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -67,6 +68,8 @@ public class GameManager : MonoBehaviour
             }
             lights.Init();
         }
+
+        //minuteAmountToHour = 2;
     }
    
     public void OnUpdate()
@@ -87,6 +90,7 @@ public class GameManager : MonoBehaviour
     public float curTime = 0;
     public float hour = 6;
     public float minute = 0;
+    public float minuteAmountToHour = 10;
 
     void SetTime()
     {
@@ -96,18 +100,20 @@ public class GameManager : MonoBehaviour
             lights.SetLight();
 
             minute++;
-            if (minute == 60)
+            if (minute == minuteAmountToHour)
             {
                 minute = 0;
                 hour++;
                 if (hour == 6)
+                {
                     timeType = TimeType.Morning;
+                    Debug.Log("아침이 되었습니다");
+                }
                 else if (hour == 18)
                 {
                     timeType = TimeType.Night;
-
-                    //if (Managers.Inven.hotBarSlotInfo[Managers.Inven.hotBarSlotInfo.Length - 1].keyType == KeyType.Exist)
-                    // build.BuildTower(true);
+                    nightEvent?.Invoke();
+                    Debug.Log("저녁이 되었습니다");
                 }
                 if (hour == 24)
                     hour = 0;
@@ -116,6 +122,8 @@ public class GameManager : MonoBehaviour
         else
             curTime += Time.deltaTime;
     }
+
+    public Action nightEvent;
 
     public bool isKeepingTower;
 

@@ -71,7 +71,6 @@ public class UI_Inventory : UI_Base
             Managers.Game.isHandleUI = false;
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
                 return;
-            Managers.Game.mouse.CursorType = Define.CursorType.Normal;
             Managers.Inven.CheckHotBarChoice();
         };
 

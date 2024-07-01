@@ -10,6 +10,7 @@ public class LightController : MonoBehaviour
     Color night;
    
     float colorTime =0;
+
     public void Init()
     {
         lights = GetComponent<Light2D>();
@@ -24,6 +25,6 @@ public class LightController : MonoBehaviour
         else
             colorTime--;
 
-        lights.color = new Color(1 - ((1 - night.r) / 12 / 60 * colorTime), 1 - ((1 - night.g) / 12 / 60 * colorTime), 1 - ((1 - night.b) / 12 /60 * colorTime));
+        lights.color = new Color(1 - ((1 - night.r) / 12 / 10 * colorTime), 1 - ((1 - night.g) / 12 / 10 * colorTime), 1 - ((1 - night.b) / 12 / 10  * colorTime));
     }
 }

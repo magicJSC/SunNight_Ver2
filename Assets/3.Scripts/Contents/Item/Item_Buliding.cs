@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Item_Buliding : Item
+public class Item_Buliding : Item,IGetDamage
 {
     [Header("Building")]
     public int level;

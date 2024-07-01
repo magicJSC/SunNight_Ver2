@@ -6,8 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [HideInInspector]
     public float damage;
-    public LayerMask playerLayer;
-    public LayerMask budildLayer;
+
     private void Start()
     {
         Destroy(gameObject,5);
@@ -15,7 +14,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == Mathf.Log(playerLayer.value,2) || collision.gameObject.layer == Mathf.Log(budildLayer.value, 2))
+        if(collision.GetComponent<IGetDamage>() != null)
         {
             Hit(collision);
         }
