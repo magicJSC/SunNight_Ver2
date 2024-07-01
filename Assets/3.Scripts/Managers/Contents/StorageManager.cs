@@ -122,8 +122,13 @@ public class StorageManager : MonoBehaviour
 
     public void CheckHotBarTowerSlot()
     {
-        if (Managers.Game.isKeepingTower)
+        if (!Managers.Game.isKeepingTower)
+        {
             Managers.Game.mouse.CursorType = CursorType.Normal;
+            hotBarUI.towerSlot.HideTowerIcon();
+        }
+        else
+            Managers.Game.mouse.CursorType = CursorType.Builder;
     }
 
     public bool AddOneItem(string name)

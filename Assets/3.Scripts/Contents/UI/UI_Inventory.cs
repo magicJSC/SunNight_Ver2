@@ -31,7 +31,8 @@ public class UI_Inventory : UI_Base
         Hide,
         Produce,
         Coin,
-        Explain_Inven
+        Explain_Inven,
+        UI_Produce
     }
 
 
@@ -48,6 +49,7 @@ public class UI_Inventory : UI_Base
         produce = Get<GameObject>((int)GameObjects.Produce);
         coin = Get<GameObject>((int)GameObjects.Coin).GetComponent<Text>();
         explain = Get<GameObject>((int)GameObjects.Explain_Inven);
+        produceUI = Get<GameObject>((int)GameObjects.UI_Produce).GetComponent<UI_Produce>();
        
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
         evt._OnDrag += (PointerEventData p) =>
@@ -74,22 +76,12 @@ public class UI_Inventory : UI_Base
         };
 
         evt = hide.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { gameObject.SetActive(false); };
+        evt._OnClick += (PointerEventData p) => { gameObject.SetActive(false); Managers.Game.isHandleUI = false; };
 
 
 
         evt = produce.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => 
-        {
-            if (produceUI != null)
-                return;
-            produceUI = Managers.UI.ShowUI("UI_Produce").GetComponent<UI_Produce>();
-            produceUI.Init();
-            RectTransform r = produceUI.GetComponent<UI_Produce>().back.GetComponent<RectTransform>();
-            RectTransform bb = back.GetComponent<RectTransform>();
-            r.anchoredPosition = new Vector2(bb.anchoredPosition.x - 615, bb.anchoredPosition.y-60);
-            produceUI.Set_Position();
-        };
+        evt._OnClick += ShowProduceUI;
 
         GetData();
         MakeKeys();
@@ -129,5 +121,16 @@ public class UI_Inventory : UI_Base
     public void SetCoin()
     {
         coin.text = "ÄÚÀÎ : " + Managers.Inven.Coin.ToString();
+    }
+
+    void ShowProduceUI(PointerEventData p)
+    {
+        if (produceUI.gameObject.activeSelf)
+            return;
+        produceUI.gameObject.SetActive(true);
+        RectTransform r = produceUI.back.GetComponent<RectTransform>();
+        RectTransform bb = back.GetComponent<RectTransform>();
+        r.anchoredPosition = new Vector2(bb.anchoredPosition.x - 615, bb.anchoredPosition.y - 20);
+        produceUI.Set_Position();
     }
 }

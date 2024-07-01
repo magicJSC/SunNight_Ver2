@@ -83,7 +83,7 @@ public class UI_Produce : UI_Base
         evt._OnClick += (PointerEventData p) => { OnProduce(); };
 
         evt = hide.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { Destroy(gameObject); };
+        evt._OnClick += (PointerEventData p) => { Managers.Game.isHandleUI = false; gameObject.SetActive(false); };
 
         for(int i = 0; i < contentItem.transform.childCount; i++)
         {
@@ -95,6 +95,7 @@ public class UI_Produce : UI_Base
         Remove_ToMake();
         explainMat.SetActive(false);
         explainItem.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void OnEnable()

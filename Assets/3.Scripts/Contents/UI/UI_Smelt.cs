@@ -181,14 +181,21 @@ public class UI_Smelt : UI_Base
         charcoalSlot.SetSlot();
     }
 
-    void ReturnCharcoal()
+    void ReturnCoal()
     {
-
+        if (isSmelting)
+            return;
+        if (charcoalSlot.charcoalCount != 0)
+        {
+            Managers.Inven.AddItems("Coal", charcoalSlot.charcoalCount);
+            charcoalSlot.charcoalCount = 0;
+            charcoalSlot.SetEmptySlot();
+         }
     }
 
     void Close(PointerEventData p)
     {
-        ReturnCharcoal();
+        ReturnCoal();
         gameObject.SetActive(false);
     }
 }
