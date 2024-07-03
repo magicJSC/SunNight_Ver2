@@ -53234,7 +53234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3112712763788155272}
   - component: {fileID: 5483604252504869537}
-  - component: {fileID: 1626361258246263583}
+  - component: {fileID: 8032582100734272747}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -53273,7 +53273,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &1626361258246263583
+--- !u!114 &8032582100734272747
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53285,7 +53285,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae144e823db56f7429eee13a20f71d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walls: {fileID: 0}
-  matter: {fileID: 0}
-  building: {fileID: 0}
-  banTile: {fileID: 11400000, guid: d1a32535618d92947a9ed677bb8c6fc1, type: 2}

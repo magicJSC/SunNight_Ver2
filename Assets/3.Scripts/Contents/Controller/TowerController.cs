@@ -18,6 +18,7 @@ public class TowerController : MonoBehaviour,IGetDamage
         Managers.Game.tower = this;
         build = Util.FindChild(gameObject,"Building",true).GetComponent<Tilemap>();
         Managers.Game.grid.building = build;
+        TimeController.nightEvent += ForceInstall;
         Camera.main.GetComponent<CameraController>().target = transform;
         playerLayer = 6;
         buildLayer.value = 9;
@@ -51,6 +52,16 @@ public class TowerController : MonoBehaviour,IGetDamage
         {
             build.transform.GetChild(i).gameObject.layer = buildLayer;
         }
+    }
+
+    void ForceInstall()
+    {
+        if (!Managers.Game.isKeepingTower)
+            return;
+
+        Managers.Game.build.BuildTower();
+        Vector2 playerPos = Managers.Game.player.transform.position;
+        transform.position = new Vector2(Mathf.Round(playerPos.x), Mathf.Round(playerPos.y));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

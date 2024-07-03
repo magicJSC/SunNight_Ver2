@@ -77,7 +77,7 @@ public class PlayerController : CreatureController,IGetDamage
     void OnGetTower()
     {
         interact?.Invoke();
-        if (!canGetTower || Managers.Game.isKeepingTower)
+        if (!canGetTower || Managers.Game.isKeepingTower || TimeController.timeType == TimeController.TimeType.Night)
             return;
 
         Managers.Game.isKeepingTower = true;
