@@ -34,6 +34,8 @@ public class TimeController : BaseController
     protected override void Init()
     {
         TimeAmount = 360;
+        morningEvent = null;
+        nightEvent = null;
     }
 
     private void Update()

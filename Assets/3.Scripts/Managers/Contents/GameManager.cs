@@ -50,32 +50,7 @@ public class GameManager : MonoBehaviour
             }
             tower.Init();
         }
-        if (player == null)
-        {
-            player = FindAnyObjectByType<PlayerController>();
-            if (player == null)
-            {
-                player = Instantiate(Resources.Load<GameObject>("Prefabs/Player")).GetComponent<PlayerController>();
-            }
-            player.Init();
-        }
-        if (timeController == null)
-        {
-            timeController = FindAnyObjectByType<TimeController>();
-            if (timeController == null)
-            {
-                timeController = Instantiate(Resources.Load<GameObject>("Prefabs/Light")).GetComponent<TimeController>();
-            }
-        }
-        if (lightController == null)
-        {
-            lightController = FindAnyObjectByType<LightController>();
-            if(lightController == null)
-            {
-                lightController = Instantiate(Resources.Load<GameObject>("Prefabs/Light")).GetComponent<LightController>();
-            }
-            lightController.Init();
-        }
+       
     }
   
     public TowerController tower;
@@ -85,7 +60,6 @@ public class GameManager : MonoBehaviour
     public MapManager grid;
    
     public LightController lightController;
-    public TimeController timeController;
 
     public bool isKeepingTower;
 

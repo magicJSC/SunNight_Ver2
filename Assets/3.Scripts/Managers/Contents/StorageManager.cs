@@ -4,7 +4,6 @@ using UnityEngine;
 using static Define;
 using UnityEngine.Tilemaps;
 using static StorageManager;
-using static UnityEditor.Progress;
 
 public class StorageManager : MonoBehaviour
 {

@@ -17,7 +17,7 @@ public class Item_Buliding : Item,IGetDamage
     {
         pos = transform.position - Managers.Game.tower.transform.position;
         buildUI = Util.FindChild(gameObject, "UI_Build",true);
-        Managers.Game.buildData.Add(pos, itemSo.idName);
+        //Managers.Game.buildData.Add(pos, itemSo.idName);
     }
 
     public void DeleteBuilding()
