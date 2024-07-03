@@ -29,6 +29,8 @@ public class PlayerController : CreatureController,IGetDamage
 
     public Action interact;
 
+    public Action escEvent;
+
     public void Init()
     {
         toolParent = Util.FindChild(gameObject, "Tool");
@@ -94,6 +96,11 @@ public class PlayerController : CreatureController,IGetDamage
             Managers.Game.build.BuildTower();
         else
             Managers.Game.build.BuildItem(); 
+    }
+
+    void OnESC()
+    {
+        escEvent?.Invoke();
     }
 
     //void OnInterface()

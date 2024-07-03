@@ -44,8 +44,8 @@ public class Managers : MonoBehaviour
             instance = go.GetComponent<Managers>();
 
             instance._network.Init();
-            instance._game.Init();
-            instance._inven.Init();
+            //instance._game.Init();
+            //instance._inven.Init();
         }
     }
 }

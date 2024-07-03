@@ -9,11 +9,17 @@ public class LightController : MonoBehaviour
 
     Animator anim;
 
+    public void Start()
+    {
+        Init();
+    }
+
     public void Init()
     {
         lights = GetComponent<Light2D>();
         lights.color = Color.white;
         anim = GetComponent<Animator>();
+
         TimeController.nightEvent += SetNight;
         TimeController.morningEvent += SetMorning;
     }
