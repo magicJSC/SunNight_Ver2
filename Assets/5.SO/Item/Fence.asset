@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Name: Fence
+  m_EditorClassIdentifier: 
+  idName: Fence
+  itemName: "\uC6B8\uD0C0\uB9AC"
+  explain: "\uB098\uBB34 \uC6B8\uD0C0\uB9AC\uC774\uB2E4"
+  itemIcon: {fileID: -2144266079, guid: 3ee0a21dff5b37c4691e606ce336d6ea, type: 3}
+  itemType: 5
+  maxAmount: 64
+  canSmelt: 0
+  smelt: {fileID: 0}
+  tile: {fileID: 11400000, guid: 1d642f2b034d0bc4ba5f979f8443b431, type: 2}

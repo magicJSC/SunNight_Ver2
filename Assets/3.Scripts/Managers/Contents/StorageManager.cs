@@ -29,7 +29,6 @@ public class StorageManager : MonoBehaviour
         public ItemSO itemInfo;
         public int count;
         public KeyType keyType;
-        public TileBase tile;
 
         public SlotInfo(int count,string _name = "")
         {
@@ -44,8 +43,6 @@ public class StorageManager : MonoBehaviour
             itemInfo = Resources.Load<GameObject>($"Prefabs/Items/{_name}").GetComponent<Item>().itemSo; //이름으로 가져오기
             keyType = KeyType.Exist;
             this.count = count;
-            if (itemInfo.itemType == ItemType.Building)
-                tile = Resources.Load<TileBase>($"TileMap/{_name}");
         }
     }
 
@@ -111,7 +108,7 @@ public class StorageManager : MonoBehaviour
                 Managers.Game.build.HideBuildIcon();
                 break;
             case ItemType.Tool:
-                Managers.Game.mouse.CursorType = CursorType.Normal;
+                Managers.Game.mouse.CursorType = CursorType.Battle;
                 Managers.Game.weapon = Instantiate(Resources.Load<GameObject>($"Prefabs/Items/{info.idName}"), Managers.Game.player.toolParent.transform);
                 break;
             default:

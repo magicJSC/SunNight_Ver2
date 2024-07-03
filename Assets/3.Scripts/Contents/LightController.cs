@@ -7,23 +7,24 @@ public class LightController : MonoBehaviour
 {
     Light2D lights;
 
-    Color night;
-   
-    float colorTime =0;
+    Animator anim;
+
     public void Init()
     {
         lights = GetComponent<Light2D>();
         lights.color = Color.white;
-        night = new Color(0.3f, 0.3f, 0.6f);
+        anim = GetComponent<Animator>();
+        TimeController.nightEvent += SetNight;
+        TimeController.morningEvent += SetMorning;
     }
 
-    public void SetLight()
+    public void SetNight()
     {
-        if(Managers.Game.timeType == Define.TimeType.Morning)
-            colorTime++;
-        else
-            colorTime--;
+        anim.Play("Night");
+    }
 
-        lights.color = new Color(1 - ((1 - night.r) / 12 / 60 * colorTime), 1 - ((1 - night.g) / 12 / 60 * colorTime), 1 - ((1 - night.b) / 12 /60 * colorTime));
+    public void SetMorning()
+    {
+        anim.Play("Morning");
     }
 }

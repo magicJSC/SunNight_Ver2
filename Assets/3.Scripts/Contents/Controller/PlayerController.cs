@@ -4,8 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : CreatureController
+public interface IGetDamage
 {
+
+}
+
+public class PlayerController : CreatureController,IGetDamage
+{
+     
+
     Rigidbody2D rigid;
     Animator anim;
     SpriteRenderer sprite;
@@ -29,6 +36,7 @@ public class PlayerController : CreatureController
         Camera.main.GetComponent<CameraController>().target = transform;
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        Instantiate(Resources.Load<GameObject>("UI/UI_PlayerStat"));
     }
 
     void OnMove(InputValue value)

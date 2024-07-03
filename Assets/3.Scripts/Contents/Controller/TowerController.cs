@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TowerController : MonoBehaviour
+public class TowerController : MonoBehaviour,IGetDamage
 {
     bool canHold = false;
     LayerMask playerLayer;
@@ -26,7 +26,7 @@ public class TowerController : MonoBehaviour
 
     private void Update()
     {
-        if (Managers.Game.timeType == Define.TimeType.Night)
+        if (TimeController.timeType == TimeController.TimeType.Night)
             return;
 
         if (Input.GetKeyDown(KeyCode.F) && canHold)

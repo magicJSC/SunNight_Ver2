@@ -59,8 +59,8 @@ public class MouseController : UI_Base
                 case Define.CursorType.Drag:
                     SetDragMode();
                     break;
-                case Define.CursorType.UI:
-                    SetUIMode();
+                case Define.CursorType.Battle:
+                    SetBattleMode();
                     break;
             }
         }
@@ -89,7 +89,7 @@ public class MouseController : UI_Base
         Managers.Game.build.gameObject.SetActive(false);
     }
 
-    void SetUIMode()
+    void SetBattleMode()
     {
         gameObject.SetActive(false);
         Cursor.SetCursor(normal, Vector2.zero, CursorMode.Auto);
