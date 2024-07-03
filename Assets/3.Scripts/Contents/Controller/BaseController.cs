@@ -6,7 +6,7 @@ public abstract class BaseController : MonoBehaviour
 {
     protected abstract void Init();
 
-    private void Start()
+    private void Awake()
     {
         Init();
     }

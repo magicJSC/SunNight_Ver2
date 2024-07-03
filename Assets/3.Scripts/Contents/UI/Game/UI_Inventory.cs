@@ -94,7 +94,7 @@ public class UI_Inventory : UI_Base
     void GetData()
     {
         Managers.Inven.inventorySlotInfo[0] = new SlotInfo(5, "Branch");
-        Managers.Inven.inventorySlotInfo[1] = new SlotInfo(5, "Bone");
+        Managers.Inven.inventorySlotInfo[1] = new SlotInfo(0);
         Managers.Inven.inventorySlotInfo[2] = new SlotInfo(5, "Coal");
         Managers.Inven.inventorySlotInfo[3] = new SlotInfo(5, "IronOre");
         Managers.Inven.inventorySlotInfo[4] = new SlotInfo(1, "Furnance");

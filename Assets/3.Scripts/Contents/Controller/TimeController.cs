@@ -41,9 +41,9 @@ public class TimeController : BaseController
     private void Update()
     {
         TimeAmount += Time.deltaTime * 20;
-        if(TimeAmount >= 1320 && timeType == TimeType.Morning)
+        if(TimeAmount >= 1080 && timeType == TimeType.Morning)
             timeType = TimeType.Night;
-        else if(TimeAmount >= 360 && TimeAmount < 1320)
+        else if(TimeAmount >= 360 && TimeAmount < 1080)
             timeType = TimeType.Morning;
         if (TimeAmount >= 1440)
             TimeAmount = 0;
