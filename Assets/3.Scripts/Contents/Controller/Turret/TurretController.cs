@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretController : MonoBehaviour
+public class TurretController : BaseController
 {
     BuildStat _stat;
     Animator anim;
@@ -14,7 +14,8 @@ public class TurretController : MonoBehaviour
 
     float atkCurTime = 0;
     bool isWorking = false;
-    private void Start()
+
+    protected override void Init()
     {
         anim = GetComponent<Animator>();
         _stat = GetComponent<BuildStat>();
@@ -24,7 +25,7 @@ public class TurretController : MonoBehaviour
         GetComponent<CircleCollider2D>().isTrigger = true;
         face = Util.FindChild(gameObject, "Face", true).transform;
     }
-
+   
     private void Update()
     {
         if (isWorking)
@@ -44,8 +45,9 @@ public class TurretController : MonoBehaviour
             SetTarget();
             return;
         }
-        Vector3 v = (_target.transform.position - transform.position).normalized;
-        face.up = Vector3.Lerp(face.up, v, 0.5f);
+        Vector3 dir = (_target.transform.position - transform.position).normalized;
+        float rot = Mathf.Atan2(-dir.y, -dir.x)*Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, rot+90);
         Attack();
     }
 
@@ -122,4 +124,6 @@ public class TurretController : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, _stat.range);
     }
+
+    
 }

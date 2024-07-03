@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(fileName ="ItemSO",menuName ="SO/Item")]
 public class ItemSO : ScriptableObject
@@ -15,4 +16,5 @@ public class ItemSO : ScriptableObject
     [Header("มฆทร")]
     public bool canSmelt;
     public ItemSO smelt;
+    public TileBase tile;
 }

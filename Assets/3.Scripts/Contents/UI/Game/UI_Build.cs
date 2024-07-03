@@ -33,6 +33,7 @@ public class UI_Build : UI_Base
     Image upgrade;
     Image close;
     Image background;
+    Image collect;
 
     GameObject panel;
     GameObject matGrid;
@@ -51,6 +52,7 @@ public class UI_Build : UI_Base
         Icon,
         Upgrade,
         Close,
+        Collect
     }
 
     public override void Init()
@@ -67,6 +69,7 @@ public class UI_Build : UI_Base
         icon = Get<Image>((int)Images.Icon);
         upgrade = Get<Image>((int)Images.Upgrade);
         close = Get<Image>((int)Images.Close);
+        collect = Get<Image>((int)Images.Collect);
 
         matGrid = Util.FindChild(gameObject,"MatterGrid",true);
         panel = Util.FindChild(gameObject,"Panel",true);
@@ -86,6 +89,9 @@ public class UI_Build : UI_Base
             Managers.Game.isHandleUI = true;
             Managers.Game.mouse.CursorType = Define.CursorType.Normal; 
         };
+
+        evt = collect.GetComponent<UI_EventHandler>();
+        evt._OnClick += Collect;
 
         InitData();
         gameObject.SetActive(false);
@@ -122,6 +128,15 @@ public class UI_Build : UI_Base
     void UpgradeStat()
     {
 
+    }
+
+    void Collect(PointerEventData p)
+    {
+        Item_Buliding building = GetComponentInParent<Item_Buliding>();
+        Managers.Inven.AddItems(building.itemSo.idName,1);
+        Managers.Game.isHandleUI = false;
+        Managers.Inven.CheckHotBarChoice();
+        building.DeleteBuilding();
     }
 
     void Close(PointerEventData p)

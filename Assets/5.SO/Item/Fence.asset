@@ -15,8 +15,9 @@ MonoBehaviour:
   idName: Fence
   itemName: "\uC6B8\uD0C0\uB9AC"
   explain: "\uB098\uBB34 \uC6B8\uD0C0\uB9AC\uC774\uB2E4"
-  itemIcon: {fileID: -48536599, guid: afc2c551094877845bdf6a96aed9bcf6, type: 3}
+  itemIcon: {fileID: -2144266079, guid: 3ee0a21dff5b37c4691e606ce336d6ea, type: 3}
   itemType: 5
   maxAmount: 64
   canSmelt: 0
   smelt: {fileID: 0}
+  tile: {fileID: 11400000, guid: 1d642f2b034d0bc4ba5f979f8443b431, type: 2}

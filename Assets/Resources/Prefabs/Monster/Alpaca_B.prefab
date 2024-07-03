@@ -172,6 +172,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  player:
-    serializedVersion: 2
-    m_Bits: 64

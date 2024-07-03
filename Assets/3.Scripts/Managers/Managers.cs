@@ -48,9 +48,4 @@ public class Managers : MonoBehaviour
             instance._inven.Init();
         }
     }
-
-    private void Update()
-    {
-        _game.OnUpdate();
-    }
 }

@@ -11,6 +11,8 @@ public interface IGetDamage
 
 public class PlayerController : CreatureController,IGetDamage
 {
+     
+
     Rigidbody2D rigid;
     Animator anim;
     SpriteRenderer sprite;
@@ -34,6 +36,7 @@ public class PlayerController : CreatureController,IGetDamage
         Camera.main.GetComponent<CameraController>().target = transform;
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        Instantiate(Resources.Load<GameObject>("UI/UI_PlayerStat"));
     }
 
     void OnMove(InputValue value)

@@ -5770,7 +5770,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_278
+      name: Fence
       rect:
         serializedVersion: 2
         x: 384
@@ -5791,7 +5791,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_279
+      name: Fence1
       rect:
         serializedVersion: 2
         x: 400
@@ -5812,7 +5812,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_280
+      name: Fence2
       rect:
         serializedVersion: 2
         x: 416
@@ -5833,7 +5833,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_281
+      name: Fence11
       rect:
         serializedVersion: 2
         x: 432
@@ -5854,7 +5854,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_282
+      name: Fence12
       rect:
         serializedVersion: 2
         x: 448
@@ -6652,7 +6652,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_324
+      name: Fence4
       rect:
         serializedVersion: 2
         x: 384
@@ -6673,7 +6673,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_325
+      name: Fence5
       rect:
         serializedVersion: 2
         x: 416
@@ -6694,7 +6694,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_326
+      name: Fence10
       rect:
         serializedVersion: 2
         x: 432
@@ -6715,7 +6715,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_327
+      name: Fence13
       rect:
         serializedVersion: 2
         x: 448
@@ -7618,7 +7618,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_370
+      name: Fence6
       rect:
         serializedVersion: 2
         x: 384
@@ -7639,7 +7639,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_371
+      name: Fence7
       rect:
         serializedVersion: 2
         x: 400
@@ -7660,7 +7660,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_372
+      name: Fence8
       rect:
         serializedVersion: 2
         x: 416
@@ -7681,7 +7681,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_373
+      name: Fence9
       rect:
         serializedVersion: 2
         x: 432
@@ -14411,6 +14411,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Fence: 378407224
+      Fence1: 1216490700
+      Fence10: -385827454
+      Fence11: -1306904787
+      Fence12: -1381140164
+      Fence13: 636561088
+      Fence2: 1564361093
+      Fence4: -1350591891
+      Fence5: -915010515
+      Fence6: 1493139669
+      Fence7: -2144266079
+      Fence8: -1679823973
+      Fence9: 1702815758
       RA_Wasteland_0: 143871523
       RA_Wasteland_1: 1511177171
       RA_Wasteland_10: 410952053
@@ -14610,12 +14623,7 @@ TextureImporter:
       RA_Wasteland_275: -1305282818
       RA_Wasteland_276: -1164600544
       RA_Wasteland_277: 1878581606
-      RA_Wasteland_278: 378407224
-      RA_Wasteland_279: 1216490700
       RA_Wasteland_28: 460567899
-      RA_Wasteland_280: 1564361093
-      RA_Wasteland_281: -1306904787
-      RA_Wasteland_282: -1381140164
       RA_Wasteland_283: 635776939
       RA_Wasteland_284: -418463040
       RA_Wasteland_285: -862113595
@@ -14662,10 +14670,6 @@ TextureImporter:
       RA_Wasteland_321: 1385781778
       RA_Wasteland_322: -1375346462
       RA_Wasteland_323: 2725065
-      RA_Wasteland_324: -1350591891
-      RA_Wasteland_325: -915010515
-      RA_Wasteland_326: -385827454
-      RA_Wasteland_327: 636561088
       RA_Wasteland_328: -250492280
       RA_Wasteland_329: -816686762
       RA_Wasteland_33: -1775266987
@@ -14713,10 +14717,6 @@ TextureImporter:
       RA_Wasteland_368: -1753484487
       RA_Wasteland_369: -699977408
       RA_Wasteland_37: 455371029
-      RA_Wasteland_370: 1493139669
-      RA_Wasteland_371: -2144266079
-      RA_Wasteland_372: -1679823973
-      RA_Wasteland_373: 1702815758
       RA_Wasteland_374: 1900824200
       RA_Wasteland_375: -1307358519
       RA_Wasteland_376: -917478924

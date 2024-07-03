@@ -58,12 +58,6 @@ public class Define : MonoBehaviour
         Battle
     }
 
-    public enum TimeType
-    {
-        Morning,
-        Night
-    }
-
     public enum SlotType
     {
         None,

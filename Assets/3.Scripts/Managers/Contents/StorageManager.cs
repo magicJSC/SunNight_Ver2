@@ -29,7 +29,6 @@ public class StorageManager : MonoBehaviour
         public ItemSO itemInfo;
         public int count;
         public KeyType keyType;
-        public TileBase tile;
 
         public SlotInfo(int count,string _name = "")
         {
@@ -44,8 +43,6 @@ public class StorageManager : MonoBehaviour
             itemInfo = Resources.Load<GameObject>($"Prefabs/Items/{_name}").GetComponent<Item>().itemSo; //이름으로 가져오기
             keyType = KeyType.Exist;
             this.count = count;
-            if (itemInfo.itemType == ItemType.Building)
-                tile = Resources.Load<TileBase>($"TileMap/{_name}");
         }
     }
 

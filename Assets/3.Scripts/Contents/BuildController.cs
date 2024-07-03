@@ -53,7 +53,7 @@ public class BuildController : MonoBehaviour
         {
             if (!gameObject.activeSelf)
                 return;
-            Managers.Game.tower.build.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), itemUI.slotInfo.tile);
+            Managers.Game.tower.build.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), itemUI.slotInfo.itemInfo.tile);
             itemUI.slotInfo.count--;
             if (itemUI.slotInfo.count <= 0)
             {
