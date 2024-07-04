@@ -38,6 +38,10 @@ public class UI_GameMenu : UI_Base
 
     void ESCKeyEvent()
     {
+        if(Time.timeScale != 0)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
         gameObject.SetActive(!gameObject.activeSelf);
     }
 }

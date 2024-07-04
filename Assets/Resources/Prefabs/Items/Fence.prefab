@@ -147,9 +147,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSo: {fileID: 11400000, guid: 8622e0bd8b84c174da889dcd9bb92917, type: 2}
-  level: 1
-  pos: {x: 0, y: 0}
+  pos: {x: 0, y: 0, z: 0}
   buildUI: {fileID: 0}
+  bodySprites:
+  - {fileID: 7778179537909355205}
 --- !u!114 &3820169665023965698
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
-using UnityEngine.Tilemaps;
 using static StorageManager;
 
 public class StorageManager : MonoBehaviour
@@ -16,8 +15,6 @@ public class StorageManager : MonoBehaviour
     }
     int _coin =0;
 
-
-    //ItemInfo대신 Item으로 바꾸기
     public SlotInfo[] hotBarSlotInfo = new SlotInfo[5];
     public SlotInfo[] inventorySlotInfo = new SlotInfo[24];
     public SlotInfo smeltSlotInfo = new SlotInfo(0);
@@ -89,22 +86,21 @@ public class StorageManager : MonoBehaviour
     //선택한 값에 따라 다르게 실행
     public void CheckHotBarChoice()
     {
-        ItemSO info = hotBarUI.slotList[choiceIndex].UI_item.slotInfo.itemInfo;
-        if (info == null)
+        if (choiceIndex == hotBarUI.slotList.Count)
             return;
+        ItemSO info = hotBarUI.slotList[choiceIndex].UI_item.slotInfo.itemInfo;
         //체크할 때 플레이어의 검이 있을 때마다 지운다(수정 필요) -> 무기는 공격이 끝나면 사라져서 안보이고
         if (Managers.Game.weapon != null)
             Destroy(Managers.Game.weapon);
+        if (info == null)
+            return;
         switch (info.itemType)
         {
             case ItemType.Building:
+                Managers.Game.build.buildItemIcon.gameObject.SetActive(true);
                 Managers.Game.mouse.CursorType = CursorType.Builder;
                 Managers.Game.build.GetBuildItemInfo(hotBarUI.slotList[choiceIndex].UI_item);
                 Managers.Game.build.ShowBuildIcon();
-                break;
-            case ItemType.Tower:
-                Managers.Game.mouse.CursorType = CursorType.Builder;
-                Managers.Game.build.HideBuildIcon();
                 break;
             case ItemType.Tool:
                 Managers.Game.mouse.CursorType = CursorType.Battle;
@@ -122,9 +118,14 @@ public class StorageManager : MonoBehaviour
         {
             Managers.Game.mouse.CursorType = CursorType.Normal;
             hotBarUI.towerSlot.HideTowerIcon();
+            Managers.Game.tower.AfterInstallTower();
         }
         else
+        {
+            Managers.Game.build.buildItemIcon.gameObject.SetActive(false);
             Managers.Game.mouse.CursorType = CursorType.Builder;
+            Managers.Game.tower.BeforeInstallTower();
+        }
     }
 
     public bool AddOneItem(string name)
@@ -133,7 +134,7 @@ public class StorageManager : MonoBehaviour
         if (item.itemType != ItemType.Tool)   //재료 아이템일때
         {
             UI_Item emptySlot = null;
-            for (int i = 0; i < inventoryUI.slotList.Count - 1; i++)
+            for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
             {
                 UI_Item itemUI = inventoryUI.slotList[i].itemUI;
                 if (itemUI.slotInfo.itemInfo == null)
@@ -161,7 +162,7 @@ public class StorageManager : MonoBehaviour
         }
         else //도구 아이템일때
         {
-            for (int i = 0; i < inventoryUI.slotList.Count - 1; i++)
+            for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
             {
                 UI_Item itemUI = inventoryUI.slotList[i].itemUI;
                 if (KeyType.Empty == itemUI.slotInfo.keyType)
@@ -179,7 +180,7 @@ public class StorageManager : MonoBehaviour
     {
         ItemSO item = Resources.Load<Item>($"Prefabs/Items/{name}").itemSo;
         UI_Item emptySlot = null;
-        for (int i = 0; i < inventoryUI.slotList.Count - 1; i++)
+        for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
         {
             UI_Item itemUI = inventoryUI.slotList[i].itemUI;
             if (itemUI.slotInfo.itemInfo == null)
@@ -211,11 +212,6 @@ public class StorageManager : MonoBehaviour
     }
     #endregion
 
-
-
-
-
-    //i1 : 드래그하는 아이템, i2 : 드래그를 드랍한 아이템
     public void ChangeItem(UI_Item drag, UI_Item drop)
     {
         SlotInfo change1 = drag.slotInfo;

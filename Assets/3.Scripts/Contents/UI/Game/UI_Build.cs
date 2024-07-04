@@ -5,34 +5,38 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class UI_Build : UI_Base
 {
     [Serializable]
     public class Matters
     {
-        public string itemName;
+        public ItemSO item;
         public int count;
     }
 
     //나중에 Item_Building에 정보로 관리 하기로
     public List<Matters> matters = new List<Matters>();
 
-    public int coin;
+    public int expension;
+
+    public ItemSO nextLevelItem;
 
     Item_Buliding itemData;
     BuildStat buildStat;
+
 
     Text nameT;
     Text hpT;
     Text dmgT;
     Text atkCoolT;
     Text rangeT;
+    Text coinT;
 
     Image icon;
     Image upgrade;
     Image close;
-    Image background;
     Image collect;
 
     GameObject panel;
@@ -44,7 +48,8 @@ public class UI_Build : UI_Base
         Hp,
         Dmg,
         AtkCool,
-        Range
+        Range,
+        Coin
     }
 
     enum Images 
@@ -65,6 +70,7 @@ public class UI_Build : UI_Base
         dmgT = Get<Text>((int)Texts.Dmg);
         atkCoolT = Get<Text>((int)Texts.AtkCool);
         rangeT = Get<Text>((int)Texts.Range);
+        coinT = Get<Text>((int)Texts.Coin);
         
         icon = Get<Image>((int)Images.Icon);
         upgrade = Get<Image>((int)Images.Upgrade);
@@ -78,7 +84,7 @@ public class UI_Build : UI_Base
         buildStat = transform.parent.GetComponent<BuildStat>();
 
         UI_EventHandler evt = upgrade.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => {  };
+        evt._OnClick += UpgradeStat;
 
         evt = close.GetComponent<UI_EventHandler>();
         evt._OnClick += Close;
@@ -100,34 +106,50 @@ public class UI_Build : UI_Base
     void InitData()
     {
         nameT.text = $"{itemData.itemSo.idName}";
-        hpT.text = buildStat.Hp.ToString();
+        hpT.text = $"{buildStat.Hp}";
 
         if (buildStat.Damage != 0)
-            dmgT.text = buildStat.Damage.ToString();
+            dmgT.text = $"{buildStat.Damage}";
         else
             dmgT.text = "-";
         if (buildStat.attackCool != 0)
-            atkCoolT.text = buildStat.attackCool.ToString();
+            atkCoolT.text = $"{buildStat.attackCool}";
         else
             atkCoolT.text = "-";
         if(buildStat.range != 0)
-            rangeT.text = buildStat.range.ToString();
+            rangeT.text = $"{buildStat.range}";
         else
             rangeT.text = "-";
 
         icon.sprite = itemData.itemSo.itemIcon;
 
+        coinT.text = $"비용 : {expension}";
+
         for (int i = 0; i < matters.Count; i++)
         {
             GameObject go = Instantiate(Resources.Load<GameObject>("UI/UI_Build_Matter"), matGrid.transform);
-            go.GetComponent<Image>().sprite = Resources.Load<Item>($"Prefabs/Items/{matters[i].itemName}").itemSo.itemIcon;
-            go.transform.GetChild(0).GetComponent<Text>().text = matters[i].count.ToString();
+            go.GetComponent<Image>().sprite = matters[i].item.itemIcon;
+            go.transform.GetComponentInChildren<Text>().text = $"{matters[i].count}";
         }
     }
 
-    void UpgradeStat()
+    void UpgradeStat(PointerEventData p)
     {
+        if (Managers.Inven.Coin - expension < 0)
+        {
+            Debug.Log("돈 부족");
+            return; 
+        }
+        if (!CheckMaterials())
+        {
+            Debug.Log("재료 부족");
+            return;
+        }
 
+        Debug.Log("업그레이드 성공");
+        Managers.Inven.Coin -= expension;
+        Vector2 tower = Managers.Game.tower.transform.position; //기지 위치 받아오기
+        MapManager.building.SetTile(new Vector3Int((int)(transform.parent.position.x - tower.x), (int)(transform.parent.position.y - tower.y), 0), nextLevelItem.tile);
     }
 
     void Collect(PointerEventData p)
@@ -146,18 +168,46 @@ public class UI_Build : UI_Base
         gameObject.SetActive(false);
     }
 
-    //bool Check_Materials()
-    //{
-    //    for(int i=0;i<matters.Count;i++)
-    //    {
-    //        Check_Materials_Inven();
-    //    }
+    List<(UI_Item,int)> ItemUIList = new List<(UI_Item, int)>();
 
-    //    return true;
-    //}
+    bool CheckMaterials()
+    {
+        UI_InventorySlot[] invenInfos = Managers.Inven.inventoryUI.slotList;
+        for (int i = 0; i < matters.Count; i++)
+        {
+            int count = matters[i].count;
+            for (int j = 0; j < invenInfos.Length; j++)
+            {
+                UI_Item itemUI = invenInfos[j].itemUI;
+                if (itemUI.slotInfo.itemInfo == matters[i].item)
+                {
+                    if(count - itemUI.slotInfo.count <= 0)
+                    {
+                        int remain = Mathf.Clamp(itemUI.slotInfo.count - count, 0, itemUI.slotInfo.count);
+                        ItemUIList.Add((itemUI,remain));
+                        count -= itemUI.slotInfo.count;
+                        break;
+                    }
+                    count -= itemUI.slotInfo.count;
+                }
+            }
+            if (count > 0)
+                return false;
+        }
 
-    //bool Check_Materials_Inven()
-    //{
+        UseMaterials();
+        return true;
+    }
 
-    //}
+    void UseMaterials()
+    {
+        for(int i = 0; i < ItemUIList.Count; i++)
+        {
+            if (ItemUIList[i].Item2 == 0)
+                ItemUIList[i].Item1.MakeEmptySlot();
+            else
+                ItemUIList[i].Item1.slotInfo.count = ItemUIList[i].Item2;
+        }
+        ItemUIList.Clear();
+    }
 }

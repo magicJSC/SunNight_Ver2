@@ -7,10 +7,6 @@ using static Define;
 
 public class GameManager : MonoBehaviour
 {
-    #region 게임데이터
-    //타워에 설치된 건축물 위치 데이터
-    public Dictionary<Vector2, string> buildData = new Dictionary<Vector2, string>();
-    #endregion
     public void Init()
     {
         if(grid == null)

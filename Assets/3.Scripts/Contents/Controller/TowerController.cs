@@ -1,57 +1,55 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TowerController : MonoBehaviour,IGetDamage
+public class TowerController : MonoBehaviour,IGetDamage,ICaninteract
 {
-    bool canHold = false;
-    LayerMask playerLayer;
+    public Action forceInstallEvent;
     LayerMask buildLayer;
     LayerMask inviLayer;
 
     [HideInInspector]
     public Tilemap build;
 
+    Stat stat;
+
+    SpriteRenderer spriteRenderer;
+
+    public bool isConnected { get; set; }
+    public bool canInteract { get; set; }
+    public GameObject canInteractSign { get; set; }
+
     public void Init()
     {
         Managers.Game.tower = this;
         build = Util.FindChild(gameObject,"Building",true).GetComponent<Tilemap>();
-        Managers.Game.grid.building = build;
+        MapManager.building = build;
+        MapManager.tower = Util.FindChild(gameObject,"Tower",true).GetComponent<Tilemap>();
         TimeController.nightEvent += ForceInstall;
+
+        canInteractSign = Util.FindChild(gameObject, "Sign");
+
         Camera.main.GetComponent<CameraController>().target = transform;
-        playerLayer = 6;
-        buildLayer.value = 9;
         inviLayer.value = 8;
+        buildLayer.value = 9;
+
+        stat = GetComponent<Stat>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+       
     }
 
-    private void Update()
+    public void Interact()
     {
-        if (TimeController.timeType == TimeController.TimeType.Night)
+        if (!canInteract || Managers.Game.isKeepingTower || TimeController.timeType == TimeController.TimeType.Night)
             return;
 
-        if (Input.GetKeyDown(KeyCode.F) && canHold)
-        {
-            Managers.Inven.hotBarUI.GetTower();
-        }
-    }
-
-    public void ChangeInvisable()
-    {
-        gameObject.layer = inviLayer;
-        for (int i = 0; i < build.transform.childCount; i++)
-        {
-            build.transform.GetChild(i).gameObject.layer = inviLayer;
-        }
-    }
-
-    public void ChangeVisable()
-    {
-        gameObject.layer = buildLayer;
-        for (int i = 0; i < build.transform.childCount; i++)
-        {
-            build.transform.GetChild(i).gameObject.layer = buildLayer;
-        }
+        Managers.Game.isKeepingTower = true;
+        Managers.Inven.hotBarUI.CheckChoice();
+        Managers.Inven.hotBarUI.towerSlot.ShowTowerIcon();
+        Managers.Game.tower.transform.SetParent(Managers.Game.build.transform);
+        Managers.Game.tower.transform.position = Managers.Game.build.transform.position;
     }
 
     void ForceInstall()
@@ -59,24 +57,75 @@ public class TowerController : MonoBehaviour,IGetDamage
         if (!Managers.Game.isKeepingTower)
             return;
 
+        forceInstallEvent?.Invoke();
         Managers.Game.build.BuildTower();
         Vector2 playerPos = Managers.Game.player.transform.position;
         transform.position = new Vector2(Mathf.Round(playerPos.x), Mathf.Round(playerPos.y));
+        AfterInstallTower();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void GetDamge(float damage)
     {
-        if (collision.gameObject.layer == playerLayer)
+        stat.Hp -= damage;
+        if (stat.Hp <= 0)
+            Debug.Log("게임 오버");
+    }
+
+    public void BeforeInstallTower()
+    {
+        spriteRenderer.color = new Color(1, 1, 1, 0.3f);
+        gameObject.layer = inviLayer;
+        for(int i =0;i<MapManager.buildData.Count;i++)
         {
-            canHold = true;
+           MapManager.building.GetInstantiatedObject(MapManager.buildData[i])
+           .GetComponent<Item_Buliding>().ChangeColorBeforeIntall();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void AfterInstallTower()
     {
-        if (collision.gameObject.layer == playerLayer)
+        spriteRenderer.color = new Color(1, 1, 1, 1);
+        gameObject.layer = buildLayer;
+        for (int i = 0; i < MapManager.buildData.Count; i++)
         {
-            canHold = false;
+            MapManager.building.GetInstantiatedObject(MapManager.buildData[i])
+            .GetComponent<Item_Buliding>().ChangeColorAfterIntall();
         }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<PlayerController>(out var player))
+        {
+            canInteract = true;
+            canInteractSign.SetActive(canInteract);
+            player.interactObjectList.Add(gameObject);
+            player.SetInteractObj();
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<PlayerController>(out var player))
+        {
+            canInteract = false;
+            canInteractSign.SetActive(canInteract);
+            player.interactObjectList.Remove(gameObject);
+            player.SetInteractObj();
+        }
+    }
+
+    public void EnterPlayer(PlayerController player)
+    {
+        canInteract = true;
+        player.interactObjectList.Add(gameObject);
+        player.SetInteractObj();
+    }
+
+    public void ExitPlayer(PlayerController player)
+    {
+        canInteract = false;
+        player.SetInteractObj();
+        player.interactObjectList.Remove(gameObject);
     }
 }
