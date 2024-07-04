@@ -235,9 +235,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSo: {fileID: 11400000, guid: 7fb0ab4e01ce7104aa914f9c4cd458e4, type: 2}
-  level: 1
-  pos: {x: 0, y: 0}
+  pos: {x: 0, y: 0, z: 0}
   buildUI: {fileID: 0}
+  bodySprites:
+  - {fileID: 7709275587171132505}
+  - {fileID: 7099397514504654712}
 --- !u!1 &5944550990788216208
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +411,26 @@ PrefabInstance:
     - target: {fileID: 3454901557121949283, guid: a6f5625b1ceaaa644a882d37600ca2b0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469804860220165662, guid: a6f5625b1ceaaa644a882d37600ca2b0, type: 3}
+      propertyPath: coin
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469804860220165662, guid: a6f5625b1ceaaa644a882d37600ca2b0, type: 3}
+      propertyPath: nextLevelItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 3b4d930a7ee6eee43ae0f777d82d5b40, type: 2}
+    - target: {fileID: 3469804860220165662, guid: a6f5625b1ceaaa644a882d37600ca2b0, type: 3}
+      propertyPath: matters.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469804860220165662, guid: a6f5625b1ceaaa644a882d37600ca2b0, type: 3}
+      propertyPath: matters.Array.data[0].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 8e58cbffd25e9414fb81859dc04e7c89, type: 2}
+    - target: {fileID: 3469804860220165662, guid: a6f5625b1ceaaa644a882d37600ca2b0, type: 3}
+      propertyPath: matters.Array.data[0].count
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4899520861259284025, guid: a6f5625b1ceaaa644a882d37600ca2b0, type: 3}
       propertyPath: m_Name

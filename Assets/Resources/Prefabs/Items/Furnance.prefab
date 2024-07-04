@@ -149,7 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSo: {fileID: 11400000, guid: d2508dddc87dd3c42b6498ef10ad4247, type: 2}
-  level: 0
   pos: {x: 0, y: 0}
   buildUI: {fileID: 0}
 --- !u!58 &4195077323307575936
@@ -289,7 +288,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -995412231, guid: 36634c649d5e4024bad2bd30b1e5fe0d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

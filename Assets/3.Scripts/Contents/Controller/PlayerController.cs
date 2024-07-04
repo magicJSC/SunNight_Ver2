@@ -6,30 +6,30 @@ using UnityEngine.InputSystem;
 
 public interface IGetDamage
 {
-
+    void GetDamge(float damage);
 }
 
 public class PlayerController : CreatureController,IGetDamage
 {
-     
+    public Action escEvent;
 
-    Rigidbody2D rigid;
-    Animator anim;
-    SpriteRenderer sprite;
-
+    PlayerStat stat;
+   
 
     [Header("Contents")]
     Vector2 dir;
-    bool canGetTower = false;
 
     [HideInInspector]
     public GameObject toolParent;
 
     List<GameObject> matters = new List<GameObject>();
+    public List<GameObject> interactObjectList = new List<GameObject>();
+    GameObject canInteractObj;
 
-    public Action interact;
 
-    public Action escEvent;
+    Rigidbody2D rigid;
+    Animator anim;
+    SpriteRenderer sprite;
 
     public void Init()
     {
@@ -38,6 +38,7 @@ public class PlayerController : CreatureController,IGetDamage
         Camera.main.GetComponent<CameraController>().target = transform;
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        stat = GetComponent<PlayerStat>();
         Instantiate(Resources.Load<GameObject>("UI/UI_PlayerStat"));
     }
 
@@ -61,6 +62,8 @@ public class PlayerController : CreatureController,IGetDamage
 
     void OnPick()
     {
+        if (Time.timeScale == 0)
+            return;
         for (int i = 0; i < matters.Count; i++)
         {
             if (Managers.Inven.AddOneItem(matters[i].GetComponent<Item_Matter>().itemSo.idName))
@@ -70,21 +73,33 @@ public class PlayerController : CreatureController,IGetDamage
 
     void OnShowInventory()
     {
+        if (Time.timeScale == 0)
+            return;
         Managers.Inven.inventoryUI.gameObject.SetActive(!Managers.Inven.inventoryUI.gameObject.activeSelf);
         Managers.Game.isHandleUI = false;
     }
 
-    void OnGetTower()
+    void OnInteract()
     {
-        interact?.Invoke();
-        if (!canGetTower || Managers.Game.isKeepingTower || TimeController.timeType == TimeController.TimeType.Night)
+        if (Time.timeScale == 0)
             return;
+        canInteractObj.GetComponent<ICaninteract>().Interact();
+    }
 
-        Managers.Game.isKeepingTower = true;
-        Managers.Inven.hotBarUI.CheckChoice();
-        Managers.Inven.hotBarUI.towerSlot.ShowTowerIcon();
-        Managers.Game.tower.transform.SetParent(Managers.Game.build.transform);
-        Managers.Game.tower.transform.position = Managers.Game.build.transform.position;
+    public void SetInteractObj()
+    {
+        canInteractObj = null;
+        for(int i = 0; i < interactObjectList.Count; i++)
+        {
+            if (canInteractObj == null)
+                canInteractObj = interactObjectList[i];
+            else if (Vector2.Distance(canInteractObj.transform.position,transform.position) > Vector2.Distance(interactObjectList[i].transform.position, transform.position))
+                canInteractObj = interactObjectList[i];
+
+            interactObjectList[i].GetComponent<ICaninteract>().canInteractSign.SetActive(false);
+        }
+        if(canInteractObj)
+            canInteractObj.GetComponent<ICaninteract>().canInteractSign.SetActive(true);
     }
 
     void OnBuild()
@@ -103,11 +118,6 @@ public class PlayerController : CreatureController,IGetDamage
         escEvent?.Invoke();
     }
 
-    //void OnInterface()
-    //{
-    //    interact.Invoke();
-    //}
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -116,9 +126,13 @@ public class PlayerController : CreatureController,IGetDamage
             matters.Add(collision.gameObject);
             collision.gameObject.GetComponent<Item_Matter>().ChangeTake();
         }
-        else if (collision.gameObject.GetComponent<TowerController>())
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<ICaninteract>() != null)
         {
-            canGetTower = true;
+            SetInteractObj();
         }
     }
 
@@ -129,9 +143,12 @@ public class PlayerController : CreatureController,IGetDamage
             matters.Remove(collision.gameObject);
             collision.gameObject.GetComponent<Item_Matter>().ChangeOrigin();
         }
-        else if (collision.gameObject.GetComponent<TowerController>())
-        {
-            canGetTower = false;
-        }
+    }
+
+    public void GetDamge(float damage)
+    {
+        stat.Hp -= damage;
+        if (stat.Hp <= 0)
+            Debug.Log("플레이어 뒤짐");
     }
 }

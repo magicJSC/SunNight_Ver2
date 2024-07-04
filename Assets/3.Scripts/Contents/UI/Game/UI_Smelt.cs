@@ -21,7 +21,9 @@ public class UI_Smelt : UI_Base
     public GameObject explain;
 
     public FurnanceController furnanace;
-    public bool isSmelting;
+    public static bool isSmelting;
+
+    private SlotInfo _slotInfo;
 
     enum GameObjects
     {
@@ -69,8 +71,11 @@ public class UI_Smelt : UI_Base
         evt._OnEnter += (PointerEventData p) => { Managers.Game.isHandleUI = true; Managers.Game.mouse.CursorType = Define.CursorType.Normal; };
         evt._OnExit += (PointerEventData p) => { Managers.Game.isHandleUI = false; Managers.Inven.CheckHotBarChoice(); };
 
-        SetData();  
-        
+        SetData();
+
+        Managers.Game.tower.forceInstallEvent -= CancelSmelt;
+        Managers.Game.tower.forceInstallEvent += CancelSmelt;
+
         explain.SetActive(false);
         gameObject.SetActive(false);
     }
@@ -98,10 +103,10 @@ public class UI_Smelt : UI_Base
     {
         if (isSmelting)
             return;
-        SlotInfo slotInfo = grillingSlot.GetComponentInChildren<UI_Item>().slotInfo;
-        if (slotInfo != null)
+        _slotInfo = grillingSlot.GetComponentInChildren<UI_Item>().slotInfo;
+        if (_slotInfo != null)
         {
-            if (!slotInfo.itemInfo.canSmelt)
+            if (!_slotInfo.itemInfo.canSmelt)
             {
                 Debug.Log("제련 할 수 있는 아이템이 아이템이 아닙니다");
                 return;
@@ -117,15 +122,15 @@ public class UI_Smelt : UI_Base
             Debug.Log("석탄이 부족합니다");
             return;
         }
-        slotInfo = smeltSlot.GetComponentInChildren<UI_Item>().slotInfo;
-        if (slotInfo.itemInfo != null)
+        _slotInfo = smeltSlot.GetComponentInChildren<UI_Item>().slotInfo;
+        if (_slotInfo.itemInfo != null)
         {
-            if (slotInfo.itemInfo.itemType == Define.ItemType.Tool)
+            if (_slotInfo.itemInfo.itemType == Define.ItemType.Tool)
             {
                 Debug.Log("제련 후 아이템 슬롯에 공간이 없습니다");
                 return;
             }
-            else if(slotInfo.count > slotInfo.itemInfo.maxAmount)
+            else if(_slotInfo.count > _slotInfo.itemInfo.maxAmount)
             {
                 Debug.Log("제련 후 아이템 슬롯에 공간이 없습니다");
                 return;
@@ -157,18 +162,18 @@ public class UI_Smelt : UI_Base
     void FillCharcoal()
     {
         int totalCount = 0;
-        for (int i = 0; i < Managers.Inven.inventoryUI.slotList.Count; i++)
+        for (int i = 0; i < Managers.Inven.inventoryUI.slotList.Length; i++)
         {
-            SlotInfo slotInfo  = Managers.Inven.inventoryUI.slotList[i].itemUI.slotInfo;
-            if (slotInfo.itemInfo != null)
+            _slotInfo  = Managers.Inven.inventoryUI.slotList[i].itemUI.slotInfo;
+            if (_slotInfo.itemInfo != null)
             {
-                if (slotInfo.itemInfo.idName == "Coal")
+                if (_slotInfo.itemInfo.idName == "Coal")
                 {
-                    totalCount += slotInfo.count;
-                    if (totalCount > slotInfo.itemInfo.maxAmount)
+                    totalCount += _slotInfo.count;
+                    if (totalCount > _slotInfo.itemInfo.maxAmount)
                     {
-                        Managers.Inven.AddItems(slotInfo.itemInfo.idName,totalCount - slotInfo.itemInfo.maxAmount);
-                        charcoalSlot.charcoalCount = slotInfo.itemInfo.maxAmount;
+                        Managers.Inven.AddItems(_slotInfo.itemInfo.idName,totalCount - _slotInfo.itemInfo.maxAmount);
+                        charcoalSlot.charcoalCount = _slotInfo.itemInfo.maxAmount;
                         break;
                     }
                     Managers.Inven.inventoryUI.slotList[i].itemUI.MakeEmptySlot();
@@ -181,21 +186,37 @@ public class UI_Smelt : UI_Base
         charcoalSlot.SetSlot();
     }
 
-    void ReturnCoal()
+    void CancelSmelt()
     {
-        if (isSmelting)
-            return;
+        ReturnItems();
+    }
+
+    void ReturnItems()
+    {
         if (charcoalSlot.charcoalCount != 0)
         {
             Managers.Inven.AddItems("Coal", charcoalSlot.charcoalCount);
             charcoalSlot.charcoalCount = 0;
             charcoalSlot.SetEmptySlot();
-         }
+        }
+        _slotInfo = grillingSlot.itemUI.slotInfo;
+        if(_slotInfo.itemInfo != null)
+        {
+            Managers.Inven.AddItems(_slotInfo.itemInfo.idName, _slotInfo.count);
+            grillingSlot.itemUI.MakeEmptySlot();
+        }
+        _slotInfo = smeltSlot.itemUI.slotInfo;
+        if (_slotInfo.itemInfo != null)
+        {
+            Managers.Inven.AddItems(_slotInfo.itemInfo.idName, _slotInfo.count);
+            smeltSlot.itemUI.MakeEmptySlot();
+        }
     }
 
     void Close(PointerEventData p)
     {
-        ReturnCoal();
+        if (!isSmelting)
+            ReturnItems();
         gameObject.SetActive(false);
     }
 }

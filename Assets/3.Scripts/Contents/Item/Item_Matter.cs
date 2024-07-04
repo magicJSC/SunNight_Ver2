@@ -4,32 +4,31 @@ using UnityEngine;
 
 public class Item_Matter : Item
 {
-    SpriteRenderer s;
+    SpriteRenderer spriteRenderer;
     Sprite origin;
     Sprite pickTarget;
 
 
     private void Start()
     {
-        s = GetComponent<SpriteRenderer>();
-        Managers.Game.grid.matter.SetTile(new Vector3Int((int)transform.position.x, (int)transform.position.y), Managers.Game.grid.banTile);
-        origin = s.sprite;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        origin = spriteRenderer.sprite;
         pickTarget = itemSo.itemIcon;
     }
 
     public void ChangeOrigin()
     {
-        s.sprite = origin;
+        spriteRenderer.sprite = origin;
     }
 
     public void ChangeTake()
     {
-        s.sprite = pickTarget;
+        spriteRenderer.sprite = pickTarget;
     }
 
     public void DestroyThis()
     {
-        Managers.Game.grid.matter.SetTile(new Vector3Int((int)transform.position.x, (int)transform.position.y), null);
+        MapManager.matter.SetTile(new Vector3Int((int)transform.position.x, (int)transform.position.y), null);
         Destroy(gameObject);
     }
 }

@@ -8,7 +8,7 @@ using static StorageManager;
 
 public class UI_Inventory : UI_Base
 {
-    public List<UI_InventorySlot> slotList = new List<UI_InventorySlot>();
+    public UI_InventorySlot[] slotList;
 
     GameObject grid;
     GameObject hide;
@@ -102,24 +102,29 @@ public class UI_Inventory : UI_Base
         {
             Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);
         }
+
+
     }
 
     void MakeKeys()
     {
+        slotList = new UI_InventorySlot[Managers.Inven.inventorySlotInfo.Length];
         for (int i = 0; i < Managers.Inven.inventorySlotInfo.Length; i++)
         {
             UI_InventorySlot go = Instantiate(Resources.Load<GameObject>("UI/UI_Inven_Slot"), grid.transform).GetComponent<UI_InventorySlot>();
-            slotList.Add(go);
+            slotList[i] = go;
             go.inven = this;
             go.Init();
             go.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.inventorySlotInfo[i];
             go.GetComponentInChildren<UI_Item>().Init();
         }
+
+        Managers.Inven.Coin = 10000;
     }
 
     public void SetCoin()
     {
-        coin.text = "코인 : " + Managers.Inven.Coin.ToString();
+        coin.text = $"코인 : {Managers.Inven.Coin}";
     }
 
     void ShowProduceUI(PointerEventData p)

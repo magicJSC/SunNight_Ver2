@@ -2012,8 +2012,6 @@ MonoBehaviour:
   material:
   - matterName: Branch
     count: 4
-  - matterName: Bone
-    count: 3
   produce: {fileID: 0}
 --- !u!114 &3664776069597545505
 MonoBehaviour:

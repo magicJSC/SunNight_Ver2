@@ -11,8 +11,6 @@ public class MonsterController : MonoBehaviour
 {
 
     Rigidbody2D rigid;
-    public LayerMask playerLayer;
-    public LayerMask buildLayer;
 
     protected Transform target;
     protected Animator anim;
@@ -81,7 +79,7 @@ public class MonsterController : MonoBehaviour
     //저녁과 아침이 목표 우선순위를 다르게 하기
     public Transform SetTarget()
     {
-        if (Define.KeyType.Exist != Managers.Inven.hotBarSlotInfo[Managers.Inven.hotBarSlotInfo.Length - 1].keyType)
+        if (TimeController.timeType == TimeController.TimeType.Night)
             return Managers.Game.tower.transform;
         else
             return Managers.Game.player.transform;
@@ -143,11 +141,14 @@ public class MonsterController : MonoBehaviour
 
     void CheckObstacle()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, (target.position - transform.position).normalized, _stat.range, buildLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (target.position - transform.position).normalized, _stat.range);
         Debug.DrawRay(transform.position, (target.position - transform.position).normalized * _stat.range,Color.red);
         if(hit)
         {
-            target = hit.transform;
+            if (hit.transform.TryGetComponent<IGetDamage>(out var getDamage))
+            {
+                target = hit.transform; 
+            }
         }
     }
 
