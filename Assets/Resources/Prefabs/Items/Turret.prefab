@@ -417,6 +417,10 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3469804860220165662, guid: a6f5625b1ceaaa644a882d37600ca2b0, type: 3}
+      propertyPath: expension
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3469804860220165662, guid: a6f5625b1ceaaa644a882d37600ca2b0, type: 3}
       propertyPath: nextLevelItem
       value: 
       objectReference: {fileID: 11400000, guid: 3b4d930a7ee6eee43ae0f777d82d5b40, type: 2}

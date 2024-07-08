@@ -68,8 +68,11 @@ public class UI_Smelt : UI_Base
         evt._OnClick += Close;
 
         evt = back.GetComponent<UI_EventHandler>();
-        evt._OnEnter += (PointerEventData p) => { Managers.Game.isHandleUI = true; Managers.Game.mouse.CursorType = Define.CursorType.Normal; };
-        evt._OnExit += (PointerEventData p) => { Managers.Game.isHandleUI = false; Managers.Inven.CheckHotBarChoice(); };
+        evt._OnEnter += (PointerEventData p) => 
+        {
+            Managers.Game.mouse.CursorType = Define.CursorType.UI; 
+        };
+        evt._OnExit += (PointerEventData p) => { Managers.Inven.CheckHotBarChoice(); };
 
         SetData();
 
@@ -106,7 +109,7 @@ public class UI_Smelt : UI_Base
         _slotInfo = grillingSlot.GetComponentInChildren<UI_Item>().slotInfo;
         if (_slotInfo != null)
         {
-            if (!_slotInfo.itemInfo.canSmelt)
+            if (_slotInfo.itemInfo.smelt == null)
             {
                 Debug.Log("제련 할 수 있는 아이템이 아이템이 아닙니다");
                 return;

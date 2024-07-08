@@ -62,6 +62,9 @@ public class MouseController : UI_Base
                 case Define.CursorType.Battle:
                     SetBattleMode();
                     break;
+                case Define.CursorType.UI:
+                    SetHandleUIMode();
+                    break;
             }
         }
     }
@@ -74,12 +77,14 @@ public class MouseController : UI_Base
         gameObject.SetActive(false);
         Cursor.SetCursor(normal, Vector2.zero, CursorMode.Auto);
         Managers.Game.build.gameObject.SetActive(false);
+        Managers.Game.isHandleUI = false;
     }
 
     void SetBuildingMode()
     {
         Managers.Game.build.gameObject.SetActive(true);
         gameObject.SetActive(false);
+        Managers.Game.isHandleUI = false;
     }
 
     void SetDragMode()
@@ -93,7 +98,16 @@ public class MouseController : UI_Base
     {
         gameObject.SetActive(false);
         Cursor.SetCursor(normal, Vector2.zero, CursorMode.Auto);
+        Managers.Game.build.gameObject.SetActive(false); 
+        Managers.Game.isHandleUI = false;
+    }
+
+    void SetHandleUIMode()
+    {
+        gameObject.SetActive(false);
+        Cursor.SetCursor(normal, Vector2.zero, CursorMode.Auto);
         Managers.Game.build.gameObject.SetActive(false);
+        Managers.Game.isHandleUI = true;
     }
     #endregion
 }

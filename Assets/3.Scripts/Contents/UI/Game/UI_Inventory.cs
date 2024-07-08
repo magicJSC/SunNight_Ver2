@@ -64,11 +64,10 @@ public class UI_Inventory : UI_Base
         {
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
                 return;
-            Managers.Game.isHandleUI = true;
+            Managers.Game.mouse.CursorType = Define.CursorType.UI;
         };
         evt._OnExit += (PointerEventData p) => 
         {
-            Managers.Game.isHandleUI = false;
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
                 return;
             Managers.Inven.CheckHotBarChoice();
@@ -93,12 +92,9 @@ public class UI_Inventory : UI_Base
 
     void GetData()
     {
-        Managers.Inven.inventorySlotInfo[0] = new SlotInfo(5, "Branch");
-        Managers.Inven.inventorySlotInfo[1] = new SlotInfo(0);
-        Managers.Inven.inventorySlotInfo[2] = new SlotInfo(5, "Coal");
-        Managers.Inven.inventorySlotInfo[3] = new SlotInfo(5, "IronOre");
-        Managers.Inven.inventorySlotInfo[4] = new SlotInfo(1, "Furnance");
-        for (int i = 5; i < Managers.Inven.inventorySlotInfo.Length; i++)
+        Managers.Inven.inventorySlotInfo[0] = new SlotInfo(6, "Meat");
+        Managers.Inven.inventorySlotInfo[1] = new SlotInfo(1,"Bonfire");
+        for (int i = 2; i < Managers.Inven.inventorySlotInfo.Length; i++)
         {
             Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);
         }

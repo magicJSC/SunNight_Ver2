@@ -80,8 +80,8 @@ public class UI_Build : UI_Base
         matGrid = Util.FindChild(gameObject,"MatterGrid",true);
         panel = Util.FindChild(gameObject,"Panel",true);
 
-        itemData = transform.parent.GetComponent<Item_Buliding>();
-        buildStat = transform.parent.GetComponent<BuildStat>();
+        itemData = transform.GetComponentInParent<Item_Buliding>();
+        buildStat = transform.GetComponentInParent<BuildStat>();
 
         UI_EventHandler evt = upgrade.GetComponent<UI_EventHandler>();
         evt._OnClick += UpgradeStat;
@@ -135,6 +135,9 @@ public class UI_Build : UI_Base
 
     void UpgradeStat(PointerEventData p)
     {
+        if (nextLevelItem == null)
+            return;
+
         if (Managers.Inven.Coin - expension < 0)
         {
             Debug.Log("µ· ºÎÁ·");

@@ -28,7 +28,7 @@ public class BuildController : MonoBehaviour
         buildItemIcon.sprite = itemUI.slotInfo.itemInfo.itemIcon;
     }
 
-    void MoveBuilder()
+    public void MoveBuilder()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition = new Vector2(Mathf.Round(mousePosition.x), Mathf.Round(mousePosition.y));

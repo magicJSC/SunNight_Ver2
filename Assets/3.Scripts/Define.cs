@@ -55,7 +55,8 @@ public class Define : MonoBehaviour
         Normal,
         Builder,
         Drag,
-        Battle
+        Battle,
+        UI
     }
 
     public enum SlotType

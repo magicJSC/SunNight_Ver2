@@ -4,12 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public interface IGetDamage
-{
-    void GetDamge(float damage);
-}
 
-public class PlayerController : CreatureController,IGetDamage
+
+public class PlayerController : CreatureController,IPlayer
 {
     public Action escEvent;
 
@@ -76,7 +73,7 @@ public class PlayerController : CreatureController,IGetDamage
         if (Time.timeScale == 0)
             return;
         Managers.Inven.inventoryUI.gameObject.SetActive(!Managers.Inven.inventoryUI.gameObject.activeSelf);
-        Managers.Game.isHandleUI = false;
+        Managers.Inven.CheckHotBarChoice();
     }
 
     void OnInteract()
@@ -121,10 +118,14 @@ public class PlayerController : CreatureController,IGetDamage
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Item_Matter>())
+        if (collision.gameObject.TryGetComponent<Item_Matter>(out var item))
         {
             matters.Add(collision.gameObject);
-            collision.gameObject.GetComponent<Item_Matter>().ChangeTake();
+            item.ChangeTake();
+
+            //자동 줍기
+            //if (Managers.Inven.AddOneItem(item.itemSo.idName))
+            //    item.DestroyThis();
         }
     }
 
@@ -138,10 +139,10 @@ public class PlayerController : CreatureController,IGetDamage
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Item_Matter>())
+        if (collision.gameObject.TryGetComponent<Item_Matter>(out var item))
         {
             matters.Remove(collision.gameObject);
-            collision.gameObject.GetComponent<Item_Matter>().ChangeOrigin();
+            item.ChangeOrigin();
         }
     }
 

@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class FurnanceController : MonoBehaviour, ICaninteract
 {
-    public bool isConnected { get; set; }
 
     public GameObject canInteractSign { get; set; }
-    public bool canInteract { get; set; }
 
     UI_Smelt smeltUI;
 
@@ -57,24 +55,17 @@ public class FurnanceController : MonoBehaviour, ICaninteract
 
     public void Interact()
     {
-        if (!canInteract || smeltUI.gameObject.activeSelf)
+        if (smeltUI.gameObject.activeSelf)
             return;
         smeltUI.gameObject.SetActive(true);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent<PlayerController>(out var player))
+        if (collision.TryGetComponent<PlayerController>(out var player))
         {
             EnterPlayer(player);
         }
-    }
-
-    public void EnterPlayer(PlayerController player)
-    {
-        canInteract = true;
-        player.interactObjectList.Add(gameObject);
-        player.SetInteractObj();
     }
 
     public void OnTriggerExit2D(Collider2D collision)
@@ -85,10 +76,16 @@ public class FurnanceController : MonoBehaviour, ICaninteract
         }
     }
 
+    public void EnterPlayer(PlayerController player)
+    {
+        player.interactObjectList.Add(gameObject);
+        player.SetInteractObj();
+    }
+
     public void ExitPlayer(PlayerController player)
     {
-        canInteract = false;
-        player.SetInteractObj();
         player.interactObjectList.Remove(gameObject);
+        canInteractSign.SetActive(false);
+        player.SetInteractObj();
     }
 }

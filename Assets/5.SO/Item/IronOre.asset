@@ -15,8 +15,8 @@ MonoBehaviour:
   idName: IronOre
   itemName: "\uCCA0 \uC6D0\uC11D"
   explain: "\uCCA0 \uC6D0\uC11D\uC774\uB2E4"
-  itemIcon: {fileID: 1817248939, guid: ef4c13ca7ab71b343884c89ddde836d9, type: 3}
+  itemIcon: {fileID: 486335542, guid: 15c1a23359c99764e8e3eecbecb0dd20, type: 3}
   itemType: 3
-  maxAmount: 99
-  canSmelt: 1
+  maxAmount: 32
   smelt: {fileID: 11400000, guid: 8e58cbffd25e9414fb81859dc04e7c89, type: 2}
+  tile: {fileID: 11400000, guid: 77eb33bafeabe3740927821344a3dfe7, type: 2}

@@ -15,8 +15,8 @@ MonoBehaviour:
   idName: Iron
   itemName: "\uCCA0"
   explain: "\uCCA0\uC774\uB2E4. \uC720\uC6A9\uD558\uAC8C \uC4F0\uC77C\uAC70 \uAC19\uB2E4"
-  itemIcon: {fileID: -2113514025, guid: ef4c13ca7ab71b343884c89ddde836d9, type: 3}
+  itemIcon: {fileID: -771253244, guid: 15c1a23359c99764e8e3eecbecb0dd20, type: 3}
   itemType: 3
   maxAmount: 99
-  canSmelt: 0
   smelt: {fileID: 0}
+  tile: {fileID: 11400000, guid: 3b7034fc5d084044ba5d51ea577db610, type: 2}
