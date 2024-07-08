@@ -12,9 +12,12 @@ public class ItemSO : ScriptableObject
     public Sprite itemIcon;
     public Define.ItemType itemType;
     public int maxAmount;
+    public TileBase tile;
 
     [Header("Á¦·Ã")]
-    public bool canSmelt;
     public ItemSO smelt;
-    public TileBase tile;
+
+    [Header("±Á±â")]
+    public ItemSO bakeItemSO;
+    public float bakeTime;
 }

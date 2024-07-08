@@ -40,7 +40,7 @@ public class UI_InventorySlot : UI_Base,IDragable,IDroppable
 
     private void ShowSlotInfo(PointerEventData data)
     {
-        if (itemUI.slotInfo.keyType == Define.KeyType.Empty)
+        if (itemUI.slotInfo.itemInfo == null)
             return;
         explain.SetActive(true);
         Set_Explain();

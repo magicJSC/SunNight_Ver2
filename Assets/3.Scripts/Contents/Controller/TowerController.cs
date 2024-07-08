@@ -17,8 +17,6 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract
 
     SpriteRenderer spriteRenderer;
 
-    public bool isConnected { get; set; }
-    public bool canInteract { get; set; }
     public GameObject canInteractSign { get; set; }
 
     public void Init()
@@ -30,6 +28,7 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract
         TimeController.nightEvent += ForceInstall;
 
         canInteractSign = Util.FindChild(gameObject, "Sign");
+        canInteractSign.SetActive(false);
 
         Camera.main.GetComponent<CameraController>().target = transform;
         inviLayer.value = 8;
@@ -42,7 +41,7 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract
 
     public void Interact()
     {
-        if (!canInteract || Managers.Game.isKeepingTower || TimeController.timeType == TimeController.TimeType.Night)
+        if (Managers.Game.isKeepingTower || TimeController.timeType == TimeController.TimeType.Night)
             return;
 
         Managers.Game.isKeepingTower = true;
@@ -97,10 +96,7 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract
     {
         if (collision.TryGetComponent<PlayerController>(out var player))
         {
-            canInteract = true;
-            canInteractSign.SetActive(canInteract);
-            player.interactObjectList.Add(gameObject);
-            player.SetInteractObj();
+            EnterPlayer(player);
         }
     }
 
@@ -108,24 +104,20 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract
     {
         if (collision.TryGetComponent<PlayerController>(out var player))
         {
-            canInteract = false;
-            canInteractSign.SetActive(canInteract);
-            player.interactObjectList.Remove(gameObject);
-            player.SetInteractObj();
+            ExitPlayer(player);
         }
     }
 
     public void EnterPlayer(PlayerController player)
     {
-        canInteract = true;
         player.interactObjectList.Add(gameObject);
         player.SetInteractObj();
     }
 
     public void ExitPlayer(PlayerController player)
     {
-        canInteract = false;
-        player.SetInteractObj();
         player.interactObjectList.Remove(gameObject);
+        canInteractSign.SetActive(false);
+        player.SetInteractObj();
     }
 }

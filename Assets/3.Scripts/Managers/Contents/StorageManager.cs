@@ -88,7 +88,7 @@ public class StorageManager : MonoBehaviour
     {
         if (choiceIndex == hotBarUI.slotList.Count)
             return;
-        ItemSO info = hotBarUI.slotList[choiceIndex].UI_item.slotInfo.itemInfo;
+        ItemSO info = hotBarUI.slotList[choiceIndex].itemUI.slotInfo.itemInfo;
         //체크할 때 플레이어의 검이 있을 때마다 지운다(수정 필요) -> 무기는 공격이 끝나면 사라져서 안보이고
         if (Managers.Game.weapon != null)
             Destroy(Managers.Game.weapon);
@@ -99,7 +99,7 @@ public class StorageManager : MonoBehaviour
             case ItemType.Building:
                 Managers.Game.build.buildItemIcon.gameObject.SetActive(true);
                 Managers.Game.mouse.CursorType = CursorType.Builder;
-                Managers.Game.build.GetBuildItemInfo(hotBarUI.slotList[choiceIndex].UI_item);
+                Managers.Game.build.GetBuildItemInfo(hotBarUI.slotList[choiceIndex].itemUI);
                 Managers.Game.build.ShowBuildIcon();
                 break;
             case ItemType.Tool:

@@ -18,5 +18,5 @@ MonoBehaviour:
   itemIcon: {fileID: 1494248696, guid: ef4c13ca7ab71b343884c89ddde836d9, type: 3}
   itemType: 3
   maxAmount: 99
-  canSmelt: 0
   smelt: {fileID: 0}
+  tile: {fileID: 11400000, guid: 7475041fe4fdcaf44b12f0755829be09, type: 2}

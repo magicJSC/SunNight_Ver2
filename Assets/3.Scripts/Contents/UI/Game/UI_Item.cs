@@ -66,11 +66,11 @@ public class UI_Item : UI_Base
     public void SetInfo()
     {
         if (slotInfo.count == 0)
-            SetEmptyItem();
+            MakeEmptySlot();
         else
         {
             SetExistItem();
-            count.text = slotInfo.count.ToString();
+            count.text = $"{slotInfo.count}";
             icon.sprite = slotInfo.itemInfo.itemIcon;
             rect.anchoredPosition = Vector2.zero;
         }
@@ -78,7 +78,6 @@ public class UI_Item : UI_Base
 
     public void MakeEmptySlot()
     {
-        slotInfo.keyType = Define.KeyType.Empty;
         slotInfo.count = 0;
         slotInfo.itemInfo = null;
         SetEmptyItem();

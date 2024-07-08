@@ -68,13 +68,11 @@ public class UI_Produce : UI_Base
         evt._OnDown += (PointerEventData p) => { startPos = new Vector3(back.transform.position.x - Camera.main.ScreenToWorldPoint(p.position).x, back.transform.position.y - Camera.main.ScreenToWorldPoint(p.position).y); };
         evt._OnEnter += (PointerEventData p) => 
         {
-            Managers.Game.isHandleUI = true;
             if(Managers.Game.mouse.CursorType != Define.CursorType.Drag)
-            Managers.Game.mouse.CursorType = Define.CursorType.Normal;
+            Managers.Game.mouse.CursorType = Define.CursorType.UI;
         };
         evt._OnExit += (PointerEventData p) =>
         {
-            Managers.Game.isHandleUI = false;
             if (Managers.Game.mouse.CursorType != Define.CursorType.Drag)
                 Managers.Inven.CheckHotBarChoice(); 
         };
@@ -83,7 +81,7 @@ public class UI_Produce : UI_Base
         evt._OnClick += (PointerEventData p) => { OnProduce(); };
 
         evt = hide.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { Managers.Game.isHandleUI = false; gameObject.SetActive(false); };
+        evt._OnClick += (PointerEventData p) => { Managers.Inven.CheckHotBarChoice(); gameObject.SetActive(false); };
 
         for(int i = 0; i < contentItem.transform.childCount; i++)
         {

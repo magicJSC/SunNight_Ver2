@@ -9,16 +9,22 @@ public class UI_HotbarSlot : UI_BaseSlot,IDroppable,IDragable
 {
 
     public int keyId;
-    public UI_Item UI_item;
+    public UI_Item itemUI;
 
     public override void Init()
     {
-       UI_item = transform.GetComponentInChildren<UI_Item>();
+       itemUI = transform.GetComponentInChildren<UI_Item>();
 
         UI_EventHandler evt = GetComponent<UI_EventHandler>();
         evt._OnDrop += OnDrop;
-        evt._OnEnter += (PointerEventData p) => { Managers.Game.isHandleUI = true; Managers.Game.mouse.CursorType = Define.CursorType.Normal; };
-        evt._OnExit += (PointerEventData p) => { Managers.Game.isHandleUI = false; Managers.Inven.CheckHotBarChoice(); };
+        evt._OnEnter += (PointerEventData p) => 
+        {
+            Managers.Game.mouse.CursorType = Define.CursorType.UI;
+        };
+        evt._OnExit += (PointerEventData p) => 
+        {
+            Managers.Inven.CheckHotBarChoice(); 
+        };
     }
 
     void OnDrop(PointerEventData p)
