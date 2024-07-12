@@ -15,12 +15,24 @@ public class BuildController : MonoBehaviour
     {
         Managers.Game.build = this;
         buildItemIcon = Util.FindChild(gameObject, "Sample").GetComponent<SpriteRenderer>();
+        StartCoroutine(UpdateCor());
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        MoveBuilder();
+        StartCoroutine(UpdateCor());
     }
+
+
+    IEnumerator UpdateCor()
+    {
+        while (true)
+        {
+            MoveBuilder();
+            yield return null;
+        }
+    }
+
 
     public void GetBuildItemInfo(UI_Item uI_Item)
     {

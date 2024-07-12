@@ -159,8 +159,8 @@ public class UI_Build : UI_Base
     {
         Item_Buliding building = GetComponentInParent<Item_Buliding>();
         Managers.Inven.AddItems(building.itemSo.idName,1);
-        Managers.Game.isHandleUI = false;
         Managers.Inven.CheckHotBarChoice();
+        Managers.Game.isHandleUI = false;
         building.DeleteBuilding();
     }
 
