@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BonFireController : MonoBehaviour, ICaninteract
 {
-    public bool isConnected { get; set; }
     public bool canInteract { get; set; }
     public GameObject canInteractSign { get; set; }
 
