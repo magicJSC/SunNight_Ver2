@@ -1,79 +1,87 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IRotate
+{
+    public void Rotate();
+}
+
+public interface IAttack
+{
+    public void Attack();
+}
+
 public class TurretController : BaseController
 {
-    BuildStat _stat;
+    protected Action workEvent;
+
+    protected BuildStat stat;
     Animator anim;
 
+    float termBeforeWork = 1;
 
-    List<GameObject> _targets = new List<GameObject>();
-    GameObject _target;
-    Transform face;
+    protected List<GameObject> targets = new List<GameObject>();
+    MonsterStat targetStat;
 
-    float atkCurTime = 0;
+    protected GameObject _target;
+
     bool isWorking = false;
 
     protected override void Init()
     {
         anim = GetComponent<Animator>();
-        _stat = GetComponent<BuildStat>();
-        if (_stat == null)
+        stat = GetComponent<BuildStat>();
+        if (stat == null)
             Debug.Log($"{name}포탑에 TurretStat이 존재하지 않습니다");
-        GetComponent<CircleCollider2D>().radius = _stat.range;
+        GetComponent<CircleCollider2D>().radius = stat.range;
         GetComponent<CircleCollider2D>().isTrigger = true;
-        face = Util.FindChild(gameObject, "Face", true).transform;
+        StartCoroutine(UpdateCor());
     }
-   
-    private void Update()
+
+    IEnumerator UpdateCor()
+    {
+        while (true)
+        {
+            CheckTarget();
+            yield return null;
+        }
+    }
+
+    protected virtual void CheckTarget()
     {
         if (isWorking)
             return;
-        Rotate();
-    }
 
-    void Rotate()
-    {
         if (_target == null)
         {
             SetTarget();
             return;
         }
-        else if (Vector2.Distance(_target.transform.position, transform.position) > _stat.range)
+        else if (Vector2.Distance(_target.transform.position, transform.position) > stat.range)
         {
             SetTarget();
             return;
         }
-        Vector3 dir = (_target.transform.position - transform.position).normalized;
-        float rot = Mathf.Atan2(-dir.y, -dir.x)*Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rot+90);
-        Attack();
     }
 
-    protected virtual void Attack()
+ 
+
+    protected IEnumerator Work()
     {
-        if (atkCurTime > _stat.attackCool)
+        yield return new WaitForSeconds(termBeforeWork);
+        while (true) 
         {
             isWorking = true;
-            atkCurTime = 0;
-            anim.Play("Attack");
-        }
-        else
-            atkCurTime += Time.deltaTime;
-    }
-
-    void Atk()
-    {
-        _target.GetComponent<MonsterStat>().Hp -= _stat.Damage;
-        if (_target.GetComponent<MonsterStat>().Hp <= 0)
-        {
-            _targets.Remove(_target);
-            Destroy(_target);
+            anim.Play("Work");
+            yield return new WaitForSeconds(stat.attackCool);
         }
     }
 
-    void EndAtk()
+    
+
+    void EndWork()
     {
         isWorking = false;
     }
@@ -81,31 +89,36 @@ public class TurretController : BaseController
     protected virtual void SetTarget()
     {
         GameObject result = null;
-        for (int i = 0; i < _targets.Count; i++)
+        for (int i = 0; i < targets.Count; i++)
         {
-            if (_targets[i] != null)
+            if (targets[i] != null)
             {
                 if (result == null)
                 {
-                    result = _targets[i];
+                    result = targets[i];
                     continue;
                 }
-                if (Vector2.Distance(transform.position, result.transform.position) > Vector2.Distance(transform.position, _targets[i].transform.position))
-                    result = _targets[i];
+                if (Vector2.Distance(transform.position, result.transform.position) > Vector2.Distance(transform.position, targets[i].transform.position))
+                    result = targets[i];
             }
             else
             {
-                _targets.Remove(_targets[i]);
+                targets.Remove(targets[i]);
             }
         }
-        _target = result;
+        if (result != null)
+        {
+            StartCoroutine(Work());
+            _target = result;
+        }
+        else
+            StopCoroutine(Work());
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<MonsterController>() != null)
         {
-            _targets.Add(collision.gameObject);
+            targets.Add(collision.gameObject);
         }
     }
 
@@ -113,16 +126,16 @@ public class TurretController : BaseController
     {
         if (collision.GetComponent<MonsterController>() != null)
         {
-            _targets.Remove(collision.gameObject);
+            targets.Remove(collision.gameObject);
         }
     }
 
     private void OnDrawGizmos()
     {
-        if (_stat == null)
+        if (stat == null)
             return;
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, _stat.range);
+        Gizmos.DrawWireSphere(transform.position, stat.range);
     }
 
     

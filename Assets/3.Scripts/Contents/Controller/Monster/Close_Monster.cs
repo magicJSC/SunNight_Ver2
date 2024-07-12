@@ -11,7 +11,7 @@ public class Close_Monster : MonsterController
         {
             if(col.TryGetComponent<IGetDamage>(out var getDamage))
             {
-                getDamage.GetDamge(_stat.Damage);
+                getDamage.GetDamage(_stat.Damage);
                 break;
             }
         }

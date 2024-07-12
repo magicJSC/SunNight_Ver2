@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TowerController : MonoBehaviour,IGetDamage,ICaninteract
+public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
 {
     public Action forceInstallEvent;
     LayerMask buildLayer;
@@ -63,7 +63,7 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract
         AfterInstallTower();
     }
 
-    public void GetDamge(float damage)
+    public void GetDamage(float damage)
     {
         stat.Hp -= damage;
         if (stat.Hp <= 0)
@@ -119,5 +119,10 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract
         player.interactObjectList.Remove(gameObject);
         canInteractSign.SetActive(false);
         player.SetInteractObj();
+    }
+
+    public void Die()
+    {
+        throw new NotImplementedException();
     }
 }

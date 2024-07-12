@@ -23,6 +23,8 @@ public class PlayerController : CreatureController,IPlayer
     public List<GameObject> interactObjectList = new List<GameObject>();
     GameObject canInteractObj;
 
+    bool isDie;
+
 
     Rigidbody2D rigid;
     Animator anim;
@@ -146,10 +148,20 @@ public class PlayerController : CreatureController,IPlayer
         }
     }
 
-    public void GetDamge(float damage)
+    public void GetDamage(float damage)
     {
+        if (isDie)
+            return;
+
         stat.Hp -= damage;
         if (stat.Hp <= 0)
-            Debug.Log("플레이어 뒤짐");
+            Die();
+    }
+
+    public void Die()
+    {
+        isDie = true;
+        GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/GraveStone"));
+        go.transform.position = transform.position;
     }
 }

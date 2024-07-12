@@ -86,7 +86,7 @@ public class StorageManager : MonoBehaviour
     //선택한 값에 따라 다르게 실행
     public void CheckHotBarChoice()
     {
-        if (choiceIndex == hotBarUI.slotList.Count)
+        if (choiceIndex == hotBarUI.slotList.Length)
             return;
         ItemSO info = hotBarUI.slotList[choiceIndex].itemUI.slotInfo.itemInfo;
         //체크할 때 플레이어의 검이 있을 때마다 지운다(수정 필요) -> 무기는 공격이 끝나면 사라져서 안보이고
@@ -176,7 +176,7 @@ public class StorageManager : MonoBehaviour
         }
     }
 
-    public void AddItems(string name,int count)
+    public bool AddItems(string name,int count)
     {
         ItemSO item = Resources.Load<Item>($"Prefabs/Items/{name}").itemSo;
         UI_Item emptySlot = null;
@@ -196,11 +196,13 @@ public class StorageManager : MonoBehaviour
                 {
                     int lefting = itemUI.slotInfo.count + count - itemUI.slotInfo.itemInfo.maxAmount;
                     SetSlot(item, itemUI, itemUI.slotInfo.itemInfo.maxAmount);
+                    AddItems(name, lefting);
+                    return true;
                 }
                 else
                 {
                     SetSlot(item, itemUI, itemUI.slotInfo.count + count);
-                    break;
+                    return true;
                 }
             }
         }
@@ -208,9 +210,27 @@ public class StorageManager : MonoBehaviour
         if (emptySlot != null)
         {
             SetSlot(item, emptySlot, count);
+            return true;
         }
+        else
+            return false;
     }
     #endregion
+
+    public void EmptyInvenAndHotBar()
+    {
+        UI_InventorySlot[] invenSlots = inventoryUI.slotList;
+        foreach(UI_InventorySlot slot in invenSlots)
+        {
+            slot.itemUI.MakeEmptySlot();
+        }
+        UI_HotbarSlot[] hotbarSlots = hotBarUI.slotList;
+        for(int i=0;i<hotbarSlots.Length-1;i++)
+        {
+            hotbarSlots[i].itemUI.MakeEmptySlot();
+        }
+        CheckHotBarChoice();
+    }
 
     public void ChangeItem(UI_Item drag, UI_Item drop)
     {

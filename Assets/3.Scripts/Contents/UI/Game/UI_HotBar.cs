@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class UI_HotBar : UI_Base
 {
-    public List<UI_HotbarSlot> slotList = new List<UI_HotbarSlot>();
+    public UI_HotbarSlot[] slotList;
     public UI_TowerSlot towerSlot;
     Image choice;
     GameObject grid;
@@ -52,11 +52,12 @@ public class UI_HotBar : UI_Base
 
     void MakeKeys()
     {
+        slotList = new UI_HotbarSlot[Managers.Inven.hotBarSlotInfo.Length];
         UI_HotbarSlot slot1;
         for (int i = 0; i < Managers.Inven.hotBarSlotInfo.Length-1; i++)
         {
             slot1 = Instantiate(Resources.Load<GameObject>("UI/UI_HotBar_Slot"), grid.transform).GetComponent<UI_HotbarSlot>();
-            slotList.Add(slot1);
+            slotList[i] = slot1;
             slot1.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.hotBarSlotInfo[i];
             slot1.GetComponentInChildren<UI_Item>().Init();
             slotList[i].GetComponent<UI_HotbarSlot>().Init();
@@ -110,7 +111,7 @@ public class UI_HotBar : UI_Base
 
     public void GetTower()
     {
-        Managers.Inven.hotBarSlotInfo[slotList.Count - 1].keyType = Define.KeyType.Exist;
+        Managers.Inven.hotBarSlotInfo[slotList.Length - 1].keyType = Define.KeyType.Exist;
     } 
     #endregion
 }
