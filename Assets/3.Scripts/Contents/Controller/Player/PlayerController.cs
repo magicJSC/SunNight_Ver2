@@ -75,7 +75,6 @@ public class PlayerController : CreatureController,IPlayer
         if (Time.timeScale == 0)
             return;
         Managers.Inven.inventoryUI.gameObject.SetActive(!Managers.Inven.inventoryUI.gameObject.activeSelf);
-        Managers.Inven.CheckHotBarChoice();
     }
 
     void OnInteract()

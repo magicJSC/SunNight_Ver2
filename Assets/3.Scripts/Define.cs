@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class Define : MonoBehaviour
 {
-    public enum Sound
-    {
-        Bgm,
-        Effect,
-        MaxCount
-    }
 
     public enum SceneType
     {
@@ -73,5 +67,13 @@ public class Define : MonoBehaviour
         Change,
         Return,
         Move
+    }
+
+    public enum Sound
+    {
+        Bgm,
+        SubBgm,
+        Effect,
+        Max,
     }
 }

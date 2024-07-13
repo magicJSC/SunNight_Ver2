@@ -30,8 +30,7 @@ public class UI_PlayerStat : UI_Base
         back = Get<GameObject>((int)GameObjects.Background);
 
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
-        evt._OnEnter += (PointerEventData p) => { Managers.Game.mouse.CursorType = Define.CursorType.UI; };
-        evt._OnExit += (PointerEventData p) => { Managers.Inven.CheckHotBarChoice(); };
+      
 
         playerStat = Managers.Game.player.GetComponent<PlayerStat>();
         playerStat.hpBarEvent += SetHpBar;

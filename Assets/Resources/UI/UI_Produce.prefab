@@ -1021,6 +1021,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37c61e2acf397a4eaaa0f2ef02647d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  produceSound: {fileID: 8300000, guid: e6a4b20a802c7475184a027e70fa3eed, type: 3}
+  showSound: {fileID: 8300000, guid: b7ef97496e9004e928478c29b2e79ee6, type: 3}
+  hideSound: {fileID: 8300000, guid: e813b345b26a747aa8ff93ed61f5e139, type: 3}
   toMakeIDName: 
   back: {fileID: 0}
   explainMat: {fileID: 0}

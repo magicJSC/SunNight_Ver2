@@ -6,9 +6,14 @@ using UnityEngine.UI;
 
 public class UI_Item : UI_Base
 {
+    [HideInInspector]
     public Transform parDragBefore;
+    [HideInInspector]
     public Transform dropingSlot;
+    [HideInInspector]
     public StorageManager.SlotInfo slotInfo;
+
+    public AudioClip changeSound;
 
     Image icon;
     Text count;
@@ -116,6 +121,7 @@ public class UI_Item : UI_Base
         else
             Managers.Inven.AddItem(this, s2);
 
+        Managers.Sound.Play(Define.Sound.Effect, changeSound);
         dropingSlot = null;
     }
 
