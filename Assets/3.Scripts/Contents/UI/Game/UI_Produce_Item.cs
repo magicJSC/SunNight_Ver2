@@ -11,12 +11,12 @@ public class UI_Produce_Item : UI_Base
     [Serializable]
     public struct matterInfo
     {
-        public string matterName;
+        public ItemSO matterSO;
         public int count;
     }
 
     [Header("Produce")]
-    public string itemName;
+    public ItemSO itemSO;
     public List<matterInfo> material = new List<matterInfo>();
 
 
@@ -35,7 +35,7 @@ public class UI_Produce_Item : UI_Base
             return;
 
         _init = true;
-        itemInfo = Resources.Load<Item>($"Prefabs/Items/{itemName}").itemSo;
+        itemInfo = Resources.Load<Item>($"Prefabs/Items/{itemSO.idName}").itemSo;
         explain = produce.explainItem;
         explainText = Util.FindChild(explain, "ExplainText", true).GetComponent<Text>();
         nameText = Util.FindChild(explain, "NameText", true).GetComponent<Text>();
@@ -48,9 +48,9 @@ public class UI_Produce_Item : UI_Base
             produce.Remove_ToMake();
             for(int i = 0; i < material.Count; i++)
             {
-                produce.matters.Add((material[i].matterName, material[i].count));
+                produce.matters.Add((material[i].matterSO.idName, material[i].count));
             }
-            produce.Set_ToMake(itemName); 
+            produce.Set_ToMake(itemSO.idName); 
         };
     }
 
