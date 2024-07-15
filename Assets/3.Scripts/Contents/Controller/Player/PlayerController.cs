@@ -45,17 +45,15 @@ public class PlayerController : CreatureController,IPlayer
     {
         dir = value.Get<Vector2>();
 
-        if (dir.x != 0 || dir.y != 0)
+        if (dir != Vector2.zero)
         {
-            if (dir.x != 0)
-                sprite.flipX = dir.x < 0;
-            if (dir.y > 0)
-                anim.Play("UpWalk");
-            else
-                anim.Play("DownWalk");
+            anim.Play("Move");
+            if(dir.x != 0)
+                sprite.flipX = dir.x > 0;
         }
         else
-            anim.SetTrigger("Stop");
+            anim.Play("Idle");
+
         rigid.velocity = new Vector3(dir.x, dir.y, 0) * speed;
     }
 

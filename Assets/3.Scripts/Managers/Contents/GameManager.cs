@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
             mouse = FindAnyObjectByType<MouseController>();
             if (mouse == null)
             {
-                mouse = Instantiate(Resources.Load<GameObject>("Prefabs/MouseContoller").GetComponent<MouseController>());
+                mouse = Instantiate(Resources.Load<GameObject>("Prefabs/MouseController").GetComponent<MouseController>());
             }
             mouse.Init();
         }

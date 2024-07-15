@@ -73,6 +73,8 @@ public class TurretController : BaseController
         yield return new WaitForSeconds(termBeforeWork);
         while (true) 
         {
+            if (_target == null)
+                yield break;
             isWorking = true;
             anim.Play("Work");
             yield return new WaitForSeconds(stat.attackCool);
@@ -111,8 +113,6 @@ public class TurretController : BaseController
             StartCoroutine(Work());
             _target = result;
         }
-        else
-            StopCoroutine(Work());
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

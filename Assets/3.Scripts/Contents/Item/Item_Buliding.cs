@@ -10,6 +10,7 @@ public class Item_Buliding : Item,IBuilding
     [HideInInspector]
     public Vector3Int pos;
 
+    [HideInInspector]
     public GameObject buildUI;
 
     Stat stat;

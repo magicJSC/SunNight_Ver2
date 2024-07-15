@@ -30,11 +30,6 @@ public class Cannon : TurretController, IAttack, IRotate
 
     public void Attack()
     {
-        _target.GetComponent<MonsterStat>().Hp -= stat.Damage;
-        if (_target.GetComponent<MonsterStat>().Hp <= 0)
-        {
-            targets.Remove(_target);
-            Destroy(_target);
-        }
+        _target.GetComponent<IMonster>().GetDamage(stat.Damage);
     }
 }

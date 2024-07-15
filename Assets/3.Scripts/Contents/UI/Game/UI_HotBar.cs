@@ -99,7 +99,7 @@ public class UI_HotBar : UI_Base
     {
         Managers.Inven.hotBarSlotInfo[0] = new StorageManager.SlotInfo(10,"Fence");
         Managers.Inven.hotBarSlotInfo[1] = new StorageManager.SlotInfo(1,"Sword");
-        Managers.Inven.hotBarSlotInfo[2] = new StorageManager.SlotInfo(3, "Turret");
+        Managers.Inven.hotBarSlotInfo[2] = new StorageManager.SlotInfo(3, "Cannon");
         for(int i = 3; i < Managers.Inven.hotBarSlotInfo.Length; i++)
         {
             Managers.Inven.hotBarSlotInfo[i] = new StorageManager.SlotInfo(0);
