@@ -13,6 +13,7 @@ public interface IAttack
     public void Attack();
 }
 
+
 public class TurretController : BaseController
 {
     protected Action workEvent;
@@ -137,6 +138,4 @@ public class TurretController : BaseController
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, stat.range);
     }
-
-    
 }

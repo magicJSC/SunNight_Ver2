@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
-  m_Name: LightningTower
+  m_Name: Bullet
   m_EditorClassIdentifier: 
-  idName: LightningTower
-  itemName: "\uB1CC\uC804\uD0D1"
-  explain: "3\uBC88\uC758 \uC5F0\uC1C4 \uACF5\uACA9\uC744 \uC900\uB2E4."
-  itemIcon: {fileID: -783043910, guid: 9f33593f0c0332c4b9338c471f408dcd, type: 3}
-  itemType: 5
-  maxAmount: 8
-  tile: {fileID: 11400000, guid: 7b3ac2d0fa0e66e4094cf1cb982a95c3, type: 2}
+  idName: Bullet
+  itemName: "\uCD1D\uC54C"
+  explain: "\uCD1D\uC54C\uC774\uB2E4"
+  itemIcon: {fileID: 772028866, guid: 4fafee73d9204f746b9d2b4fd4ce17d2, type: 3}
+  itemType: 3
+  maxAmount: 50
+  tile: {fileID: 0}
   smelt: {fileID: 0}
   bakeItemSO: {fileID: 0}
   bakeTime: 0
