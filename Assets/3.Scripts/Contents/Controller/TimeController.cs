@@ -36,6 +36,7 @@ public class TimeController : BaseController
         TimeAmount = 360;
         morningEvent = null;
         nightEvent = null;
+        timeType = TimeType.Night;
     }
 
     private void Update()
@@ -43,7 +44,7 @@ public class TimeController : BaseController
         TimeAmount += Time.deltaTime;
         if(TimeAmount >= 1080 && timeType == TimeType.Morning)
             timeType = TimeType.Night;
-        else if(TimeAmount >= 360 && TimeAmount < 1080)
+        else if(TimeAmount >= 360 && TimeAmount < 1080 && timeType == TimeType.Night)
             timeType = TimeType.Morning;
         if (TimeAmount >= 1440)
             TimeAmount = 0;

@@ -1,14 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class UI_Build : UI_Base
 {
+    public AudioClip clickSound;
+    public AudioClip upgradeSound;
+
     [Serializable]
     public class Matters
     {
@@ -89,13 +90,6 @@ public class UI_Build : UI_Base
         evt = close.GetComponent<UI_EventHandler>();
         evt._OnClick += Close;
 
-        evt = panel.GetComponent<UI_EventHandler>();
-        evt._OnEnter += (PointerEventData p) => 
-        {
-            Managers.Game.isHandleUI = true;
-            Managers.Game.mouse.CursorType = Define.CursorType.Normal; 
-        };
-
         evt = collect.GetComponent<UI_EventHandler>();
         evt._OnClick += Collect;
 
@@ -162,6 +156,7 @@ public class UI_Build : UI_Base
         Managers.Inven.CheckHotBarChoice();
         Managers.Game.isHandleUI = false;
         building.DeleteBuilding();
+        Managers.Sound.Play(Define.Sound.Effect, clickSound);
     }
 
     void Close(PointerEventData p)
@@ -169,6 +164,7 @@ public class UI_Build : UI_Base
         Managers.Game.isHandleUI = false;
         Managers.Inven.CheckHotBarChoice(); 
         gameObject.SetActive(false);
+        Managers.Sound.Play(Define.Sound.Effect, clickSound);
     }
 
     List<(UI_Item,int)> ItemUIList = new List<(UI_Item, int)>();

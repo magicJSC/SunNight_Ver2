@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-interface IMonsterController 
-{
-        
-}
 
-public class MonsterController : MonoBehaviour
+public class MonsterController : MonoBehaviour,IMonster
 {
 
     Rigidbody2D rigid;
@@ -147,6 +143,8 @@ public class MonsterController : MonoBehaviour
         {
             if (hit.transform.TryGetComponent<IGetDamage>(out var getDamage))
             {
+                if (hit.transform.GetComponent<IMonster>() != null)
+                    return;
                 target = hit.transform; 
             }
         }
@@ -155,5 +153,17 @@ public class MonsterController : MonoBehaviour
     void EndAtk()
     {
         State = Define.State.Idle;
+    }
+
+    public void GetDamage(float damage)
+    {
+        _stat.Hp -= damage;
+        if (_stat.Hp <= 0)
+            Die();
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }

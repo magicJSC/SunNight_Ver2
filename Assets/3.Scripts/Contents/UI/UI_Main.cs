@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class UI_Main : UI_Base
 {
+    AudioSource audioSource;
+    public AudioClip clickSound;
+
+
     GameObject start;
     GameObject option;
     GameObject exit;

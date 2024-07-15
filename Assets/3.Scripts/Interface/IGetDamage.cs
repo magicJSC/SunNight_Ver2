@@ -9,7 +9,7 @@ public interface IPlayer : IGetDamage,IDie
 
 }
 
-public interface IMonster : IGetDamage
+public interface IMonster : IGetDamage,IDie
 {
 
 }

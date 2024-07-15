@@ -17,14 +17,6 @@ public class UI_HotbarSlot : UI_BaseSlot,IDroppable,IDragable
 
         UI_EventHandler evt = GetComponent<UI_EventHandler>();
         evt._OnDrop += OnDrop;
-        evt._OnEnter += (PointerEventData p) => 
-        {
-            Managers.Game.mouse.CursorType = Define.CursorType.UI;
-        };
-        evt._OnExit += (PointerEventData p) => 
-        {
-            Managers.Inven.CheckHotBarChoice(); 
-        };
     }
 
     void OnDrop(PointerEventData p)

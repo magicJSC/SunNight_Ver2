@@ -3,24 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Linq;
 
 public class UI_Produce : UI_Base
 {
+    public AudioClip produceSound;
+    public AudioClip showSound;
+    public AudioClip hideSound;
+
     [Header("Produce")]
     //item1 : 재료 idName, item2 : 필요 개수
     public List<(string,int)> matters = new();
+    [HideInInspector]
     public string toMakeIDName;
 
     [Header("UI")]
     Image toMake;
 
+    [HideInInspector]
     public GameObject back;
     GameObject contentMat;
     GameObject contentItem;
     GameObject produce;
     GameObject hide;
+    [HideInInspector]
     public GameObject explainMat;
+    [HideInInspector]
     public GameObject explainItem;
 
     Vector2 startPos;
@@ -44,7 +51,6 @@ public class UI_Produce : UI_Base
         if (_init)
             return;
 
-        _init = true;
         Bind<GameObject>(typeof(GameObjects));
         back = Get<GameObject>((int)GameObjects.Background);
         contentMat = Get<GameObject>((int)GameObjects.Content_Mat);
@@ -66,16 +72,6 @@ public class UI_Produce : UI_Base
             Set_Position();
         };
         evt._OnDown += (PointerEventData p) => { startPos = new Vector3(back.transform.position.x - Camera.main.ScreenToWorldPoint(p.position).x, back.transform.position.y - Camera.main.ScreenToWorldPoint(p.position).y); };
-        evt._OnEnter += (PointerEventData p) => 
-        {
-            if(Managers.Game.mouse.CursorType != Define.CursorType.Drag)
-            Managers.Game.mouse.CursorType = Define.CursorType.UI;
-        };
-        evt._OnExit += (PointerEventData p) =>
-        {
-            if (Managers.Game.mouse.CursorType != Define.CursorType.Drag)
-                Managers.Inven.CheckHotBarChoice(); 
-        };
 
         evt = produce.GetComponent<UI_EventHandler>();
         evt._OnClick += (PointerEventData p) => { OnProduce(); };
@@ -94,12 +90,21 @@ public class UI_Produce : UI_Base
         explainMat.SetActive(false);
         explainItem.SetActive(false);
         gameObject.SetActive(false);
+        _init = true;
     }
 
     private void OnEnable()
     {
         if(_init)
-            Remove_ToMake();    
+            Remove_ToMake();
+        if (_init)
+            Managers.Sound.Play(Define.Sound.Effect, showSound);
+    }
+
+    private void OnDisable()
+    {
+        if (_init)
+            Managers.Sound.Play(Define.Sound.Effect, hideSound);
     }
 
     public void Set_Position()
@@ -156,6 +161,7 @@ public class UI_Produce : UI_Base
                 }
             }
             Managers.Inven.AddOneItem(toMakeIDName);
+            Managers.Sound.Play(Define.Sound.Effect, produceSound);
         }
         else
             Debug.Log("재료가 부족합니다");

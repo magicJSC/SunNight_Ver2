@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Name: LightningTower
+  m_EditorClassIdentifier: 
+  idName: LightningTower
+  itemName: "\uB1CC\uC804\uD0D1"
+  explain: "3\uBC88\uC758 \uC5F0\uC1C4 \uACF5\uACA9\uC744 \uC900\uB2E4."
+  itemIcon: {fileID: 0}
+  itemType: 5
+  maxAmount: 8
+  tile: {fileID: 0}
+  smelt: {fileID: 0}
+  bakeItemSO: {fileID: 0}
+  bakeTime: 0

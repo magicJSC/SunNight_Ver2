@@ -1,43 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MouseController : UI_Base
+public class MouseController : MonoBehaviour
 {
-    //마우스
-    [HideInInspector]
-    public GameObject icon;
-    [HideInInspector]
-    public GameObject count;
-
-    enum GameObjects
+    bool init;
+    public void Init()
     {
-        Icon,
-        Count
-    }
-
-    public override void Init()
-    {
-        if (_init)
+        if(init)
             return;
 
-        _init = true;
-        Bind<GameObject>(typeof(GameObjects));
-        icon = Get<GameObject>((int)GameObjects.Icon);
-        count = Get<GameObject>((int)GameObjects.Count);
+        init = true;
+        StartCoroutine(UpdateMouse());
     }
 
-    private void OnEnable()
+    public IEnumerator UpdateMouse()
     {
-        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10);
+        while (true)
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                if (CursorType != Define.CursorType.UI && CursorType != Define.CursorType.Drag)
+                { 
+                    CursorType = Define.CursorType.UI;
+                    Debug.Log("UI위에 있다");
+                }
+            }
+            else
+            {
+                if (CursorType == Define.CursorType.UI)
+                {
+                    Managers.Inven.CheckHotBarChoice();
+                    Debug.Log("UI위에 없다");
+                }
+            }
+            yield return null;
+        }
     }
-
-    private void Update()
-    {
-        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition)+new Vector3(0,0,10);
-    }
-
 
     #region 플레이 타입
     Define.CursorType _cursorType = Define.CursorType.Normal;
@@ -74,7 +75,6 @@ public class MouseController : UI_Base
    
     void SetNormalMode()
     {
-        gameObject.SetActive(false);
         Cursor.SetCursor(normal, Vector2.zero, CursorMode.Auto);
         Managers.Game.build.gameObject.SetActive(false);
         Managers.Game.isHandleUI = false;
@@ -82,29 +82,26 @@ public class MouseController : UI_Base
 
     void SetBuildingMode()
     {
+        Cursor.SetCursor(normal, Vector2.zero, CursorMode.Auto);
         Managers.Game.build.gameObject.SetActive(true);
-        gameObject.SetActive(false);
         Managers.Game.isHandleUI = false;
     }
 
     void SetDragMode()
     {
-        //gameObject.SetActive(true);
         Cursor.SetCursor(drag, Vector2.zero, CursorMode.Auto);
         Managers.Game.build.gameObject.SetActive(false);
     }
 
     void SetBattleMode()
     {
-        gameObject.SetActive(false);
         Cursor.SetCursor(normal, Vector2.zero, CursorMode.Auto);
         Managers.Game.build.gameObject.SetActive(false); 
-        Managers.Game.isHandleUI = false;
+        Managers.Game.isHandleUI = true;
     }
 
     void SetHandleUIMode()
     {
-        gameObject.SetActive(false);
         Cursor.SetCursor(normal, Vector2.zero, CursorMode.Auto);
         Managers.Game.build.gameObject.SetActive(false);
         Managers.Game.isHandleUI = true;

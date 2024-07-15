@@ -7,6 +7,7 @@ public class UI_TowerSlot : UI_Base
 {
     Image icon;
 
+    public AudioClip getTowerSound;
 
     public new void Init()
     {
@@ -19,6 +20,7 @@ public class UI_TowerSlot : UI_Base
     public void ShowTowerIcon()
     {
         icon.gameObject.SetActive(true);
+        Managers.Sound.Play(Define.Sound.Effect,getTowerSound);
     }
 
     public void HideTowerIcon()

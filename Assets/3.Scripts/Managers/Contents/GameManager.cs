@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using static Define;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,7 +21,7 @@ public class GameManager : MonoBehaviour
             mouse = FindAnyObjectByType<MouseController>();
             if (mouse == null)
             {
-                mouse = Resources.Load<GameObject>("Prefabs/Mouse").GetComponent<MouseController>();
+                mouse = Instantiate(Resources.Load<GameObject>("Prefabs/MouseController").GetComponent<MouseController>());
             }
             mouse.Init();
         }

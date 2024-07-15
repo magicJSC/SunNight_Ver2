@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using static StorageManager;
 
 public class UI_Inventory : UI_Base
 {
+    public AudioClip showSound;
+    public AudioClip hideSound;
+
+    [HideInInspector]
     public UI_InventorySlot[] slotList;
 
     GameObject grid;
@@ -41,7 +44,6 @@ public class UI_Inventory : UI_Base
         if (_init)
             return;
 
-        _init = true;
         Bind<GameObject>(typeof(GameObjects));
         back = Get<GameObject>((int)GameObjects.Background);
         grid = Get<GameObject>((int)GameObjects.Grid);
@@ -88,6 +90,24 @@ public class UI_Inventory : UI_Base
 
         explain.SetActive(false);
         gameObject.SetActive(false);
+
+        _init = true;
+    }
+
+    private void OnEnable()
+    {
+        if (_init)
+        {
+            Managers.Sound.Play(Define.Sound.Effect, showSound);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_init)
+        {
+            Managers.Sound.Play(Define.Sound.Effect, hideSound);
+        }
     }
 
     void GetData()
