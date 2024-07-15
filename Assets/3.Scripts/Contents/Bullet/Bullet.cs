@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public abstract class Bullet : MonoBehaviour
 {
     [HideInInspector]
     public float damage;
@@ -14,21 +14,8 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<IGetDamage>() != null)
-        {
-            Hit(collision);
-        }
+         Hit(collision);
     }
 
-    void Hit(Collider2D col)
-    {
-        if (col.GetComponent<IGetDamage>() != null)
-        {
-            if (col.TryGetComponent<IGetDamage>(out var getDamage))
-            {
-                getDamage.GetDamage(damage);
-            }
-        }
-        Destroy(gameObject);
-    }
+    protected abstract void Hit(Collider2D col);
 }

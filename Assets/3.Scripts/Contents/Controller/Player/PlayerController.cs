@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 
 
@@ -15,6 +16,7 @@ public class PlayerController : CreatureController,IPlayer
 
     [Header("Contents")]
     Vector2 dir;
+    Vector2 mousePos;
 
     [HideInInspector]
     public GameObject toolParent;
