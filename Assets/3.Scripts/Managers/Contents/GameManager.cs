@@ -60,4 +60,6 @@ public class GameManager : MonoBehaviour
     public GameObject weapon;
 
     public bool isHandleUI;
+
+    public bool canHandleMenuUI = true;
 }

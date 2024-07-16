@@ -97,6 +97,15 @@ public class UI_Build : UI_Base
         gameObject.SetActive(false);
     }
 
+    private void OnDisappear()
+    {
+        Managers.Game.isHandleUI = false;
+        Managers.Inven.CheckHotBarChoice();
+        gameObject.SetActive(false);
+        Managers.Sound.Play(Define.Sound.Effect, clickSound);
+        Managers.Game.canHandleMenuUI = true;
+    }
+
     void InitData()
     {
         nameT.text = $"{itemData.itemSo.idName}";

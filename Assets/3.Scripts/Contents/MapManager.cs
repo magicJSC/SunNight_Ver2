@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using static Define;
 
@@ -62,6 +63,7 @@ public class MapManager : MonoBehaviour
             return;
         GameObject go = building.GetInstantiatedObject(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y));
         go.GetComponent<Item_Buliding>().buildUI.SetActive(true);
+        Managers.Game.canHandleMenuUI = false;
     }
 
     public void LoadMap(int mapId)
