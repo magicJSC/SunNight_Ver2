@@ -14,6 +14,5 @@ public class ItemBaker : MonoBehaviour
     {
         Debug.Log("아이템을 구웠습니다");
         GetComponentInParent<BonFireController>().itemBakers.Add(this);
-        //bakedItem.bakeItemSO;
     }
 }
