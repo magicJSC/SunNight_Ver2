@@ -95,10 +95,11 @@ public class UI_Produce : UI_Base
 
     private void OnEnable()
     {
-        if(_init)
-            Remove_ToMake();
         if (_init)
+        {
+            Remove_ToMake();
             Managers.Sound.Play(Define.Sound.Effect, showSound);
+        }
     }
 
     private void OnDisable()

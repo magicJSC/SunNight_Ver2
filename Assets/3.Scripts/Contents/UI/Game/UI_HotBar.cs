@@ -24,30 +24,48 @@ public class UI_HotBar : UI_Base
         GetData();
         MakeKeys();
         ChangeChoice(0);
+
     }
 
-    private void Update()
+    void OnKey1() 
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ChangeChoice(0);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ChangeChoice(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            ChangeChoice(2);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            ChangeChoice(3);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            ChangeChoice(4);
-        }
+        ChangeChoice(0);
+    }
+
+    void OnKey2()
+    {
+        ChangeChoice(1);
+    }
+
+    void OnKey3()
+    {
+        ChangeChoice(2);
+    }
+
+    void OnKey4()
+    {
+        ChangeChoice(3);
+    }
+
+    void OnKey5()
+    {
+        ChangeChoice(4);
+    }
+
+    void OnUpScroll()
+    {
+        int index = choiceIndex + 1;
+        if (index > 4)
+            index = 0;
+        ChangeChoice(index);
+    }
+
+    void OnDownScroll()
+    {
+        int index = choiceIndex - 1;
+        if (index < 0)
+            index = 4;
+        ChangeChoice(index);
     }
 
     void MakeKeys()

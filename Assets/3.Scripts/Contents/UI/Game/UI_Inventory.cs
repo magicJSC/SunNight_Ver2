@@ -106,6 +106,7 @@ public class UI_Inventory : UI_Base
     {
         if (_init)
         {
+            produceUI.gameObject.SetActive(false);
             Managers.Sound.Play(Define.Sound.Effect, hideSound);
         }
     }
@@ -146,7 +147,10 @@ public class UI_Inventory : UI_Base
     void ShowProduceUI(PointerEventData p)
     {
         if (produceUI.gameObject.activeSelf)
+        {
+            produceUI.gameObject.SetActive(false);
             return;
+        }
         produceUI.gameObject.SetActive(true);
         RectTransform r = produceUI.back.GetComponent<RectTransform>();
         RectTransform bb = back.GetComponent<RectTransform>();
