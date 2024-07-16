@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555b14ce38fec534ca171dd482a5b28a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  luck: 55
   meat: {fileID: 11400000, guid: 1e8a1a00c16e47b4aaf86b1d2532639b, type: 2}
   bulletSpeed: 5
 --- !u!114 &2297774022771462896

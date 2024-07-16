@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour,IMonster
 {
+    [Header("아이템 드랍")]
+    public float luck;
     public ItemSO meat;
 
 
@@ -55,22 +57,27 @@ public class MonsterController : MonoBehaviour,IMonster
         rigid = GetComponent<Rigidbody2D>();
         sprite =GetComponent<SpriteRenderer>();
         curAtkCool = _stat.attackCool;
+        StartCoroutine(UpdateCor());
     }
 
     
-    void Update()
+    IEnumerator UpdateCor()
     {
-        switch (State)
+        while (true)
         {
-            case Define.State.Idle:
-                OnIdle();
-                break;
-            case Define.State.Move:
-                OnMove();
-                break;
-            case Define.State.Attack:
-                OnAttack();
-                break;
+            switch (State)
+            {
+                case Define.State.Idle:
+                    OnIdle();
+                    break;
+                case Define.State.Move:
+                    OnMove();
+                    break;
+                case Define.State.Attack:
+                    OnAttack();
+                    break;
+            }
+            yield return null;
         }
     }
 
@@ -166,8 +173,12 @@ public class MonsterController : MonoBehaviour,IMonster
 
     public void Die()
     {
-        Vector3Int pos = new Vector3Int((int)transform.position.x, (int)transform.position.y);
-        MapManager.matter.SetTile(pos,meat.tile);
+        float index = Random.Range(0,101);
+        if(index <= luck)
+        {
+            Vector3Int pos = new Vector3Int((int)transform.position.x, (int)transform.position.y);
+            MapManager.matter.SetTile(pos, meat.tile);
+        }
         Destroy(gameObject);
     }
 }
