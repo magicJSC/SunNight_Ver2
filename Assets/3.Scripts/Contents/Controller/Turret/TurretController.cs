@@ -38,6 +38,10 @@ public class TurretController : BaseController
             Debug.Log($"{name}포탑에 TurretStat이 존재하지 않습니다");
         GetComponent<CircleCollider2D>().radius = stat.range;
         GetComponent<CircleCollider2D>().isTrigger = true;
+    }
+
+    private void OnEnable()
+    {
         StartCoroutine(UpdateCor());
     }
 
@@ -50,7 +54,7 @@ public class TurretController : BaseController
                 yield return null;
                 continue; 
             }
-                CheckTarget();
+            CheckTarget();
             yield return null;
         }
     }
