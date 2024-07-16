@@ -52,7 +52,7 @@ public class PlayerController : CreatureController,IPlayer
     {
         if (!init)
             return;
-
+        isDie = false;
         stat.Hp = stat.maxHP;
     }
 
