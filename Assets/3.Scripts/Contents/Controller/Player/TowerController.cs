@@ -74,10 +74,12 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
     {
         spriteRenderer.color = new Color(1, 1, 1, 0.3f);
         gameObject.layer = inviLayer;
+        GetComponent<BoxCollider2D>().isTrigger = true;
         for(int i =0;i<MapManager.buildData.Count;i++)
         {
-           MapManager.building.GetInstantiatedObject(MapManager.buildData[i])
-           .GetComponent<Item_Buliding>().ChangeColorBeforeIntall();
+            GameObject go = MapManager.building.GetInstantiatedObject(MapManager.buildData[i]);
+            go.GetComponent<Item_Buliding>().ChangeColorBeforeIntall();
+            go.GetComponent<BoxCollider2D>().isTrigger = true;
         }
     }
 
@@ -85,10 +87,12 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
     {
         spriteRenderer.color = new Color(1, 1, 1, 1);
         gameObject.layer = buildLayer;
+        GetComponent<BoxCollider2D>().isTrigger = false;
         for (int i = 0; i < MapManager.buildData.Count; i++)
         {
-            MapManager.building.GetInstantiatedObject(MapManager.buildData[i])
-            .GetComponent<Item_Buliding>().ChangeColorAfterIntall();
+            GameObject go = MapManager.building.GetInstantiatedObject(MapManager.buildData[i]);
+            go.GetComponent<Item_Buliding>().ChangeColorAfterIntall();
+            go.GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
 
