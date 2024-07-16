@@ -18,7 +18,7 @@ MonoBehaviour:
   itemIcon: {fileID: -520278084, guid: 15c1a23359c99764e8e3eecbecb0dd20, type: 3}
   itemType: 4
   maxAmount: 32
-  tile: {fileID: 0}
+  tile: {fileID: 11400000, guid: d3f7c534f7c24d64fa3c3366ffbc7a61, type: 2}
   smelt: {fileID: 0}
   bakeItemSO: {fileID: 11400000, guid: 40f9b220ac9546240b63c41de9d2c70c, type: 2}
   bakeTime: 6
