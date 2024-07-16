@@ -12,6 +12,7 @@ public class PlayerController : CreatureController,IPlayer
     public Action escEvent;
 
     PlayerStat stat;
+    bool init;
    
 
     [Header("Contents")]
@@ -34,6 +35,10 @@ public class PlayerController : CreatureController,IPlayer
 
     public void Init()
     {
+        if (init)
+            return;
+
+        init = true;
         toolParent = Util.FindChild(gameObject, "Tool");
         rigid = GetComponent<Rigidbody2D>();
         Camera.main.GetComponent<CameraController>().target = transform;
@@ -41,6 +46,14 @@ public class PlayerController : CreatureController,IPlayer
         sprite = GetComponent<SpriteRenderer>();
         stat = GetComponent<PlayerStat>();
         Instantiate(Resources.Load<GameObject>("UI/UI_PlayerStat"));
+    }
+
+    public void OnEnable()
+    {
+        if (!init)
+            return;
+
+        stat.Hp = stat.maxHP;
     }
 
     void OnMove(InputValue value)

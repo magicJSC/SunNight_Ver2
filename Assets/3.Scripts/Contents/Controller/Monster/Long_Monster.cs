@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Long_Monster : MonsterController
 {
-    public GameObject go = null;
+    GameObject go = null;
+    public float bulletSpeed;
 
     void Atk()
     {
@@ -15,7 +16,7 @@ public class Long_Monster : MonsterController
         GameObject g = Instantiate(go);
         Rigidbody2D r = g.GetComponent<Rigidbody2D>();
         g.transform.position = transform.position;
-        r.velocity = (target.position - transform.position).normalized * 3;
+        r.velocity = (target.position - transform.position).normalized * bulletSpeed;
         g.GetComponent<Bullet>().damage = _stat.Damage;
     }
 }
