@@ -87,7 +87,7 @@ public class StorageManager : MonoBehaviour
     //선택한 값에 따라 다르게 실행
     public void CheckHotBarChoice()
     {
-        if (choiceIndex == hotBarUI.slotList.Length)
+        if (!hotBarUI.slotList[choiceIndex])
             return;
         ItemSO info = hotBarUI.slotList[choiceIndex].itemUI.slotInfo.itemInfo;
         //체크할 때 플레이어의 검이 있을 때마다 지운다(수정 필요) -> 무기는 공격이 끝나면 사라져서 안보이고
@@ -151,6 +151,22 @@ public class StorageManager : MonoBehaviour
                     return true;
                 }
             }
+            for (int i = 0; i < hotBarUI.slotList.Length - 1; i++)
+            {
+                UI_Item itemUI = hotBarUI.slotList[i].itemUI;
+                if (itemUI.slotInfo.itemInfo == null)
+                {
+                    if (emptySlot == null)
+                        emptySlot = itemUI;
+                    continue;
+                }
+
+                if (item.idName == itemUI.slotInfo.itemInfo.idName && itemUI.slotInfo.count < itemUI.slotInfo.itemInfo.maxAmount)
+                {
+                    SetSlot(item, itemUI, itemUI.slotInfo.count + 1);
+                    return true;
+                }
+            }
             //추가 하지 못했다면 비어있는 칸에 넣기
             if (emptySlot != null)
             {
@@ -184,6 +200,32 @@ public class StorageManager : MonoBehaviour
         for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
         {
             UI_Item itemUI = inventoryUI.slotList[i].itemUI;
+            if (itemUI.slotInfo.itemInfo == null)
+            {
+                if (emptySlot == null)
+                    emptySlot = itemUI;
+                continue;
+            }
+
+            if (item.idName == itemUI.slotInfo.itemInfo.idName)
+            {
+                if (itemUI.slotInfo.count + count > itemUI.slotInfo.itemInfo.maxAmount)
+                {
+                    int lefting = itemUI.slotInfo.count + count - itemUI.slotInfo.itemInfo.maxAmount;
+                    SetSlot(item, itemUI, itemUI.slotInfo.itemInfo.maxAmount);
+                    AddItems(name, lefting);
+                    return true;
+                }
+                else
+                {
+                    SetSlot(item, itemUI, itemUI.slotInfo.count + count);
+                    return true;
+                }
+            }
+        }
+        for (int i = 0; i < hotBarUI.slotList.Length - 1; i++)
+        {
+            UI_Item itemUI = hotBarUI.slotList[i].itemUI;
             if (itemUI.slotInfo.itemInfo == null)
             {
                 if (emptySlot == null)

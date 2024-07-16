@@ -133,7 +133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9}
+  m_Size: {x: 0.6, y: 0.6}
   m_EdgeRadius: 0
 --- !u!58 &7391024992905247631
 CircleCollider2D:
@@ -185,7 +185,8 @@ MonoBehaviour:
   itemSo: {fileID: 11400000, guid: ec541345b08d09e40972f5c3d72ff230, type: 2}
   pos: {x: 0, y: 0, z: 0}
   buildUI: {fileID: 0}
-  bodySprites: []
+  bodySprites:
+  - {fileID: 2077525148827921220}
 --- !u!114 &3031120595418561938
 MonoBehaviour:
   m_ObjectHideFlags: 0

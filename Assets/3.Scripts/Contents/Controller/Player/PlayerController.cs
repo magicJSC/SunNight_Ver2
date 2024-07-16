@@ -53,6 +53,7 @@ public class PlayerController : CreatureController,IPlayer
         if (!init)
             return;
         isDie = false;
+        Destroy(toolParent.transform.GetChild(0).gameObject);
         stat.Hp = stat.maxHP;
     }
 
