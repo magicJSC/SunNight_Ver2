@@ -9,6 +9,7 @@ public class GameScene : BaseScene
         if (base.Init() == false)
             return false;
 
+        Managers.Game.isKeepingTower = false;
 
         Instantiate(Resources.Load<GameObject>("UI/UI_Time"));
         Managers.Game.lightController = Instantiate(Resources.Load<GameObject>("Prefabs/Light")).GetComponent<LightController>();
