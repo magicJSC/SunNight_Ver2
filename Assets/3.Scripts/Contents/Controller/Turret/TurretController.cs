@@ -45,7 +45,12 @@ public class TurretController : BaseController
     {
         while (true)
         {
-            CheckTarget();
+            if (Managers.Game.isKeepingTower)
+            {
+                yield return null;
+                continue; 
+            }
+                CheckTarget();
             yield return null;
         }
     }
@@ -74,6 +79,8 @@ public class TurretController : BaseController
         yield return new WaitForSeconds(termBeforeWork);
         while (true) 
         {
+            if (!Managers.Game.isKeepingTower)
+                yield break;
             if (_target == null)
                 yield break;
             isWorking = true;
