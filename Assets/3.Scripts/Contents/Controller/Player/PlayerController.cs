@@ -94,6 +94,9 @@ public class PlayerController : CreatureController,IPlayer
     {
         if (Time.timeScale == 0)
             return;
+        if (!canInteractObj)
+            return;
+
         canInteractObj.GetComponent<ICaninteract>().Interact();
     }
 
