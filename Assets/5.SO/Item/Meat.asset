@@ -15,7 +15,7 @@ MonoBehaviour:
   idName: Meat
   itemName: "\uACE0\uAE30"
   explain: "\uC0DD\uACE0\uAE30\uC774\uB2E4"
-  itemIcon: {fileID: -520278084, guid: 15c1a23359c99764e8e3eecbecb0dd20, type: 3}
+  itemIcon: {fileID: -2065710499, guid: fcf937f4d64a517488cbcd2a2fd9ec3d, type: 3}
   itemType: 4
   maxAmount: 32
   tile: {fileID: 11400000, guid: d3f7c534f7c24d64fa3c3366ffbc7a61, type: 2}
