@@ -130,7 +130,8 @@ public class PlayerController : CreatureController,IPlayer
 
     void OnESC()
     {
-        escEvent?.Invoke();
+        if(Managers.Game.canHandleMenuUI)
+            escEvent?.Invoke();
     }
 
 
