@@ -12,7 +12,7 @@ public class ItemBaker : MonoBehaviour
 
     void MakeBakedItem(ItemSO bakedItem)
     {
-        Debug.Log("아이템을 구웠습니다");
         GetComponentInParent<BonFireController>().itemBakers.Add(this);
+        Managers.Inven.AddOneItem(bakedItem.idName);
     }
 }

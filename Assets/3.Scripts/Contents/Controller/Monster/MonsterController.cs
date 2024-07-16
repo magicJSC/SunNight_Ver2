@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour,IMonster
 {
+    public ItemSO meat;
+
 
     Rigidbody2D rigid;
 
@@ -164,6 +166,8 @@ public class MonsterController : MonoBehaviour,IMonster
 
     public void Die()
     {
+        Vector3Int pos = new Vector3Int((int)transform.position.x, (int)transform.position.y);
+        MapManager.matter.SetTile(pos,meat.tile);
         Destroy(gameObject);
     }
 }
