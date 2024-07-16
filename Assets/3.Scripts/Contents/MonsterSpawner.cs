@@ -8,9 +8,11 @@ public class MonsterSpawner : MonoBehaviour
     Transform[] spots;
     [SerializeField]
     GameObject[] monsters;
+    [SerializeField]
+    float spawnTime;
     private void Start()
     {
-
+        StartSpawn();
     }
 
     void StartSpawn()
@@ -22,8 +24,8 @@ public class MonsterSpawner : MonoBehaviour
     {
         while (true)
         {
-            if (TimeController.timeType == TimeController.TimeType.Morning)
-                yield break;
+            //if (TimeController.timeType == TimeController.TimeType.Morning)
+            //    yield break;
 
             int spotIndex = Random.Range(0, spots.Length);
             Vector3 randomPos = new Vector2(Random.Range(-4,4),Random.Range(-4,4));
@@ -31,7 +33,7 @@ public class MonsterSpawner : MonoBehaviour
 
             GameObject monster = Instantiate(monsters[monsterIndex]);
             monster.transform.position = randomPos+spots[spotIndex].transform.position;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(spawnTime);
         }
     }
 }
