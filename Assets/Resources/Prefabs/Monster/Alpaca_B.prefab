@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6652704244238003950}
   - component: {fileID: 4808009093154001862}
   - component: {fileID: 8734858188377619328}
-  - component: {fileID: 2262670633474404015}
-  m_Layer: 0
+  - component: {fileID: 1330053220642899661}
+  m_Layer: 7
   m_Name: Alpaca_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2262670633474404015
+--- !u!114 &1330053220642899661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7723298528508536329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a78dfd1c9c673e54486a7b24006d69ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a1610eeff381634d9c674076c1e080c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 0
