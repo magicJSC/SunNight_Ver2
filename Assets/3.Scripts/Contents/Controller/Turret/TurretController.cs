@@ -79,7 +79,7 @@ public class TurretController : BaseController
         yield return new WaitForSeconds(termBeforeWork);
         while (true) 
         {
-            if (!Managers.Game.isKeepingTower)
+            if (Managers.Game.isKeepingTower)
                 yield break;
             if (_target == null)
                 yield break;
