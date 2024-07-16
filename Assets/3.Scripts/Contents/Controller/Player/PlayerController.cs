@@ -72,7 +72,7 @@ public class PlayerController : CreatureController,IPlayer
         else
             anim.Play("Idle");
 
-        rigid.velocity = new Vector3(dir.x, dir.y, 0) * speed;
+        rigid.velocity = dir * speed;
     }
 
     void OnPick()
@@ -183,6 +183,11 @@ public class PlayerController : CreatureController,IPlayer
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/GraveStone"));
         go.transform.position = transform.position;
         gameObject.SetActive(false);
-        Instantiate(Resources.Load<GameObject>("UI/UI_Die"));
+        go = Instantiate(Resources.Load<GameObject>("UI/UI_Die"));
+
+        if(!Managers.Game.isKeepingTower)
+            go.GetComponent<Animator>().Play("Die");
+        else
+            go.GetComponent<Animator>().Play("GameOver");
     }
 }

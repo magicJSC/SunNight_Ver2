@@ -127,6 +127,8 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
 
     public void Die()
     {
-        throw new NotImplementedException();
+        GameObject go = Instantiate(Resources.Load<GameObject>("UI/UI_Die"));
+        go.GetComponent<Animator>().Play("GameOver");
+        Camera.main.GetComponent<CameraController>().target = Managers.Game.tower.transform;
     }
 }

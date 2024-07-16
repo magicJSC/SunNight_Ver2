@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UI_Die : MonoBehaviour
 {
@@ -13,5 +14,10 @@ public class UI_Die : MonoBehaviour
     void Disappear()
     {
         Destroy(gameObject);
+    }
+
+    void GameOver()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }
