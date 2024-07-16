@@ -29,6 +29,5 @@ public class Item_Matter : Item
     public void DestroyThis()
     {
         MapManager.matter.SetTile(new Vector3Int((int)transform.position.x, (int)transform.position.y), null);
-        Destroy(gameObject);
     }
 }
