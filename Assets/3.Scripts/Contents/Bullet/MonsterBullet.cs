@@ -14,6 +14,9 @@ public class MonsterBullet : Bullet
         {
             player.GetDamage(damage);
         }
+
+        if (col.GetComponent<IMonster>() != null)
+            return;
         Destroy(gameObject);
     }
 }
