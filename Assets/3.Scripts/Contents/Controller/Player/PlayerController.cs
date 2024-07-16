@@ -164,6 +164,5 @@ public class PlayerController : CreatureController,IPlayer
         go.transform.position = transform.position;
         gameObject.SetActive(false);
         Instantiate(Resources.Load<GameObject>("UI/UI_Die"));
-        transform.position = Managers.Game.tower.transform.position + new Vector3(0,-1);
     }
 }
