@@ -1,9 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Item_Matter : Item
+public class Item_Pick : Item,IPickable
 {
+    [HideInInspector]
+    public Text countText;
+
+    [HideInInspector]
+    public int Count { get { return count; } set { count = value; SetCountText(); } }
+
+    int count = 1;
+
+
     SpriteRenderer spriteRenderer;
     Sprite origin;
     Sprite pickTarget;
@@ -12,9 +22,14 @@ public class Item_Matter : Item
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        countText = Util.FindChild(gameObject,"Count",true).GetComponent<Text>();
+        countText.text = $"{count}";
         origin = spriteRenderer.sprite;
         pickTarget = itemSo.itemIcon;
+        SetCountText();
     }
+
+    
 
     public void ChangeOrigin()
     {
@@ -29,5 +44,19 @@ public class Item_Matter : Item
     public void DestroyThis()
     {
         MapManager.matter.SetTile(new Vector3Int((int)transform.position.x, (int)transform.position.y), null);
+    }
+
+    public void Pick()
+    {
+        Managers.Inven.AddItems(itemSo.idName, Count);
+        DestroyThis();
+    }
+
+    void SetCountText()
+    {
+        if(count != 1)
+            countText.text = $"{count}";
+        else
+            countText.text = $"";
     }
 }
