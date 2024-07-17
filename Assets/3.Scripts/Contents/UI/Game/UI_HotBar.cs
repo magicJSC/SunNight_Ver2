@@ -109,7 +109,6 @@ public class UI_HotBar : UI_Base
         Managers.Inven.choicingTower = choiceTower;
         if (Managers.Game.isKeepingTower)
             Managers.Game.tower.gameObject.SetActive(choiceTower);
-        Debug.Log(Managers.Game.isKeepingTower);
     }
 
     #region 아이템 관련
