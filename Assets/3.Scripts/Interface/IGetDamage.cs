@@ -1,7 +1,7 @@
 
 public interface IGetDamage
 {
-    void GetDamage(float damage);
+    void GetDamage(int damage);
 }
 
 public interface IPlayer : IGetDamage,IDie

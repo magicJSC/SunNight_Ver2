@@ -99,6 +99,7 @@ public class UI_Inventory : UI_Base
         if (_init)
         {
             Managers.Sound.Play(Define.Sound.Effect, showSound);
+            Managers.Game.canHandleMenuUI = false;
         }
     }
 
@@ -108,7 +109,13 @@ public class UI_Inventory : UI_Base
         {
             produceUI.gameObject.SetActive(false);
             Managers.Sound.Play(Define.Sound.Effect, hideSound);
+            Managers.Game.canHandleMenuUI = true;
         }
+    }
+
+    void OnDisappear()
+    {
+        gameObject.SetActive(false);
     }
 
     void GetData()

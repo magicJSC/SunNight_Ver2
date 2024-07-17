@@ -19,9 +19,9 @@ public class UI_Produce_Mat : UI_Base
 
     ItemSO itemInfo;
 
-    public void Init(string matterName,int _cnt)
+    public void Init(ItemSO itemSO,int cnt)
     {
-        itemInfo = Resources.Load<Item>($"Prefabs/Items/{matterName}").itemSo;
+        itemInfo = itemSO;
 
        icon = GetComponent<Image>();
         count = Util.FindChild(gameObject, "Count",true).GetComponent<Text>();
@@ -36,7 +36,7 @@ public class UI_Produce_Mat : UI_Base
 
 
         icon.sprite = itemInfo.itemIcon;
-        count.text = _cnt.ToString();
+        count.text = cnt.ToString();
     }
 
     public void Set_Explain()

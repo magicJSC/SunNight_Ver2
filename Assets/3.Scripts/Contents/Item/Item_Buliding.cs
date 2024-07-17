@@ -38,7 +38,7 @@ public class Item_Buliding : Item,IBuilding
         MapManager.buildData.Remove(pos);
     }
 
-    public void GetDamage(float damage)
+    public void GetDamage(int damage)
     {
         stat.Hp -= damage;
         if (stat.Hp <= 0)

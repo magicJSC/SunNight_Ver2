@@ -6,6 +6,9 @@ public class MonsterBullet : Bullet
 {
     protected override void Hit(Collider2D col)
     {
+        if (col.GetComponent<IMonster>() != null)
+            return;
+
         if (col.TryGetComponent<IBuilding>(out var build))
         {
             build.GetDamage(damage);
@@ -14,9 +17,11 @@ public class MonsterBullet : Bullet
         {
             player.GetDamage(damage);
         }
+        else if (col.TryGetComponent<IGetDamage>(out var getDamge))
+        {
+            getDamge.GetDamage(damage);
+        }
 
-        if (col.GetComponent<IMonster>() != null)
-            return;
         Destroy(gameObject);
     }
 }

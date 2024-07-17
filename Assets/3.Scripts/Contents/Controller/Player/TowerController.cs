@@ -63,7 +63,7 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
         AfterInstallTower();
     }
 
-    public void GetDamage(float damage)
+    public void GetDamage(int damage)
     {
         stat.Hp -= damage;
         if (stat.Hp <= 0)
