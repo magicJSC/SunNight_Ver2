@@ -26,6 +26,7 @@ public class MapManager : MonoBehaviour
 
     public void Init()
     {
+        buildData.Clear();
         GameObject go = Util.FindChild(gameObject, "Wall");
         walls = go.GetComponent<Tilemap>();
         go = Util.FindChild(gameObject, "Matter");
@@ -35,7 +36,6 @@ public class MapManager : MonoBehaviour
     public bool CheckCanBuild(Vector3Int pos)
     {
         Vector2 towerPos = Managers.Game.tower.transform.position;
-
         if (walls.HasTile(pos))
             return false;
         else if (building.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))

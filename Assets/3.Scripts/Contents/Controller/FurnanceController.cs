@@ -55,6 +55,8 @@ public class FurnanceController : MonoBehaviour, ICaninteract
 
     public void Interact()
     {
+        if (Managers.Game.isKeepingTower)
+            return;
         if (smeltUI.gameObject.activeSelf)
             return;
         smeltUI.gameObject.SetActive(true);

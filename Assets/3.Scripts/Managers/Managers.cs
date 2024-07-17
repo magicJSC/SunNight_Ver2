@@ -5,7 +5,7 @@ using UnityEngine;
 public class Managers : MonoBehaviour
 {
     static Managers instance;
-    public static Managers Instance { get { return instance; } }
+    public static Managers Instance { get { Init(); return instance; } }
 
     #region Contents
     GameManager _game = new();

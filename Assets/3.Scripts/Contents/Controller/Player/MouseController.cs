@@ -25,7 +25,6 @@ public class MouseController : MonoBehaviour
                 if (CursorType != Define.CursorType.UI && CursorType != Define.CursorType.Drag)
                 { 
                     CursorType = Define.CursorType.UI;
-                    Debug.Log("UI위에 있다");
                 }
             }
             else
@@ -33,7 +32,6 @@ public class MouseController : MonoBehaviour
                 if (CursorType == Define.CursorType.UI)
                 {
                     Managers.Inven.CheckHotBarChoice();
-                    Debug.Log("UI위에 없다");
                 }
             }
             yield return null;
