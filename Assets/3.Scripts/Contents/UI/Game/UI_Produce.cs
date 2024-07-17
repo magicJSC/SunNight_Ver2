@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Xml.Schema;
+using System;
 
 public class UI_Produce : UI_Base
 {
@@ -10,11 +12,18 @@ public class UI_Produce : UI_Base
     public AudioClip showSound;
     public AudioClip hideSound;
 
+    [Serializable]
+    public struct Materials
+    {
+        public ItemSO itemSO;
+        public int count;
+    }
+
     [Header("Produce")]
     //item1 : 재료 idName, item2 : 필요 개수
-    public List<(string,int)> matters = new();
+    public List<Materials> matters = new();
     [HideInInspector]
-    public string toMakeIDName;
+    public ItemSO toMakeItemSO;
 
     [Header("UI")]
     Image toMake;
@@ -79,7 +88,7 @@ public class UI_Produce : UI_Base
         evt = hide.GetComponent<UI_EventHandler>();
         evt._OnClick += (PointerEventData p) => { Managers.Inven.CheckHotBarChoice(); gameObject.SetActive(false); };
 
-        for(int i = 0; i < contentItem.transform.childCount; i++)
+        for (int i = 0; i < contentItem.transform.childCount; i++)
         {
             UI_Produce_Item it = contentItem.transform.GetChild(i).GetComponent<UI_Produce_Item>();
             it.produce = this;
@@ -118,50 +127,49 @@ public class UI_Produce : UI_Base
     public void Set_ToMake(string itemName)
     {
         toMake.gameObject.SetActive(true);
-        toMake.sprite = Resources.Load<Item>($"Prefabs/Items/{itemName}").itemSo.itemIcon;
-        toMakeIDName = itemName;
-        contentMat.GetComponent<RectTransform>().offsetMax = new Vector2(100 * matters.Count -200, 0);
-        for( int i = 0; i < matters.Count; i++)
+        toMakeItemSO = Resources.Load<Item>($"Prefabs/Items/{itemName}").itemSo;
+        toMake.sprite = toMakeItemSO.itemIcon;
+        contentMat.GetComponent<RectTransform>().offsetMax = new Vector2(100 * matters.Count - 200, 0);
+        for (int i = 0; i < matters.Count; i++)
         {
-            UI_Produce_Mat ma = Instantiate(Resources.Load<GameObject>("UI/UI_Produce_Mat"),contentMat.transform).GetComponent<UI_Produce_Mat>();
+            UI_Produce_Mat ma = Instantiate(Resources.Load<GameObject>("UI/UI_Produce_Mat"), contentMat.transform).GetComponent<UI_Produce_Mat>();
             ma.produce = this;
-            ma.Init(matters[i].Item1, matters[i].Item2);
+            ma.Init(matters[i].itemSO, matters[i].count);
         }
     }
 
     public void Remove_ToMake()
     {
         toMake.gameObject.SetActive(false);
-        for(int i=0;i<contentMat.transform.childCount;i++)
+        for (int i = 0; i < contentMat.transform.childCount; i++)
         {
             Destroy(contentMat.transform.GetChild(i).gameObject);
         }
         matters.Clear();
-    } 
+    }
 
-   
+
     //List -> item1 : 인벤 index, item2 : 필요 개수
-    Dictionary<string, List<(int, int)>> inven_m = new();
-    List<(int, int)> info_m;
+    Dictionary<ItemSO, List<(UI_Item, int)>> inven_m = new();
+    List<(UI_Item, int)> info_m;
 
     void OnProduce()
     {
         if (matters.Count == 0)
             return;
-        
+
         if (CanProduce())
         {
             for (int i = 0; i < matters.Count; i++)
             {
-                int count = matters[i].Item2;
-                for (int j = 0; j < inven_m[matters[i].Item1].Count; j++)
+                for (int j = 0; j < inven_m[matters[i].itemSO].Count; j++)
                 {
-                    ItemSO item = Resources.Load<Item>($"Prefabs/Items/{matters[i].Item1}").itemSo;
-                    Managers.Inven.SetSlot(item, Managers.Inven.inventoryUI.slotList[inven_m[matters[i].Item1][j].Item1].itemUI, Mathf.Clamp(info_m[j].Item2 - count,0, matters[i].Item2));
+                    int count = matters[i].count;
+                    Managers.Inven.SetSlot(matters[i].itemSO, inven_m[matters[i].itemSO][j].Item1, Mathf.Clamp(info_m[j].Item2 - count, 0, matters[i].count));
                     count -= info_m[j].Item2;
                 }
             }
-            Managers.Inven.AddOneItem(toMakeIDName);
+            Managers.Inven.AddOneItem(toMakeItemSO.idName);
             Managers.Sound.Play(Define.Sound.Effect, produceSound);
         }
         else
@@ -171,35 +179,50 @@ public class UI_Produce : UI_Base
     bool CanProduce()
     {
         inven_m.Clear();
-        for(int i =0;i<matters.Count;i++)
+        for (int i = 0; i < matters.Count; i++)
         {
-            bool correct = false;
             int _count = 0;
             for (int j = 0; j < Managers.Inven.inventorySlotInfo.Length - 1; j++)
             {
-                StorageManager.SlotInfo slotInfo = Managers.Inven.inventoryUI.slotList[j].itemUI.slotInfo;
-                if (slotInfo.itemInfo == null)
+                UI_Item itemUI = Managers.Inven.inventoryUI.slotList[j].itemUI;
+                if (itemUI.slotInfo.itemInfo == null)
                     continue;
-                if (matters[i].Item1 == slotInfo.itemInfo.idName)
+                if (matters[i].itemSO == itemUI.slotInfo.itemInfo)
                 {
-                    _count += slotInfo.count;
+                    _count += itemUI.slotInfo.count;
                     info_m = new()
                     {
-                        (j, slotInfo.count)
+                        (itemUI, itemUI.slotInfo.count)
                     };
 
-                    if(_count >= matters[i].Item2)
+                    if (_count >= matters[i].count)
                     {
-                        inven_m.Add(matters[i].Item1, info_m);
-                        correct = true;
-                        break;
+                        inven_m.Add(matters[i].itemSO, info_m);
+                        return true;
                     }
                 }
             }
-            if(!correct)
-                return false;
-        }
+            for (int j = 0; j < Managers.Inven.hotBarSlotInfo.Length - 1; j++)
+            {
+                UI_Item itemUI = Managers.Inven.hotBarUI.slotList[j].itemUI;
+                if (itemUI.slotInfo.itemInfo == null)
+                    continue;
+                if (matters[i].itemSO == itemUI.slotInfo.itemInfo)
+                {
+                    _count += itemUI.slotInfo.count;
+                    info_m = new()
+                    {
+                        (itemUI, itemUI.slotInfo.count)
+                    };
 
-        return true;
+                    if (_count >= matters[i].count)
+                    {
+                        inven_m.Add(matters[i].itemSO, info_m);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

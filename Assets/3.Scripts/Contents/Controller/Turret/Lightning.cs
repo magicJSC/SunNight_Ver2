@@ -7,7 +7,7 @@ public class Lightning : MonoBehaviour
     List<Transform> targets = new List<Transform>();
 
 
-    public float damage;
+    public int damage;
 
     private void Start()
     {

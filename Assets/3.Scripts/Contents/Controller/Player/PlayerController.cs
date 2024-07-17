@@ -167,7 +167,7 @@ public class PlayerController : CreatureController,IPlayer
         }
     }
 
-    public void GetDamage(float damage)
+    public void GetDamage(int damage)
     {
         if (isDie)
             return;

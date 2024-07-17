@@ -9,12 +9,12 @@ public class PlayerStat : MonoBehaviour
     public Action<float> energyBarEvent;
     public Action<float> hungerBarEvent;
 
-    public float Hp { get { return _hp; } set { _hp = Mathf.Clamp(value, 0, value); hpBarEvent.Invoke(Hp / maxHP); } }
+    public int Hp { get { return hp; } set { hp = Mathf.Clamp(value, 0, value); Debug.Log(hp); hpBarEvent.Invoke(Hp / maxHP); } }
     [SerializeField]
-    float _hp;
+    int hp;
 
     [HideInInspector]
-    public float maxHP;
+    public int maxHP;
 
     public float Energy { get { return _energy; } set { _energy = Mathf.Clamp(value, 0, value); energyBarEvent.Invoke(_energy / maxEnergy); } }
     [SerializeField]

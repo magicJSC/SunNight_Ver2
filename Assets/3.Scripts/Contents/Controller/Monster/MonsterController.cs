@@ -164,7 +164,7 @@ public class MonsterController : MonoBehaviour,IMonster
         State = Define.State.Idle;
     }
 
-    public void GetDamage(float damage)
+    public void GetDamage(int damage)
     {
         _stat.Hp -= damage;
         if (_stat.Hp <= 0)

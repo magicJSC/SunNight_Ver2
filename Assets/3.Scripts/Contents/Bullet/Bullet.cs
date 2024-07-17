@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Bullet : MonoBehaviour
 {
     [HideInInspector]
-    public float damage;
+    public int damage;
 
     private void Start()
     {
