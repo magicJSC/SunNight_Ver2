@@ -31,7 +31,7 @@ public class MouseController : MonoBehaviour
             {
                 if (CursorType == Define.CursorType.UI)
                 {
-                    Managers.Inven.CheckHotBarChoice();
+                    Managers.Inven.hotBarUI.CheckChoice();
                 }
             }
             yield return null;
