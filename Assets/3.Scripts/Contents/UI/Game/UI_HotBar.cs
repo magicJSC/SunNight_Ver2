@@ -89,6 +89,9 @@ public class UI_HotBar : UI_Base
     //선택한 핫바키를 바꿔주는 함수
     void ChangeChoice(int change)
     {
+        if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
+            return;
+
         if (choiceIndex == change)
             return;
         choiceIndex = change;
