@@ -9,7 +9,6 @@ public class ItemBaker : MonoBehaviour
     private void OnDisable()
     {
         Managers.Inven.AddOneItem(bakingItemSO.name);
-        Destroy(gameObject);
     }
 
     public IEnumerator Bake(ItemSO item)
@@ -21,7 +20,9 @@ public class ItemBaker : MonoBehaviour
 
     void MakeBakedItem(ItemSO bakedItem)
     {
-        GetComponentInParent<BonFireController>().itemBakers.Add(this);
+        BonFireController bonfire = GetComponentInParent<BonFireController>();
+        bonfire.itemBakers.Add(this);
+        bonfire.BakingCount--;
         Managers.Inven.AddOneItem(bakedItem.idName);
     }
 }

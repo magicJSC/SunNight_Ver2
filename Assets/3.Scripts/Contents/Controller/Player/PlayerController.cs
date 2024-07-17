@@ -81,8 +81,7 @@ public class PlayerController : CreatureController,IPlayer
             return;
         for (int i = 0; i < matters.Count; i++)
         {
-            if (Managers.Inven.AddOneItem(matters[i].GetComponent<Item_Matter>().itemSo.idName))
-                matters[i].GetComponent<Item_Matter>().DestroyThis();
+            matters[i].GetComponent<Item_Pick>().Pick();
         }
     }
 
@@ -139,7 +138,7 @@ public class PlayerController : CreatureController,IPlayer
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Item_Matter>(out var item))
+        if (collision.gameObject.TryGetComponent<Item_Pick>(out var item))
         {
             matters.Add(collision.gameObject);
             item.ChangeTake();
@@ -160,7 +159,7 @@ public class PlayerController : CreatureController,IPlayer
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Item_Matter>(out var item))
+        if (collision.gameObject.TryGetComponent<Item_Pick>(out var item))
         {
             matters.Remove(collision.gameObject);
             item.ChangeOrigin();
