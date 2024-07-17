@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class ItemBaker : MonoBehaviour
 {
-   public IEnumerator Bake(ItemSO item)
+    ItemSO bakingItemSO;
+
+    private void OnDisable()
     {
+        Managers.Inven.AddOneItem(bakingItemSO.name);
+        Destroy(gameObject);
+    }
+
+    public IEnumerator Bake(ItemSO item)
+    {
+        bakingItemSO = item;
         yield return new WaitForSeconds(item.bakeTime);
         MakeBakedItem(item.bakeItemSO);
     }
