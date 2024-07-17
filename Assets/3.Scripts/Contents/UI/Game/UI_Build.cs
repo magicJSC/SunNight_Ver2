@@ -174,6 +174,7 @@ public class UI_Build : UI_Base
         Managers.Inven.CheckHotBarChoice(); 
         gameObject.SetActive(false);
         Managers.Sound.Play(Define.Sound.Effect, clickSound);
+        Managers.Game.canHandleMenuUI = true;
     }
 
     List<(UI_Item,int)> ItemUIList = new List<(UI_Item, int)>();

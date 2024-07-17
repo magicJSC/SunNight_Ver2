@@ -29,6 +29,9 @@ public class BonFireController : MonoBehaviour, ICaninteract
 
     public void Interact()
     {
+        if (Managers.Game.isKeepingTower)
+            return;
+
         choicingItemUI = Managers.Inven.hotBarUI.slotList[Managers.Inven.choiceIndex].itemUI;
         if (choicingItemUI.slotInfo.itemInfo != null)
         {

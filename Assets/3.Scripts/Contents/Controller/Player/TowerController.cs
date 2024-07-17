@@ -67,15 +67,17 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
     {
         stat.Hp -= damage;
         if (stat.Hp <= 0)
-            Debug.Log("게임 오버");
+            Die();
     }
 
     public void BeforeInstallTower()
     {
+        gameObject.SetActive(true);
         spriteRenderer.color = new Color(1, 1, 1, 0.3f);
         gameObject.layer = inviLayer;
         GetComponent<BoxCollider2D>().isTrigger = true;
-        for(int i =0;i<MapManager.buildData.Count;i++)
+        MapManager.building.color = new Color(1, 1, 1, 0.3f);
+        for (int i =0;i<MapManager.buildData.Count;i++)
         {
             GameObject go = MapManager.building.GetInstantiatedObject(MapManager.buildData[i]);
             go.GetComponent<Item_Buliding>().ChangeColorBeforeIntall();
@@ -85,8 +87,10 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
 
     public void AfterInstallTower()
     {
+        gameObject.SetActive(true);
         spriteRenderer.color = new Color(1, 1, 1, 1);
         gameObject.layer = buildLayer;
+        MapManager.building.color = new Color(1, 1, 1, 1f);
         GetComponent<BoxCollider2D>().isTrigger = false;
         for (int i = 0; i < MapManager.buildData.Count; i++)
         {
