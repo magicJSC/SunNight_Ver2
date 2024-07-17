@@ -23,7 +23,8 @@ public class UI_Inventory : UI_Base
     UI_Produce produceUI;
     [HideInInspector]
     public Text coin;
-   
+
+    public bool canAbandon;
 
     Vector3 startPos;
 

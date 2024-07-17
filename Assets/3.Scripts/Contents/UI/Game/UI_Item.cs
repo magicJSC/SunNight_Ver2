@@ -107,7 +107,7 @@ public class UI_Item : UI_Base
     {
         if (dropingSlot == null)
         {
-            ReturnItemToSlot();
+            AbandonItem();
             return;
         }
         UI_Item s2 = dropingSlot.GetComponentInChildren<UI_Item>();
@@ -126,6 +126,11 @@ public class UI_Item : UI_Base
     }
 
     void ReturnItemToSlot()
+    {
+        rect.anchoredPosition = Vector2.zero;
+    }
+
+    void AbandonItem()
     {
         rect.anchoredPosition = Vector2.zero;
     }
