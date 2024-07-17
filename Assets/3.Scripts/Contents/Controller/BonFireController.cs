@@ -26,7 +26,6 @@ public class BonFireController : MonoBehaviour, ICaninteract
         }
     }
 
-
     public void Interact()
     {
         if (Managers.Game.isKeepingTower)
