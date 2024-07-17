@@ -94,7 +94,10 @@ public class StorageManager : MonoBehaviour
         if (Managers.Game.weapon != null)
             Destroy(Managers.Game.weapon);
         if (info == null)
+        {
+            Managers.Game.mouse.CursorType = CursorType.Normal;
             return;
+        }
         switch (info.itemType)
         {
             case ItemType.Building:

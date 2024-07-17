@@ -59,6 +59,7 @@ public class BuildController : MonoBehaviour
         Vector2 tower = Managers.Game.tower.transform.position; //기지 위치 받아오기
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition = new Vector2(Mathf.Round(mousePosition.x), Mathf.Round(mousePosition.y));
+        Debug.Log(Managers.Game.mouse.CursorType);
         if (Managers.Map.CheckCanBuild(new Vector3Int((int)(mousePosition.x), (int)(mousePosition.y), 0)))
         {
             if (!gameObject.activeSelf)
