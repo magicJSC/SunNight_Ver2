@@ -15,6 +15,7 @@ public class LightningTower : TurretController, IAttack
     {
         Lightning lightning = Instantiate(Resources.Load<GameObject>("Prefabs/Lightning"),_target.transform).GetComponent<Lightning>();
         lightning.damage = stat.Damage;
+        lightning.gameObject.name = Util.GetOriginalName(lightning.name);
         for (int i = 0;i< chainCount-1; i++)
         {
             yield return new WaitForSeconds(0.1f);
@@ -22,6 +23,7 @@ public class LightningTower : TurretController, IAttack
             if(nextTarget == null)
                 yield break;
             lightning = Instantiate(Resources.Load<GameObject>("Prefabs/Lightning"), nextTarget.transform).GetComponent<Lightning>();
+            lightning.gameObject.name = Util.GetOriginalName(lightning.name);
             lightning.damage = stat.Damage;
         }
     }

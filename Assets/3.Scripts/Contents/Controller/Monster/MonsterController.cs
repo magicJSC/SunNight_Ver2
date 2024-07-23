@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IFly
+{
+
+}
+
+public interface IWalk
+{
+
+}
 
 public class MonsterController : MonoBehaviour,IMonster
 {

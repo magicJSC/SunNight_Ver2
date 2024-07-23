@@ -66,13 +66,19 @@ public class UI_Inventory : UI_Base
         evt._OnEnter += (PointerEventData p) =>
         {
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
-                return;
+            {
+                StorageManager.canAbandon = false;
+                return; 
+            }
             Managers.Game.mouse.CursorType = Define.CursorType.UI;
         };
         evt._OnExit += (PointerEventData p) => 
         {
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
-                return;
+            {
+                StorageManager.canAbandon = true;
+                return; 
+            }
             Managers.Inven.CheckHotBarChoice();
         };
 
@@ -100,7 +106,7 @@ public class UI_Inventory : UI_Base
         if (_init)
         {
             Managers.Sound.Play(Define.Sound.Effect, showSound);
-            Managers.Game.canHandleMenuUI = false;
+            Managers.UI.PopUIList.Add(gameObject);
         }
     }
 
@@ -110,7 +116,7 @@ public class UI_Inventory : UI_Base
         {
             produceUI.gameObject.SetActive(false);
             Managers.Sound.Play(Define.Sound.Effect, hideSound);
-            Managers.Game.canHandleMenuUI = true;
+            Managers.UI.PopUIList.Remove(gameObject);
         }
     }
 

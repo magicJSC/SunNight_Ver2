@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using static StorageManager;
-using System;
 
 /// <summary>
 /// 제련 할 때 생성되는 UI입니다
@@ -24,6 +23,8 @@ public class UI_Smelt : UI_Base
     public static bool isSmelting;
 
     private SlotInfo _slotInfo;
+
+    ItemSO coalSO;
 
     enum GameObjects
     {
@@ -75,6 +76,8 @@ public class UI_Smelt : UI_Base
         evt._OnExit += (PointerEventData p) => { Managers.Inven.CheckHotBarChoice(); };
 
         SetData();
+
+        coalSO = Resources.Load<ItemSO>("Prefabs/Items/Coal");
 
         Managers.Game.tower.forceInstallEvent -= CancelSmelt;
         Managers.Game.tower.forceInstallEvent += CancelSmelt;
@@ -170,12 +173,12 @@ public class UI_Smelt : UI_Base
             _slotInfo  = Managers.Inven.inventoryUI.slotList[i].itemUI.slotInfo;
             if (_slotInfo.itemInfo != null)
             {
-                if (_slotInfo.itemInfo.idName == "Coal")
+                if (_slotInfo.itemInfo == coalSO)
                 {
                     totalCount += _slotInfo.count;
                     if (totalCount > _slotInfo.itemInfo.maxAmount)
                     {
-                        Managers.Inven.AddItems(_slotInfo.itemInfo.idName,totalCount - _slotInfo.itemInfo.maxAmount);
+                        Managers.Inven.AddItems(_slotInfo.itemInfo,totalCount - _slotInfo.itemInfo.maxAmount);
                         charcoalSlot.charcoalCount = _slotInfo.itemInfo.maxAmount;
                         break;
                     }
@@ -198,20 +201,20 @@ public class UI_Smelt : UI_Base
     {
         if (charcoalSlot.charcoalCount != 0)
         {
-            Managers.Inven.AddItems("Coal", charcoalSlot.charcoalCount);
+            Managers.Inven.AddItems(coalSO, charcoalSlot.charcoalCount);
             charcoalSlot.charcoalCount = 0;
             charcoalSlot.SetEmptySlot();
         }
         _slotInfo = grillingSlot.itemUI.slotInfo;
         if(_slotInfo.itemInfo != null)
         {
-            Managers.Inven.AddItems(_slotInfo.itemInfo.idName, _slotInfo.count);
+            Managers.Inven.AddItems(_slotInfo.itemInfo, _slotInfo.count);
             grillingSlot.itemUI.MakeEmptySlot();
         }
         _slotInfo = smeltSlot.itemUI.slotInfo;
         if (_slotInfo.itemInfo != null)
         {
-            Managers.Inven.AddItems(_slotInfo.itemInfo.idName, _slotInfo.count);
+            Managers.Inven.AddItems(_slotInfo.itemInfo, _slotInfo.count);
             smeltSlot.itemUI.MakeEmptySlot();
         }
     }

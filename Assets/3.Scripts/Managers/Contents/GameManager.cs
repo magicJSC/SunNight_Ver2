@@ -20,7 +20,5 @@ public class GameManager : MonoBehaviour
 
     public bool isHandleUI;
 
-    public bool canHandleMenuUI = true;
-
     public bool isplayingTutorial = true;
 }

@@ -17,7 +17,6 @@ public class PlayerController : CreatureController,IPlayer
 
     [Header("Contents")]
     Vector2 dir;
-    Vector2 mousePos;
 
     [HideInInspector]
     public GameObject toolParent;
@@ -127,12 +126,6 @@ public class PlayerController : CreatureController,IPlayer
             Managers.Game.build.BuildTower();
         else
             Managers.Game.build.BuildItem(); 
-    }
-
-    void OnESC()
-    {
-        if(Managers.Game.canHandleMenuUI)
-            escEvent?.Invoke();
     }
 
 

@@ -24,11 +24,10 @@ public class TurretController : BaseController
     float termBeforeWork = 1;
 
     protected List<GameObject> targets = new List<GameObject>();
-    MonsterStat targetStat;
 
     protected GameObject _target;
 
-    bool isWorking = false;
+    protected bool isWorking = false;
 
     protected override void Init()
     {
@@ -52,7 +51,7 @@ public class TurretController : BaseController
             if (Managers.Game.isKeepingTower)
             {
                 yield return null;
-                continue; 
+                continue;
             }
             CheckTarget();
             yield return null;
@@ -76,12 +75,12 @@ public class TurretController : BaseController
         }
     }
 
- 
+
 
     protected IEnumerator Work()
     {
         yield return new WaitForSeconds(termBeforeWork);
-        while (true) 
+        while (true)
         {
             if (Managers.Game.isKeepingTower)
                 yield break;
@@ -93,7 +92,7 @@ public class TurretController : BaseController
         }
     }
 
-    
+
 
     void EndWork()
     {
@@ -128,13 +127,23 @@ public class TurretController : BaseController
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<MonsterController>() != null)
+        AddTarget(collision);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        RemoveTarget(collision);
+    }
+
+    protected virtual void AddTarget(Collider2D collision)
+    {
+        if (collision.GetComponent<MonsterController>() == null)
         {
             targets.Add(collision.gameObject);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    protected virtual void RemoveTarget(Collider2D collision)
     {
         if (collision.GetComponent<MonsterController>() != null)
         {
