@@ -97,13 +97,22 @@ public class UI_Build : UI_Base
         gameObject.SetActive(false);
     }
 
-    private void OnDisappear()
+    private void OnEnable()
+    {
+        Managers.UI.PopUIList.Add(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        Managers.UI.PopUIList.Remove(gameObject);
+    }
+
+    public void Disappear()
     {
         Managers.Game.isHandleUI = false;
         Managers.Inven.CheckHotBarChoice();
         gameObject.SetActive(false);
         Managers.Sound.Play(Define.Sound.Effect, clickSound);
-        Managers.Game.canHandleMenuUI = true;
     }
 
     void InitData()
@@ -161,7 +170,7 @@ public class UI_Build : UI_Base
     void Collect(PointerEventData p)
     {
         Item_Buliding building = GetComponentInParent<Item_Buliding>();
-        Managers.Inven.AddItems(building.itemSo.idName,1);
+        Managers.Inven.AddItems(building.itemSo,1);
         Managers.Inven.CheckHotBarChoice();
         Managers.Game.isHandleUI = false;
         building.DeleteBuilding();
@@ -170,11 +179,7 @@ public class UI_Build : UI_Base
 
     void Close(PointerEventData p)
     {
-        Managers.Game.isHandleUI = false;
-        Managers.Inven.CheckHotBarChoice(); 
-        gameObject.SetActive(false);
-        Managers.Sound.Play(Define.Sound.Effect, clickSound);
-        Managers.Game.canHandleMenuUI = true;
+        Disappear();
     }
 
     List<(UI_Item,int)> ItemUIList = new List<(UI_Item, int)>();

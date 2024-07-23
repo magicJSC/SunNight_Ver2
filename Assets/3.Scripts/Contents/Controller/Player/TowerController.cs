@@ -36,7 +36,6 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
 
         stat = GetComponent<Stat>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-       
     }
 
     public void Interact()

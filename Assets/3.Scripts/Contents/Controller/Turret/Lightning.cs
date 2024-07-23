@@ -45,7 +45,7 @@ public class Lightning : MonoBehaviour
     {
         if(collision.GetComponent<IMonster>() != null && collision != transform.parent)
         {
-            if (Util.FindChild(collision.gameObject, "Lightning"))
+            if (Util.FindChild(collision.gameObject, "Lightnin"))
                 return;
 
             targets.Add(collision.transform);

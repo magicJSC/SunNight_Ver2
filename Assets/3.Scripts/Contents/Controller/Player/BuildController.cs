@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
+using static UnityEditor.PlayerSettings;
 
 public class BuildController : MonoBehaviour
 {
@@ -59,8 +60,7 @@ public class BuildController : MonoBehaviour
         Vector2 tower = Managers.Game.tower.transform.position; //기지 위치 받아오기
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition = new Vector2(Mathf.Round(mousePosition.x), Mathf.Round(mousePosition.y));
-        Debug.Log(Managers.Game.mouse.CursorType);
-        if (Managers.Map.CheckCanBuild(new Vector3Int((int)(mousePosition.x), (int)(mousePosition.y), 0)))
+        if (Managers.Map.CheckCanUseTile(new Vector3Int((int)(mousePosition.x), (int)(mousePosition.y), 0)))
         {
             if (!gameObject.activeSelf)
                 return;
@@ -74,6 +74,12 @@ public class BuildController : MonoBehaviour
             }
             else
                 itemUI.SetInfo();
+        }
+        else
+        {
+            Vector3Int pos = new Vector3Int((int)(mousePosition.x), (int)(mousePosition.y), 0);
+            if (MapManager.building.HasTile(new Vector3Int(pos.x - (int)tower.x, pos.y - (int)tower.y)))
+                Managers.Map.ShowBuildUI(new Vector3Int(pos.x - (int)tower.x, pos.y - (int)tower.y));
         }
     }
 

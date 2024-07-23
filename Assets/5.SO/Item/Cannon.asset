@@ -15,7 +15,7 @@ MonoBehaviour:
   idName: Cannon
   itemName: "\uACE0\uCCA0 \uB300\uD3EC"
   explain: "\uACE0\uCCA0\uB85C \uB9CC\uB4E0 \uB300\uD3EC\uC774\uB2E4"
-  itemIcon: {fileID: 1600583313, guid: 091841c68626a5e40b20e8eb2c1da606, type: 3}
+  itemIcon: {fileID: -189661124, guid: 3fdbf781d76e7374e85364867a80b266, type: 3}
   itemType: 5
   maxAmount: 8
   tile: {fileID: 11400000, guid: dc36533147163a94fa26902aa14f09e8, type: 2}

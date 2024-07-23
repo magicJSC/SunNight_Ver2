@@ -7,7 +7,7 @@ public class GraveStoneController : MonoBehaviour,ICaninteract
     public GameObject canInteractSign { get; private set; }
 
     [HideInInspector]
-    public List<StorageManager.SlotInfo> ItemUIList = new List<StorageManager.SlotInfo>();
+    public List<StorageManager.SlotInfo> slotInfoList = new List<StorageManager.SlotInfo>();
 
     void Start()
     {
@@ -53,7 +53,7 @@ public class GraveStoneController : MonoBehaviour,ICaninteract
             if(info.itemUI.slotInfo.itemInfo != null)
             {
                 StorageManager.SlotInfo slotInfo = new StorageManager.SlotInfo(info.itemUI.slotInfo.count, info.itemUI.slotInfo.itemInfo.idName);
-                ItemUIList.Add(slotInfo);
+                slotInfoList.Add(slotInfo);
             }
         }
         UI_HotbarSlot[] hotbarSlotInfo = Managers.Inven.hotBarUI.slotList;
@@ -62,15 +62,15 @@ public class GraveStoneController : MonoBehaviour,ICaninteract
             if (hotbarSlotInfo[i].itemUI.slotInfo.itemInfo != null)
             {
                 StorageManager.SlotInfo slotInfo = new StorageManager.SlotInfo(hotbarSlotInfo[i].itemUI.slotInfo.count, hotbarSlotInfo[i].itemUI.slotInfo.itemInfo.idName);
-                ItemUIList.Add(slotInfo); 
+                slotInfoList.Add(slotInfo); 
             }
         }
         int index;
-        int count = ItemUIList.Count / 4;
+        int count = slotInfoList.Count / 4;
         for(int i = 0; i < count; i++)
         {
-            index = Random.Range(0,ItemUIList.Count);
-            ItemUIList.Remove(ItemUIList[index]);
+            index = Random.Range(0,slotInfoList.Count);
+            slotInfoList.Remove(slotInfoList[index]);
         }
         Managers.Inven.EmptyInvenAndHotBar();
     }
@@ -83,15 +83,17 @@ public class GraveStoneController : MonoBehaviour,ICaninteract
     void GetItem()
     {
         bool bringAll = true;
-       foreach(StorageManager.SlotInfo item in ItemUIList)
+       foreach(StorageManager.SlotInfo item in slotInfoList)
        {
-            if(!Managers.Inven.AddItems(item.itemInfo.idName, item.count))
+            if(!Managers.Inven.AddItems(item.itemInfo, item.count))
                 bringAll = false;
+            else
+                slotInfoList.Remove(item);
        }
         if (bringAll)
         {
             Destroy(gameObject);
-            ItemUIList.Clear();
+            slotInfoList.Clear();
         }
         else
             Debug.Log("인벤이 차서 가져갈수 없습니다");

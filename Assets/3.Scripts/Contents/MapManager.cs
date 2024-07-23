@@ -16,6 +16,8 @@ public class MapManager : MonoBehaviour
 {
     public Grid CurrentGrid { get; private set; }
 
+    static List<Vector3Int> directList = new List<Vector3Int>();
+
     //타워에 설치된 건축물 위치 데이터
     public static List<Vector3Int> buildData = new List<Vector3Int>();
 
@@ -31,18 +33,19 @@ public class MapManager : MonoBehaviour
         walls = go.GetComponent<Tilemap>();
         go = Util.FindChild(gameObject, "Matter");
         matter = go.GetComponent<Tilemap>();
+        directList.Add(Vector3Int.right);
+        directList.Add(Vector3Int.up);
+        directList.Add(Vector3Int.down);
+        directList.Add(Vector3Int.left);
     }
 
-    public bool CheckCanBuild(Vector3Int pos)
+    public bool CheckCanUseTile(Vector3Int pos)
     {
         Vector2 towerPos = Managers.Game.tower.transform.position;
         if (walls.HasTile(pos))
             return false;
         else if (building.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))
-        {
-            ShowBuildUI(pos);
             return false; 
-        }
         else if (tower.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))
             return false;
         else if (matter.HasTile(pos))
@@ -54,7 +57,7 @@ public class MapManager : MonoBehaviour
     }
 
     //강화 할수 있는 UI 생성
-    void ShowBuildUI(Vector3Int pos)
+    public void ShowBuildUI(Vector3Int pos)
     {
         if (Managers.Game.mouse.CursorType == CursorType.Battle)
             return;
@@ -63,7 +66,56 @@ public class MapManager : MonoBehaviour
             return;
         GameObject go = building.GetInstantiatedObject(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y));
         go.GetComponent<Item_Buliding>().buildUI.SetActive(true);
-        Managers.Game.canHandleMenuUI = false;
+    }
+
+    public void SpawnItem(ItemSO itemSO,int count,Vector3Int pos)
+    {
+        pos = FindSpawnSpot(pos,itemSO);
+        GameObject go = matter.GetInstantiatedObject(pos);
+        if (go == null)
+        {
+            matter.SetTile(pos, itemSO.tile);
+            matter.GetInstantiatedObject(pos).GetComponent<Item_Pick>().Count = count;
+        }
+        else
+        {
+            Item_Pick item = matter.GetInstantiatedObject(pos).GetComponent<Item_Pick>();
+            item.Count += count;
+            if(item.Count > item.itemSo.maxAmount)
+            {
+                SpawnItem(itemSO,item.Count - item.itemSo.maxAmount, pos);
+                item.Count = item.itemSo.maxAmount;
+            }
+        }
+    }
+
+    Vector3Int FindSpawnSpot(Vector3Int pos,ItemSO itemSO)
+    {
+        Vector3Int nextPos = pos;
+        while (true)
+        {
+            pos = nextPos;
+            for (int i = 0;i < directList.Count;i++)
+            {
+                if (!CheckCanUseTile(directList[i] + pos))
+                {
+                    if (matter.HasTile(pos + directList[i]))
+                    {
+                        if(itemSO == matter.GetInstantiatedObject(pos + directList[i]).GetComponent<Item>().itemSo)
+                        {
+                            return pos + directList[i];
+                        }
+                    }
+
+                    if (walls.HasTile(pos))
+                        continue;
+
+                    nextPos = pos + directList[i];
+                }
+                else
+                    return pos + directList[i];
+            }
+        }
     }
 
     public void LoadMap(int mapId)

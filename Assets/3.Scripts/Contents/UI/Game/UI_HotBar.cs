@@ -91,7 +91,6 @@ public class UI_HotBar : UI_Base
     {
         if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
             return;
-
         if (choiceIndex == change)
             return;
         choiceIndex = change;

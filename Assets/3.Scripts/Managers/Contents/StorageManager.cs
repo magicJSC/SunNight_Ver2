@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static Define;
-using static StorageManager;
 
 public class StorageManager : MonoBehaviour
 {
@@ -196,9 +195,8 @@ public class StorageManager : MonoBehaviour
         }
     }
 
-    public bool AddItems(string name,int count)
+    public bool AddItems(ItemSO item,int count)
     {
-        ItemSO item = Resources.Load<Item>($"Prefabs/Items/{name}").itemSo;
         UI_Item emptySlot = null;
         for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
         {
@@ -210,13 +208,13 @@ public class StorageManager : MonoBehaviour
                 continue;
             }
 
-            if (item.idName == itemUI.slotInfo.itemInfo.idName)
+            if (item == itemUI.slotInfo.itemInfo)
             {
                 if (itemUI.slotInfo.count + count > itemUI.slotInfo.itemInfo.maxAmount)
                 {
                     int lefting = itemUI.slotInfo.count + count - itemUI.slotInfo.itemInfo.maxAmount;
                     SetSlot(item, itemUI, itemUI.slotInfo.itemInfo.maxAmount);
-                    AddItems(name, lefting);
+                    AddItems(item, lefting);
                     return true;
                 }
                 else
@@ -236,13 +234,13 @@ public class StorageManager : MonoBehaviour
                 continue;
             }
 
-            if (item.idName == itemUI.slotInfo.itemInfo.idName)
+            if (item == itemUI.slotInfo.itemInfo)
             {
                 if (itemUI.slotInfo.count + count > itemUI.slotInfo.itemInfo.maxAmount)
                 {
                     int lefting = itemUI.slotInfo.count + count - itemUI.slotInfo.itemInfo.maxAmount;
                     SetSlot(item, itemUI, itemUI.slotInfo.itemInfo.maxAmount);
-                    AddItems(name, lefting);
+                    AddItems(item, lefting);
                     return true;
                 }
                 else
@@ -308,5 +306,7 @@ public class StorageManager : MonoBehaviour
         itemUI.slotInfo.count = count;
         itemUI.SetInfo();
     }
+
+    public static bool canAbandon;
 }
 

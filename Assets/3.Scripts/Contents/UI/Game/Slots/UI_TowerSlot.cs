@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_TowerSlot : UI_Base
@@ -15,6 +16,22 @@ public class UI_TowerSlot : UI_Base
         GetComponent<Image>().color = Color.yellow;
         icon.sprite = Managers.Game.tower.GetComponent<SpriteRenderer>().sprite;
         HideTowerIcon();
+
+        UI_EventHandler evt = GetComponent<UI_EventHandler>();
+        evt._OnEnter += (PointerEventData p) =>
+        {
+            if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
+            {
+                StorageManager.canAbandon = false;
+            }
+        };
+        evt._OnExit += (PointerEventData p) =>
+        {
+            if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
+            {
+                StorageManager.canAbandon = true;
+            }
+        };
     }
 
     public void ShowTowerIcon()

@@ -40,7 +40,7 @@ public class UI_Item : UI_Base
             transform.parent = transform.root.GetChild(0);
             icon.raycastTarget = false;
         };
-        evt._OnDrag += (PointerEventData p) => 
+        evt._OnDrag += (PointerEventData p) =>
         {
             if (p.pointerDrag.transform.parent.GetComponentInParent<IDragable>() != null)
                 return;
@@ -52,7 +52,7 @@ public class UI_Item : UI_Base
             rect.anchoredPosition = Vector2.zero;
             icon.raycastTarget = true;
             Drop();
-            Managers.Inven.CheckHotBarChoice();
+            Managers.Inven.hotBarUI.CheckChoice();
         };
         evt._OnDrop += (PointerEventData p) =>
         {
@@ -111,10 +111,10 @@ public class UI_Item : UI_Base
             return;
         }
         UI_Item s2 = dropingSlot.GetComponentInChildren<UI_Item>();
-        
-        if(s2 == this)
+
+        if (s2 == this)
             ReturnItemToSlot();
-        else if(s2.slotInfo.itemInfo == null)
+        else if (s2.slotInfo.itemInfo == null)
             Managers.Inven.ChangeItem(this, s2);
         else if (s2.slotInfo.itemInfo.idName != slotInfo.itemInfo.idName)
             Managers.Inven.ChangeItem(this, s2);
@@ -132,6 +132,10 @@ public class UI_Item : UI_Base
 
     void AbandonItem()
     {
+        if (slotInfo.itemInfo.itemType == Define.ItemType.Building || !StorageManager.canAbandon)
+            return;
+        GameObject go = Instantiate(Resources.Load<GameObject>("UI/UI_Abandon"));
+        go.GetComponent<UI_Abandon>().itemUI = this;
         rect.anchoredPosition = Vector2.zero;
     }
 }

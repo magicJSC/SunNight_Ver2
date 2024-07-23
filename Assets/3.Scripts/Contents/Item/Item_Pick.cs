@@ -22,7 +22,7 @@ public class Item_Pick : Item,IPickable
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        countText = Util.FindChild(gameObject,"Count",true).GetComponent<Text>();
+        GetCountText();
         countText.text = $"{count}";
         origin = spriteRenderer.sprite;
         pickTarget = itemSo.itemIcon;
@@ -48,15 +48,23 @@ public class Item_Pick : Item,IPickable
 
     public void Pick()
     {
-        Managers.Inven.AddItems(itemSo.idName, Count);
+        Managers.Inven.AddItems(itemSo, Count);
         DestroyThis();
     }
 
     void SetCountText()
     {
+        if (countText == null)
+            GetCountText();
+
         if(count != 1)
             countText.text = $"{count}";
         else
             countText.text = $"";
+    }
+
+    void GetCountText()
+    {
+        countText = Util.FindChild(gameObject, "Count", true).GetComponent<Text>();
     }
 }

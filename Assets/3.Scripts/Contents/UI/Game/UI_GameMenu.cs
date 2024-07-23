@@ -20,8 +20,6 @@ public class UI_GameMenu : UI_Base
         evt = main.GetComponent<UI_EventHandler>();
         evt._OnClick += (PointerEventData p) => { Time.timeScale = 1; SceneManager.LoadScene("MainScene");  };
 
-        GetComponentInParent<PlayerController>().escEvent += ESCKeyEvent;
-
         Close();
     }
 
@@ -34,14 +32,5 @@ public class UI_GameMenu : UI_Base
     {
         Time.timeScale = 1;
         gameObject.SetActive(false);
-    }
-
-    void ESCKeyEvent()
-    {
-        if(Time.timeScale != 0)
-            Time.timeScale = 0;
-        else
-            Time.timeScale = 1;
-        gameObject.SetActive(!gameObject.activeSelf);
     }
 }

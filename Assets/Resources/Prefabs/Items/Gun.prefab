@@ -116,7 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 6
   bulletSpeed: 15
-  bullet: {fileID: 3688767379772173983, guid: 46f410e9ca3116c49bd137228bf16ab9, type: 3}
+  bullet: {fileID: 3688767379772173983, guid: eeb1cbef9ea26794880ccbc7066623fb, type: 3}
 --- !u!1 &4813914107398029618
 GameObject:
   m_ObjectHideFlags: 0

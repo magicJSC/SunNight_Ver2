@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Name: Flamethrower
+  m_EditorClassIdentifier: 
+  idName: Flamethrower
+  itemName: "\uD654\uC5FC\uBC29\uC0AC\uD3EC\uD0D1"
+  explain: "\uD654\uC5FC\uC744 \uBC29\uC0AC\uD55C\uB2E4"
+  itemIcon: {fileID: -783043910, guid: 9f33593f0c0332c4b9338c471f408dcd, type: 3}
+  itemType: 5
+  maxAmount: 8
+  tile: {fileID: 11400000, guid: 3538f41d73186a6409fd20f374089b4a, type: 2}
+  smelt: {fileID: 0}
+  bakeItemSO: {fileID: 0}
+  bakeTime: 0
