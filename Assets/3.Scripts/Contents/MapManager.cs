@@ -12,7 +12,7 @@ public struct Pos
     public int X;
 }
 
-public class MapManager : MonoBehaviour 
+public class MapManager : MonoBehaviour
 {
     public Grid CurrentGrid { get; private set; }
 
@@ -45,7 +45,7 @@ public class MapManager : MonoBehaviour
         if (walls.HasTile(pos))
             return false;
         else if (building.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))
-            return false; 
+            return false;
         else if (tower.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))
             return false;
         else if (matter.HasTile(pos))
@@ -68,9 +68,9 @@ public class MapManager : MonoBehaviour
         go.GetComponent<Item_Buliding>().buildUI.SetActive(true);
     }
 
-    public void SpawnItem(ItemSO itemSO,int count,Vector3Int pos)
+    public void SpawnItem(ItemSO itemSO, int count, Vector3Int pos)
     {
-        pos = FindSpawnSpot(pos,itemSO);
+        pos = FindSpawnSpot(pos, itemSO);
         GameObject go = matter.GetInstantiatedObject(pos);
         if (go == null)
         {
@@ -81,27 +81,27 @@ public class MapManager : MonoBehaviour
         {
             Item_Pick item = matter.GetInstantiatedObject(pos).GetComponent<Item_Pick>();
             item.Count += count;
-            if(item.Count > item.itemSo.maxAmount)
+            if (item.Count > item.itemSo.maxAmount)
             {
-                SpawnItem(itemSO,item.Count - item.itemSo.maxAmount, pos);
+                SpawnItem(itemSO, item.Count - item.itemSo.maxAmount, pos);
                 item.Count = item.itemSo.maxAmount;
             }
         }
     }
 
-    Vector3Int FindSpawnSpot(Vector3Int pos,ItemSO itemSO)
+    Vector3Int FindSpawnSpot(Vector3Int pos, ItemSO itemSO)
     {
         Vector3Int nextPos = pos;
         while (true)
         {
             pos = nextPos;
-            for (int i = 0;i < directList.Count;i++)
+            for (int i = 0; i < directList.Count; i++)
             {
                 if (!CheckCanUseTile(directList[i] + pos))
                 {
                     if (matter.HasTile(pos + directList[i]))
                     {
-                        if(itemSO == matter.GetInstantiatedObject(pos + directList[i]).GetComponent<Item>().itemSo)
+                        if (itemSO == matter.GetInstantiatedObject(pos + directList[i]).GetComponent<Item>().itemSo)
                         {
                             return pos + directList[i];
                         }

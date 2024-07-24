@@ -1616,8 +1616,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d5bd7b8f2deb24d81a68f9119a0729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickSound: {fileID: 8300000, guid: 219c128bb5466495184d344182224ed2, type: 3}
-  upgradeSound: {fileID: 8300000, guid: b7ef97496e9004e928478c29b2e79ee6, type: 3}
+  clickSoundAsset:
+    m_AssetGUID: e813b345b26a747aa8ff93ed61f5e139
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
+  upgradeSoundAsset:
+    m_AssetGUID: dc7e63a78f34f4fe5ac94bed762cc7cb
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
+  buildMatterUIAsset:
+    m_AssetGUID: 4d61a8b97db99ad4eb936e32a9120f1e
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   matters: []
   expension: 0
   nextLevelItem: {fileID: 0}

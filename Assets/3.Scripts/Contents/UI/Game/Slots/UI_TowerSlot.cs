@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -8,7 +9,9 @@ public class UI_TowerSlot : UI_Base
 {
     Image icon;
 
-    public AudioClip getTowerSound;
+    public AssetReferenceT<AudioClip> getTowerSoundAsset;
+
+    AudioClip getTowerSound;
 
     public new void Init()
     {
@@ -31,6 +34,11 @@ public class UI_TowerSlot : UI_Base
             {
                 StorageManager.canAbandon = true;
             }
+        };
+
+        getTowerSoundAsset.LoadAssetAsync().Completed += (clip) =>
+        {
+            getTowerSound = clip.Result;
         };
     }
 

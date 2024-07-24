@@ -289,6 +289,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c3369734590384db1fecc70ef80e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSoundAsset:
+    m_AssetGUID: 219c128bb5466495184d344182224ed2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  enterSoundAsset:
+    m_AssetGUID: 112c2e7e1ef344ca188b5fc5aaffed0c
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   clickSound: {fileID: 8300000, guid: 219c128bb5466495184d344182224ed2, type: 3}
   enterSound: {fileID: 8300000, guid: 112c2e7e1ef344ca188b5fc5aaffed0c, type: 3}
 --- !u!95 &688588296801439367

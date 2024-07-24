@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Xml.Schema;
 using System;
+using UnityEngine.AddressableAssets;
 
 public class UI_Produce : UI_Base
 {
-    public AudioClip produceSound;
-    public AudioClip showSound;
-    public AudioClip hideSound;
+    public AssetReferenceT<AudioClip> produceSoundAsset;
+    public AssetReferenceT<AudioClip> showSoundAsset;
+    public AssetReferenceT<AudioClip> hideSoundAsset;
+
+    AudioClip produceSound;
+    AudioClip showSound;
+    AudioClip hideSound;
+
+    public AssetReferenceGameObject produceMaterialUIAsset;
+
+    GameObject produceMaterialUI;
 
     [Serializable]
     public struct Materials
@@ -20,6 +28,7 @@ public class UI_Produce : UI_Base
     }
 
     [Header("Produce")]
+    [HideInInspector]
     //item1 : 재료 idName, item2 : 필요 개수
     public List<Materials> matters = new();
     [HideInInspector]
@@ -33,11 +42,13 @@ public class UI_Produce : UI_Base
     GameObject contentMat;
     GameObject contentItem;
     GameObject produce;
-    GameObject hide;
+    RectTransform hideRect;
     [HideInInspector]
     public GameObject explainMat;
     [HideInInspector]
     public GameObject explainItem;
+
+    Text produceButtonText;
 
     Vector2 startPos;
 
@@ -66,13 +77,20 @@ public class UI_Produce : UI_Base
         contentItem = Get<GameObject>((int)GameObjects.Content_Item);
         toMake = Get<GameObject>((int)GameObjects.ToMake).GetComponent<Image>();
         produce = Get<GameObject>((int)GameObjects.Produce);
-        hide = Get<GameObject>((int)GameObjects.Hide);
+        hideRect = Get<GameObject>((int)GameObjects.Hide).GetComponent<RectTransform>();
         explainMat = Get<GameObject>((int)GameObjects.Explain_Mat);
         explainItem = Get<GameObject>((int)GameObjects.Explain_Item);
+
+        produceButtonText = Util.FindChild(gameObject, "ProduceText", true).GetComponent<Text>();
 
         GetComponent<Canvas>().worldCamera = Camera.main;
 
         backR = back.GetComponent<RectTransform>();
+
+        produceMaterialUIAsset.LoadAssetAsync().Completed += (obj) => 
+        {
+            produceMaterialUI = obj.Result;
+        };
 
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
         evt._OnDrag += (PointerEventData p) =>
@@ -84,9 +102,11 @@ public class UI_Produce : UI_Base
 
         evt = produce.GetComponent<UI_EventHandler>();
         evt._OnClick += (PointerEventData p) => { OnProduce(); };
+        evt._OnEnter += EnterProduceButton;
+        evt._OnExit += ExitProduceButton;
 
-        evt = hide.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { Managers.Inven.CheckHotBarChoice(); gameObject.SetActive(false); };
+        evt = hideRect.GetComponent<UI_EventHandler>();
+        evt._OnClick += (PointerEventData p) => { gameObject.SetActive(false); };
 
         for (int i = 0; i < contentItem.transform.childCount; i++)
         {
@@ -94,6 +114,19 @@ public class UI_Produce : UI_Base
             it.produce = this;
             it.Init();
         }
+
+        produceSoundAsset.LoadAssetAsync().Completed += (clip) =>
+        {
+            produceSound = clip.Result;
+        };
+        hideSoundAsset.LoadAssetAsync().Completed += (clip) =>
+        {
+            hideSound = clip.Result;
+        };
+        showSoundAsset.LoadAssetAsync().Completed += (clip) =>
+        {
+            showSound = clip.Result;
+        };
 
         Remove_ToMake();
         explainMat.SetActive(false);
@@ -124,18 +157,20 @@ public class UI_Produce : UI_Base
         back.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
     }
 
-    public void Set_ToMake(string itemName)
+    public void Set_ToMake(ItemSO itemSo)
     {
         toMake.gameObject.SetActive(true);
-        toMakeItemSO = Resources.Load<Item>($"Prefabs/Items/{itemName}").itemSo;
+        toMakeItemSO = itemSo;
         toMake.sprite = toMakeItemSO.itemIcon;
         contentMat.GetComponent<RectTransform>().offsetMax = new Vector2(100 * matters.Count - 200, 0);
+
         for (int i = 0; i < matters.Count; i++)
         {
-            UI_Produce_Mat ma = Instantiate(Resources.Load<GameObject>("UI/UI_Produce_Mat"), contentMat.transform).GetComponent<UI_Produce_Mat>();
+            UI_Produce_Material ma = Instantiate(produceMaterialUI, contentMat.transform).GetComponent<UI_Produce_Material>();
             ma.produce = this;
             ma.Init(matters[i].itemSO, matters[i].count);
         }
+
     }
 
     public void Remove_ToMake()
@@ -169,11 +204,21 @@ public class UI_Produce : UI_Base
                     count -= info_m[j].Item2;
                 }
             }
-            Managers.Inven.AddOneItem(toMakeItemSO.idName);
+            Managers.Inven.AddOneItem(toMakeItemSO);
             Managers.Sound.Play(Define.Sound.Effect, produceSound);
         }
         else
             Debug.Log("재료가 부족합니다");
+    }
+
+    void EnterProduceButton(PointerEventData p)
+    {
+        produceButtonText.color = Color.red;
+    }
+
+    void ExitProduceButton(PointerEventData p)
+    {
+        produceButtonText.color = Color.black;
     }
 
     bool CanProduce()

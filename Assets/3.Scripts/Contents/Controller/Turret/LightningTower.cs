@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class LightningTower : TurretController, IAttack
 {
+    public AssetReferenceGameObject lightningAsset;
+
     public int chainCount;
 
     public void Attack()
@@ -13,7 +16,7 @@ public class LightningTower : TurretController, IAttack
 
     IEnumerator SpawnLightning()
     {
-        Lightning lightning = Instantiate(Resources.Load<GameObject>("Prefabs/Lightning"),_target.transform).GetComponent<Lightning>();
+        Lightning lightning = lightningAsset.InstantiateAsync(_target.transform).Result.GetComponent<Lightning>();
         lightning.damage = stat.Damage;
         lightning.gameObject.name = Util.GetOriginalName(lightning.name);
         for (int i = 0;i< chainCount-1; i++)
@@ -22,7 +25,7 @@ public class LightningTower : TurretController, IAttack
             Transform nextTarget = lightning.GetNextTarget();
             if(nextTarget == null)
                 yield break;
-            lightning = Instantiate(Resources.Load<GameObject>("Prefabs/Lightning"), nextTarget.transform).GetComponent<Lightning>();
+            lightning = lightningAsset.InstantiateAsync(_target.transform).Result.GetComponent<Lightning>();
             lightning.gameObject.name = Util.GetOriginalName(lightning.name);
             lightning.damage = stat.Damage;
         }

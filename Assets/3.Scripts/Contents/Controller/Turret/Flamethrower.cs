@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class Flamethrower : TurretController, IAttack,IRotate
 {
+    public AssetReferenceGameObject flameAsset;
+
     [SerializeField]
     int flameCount;
     [SerializeField]
@@ -20,14 +23,15 @@ public class Flamethrower : TurretController, IAttack,IRotate
     protected override void Init()
     {
         base.Init();
-        GameObject flame = Resources.Load<GameObject>("Prefabs/Flame");
-        for(int i = 0; i < flameCount; i++)
+        for (int i = 0; i < flameCount; i++)
         {
-            GameObject go = Instantiate(flame);
-            flameList.Add(go);
-            go.GetComponent<Flame>().flameList = flameList;
-            go.GetComponent<Flame>().SetDamage(stat.Damage);
-            go.SetActive(false);
+            flameAsset.InstantiateAsync().Completed += (go) => 
+            {
+                flameList.Add(go.Result);
+                go.Result.GetComponent<Flame>().flameList = flameList;
+                go.Result.GetComponent<Flame>().SetDamage(stat.Damage);
+                go.Result.SetActive(false);
+            };
         }
     }
 

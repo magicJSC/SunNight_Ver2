@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class Singijeon : TurretController, IAttack, IRotate
 {
@@ -8,6 +9,8 @@ public class Singijeon : TurretController, IAttack, IRotate
     int arrowCount;
     [SerializeField]
     float attackSpeed;
+
+    public AssetReferenceGameObject arrowAsset;
 
     GameObject arrow;
 
@@ -18,7 +21,7 @@ public class Singijeon : TurretController, IAttack, IRotate
     protected override void Init()
     {
         base.Init();
-        arrow = Resources.Load<GameObject>("Prefabs/Arrow");
+        arrow = arrowAsset.LoadAssetAsync().Result;
         for(int i = 0;i < arrowCount; i++)
         {
            GameObject go = Instantiate(arrow,transform);

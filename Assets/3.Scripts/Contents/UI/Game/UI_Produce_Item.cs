@@ -41,7 +41,7 @@ public class UI_Produce_Item : UI_Base
             {
                 produce.matters.Add(materialList[i]);
             }
-            produce.Set_ToMake(itemSO.idName); 
+            produce.Set_ToMake(itemSO); 
         };
     }
 

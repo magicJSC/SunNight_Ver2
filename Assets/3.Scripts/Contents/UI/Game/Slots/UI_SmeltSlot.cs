@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class UI_SmeltSlot : UI_BaseSlot,IDragable
 {
+    [HideInInspector]
     public UI_Smelt smelt;
+    [HideInInspector]
     public UI_Item itemUI;
 
     GameObject explain;

@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Tilemaps;
 
 public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
@@ -18,6 +17,9 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
     SpriteRenderer spriteRenderer;
 
     public GameObject canInteractSign { get; set; }
+
+
+    public AssetReferenceGameObject DieUIAsset;
 
     public void Init()
     {
@@ -130,8 +132,13 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
 
     public void Die()
     {
-        GameObject go = Instantiate(Resources.Load<GameObject>("UI/UI_Die"));
-        go.GetComponent<Animator>().Play("GameOver");
+        DieUIAsset.InstantiateAsync().Completed += (go) =>
+        {
+            if (!Managers.Game.isKeepingTower)
+                go.Result.GetComponent<Animator>().Play("Die");
+            else
+                go.Result.GetComponent<Animator>().Play("GameOver");
+        };
         Camera.main.GetComponent<CameraController>().target = Managers.Game.tower.transform;
     }
 }

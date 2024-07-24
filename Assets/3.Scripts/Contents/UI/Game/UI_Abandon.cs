@@ -41,8 +41,6 @@ public class UI_Abandon : UI_Base
 
     void ClickCorrect(PointerEventData p)
     {
-        Vector3 pos = Managers.Game.player.transform.position;
-        Managers.Map.SpawnItem(itemUI.slotInfo.itemInfo,itemUI.slotInfo.count,new Vector3Int((int)pos.x,(int)pos.y));
         itemUI.MakeEmptySlot();
         gameObject.SetActive(false);
     }

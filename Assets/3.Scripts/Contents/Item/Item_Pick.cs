@@ -13,32 +13,11 @@ public class Item_Pick : Item,IPickable
 
     int count = 1;
 
-
-    SpriteRenderer spriteRenderer;
-    Sprite origin;
-    Sprite pickTarget;
-
-
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         GetCountText();
         countText.text = $"{count}";
-        origin = spriteRenderer.sprite;
-        pickTarget = itemSo.itemIcon;
         SetCountText();
-    }
-
-    
-
-    public void ChangeOrigin()
-    {
-        spriteRenderer.sprite = origin;
-    }
-
-    public void ChangeTake()
-    {
-        spriteRenderer.sprite = pickTarget;
     }
 
     public void DestroyThis()

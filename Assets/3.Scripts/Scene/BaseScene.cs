@@ -21,12 +21,6 @@ public class BaseScene : MonoBehaviour
         _init = true;
         Managers.Init();
 
-        GameObject go = GameObject.Find("EventSystem");
-        if (go == null)
-        {
-            Instantiate(Resources.Load<GameObject>("EventSystem"));
-        }
-
         return true;
     }
 

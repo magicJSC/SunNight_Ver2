@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
@@ -21,12 +22,16 @@ public class PlayerController : CreatureController,IPlayer
     [HideInInspector]
     public GameObject toolParent;
 
-    List<GameObject> matters = new List<GameObject>();
+    [HideInInspector]
     public List<GameObject> interactObjectList = new List<GameObject>();
     GameObject canInteractObj;
 
     bool isDie;
 
+    public AssetReferenceGameObject statUIAsset;
+    public AssetReferenceGameObject DieUIAsset;
+
+    public AssetReferenceGameObject graveAsset;
 
     Rigidbody2D rigid;
     Animator anim;
@@ -44,7 +49,8 @@ public class PlayerController : CreatureController,IPlayer
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         stat = GetComponent<PlayerStat>();
-        Instantiate(Resources.Load<GameObject>("UI/UI_PlayerStat"));
+        statUIAsset.InstantiateAsync();
+        StartCoroutine(Move());
     }
 
     public void OnEnable()
@@ -53,6 +59,8 @@ public class PlayerController : CreatureController,IPlayer
             return;
         isDie = false;
         stat.Hp = stat.maxHP;
+
+        StartCoroutine(Move());
 
         if(toolParent.transform.GetChild(0) != null)
          Destroy(toolParent.transform.GetChild(0).gameObject);
@@ -70,17 +78,14 @@ public class PlayerController : CreatureController,IPlayer
         }
         else
             anim.Play("Idle");
-
-        rigid.velocity = dir * speed;
     }
 
-    void OnPick()
+    IEnumerator Move()
     {
-        if (Time.timeScale == 0)
-            return;
-        for (int i = 0; i < matters.Count; i++)
+        while (true)
         {
-            matters[i].GetComponent<Item_Pick>().Pick();
+            rigid.velocity = dir * speed;
+            yield return null;
         }
     }
 
@@ -133,12 +138,8 @@ public class PlayerController : CreatureController,IPlayer
     {
         if (collision.gameObject.TryGetComponent<Item_Pick>(out var item))
         {
-            matters.Add(collision.gameObject);
-            item.ChangeTake();
-
-            //자동 줍기
-            //if (Managers.Inven.AddOneItem(item.itemSo.idName))
-            //    item.DestroyThis();
+            if (Managers.Inven.AddItems(item.itemSo,item.Count))
+                item.DestroyThis();
         }
     }
 
@@ -147,15 +148,6 @@ public class PlayerController : CreatureController,IPlayer
         if (collision.gameObject.GetComponent<ICaninteract>() != null)
         {
             SetInteractObj();
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<Item_Pick>(out var item))
-        {
-            matters.Remove(collision.gameObject);
-            item.ChangeOrigin();
         }
     }
 
@@ -172,14 +164,18 @@ public class PlayerController : CreatureController,IPlayer
     public void Die()
     {
         isDie = true;
-        GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/GraveStone"));
-        go.transform.position = transform.position;
-        gameObject.SetActive(false);
-        go = Instantiate(Resources.Load<GameObject>("UI/UI_Die"));
-
-        if(!Managers.Game.isKeepingTower)
-            go.GetComponent<Animator>().Play("Die");
-        else
-            go.GetComponent<Animator>().Play("GameOver");
+        graveAsset.InstantiateAsync().Completed += (go) => 
+        {
+            go.Result.transform.position = transform.position;
+            gameObject.SetActive(false);
+        };
+        
+        DieUIAsset.InstantiateAsync().Completed += (go) =>
+        {
+            if (!Managers.Game.isKeepingTower)
+                go.Result.GetComponent<Animator>().Play("Die");
+            else
+                go.Result.GetComponent<Animator>().Play("GameOver");
+        };
     }
 }

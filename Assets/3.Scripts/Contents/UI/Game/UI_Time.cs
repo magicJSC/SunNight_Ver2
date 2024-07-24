@@ -11,15 +11,17 @@ public class UI_Time : UI_Base
 
     Animator anim;
 
+    TimeController time;
     public override void Init()
     {
         timeRullet = Util.FindChild(gameObject,"TimeRullet",true).GetComponent<RectTransform>();
         timeText = Util.FindChild(gameObject,"Time",true).GetComponent<Text>();
 
         anim = GetComponent<Animator>();
+        time = GetComponent<TimeController>();
         TimeController.nightEvent += ShowNightSign;
-        GetComponent<TimeController>().timeEvent += RotateTimeRullet;
-        GetComponent<TimeController>().timeEvent += SetTimeText;
+        time.timeEvent += RotateTimeRullet;
+        time.timeEvent += SetTimeText;
     }
 
     void RotateTimeRullet(float time)

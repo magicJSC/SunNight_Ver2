@@ -769,7 +769,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parDragBefore: {fileID: 0}
   dropingSlot: {fileID: 0}
-  changeSound: {fileID: 8300000, guid: 6064abec5682a43c197be8b157e52957, type: 3}
+  changeSoundAsset:
+    m_AssetGUID: 6064abec5682a43c197be8b157e52957
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1 &6411729590873822578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,7 +1685,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parDragBefore: {fileID: 0}
   dropingSlot: {fileID: 0}
-  changeSound: {fileID: 8300000, guid: 93fbb0316886b4c7eb9cf4273b8fa119, type: 3}
+  changeSoundAsset:
+    m_AssetGUID: 6064abec5682a43c197be8b157e52957
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1001 &7579956418972143119
 PrefabInstance:
   m_ObjectHideFlags: 0

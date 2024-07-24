@@ -210,6 +210,21 @@ MonoBehaviour:
   speed: 6
   toolParent: {fileID: 0}
   interactObjectList: []
+  statUIAsset:
+    m_AssetGUID: e831c81d166b2d8469fd83626494cd7a
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  DieUIAsset:
+    m_AssetGUID: b94e22f449b02cd4982f752aa3c0438b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  graveAsset:
+    m_AssetGUID: 99453c910a0fd0e4d8a3d9e10598cab2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!95 &5181808167504846212
 Animator:
   serializedVersion: 5

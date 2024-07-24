@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_Main : UI_Base
 {
-    public AudioClip clickSound;
-    public AudioClip enterSound;
+    public AssetReferenceT<AudioClip> clickSoundAsset;
+    public AssetReferenceT<AudioClip> enterSoundAsset;
+
+    AudioClip clickSound;
+    AudioClip enterSound;
 
 
     GameObject start;
@@ -44,6 +48,15 @@ public class UI_Main : UI_Base
         evt._OnClick += (PointerEventData p) => { Application.Quit(); };
         evt._OnEnter += (PointerEventData p) => { exitText.color = Color.red; Managers.Sound.Play(Define.Sound.Effect, enterSound); };
         evt._OnExit += (PointerEventData p) => { exitText.color = Color.black; };
+
+        clickSoundAsset.LoadAssetAsync().Completed += (clip) =>
+        {
+            clickSound = clip.Result;
+        };
+        enterSoundAsset.LoadAssetAsync().Completed += (clip) =>
+        {
+            enterSound = clip.Result;
+        };
     }
 
     private void StartGame()

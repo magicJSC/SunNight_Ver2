@@ -292,6 +292,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   build: {fileID: 0}
+  DieUIAsset:
+    m_AssetGUID: b94e22f449b02cd4982f752aa3c0438b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!58 &7889444855197644337
 CircleCollider2D:
   m_ObjectHideFlags: 0

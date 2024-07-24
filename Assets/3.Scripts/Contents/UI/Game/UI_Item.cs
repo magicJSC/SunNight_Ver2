@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -13,7 +14,12 @@ public class UI_Item : UI_Base
     [HideInInspector]
     public StorageManager.SlotInfo slotInfo;
 
-    public AudioClip changeSound;
+    [SerializeField]
+    AssetReferenceT<AudioClip> changeSoundAsset;
+
+    public AssetReferenceGameObject abandonUIAsset;
+
+    AudioClip changeSound;
 
     Image icon;
     Text count;
@@ -65,6 +71,11 @@ public class UI_Item : UI_Base
             SetInfo();
         else
             SetEmptyItem();
+
+        changeSoundAsset.LoadAssetAsync().Completed += (clip) =>
+        {
+            changeSound = clip.Result;
+        };
     }
 
 
@@ -134,7 +145,7 @@ public class UI_Item : UI_Base
     {
         if (slotInfo.itemInfo.itemType == Define.ItemType.Building || !StorageManager.canAbandon)
             return;
-        GameObject go = Instantiate(Resources.Load<GameObject>("UI/UI_Abandon"));
+        GameObject go = abandonUIAsset.InstantiateAsync().Result;
         go.GetComponent<UI_Abandon>().itemUI = this;
         rect.anchoredPosition = Vector2.zero;
     }

@@ -116,7 +116,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 6
   bulletSpeed: 15
-  bullet: {fileID: 3688767379772173983, guid: eeb1cbef9ea26794880ccbc7066623fb, type: 3}
+  asset:
+    m_AssetGUID: eeb1cbef9ea26794880ccbc7066623fb
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1 &4813914107398029618
 GameObject:
   m_ObjectHideFlags: 0
