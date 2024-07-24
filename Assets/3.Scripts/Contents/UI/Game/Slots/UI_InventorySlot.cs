@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class UI_InventorySlot : UI_Base,IDragable,IDroppable
 {
+    [HideInInspector]
     public UI_Inventory inven;
+    [HideInInspector]
     public UI_Item itemUI;
 
 

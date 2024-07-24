@@ -24,5 +24,10 @@ public class UI_HpBar : UI_Base
         Bind<Image>(typeof(Images));
         fill = GetImage((int)Images.Fill);
         anim = GetComponent<Animator>();
+
+       if(transform.parent.TryGetComponent<Stat>(out var stat))
+        {
+            stat.hpEvent += SetHp;
+        }
     }
 }

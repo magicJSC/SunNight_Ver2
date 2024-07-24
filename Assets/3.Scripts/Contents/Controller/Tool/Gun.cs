@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class Gun : ToolController
 {
@@ -8,15 +9,18 @@ public class Gun : ToolController
     float bulletSpeed;
 
     [SerializeField]
+    AssetReferenceGameObject asset;
+
     GameObject bullet;
 
-   void Attack()
+    void Attack()
     {
-        GameObject b = Instantiate(bullet);
-        b.transform.position = transform.position;
         angle = Mathf.Atan2(point.y - transform.position.y, point.x - transform.position.x) * Mathf.Rad2Deg;
-        b.transform.rotation = Quaternion.AngleAxis(angle, b.transform.forward);
-        b.GetComponent<Rigidbody2D>().velocity = (point - transform.position).normalized * bulletSpeed;
-        b.GetComponent<Bullet>().damage = _damage;
+        asset.InstantiateAsync(transform.position, Quaternion.Euler(0,0,angle)).Completed += (obj) =>
+        {
+            bullet = obj.Result;
+            bullet.GetComponent<Rigidbody2D>().velocity = (point - transform.position).normalized * bulletSpeed;
+            bullet.GetComponent<Bullet>().damage = _damage;
+        };
     }
 }

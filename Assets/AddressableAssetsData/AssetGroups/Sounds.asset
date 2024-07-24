@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Sounds
+  m_EditorClassIdentifier: 
+  m_GroupName: Sounds
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 506ec2c3eaa0f7c468b725e695177f7f
+  m_SerializeEntries:
+  - m_GUID: dc7e63a78f34f4fe5ac94bed762cc7cb
+    m_Address: Assets/1.Asset/Audio/RPG Inventory Sounds/Special_Tool.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e813b345b26a747aa8ff93ed61f5e139
+    m_Address: Assets/1.Asset/Audio/RPG Inventory Sounds/UI_Negative.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6064abec5682a43c197be8b157e52957
+    m_Address: Assets/1.Asset/Audio/RPG Inventory Sounds/Bag_Interaction_Soft_01.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7ef97496e9004e928478c29b2e79ee6
+    m_Address: Assets/1.Asset/Audio/RPG Inventory Sounds/UI_Postitive_Bright.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 219c128bb5466495184d344182224ed2
+    m_Address: Assets/1.Asset/Audio/RPG Inventory Sounds/Click_02.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 112c2e7e1ef344ca188b5fc5aaffed0c
+    m_Address: Assets/1.Asset/Audio/RPG Inventory Sounds/UI_Satisfying_01.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e6a4b20a802c7475184a027e70fa3eed
+    m_Address: Assets/1.Asset/Audio/RPG Inventory Sounds/Tool_Interaction_03.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9a368fece3badaa408b73453d1be7c74, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: fb50f8afe248c1a428be917b0055fb40, type: 2}
+    - {fileID: 11400000, guid: 4c0b392783983e5489772be18a5c57a1, type: 2}

@@ -1,19 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class Long_Monster : MonsterController
 {
-    GameObject go = null;
+    public AssetReferenceGameObject bulletAsset;
+
     public float bulletSpeed;
 
     void Atk()
     {
-        if (go == null)
-        {
-            go = Resources.Load<GameObject>($"Prefabs/Monster/{Util.GetOriginalName(name)}_B");
-        }
-        GameObject g = Instantiate(go);
+        GameObject g = bulletAsset.InstantiateAsync().Result;
         Rigidbody2D r = g.GetComponent<Rigidbody2D>();
         g.transform.position = transform.position;
         r.velocity = (target.position - transform.position).normalized * bulletSpeed;

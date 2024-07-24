@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Pick",
-                    "type": "Button",
-                    "id": "0a96352e-42ff-48c4-b347-684619776a5e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "ShowInventory",
                     "type": "Button",
                     "id": "e84846f8-1b4c-4dc0-88f0-adcffbbe8a5c",
@@ -142,17 +133,6 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "62118f8a-a72b-4dbc-b4c2-c349e335c8db",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Pick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

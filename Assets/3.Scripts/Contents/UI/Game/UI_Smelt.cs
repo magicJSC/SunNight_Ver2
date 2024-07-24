@@ -16,9 +16,13 @@ public class UI_Smelt : UI_Base
     GameObject doSmelt;
     UI_CharcoalSlot charcoalSlot;
     GameObject back;
+
+    [HideInInspector]
     public Image timer;
+    [HideInInspector]
     public GameObject explain;
 
+    [HideInInspector]
     public FurnanceController furnanace;
     public static bool isSmelting;
 

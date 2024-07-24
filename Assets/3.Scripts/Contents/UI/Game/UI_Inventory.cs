@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static StorageManager;
 
 public class UI_Inventory : UI_Base
 {
-    public AudioClip showSound;
-    public AudioClip hideSound;
+    public AssetReferenceT<AudioClip> showSoundAsset;
+    public AssetReferenceT<AudioClip> hideSoundAsset;
+
+    public AssetReferenceGameObject invenSlotAsset;
+    public AssetReferenceGameObject produceUIAsset;
+
+    AudioClip showSound;
+    AudioClip hideSound;
 
     [HideInInspector]
     public UI_InventorySlot[] slotList;
@@ -23,6 +30,8 @@ public class UI_Inventory : UI_Base
     UI_Produce produceUI;
     [HideInInspector]
     public Text coin;
+
+    Text produceText;
 
     public bool canAbandon;
 
@@ -52,8 +61,13 @@ public class UI_Inventory : UI_Base
         produce = Get<GameObject>((int)GameObjects.Produce);
         coin = Get<GameObject>((int)GameObjects.Coin).GetComponent<Text>();
         explain = Get<GameObject>((int)GameObjects.Explain_Inven);
-        produceUI = Get<GameObject>((int)GameObjects.UI_Produce).GetComponent<UI_Produce>();
-       
+        produceUIAsset.LoadAssetAsync().Completed += (obj) => 
+        {
+            produceUI = Instantiate(obj.Result).GetComponent<UI_Produce>();
+        };
+
+        produceText = Util.FindChild(gameObject, "ProduceText", true).GetComponent<Text>();
+
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
         evt._OnDrag += (PointerEventData p) =>
         {
@@ -85,10 +99,19 @@ public class UI_Inventory : UI_Base
         evt = hide.GetComponent<UI_EventHandler>();
         evt._OnClick += (PointerEventData p) => { gameObject.SetActive(false); Managers.Game.isHandleUI = false; };
 
-
-
         evt = produce.GetComponent<UI_EventHandler>();
         evt._OnClick += ShowProduceUI;
+        evt._OnEnter += (PointerEventData p)=> { produceText.color = Color.red; };
+        evt._OnExit += (PointerEventData p) => { produceText.color = Color.white; };
+
+        showSoundAsset.LoadAssetAsync().Completed += (clip) =>
+        {
+            showSound = clip.Result;
+        };
+        hideSoundAsset.LoadAssetAsync().Completed += (clip) =>
+        {
+            hideSound = clip.Result;
+        };
 
         GetData();
         MakeKeys();
@@ -140,16 +163,18 @@ public class UI_Inventory : UI_Base
     void MakeKeys()
     {
         slotList = new UI_InventorySlot[Managers.Inven.inventorySlotInfo.Length];
-        for (int i = 0; i < Managers.Inven.inventorySlotInfo.Length; i++)
+        invenSlotAsset.LoadAssetAsync().Completed += (slot) => 
         {
-            UI_InventorySlot go = Instantiate(Resources.Load<GameObject>("UI/UI_Inven_Slot"), grid.transform).GetComponent<UI_InventorySlot>();
-            slotList[i] = go;
-            go.inven = this;
-            go.Init();
-            go.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.inventorySlotInfo[i];
-            go.GetComponentInChildren<UI_Item>().Init();
-        }
-
+            for (int i = 0; i < Managers.Inven.inventorySlotInfo.Length; i++)
+            {
+                UI_InventorySlot go = Instantiate(slot.Result, grid.transform).GetComponent<UI_InventorySlot>();
+                slotList[i] = go;
+                go.inven = this;
+                go.Init();
+                go.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.inventorySlotInfo[i];
+                go.GetComponentInChildren<UI_Item>().Init();
+            }
+        };
         Managers.Inven.Coin = 10000;
     }
 

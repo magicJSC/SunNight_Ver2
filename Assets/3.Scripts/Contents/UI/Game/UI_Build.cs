@@ -2,13 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_Build : UI_Base
 {
-    public AudioClip clickSound;
-    public AudioClip upgradeSound;
+    public AssetReferenceT<AudioClip> clickSoundAsset;
+    public AssetReferenceT<AudioClip> upgradeSoundAsset;
+
+    public AssetReferenceGameObject buildMatterUIAsset;
+
+    AudioClip clickSound;
+    AudioClip upgradeSound;
 
     [Serializable]
     public class Matters
@@ -93,6 +99,15 @@ public class UI_Build : UI_Base
         evt = collect.GetComponent<UI_EventHandler>();
         evt._OnClick += Collect;
 
+        clickSoundAsset.LoadAssetAsync().Completed += (clip) =>
+        {
+            clickSound = clip.Result;
+        };
+        upgradeSoundAsset.LoadAssetAsync().Completed += (clip) =>
+        {
+            upgradeSound = clip.Result;
+        };
+
         InitData();
         gameObject.SetActive(false);
     }
@@ -139,7 +154,7 @@ public class UI_Build : UI_Base
 
         for (int i = 0; i < matters.Count; i++)
         {
-            GameObject go = Instantiate(Resources.Load<GameObject>("UI/UI_Build_Matter"), matGrid.transform);
+            GameObject go = buildMatterUIAsset.InstantiateAsync(matGrid.transform).Result;
             go.GetComponent<Image>().sprite = matters[i].item.itemIcon;
             go.transform.GetComponentInChildren<Text>().text = $"{matters[i].count}";
         }

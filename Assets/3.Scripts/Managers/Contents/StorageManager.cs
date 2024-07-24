@@ -131,9 +131,8 @@ public class StorageManager : MonoBehaviour
         }
     }
 
-    public bool AddOneItem(string name)
+    public bool AddOneItem(ItemSO item)
     {
-        ItemSO item = Resources.Load<Item>($"Prefabs/Items/{name}").itemSo;
         if (item.itemType != ItemType.Tool)   //재료 아이템일때
         {
             UI_Item emptySlot = null;
@@ -163,7 +162,7 @@ public class StorageManager : MonoBehaviour
                     continue;
                 }
 
-                if (item.idName == itemUI.slotInfo.itemInfo.idName && itemUI.slotInfo.count < itemUI.slotInfo.itemInfo.maxAmount)
+                if (item == itemUI.slotInfo.itemInfo && itemUI.slotInfo.count < itemUI.slotInfo.itemInfo.maxAmount)
                 {
                     SetSlot(item, itemUI, itemUI.slotInfo.count + 1);
                     return true;

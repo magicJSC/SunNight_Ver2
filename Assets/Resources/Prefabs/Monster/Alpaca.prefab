@@ -197,6 +197,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   luck: 55
   meat: {fileID: 11400000, guid: 1e8a1a00c16e47b4aaf86b1d2532639b, type: 2}
+  bulletAsset:
+    m_AssetGUID: 719c9f6403c95074f8e3519c07b30597
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   bulletSpeed: 5
 --- !u!114 &2297774022771462896
 MonoBehaviour:
