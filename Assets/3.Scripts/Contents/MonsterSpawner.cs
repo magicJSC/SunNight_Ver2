@@ -34,6 +34,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         while(true)
         {
+
             if (TimeController.timeType == TimeController.TimeType.Night)
                 yield break;
 
@@ -41,6 +42,7 @@ public class MonsterSpawner : MonoBehaviour
 
             Instantiate(monsters[monsterIndex],transform.position,Quaternion.identity);
             yield return new WaitForSeconds(2f);
+
         }
     }
 
