@@ -8,14 +8,21 @@ public class TimeController : BaseController
     public Action<float> timeEvent;
     public static Action morningEvent;
     public static Action nightEvent;
+    public static Action battleEvent;
+
+    public AudioClip morningAudio;
+    public AudioClip nightAudio;
 
     public float TimeAmount { get { return _time; } set { _time = value; timeEvent?.Invoke(_time); } }
     float _time = 0;
 
+    static bool finishBattle;
+
     public enum TimeType
     {
         Morning,
-        Night
+        Night,
+        Battle
     }
 
     public static TimeType timeType { get { return _timeType; } 
@@ -23,10 +30,18 @@ public class TimeController : BaseController
         {
             _timeType = value;
 
-            if(_timeType == TimeType.Morning)
+            if (_timeType == TimeType.Morning)
                 morningEvent?.Invoke();
-            else
-                nightEvent?.Invoke();
+            else if (_timeType == TimeType.Night)
+            {
+                if (!finishBattle)
+                {
+                    nightEvent?.Invoke();
+                    _timeType = TimeType.Battle;
+                }
+            }
+            else if(_timeType == TimeType.Battle)
+                battleEvent?.Invoke();
         }
     }
     static TimeType _timeType;
@@ -34,19 +49,44 @@ public class TimeController : BaseController
     protected override void Init()
     {
         TimeAmount = 360;
-        morningEvent = null;
-        nightEvent = null;
         timeType = TimeType.Night;
+        morningEvent += SetMorningBGM;
+        nightEvent += SetNightBGM;
+        StartCoroutine(StartTime());
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        TimeAmount += Time.deltaTime;
-        if(TimeAmount >= 1080 && timeType == TimeType.Morning)
-            timeType = TimeType.Night;
-        else if(TimeAmount >= 360 && TimeAmount < 1080 && timeType == TimeType.Night)
-            timeType = TimeType.Morning;
-        if (TimeAmount >= 1440)
-            TimeAmount = 0;
+        morningEvent = null;
+        nightEvent = null;
+        battleEvent = null;
+    }
+
+    IEnumerator StartTime()
+    {
+        while (true)
+        {
+            TimeAmount += Time.deltaTime;
+            if (TimeAmount >= 1080 && timeType == TimeType.Morning)
+                timeType = TimeType.Night;
+            else if (TimeAmount >= 360 && TimeAmount < 1080 && timeType == TimeType.Night)
+                timeType = TimeType.Morning;
+            else if (TimeAmount >= 1440 && timeType == TimeType.Battle)
+                timeType = TimeType.Night;
+
+            if (TimeAmount >= 1440)
+                TimeAmount = 0;
+            yield return null;
+        }
+    }
+
+    void SetNightBGM()
+    {
+        Managers.Sound.Play(Define.Sound.Bgm,nightAudio);
+    }
+
+    void SetMorningBGM()
+    {
+        Managers.Sound.Play(Define.Sound.Bgm, morningAudio);
     }
 }

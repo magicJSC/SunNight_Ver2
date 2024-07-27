@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField]
-    Transform[] spots;
+    float range;
+
     [SerializeField]
     GameObject[] monsters;
-    [SerializeField]
-    float spawnTime;
+
+    bool canSpawn;
+
     private void Start()
     {
-        StartSpawn();
+        TimeController.battleEvent += CheckCanSpawn;
+        GetComponent<BoxCollider2D>().size = new Vector2(range,range);
+    }
+
+    void CheckCanSpawn()
+    {
+        if(canSpawn)
+            StartSpawn();
     }
 
     void StartSpawn()
@@ -22,18 +32,35 @@ public class MonsterSpawner : MonoBehaviour
 
     IEnumerator Spawn()
     {
-        while (true)
+        while(true)
         {
-            //if (TimeController.timeType == TimeController.TimeType.Morning)
-            //    yield break;
 
-            int spotIndex = Random.Range(0, spots.Length);
-            Vector3 randomPos = new Vector2(Random.Range(-4,4),Random.Range(-4,4));
+            if (TimeController.timeType == TimeController.TimeType.Night)
+                yield break;
+
             int monsterIndex = Random.Range(0, monsters.Length);
 
-            GameObject monster = Instantiate(monsters[monsterIndex]);
-            monster.transform.position = randomPos+spots[spotIndex].transform.position;
-            yield return new WaitForSeconds(spawnTime);
+            Instantiate(monsters[monsterIndex],transform.position,Quaternion.identity);
+            yield return new WaitForSeconds(2f);
+
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.GetComponent<IPlayer>() != null)
+            canSpawn = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<IPlayer>() != null)
+            canSpawn = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position,new Vector2(range,range));
     }
 }

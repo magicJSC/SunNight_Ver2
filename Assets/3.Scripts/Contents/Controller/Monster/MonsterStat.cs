@@ -13,7 +13,8 @@ public class MonsterStat : Stat
     int _damage;
 
     public float attackCool;
-    public float range;
+    public float attackRange;
+    public float lookRange;
     public float Speed { get { return _speed; } set { _speed = value; } }
     [SerializeField]
     float _speed;

@@ -13,7 +13,7 @@ public class Close_Monster : MonsterController,IFly
             {
                 if (col.GetComponent<IMonster>() != null)
                     continue;
-                getDamage.GetDamage(_stat.Damage);
+                getDamage.GetDamage(stat.Damage);
                 break;
             }
         }

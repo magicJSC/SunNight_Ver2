@@ -15,6 +15,6 @@ public class Long_Monster : MonsterController
         Rigidbody2D r = g.GetComponent<Rigidbody2D>();
         g.transform.position = transform.position;
         r.velocity = (target.position - transform.position).normalized * bulletSpeed;
-        g.GetComponent<Bullet>().damage = _stat.Damage;
+        g.GetComponent<Bullet>().damage = stat.Damage;
     }
 }

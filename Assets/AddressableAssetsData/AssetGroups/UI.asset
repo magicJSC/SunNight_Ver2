@@ -27,6 +27,36 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0307e461b9243de4a9ff976237ccd991
+    m_Address: Assets/Resources_moved/UI/UI_Inven_Slot.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57fe574a661d8614f88746f81928c9f6
+    m_Address: Assets/Resources_moved/UI/UI_HotBar_Slot.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d61a8b97db99ad4eb936e32a9120f1e
+    m_Address: Assets/Resources_moved/UI/UI_Build_Matter.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e88d5ee14bb4bb468b97c06ae916b6a
+    m_Address: Assets/Resources_moved/UI/UI_Produce.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6fce7d33d47d9494b9553a1eb75eb9d7
+    m_Address: Assets/Resources_moved/UI/UI_Produce_Material.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29d9ddddd4a0c9b439e7e04e4e7dda53
+    m_Address: Assets/Resources_moved/UI/UI_Slot_Tower.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9a368fece3badaa408b73453d1be7c74, type: 2}
   m_SchemaSet:
