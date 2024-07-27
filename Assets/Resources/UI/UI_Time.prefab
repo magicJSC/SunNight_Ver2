@@ -210,6 +210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 534f7196af1cc8e4aaab8c6a59d3efcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  morningAudio: {fileID: 8300000, guid: cd2d3e02999d0f1459a0271ed7c67f5a, type: 3}
+  nightAudio: {fileID: 8300000, guid: f783d72456430ee428a82a3d84538e37, type: 3}
 --- !u!95 &3595862050611766542
 Animator:
   serializedVersion: 5

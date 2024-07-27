@@ -12,7 +12,7 @@ public interface IWalk
 
 }
 
-public class MonsterController : MonoBehaviour,IMonster
+public class MonsterController : MonoBehaviour, IMonster
 {
     [Header("아이템 드랍")]
     public float luck;
@@ -22,13 +22,17 @@ public class MonsterController : MonoBehaviour,IMonster
     Rigidbody2D rigid;
 
     protected Transform target;
+    List<Transform> targetList = new List<Transform>();
+
     protected Animator anim;
 
-    public Define.State State { get { return _state; } 
-        set 
+    public Define.State State
+    {
+        get { return _state; }
+        set
         {
             _state = value;
-            if(anim == null)
+            if (anim == null)
                 anim = GetComponent<Animator>();
             switch (_state)
             {
@@ -49,27 +53,29 @@ public class MonsterController : MonoBehaviour,IMonster
     }
     Define.State _state = Define.State.Idle;
 
-    enum OnFight 
+    public enum TargetType
     {
-        None,
-        Battle
+        Player,
+        Tower
     }
-    OnFight onfight;
+    [HideInInspector]
+    public TargetType targetType;
 
-    protected MonsterStat _stat;
+    protected MonsterStat stat;
     protected float curAtkCool;
     protected SpriteRenderer sprite;
 
     void Start()
     {
-        _stat = GetComponent<MonsterStat>();
+        stat = GetComponent<MonsterStat>();
         rigid = GetComponent<Rigidbody2D>();
-        sprite =GetComponent<SpriteRenderer>();
-        curAtkCool = _stat.attackCool;
+        sprite = GetComponent<SpriteRenderer>();
+        curAtkCool = stat.attackCool;
+        GetComponent<CircleCollider2D>().radius = stat.lookRange;
         StartCoroutine(UpdateCor());
     }
 
-    
+
     IEnumerator UpdateCor()
     {
         while (true)
@@ -93,26 +99,46 @@ public class MonsterController : MonoBehaviour,IMonster
     //저녁과 아침이 목표 우선순위를 다르게 하기
     public Transform SetTarget()
     {
-        if (TimeController.timeType == TimeController.TimeType.Night)
+        Transform result = null;
+        if (targetType == TargetType.Player)
+        {
+            for (int i = 0; i < targetList.Count; i++)
+            {
+                if (targetList[i] == null)
+                {
+                    targetList.Remove(targetList[i]);
+                }
+
+                if (targetList[i].GetComponent<IPlayer>() != null)
+                {
+                    result = targetList[i];
+                    return result;
+                }
+                else
+                    result = targetList[i];
+            }
+
+            return result;
+        }
+        else if (targetType == TargetType.Tower)
             return Managers.Game.tower.transform;
-        else
-            return Managers.Game.player.transform;
+
+        return null;
     }
 
     protected virtual void OnIdle()
     {
-        if (target != null)
-            onfight = OnFight.Battle;
-        else
+        if (target == null)
+        {
             target = SetTarget();
+            return;
+        }
 
-       if(Define.KeyType.Exist == Managers.Inven.hotBarSlotInfo[Managers.Inven.hotBarSlotInfo.Length - 1].keyType)
-            target = SetTarget();
 
-        if (Vector2.Distance(target.transform.position, transform.position) < _stat.range)
+        if (Vector2.Distance(target.transform.position, transform.position) < stat.attackRange)
         {
             rigid.velocity = Vector2.zero;
-            if (curAtkCool >= _stat.attackCool)
+            if (curAtkCool >= stat.attackCool)
             {
                 curAtkCool = 0;
                 State = Define.State.Attack;
@@ -123,31 +149,29 @@ public class MonsterController : MonoBehaviour,IMonster
         }
         else
             State = Define.State.Move;
-            
+
     }
-    protected virtual void OnMove() 
+    protected virtual void OnMove()
     {
         CheckObstacle();
 
-        if (target != null)
-            onfight = OnFight.Battle;
-        else
-            target = Managers.Game.tower.transform;
-
-        if(onfight == OnFight.Battle)
+        if(target == null)
         {
-            if (Vector2.Distance(target.transform.position, transform.position) > _stat.range)
-                rigid.velocity = (target.transform.position - transform.position).normalized * _stat.Speed;
-            else
-                State = Define.State.Idle;
-
-            if (curAtkCool < _stat.attackCool)
-                curAtkCool += Time.deltaTime;
+            State = Define.State.Idle;
+            return;
         }
 
-        sprite.flipX = rigid.velocity.x < 0; 
+        if (Vector2.Distance(target.transform.position, transform.position) > stat.attackRange)
+            rigid.velocity = (target.transform.position - transform.position).normalized * stat.Speed;
+        else
+            State = Define.State.Idle;
+
+        if (curAtkCool < stat.attackCool)
+            curAtkCool += Time.deltaTime;
+
+        sprite.flipX = rigid.velocity.x < 0;
     }
-    
+
     protected virtual void OnAttack()
     {
         rigid.velocity = Vector2.zero;
@@ -155,15 +179,15 @@ public class MonsterController : MonoBehaviour,IMonster
 
     void CheckObstacle()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, (target.position - transform.position).normalized, _stat.range);
-        Debug.DrawRay(transform.position, (target.position - transform.position).normalized * _stat.range,Color.red);
-        if(hit)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (target.position - transform.position).normalized, stat.attackRange);
+        Debug.DrawRay(transform.position, (target.position - transform.position).normalized * stat.attackRange, Color.red);
+        if (hit)
         {
             if (hit.transform.TryGetComponent<IGetDamage>(out var getDamage))
             {
                 if (hit.transform.GetComponent<IMonster>() != null)
                     return;
-                target = hit.transform; 
+                target = hit.transform;
             }
         }
     }
@@ -175,19 +199,33 @@ public class MonsterController : MonoBehaviour,IMonster
 
     public void GetDamage(int damage)
     {
-        _stat.Hp -= damage;
-        if (_stat.Hp <= 0)
+        stat.Hp -= damage;
+        if (stat.Hp <= 0)
             Die();
     }
 
     public void Die()
     {
-        float index = Random.Range(0,101);
-        if(index <= luck)
+        float index = Random.Range(0, 101);
+        if (index <= luck)
         {
             Vector3Int pos = new Vector3Int((int)transform.position.x, (int)transform.position.y);
             MapManager.matter.SetTile(pos, meat.tile);
         }
         Destroy(gameObject);
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Stat>() != null)
+            targetList.Add(target);
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Stat>() != null)
+            targetList.Remove(target);
+
+        target = SetTarget();
     }
 }
