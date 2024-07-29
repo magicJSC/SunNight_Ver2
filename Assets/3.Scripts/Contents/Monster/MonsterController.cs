@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public interface IWalk
 
 public class MonsterController : MonoBehaviour, IMonster
 {
+    public Action<GameObject> dieEvent;
+
     [Header("아이템 드랍")]
     public float luck;
     public ItemSO meat;
@@ -134,7 +137,7 @@ public class MonsterController : MonoBehaviour, IMonster
             return;
         }
 
-
+        rigid.velocity = Vector3.zero;
         if (Vector2.Distance(target.transform.position, transform.position) < stat.attackRange)
         {
             rigid.velocity = Vector2.zero;
@@ -206,12 +209,13 @@ public class MonsterController : MonoBehaviour, IMonster
 
     public void Die()
     {
-        float index = Random.Range(0, 101);
+        float index = UnityEngine.Random.Range(0, 101);
         if (index <= luck)
         {
             Vector3Int pos = new Vector3Int((int)transform.position.x, (int)transform.position.y);
             MapManager.matter.SetTile(pos, meat.tile);
         }
+        dieEvent?.Invoke(gameObject);
         Destroy(gameObject);
     }
 

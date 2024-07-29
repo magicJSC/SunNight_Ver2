@@ -38571,7 +38571,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6320708761635937942}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 25.2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -38592,6 +38592,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 25
   monsters: []
+  maxMonsterAmount: 0
+  distance: 0
 --- !u!61 &4711064293539510745
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38607,7 +38609,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -38635,7 +38637,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 25, y: 25}
   m_EdgeRadius: 0
 --- !u!1 &8061821800710118814
 GameObject:
@@ -38663,7 +38665,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8061821800710118814}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -25.15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -38684,6 +38686,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 25
   monsters: []
+  maxMonsterAmount: 0
+  distance: 0
 --- !u!61 &5695815900392736095
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38699,7 +38703,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -38727,7 +38731,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 25, y: 25}
   m_EdgeRadius: 0
 --- !u!1 &8265545601798858204
 GameObject:
@@ -53372,7 +53376,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8994624054298029320}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -53392,7 +53396,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 25
-  monsters: []
+  monsters:
+  - {fileID: 3263040771799250074, guid: 86b99bbc60a021a4a89bf9435519a572, type: 3}
+  maxMonsterAmount: 1
+  distance: 30
 --- !u!61 &6464939581217692535
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -53408,7 +53415,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -53436,5 +53443,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 25, y: 25}
   m_EdgeRadius: 0

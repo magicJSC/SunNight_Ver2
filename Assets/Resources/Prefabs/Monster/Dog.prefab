@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5264163572248533395}
   - component: {fileID: 7283630443451138983}
   - component: {fileID: 8111215423082806451}
+  - component: {fileID: -4300505216020974157}
   m_Layer: 0
   m_Name: Dog
   m_TagString: Untagged
@@ -197,6 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   luck: 40
   meat: {fileID: 11400000, guid: 1e8a1a00c16e47b4aaf86b1d2532639b, type: 2}
+  targetType: 0
 --- !u!114 &8111215423082806451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,8 +216,44 @@ MonoBehaviour:
   _defence: 1
   _damage: 20
   attackCool: 1
-  range: 2
+  attackRange: 0
+  lookRange: 0
   _speed: 5
+--- !u!58 &-4300505216020974157
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3263040771799250074}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.84375
 --- !u!1001 &6914328826274419481
 PrefabInstance:
   m_ObjectHideFlags: 0

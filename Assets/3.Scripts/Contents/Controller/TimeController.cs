@@ -16,7 +16,7 @@ public class TimeController : BaseController
     public float TimeAmount { get { return _time; } set { _time = value; timeEvent?.Invoke(_time); } }
     float _time = 0;
 
-    static bool finishBattle;
+    public static bool finishBattle;
 
     public enum TimeType
     {
@@ -72,8 +72,10 @@ public class TimeController : BaseController
             else if (TimeAmount >= 360 && TimeAmount < 1080 && timeType == TimeType.Night)
                 timeType = TimeType.Morning;
             else if (TimeAmount >= 1440 && timeType == TimeType.Battle)
+            {
+                finishBattle = true;
                 timeType = TimeType.Night;
-
+            }
             if (TimeAmount >= 1440)
                 TimeAmount = 0;
             yield return null;

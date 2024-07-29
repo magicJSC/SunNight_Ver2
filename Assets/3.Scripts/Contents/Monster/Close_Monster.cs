@@ -21,6 +21,8 @@ public class Close_Monster : MonsterController,IFly
 
     private void OnDrawGizmos()
     {
+        if (target == null)
+            return;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position + (target.position - transform.position).normalized, new Vector2(2, 2));
     }

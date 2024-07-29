@@ -19,7 +19,7 @@ public class UI_Time : UI_Base
 
         anim = GetComponent<Animator>();
         time = GetComponent<TimeController>();
-        TimeController.battleEvent += ShowBattleSign;
+        TimeController.nightEvent += ShowBattleSign;
         time.timeEvent += RotateTimeRullet;
         time.timeEvent += SetTimeText;
     }
@@ -39,6 +39,7 @@ public class UI_Time : UI_Base
 
     void ShowBattleSign()
     {
-        anim.Play("Sign");
+        if(!TimeController.finishBattle)
+            anim.Play("Sign");
     }
 }

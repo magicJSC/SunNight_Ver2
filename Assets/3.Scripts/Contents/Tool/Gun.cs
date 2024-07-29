@@ -20,7 +20,7 @@ public class Gun : ToolController
         {
             bullet = obj.Result;
             bullet.GetComponent<Rigidbody2D>().velocity = (point - transform.position).normalized * bulletSpeed;
-            bullet.GetComponent<Bullet>().damage = _damage;
+            bullet.GetComponent<PlayerBullet>().damage = _damage;
         };
     }
 }
