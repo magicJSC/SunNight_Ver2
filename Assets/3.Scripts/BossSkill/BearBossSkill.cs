@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BearBossSkill : MonoBehaviour
 {
-    MonsterStat MonsterStat;
+    MonsterStat monsterStat;
     public float nowHp;
     public float maxHp = 200;
     public Color newColor = Color.red;
@@ -15,7 +15,6 @@ public class BearBossSkill : MonoBehaviour
 
     public void Start()
     {
-        MonsterStat = GetComponent<MonsterStat>();
         angry = false;
         nowHp = maxHp;
         Renderer renderer = GetComponent<Renderer>();
