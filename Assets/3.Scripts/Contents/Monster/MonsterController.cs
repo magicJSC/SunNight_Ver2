@@ -24,8 +24,8 @@ public class MonsterController : MonoBehaviour, IMonster
 
     Rigidbody2D rigid;
 
-    protected Transform target;
-    List<Transform> targetList = new List<Transform>();
+    public Transform target;
+    public List<Transform> targetList = new List<Transform>();
 
     protected Animator anim;
 
@@ -74,7 +74,6 @@ public class MonsterController : MonoBehaviour, IMonster
         rigid = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         curAtkCool = stat.attackCool;
-        GetComponent<CircleCollider2D>().radius = stat.lookRange;
         StartCoroutine(UpdateCor());
     }
 
@@ -131,13 +130,14 @@ public class MonsterController : MonoBehaviour, IMonster
 
     protected virtual void OnIdle()
     {
+        rigid.velocity = Vector3.zero;
+
         if (target == null)
         {
             target = SetTarget();
             return;
         }
 
-        rigid.velocity = Vector3.zero;
         if (Vector2.Distance(target.transform.position, transform.position) < stat.attackRange)
         {
             rigid.velocity = Vector2.zero;
@@ -182,6 +182,9 @@ public class MonsterController : MonoBehaviour, IMonster
 
     void CheckObstacle()
     {
+        if (target == null)
+            return;
+
         RaycastHit2D hit = Physics2D.Raycast(transform.position, (target.position - transform.position).normalized, stat.attackRange);
         Debug.DrawRay(transform.position, (target.position - transform.position).normalized * stat.attackRange, Color.red);
         if (hit)
@@ -217,19 +220,5 @@ public class MonsterController : MonoBehaviour, IMonster
         }
         dieEvent?.Invoke(gameObject);
         Destroy(gameObject);
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<Stat>() != null)
-            targetList.Add(target);
-    }
-
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.GetComponent<Stat>() != null)
-            targetList.Remove(target);
-
-        target = SetTarget();
     }
 }

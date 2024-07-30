@@ -42,14 +42,22 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
 
     public void Interact()
     {
-        if (Managers.Game.isKeepingTower || TimeController.timeType == TimeController.TimeType.Night)
-            return;
+        if (TimeController.timeType == TimeController.TimeType.Morning)
+        {
 
-        Managers.Game.isKeepingTower = true;
-        Managers.Inven.hotBarUI.CheckChoice();
-        Managers.Inven.hotBarUI.towerSlot.ShowTowerIcon();
-        Managers.Game.tower.transform.SetParent(Managers.Game.build.transform);
-        Managers.Game.tower.transform.position = Managers.Game.build.transform.position;
+            if (Managers.Game.isKeepingTower)
+                return;
+
+            Managers.Game.isKeepingTower = true;
+            Managers.Inven.hotBarUI.CheckChoice();
+            Managers.Inven.hotBarUI.towerSlot.ShowTowerIcon();
+            Managers.Game.tower.transform.SetParent(Managers.Game.build.transform);
+            Managers.Game.tower.transform.position = Managers.Game.build.transform.position;
+        }
+        else if(TimeController.timeType == TimeController.TimeType.Night)
+        {
+            TimeController.SetMorning();
+        }
     }
 
     void ForceInstall()
@@ -66,6 +74,8 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
 
     public void GetDamage(int damage)
     {
+        if (PlayerController.isDie)
+            return;
         stat.Hp -= damage;
         if (stat.Hp <= 0)
             Die();
@@ -138,6 +148,8 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
                 go.Result.GetComponent<Animator>().Play("Die");
             else
                 go.Result.GetComponent<Animator>().Play("GameOver");
+
+            PlayerController.isDie = true;
         };
         Camera.main.GetComponent<CameraController>().target = Managers.Game.tower.transform;
     }

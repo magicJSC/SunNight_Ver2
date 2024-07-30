@@ -14,7 +14,7 @@ public class PlayerController : CreatureController,IPlayer
 
     PlayerStat stat;
     bool init;
-   
+  
 
     [Header("Contents")]
     Vector2 dir;
@@ -26,7 +26,7 @@ public class PlayerController : CreatureController,IPlayer
     public List<GameObject> interactObjectList = new List<GameObject>();
     GameObject canInteractObj;
 
-    bool isDie;
+    public static bool isDie;
 
     public AssetReferenceGameObject statUIAsset;
     public AssetReferenceGameObject DieUIAsset;
@@ -163,6 +163,7 @@ public class PlayerController : CreatureController,IPlayer
 
     public void Die()
     {
+
         isDie = true;
         graveAsset.InstantiateAsync().Completed += (go) => 
         {

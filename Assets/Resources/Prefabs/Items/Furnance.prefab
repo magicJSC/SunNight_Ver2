@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4195077323307575936}
   - component: {fileID: 4750833110444071858}
   - component: {fileID: 2229222575752670638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Furnance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 384
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

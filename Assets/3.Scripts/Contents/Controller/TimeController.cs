@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TimeController : BaseController
 {
-    public Action<float> timeEvent;
+    public static Action<float> timeEvent;
     public static Action morningEvent;
     public static Action nightEvent;
     public static Action battleEvent;
@@ -13,10 +13,9 @@ public class TimeController : BaseController
     public AudioClip morningAudio;
     public AudioClip nightAudio;
 
-    public float TimeAmount { get { return _time; } set { _time = value; timeEvent?.Invoke(_time); } }
-    float _time = 0;
+    public static float TimeAmount { get { return _time; } set { _time = value; timeEvent?.Invoke(_time); } }
+    static float _time = 0;
 
-    public static bool finishBattle;
 
     public enum TimeType
     {
@@ -25,23 +24,18 @@ public class TimeController : BaseController
         Battle
     }
 
-    public static TimeType timeType { get { return _timeType; } 
+    public static TimeType timeType { get { return _timeType; }
         set
         {
             _timeType = value;
 
             if (_timeType == TimeType.Morning)
                 morningEvent?.Invoke();
-            else if (_timeType == TimeType.Night)
+            else if (_timeType == TimeType.Battle)
             {
-                if (!finishBattle)
-                {
-                    nightEvent?.Invoke();
-                    _timeType = TimeType.Battle;
-                }
-            }
-            else if(_timeType == TimeType.Battle)
                 battleEvent?.Invoke();
+                nightEvent?.Invoke();
+            }
         }
     }
     static TimeType _timeType;
@@ -60,26 +54,29 @@ public class TimeController : BaseController
         morningEvent = null;
         nightEvent = null;
         battleEvent = null;
+        timeEvent = null;
     }
 
     IEnumerator StartTime()
     {
         while (true)
         {
-            TimeAmount += Time.deltaTime;
+            TimeAmount += Time.deltaTime * 20;
             if (TimeAmount >= 1080 && timeType == TimeType.Morning)
-                timeType = TimeType.Night;
+                timeType = TimeType.Battle;
             else if (TimeAmount >= 360 && TimeAmount < 1080 && timeType == TimeType.Night)
                 timeType = TimeType.Morning;
             else if (TimeAmount >= 1440 && timeType == TimeType.Battle)
-            {
-                finishBattle = true;
                 timeType = TimeType.Night;
-            }
             if (TimeAmount >= 1440)
                 TimeAmount = 0;
             yield return null;
         }
+    }
+
+    public static void SetMorning()
+    {
+        UI_Time.anim.Play("Sleep");
     }
 
     void SetNightBGM()
