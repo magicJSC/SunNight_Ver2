@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8131323361865069675}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MonsterSpawners
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38556,7 +38556,7 @@ GameObject:
   - component: {fileID: 8956214276747974935}
   - component: {fileID: 3124386186910106045}
   - component: {fileID: 4711064293539510745}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MonsterSpawner (2)
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -38591,9 +38591,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 25
-  monsters: []
-  maxMonsterAmount: 0
-  distance: 0
+  monsters:
+  - {fileID: 3263040771799250074, guid: 86b99bbc60a021a4a89bf9435519a572, type: 3}
+  maxMonsterAmount: 1
+  distance: 30
+  spawnCool: 2
 --- !u!61 &4711064293539510745
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -38650,7 +38652,7 @@ GameObject:
   - component: {fileID: 919611411128550552}
   - component: {fileID: 2770650762428088845}
   - component: {fileID: 5695815900392736095}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MonsterSpawner (1)
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -38685,9 +38687,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 25
-  monsters: []
-  maxMonsterAmount: 0
-  distance: 0
+  monsters:
+  - {fileID: 3263040771799250074, guid: 86b99bbc60a021a4a89bf9435519a572, type: 3}
+  maxMonsterAmount: 1
+  distance: 30
+  spawnCool: 2
 --- !u!61 &5695815900392736095
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -53361,7 +53365,7 @@ GameObject:
   - component: {fileID: 7803468512976695071}
   - component: {fileID: 2271706526605935626}
   - component: {fileID: 6464939581217692535}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MonsterSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -53400,6 +53404,7 @@ MonoBehaviour:
   - {fileID: 3263040771799250074, guid: 86b99bbc60a021a4a89bf9435519a572, type: 3}
   maxMonsterAmount: 1
   distance: 30
+  spawnCool: 2
 --- !u!61 &6464939581217692535
 BoxCollider2D:
   m_ObjectHideFlags: 0

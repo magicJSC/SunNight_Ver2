@@ -59,7 +59,7 @@ public class UI_Build : UI_Base
         Coin
     }
 
-    enum Images 
+    enum Images
     {
         Icon,
         Upgrade,
@@ -78,14 +78,14 @@ public class UI_Build : UI_Base
         atkCoolT = Get<Text>((int)Texts.AtkCool);
         rangeT = Get<Text>((int)Texts.Range);
         coinT = Get<Text>((int)Texts.Coin);
-        
+
         icon = Get<Image>((int)Images.Icon);
         upgrade = Get<Image>((int)Images.Upgrade);
         close = Get<Image>((int)Images.Close);
         collect = Get<Image>((int)Images.Collect);
 
-        matGrid = Util.FindChild(gameObject,"MatterGrid",true);
-        panel = Util.FindChild(gameObject,"Panel",true);
+        matGrid = Util.FindChild(gameObject, "MatterGrid", true);
+        panel = Util.FindChild(gameObject, "Panel", true);
 
         itemData = transform.GetComponentInParent<Item_Buliding>();
         buildStat = transform.GetComponentInParent<BuildStat>();
@@ -143,7 +143,7 @@ public class UI_Build : UI_Base
             atkCoolT.text = $"{buildStat.attackCool}";
         else
             atkCoolT.text = "-";
-        if(buildStat.range != 0)
+        if (buildStat.range != 0)
             rangeT.text = $"{buildStat.range}";
         else
             rangeT.text = "-";
@@ -152,12 +152,17 @@ public class UI_Build : UI_Base
 
         coinT.text = $"ºñ¿ë : {expension}";
 
-        for (int i = 0; i < matters.Count; i++)
+
+        buildMatterUIAsset.LoadAssetAsync().Completed += (obj) =>
         {
-            GameObject go = buildMatterUIAsset.InstantiateAsync(matGrid.transform).Result;
-            go.GetComponent<Image>().sprite = matters[i].item.itemIcon;
-            go.transform.GetComponentInChildren<Text>().text = $"{matters[i].count}";
-        }
+            for (int i = 0; i < matters.Count; i++)
+            {
+                GameObject go = Instantiate(obj.Result,matGrid.transform);
+                go.GetComponent<Image>().sprite = matters[i].item.itemIcon;
+                go.transform.GetComponentInChildren<Text>().text = $"{matters[i].count}";
+            }
+        };
+
     }
 
     void UpgradeStat(PointerEventData p)
@@ -168,7 +173,7 @@ public class UI_Build : UI_Base
         if (Managers.Inven.Coin - expension < 0)
         {
             Debug.Log("µ· ºÎÁ·");
-            return; 
+            return;
         }
         if (!CheckMaterials())
         {
@@ -185,7 +190,7 @@ public class UI_Build : UI_Base
     void Collect(PointerEventData p)
     {
         Item_Buliding building = GetComponentInParent<Item_Buliding>();
-        Managers.Inven.AddItems(building.itemSo,1);
+        Managers.Inven.AddItems(building.itemSo, 1);
         Managers.Inven.CheckHotBarChoice();
         Managers.Game.isHandleUI = false;
         building.DeleteBuilding();
@@ -197,7 +202,7 @@ public class UI_Build : UI_Base
         Disappear();
     }
 
-    List<(UI_Item,int)> ItemUIList = new List<(UI_Item, int)>();
+    List<(UI_Item, int)> ItemUIList = new List<(UI_Item, int)>();
 
     bool CheckMaterials()
     {
@@ -210,10 +215,10 @@ public class UI_Build : UI_Base
                 UI_Item itemUI = invenInfos[j].itemUI;
                 if (itemUI.slotInfo.itemInfo == matters[i].item)
                 {
-                    if(count - itemUI.slotInfo.count <= 0)
+                    if (count - itemUI.slotInfo.count <= 0)
                     {
                         int remain = Mathf.Clamp(itemUI.slotInfo.count - count, 0, itemUI.slotInfo.count);
-                        ItemUIList.Add((itemUI,remain));
+                        ItemUIList.Add((itemUI, remain));
                         count -= itemUI.slotInfo.count;
                         break;
                     }
@@ -230,7 +235,7 @@ public class UI_Build : UI_Base
 
     void UseMaterials()
     {
-        for(int i = 0; i < ItemUIList.Count; i++)
+        for (int i = 0; i < ItemUIList.Count; i++)
         {
             if (ItemUIList[i].Item2 == 0)
                 ItemUIList[i].Item1.MakeEmptySlot();

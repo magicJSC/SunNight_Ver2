@@ -9,19 +9,17 @@ public class UI_Time : UI_Base
     RectTransform timeRullet;
     Text timeText;
 
-    Animator anim;
+    public static Animator anim;
 
-    TimeController time;
     public override void Init()
     {
         timeRullet = Util.FindChild(gameObject,"TimeRullet",true).GetComponent<RectTransform>();
         timeText = Util.FindChild(gameObject,"Time",true).GetComponent<Text>();
 
         anim = GetComponent<Animator>();
-        time = GetComponent<TimeController>();
         TimeController.nightEvent += ShowBattleSign;
-        time.timeEvent += RotateTimeRullet;
-        time.timeEvent += SetTimeText;
+        TimeController.timeEvent += RotateTimeRullet;
+        TimeController.timeEvent += SetTimeText;
     }
 
     void RotateTimeRullet(float time)
@@ -38,8 +36,12 @@ public class UI_Time : UI_Base
     }
 
     void ShowBattleSign()
+    { 
+        anim.Play("BattleSign");
+    }
+
+    void Sleep()
     {
-        if(!TimeController.finishBattle)
-            anim.Play("Sign");
+        TimeController.TimeAmount = 360;
     }
 }

@@ -23,7 +23,7 @@ public class TurretController : BaseController
 
     float termBeforeWork = 1;
 
-    protected List<GameObject> targets = new List<GameObject>();
+    public List<GameObject> targets = new List<GameObject>();
 
     protected GameObject _target;
 
@@ -35,8 +35,6 @@ public class TurretController : BaseController
         stat = GetComponent<BuildStat>();
         if (stat == null)
             Debug.Log($"{name}포탑에 TurretStat이 존재하지 않습니다");
-        GetComponent<CircleCollider2D>().radius = stat.range;
-        GetComponent<CircleCollider2D>().isTrigger = true;
     }
 
     private void OnEnable()
@@ -125,25 +123,17 @@ public class TurretController : BaseController
             _target = result;
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        AddTarget(collision);
-    }
+   
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public virtual void AddTarget(Collider2D collision)
     {
-        RemoveTarget(collision);
-    }
-
-    protected virtual void AddTarget(Collider2D collision)
-    {
-        if (collision.GetComponent<MonsterController>() == null)
+        if (collision.GetComponent<MonsterController>() != null)
         {
             targets.Add(collision.gameObject);
         }
     }
 
-    protected virtual void RemoveTarget(Collider2D collision)
+    public virtual void RemoveTarget(Collider2D collision)
     {
         if (collision.GetComponent<MonsterController>() != null)
         {

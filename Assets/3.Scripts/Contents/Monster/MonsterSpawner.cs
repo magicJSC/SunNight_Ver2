@@ -18,6 +18,8 @@ public class MonsterSpawner : MonoBehaviour
     [Header("Night")]
     [SerializeField]
     float distance;
+    [SerializeField]
+    float spawnCool;
 
     float camWidth;
     float camHeight;
@@ -64,7 +66,7 @@ public class MonsterSpawner : MonoBehaviour
                 yield break;
 
             NightSpawn();
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(spawnCool);
         }
     }
 
@@ -118,7 +120,8 @@ public class MonsterSpawner : MonoBehaviour
                 spawnPos = spawnPos - new Vector2(camWidth / 2, 0);
         }
 
-        Instantiate(monsters[monsterIndex], spawnPos, Quaternion.identity);
+        GameObject go = Instantiate(monsters[monsterIndex], spawnPos, Quaternion.identity);
+        go.GetComponent<MonsterController>().targetType = MonsterController.TargetType.Tower;
     }
 
     void RemoveMonster(GameObject monster)
