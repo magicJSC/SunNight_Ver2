@@ -47,7 +47,7 @@ public class UI_Produce_Item : UI_Base
 
     public void Set_Explain()
     {
-        explain.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + new Vector2(-515, 450);
+        explain.GetComponent<RectTransform>().anchoredPosition = transform.parent.GetComponent<RectTransform>().anchoredPosition + new Vector2(-515, 450);
         explainText.text = itemSO.explain;
         nameText.text = itemSO.itemName;
     }
