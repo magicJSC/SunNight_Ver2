@@ -110,7 +110,7 @@ public class UI_Produce : UI_Base
 
         for (int i = 0; i < contentItem.transform.childCount; i++)
         {
-            UI_Produce_Item it = contentItem.transform.GetChild(i).GetComponent<UI_Produce_Item>();
+            UI_Produce_Item it = contentItem.transform.GetChild(i).GetComponentInChildren<UI_Produce_Item>();
             it.produce = this;
             it.Init();
         }

@@ -143,10 +143,12 @@ public class UI_Item : UI_Base
 
     void AbandonItem()
     {
-        if (slotInfo.itemInfo.itemType == Define.ItemType.Building || !StorageManager.canAbandon)
+        if (!StorageManager.canAbandon)
             return;
-        GameObject go = abandonUIAsset.InstantiateAsync().Result;
-        go.GetComponent<UI_Abandon>().itemUI = this;
+        abandonUIAsset.InstantiateAsync().Completed += (obj) =>
+        {
+            obj.Result.GetComponent<UI_Abandon>().itemUI = this;
+        };
         rect.anchoredPosition = Vector2.zero;
     }
 }
