@@ -144,13 +144,10 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
     {
         DieUIAsset.InstantiateAsync().Completed += (go) =>
         {
-            if (!Managers.Game.isKeepingTower)
-                go.Result.GetComponent<Animator>().Play("Die");
-            else
-                go.Result.GetComponent<Animator>().Play("GameOver");
+            go.Result.GetComponent<Animator>().Play("GameOver");
 
             PlayerController.isDie = true;
+           Camera.main.GetComponent<CameraController>().target = Managers.Game.tower.transform;
         };
-        Camera.main.GetComponent<CameraController>().target = Managers.Game.tower.transform;
     }
 }
