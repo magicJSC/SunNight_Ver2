@@ -198,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   luck: 55
   meat: {fileID: 11400000, guid: 1e8a1a00c16e47b4aaf86b1d2532639b, type: 2}
-  money: 50
+  coin: 80
   target: {fileID: 0}
   targetList: []
   targetType: 0

@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   luck: 40
   meat: {fileID: 11400000, guid: 1e8a1a00c16e47b4aaf86b1d2532639b, type: 2}
-  money: 50
+  coin: 50
   target: {fileID: 0}
   targetList: []
   targetType: 0
@@ -225,7 +225,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3263040771799250074}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

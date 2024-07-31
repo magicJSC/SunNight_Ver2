@@ -22,7 +22,7 @@ public class Crossbow : TurretController, IAttack, IRotate
 
     public void Attack()
     {
-        if (_target)
+        if (_target == null)
             return;
         _target.GetComponent<IMonster>().GetDamage(stat.Damage);
     }
