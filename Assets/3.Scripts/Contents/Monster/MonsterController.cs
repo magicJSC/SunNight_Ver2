@@ -24,7 +24,7 @@ public class MonsterController : MonoBehaviour, IMonster
     [SerializeField]
     ItemSO meat;
     [SerializeField]
-    int money;
+    int coin;
 
     [HideInInspector]
     public Transform target;
@@ -183,7 +183,8 @@ public class MonsterController : MonoBehaviour, IMonster
         if (curAtkCool < stat.attackCool)
             curAtkCool += Time.deltaTime;
 
-        sprite.flipX = agent.velocity.x < 0; 
+        if(agent.velocity.x != 0)
+            sprite.flipX = agent.velocity.x < 0; 
     }
 
     protected virtual void OnAttack()
@@ -229,6 +230,7 @@ public class MonsterController : MonoBehaviour, IMonster
             Vector3Int pos = new Vector3Int((int)transform.position.x, (int)transform.position.y);
             MapManager.matter.SetTile(pos, meat.tile);
         }
+        Managers.Inven.Coin += coin;
         dieEvent?.Invoke(gameObject);
         Destroy(gameObject);
     }

@@ -231,7 +231,6 @@ GameObject:
   - component: {fileID: 9066740309512137794}
   - component: {fileID: 3584362482958360837}
   - component: {fileID: 2625381835466355638}
-  - component: {fileID: 1728024928826082234}
   m_Layer: 5
   m_Name: Choice
   m_TagString: Untagged
@@ -286,7 +285,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -110212386, guid: 1c001994aad59e7428bb85b3108732e8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a3bafe900dbc43f2b54db79914cc5dd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -296,24 +295,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &1728024928826082234
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6176858279883405454}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f458264a24a9a6f4fb83d612157939bb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

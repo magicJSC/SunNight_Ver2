@@ -59,8 +59,8 @@ public class SoundManager
                 audioSource.Stop();
 
             audioSource.clip = audioClip;
-            //if (Managers.Game.BGMOn)
-            audioSource.Play();
+            if(Managers.Game.BGMOn)
+                audioSource.Play();
         }
         else if (type == Define.Sound.SubBgm)
         {
@@ -68,14 +68,14 @@ public class SoundManager
                 audioSource.Stop();
 
             audioSource.clip = audioClip;
-            //if (Managers.Game.EffectSoundOn)
-            audioSource.Play();
+            if (Managers.Game.EffectSoundOn)
+                audioSource.Play();
         }
         else
         {
             audioSource.pitch = pitch;
-            //if (Managers.Game.EffectSoundOn)
-            audioSource.PlayOneShot(audioClip);
+            if (Managers.Game.EffectSoundOn)
+             audioSource.PlayOneShot(audioClip);
         }
     }
 
