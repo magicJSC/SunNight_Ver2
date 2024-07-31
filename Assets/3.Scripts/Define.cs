@@ -8,6 +8,7 @@ public class Define : MonoBehaviour
     public enum SceneType
     {
         None,
+        MainScene,
         GameScene,
         TutorialScene
     }
