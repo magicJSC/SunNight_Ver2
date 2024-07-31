@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public interface IFly
 {
@@ -21,11 +22,12 @@ public class MonsterController : MonoBehaviour, IMonster
     public float luck;
     public ItemSO meat;
 
-
-    Rigidbody2D rigid;
-
+    [HideInInspector]
     public Transform target;
+    [HideInInspector]
     public List<Transform> targetList = new List<Transform>();
+
+    NavMeshAgent agent;
 
     protected Animator anim;
 
@@ -41,11 +43,14 @@ public class MonsterController : MonoBehaviour, IMonster
             {
                 case Define.State.Idle:
                     anim.Play("Idle");
+                    agent.enabled = false;
                     break;
                 case Define.State.Move:
                     anim.Play("Move");
+                    agent.enabled = true;
                     break;
                 case Define.State.Attack:
+                    agent.enabled = false;
                     anim.Play("Attack");
                     break;
                 case Define.State.Die:
@@ -71,8 +76,12 @@ public class MonsterController : MonoBehaviour, IMonster
     void Start()
     {
         stat = GetComponent<MonsterStat>();
-        rigid = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        agent.speed = stat.Speed;
+
         curAtkCool = stat.attackCool;
         StartCoroutine(UpdateCor());
     }
@@ -130,7 +139,6 @@ public class MonsterController : MonoBehaviour, IMonster
 
     protected virtual void OnIdle()
     {
-        rigid.velocity = Vector3.zero;
 
         if (target == null)
         {
@@ -138,9 +146,8 @@ public class MonsterController : MonoBehaviour, IMonster
             return;
         }
 
-        if (Vector2.Distance(target.transform.position, transform.position) < stat.attackRange)
+        if ((target.transform.position - transform.position).magnitude < stat.attackRange)
         {
-            rigid.velocity = Vector2.zero;
             if (curAtkCool >= stat.attackCool)
             {
                 curAtkCool = 0;
@@ -152,32 +159,32 @@ public class MonsterController : MonoBehaviour, IMonster
         }
         else
             State = Define.State.Move;
-
     }
     protected virtual void OnMove()
     {
-        CheckObstacle();
 
         if(target == null)
         {
             State = Define.State.Idle;
             return;
         }
+        CheckObstacle();
 
-        if (Vector2.Distance(target.transform.position, transform.position) > stat.attackRange)
-            rigid.velocity = (target.transform.position - transform.position).normalized * stat.Speed;
-        else
+        if(agent.enabled)
+            agent.SetDestination(target.transform.position);
+      
+        if ((target.transform.position - transform.position).magnitude < stat.attackRange)
             State = Define.State.Idle;
 
         if (curAtkCool < stat.attackCool)
             curAtkCool += Time.deltaTime;
 
-        sprite.flipX = rigid.velocity.x < 0;
+        sprite.flipX = (target.transform.position - transform.position).normalized.x < 0; 
     }
 
     protected virtual void OnAttack()
     {
-        rigid.velocity = Vector2.zero;
+
     }
 
     void CheckObstacle()
@@ -185,7 +192,7 @@ public class MonsterController : MonoBehaviour, IMonster
         if (target == null)
             return;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, (target.position - transform.position).normalized, stat.attackRange);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (target.position - transform.position).normalized, stat.attackRange,0);
         Debug.DrawRay(transform.position, (target.position - transform.position).normalized * stat.attackRange, Color.red);
         if (hit)
         {

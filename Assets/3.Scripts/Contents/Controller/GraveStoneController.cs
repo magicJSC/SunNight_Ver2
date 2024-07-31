@@ -82,15 +82,16 @@ public class GraveStoneController : MonoBehaviour,ICaninteract
 
     void GetItem()
     {
-        bool bringAll = true;
-       foreach(StorageManager.SlotInfo item in slotInfoList)
-       {
-            if(!Managers.Inven.AddItems(item.itemInfo, item.count))
-                bringAll = false;
+        int stack =0;
+        int count = slotInfoList.Count;
+        for(int i = 0;i < count;i++)
+        {
+            if (Managers.Inven.AddItems(slotInfoList[stack].itemInfo, slotInfoList[stack].count))
+                slotInfoList.RemoveAt(stack);
             else
-                slotInfoList.Remove(item);
-       }
-        if (bringAll)
+                stack++;
+        }
+        if (slotInfoList.Count == 0)
         {
             Destroy(gameObject);
             slotInfoList.Clear();
