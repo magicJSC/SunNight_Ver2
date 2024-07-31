@@ -36,6 +36,10 @@ public class UI_PlayerStat : UI_Base
         playerStat.hpBarEvent += SetHpBar;
         playerStat.energyBarEvent += SetEnergyBar;
         playerStat.hungerBarEvent += SetHungerBar;
+
+        playerStat.Hp = playerStat.maxHP;
+        playerStat.Energy = playerStat.maxEnergy;
+        playerStat.Hunger = playerStat.maxHunger;
     }
 
     void SetHpBar(float ratio)

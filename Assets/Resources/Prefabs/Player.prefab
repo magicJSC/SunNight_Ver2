@@ -289,12 +289,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c594dcc0bf64b47b90a43442412fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  maxHP: 0
-  _energy: 30
-  maxEnergy: 0
-  _hunger: 30
-  maxHunger: 0
+  maxHP: 100
+  maxEnergy: 30
+  maxHunger: 30
 --- !u!114 &2880817748547012284
 MonoBehaviour:
   m_ObjectHideFlags: 0

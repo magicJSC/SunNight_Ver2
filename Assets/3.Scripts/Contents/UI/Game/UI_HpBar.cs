@@ -29,5 +29,6 @@ public class UI_HpBar : UI_Base
         {
             stat.hpEvent += SetHp;
         }
+        stat.Hp = stat.maxHP;
     }
 }

@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   luck: 40
   meat: {fileID: 11400000, guid: 1e8a1a00c16e47b4aaf86b1d2532639b, type: 2}
+  money: 50
   target: {fileID: 0}
   targetList: []
   targetType: 0
@@ -187,12 +188,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ff16f68f910dc419778eb9056c191a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 50
-  maxHP: 0
+  maxHP: 20
   _defence: 1
-  _damage: 20
+  _damage: 10
   attackCool: 1
-  attackRange: 3
+  attackRange: 2
   lookRange: 10
   _speed: 5
 --- !u!195 &2882236893292789278
