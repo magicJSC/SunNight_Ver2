@@ -19,8 +19,12 @@ public class MonsterController : MonoBehaviour, IMonster
     public Action<GameObject> dieEvent;
 
     [Header("아이템 드랍")]
-    public float luck;
-    public ItemSO meat;
+    [SerializeField]
+    float luck;
+    [SerializeField]
+    ItemSO meat;
+    [SerializeField]
+    int money;
 
     [HideInInspector]
     public Transform target;

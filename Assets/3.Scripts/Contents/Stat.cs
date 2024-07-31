@@ -9,14 +9,13 @@ public class Stat : MonoBehaviour
 
 
     public float Hp { get { return _hp; } set { _hp = Mathf.Clamp(value,0,value); hpEvent?.Invoke(Hp / maxHP); } }
-    [SerializeField]
     float _hp;
 
-    [HideInInspector]
+    [SerializeField]
     public float maxHP;
 
     private void Start()
     {
-        maxHP = _hp;
+        _hp = maxHP;
     }
 }
