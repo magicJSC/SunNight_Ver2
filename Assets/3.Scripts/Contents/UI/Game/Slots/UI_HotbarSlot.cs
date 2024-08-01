@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class UI_HotbarSlot : UI_BaseSlot,IDroppable,IDragable
 {
     [HideInInspector]
-    public int keyId;
-    [HideInInspector]
     public UI_Item itemUI;
 
     public override void Init()

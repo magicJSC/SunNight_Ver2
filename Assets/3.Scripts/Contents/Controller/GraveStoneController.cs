@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GraveStoneController : MonoBehaviour,ICaninteract
+public class GraveStoneController : MonoBehaviour,IInteractObject
 {
     public GameObject canInteractSign { get; private set; }
 
@@ -16,34 +16,6 @@ public class GraveStoneController : MonoBehaviour,ICaninteract
         GetInvenData();
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<PlayerController>(out var player))
-        {
-            EnterPlayer(player);
-        }
-    }
-
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<PlayerController>(out var player))
-        {
-            ExitPlayer(player);
-        }
-    }
-
-    public void EnterPlayer(PlayerController player)
-    {
-        player.interactObjectList.Add(gameObject);
-        player.SetInteractObj();
-    }
-
-    public void ExitPlayer(PlayerController player)
-    {
-        player.interactObjectList.Remove(gameObject);
-        canInteractSign.SetActive(false);
-        player.SetInteractObj();
-    }
 
     void GetInvenData()
     {
@@ -73,6 +45,8 @@ public class GraveStoneController : MonoBehaviour,ICaninteract
             slotInfoList.Remove(slotInfoList[index]);
         }
         Managers.Inven.EmptyInvenAndHotBar();
+        if(slotInfoList.Count == 0)
+            Destroy(gameObject);
     }
 
     public void Interact()

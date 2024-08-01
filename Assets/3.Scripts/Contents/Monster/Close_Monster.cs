@@ -9,10 +9,9 @@ public class Close_Monster : MonsterController,IFly
         Collider2D[] cols = Physics2D.OverlapBoxAll(transform.position + (target.position - transform.position).normalized, new Vector2(2, 2), (target.position - transform.position).normalized.z);
         foreach (Collider2D col in cols)
         {
-            if(col.TryGetComponent<IGetDamage>(out var getDamage))
+            if(col.transform == target)
             {
-                if (col.GetComponent<IMonster>() != null)
-                    continue;
+                target.TryGetComponent<IGetDamage>(out var getDamage);
                 getDamage.GetDamage(stat.Damage);
                 break;
             }

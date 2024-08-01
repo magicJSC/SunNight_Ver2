@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -115,29 +116,24 @@ public class MonsterController : MonoBehaviour, IMonster
     public Transform SetTarget()
     {
         Transform result = null;
+        int count = targetList.Count;
+        targetList = targetList.OrderBy(target => (target.position - transform.position).magnitude).ToList();
         if (targetType == TargetType.Player)
         {
-            for (int i = 0; i < targetList.Count; i++)
+            for (int i = 0; i < count;)
             {
                 if (targetList[i] == null)
                 {
                     targetList.Remove(targetList[i]);
-                }
-
-                if (targetList[i].GetComponent<IPlayer>() != null)
-                {
-                    result = targetList[i];
-                    return result;
-                }
-                else
-                    result = targetList[i];
+                    continue;
+                }  
+                return result = targetList[i];
             }
-
-            return result;
         }
         else if (targetType == TargetType.Tower)
+        {
             return Managers.Game.tower.transform;
-
+        }
         return null;
     }
 
@@ -170,13 +166,19 @@ public class MonsterController : MonoBehaviour, IMonster
         if(target == null)
         {
             State = Define.State.Idle;
+            target = SetTarget();
             return;
         }
+
         CheckObstacle();
 
-        if(agent.enabled)
-            agent.SetDestination(target.transform.position);
-      
+        if (agent != null && agent.isActiveAndEnabled)
+        {
+            if (!agent.SetDestination(target.transform.position))
+            {
+                Destroy(gameObject);
+            }
+        }
         if ((target.transform.position - transform.position).magnitude < stat.attackRange)
             State = Define.State.Idle;
 
@@ -194,18 +196,17 @@ public class MonsterController : MonoBehaviour, IMonster
 
     void CheckObstacle()
     {
-        if (target == null)
-            return;
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, (target.position - transform.position).normalized, stat.attackRange,0);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, (target.position - transform.position).normalized, stat.attackRange);
         Debug.DrawRay(transform.position, (target.position - transform.position).normalized * stat.attackRange, Color.red);
-        if (hit)
+      
+        foreach(RaycastHit2D hit in hits)
         {
-            if (hit.transform.TryGetComponent<IGetDamage>(out var getDamage))
+            if(hit.transform.GetComponent<IGetDamage>() != null)
             {
                 if (hit.transform.GetComponent<IMonster>() != null)
-                    return;
+                    continue;
                 target = hit.transform;
+                break;
             }
         }
     }

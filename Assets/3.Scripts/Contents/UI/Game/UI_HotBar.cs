@@ -25,8 +25,6 @@ public class UI_HotBar : UI_Base
 
         GetData();
         MakeKeys();
-        ChangeChoice(0);
-
     }
 
     void OnKey1()
@@ -83,12 +81,12 @@ public class UI_HotBar : UI_Base
                 hotBarSlot.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.hotBarSlotInfo[i];
                 hotBarSlot.GetComponentInChildren<UI_Item>().Init();
                 slotList[i].GetComponent<UI_HotbarSlot>().Init();
-                hotBarSlot.keyId = i;
             }
             towerSlotAsset.LoadAssetAsync().Completed += (obj) =>
             {
                 towerSlot = Instantiate(obj.Result, grid.transform).GetComponent<UI_TowerSlot>();
                 towerSlot.Init();
+                ChangeChoice(0);
             };
         };
         
@@ -135,6 +133,7 @@ public class UI_HotBar : UI_Base
         {
             Managers.Inven.hotBarSlotInfo[i] = new StorageManager.SlotInfo(0);
         }
+
     }
     #endregion
 

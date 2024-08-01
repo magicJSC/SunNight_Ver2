@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 345886288709737079}
   - component: {fileID: 8537568394169063445}
   - component: {fileID: 1589728916734038482}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Singijeon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

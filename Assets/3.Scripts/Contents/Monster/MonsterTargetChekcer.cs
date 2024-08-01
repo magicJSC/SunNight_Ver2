@@ -18,13 +18,13 @@ public class MonsterTargetChekcer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<IPlayer>() != null || collision.GetComponent<IBuilding>() != null)
+        if (collision.GetComponent<IGetDamage>() != null && collision.GetComponent<IMonster>() == null)
             monsterController.targetList.Add(collision.transform);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<IPlayer>() != null || collision.GetComponent<IBuilding>() != null)
+        if (collision.GetComponent<IGetDamage>() != null && collision.GetComponent<IMonster>() == null)
             monsterController.targetList.Remove(collision.transform);
 
         monsterController.target = monsterController.SetTarget();

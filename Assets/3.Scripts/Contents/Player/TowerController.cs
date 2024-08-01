@@ -3,9 +3,12 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Tilemaps;
 
-public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
+public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
 {
     public Action forceInstallEvent;
+
+    public GameObject canInteractSign { get; private set; }
+
     LayerMask buildLayer;
     LayerMask inviLayer;
 
@@ -15,8 +18,6 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
     Stat stat;
 
     SpriteRenderer spriteRenderer;
-
-    public GameObject canInteractSign { get; set; }
 
 
     public AssetReferenceGameObject DieUIAsset;
@@ -109,35 +110,6 @@ public class TowerController : MonoBehaviour,IGetDamage,ICaninteract,IDie
             go.GetComponent<Item_Buliding>().ChangeColorAfterIntall();
             go.GetComponent<BoxCollider2D>().isTrigger = false;
         }
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<PlayerController>(out var player))
-        {
-            EnterPlayer(player);
-        }
-    }
-
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<PlayerController>(out var player))
-        {
-            ExitPlayer(player);
-        }
-    }
-
-    public void EnterPlayer(PlayerController player)
-    {
-        player.interactObjectList.Add(gameObject);
-        player.SetInteractObj();
-    }
-
-    public void ExitPlayer(PlayerController player)
-    {
-        player.interactObjectList.Remove(gameObject);
-        canInteractSign.SetActive(false);
-        player.SetInteractObj();
     }
 
     public void Die()
