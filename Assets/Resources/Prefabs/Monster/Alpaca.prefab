@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1132958213132411450}
   - component: {fileID: 2297774022771462896}
   - component: {fileID: 2151361934956360520}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Alpaca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ PrefabInstance:
     - target: {fileID: 1619021019407462646, guid: 9f021ddef2185be4ab4cb69f6994ca7d,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5051120194597868085, guid: 9f021ddef2185be4ab4cb69f6994ca7d,
         type: 3}
@@ -370,12 +370,12 @@ PrefabInstance:
     - target: {fileID: 5051120194597868085, guid: 9f021ddef2185be4ab4cb69f6994ca7d,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7476882447577138073, guid: 9f021ddef2185be4ab4cb69f6994ca7d,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8846538996840157436, guid: 9f021ddef2185be4ab4cb69f6994ca7d,
         type: 3}

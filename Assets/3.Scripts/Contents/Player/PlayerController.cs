@@ -103,7 +103,7 @@ public class PlayerController : CreatureController,IPlayer
         if (!canInteractObj)
             return;
 
-        canInteractObj.GetComponent<ICaninteract>().Interact();
+        canInteractObj.GetComponent<IInteractObject>().Interact();
     }
 
     public void SetInteractObj()
@@ -116,10 +116,10 @@ public class PlayerController : CreatureController,IPlayer
             else if (Vector2.Distance(canInteractObj.transform.position,transform.position) > Vector2.Distance(interactObjectList[i].transform.position, transform.position))
                 canInteractObj = interactObjectList[i];
 
-            interactObjectList[i].GetComponent<ICaninteract>().canInteractSign.SetActive(false);
+            interactObjectList[i].GetComponent<IInteractObject>().canInteractSign.SetActive(false);
         }
         if(canInteractObj)
-            canInteractObj.GetComponent<ICaninteract>().canInteractSign.SetActive(true);
+            canInteractObj.GetComponent<IInteractObject>().canInteractSign.SetActive(true);
     }
 
     void OnBuild()
@@ -145,7 +145,7 @@ public class PlayerController : CreatureController,IPlayer
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<ICaninteract>() != null)
+        if (collision.gameObject.GetComponent<IInteractObject>() != null)
         {
             SetInteractObj();
         }

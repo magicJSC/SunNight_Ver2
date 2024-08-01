@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 
 
-public class Item_Buliding : Item,IBuilding
+public class Item_Buliding : Item,IBuilding,IGetDamage
 {
     [HideInInspector]
     public Vector3Int pos;

@@ -16,7 +16,7 @@ public class LightningTower : TurretController, IAttack
 
     IEnumerator SpawnLightning()
     {
-        if (_target != null)
+        if (_target == null)
             yield break;
         Lightning lightning = lightningAsset.InstantiateAsync(_target.transform).Result.GetComponent<Lightning>();
         lightning.damage = stat.Damage;

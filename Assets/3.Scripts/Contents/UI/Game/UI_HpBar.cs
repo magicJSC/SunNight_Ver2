@@ -25,10 +25,11 @@ public class UI_HpBar : UI_Base
         fill = GetImage((int)Images.Fill);
         anim = GetComponent<Animator>();
 
-       if(transform.parent.TryGetComponent<Stat>(out var stat))
+        if(transform.parent.TryGetComponent<Stat>(out var stat))
         {
+            stat.Hp = stat.maxHP;
+            fill.fillAmount = 1;
             stat.hpEvent += SetHp;
         }
-        stat.Hp = stat.maxHP;
     }
 }

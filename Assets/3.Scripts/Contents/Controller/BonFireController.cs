@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BonFireController : MonoBehaviour, ICaninteract
+public class BonFireController : MonoBehaviour, IInteractObject
 {
     public bool canInteract { get; set; }
     public GameObject canInteractSign { get; set; }
@@ -66,32 +66,4 @@ public class BonFireController : MonoBehaviour, ICaninteract
     }
     
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<PlayerController>(out var player))
-        {
-            EnterPlayer(player);
-        }
-    }
-
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<PlayerController>(out var player))
-        {
-            ExitPlayer(player);
-        }
-    }
-
-    public void EnterPlayer(PlayerController player)
-    {
-        player.interactObjectList.Add(gameObject);
-        player.SetInteractObj();
-    }
-
-    public void ExitPlayer(PlayerController player)
-    {
-        player.interactObjectList.Remove(gameObject);
-        canInteractSign.SetActive(false);
-        player.SetInteractObj();
-    }
 }

@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3031120595418561938}
   - component: {fileID: 1689074787771635963}
   - component: {fileID: 9136863925620024442}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LightningTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
