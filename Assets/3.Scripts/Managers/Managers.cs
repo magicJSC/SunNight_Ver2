@@ -27,7 +27,7 @@ public class Managers : MonoBehaviour
 
     public static UIManager UI { get { return Instance._ui; } }
     public static MapManager Map { get { return Instance._map; } }
-    public static InputManager Input { get {  return Instance._input; } }
+    public static InputManager Input { get { return Instance._input; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
     public static SoundManager Sound { get { return Instance._sound; } }
 
@@ -35,12 +35,10 @@ public class Managers : MonoBehaviour
     {
         if (instance == null)
         {
-            GameObject go = GameObject.Find("@Managers");
-            if (go == null)
-            {
-                go = new GameObject { name = "@Managers" };
-                go.AddComponent<Managers>();
-            }
+            GameObject go = null;
+
+            go = new GameObject { name = "@Managers" };
+            go.AddComponent<Managers>();
 
             DontDestroyOnLoad(go);
             instance = go.GetComponent<Managers>();

@@ -6,7 +6,6 @@ using UnityEngine;
 public class SoundManager
 {
     private AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.Max];
-    private Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 
     private GameObject _soundRoot = null;
 
@@ -30,15 +29,11 @@ public class SoundManager
 
                 _audioSources[(int)Define.Sound.Bgm].loop = true;
                 _audioSources[(int)Define.Sound.SubBgm].loop = true;
+
+                effectVolume = 0.5f;
+                bgmVolume = 0.5f;
             }
         }
-    }
-
-    public void Clear()
-    {
-        foreach (AudioSource audioSource in _audioSources)
-            audioSource.Stop();
-        _audioClips.Clear();
     }
 
     public void Play(Define.Sound type)
@@ -79,9 +74,38 @@ public class SoundManager
         }
     }
 
+    public Action<float> effectVolumeEvent;
+    public Action<float> bgmVolumeEvent;
+
+    public float EffectVolume { get { return effectVolume; }
+        set 
+        {
+            effectVolume = value;
+            effectVolumeEvent.Invoke(value);
+            SetVolume(Define.Sound.Effect,value);
+        }
+    }
+    float effectVolume = 0.5f;
+
+    public float BgmVolume { get { return bgmVolume; }
+        set
+        {
+            bgmVolume = value;
+            bgmVolumeEvent.Invoke(value);
+            SetVolume(Define.Sound.Bgm,  value);
+        }
+    }
+    float bgmVolume = 0.5f;
+
     public void Stop(Define.Sound type)
     {
         AudioSource audioSource = _audioSources[(int)type];
         audioSource.Stop();
+    }
+
+    public void SetVolume(Define.Sound type, float ratio)
+    {
+        AudioSource audioSource = _audioSources[(int)type];
+        audioSource.volume = ratio;
     }
 }

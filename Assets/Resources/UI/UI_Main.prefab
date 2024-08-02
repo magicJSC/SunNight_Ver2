@@ -299,6 +299,11 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  settingUIAsset:
+    m_AssetGUID: c51a98ebc77e9474bad897c68d60cd78
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!95 &688588296801439367
 Animator:
   serializedVersion: 5

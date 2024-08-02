@@ -11,6 +11,10 @@ public class UI_Main : UI_Base
     public AssetReferenceT<AudioClip> clickSoundAsset;
     public AssetReferenceT<AudioClip> enterSoundAsset;
 
+    public AssetReferenceGameObject settingUIAsset;
+
+    GameObject settingUI;
+
     AudioClip clickSound;
     AudioClip enterSound;
 
@@ -42,6 +46,7 @@ public class UI_Main : UI_Base
 
         evt = option.GetComponent<UI_EventHandler>();
         evt._OnEnter += (PointerEventData p) => { optionText.color = Color.red; Managers.Sound.Play(Define.Sound.Effect, enterSound); };
+        evt._OnClick += (PointerEventData p) => { Managers.Sound.Play(Define.Sound.Effect, clickSound); settingUI.SetActive(true); };
         evt._OnExit += (PointerEventData p) => { optionText.color = Color.black; };
 
         evt = exit.GetComponent<UI_EventHandler>();
@@ -56,6 +61,11 @@ public class UI_Main : UI_Base
         enterSoundAsset.LoadAssetAsync().Completed += (clip) =>
         {
             enterSound = clip.Result;
+        };
+
+        settingUIAsset.InstantiateAsync().Completed += (obj) =>
+        {
+            settingUI = obj.Result;
         };
     }
 

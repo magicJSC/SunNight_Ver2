@@ -340,6 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneType: 1
   mainSound: {fileID: 8300000, guid: a77f8894f1a6bd44e8a56b8a38c23826, type: 3}
+  normal: {fileID: 2800000, guid: d8cf198e0e2b6ad4c8513a64e2d44fae, type: 3}
 --- !u!4 &946739400
 Transform:
   m_ObjectHideFlags: 0
