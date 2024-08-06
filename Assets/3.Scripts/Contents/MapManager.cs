@@ -64,7 +64,7 @@ public class MapManager : MonoBehaviour
         Vector2 towerPos = Managers.Game.tower.transform.position;
         if (pos == new Vector3Int((int)towerPos.x, (int)towerPos.y))
             return;
-        GameObject go = building.GetInstantiatedObject(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y));
+        GameObject go = building.GetInstantiatedObject(new Vector3Int(pos.x, pos.y));
         go.GetComponent<Item_Buliding>().buildUI.SetActive(true);
     }
 

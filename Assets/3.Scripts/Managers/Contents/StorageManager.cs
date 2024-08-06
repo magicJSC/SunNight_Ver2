@@ -120,6 +120,9 @@ public class StorageManager : MonoBehaviour
 
     public void CheckHotBarTowerSlot()
     {
+        if (Managers.Game.weapon != null)
+            Destroy(Managers.Game.weapon);
+
         if (!Managers.Game.isKeepingTower)
         {
             Managers.Game.mouse.CursorType = CursorType.Normal;
