@@ -6,14 +6,17 @@ using static Define;
 
 public class StorageManager : MonoBehaviour
 {
-    public int Coin {  get { return _coin; } set 
+    public int Coin
+    {
+        get { return _coin; }
+        set
         {
             _coin = value;
-            if(inventoryUI != null)
+            if (inventoryUI != null)
                 inventoryUI.SetCoin();
         }
     }
-    int _coin =0;
+    int _coin = 0;
 
     public SlotInfo[] hotBarSlotInfo = new SlotInfo[5];
     public SlotInfo[] inventorySlotInfo = new SlotInfo[24];
@@ -26,9 +29,9 @@ public class StorageManager : MonoBehaviour
         public int count;
         public KeyType keyType;
 
-        public SlotInfo(int count,string _name = "")
+        public SlotInfo(int count, string _name = "")
         {
-            if(_name == "")
+            if (_name == "")
             {
                 itemInfo = null;
                 count = 0;
@@ -148,7 +151,7 @@ public class StorageManager : MonoBehaviour
 
                 if (item.idName == itemUI.slotInfo.itemInfo.idName && itemUI.slotInfo.count < itemUI.slotInfo.itemInfo.maxAmount)
                 {
-                    SetSlot(item,itemUI, itemUI.slotInfo.count + 1);
+                    SetSlot(item, itemUI, itemUI.slotInfo.count + 1);
                     return true;
                 }
             }
@@ -171,7 +174,7 @@ public class StorageManager : MonoBehaviour
             //추가 하지 못했다면 비어있는 칸에 넣기
             if (emptySlot != null)
             {
-                SetSlot(item,emptySlot,1);
+                SetSlot(item, emptySlot, 1);
                 return true;
             }
 
@@ -185,7 +188,7 @@ public class StorageManager : MonoBehaviour
                 UI_Item itemUI = inventoryUI.slotList[i].itemUI;
                 if (KeyType.Empty == itemUI.slotInfo.keyType)
                 {
-                    SetSlot(item, itemUI,1);
+                    SetSlot(item, itemUI, 1);
                     return true;
                 }
             }
@@ -194,7 +197,7 @@ public class StorageManager : MonoBehaviour
         }
     }
 
-    public bool AddItems(ItemSO item,int count)
+    public bool AddItems(ItemSO item, int count)
     {
         UI_Item emptySlot = null;
         for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
@@ -263,12 +266,12 @@ public class StorageManager : MonoBehaviour
     public void EmptyInvenAndHotBar()
     {
         UI_InventorySlot[] invenSlots = inventoryUI.slotList;
-        foreach(UI_InventorySlot slot in invenSlots)
+        foreach (UI_InventorySlot slot in invenSlots)
         {
             slot.itemUI.MakeEmptySlot();
         }
         UI_HotbarSlot[] hotbarSlots = hotBarUI.slotList;
-        for(int i=0;i<hotbarSlots.Length-1;i++)
+        for (int i = 0; i < hotbarSlots.Length - 1; i++)
         {
             hotbarSlots[i].itemUI.MakeEmptySlot();
         }
@@ -288,7 +291,7 @@ public class StorageManager : MonoBehaviour
     public void AddItem(UI_Item drag, UI_Item drop)
     {
         drop.slotInfo.count += drag.slotInfo.count;
-        if(drop.slotInfo.count > drop.slotInfo.itemInfo.maxAmount)
+        if (drop.slotInfo.count > drop.slotInfo.itemInfo.maxAmount)
         {
             drag.slotInfo.count = drop.slotInfo.count - drop.slotInfo.itemInfo.maxAmount;
             drop.slotInfo.count = drop.slotInfo.itemInfo.maxAmount;
@@ -298,7 +301,7 @@ public class StorageManager : MonoBehaviour
         drop.SetInfo();
     }
 
-    public void SetSlot(ItemSO item,UI_Item itemUI,int count)
+    public void SetSlot(ItemSO item, UI_Item itemUI, int count)
     {
         itemUI.slotInfo.itemInfo = item;
         itemUI.slotInfo.keyType = KeyType.Exist;
@@ -307,5 +310,71 @@ public class StorageManager : MonoBehaviour
     }
 
     public static bool canAbandon;
+
+    public int GetItemCount(ItemSO itemSO)
+    {
+        int count = 0;
+        for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
+        {
+            UI_Item itemUI = inventoryUI.slotList[i].itemUI;
+            if (itemUI.slotInfo.itemInfo == itemSO)
+            {
+                count += itemUI.slotInfo.count;
+            }
+        }
+        for (int i = 0; i < hotBarUI.slotList.Length - 1; i++)
+        {
+            UI_Item itemUI = hotBarUI.slotList[i].itemUI;
+            if (itemUI.slotInfo.itemInfo == itemSO)
+            {
+                count += itemUI.slotInfo.count;
+            }
+        }
+        return count;
+    }
+
+    public void RemoveItem(ItemSO itemSO,int count)
+    {
+        int remainCount = count;
+        for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
+        {
+            UI_Item itemUI = inventoryUI.slotList[i].itemUI;
+            if (itemUI.slotInfo.itemInfo == itemSO)
+            {
+                remainCount -= itemUI.slotInfo.count;
+                if (remainCount < 0)
+                {
+                    itemUI.slotInfo.count = -remainCount;
+                    itemUI.SetInfo();
+                    return;
+                }
+                else
+                {
+                    itemUI.MakeEmptySlot();
+                    if (remainCount == 0)
+                        return;
+                }
+            }
+        }
+        for (int i = 0; i < hotBarUI.slotList.Length - 1; i++)
+        {
+            UI_Item itemUI = hotBarUI.slotList[i].itemUI;
+            if (itemUI.slotInfo.itemInfo == itemSO)
+            {
+                remainCount -= itemUI.slotInfo.count;
+                if (remainCount < 0)
+                {
+                    itemUI.slotInfo.count = -remainCount;
+                    return;
+                }
+                else
+                {
+                    itemUI.MakeEmptySlot();
+                    if (remainCount == 0)
+                        return;
+                }
+            }
+        }
+    }
 }
 
