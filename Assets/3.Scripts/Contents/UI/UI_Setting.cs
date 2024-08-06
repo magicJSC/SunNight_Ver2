@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_Setting : UI_Base
@@ -26,6 +27,8 @@ public class UI_Setting : UI_Base
     Slider effectSlider;
     Slider bgmSlider;
 
+    GameObject close;
+
     public override void Init()
     {
         init = true;
@@ -36,6 +39,10 @@ public class UI_Setting : UI_Base
         bgmRatioText = Util.FindChild(gameObject, "BGMRatio", true).GetComponent<Text>();
         bgmSlider = Util.FindChild(gameObject, "BGM", true).GetComponent<Slider>();
         effectSlider = Util.FindChild(gameObject, "Effect", true).GetComponent<Slider>();
+
+        close = Util.FindChild(gameObject, "Close", true);
+
+        close.GetComponent<UI_EventHandler>()._OnClick += Close;
 
         Managers.Sound.bgmVolumeEvent += SetBgmSoundUI;
         Managers.Sound.effectVolumeEvent += SetEffectSoundUI;
@@ -49,6 +56,11 @@ public class UI_Setting : UI_Base
             return;
         effectSlider.value = Managers.Sound.EffectVolume;
         bgmSlider.value = Managers.Sound.BgmVolume;
+    }
+
+    void Close(PointerEventData p)
+    {
+        gameObject.SetActive(false);
     }
 
     public void GetBgmVolume()
@@ -68,7 +80,7 @@ public class UI_Setting : UI_Base
         else
             effectIcon.sprite = effectOn;
 
-        effectRatioText.text = $"{ratio * 100}";
+        effectRatioText.text = $"{Mathf.Floor(ratio * 100)}";
     }
 
     void SetBgmSoundUI(float ratio)
@@ -78,6 +90,6 @@ public class UI_Setting : UI_Base
         else
             bgmIcon.sprite = bgmOn;
 
-        bgmRatioText.text = $"{ratio * 100}";
+        bgmRatioText.text = $"{Mathf.Floor(ratio * 100)}";
     }
 }

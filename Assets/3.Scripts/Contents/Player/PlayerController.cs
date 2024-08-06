@@ -127,7 +127,7 @@ public class PlayerController : CreatureController,IPlayer
         if (Managers.Game.isHandleUI)
             return;
 
-        if (Managers.Inven.choicingTower)
+        if (Managers.Inven.choicingTower || Managers.Game.isKeepingTower)
             Managers.Game.build.BuildTower();
         else
             Managers.Game.build.BuildItem(); 
