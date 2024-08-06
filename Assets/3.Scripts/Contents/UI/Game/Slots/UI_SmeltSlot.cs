@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class UI_SmeltSlot : UI_BaseSlot,IDragable
 {
@@ -10,6 +11,8 @@ public class UI_SmeltSlot : UI_BaseSlot,IDragable
     public UI_Smelt smelt;
     [HideInInspector]
     public UI_Item itemUI;
+
+    RectTransform background;
 
     GameObject explain;
     Text explainText;
@@ -24,6 +27,7 @@ public class UI_SmeltSlot : UI_BaseSlot,IDragable
         UI_EventHandler evt = GetComponent<UI_EventHandler>();
         evt._OnEnter += ShowSlotInfo;
 
+        background = GetComponentInParent<RectTransform>();
 
         evt._OnExit += (PointerEventData p) =>
         {
@@ -43,7 +47,13 @@ public class UI_SmeltSlot : UI_BaseSlot,IDragable
 
     public void SetExplain()
     {
-        explain.GetComponent<RectTransform>().anchoredPosition = new Vector2(-333, 21);
+        int x;
+        if (background.anchoredPosition.x <= -427)
+            x = 187;
+        else
+            x = -333;
+
+        explain.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, 21);
         explainText.text = itemUI.slotInfo.itemInfo.explain;
         nameText.text = itemUI.slotInfo.itemInfo.itemName;
     }

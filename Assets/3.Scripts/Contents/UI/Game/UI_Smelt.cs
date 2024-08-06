@@ -15,7 +15,9 @@ public class UI_Smelt : UI_Base
     UI_SmeltSlot smeltSlot;
     GameObject doSmelt;
     UI_CharcoalSlot charcoalSlot;
-    GameObject back;
+    RectTransform back;
+
+    Vector3 startPos;
 
     [HideInInspector]
     public Image timer;
@@ -51,7 +53,7 @@ public class UI_Smelt : UI_Base
         Bind<GameObject>(typeof(GameObjects));
         grillingSlot = Get<GameObject>((int)GameObjects.GrillingSlot).GetComponent<UI_GrillingSlot>();
         close = Get<GameObject>((int)GameObjects.CloseSmelt);
-        back = Get<GameObject>((int)GameObjects.Background);
+        back = Util.FindChild<RectTransform>(gameObject,"Background",true);
         smeltSlot = Get<GameObject>((int)GameObjects.SmeltSlot).GetComponent<UI_SmeltSlot>();
         doSmelt = Get<GameObject>((int)GameObjects.DoSmelt);
         charcoalSlot = Get<GameObject>((int)GameObjects.CharcoalSlot).GetComponent<UI_CharcoalSlot>();
@@ -73,11 +75,14 @@ public class UI_Smelt : UI_Base
         evt._OnClick += Close;
 
         evt = back.GetComponent<UI_EventHandler>();
-        evt._OnEnter += (PointerEventData p) => 
+        evt._OnDrag += (PointerEventData p) =>
         {
-            Managers.Game.mouse.CursorType = Define.CursorType.UI; 
+            back.transform.position = startPos + Input.mousePosition;
+            float x = Mathf.Clamp(back.anchoredPosition.x, -660, 660);
+            float y = Mathf.Clamp(back.anchoredPosition.y, -240, 240);
+            back.anchoredPosition = new Vector2(x, y);
         };
-        evt._OnExit += (PointerEventData p) => { Managers.Inven.CheckHotBarChoice(); };
+        evt._OnDown += (PointerEventData p) => { startPos = back.transform.position - Input.mousePosition; };
 
         SetData();
 
