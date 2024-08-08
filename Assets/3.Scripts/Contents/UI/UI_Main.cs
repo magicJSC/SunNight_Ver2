@@ -71,6 +71,9 @@ public class UI_Main : UI_Base
 
     private void StartGame()
     {
-        SceneManager.LoadScene("GameScene");
+        if(Managers.Game.completeTutorial)
+         SceneManager.LoadScene("GameScene");
+        else
+            SceneManager.LoadScene("TutorialScene");
     }
 }

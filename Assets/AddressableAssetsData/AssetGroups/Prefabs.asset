@@ -67,6 +67,31 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e36191b2262c466a9af0f7cdf6dded0
+    m_Address: Assets/1.Asset/UI/SPUM/Retro UI Set/1_UI_Images/Theme1/02_Icons/0_Flat/Icon_Flat__3.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8da8c5946ece14d55966ca178fda2632
+    m_Address: Assets/1.Asset/UI/SPUM/Retro UI Set/1_UI_Images/Theme1/02_Icons/0_Flat/Icon_Flat__1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80b92c3296a7743538b7eb844b078aac
+    m_Address: Assets/1.Asset/UI/SPUM/Retro UI Set/1_UI_Images/Theme1/02_Icons/0_Flat/Icon_Flat__44.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7de4f17a0ab224fe5a6d6b2e94c06b79
+    m_Address: Assets/1.Asset/UI/SPUM/Retro UI Set/1_UI_Images/Theme1/02_Icons/0_Flat/Icon_Flat__48.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 082f70116bda24d608ee1ee2f4eb1044
+    m_Address: Assets/1.Asset/Audio/RPG Inventory Sounds/Coin_Pot_02.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9a368fece3badaa408b73453d1be7c74, type: 2}
   m_SchemaSet:

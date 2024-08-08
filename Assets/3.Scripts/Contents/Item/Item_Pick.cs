@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Item_Pick : Item,IPickable
+public class Item_Pick : Item
 {
+    public static Action tutorialEvent;
+
     [HideInInspector]
     public Text countText;
 
@@ -23,12 +26,6 @@ public class Item_Pick : Item,IPickable
     public void DestroyThis()
     {
         MapManager.matter.SetTile(new Vector3Int((int)transform.position.x, (int)transform.position.y), null);
-    }
-
-    public void Pick()
-    {
-        Managers.Inven.AddItems(itemSo, Count);
-        DestroyThis();
     }
 
     void SetCountText()

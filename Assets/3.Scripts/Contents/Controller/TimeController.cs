@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TimeController : BaseController
 {
+    public static Action tutorialEvent;
     public static Action<float> timeEvent;
     public static Action morningEvent;
     public static Action nightEvent;
@@ -13,8 +14,11 @@ public class TimeController : BaseController
     public AudioClip morningAudio;
     public AudioClip nightAudio;
 
-    public static float TimeAmount { get { return _time; } set { _time = value; timeEvent?.Invoke(_time); } }
+    public static float TimeAmount { get { return _time; } set { _time = value; if(init) timeEvent?.Invoke(_time); } }
     static float _time = 0;
+    public static float timeSpeed;
+
+    static bool init = false;
 
 
     public enum TimeType
@@ -38,12 +42,17 @@ public class TimeController : BaseController
             }
         }
     }
-    static TimeType _timeType;
+    static TimeType _timeType = TimeType.Morning;
 
     protected override void Init()
     {
+        
+    }
+
+    private void OnEnable()
+    {
         TimeAmount = 360;
-        timeType = TimeType.Night;
+        SetMorningBGM();
         morningEvent += SetMorningBGM;
         nightEvent += SetNightBGM;
         StartCoroutine(StartTime());
@@ -61,13 +70,17 @@ public class TimeController : BaseController
     {
         while (true)
         {
-            TimeAmount += Time.deltaTime * 20;
+            TimeAmount += Time.deltaTime * timeSpeed;
             if (TimeAmount >= 1080 && timeType == TimeType.Morning)
                 timeType = TimeType.Battle;
             else if (TimeAmount >= 360 && TimeAmount < 1080 && timeType == TimeType.Night)
                 timeType = TimeType.Morning;
             else if (TimeAmount >= 1440 && timeType == TimeType.Battle)
+            {
                 timeType = TimeType.Night;
+                if (!Managers.Game.completeTutorial)
+                    tutorialEvent.Invoke();
+            }
             if (TimeAmount >= 1440)
                 TimeAmount = 0;
             yield return null;

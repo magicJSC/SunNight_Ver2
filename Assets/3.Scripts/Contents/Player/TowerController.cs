@@ -5,6 +5,9 @@ using UnityEngine.Tilemaps;
 
 public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
 {
+    public static Action tutorial1Event;
+    public static Action tutorial2Event;
+    public static Action tutorial3Event;
     public Action forceInstallEvent;
 
     public GameObject canInteractSign { get; private set; }
@@ -49,6 +52,9 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
             if (Managers.Game.isKeepingTower)
                 return;
 
+            if (!Managers.Game.completeTutorial)
+                tutorial1Event.Invoke();
+
             Managers.Game.isKeepingTower = true;
             Managers.Inven.hotBarUI.CheckChoice();
             Managers.Inven.hotBarUI.towerSlot.ShowTowerIcon();
@@ -58,6 +64,8 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
         else if(TimeController.timeType == TimeController.TimeType.Night)
         {
             TimeController.SetMorning();
+            if (!Managers.Game.completeTutorial)
+                tutorial3Event.Invoke();
         }
     }
 
@@ -99,6 +107,9 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
 
     public void AfterInstallTower()
     {
+        if (!Managers.Game.completeTutorial)
+            tutorial2Event.Invoke();
+
         gameObject.SetActive(true);
         spriteRenderer.color = new Color(1, 1, 1, 1);
         gameObject.layer = buildLayer;

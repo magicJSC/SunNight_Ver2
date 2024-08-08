@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,9 @@ using static StorageManager;
 
 public class UI_Inventory : UI_Base
 {
+    public static Action tutorial1Event;
+    public static Action tutorial2Event;
+
     public AssetReferenceT<AudioClip> showSoundAsset;
     public AssetReferenceT<AudioClip> hideSoundAsset;
 
@@ -128,6 +132,9 @@ public class UI_Inventory : UI_Base
     {
         if (_init)
         {
+            if (!Managers.Game.completeTutorial)
+                tutorial1Event.Invoke();
+
             Managers.Sound.Play(Define.Sound.Effect, showSound);
             Managers.UI.PopUIList.Add(gameObject);
         }
@@ -138,6 +145,7 @@ public class UI_Inventory : UI_Base
         if (_init)
         {
             produceUI.gameObject.SetActive(false);
+            explain.SetActive(false);
             Managers.Sound.Play(Define.Sound.Effect, hideSound);
             Managers.UI.PopUIList.Remove(gameObject);
         }
@@ -150,9 +158,7 @@ public class UI_Inventory : UI_Base
 
     void GetData()
     {
-        Managers.Inven.inventorySlotInfo[0] = new SlotInfo(6, "Meat");
-        Managers.Inven.inventorySlotInfo[1] = new SlotInfo(1,"Bonfire");
-        for (int i = 2; i < Managers.Inven.inventorySlotInfo.Length; i++)
+        for (int i = 0; i < Managers.Inven.inventorySlotInfo.Length; i++)
         {
             Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);
         }
@@ -190,6 +196,9 @@ public class UI_Inventory : UI_Base
             produceUI.gameObject.SetActive(false);
             return;
         }
+
+        if (!Managers.Game.completeTutorial)
+            tutorial2Event.Invoke();
         produceUI.gameObject.SetActive(true);
         RectTransform r = produceUI.back.GetComponent<RectTransform>();
         RectTransform bb = back.GetComponent<RectTransform>();

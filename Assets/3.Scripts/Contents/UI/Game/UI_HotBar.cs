@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 public class UI_HotBar : UI_Base
 {
+    public static Action tutorialEvent;
+
     public AssetReferenceGameObject hotBarSlotAsset;
     public AssetReferenceGameObject towerSlotAsset;
 
@@ -101,6 +104,9 @@ public class UI_HotBar : UI_Base
             return;
         if (choiceIndex == change)
             return;
+
+        if (!Managers.Game.completeTutorial)
+            tutorialEvent.Invoke();
         choiceIndex = change;
         choice.GetComponent<RectTransform>().anchoredPosition = new Vector2(-330 + change * 160, -443);
 
@@ -125,11 +131,7 @@ public class UI_HotBar : UI_Base
     //값 가져오기
     public void GetData()
     {
-        Managers.Inven.hotBarSlotInfo[0] = new StorageManager.SlotInfo(10, "Fence");
-        Managers.Inven.hotBarSlotInfo[1] = new StorageManager.SlotInfo(1, "Gun");
-        Managers.Inven.hotBarSlotInfo[2] = new StorageManager.SlotInfo(3, "Cannon");
-        Managers.Inven.hotBarSlotInfo[3] = new StorageManager.SlotInfo(3, "LightningTower");
-        for (int i = 4; i < Managers.Inven.hotBarSlotInfo.Length; i++)
+        for (int i = 0; i < Managers.Inven.hotBarSlotInfo.Length; i++)
         {
             Managers.Inven.hotBarSlotInfo[i] = new StorageManager.SlotInfo(0);
         }

@@ -6,6 +6,9 @@ using static Define;
 
 public class BuildController : MonoBehaviour
 {
+    public static Action tutorialEvent;
+
+    [HideInInspector]
     public UI_Item itemUI;
 
     public SpriteRenderer buildItemIcon;
@@ -63,6 +66,10 @@ public class BuildController : MonoBehaviour
         {
             if (!gameObject.activeSelf)
                 return;
+
+            if (!Managers.Game.completeTutorial)
+                tutorialEvent.Invoke();
+
             MapManager.building.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), itemUI.slotInfo.itemInfo.tile);
             itemUI.slotInfo.count--;
             if (itemUI.slotInfo.count <= 0)
