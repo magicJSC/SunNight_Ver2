@@ -10,6 +10,8 @@ using UnityEngine.Rendering;
 
 public class PlayerController : CreatureController,IPlayer
 {
+    public static Action tutorial1Event;
+    public static Action tutorial2Event;
     public Action escEvent;
 
     PlayerStat stat;
@@ -72,6 +74,9 @@ public class PlayerController : CreatureController,IPlayer
 
         if (dir != Vector2.zero)
         {
+            if (!Managers.Game.completeTutorial)
+                tutorial1Event.Invoke();
+
             anim.Play("Move");
             if(dir.x != 0)
                 sprite.flipX = dir.x > 0;
@@ -138,8 +143,13 @@ public class PlayerController : CreatureController,IPlayer
     {
         if (collision.gameObject.TryGetComponent<Item_Pick>(out var item))
         {
-            if (Managers.Inven.AddItems(item.itemSo,item.Count))
+            if (Managers.Inven.AddItems(item.itemSo, item.Count))
+            {
+                if (!Managers.Game.completeTutorial)
+                    tutorial2Event.Invoke();
+
                 item.DestroyThis();
+            }
         }
     }
 

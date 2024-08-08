@@ -103,6 +103,13 @@ public class UI_Smelt : UI_Base
         FillCharcoal();
     }
 
+    private void OnDisable()
+    {
+        if (!_init)
+            return;
+        explain.SetActive(false);
+    }
+
     void SetData()
     {
         smeltSlot.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.smeltSlotInfo;

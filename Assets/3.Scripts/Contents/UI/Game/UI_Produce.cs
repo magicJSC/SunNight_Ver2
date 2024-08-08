@@ -8,6 +8,8 @@ using UnityEngine.AddressableAssets;
 
 public class UI_Produce : UI_Base
 {
+    public static Action tutorialEvent;
+
     public AssetReferenceT<AudioClip> produceSoundAsset;
     public AssetReferenceT<AudioClip> showSoundAsset;
     public AssetReferenceT<AudioClip> hideSoundAsset;
@@ -147,7 +149,11 @@ public class UI_Produce : UI_Base
     private void OnDisable()
     {
         if (_init)
+        {
             Managers.Sound.Play(Define.Sound.Effect, hideSound);
+            explainItem.SetActive(false);
+            explainMat.SetActive(false);
+        }
     }
 
     public void Set_Position()
@@ -204,6 +210,9 @@ public class UI_Produce : UI_Base
                     count -= info_m[j].Item2;
                 }
             }
+
+            if (!Managers.Game.completeTutorial)
+                tutorialEvent.Invoke();
             Managers.Inven.AddOneItem(toMakeItemSO);
             Managers.Sound.Play(Define.Sound.Effect, produceSound);
         }

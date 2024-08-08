@@ -10,8 +10,9 @@ public class TutorialScene : BaseScene
             return false;
         if (Managers.Game.grid == null)
         {
-            Managers.Game.grid = Instantiate(Resources.Load<GameObject>("Prefabs/TutorialGrid")).GetComponent<MapManager>();
+            Managers.Game.grid = FindAnyObjectByType<MapManager>();
         }
+        Managers.Game.lightController = Instantiate(Resources.Load<GameObject>("Prefabs/Light")).GetComponent<LightController>();
         Managers.Game.grid.Init();
         if (Managers.Game.mouse == null)
         {

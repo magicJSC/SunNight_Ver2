@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
 
     public bool isHandleUI;
 
-    public bool isplayingTutorial = true;
+    public bool completeTutorial = false;
 
-    public bool BGMOn;
-    public bool EffectSoundOn;
 }

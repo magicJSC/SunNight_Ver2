@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: "\uC2A4\uD14C\uC774\uD06C"
   explain: "\uC2A4\uD14C\uC774\uD06C\uC774\uB2E4. \uBC30\uACE0\uD514\uC744 \uC99D\uAC00\uC2DC\uD0A8\uB2E4"
   itemIcon: {fileID: -1645561458, guid: fcf937f4d64a517488cbcd2a2fd9ec3d, type: 3}
-  itemType: 4
+  itemType: 1
   maxAmount: 32
   tile: {fileID: 11400000, guid: 5c125055c89e5d2428a8eb2c5e34b933, type: 2}
   smelt: {fileID: 0}

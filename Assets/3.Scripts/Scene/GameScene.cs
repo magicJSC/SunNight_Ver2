@@ -18,7 +18,7 @@ public class GameScene : BaseScene
 
         if (Managers.Game.grid == null)
         {
-            Managers.Game.grid = Instantiate(Resources.Load<GameObject>("Prefabs/Grid")).GetComponent<MapManager>();
+            Managers.Game.grid = FindObjectOfType<MapManager>();
         }
         Managers.Game.grid.Init();
 

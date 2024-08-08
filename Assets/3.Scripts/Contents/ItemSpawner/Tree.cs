@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Tree : MonoBehaviour
 {
-    // Start is called before the first frame update
+    ItemSO branch;
+     
     void Start()
     {
-        
-    }
+        branch = Resources.Load<Item_Pick>("Prefabs/Items/Branch").itemSo;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+       
+        for(int i = 0;i < 5;i++)
+        {
+            float x = Mathf.Round(transform.position.x + Random.Range(-2,3));
+            float y = Mathf.Round(transform.position.y + Random.Range(-2,-3));
+            MapManager.matter.SetTile(new Vector3Int((int)x,(int)y),branch.tile);          
+        }
     }
 }

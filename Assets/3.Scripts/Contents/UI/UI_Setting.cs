@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_Setting : UI_Base
 {
     bool init;
+
+    public AssetReferenceT<AudioClip> clickSoundAsset;
 
     [SerializeField]
     Sprite effectOn;
@@ -18,6 +21,8 @@ public class UI_Setting : UI_Base
     [SerializeField]
     Sprite bgmOff;
 
+    AudioClip clickSound;
+
     Image effectIcon;
     Image bgmIcon;
 
@@ -28,6 +33,7 @@ public class UI_Setting : UI_Base
     Slider bgmSlider;
 
     GameObject close;
+    GameObject effectHandle;
 
     public override void Init()
     {
@@ -39,13 +45,17 @@ public class UI_Setting : UI_Base
         bgmRatioText = Util.FindChild(gameObject, "BGMRatio", true).GetComponent<Text>();
         bgmSlider = Util.FindChild(gameObject, "BGM", true).GetComponent<Slider>();
         effectSlider = Util.FindChild(gameObject, "Effect", true).GetComponent<Slider>();
-
         close = Util.FindChild(gameObject, "Close", true);
 
         close.GetComponent<UI_EventHandler>()._OnClick += Close;
 
         Managers.Sound.bgmVolumeEvent += SetBgmSoundUI;
         Managers.Sound.effectVolumeEvent += SetEffectSoundUI;
+
+        clickSoundAsset.LoadAssetAsync().Completed += (clip) =>
+        {
+            clickSound = clip.Result;
+        };
 
         gameObject.SetActive(false);
     }
@@ -60,6 +70,7 @@ public class UI_Setting : UI_Base
 
     void Close(PointerEventData p)
     {
+        Managers.Sound.Play(Define.Sound.Effect, clickSound);
         gameObject.SetActive(false);
     }
 
@@ -70,6 +81,7 @@ public class UI_Setting : UI_Base
 
     public void GetEffectVolume()
     {
+        
         Managers.Sound.EffectVolume = effectSlider.value;
     }
 

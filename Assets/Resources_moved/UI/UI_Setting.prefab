@@ -810,6 +810,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3761173fa8daa434694bddce59635497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSoundAsset:
+    m_AssetGUID: e813b345b26a747aa8ff93ed61f5e139
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  effectSoundAsset:
+    m_AssetGUID: 219c128bb5466495184d344182224ed2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   effectOn: {fileID: 21300000, guid: 1a5f7b16c4771461c88019bedc2ef296, type: 3}
   effectOff: {fileID: 21300000, guid: ceb706128b10c4a5ca3e8786bdf500c8, type: 3}
   bgmOn: {fileID: 2060007223, guid: 7a2a2bf4f48fa4d3ba9eb1f8609b8606, type: 3}
@@ -1493,7 +1503,7 @@ GameObject:
   - component: {fileID: 274999737282227218}
   - component: {fileID: 3843629771039136303}
   m_Layer: 5
-  m_Name: Handle
+  m_Name: EffectHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

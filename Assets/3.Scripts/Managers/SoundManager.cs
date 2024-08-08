@@ -42,7 +42,7 @@ public class SoundManager
         audioSource.Play();
     }
 
-    
+
 
     public void Play(Define.Sound type, AudioClip audioClip, float pitch = 1.0f)
     {
@@ -52,10 +52,10 @@ public class SoundManager
         {
             if (audioSource.isPlaying)
                 audioSource.Stop();
-
+            if (audioSource.clip == audioClip)
+                return;
             audioSource.clip = audioClip;
-            if(Managers.Game.BGMOn)
-                audioSource.Play();
+            audioSource.Play();
         }
         else if (type == Define.Sound.SubBgm)
         {
@@ -63,36 +63,38 @@ public class SoundManager
                 audioSource.Stop();
 
             audioSource.clip = audioClip;
-            if (Managers.Game.EffectSoundOn)
-                audioSource.Play();
+            audioSource.Play();
         }
         else
         {
             audioSource.pitch = pitch;
-            if (Managers.Game.EffectSoundOn)
-             audioSource.PlayOneShot(audioClip);
+            audioSource.PlayOneShot(audioClip);
         }
     }
 
     public Action<float> effectVolumeEvent;
     public Action<float> bgmVolumeEvent;
 
-    public float EffectVolume { get { return effectVolume; }
-        set 
+    public float EffectVolume
+    {
+        get { return effectVolume; }
+        set
         {
             effectVolume = value;
             effectVolumeEvent.Invoke(value);
-            SetVolume(Define.Sound.Effect,value);
+            SetVolume(Define.Sound.Effect, value);
         }
     }
     float effectVolume = 0.5f;
 
-    public float BgmVolume { get { return bgmVolume; }
+    public float BgmVolume
+    {
+        get { return bgmVolume; }
         set
         {
             bgmVolume = value;
             bgmVolumeEvent.Invoke(value);
-            SetVolume(Define.Sound.Bgm,  value);
+            SetVolume(Define.Sound.Bgm, value);
         }
     }
     float bgmVolume = 0.5f;
