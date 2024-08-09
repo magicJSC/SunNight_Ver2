@@ -14,7 +14,7 @@ public class TimeController : BaseController
     public AudioClip morningAudio;
     public AudioClip nightAudio;
 
-    public static float TimeAmount { get { return _time; } set { _time = value; if(init) timeEvent?.Invoke(_time); } }
+    public static float TimeAmount { get { return _time; } set { _time = value; if (init) timeEvent?.Invoke(_time); else init = true; } }
     static float _time = 0;
     public static float timeSpeed;
 
@@ -46,13 +46,12 @@ public class TimeController : BaseController
 
     protected override void Init()
     {
-        
+        SetMorningBGM();
     }
 
     private void OnEnable()
     {
         TimeAmount = 360;
-        SetMorningBGM();
         morningEvent += SetMorningBGM;
         nightEvent += SetNightBGM;
         StartCoroutine(StartTime());
@@ -74,7 +73,9 @@ public class TimeController : BaseController
             if (TimeAmount >= 1080 && timeType == TimeType.Morning)
                 timeType = TimeType.Battle;
             else if (TimeAmount >= 360 && TimeAmount < 1080 && timeType == TimeType.Night)
+            {
                 timeType = TimeType.Morning;
+            }
             else if (TimeAmount >= 1440 && timeType == TimeType.Battle)
             {
                 timeType = TimeType.Night;

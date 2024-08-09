@@ -70,7 +70,7 @@ public class BuildController : MonoBehaviour
             if (!Managers.Game.completeTutorial)
                 tutorialEvent.Invoke();
 
-            MapManager.building.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), itemUI.slotInfo.itemInfo.tile);
+            MapManager.building.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), itemUI.slotInfo.itemInfo.tile); 
             itemUI.slotInfo.count--;
             if (itemUI.slotInfo.count <= 0)
             {

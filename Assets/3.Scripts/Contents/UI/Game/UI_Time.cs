@@ -16,11 +16,14 @@ public class UI_Time : UI_Base
         timeRullet = Util.FindChild(gameObject,"TimeRullet",true).GetComponent<RectTransform>();
         timeText = Util.FindChild(gameObject,"Time",true).GetComponent<Text>();
 
-        anim = GetComponent<Animator>();
         TimeController.nightEvent += ShowBattleSign;
         TimeController.timeEvent += RotateTimeRullet;
         TimeController.timeEvent += SetTimeText;
+
+        anim = GetComponent<Animator>();
     }
+
+   
 
     void RotateTimeRullet(float time)
     {

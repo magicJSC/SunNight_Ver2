@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   completeSoundAsset:
-    m_AssetGUID: 
+    m_AssetGUID: 082f70116bda24d608ee1ee2f4eb1044
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
