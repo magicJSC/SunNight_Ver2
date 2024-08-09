@@ -12,8 +12,10 @@ public class UI_Main : UI_Base
     public AssetReferenceT<AudioClip> enterSoundAsset;
 
     public AssetReferenceGameObject settingUIAsset;
+    public AssetReferenceGameObject gamePlayUIAsset;
 
     GameObject settingUI;
+    GameObject gamePlayUI;
 
     AudioClip clickSound;
     AudioClip enterSound;
@@ -26,7 +28,6 @@ public class UI_Main : UI_Base
     Text optionText;
     Text exitText;
 
-    Animator anim;
 
     public override void Init()
     {
@@ -37,10 +38,9 @@ public class UI_Main : UI_Base
         optionText = option.GetComponentInChildren<Text>();
         exitText = exit.GetComponentInChildren<Text>();
 
-        anim = GetComponent<Animator>();
 
         UI_EventHandler evt = start.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p)=> { anim.Play("Load"); Managers.Sound.Play(Define.Sound.Effect, clickSound); };
+        evt._OnClick += (PointerEventData p)=> { gamePlayUI.SetActive(true); Managers.Sound.Play(Define.Sound.Effect, clickSound); };
         evt._OnEnter += (PointerEventData p) => { startText.color = Color.red; Managers.Sound.Play(Define.Sound.Effect, enterSound); };
         evt._OnExit += (PointerEventData p) => { startText.color = Color.black; };
 
@@ -67,13 +67,10 @@ public class UI_Main : UI_Base
         {
             settingUI = obj.Result;
         };
+        gamePlayUIAsset.InstantiateAsync().Completed += (obj) =>
+        {
+            gamePlayUI = obj.Result;
+        };
     }
 
-    private void StartGame()
-    {
-        if(Managers.Game.completeTutorial)
-         SceneManager.LoadScene("GameScene");
-        else
-            SceneManager.LoadScene("TutorialScene");
-    }
 }

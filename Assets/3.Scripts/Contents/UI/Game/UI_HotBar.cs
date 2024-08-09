@@ -106,7 +106,7 @@ public class UI_HotBar : UI_Base
             return;
 
         if (!Managers.Game.completeTutorial)
-            tutorialEvent.Invoke();
+            tutorialEvent.Invoke(); 
         choiceIndex = change;
         choice.GetComponent<RectTransform>().anchoredPosition = new Vector2(-330 + change * 160, -443);
 

@@ -21,18 +21,18 @@ public class MapManager : MonoBehaviour
     //타워에 설치된 건축물 위치 데이터
     public static List<Vector3Int> buildData = new List<Vector3Int>();
 
-    public static Tilemap walls;
     public static Tilemap matter;
     public static Tilemap building;
+    public static Tilemap cantBuild;
     public static Tilemap tower;
 
     public void Init()
     {
         buildData.Clear();
-        GameObject go = Util.FindChild(gameObject, "Wall");
-        walls = go.GetComponent<Tilemap>();
-        go = Util.FindChild(gameObject, "Matter");
+        GameObject go = Util.FindChild(gameObject, "Matter");
         matter = go.GetComponent<Tilemap>();
+        go = Util.FindChild(gameObject, "CantBuild");
+        cantBuild = go.GetComponent<Tilemap>();
         directList.Add(Vector3Int.right);
         directList.Add(Vector3Int.up);
         directList.Add(Vector3Int.down);
@@ -42,13 +42,13 @@ public class MapManager : MonoBehaviour
     public bool CheckCanUseTile(Vector3Int pos)
     {
         Vector2 towerPos = Managers.Game.tower.transform.position;
-        if (walls.HasTile(pos))
-            return false;
-        else if (building.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))
+        if (building.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))
             return false;
         else if (tower.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))
             return false;
         else if (matter.HasTile(pos))
+            return false;
+        else if (cantBuild.HasTile(pos))
             return false;
         else if ((pos - new Vector3Int((int)towerPos.x, (int)towerPos.y)) == Vector3Int.zero)
             return false;
@@ -107,9 +107,8 @@ public class MapManager : MonoBehaviour
                         }
                     }
 
-                    if (walls.HasTile(pos))
+                    if (cantBuild.HasTile(pos))
                         continue;
-
                     nextPos = pos + directList[i];
                 }
                 else

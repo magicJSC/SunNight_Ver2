@@ -666,9 +666,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 448
-        y: 240
-        width: 16
-        height: 16
+        y: 224
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -686,10 +686,10 @@ TextureImporter:
       name: RA_Wasteland_25
       rect:
         serializedVersion: 2
-        x: 464
-        y: 240
-        width: 16
-        height: 16
+        x: 480
+        y: 224
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -699,48 +699,6 @@ TextureImporter:
       bones: []
       spriteID: 66d4d6d4fa0368f4fbb30c07df4eb595
       internalID: 1084750071
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RA_Wasteland_26
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 240
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af5c4cc39a8afe64ab0f57fc0b75ed1c
-      internalID: 316832273
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RA_Wasteland_27
-      rect:
-        serializedVersion: 2
-        x: 496
-        y: 240
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 221ed7097e1537545a75ac3882841578
-      internalID: -644557628
       vertices: []
       indices: 
       edges: []
@@ -1501,90 +1459,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_63
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 224
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc35b52369cf4314eacf5b40a92ec970
-      internalID: 2064744873
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RA_Wasteland_64
-      rect:
-        serializedVersion: 2
-        x: 464
-        y: 224
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f312f9c39fc9a4b48813c76e6155ac1f
-      internalID: -1009307948
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RA_Wasteland_65
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 224
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 36768cdc358de674fa9822150744feb6
-      internalID: 1060989599
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RA_Wasteland_66
-      rect:
-        serializedVersion: 2
-        x: 496
-        y: 224
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 639ad7c3a029a7e4c8940e670d77324f
-      internalID: 774632280
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: RA_Wasteland_67
       rect:
         serializedVersion: 2
@@ -2324,9 +2198,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 368
-        y: 208
-        width: 16
-        height: 16
+        y: 192
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2336,27 +2210,6 @@ TextureImporter:
       bones: []
       spriteID: bafdfe6a827997c43bb9fa75d29af089
       internalID: 126341733
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RA_Wasteland_103
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 208
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd3c6a7e6ce9ec3409d843fe2cc5c10c
-      internalID: -2036885240
       vertices: []
       indices: 
       edges: []
@@ -3286,48 +3139,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RA_Wasteland_148
-      rect:
-        serializedVersion: 2
-        x: 368
-        y: 192
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3b2d25cf022f6bb4ba18eb254aa51446
-      internalID: 1721831236
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RA_Wasteland_149
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 192
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 89aecdcd0d3f81247a24f8fe6e248439
-      internalID: -607915707
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: RA_Wasteland_150
       rect:
         serializedVersion: 2
@@ -4109,11 +3920,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 128
+        y: 127
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.49596834, y: 0.19560099}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:

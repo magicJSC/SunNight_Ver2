@@ -12,6 +12,7 @@ public class GameScene : BaseScene
 
         Managers.Game.isKeepingTower = false;
         PlayerController.isDie = false;
+        Managers.Game.completeTutorial = true;
 
         Instantiate(Resources.Load<GameObject>("UI/UI_Time"));
         Managers.Game.lightController = Instantiate(Resources.Load<GameObject>("Prefabs/Light")).GetComponent<LightController>();
@@ -41,6 +42,7 @@ public class GameScene : BaseScene
         Managers.Inven.Init();
         Managers.Game.player = Instantiate(Resources.Load<GameObject>("Prefabs/Player")).GetComponent<PlayerController>();
         Managers.Game.player.Init();
+        Managers.Game.player.transform.position = new Vector3(-67.5f, 55.39f);
         Instantiate(Resources.Load<GameObject>("UI/UI_GameMenu"), Managers.Game.player.transform);
 
         return true;
