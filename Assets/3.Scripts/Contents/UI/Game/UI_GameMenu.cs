@@ -26,6 +26,12 @@ public class UI_GameMenu : UI_Base
     private void OnEnable()
     {
         Time.timeScale = 0;
+        Managers.UI.PopUIList.Add(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        Managers.UI.PopUIList.Remove(gameObject);
     }
 
     void Close()

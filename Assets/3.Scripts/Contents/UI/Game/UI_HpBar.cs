@@ -15,8 +15,20 @@ public class UI_HpBar : UI_Base
 
     public void SetHp(float f)
     {
-        fill.fillAmount = f;
+        StartCoroutine(UpdateHPBar(f));
         anim.Play("Hited",-1,0);
+    }
+
+    IEnumerator UpdateHPBar(float ratio)
+    {
+        while (true)
+        {
+            yield return null;
+
+            if (Mathf.Approximately(fill.fillAmount, ratio))
+                yield break;
+            fill.fillAmount = Mathf.Lerp(fill.fillAmount, ratio, 0.1f);
+        }
     }
 
     public override void Init()

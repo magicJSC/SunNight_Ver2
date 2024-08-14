@@ -76,20 +76,26 @@ public class UI_HotBar : UI_Base
         slotList = new UI_HotbarSlot[Managers.Inven.hotBarSlotInfo.Length];
         hotBarSlotAsset.LoadAssetAsync().Completed += (slot) =>
         {
-            for (int i = 0; i < Managers.Inven.hotBarSlotInfo.Length - 1; i++)
-            {
-                UI_HotbarSlot hotBarSlot = Instantiate(slot.Result, grid.transform).GetComponent<UI_HotbarSlot>();
-
-                slotList[i] = hotBarSlot;
-                hotBarSlot.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.hotBarSlotInfo[i];
-                hotBarSlot.GetComponentInChildren<UI_Item>().Init();
-                slotList[i].GetComponent<UI_HotbarSlot>().Init();
-            }
             towerSlotAsset.LoadAssetAsync().Completed += (obj) =>
             {
+                for (int i = 0; i < Managers.Inven.hotBarSlotInfo.Length - 1; i++)
+                {
+                    UI_HotbarSlot hotBarSlot = Instantiate(slot.Result, grid.transform).GetComponent<UI_HotbarSlot>();
+
+                    slotList[i] = hotBarSlot;
+                    hotBarSlot.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.hotBarSlotInfo[i];
+                    hotBarSlot.GetComponentInChildren<UI_Item>().Init();
+                    slotList[i].GetComponent<UI_HotbarSlot>().Init();
+                }
                 towerSlot = Instantiate(obj.Result, grid.transform).GetComponent<UI_TowerSlot>();
                 towerSlot.Init();
                 ChangeChoice(0);
+
+                Managers.Game.isKeepingTower = true;
+                Managers.Inven.hotBarUI.CheckChoice();
+                Managers.Inven.hotBarUI.towerSlot.ShowTowerIcon();
+                Managers.Game.tower.transform.SetParent(Managers.Game.build.transform);
+                Managers.Game.tower.transform.position = Managers.Game.build.transform.position;
             };
         };
         
@@ -131,7 +137,10 @@ public class UI_HotBar : UI_Base
     //값 가져오기
     public void GetData()
     {
-        for (int i = 0; i < Managers.Inven.hotBarSlotInfo.Length; i++)
+        Managers.Inven.hotBarSlotInfo[0] = new StorageManager.SlotInfo(16, "Fence");
+        Managers.Inven.hotBarSlotInfo[1] = new StorageManager.SlotInfo(1, "Sword");
+        Managers.Inven.hotBarSlotInfo[2] = new StorageManager.SlotInfo(3, "Cannon");
+        for (int i = 3; i < Managers.Inven.hotBarSlotInfo.Length; i++)
         {
             Managers.Inven.hotBarSlotInfo[i] = new StorageManager.SlotInfo(0);
         }

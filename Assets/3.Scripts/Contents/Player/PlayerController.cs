@@ -45,9 +45,10 @@ public class PlayerController : CreatureController,IPlayer
             return;
 
         init = true;
+        Camera.main.transform.parent = transform;
+        Camera.main.transform.position = Camera.main.transform.parent.position + new Vector3(0, 0, -10);
         toolParent = Util.FindChild(gameObject, "Tool");
         rigid = GetComponent<Rigidbody2D>();
-        Camera.main.GetComponent<CameraController>().target = transform;
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         stat = GetComponent<PlayerStat>();
@@ -61,7 +62,8 @@ public class PlayerController : CreatureController,IPlayer
             return;
         isDie = false;
         stat.Hp = stat.maxHP;
-
+        Camera.main.transform.parent = transform;
+        Camera.main.transform.position = Camera.main.transform.parent.position + new Vector3(0, 0, -10);
         StartCoroutine(Move());
 
         if(toolParent.transform.GetChild(0) != null)
@@ -132,8 +134,13 @@ public class PlayerController : CreatureController,IPlayer
         if (Managers.Game.isHandleUI)
             return;
 
-        if (Managers.Inven.choicingTower || Managers.Game.isKeepingTower)
+        if (Managers.Inven.choicingTower)
+        {
+            Vector2 tower = Managers.Game.tower.transform.position;
+            if (MapManager.cantBuild.HasTile(new Vector3Int((int)(tower.x), (int)(tower.y), 0)))
+                return;
             Managers.Game.build.BuildTower();
+        }
         else
             Managers.Game.build.BuildItem(); 
     }
@@ -173,7 +180,7 @@ public class PlayerController : CreatureController,IPlayer
 
     public void Die()
     {
-
+        Camera.main.transform.parent = null;
         isDie = true;
         graveAsset.InstantiateAsync().Completed += (go) => 
         {

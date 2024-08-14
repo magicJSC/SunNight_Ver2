@@ -5,11 +5,24 @@ using UnityEngine;
 
 public class PlayerStat : MonoBehaviour
 {
+    public Action damageEvent;
     public Action<float> hpBarEvent;
     public Action<float> energyBarEvent;
     public Action<float> hungerBarEvent;
 
-    public int Hp { get { return hp; } set { hp = Mathf.Clamp(value, 0, value); hpBarEvent.Invoke(((float)Hp / (float)maxHP)); } }
+    CameraController cam;
+
+    public int Hp { get { return hp; } 
+        set 
+        {
+            if (hp > value)
+                OnDamageEvent();
+            else if(hp < value)
+                OnHillEvent();
+            hp = Mathf.Clamp(value, 0, value);
+            hpBarEvent.Invoke(((float)Hp / (float)maxHP));
+        }
+    }
     int hp;
 
     public int maxHP;
@@ -28,6 +41,17 @@ public class PlayerStat : MonoBehaviour
 
     private void Start()
     {
+        cam = Camera.main.GetComponent<CameraController>();
+    }
 
+    void OnDamageEvent()
+    {
+        cam.Shake(0.5f, 0.5f);
+        damageEvent?.Invoke();
+    }
+
+    void OnHillEvent()
+    {
+        
     }
 }
