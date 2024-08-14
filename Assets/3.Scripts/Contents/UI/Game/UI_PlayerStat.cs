@@ -21,6 +21,8 @@ public class UI_PlayerStat : UI_Base
         Background
     }
 
+    Animator anim;
+
     public override void Init()
     {
         Bind<GameObject>(typeof(GameObjects));
@@ -29,6 +31,8 @@ public class UI_PlayerStat : UI_Base
         hungerImage = Get<GameObject>((int)GameObjects.Hunger).GetComponent<Image>();
         back = Get<GameObject>((int)GameObjects.Background);
 
+        anim = GetComponent<Animator>();
+
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
       
 
@@ -36,16 +40,36 @@ public class UI_PlayerStat : UI_Base
         playerStat.hpBarEvent += SetHpBar;
         playerStat.energyBarEvent += SetEnergyBar;
         playerStat.hungerBarEvent += SetHungerBar;
+        playerStat.damageEvent += GetDamageEffect;
 
         playerStat.Hp = playerStat.maxHP;
         playerStat.Energy = playerStat.maxEnergy;
         playerStat.Hunger = playerStat.maxHunger;
+
+    }
+
+    void GetDamageEffect()
+    {
+        anim.Play("Damage",-1,0);
     }
 
     void SetHpBar(float ratio)
     {
-        hpImage.fillAmount = ratio;
+        StartCoroutine(UpdateHPBar(ratio));
     }
+
+    IEnumerator UpdateHPBar(float ratio)
+    {
+        while(true)
+        {
+            yield return null;
+
+            if(Mathf.Approximately(hpImage.fillAmount,ratio))
+                yield break;
+            hpImage.fillAmount = Mathf.Lerp(hpImage.fillAmount, ratio,0.1f);
+        }
+    }
+
 
     void SetEnergyBar(float ratio)
     {

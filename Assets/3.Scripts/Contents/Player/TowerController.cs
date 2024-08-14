@@ -36,12 +36,13 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
         canInteractSign = Util.FindChild(gameObject, "Sign");
         canInteractSign.SetActive(false);
 
-        Camera.main.GetComponent<CameraController>().target = transform;
         inviLayer.value = 8;
         buildLayer.value = 9;
 
         stat = GetComponent<Stat>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+
     }
 
     public void Interact()
@@ -130,7 +131,8 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
             go.Result.GetComponent<Animator>().Play("GameOver");
 
             PlayerController.isDie = true;
-           Camera.main.GetComponent<CameraController>().target = Managers.Game.tower.transform;
+            Camera.main.transform.parent = transform;
+            Camera.main.transform.position = Camera.main.transform.parent.position + new Vector3(0, 0, -10);
         };
     }
 }

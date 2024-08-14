@@ -1,13 +1,13 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform target;
 
-    private void Update()
+    public void Shake(float duration,float strength)
     {
-        transform.position = target.position + new Vector3(0, 0, -10);
+        transform.DOShakePosition(duration, strength);
     }
 }
