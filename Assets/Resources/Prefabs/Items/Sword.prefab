@@ -201,6 +201,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 10
   size: {x: 1.5, y: 1.5}
+  effectAsset:
+    m_AssetGUID: 8b620369a0fc04a45bdc1b94a23b90bc
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  soundAsset:
+    m_AssetGUID: 4a22f48158f0fe045b7bf8f06baa7d90
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!114 &6378499207923595965
 MonoBehaviour:
   m_ObjectHideFlags: 0

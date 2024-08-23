@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Close_Monster : MonsterController,IFly
+public class Close_Monster : MonsterController,IWalk
 {
     void Atk()
     {
-        Collider2D[] cols = Physics2D.OverlapBoxAll(transform.position + (target.position - transform.position).normalized, new Vector2(2, 2), (target.position - transform.position).normalized.z);
+        Collider2D[] cols = Physics2D.OverlapBoxAll(transform.position + (target.position - transform.position) / 2, new Vector2(stat.attackRange, stat.attackRange), (target.position - transform.position).normalized.z);
         foreach (Collider2D col in cols)
         {
             if(col.transform == target)
@@ -23,6 +23,6 @@ public class Close_Monster : MonsterController,IFly
         if (target == null)
             return;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(transform.position + (target.position - transform.position).normalized, new Vector2(2, 2));
+        Gizmos.DrawWireCube(transform.position + (target.position - transform.position) / 2, new Vector2(stat.attackRange, stat.attackRange));
     }
 }

@@ -247,6 +247,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSo: {fileID: 11400000, guid: 209835d44adc74944aec8c3a71c90dd7, type: 2}
+  effectAsset:
+    m_AssetGUID: 37bf83344e0915a4d970ec8995dc3fb5
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  soundAsset:
+    m_AssetGUID: d3611e9ee2658cf4a99c4a0ecd6e2985
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   countText: {fileID: 0}
 --- !u!1 &3604485668344030840
 GameObject:

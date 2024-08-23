@@ -97,6 +97,31 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c058501afad36f44c861ebbb42318bab
+    m_Address: Assets/1.Asset/Audio/TypingSound.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3611e9ee2658cf4a99c4a0ecd6e2985
+    m_Address: Assets/1.Asset/Audio/GetItemSound.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 37bf83344e0915a4d970ec8995dc3fb5
+    m_Address: Prefabs/Effect/GetItemEffect
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b620369a0fc04a45bdc1b94a23b90bc
+    m_Address: Assets/Resources_moved/Prefabs/Effect/AttackEffect.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a22f48158f0fe045b7bf8f06baa7d90
+    m_Address: Assets/1.Asset/Audio/Slash.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9a368fece3badaa408b73453d1be7c74, type: 2}
   m_SchemaSet:

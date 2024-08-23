@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build.Pipeline.Utilities;
 using UnityEngine;
 
 public interface IRotate
@@ -37,13 +36,7 @@ public class TurretController : BaseController
         if (stat == null)
             Debug.Log($"{name}포탑에 TurretStat이 존재하지 않습니다");
 
-        Vector2 tower = Managers.Game.tower.transform.position;
-        if (MapManager.cantBuild.HasTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0)))
-        {
-            Item_Buliding building = GetComponentInParent<Item_Buliding>();
-            Managers.Inven.AddItems(building.itemSo, 1);
-            building.DeleteBuilding();
-        }
+        
     }
 
     private void OnEnable()

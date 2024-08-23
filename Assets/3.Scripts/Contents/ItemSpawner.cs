@@ -7,25 +7,30 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField]
     ItemSO itemSO;
 
-    GameObject item;
+    public int itemCount;
+
+    public float range;
+
 
     private void Start()
     {
-        StartCoroutine(SpawnItem());
+        TimeController.morningEvent += SpawnItem;
+        SpawnItem();
     }
 
-    IEnumerator SpawnItem()
+    void SpawnItem()
     {
-        while (true)
+        for(int i = 0; i < itemCount; i++)
         {
-            if (item == null)
-            {
-                yield return new WaitForSeconds(2);
-                Vector3Int pos = new Vector3Int((int)transform.position.x, (int)transform.position.y);
-                MapManager.matter.SetTile(pos, itemSO.tile);
-                item = MapManager.matter.GetInstantiatedObject(pos);
-            }
-            yield return null;
+            Vector3Int pos = new Vector3Int((int)(transform.position.x + Random.Range(-range, range)), (int)(transform.position.y + Random.Range(-range, range)));
+            MapManager.matter.SetTile(pos,itemSO.tile);
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(transform.position, new Vector2(range, range));
+    }
+
 }

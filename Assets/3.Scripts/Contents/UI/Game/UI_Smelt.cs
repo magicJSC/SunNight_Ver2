@@ -30,7 +30,7 @@ public class UI_Smelt : UI_Base
 
     private SlotInfo _slotInfo;
 
-    ItemSO coalSO;
+    public ItemSO coalSO;
 
     enum GameObjects
     {
@@ -86,8 +86,6 @@ public class UI_Smelt : UI_Base
 
         SetData();
 
-        coalSO = Resources.Load<ItemSO>("Prefabs/Items/Coal");
-
         Managers.Game.tower.forceInstallEvent -= CancelSmelt;
         Managers.Game.tower.forceInstallEvent += CancelSmelt;
 
@@ -101,6 +99,7 @@ public class UI_Smelt : UI_Base
             return;
         Managers.Inven.inventoryUI.gameObject.SetActive(true);
         FillCharcoal();
+        Managers.UI.PopUIList.Add(gameObject);
     }
 
     private void OnDisable()
@@ -108,6 +107,7 @@ public class UI_Smelt : UI_Base
         if (!_init)
             return;
         explain.SetActive(false);
+        Managers.UI.PopUIList.Remove(gameObject);
     }
 
     void SetData()

@@ -81,7 +81,7 @@ public class MonsterController : MonoBehaviour, IMonster
     void Start()
     {
         stat = GetComponent<MonsterStat>();
-        sprite = GetComponent<SpriteRenderer>();
+        sprite = Util.FindChild<SpriteRenderer>(gameObject,"Sprite",true);
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;

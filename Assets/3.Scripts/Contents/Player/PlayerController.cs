@@ -70,6 +70,7 @@ public class PlayerController : CreatureController,IPlayer
          Destroy(toolParent.transform.GetChild(0).gameObject);
     }
 
+
     void OnMove(InputValue value)
     {
         dir = value.Get<Vector2>();
@@ -142,7 +143,7 @@ public class PlayerController : CreatureController,IPlayer
             Managers.Game.build.BuildTower();
         }
         else
-            Managers.Game.build.BuildItem(); 
+           Managers.Game.build.BuildItem(); 
     }
 
 

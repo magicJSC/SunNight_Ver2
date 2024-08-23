@@ -11,6 +11,7 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
     public Action forceInstallEvent;
 
     public GameObject canInteractSign { get; private set; }
+    GameObject buildEffect;
 
     LayerMask buildLayer;
     LayerMask inviLayer;
@@ -29,6 +30,7 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
     {
         Managers.Game.tower = this;
         build = Util.FindChild(gameObject,"Building",true).GetComponent<Tilemap>();
+        buildEffect = Util.FindChild(gameObject, "BuildEffect", true);
         MapManager.building = build;
         MapManager.tower = Util.FindChild(gameObject,"Tower",true).GetComponent<Tilemap>();
         TimeController.nightEvent += ForceInstall;
@@ -80,6 +82,7 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
         Vector2 playerPos = Managers.Game.player.transform.position;
         transform.position = new Vector2(Mathf.Round(playerPos.x), Mathf.Round(playerPos.y));
         AfterInstallTower();
+        Managers.Inven.CheckHotBarTowerSlot();
     }
 
     public void GetDamage(int damage)
@@ -94,6 +97,7 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
     public void BeforeInstallTower()
     {
         gameObject.SetActive(true);
+        buildEffect.SetActive(false);
         spriteRenderer.color = new Color(1, 1, 1, 0.3f);
         gameObject.layer = inviLayer;
         GetComponent<BoxCollider2D>().isTrigger = true;
@@ -112,6 +116,7 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
             tutorial2Event.Invoke();
 
         gameObject.SetActive(true);
+        buildEffect.SetActive(true);
         spriteRenderer.color = new Color(1, 1, 1, 1);
         gameObject.layer = buildLayer;
         MapManager.building.color = new Color(1, 1, 1, 1f);

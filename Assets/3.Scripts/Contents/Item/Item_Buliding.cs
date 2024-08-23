@@ -12,6 +12,7 @@ public class Item_Buliding : Item,IBuilding,IGetDamage
 
     [HideInInspector]
     public GameObject buildUI;
+    GameObject buildEffect;
 
     Stat stat;
     public SpriteRenderer[] bodySprites;
@@ -23,6 +24,7 @@ public class Item_Buliding : Item,IBuilding,IGetDamage
         Vector2 thisPos = transform.position - Managers.Game.tower.transform.position;
         pos = new Vector3Int((int)thisPos.x, (int)thisPos.y);
         buildUI = Util.FindChild(gameObject, "UI_Build",true);
+        buildEffect = Util.FindChild(gameObject, "BuildEffect", true);
 
         stat = GetComponent<Stat>();
 
@@ -48,6 +50,7 @@ public class Item_Buliding : Item,IBuilding,IGetDamage
     //설치 전 색깔로 변경
     public void ChangeColorBeforeIntall()
     {
+        buildEffect.SetActive(false);
         gameObject.layer = inviLayer;
         for(int i=0;i< bodySprites.Length;i++)
         {
@@ -58,6 +61,14 @@ public class Item_Buliding : Item,IBuilding,IGetDamage
     //설치 후 색깔로 변경
     public void ChangeColorAfterIntall()
     {
+        if (MapManager.cantBuild.HasTile(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0)))
+        {
+            Item_Buliding building = GetComponentInParent<Item_Buliding>();
+            Managers.Inven.AddItems(building.itemSo, 1);
+            building.DeleteBuilding();
+        }
+
+        buildEffect.SetActive(true);
         gameObject.layer = buildLayer;
         for (int i = 0; i < bodySprites.Length; i++)
         {

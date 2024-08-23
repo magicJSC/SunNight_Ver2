@@ -13,23 +13,7 @@ public class UI_HpBar : UI_Base
         Fill
     }
 
-    public void SetHp(float f)
-    {
-        StartCoroutine(UpdateHPBar(f));
-        anim.Play("Hited",-1,0);
-    }
-
-    IEnumerator UpdateHPBar(float ratio)
-    {
-        while (true)
-        {
-            yield return null;
-
-            if (Mathf.Approximately(fill.fillAmount, ratio))
-                yield break;
-            fill.fillAmount = Mathf.Lerp(fill.fillAmount, ratio, 0.1f);
-        }
-    }
+    
 
     public override void Init()
     {
@@ -41,7 +25,28 @@ public class UI_HpBar : UI_Base
         {
             stat.Hp = stat.maxHP;
             fill.fillAmount = 1;
-            stat.hpEvent += SetHp;
+            stat.hpEvent += SetHp; 
+        }
+    }
+
+    public void SetHp(Stat stat)
+    {
+        StartCoroutine(UpdateHPBar(stat));
+        anim.Play("Hited", -1, 0);
+    }
+
+    IEnumerator UpdateHPBar(Stat stat)
+    {
+        float hp = stat.Hp;
+        while (true)
+        {
+            yield return null;
+
+            if (Mathf.Approximately(fill.fillAmount, stat.Hp / stat.maxHP))
+                yield break;
+            if(hp != stat.Hp)
+                yield break;
+            fill.fillAmount = Mathf.Lerp(fill.fillAmount, stat.Hp / stat.maxHP, 0.1f);
         }
     }
 }
