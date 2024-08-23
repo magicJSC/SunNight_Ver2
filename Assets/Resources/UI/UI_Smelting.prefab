@@ -552,6 +552,7 @@ MonoBehaviour:
   timer: {fileID: 0}
   explain: {fileID: 0}
   furnanace: {fileID: 0}
+  coalSO: {fileID: 11400000, guid: 4efdbac0b67ce9540852415c7b1b0d0b, type: 2}
 --- !u!1 &5240879208395259082
 GameObject:
   m_ObjectHideFlags: 0

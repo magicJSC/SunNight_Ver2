@@ -60,11 +60,14 @@ public class UI_PlayerStat : UI_Base
 
     IEnumerator UpdateHPBar(float ratio)
     {
-        while(true)
+        float hp = playerStat.Hp;
+        while (true)
         {
             yield return null;
 
             if(Mathf.Approximately(hpImage.fillAmount,ratio))
+                yield break;
+            if (hp != playerStat.Hp)
                 yield break;
             hpImage.fillAmount = Mathf.Lerp(hpImage.fillAmount, ratio,0.1f);
         }

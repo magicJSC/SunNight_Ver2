@@ -39,7 +39,7 @@ public class Cannon : TurretController, IAttack, IRotate
     {
         if (collision.GetComponent<MonsterController>() != null)
         {
-            if(collision.GetComponent<IFly>() != null)
+            if(collision.GetComponent<IWalk>() != null)
                 targets.Add(collision.gameObject);
         }
     }
@@ -48,7 +48,7 @@ public class Cannon : TurretController, IAttack, IRotate
     {
         if (collision.GetComponent<MonsterController>() != null)
         {
-            if (collision.GetComponent<IFly>() != null)
+            if (collision.GetComponent<IWalk>() != null)
                 targets.Remove(collision.gameObject);
         }
     }

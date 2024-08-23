@@ -44,7 +44,7 @@ public class Managers : MonoBehaviour
             instance = go.GetComponent<Managers>();
 
             instance._network.Init();
-            instance._sound.Init();
+            instance._sound.Init();        
         }
     }
 }

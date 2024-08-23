@@ -181,10 +181,60 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1621166309014760283, guid: b5d3bbdcd080573448c258382f4d6d15,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981473954873765231, guid: b5d3bbdcd080573448c258382f4d6d15,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3658092357125571553, guid: b5d3bbdcd080573448c258382f4d6d15,
         type: 3}
       propertyPath: m_Name
       value: TutorialGrid
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678526485134899267, guid: b5d3bbdcd080573448c258382f4d6d15,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3696360891045968133, guid: b5d3bbdcd080573448c258382f4d6d15,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719566670153820541, guid: b5d3bbdcd080573448c258382f4d6d15,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218113579276503928, guid: b5d3bbdcd080573448c258382f4d6d15,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387000588040275860, guid: b5d3bbdcd080573448c258382f4d6d15,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783510087494685427, guid: b5d3bbdcd080573448c258382f4d6d15,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190861354057935240, guid: b5d3bbdcd080573448c258382f4d6d15,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409431748649720677, guid: b5d3bbdcd080573448c258382f4d6d15,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -462,7 +512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50edf4e1df5e1b04f8e9bab0569c9d5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!114 &2137221399
 MonoBehaviour:
   m_ObjectHideFlags: 0

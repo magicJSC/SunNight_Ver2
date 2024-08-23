@@ -158,7 +158,9 @@ public class UI_Inventory : UI_Base
 
     void GetData()
     {
-        for (int i = 0; i < Managers.Inven.inventorySlotInfo.Length; i++)
+        Managers.Inven.inventorySlotInfo[0] = new SlotInfo(3,"IronOre");
+        Managers.Inven.inventorySlotInfo[1] = new SlotInfo(10,"Coal");
+        for (int i = 2; i < Managers.Inven.inventorySlotInfo.Length; i++)
         {
             Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);
         }

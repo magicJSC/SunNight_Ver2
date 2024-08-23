@@ -326,4 +326,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSo: {fileID: 11400000, guid: 1e8a1a00c16e47b4aaf86b1d2532639b, type: 2}
+  effectAsset:
+    m_AssetGUID: 37bf83344e0915a4d970ec8995dc3fb5
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  soundAsset:
+    m_AssetGUID: d3611e9ee2658cf4a99c4a0ecd6e2985
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   countText: {fileID: 0}
