@@ -100,7 +100,7 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
         buildEffect.SetActive(false);
         spriteRenderer.color = new Color(1, 1, 1, 0.3f);
         gameObject.layer = inviLayer;
-        GetComponent<BoxCollider2D>().isTrigger = true;
+        GetComponent<BoxCollider2D>().enabled = false;
         MapManager.building.color = new Color(1, 1, 1, 0.3f);
         for (int i =0;i<MapManager.buildData.Count;i++)
         {
@@ -120,7 +120,7 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
         spriteRenderer.color = new Color(1, 1, 1, 1);
         gameObject.layer = buildLayer;
         MapManager.building.color = new Color(1, 1, 1, 1f);
-        GetComponent<BoxCollider2D>().isTrigger = false;
+        GetComponent<BoxCollider2D>().enabled = true;
         for (int i = 0; i < MapManager.buildData.Count; i++)
         {
             GameObject go = MapManager.building.GetInstantiatedObject(MapManager.buildData[i]);

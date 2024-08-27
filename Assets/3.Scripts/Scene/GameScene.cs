@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class GameScene : BaseScene
 {
+    public GameObject openingStory;
+
     protected override bool Init()
     {
         if (base.Init() == false)
@@ -46,6 +48,11 @@ public class GameScene : BaseScene
         Managers.Game.player.transform.position = new Vector3(-67.5f, 55.39f);
         Instantiate(Resources.Load<GameObject>("UI/UI_GameMenu"), Managers.Game.player.transform);
 
+        if (!Managers.Game.isOpeningStory)
+        {
+            Instantiate(openingStory);
+            Managers.Game.isOpeningStory = true;
+        }
         return true;
     }
 

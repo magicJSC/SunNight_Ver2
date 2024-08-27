@@ -56,33 +56,20 @@ public class UI_Produce : UI_Base
 
     RectTransform backR;
 
-    enum GameObjects
-    {
-        Background,
-        Content_Mat,
-        Content_Item,
-        ToMake,
-        Produce,
-        Hide,
-        Explain_Mat,
-        Explain_Item
-    }
-
+   
     public override void Init()
     {
         if (_init)
             return;
 
-        Bind<GameObject>(typeof(GameObjects));
-        back = Get<GameObject>((int)GameObjects.Background);
-        contentMat = Get<GameObject>((int)GameObjects.Content_Mat);
-        contentItem = Get<GameObject>((int)GameObjects.Content_Item);
-        toMake = Get<GameObject>((int)GameObjects.ToMake).GetComponent<Image>();
-        produce = Get<GameObject>((int)GameObjects.Produce);
-        hideRect = Get<GameObject>((int)GameObjects.Hide).GetComponent<RectTransform>();
-        explainMat = Get<GameObject>((int)GameObjects.Explain_Mat);
-        explainItem = Get<GameObject>((int)GameObjects.Explain_Item);
-
+        back = Util.FindChild(gameObject, "Background", true); 
+        contentMat = Util.FindChild(gameObject, "Content_Mat", true); 
+        contentItem = Util.FindChild(gameObject, "Content_Item", true);
+        toMake = Util.FindChild<Image>(gameObject, "ToMake", true);
+        produce = Util.FindChild(gameObject, "Produce", true);
+        hideRect = Util.FindChild<RectTransform>(gameObject, "Hide", true);
+        explainMat = Util.FindChild(gameObject, "Explain_Mat", true);
+        explainItem = Util.FindChild(gameObject, "Explain_Item", true);
         produceButtonText = Util.FindChild(gameObject, "ProduceText", true).GetComponent<Text>();
 
         GetComponent<Canvas>().worldCamera = Camera.main;
@@ -196,6 +183,7 @@ public class UI_Produce : UI_Base
 
     void OnProduce()
     {
+        Debug.Log("시작");
         if (matters.Count == 0)
             return;
 
@@ -210,11 +198,12 @@ public class UI_Produce : UI_Base
                     count -= info_m[j].Item2;
                 }
             }
-
             if (!Managers.Game.completeTutorial)
                 tutorialEvent.Invoke();
             Managers.Inven.AddOneItem(toMakeItemSO);
-            Managers.Sound.Play(Define.Sound.Effect, produceSound);
+            if(produceSound != null)
+                Managers.Sound.Play(Define.Sound.Effect, produceSound);
+
         }
         else
             Debug.Log("재료가 부족합니다");
@@ -241,7 +230,8 @@ public class UI_Produce : UI_Base
                 UI_Item itemUI = Managers.Inven.inventoryUI.slotList[j].itemUI;
                 if (itemUI.slotInfo.itemInfo == null)
                     continue;
-                if (matters[i].itemSO == itemUI.slotInfo.itemInfo)
+               
+                if (matters[i].itemSO.idName == itemUI.slotInfo.itemInfo.idName)
                 {
                     _count += itemUI.slotInfo.count;
                     info_m = new()

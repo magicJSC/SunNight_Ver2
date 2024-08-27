@@ -101,7 +101,7 @@ public class MapManager : MonoBehaviour
                 {
                     if (matter.HasTile(pos + directList[i]))
                     {
-                        if (itemSO == matter.GetInstantiatedObject(pos + directList[i]).GetComponent<Item>().itemSo)
+                        if (itemSO.idName == matter.GetInstantiatedObject(pos + directList[i]).GetComponent<Item>().itemSo.idName)
                         {
                             return pos + directList[i];
                         }

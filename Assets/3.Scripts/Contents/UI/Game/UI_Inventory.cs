@@ -49,7 +49,6 @@ public class UI_Inventory : UI_Base
         Produce,
         Coin,
         Explain_Inven,
-        UI_Produce
     }
 
 
