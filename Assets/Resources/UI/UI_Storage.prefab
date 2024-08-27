@@ -750,10 +750,58 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_Smelting
       objectReference: {fileID: 0}
+    - target: {fileID: 5313669205892103363, guid: 79fec2a08d598434bb83ec0bad7a997a,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: d4db614da0c1ee64fac43e3d103e8fb1,
+        type: 3}
+    - target: {fileID: 5313669205892103363, guid: 79fec2a08d598434bb83ec0bad7a997a,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5313669205892103363, guid: 79fec2a08d598434bb83ec0bad7a997a,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 61
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937344660031646389, guid: 79fec2a08d598434bb83ec0bad7a997a,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: d4db614da0c1ee64fac43e3d103e8fb1,
+        type: 3}
+    - target: {fileID: 5937344660031646389, guid: 79fec2a08d598434bb83ec0bad7a997a,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937344660031646389, guid: 79fec2a08d598434bb83ec0bad7a997a,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 61
+      objectReference: {fileID: 0}
     - target: {fileID: 7340995884006650696, guid: 79fec2a08d598434bb83ec0bad7a997a,
         type: 3}
       propertyPath: m_Name
       value: CloseSmelt
+      objectReference: {fileID: 0}
+    - target: {fileID: 9068410993040755573, guid: 79fec2a08d598434bb83ec0bad7a997a,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: d4db614da0c1ee64fac43e3d103e8fb1,
+        type: 3}
+    - target: {fileID: 9068410993040755573, guid: 79fec2a08d598434bb83ec0bad7a997a,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9068410993040755573, guid: 79fec2a08d598434bb83ec0bad7a997a,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 61
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

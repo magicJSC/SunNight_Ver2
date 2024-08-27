@@ -168,7 +168,7 @@ public class StorageManager : MonoBehaviour
                     continue;
                 }
 
-                if (item == itemUI.slotInfo.itemInfo && itemUI.slotInfo.count < itemUI.slotInfo.itemInfo.maxAmount)
+                if (item.idName == itemUI.slotInfo.itemInfo.idName && itemUI.slotInfo.count < itemUI.slotInfo.itemInfo.maxAmount)
                 {
                     SetSlot(item, itemUI, itemUI.slotInfo.count + 1);
                     return true;
@@ -213,7 +213,7 @@ public class StorageManager : MonoBehaviour
                 continue;
             }
 
-            if (item == itemUI.slotInfo.itemInfo)
+            if (item.idName == itemUI.slotInfo.itemInfo.idName)
             {
                 if (itemUI.slotInfo.count + count > itemUI.slotInfo.itemInfo.maxAmount)
                 {
@@ -239,7 +239,7 @@ public class StorageManager : MonoBehaviour
                 continue;
             }
 
-            if (item == itemUI.slotInfo.itemInfo)
+            if (item.idName == itemUI.slotInfo.itemInfo.idName)
             {
                 if (itemUI.slotInfo.count + count > itemUI.slotInfo.itemInfo.maxAmount)
                 {
