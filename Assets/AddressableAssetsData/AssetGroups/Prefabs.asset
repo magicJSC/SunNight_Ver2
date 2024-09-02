@@ -47,6 +47,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+<<<<<<< Updated upstream
   - m_GUID: 12c826be4fbd68b4aa0c49c8dca3f488
     m_Address: UI/UI_Abandon
     m_ReadOnly: 0
@@ -122,6 +123,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+=======
+>>>>>>> Stashed changes
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9a368fece3badaa408b73453d1be7c74, type: 2}
   m_SchemaSet:
