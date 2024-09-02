@@ -44,12 +44,12 @@ public class ToolController : MonoBehaviour
                 if (transform.parent.position.x < point.x)
                 {
                     angle = Mathf.Atan2(-(point.y - transform.position.y), point.x - transform.position.x) * Mathf.Rad2Deg;
-                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 180, angle + 180), 0.5f);
+                    transform.rotation = Quaternion.Euler(0, 180, angle + 180);
                 }
                 else
                 {
                     angle = Mathf.Atan2(point.y - transform.position.y, point.x - transform.position.x) * Mathf.Rad2Deg;
-                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, angle), 0.5f);
+                    transform.rotation = Quaternion.Euler(0, 0, angle);
                 }
             }
             yield return null;
@@ -61,7 +61,7 @@ public class ToolController : MonoBehaviour
         if (isWorking)
             return;
 
-        anim.Play("Attack");
+        anim.SetTrigger("Attack");
         isWorking = true;
     }
 

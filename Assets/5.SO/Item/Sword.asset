@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   idName: Sword
-  itemName: "\uB098\uBB34\uAC80"
-  explain: "\uB098\uBB34\uAC80\uC774\uB2E4"
-  itemIcon: {fileID: -157942333, guid: c7198cf7fc0cfb54b90a8ffeefc122cf, type: 3}
+  itemName: "\uAC80"
+  explain: "\uAC80\uC774\uB2E4"
+  itemIcon: {fileID: -3548928026839867271, guid: 896be884da5dcc449acadcfdc9075f0b,
+    type: 3}
   itemType: 2
   maxAmount: 1
-  canSmelt: 0
+  tile: {fileID: 0}
   smelt: {fileID: 0}
+  bakeItemSO: {fileID: 0}
+  bakeTime: 0

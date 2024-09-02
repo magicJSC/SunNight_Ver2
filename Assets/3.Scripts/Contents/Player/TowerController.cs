@@ -106,7 +106,23 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
         {
             GameObject go = MapManager.building.GetInstantiatedObject(MapManager.buildData[i]);
             go.GetComponent<Item_Buliding>().ChangeColorBeforeIntall();
-            go.GetComponent<BoxCollider2D>().isTrigger = true;
+            go.GetComponent<BoxCollider2D>().enabled = false;
+        }
+    }
+
+    public void CantInstallTower()
+    {
+        gameObject.SetActive(true);
+        buildEffect.SetActive(false);
+        spriteRenderer.color = new Color(1, 0.5f, 0.5f, 0.3f);
+        gameObject.layer = inviLayer;
+        GetComponent<BoxCollider2D>().enabled = false;
+        MapManager.building.color = new Color(1, 0.5f, 0.5f, 0.3f);
+        for (int i = 0; i < MapManager.buildData.Count; i++)
+        {
+            GameObject go = MapManager.building.GetInstantiatedObject(MapManager.buildData[i]);
+            go.GetComponent<Item_Buliding>().CantInstallColor();
+            go.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 
@@ -125,7 +141,7 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
         {
             GameObject go = MapManager.building.GetInstantiatedObject(MapManager.buildData[i]);
             go.GetComponent<Item_Buliding>().ChangeColorAfterIntall();
-            go.GetComponent<BoxCollider2D>().isTrigger = false;
+            go.GetComponent<BoxCollider2D>().enabled = true;
         }
     }
 

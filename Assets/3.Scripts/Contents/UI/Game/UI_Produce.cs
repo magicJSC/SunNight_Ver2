@@ -183,7 +183,6 @@ public class UI_Produce : UI_Base
 
     void OnProduce()
     {
-        Debug.Log("Ω√¿€");
         if (matters.Count == 0)
             return;
 

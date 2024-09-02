@@ -110,6 +110,7 @@ public class UI_Build : UI_Base
 
         InitData();
         gameObject.SetActive(false);
+        
     }
 
     private void OnEnable()

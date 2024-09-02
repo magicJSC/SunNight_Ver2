@@ -31,6 +31,7 @@ public class UI_GameMenu : UI_Base
 
     private void OnDisable()
     {
+        Time.timeScale = 1;
         Managers.UI.PopUIList.Remove(gameObject);
     }
 

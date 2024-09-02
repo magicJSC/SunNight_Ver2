@@ -58,6 +58,16 @@ public class Item_Buliding : Item,IBuilding,IGetDamage
         }
     }
 
+    public void CantInstallColor()
+    {
+        buildEffect.SetActive(false);
+        gameObject.layer = inviLayer;
+        for (int i = 0; i < bodySprites.Length; i++)
+        {
+            bodySprites[i].color = new Color(1, 0.5f, 0.5f, 0.3f);
+        }
+    }
+
     //설치 후 색깔로 변경
     public void ChangeColorAfterIntall()
     {
@@ -66,6 +76,7 @@ public class Item_Buliding : Item,IBuilding,IGetDamage
             Item_Buliding building = GetComponentInParent<Item_Buliding>();
             Managers.Inven.AddItems(building.itemSo, 1);
             building.DeleteBuilding();
+            return;
         }
 
         buildEffect.SetActive(true);

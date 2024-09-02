@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1132958213132411450}
   - component: {fileID: 2297774022771462896}
   - component: {fileID: 2151361934956360520}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Alpaca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 4
 --- !u!61 &6250243644208160663
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   _defence: 3
   _damage: 8
   attackCool: 1
-  attackRange: 5
+  attackRange: 10
   lookRange: 7
   _speed: 4
 --- !u!195 &2151361934956360520
@@ -194,8 +194,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.125
-  m_BaseOffset: 0.5625
+  m_Height: 1.62
+  m_BaseOffset: 0.51
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1 &3204963829209148029
@@ -255,7 +255,7 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 384
@@ -288,7 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3989876457198893495}
   - component: {fileID: 2671197796823170456}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1472567064, guid: 4ba47cb4919846041a505a644bd2fcc5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -473,7 +473,7 @@ PrefabInstance:
     - target: {fileID: 1619021019407462646, guid: 9f021ddef2185be4ab4cb69f6994ca7d,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5051120194597868085, guid: 9f021ddef2185be4ab4cb69f6994ca7d,
         type: 3}
@@ -483,12 +483,12 @@ PrefabInstance:
     - target: {fileID: 5051120194597868085, guid: 9f021ddef2185be4ab4cb69f6994ca7d,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7476882447577138073, guid: 9f021ddef2185be4ab4cb69f6994ca7d,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8846538996840157436, guid: 9f021ddef2185be4ab4cb69f6994ca7d,
         type: 3}
