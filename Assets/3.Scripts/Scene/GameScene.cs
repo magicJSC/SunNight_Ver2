@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class GameScene : BaseScene
 {
@@ -36,13 +35,15 @@ public class GameScene : BaseScene
         {
             Managers.Game.build = Instantiate(Resources.Load<GameObject>("Prefabs/Builder")).GetComponent<BuildController>();
         }
-        Managers.Game.build.Init();
 
 
         Managers.Game.tower = Instantiate(Resources.Load<GameObject>("Prefabs/Tower")).GetComponent<TowerController>();
         Managers.Game.tower.Init();
 
         Managers.Inven.Init();
+
+        Managers.Game.build.Init(); //¼öÁ¤ Áß
+
         Managers.Game.player = Instantiate(Resources.Load<GameObject>("Prefabs/Player")).GetComponent<PlayerController>();
         Managers.Game.player.Init();
         Managers.Game.player.transform.position = new Vector3(-67.5f, 55.39f);

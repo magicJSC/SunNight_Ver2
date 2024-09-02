@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -80,8 +81,13 @@ public class MonsterController : MonoBehaviour, IMonster
 
     void Start()
     {
+        Init();
+    }
+
+    public virtual void Init()
+    {
         stat = GetComponent<MonsterStat>();
-        sprite = Util.FindChild<SpriteRenderer>(gameObject,"Sprite",true);
+        sprite = Util.FindChild<SpriteRenderer>(gameObject, "Sprite", true);
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -132,7 +138,10 @@ public class MonsterController : MonoBehaviour, IMonster
         }
         else if (targetType == TargetType.Tower)
         {
-            return Managers.Game.tower.transform;
+            if(Managers.Game.tower != null)
+                return Managers.Game.tower.transform;
+            else
+                return null;
         }
         return null;
     }

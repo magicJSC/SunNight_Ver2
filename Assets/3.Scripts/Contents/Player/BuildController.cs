@@ -12,12 +12,13 @@ public class BuildController : MonoBehaviour
     public UI_Item itemUI;
 
     public SpriteRenderer buildItemIcon;
-
+    public SpriteRenderer gridSign;
 
     public void Init()
     {
-        Managers.Game.build = this;
+        gridSign = GetComponent<SpriteRenderer>();
         buildItemIcon = Util.FindChild(gameObject, "Sample").GetComponent<SpriteRenderer>();
+        Managers.Inven.hotBarEvent += GetBuildItemInfo;
         StartCoroutine(UpdateCor());
     }
 
@@ -36,11 +37,11 @@ public class BuildController : MonoBehaviour
         }
     }
 
-
-    public void GetBuildItemInfo(UI_Item uI_Item)
+    public void GetBuildItemInfo(UI_Item itemUI)
     {
-        itemUI = uI_Item;
+        this.itemUI = itemUI;
         buildItemIcon.sprite = itemUI.slotInfo.itemInfo.itemIcon;
+        buildItemIcon.gameObject.SetActive(true);
     }
 
     public void MoveBuilder()
@@ -48,6 +49,40 @@ public class BuildController : MonoBehaviour
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition = new Vector2(Mathf.Round(mousePosition.x), Mathf.Round(mousePosition.y));
         transform.position = mousePosition;
+
+
+        if (buildItemIcon == null)
+            return;
+
+        if (!Managers.Inven.choicingTower)
+        {
+            if (Managers.Map.CheckCanUseTile(new Vector3Int((int)(mousePosition.x), (int)(mousePosition.y), 0)))
+            {
+                buildItemIcon.color = new Color(1, 1, 1, 0.6f);
+            }
+            else
+            {
+                buildItemIcon.color = new Color(1, 0.5f, 0.5f, 0.6f);
+            }
+        }
+        else
+        {
+            if (!Managers.Game.isKeepingTower)
+                return;
+            Vector2 tower = Managers.Game.tower.transform.position;
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    if (MapManager.cantBuild.HasTile(new Vector3Int((int)(tower.x + x), (int)(tower.y + y), 0)))
+                    {
+                        Managers.Game.tower.transform.GetComponent<TowerController>().CantInstallTower();
+                         return;
+                    }
+                }
+            }
+            Managers.Game.tower.GetComponent<TowerController>().BeforeInstallTower();
+        }
     }
 
     public void BuildTower()
@@ -55,6 +90,7 @@ public class BuildController : MonoBehaviour
         Managers.Game.tower.transform.parent = null;
         Managers.Game.isKeepingTower = false;
         Managers.Inven.hotBarUI.CheckChoice();
+
     }
 
     public void BuildItem()
@@ -69,7 +105,8 @@ public class BuildController : MonoBehaviour
 
             if (!Managers.Game.completeTutorial)
                 tutorialEvent.Invoke();
-
+            if (itemUI == null)
+                return;
             MapManager.building.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), itemUI.slotInfo.itemInfo.tile); 
             itemUI.slotInfo.count--;
             if (itemUI.slotInfo.count <= 0)
@@ -87,11 +124,6 @@ public class BuildController : MonoBehaviour
             if (MapManager.building.HasTile(new Vector3Int(pos.x - (int)tower.x, pos.y - (int)tower.y)))
                 Managers.Map.ShowBuildUI(new Vector3Int(pos.x - (int)tower.x, pos.y - (int)tower.y));
         }
-    }
-
-    public void ShowBuildIcon()
-    {
-        buildItemIcon.gameObject.SetActive(true);
     }
 
     public void HideBuildIcon()

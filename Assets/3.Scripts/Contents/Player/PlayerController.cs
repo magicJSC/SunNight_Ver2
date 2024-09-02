@@ -138,8 +138,14 @@ public class PlayerController : CreatureController,IPlayer
         if (Managers.Inven.choicingTower)
         {
             Vector2 tower = Managers.Game.tower.transform.position;
-            if (MapManager.cantBuild.HasTile(new Vector3Int((int)(tower.x), (int)(tower.y), 0)))
-                return;
+            for(int x = -1; x <= 1; x++)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    if (MapManager.cantBuild.HasTile(new Vector3Int((int)(tower.x + x), (int)(tower.y + y), 0)))
+                        return;
+                }
+            }
             Managers.Game.build.BuildTower();
         }
         else

@@ -47,10 +47,6 @@ public class TimeController : BaseController
     protected override void Init()
     {
         SetMorningBGM();
-    }
-
-    private void OnEnable()
-    {
         TimeAmount = 360;
         morningEvent += SetMorningBGM;
         nightEvent += SetNightBGM;

@@ -7,13 +7,24 @@ public class Long_Monster : MonsterController
 {
     public AssetReferenceGameObject bulletAsset;
 
+    GameObject bullet;
+
     public float bulletSpeed;
+
+    public override void Init()
+    {
+        base.Init();
+        bulletAsset.LoadAssetAsync().Completed += (obj)=>
+        {
+            bullet = obj.Result; 
+
+        };
+    }
 
     void Atk()
     {
-        GameObject g = bulletAsset.InstantiateAsync().Result;
+        GameObject g = Instantiate(bullet,transform.position,Quaternion.identity);
         Rigidbody2D r = g.GetComponent<Rigidbody2D>();
-        g.transform.position = transform.position;
         r.velocity = (target.position - transform.position).normalized * bulletSpeed;
         g.GetComponent<Bullet>().damage = stat.Damage;
     }

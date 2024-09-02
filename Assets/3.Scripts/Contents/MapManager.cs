@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using static Define;
 
@@ -18,7 +16,6 @@ public class MapManager : MonoBehaviour
 
     static List<Vector3Int> directList = new List<Vector3Int>();
 
-    //타워에 설치된 건축물 위치 데이터
     public static List<Vector3Int> buildData = new List<Vector3Int>();
 
     public static Tilemap matter;
@@ -41,6 +38,9 @@ public class MapManager : MonoBehaviour
 
     public bool CheckCanUseTile(Vector3Int pos)
     {
+
+        if (Managers.Game.tower == null)
+            return false;
         Vector2 towerPos = Managers.Game.tower.transform.position;
         if (building.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))
             return false;
@@ -56,7 +56,6 @@ public class MapManager : MonoBehaviour
         return true;
     }
 
-    //강화 할수 있는 UI 생성
     public void ShowBuildUI(Vector3Int pos)
     {
         if (Managers.Game.mouse.CursorType == CursorType.Battle)
@@ -94,6 +93,7 @@ public class MapManager : MonoBehaviour
         Vector3Int nextPos = pos;
         while (true)
         {
+            int index = 0;
             pos = nextPos;
             for (int i = 0; i < directList.Count; i++)
             {
@@ -106,10 +106,12 @@ public class MapManager : MonoBehaviour
                             return pos + directList[i];
                         }
                     }
-
+                    index++;
+                    if (index > 5)
+                        break;
+                    nextPos = pos + directList[i];
                     if (cantBuild.HasTile(pos))
                         continue;
-                    nextPos = pos + directList[i];
                 }
                 else
                     return pos + directList[i];

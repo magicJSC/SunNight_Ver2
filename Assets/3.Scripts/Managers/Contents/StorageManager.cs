@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,6 +48,7 @@ public class StorageManager : MonoBehaviour
 
     public void Init()
     {
+        hotBarEvent = null;
         if (hotBarUI == null)
         {
             hotBarUI = FindAnyObjectByType<UI_HotBar>();
@@ -86,6 +88,8 @@ public class StorageManager : MonoBehaviour
     public int choiceIndex = 0;
     public bool choicingTower = false;
 
+    public Action<UI_Item> hotBarEvent;
+
     //선택한 값에 따라 다르게 실행
     public void CheckHotBarChoice()
     {
@@ -100,13 +104,13 @@ public class StorageManager : MonoBehaviour
             Managers.Game.mouse.CursorType = CursorType.Normal;
             return;
         }
+        hotBarEvent?.Invoke(hotBarUI.slotList[choiceIndex].itemUI);
         switch (info.itemType)
         {
             case ItemType.Building:
-                Managers.Game.build.buildItemIcon.gameObject.SetActive(true);
                 Managers.Game.mouse.CursorType = CursorType.Builder;
+                Managers.Game.build.gridSign.size = new Vector2(1, 1);
                 Managers.Game.build.GetBuildItemInfo(hotBarUI.slotList[choiceIndex].itemUI);
-                Managers.Game.build.ShowBuildIcon();
                 break;
             case ItemType.Tool:
                 Managers.Game.mouse.CursorType = CursorType.Battle;
@@ -132,6 +136,7 @@ public class StorageManager : MonoBehaviour
         else
         {
             Managers.Game.build.buildItemIcon.gameObject.SetActive(false);
+            Managers.Game.build.gridSign.size = new Vector2(2, 2);
             Managers.Game.mouse.CursorType = CursorType.Builder;
             Managers.Game.tower.BeforeInstallTower();
         }
@@ -206,6 +211,8 @@ public class StorageManager : MonoBehaviour
         for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
         {
             UI_Item itemUI = inventoryUI.slotList[i].itemUI;
+            if (itemUI == null)
+                continue;
             if (itemUI.slotInfo.itemInfo == null)
             {
                 if (emptySlot == null)
