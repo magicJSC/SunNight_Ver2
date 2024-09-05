@@ -76,11 +76,22 @@ public class BuildController : MonoBehaviour
                 {
                     if (MapManager.cantBuild.HasTile(new Vector3Int((int)(tower.x + x), (int)(tower.y + y), 0)))
                     {
+                        Managers.Game.canBuild = false;
                         Managers.Game.tower.transform.GetComponent<TowerController>().CantInstallTower();
                          return;
                     }
                 }
             }
+            for (int i = 0; i < MapManager.buildData.Count; i++)
+            {
+                if (MapManager.cantBuild.HasTile(MapManager.buildData[i] + new Vector3Int((int)tower.x, (int)tower.y, 0)))
+                {
+                    Managers.Game.canBuild = false;
+                    Managers.Game.tower.transform.GetComponent<TowerController>().CantInstallTower();
+                    return;
+                }
+            }
+            Managers.Game.canBuild = true;
             Managers.Game.tower.GetComponent<TowerController>().BeforeInstallTower();
         }
     }
