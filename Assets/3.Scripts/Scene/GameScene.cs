@@ -14,7 +14,7 @@ public class GameScene : BaseScene
         Managers.Game.isKeepingTower = false;
         PlayerController.isDie = false;
         Managers.Game.completeTutorial = true;
-        TimeController.timeSpeed = 7;
+        TimeController.timeSpeed = 1.2f;
 
         Instantiate(Resources.Load<GameObject>("UI/UI_Time"));
         Managers.Game.lightController = Instantiate(Resources.Load<GameObject>("Prefabs/Light")).GetComponent<LightController>();

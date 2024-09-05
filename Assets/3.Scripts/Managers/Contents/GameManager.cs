@@ -23,4 +23,5 @@ public class GameManager : MonoBehaviour
     public bool completeTutorial = false;
 
     public bool isOpeningStory = false;
+    public bool canBuild;
 }

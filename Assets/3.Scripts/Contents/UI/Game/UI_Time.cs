@@ -35,7 +35,7 @@ public class UI_Time : UI_Base
     {
         float hour = time / 60;
         float minute = time % 60;
-        timeText.text = string.Format("{0:D2}:{1:D2}",(int)hour,(int)minute / 10 * 10);
+        timeText.text = string.Format("{0:D2}:{1:D2}",(int)hour,(int)minute);
     }
 
     void ShowBattleSign()

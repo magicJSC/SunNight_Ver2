@@ -32,10 +32,6 @@ public class UI_PlayerStat : UI_Base
         back = Get<GameObject>((int)GameObjects.Background);
 
         anim = GetComponent<Animator>();
-
-        UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
-      
-
         playerStat = Managers.Game.player.GetComponent<PlayerStat>();
         playerStat.hpBarEvent += SetHpBar;
         playerStat.energyBarEvent += SetEnergyBar;

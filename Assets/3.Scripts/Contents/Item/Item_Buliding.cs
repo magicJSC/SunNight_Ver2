@@ -34,6 +34,11 @@ public class Item_Buliding : Item,IBuilding,IGetDamage
         buildLayer.value = 9;
     }
 
+    private void OnDisable()
+    {
+        buildUI.SetActive(false);
+    }
+
     public void DeleteBuilding()
     {
         Managers.Game.tower.build.SetTile(pos,null);

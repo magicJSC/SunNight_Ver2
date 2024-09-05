@@ -135,18 +135,10 @@ public class PlayerController : CreatureController,IPlayer
         if (Managers.Game.isHandleUI)
             return;
 
-        if (Managers.Inven.choicingTower)
+        if (Managers.Inven.choicingTower && Managers.Game.isKeepingTower)
         {
-            Vector2 tower = Managers.Game.tower.transform.position;
-            for(int x = -1; x <= 1; x++)
-            {
-                for (int y = -1; y <= 1; y++)
-                {
-                    if (MapManager.cantBuild.HasTile(new Vector3Int((int)(tower.x + x), (int)(tower.y + y), 0)))
-                        return;
-                }
-            }
-            Managers.Game.build.BuildTower();
+            if(Managers.Game.canBuild)  
+                Managers.Game.build.BuildTower();
         }
         else
            Managers.Game.build.BuildItem(); 

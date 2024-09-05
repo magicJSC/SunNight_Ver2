@@ -114,7 +114,7 @@ public class UI_HotBar : UI_Base
         if (!Managers.Game.completeTutorial)
             tutorialEvent.Invoke(); 
         choiceIndex = change;
-        choice.GetComponent<RectTransform>().anchoredPosition = new Vector2(-330 + change * 160, -443);
+        choice.GetComponent<RectTransform>().anchoredPosition = new Vector2(-305 + change * 135, -475);
 
         Managers.Inven.choiceIndex = change;
         CheckChoice();
