@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 
 
-public class PlayerController : CreatureController,IPlayer
+public class PlayerController : CreatureController, IPlayer, IBuffReciever
 {
     public static Action tutorial1Event;
     public static Action tutorial2Event;
@@ -16,7 +15,7 @@ public class PlayerController : CreatureController,IPlayer
 
     PlayerStat stat;
     bool init;
-  
+
 
     [Header("Contents")]
     Vector2 dir;
@@ -32,12 +31,15 @@ public class PlayerController : CreatureController,IPlayer
 
     public AssetReferenceGameObject statUIAsset;
     public AssetReferenceGameObject DieUIAsset;
+    public AssetReferenceGameObject gameMenuUIAsset;
 
     public AssetReferenceGameObject graveAsset;
 
     Rigidbody2D rigid;
     Animator anim;
     SpriteRenderer sprite;
+
+    public List<BaseBuffGiver> buffList { get => new(); }
 
     public void Init()
     {
@@ -52,7 +54,15 @@ public class PlayerController : CreatureController,IPlayer
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         stat = GetComponent<PlayerStat>();
-        statUIAsset.InstantiateAsync();
+        statUIAsset.LoadAssetAsync().Completed += (obj) =>
+        {
+            Managers.UI.ShowUI<GameObject>(obj.Result, transform);
+        };
+        gameMenuUIAsset.LoadAssetAsync().Completed += (obj) =>
+        {
+            Managers.UI.ShowUI<GameObject>(obj.Result);
+            GetComponent<PopUICloser>().gameMenuUI = obj.Result;
+        };
         StartCoroutine(Move());
     }
 
@@ -65,9 +75,9 @@ public class PlayerController : CreatureController,IPlayer
         Camera.main.transform.parent = transform;
         Camera.main.transform.position = Camera.main.transform.parent.position + new Vector3(0, 0, -10);
         StartCoroutine(Move());
-
-        if(toolParent.transform.GetChild(0) != null)
-         Destroy(toolParent.transform.GetChild(0).gameObject);
+        StartCoroutine(UpdateBuff());
+        if (toolParent.transform.GetChild(0) != null)
+            Destroy(toolParent.transform.GetChild(0).gameObject);
     }
 
 
@@ -81,7 +91,7 @@ public class PlayerController : CreatureController,IPlayer
                 tutorial1Event.Invoke();
 
             anim.Play("Move");
-            if(dir.x != 0)
+            if (dir.x != 0)
                 sprite.flipX = dir.x > 0;
         }
         else
@@ -92,7 +102,7 @@ public class PlayerController : CreatureController,IPlayer
     {
         while (true)
         {
-            rigid.velocity = dir * speed;
+            rigid.velocity = dir * stat.Speed;
             yield return null;
         }
     }
@@ -117,16 +127,16 @@ public class PlayerController : CreatureController,IPlayer
     public void SetInteractObj()
     {
         canInteractObj = null;
-        for(int i = 0; i < interactObjectList.Count; i++)
+        for (int i = 0; i < interactObjectList.Count; i++)
         {
             if (canInteractObj == null)
                 canInteractObj = interactObjectList[i];
-            else if (Vector2.Distance(canInteractObj.transform.position,transform.position) > Vector2.Distance(interactObjectList[i].transform.position, transform.position))
+            else if (Vector2.Distance(canInteractObj.transform.position, transform.position) > Vector2.Distance(interactObjectList[i].transform.position, transform.position))
                 canInteractObj = interactObjectList[i];
 
             interactObjectList[i].GetComponent<IInteractObject>().canInteractSign.SetActive(false);
         }
-        if(canInteractObj)
+        if (canInteractObj)
             canInteractObj.GetComponent<IInteractObject>().canInteractSign.SetActive(true);
     }
 
@@ -137,11 +147,11 @@ public class PlayerController : CreatureController,IPlayer
 
         if (Managers.Inven.choicingTower && Managers.Game.isKeepingTower)
         {
-            if(Managers.Game.canBuild)  
+            if (Managers.Game.canBuild)
                 Managers.Game.build.BuildTower();
         }
         else
-           Managers.Game.build.BuildItem(); 
+            Managers.Game.build.BuildItem();
     }
 
 
@@ -181,12 +191,12 @@ public class PlayerController : CreatureController,IPlayer
     {
         Camera.main.transform.parent = null;
         isDie = true;
-        graveAsset.InstantiateAsync().Completed += (go) => 
+        graveAsset.InstantiateAsync().Completed += (go) =>
         {
             go.Result.transform.position = transform.position;
             gameObject.SetActive(false);
         };
-        
+
         DieUIAsset.InstantiateAsync().Completed += (go) =>
         {
             if (!Managers.Game.isKeepingTower)
@@ -194,5 +204,56 @@ public class PlayerController : CreatureController,IPlayer
             else
                 go.Result.GetComponent<Animator>().Play("GameOver");
         };
+    }
+
+   
+
+    public IEnumerator UpdateBuff()
+    {
+        while (true)
+        {
+            yield return null;
+            if (buffList.Count == 0)
+                continue;
+
+            for (int i = 0; i < buffList.Count; i++)
+            {
+                buffList[i].CoolTime -= Time.deltaTime;
+            }
+        }
+    }
+
+    public void GetBuff(BaseBuffGiver buff)
+    {
+        if(!buff.buffSO.noCool)
+         buffList.Add(buff);
+        for(int i = 0;i < buff.buffSO.buffList.Count; i++)
+        {
+            switch (buff.buffSO.buffList[i].buffType)
+            {
+                case Define.BuffType.SpeedUp:
+                    stat.Speed *= buff.buffSO.buffList[i].amount;
+                    break;
+                case Define.BuffType.SpeedDown:
+                    stat.Speed /= buff.buffSO.buffList[i].amount;
+                    break;
+            }
+        }
+    }
+
+    public void StopBuff(BaseBuffGiver buff)
+    {
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            switch (buff.buffSO.buffList[i].buffType)
+            {
+                case Define.BuffType.SpeedUp:
+                    stat.Speed /= buff.buffSO.buffList[i].amount;
+                    break;
+                case Define.BuffType.SpeedDown:
+                    stat.Speed *= buff.buffSO.buffList[i].amount;
+                    break;
+            }
+        }
     }
 }

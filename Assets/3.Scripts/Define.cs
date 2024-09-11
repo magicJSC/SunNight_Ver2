@@ -78,4 +78,11 @@ public class Define : MonoBehaviour
         Effect,
         Max,
     }
+
+    public enum BuffType
+    {
+        SpeedUp,
+        SpeedDown,
+        ViewDown
+    }
 }

@@ -15,39 +15,20 @@ public class GameScene : BaseScene
         PlayerController.isDie = false;
         Managers.Game.completeTutorial = true;
         TimeController.timeSpeed = 1.2f;
+        Managers.UI.PopUIList.Clear();
 
-        Instantiate(Resources.Load<GameObject>("UI/UI_Time"));
-        Managers.Game.lightController = Instantiate(Resources.Load<GameObject>("Prefabs/Light")).GetComponent<LightController>();
+        InstantiateOrLoad();
+        SetActions();
 
-        if (Managers.Game.grid == null)
-        {
-            Managers.Game.grid = FindObjectOfType<MapManager>();
-        }
         Managers.Game.grid.Init();
-
-        if (Managers.Game.mouse == null)
-        {
-            Managers.Game.mouse = Instantiate(Resources.Load<GameObject>("Prefabs/MouseController").GetComponent<MouseController>());
-        }
         Managers.Game.mouse.Init();
-
-        if (Managers.Game.build == null)
-        {
-            Managers.Game.build = Instantiate(Resources.Load<GameObject>("Prefabs/Builder")).GetComponent<BuildController>();
-        }
-
-
-        Managers.Game.tower = Instantiate(Resources.Load<GameObject>("Prefabs/Tower")).GetComponent<TowerController>();
         Managers.Game.tower.Init();
-
         Managers.Inven.Init();
-
         Managers.Game.build.Init(); //¼öÁ¤ Áß
-
-        Managers.Game.player = Instantiate(Resources.Load<GameObject>("Prefabs/Player")).GetComponent<PlayerController>();
         Managers.Game.player.Init();
+
+
         Managers.Game.player.transform.position = new Vector3(-67.5f, 55.39f);
-        Instantiate(Resources.Load<GameObject>("UI/UI_GameMenu"), Managers.Game.player.transform);
 
         if (!Managers.Game.isOpeningStory)
         {
@@ -57,4 +38,21 @@ public class GameScene : BaseScene
         return true;
     }
 
+
+    void InstantiateOrLoad()
+    {
+        Instantiate(Resources.Load<GameObject>("UI/UI_Time"));
+        Managers.Game.lightController = Instantiate(Resources.Load<GameObject>("Prefabs/Light")).GetComponent<LightController>();
+        Managers.Game.grid = FindObjectOfType<MapManager>();
+        Managers.Game.mouse = Instantiate(Resources.Load<GameObject>("Prefabs/MouseController").GetComponent<MouseController>());
+        Managers.Game.build = Instantiate(Resources.Load<GameObject>("Prefabs/Builder")).GetComponent<BuildController>();
+        Managers.Game.tower = Instantiate(Resources.Load<GameObject>("Prefabs/Tower")).GetComponent<TowerController>();
+        Managers.Game.player = Instantiate(Resources.Load<GameObject>("Prefabs/Player")).GetComponent<PlayerController>();
+    }
+
+    void SetActions()
+    {
+        Managers.Game.tower.SetAction();
+        Managers.Game.build.SetAction();
+    }
 }

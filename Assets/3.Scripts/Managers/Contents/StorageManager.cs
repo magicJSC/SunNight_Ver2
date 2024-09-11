@@ -49,35 +49,15 @@ public class StorageManager : MonoBehaviour
     public void Init()
     {
         hotBarEvent = null;
-        if (hotBarUI == null)
-        {
-            hotBarUI = FindAnyObjectByType<UI_HotBar>();
-            if (hotBarUI == null)
-            {
-                GameObject go = Managers.UI.ShowUI("UI_Storage");
-                hotBarUI = Util.FindChild(go, "UI_HotBar").GetComponent<UI_HotBar>();
-            }
-            hotBarUI.Init();
-        }
-        if (inventoryUI == null)
-        {
-            inventoryUI = FindAnyObjectByType<UI_Inventory>();
-            if (inventoryUI == null)
-            {
-                GameObject go = Managers.UI.ShowUI("UI_Storage");
-                inventoryUI = Util.FindChild(go, "UI_Inven").GetComponent<UI_Inventory>();
-            }
-            inventoryUI.Init();
-        }
-        if (smeltUI == null)
-        {
-            smeltUI = FindAnyObjectByType<UI_Smelt>();
-            if (smeltUI == null)
-            {
-                GameObject go = Managers.UI.ShowUI("UI_Storage");
-                smeltUI = Util.FindChild(go, "UI_Inven").GetComponent<UI_Smelt>();
-            }
-        }
+        
+        hotBarUI = Managers.UI.ShowInvenUI("UI_HotBar").GetComponent<UI_HotBar>();
+        hotBarUI.Init();
+      
+        inventoryUI = Managers.UI.ShowInvenUI("UI_Inven").GetComponent<UI_Inventory>();
+        inventoryUI.Init();
+      
+        smeltUI = Managers.UI.ShowInvenUI("UI_Smelting").GetComponent<UI_Smelt>();
+        smeltUI.Init();
     }
 
     #region 인벤토리

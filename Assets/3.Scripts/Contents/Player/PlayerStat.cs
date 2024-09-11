@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class PlayerStat : MonoBehaviour
 {
@@ -27,21 +28,63 @@ public class PlayerStat : MonoBehaviour
 
     public int maxHP;
 
-    public float Energy { get { return energy; } set { energy = Mathf.Clamp(value, 0, value); energyBarEvent.Invoke(energy / maxEnergy); } }
+    public float Energy { get { return energy; } set { energy = Mathf.Clamp(value, 0, value);  energyBarEvent.Invoke(energy / maxEnergy); } }
     float energy;
 
    
     public float maxEnergy;
 
-    public float Hunger { get { return hunger; } set { hunger = Mathf.Clamp(value, 0, value); hungerBarEvent.Invoke(hunger / maxHunger); } }
+    public float Hunger { get { return hunger; } 
+        set
+        { 
+            hunger = Mathf.Clamp(value, 0, value);
+            if (hunger <= maxHunger / 7)
+            {
+                if(hungerBuff == null)
+                 hungerBuff = Instantiate(hungerBuffPrefab, transform);
+            }
+            else
+            {
+                if (hungerBuff != null)
+                    Destroy(hungerBuff);
+            }
+            hungerBarEvent.Invoke(hunger / maxHunger);
+        }
+    }
     float hunger;
 
     
     public float maxHunger;
 
+    public float Speed;
+
+    public AssetReferenceGameObject hungerBuffAsset;
+
+    GameObject hungerBuffPrefab;
+    GameObject hungerBuff;
+
     private void Start()
     {
         cam = Camera.main.GetComponent<CameraController>();
+        hungerBuffAsset.LoadAssetAsync().Completed += (obj) =>
+        {
+            hungerBuffPrefab = obj.Result;
+        };
+
+        StartCoroutine(ReduceHunger());
+    }
+
+
+    IEnumerator ReduceHunger()
+    {
+        while(true)
+        {
+            yield return null;
+            if (Hunger <= 0)
+                continue;
+
+            Hunger -= Time.deltaTime * maxHunger;
+        }
     }
 
     void OnDamageEvent()

@@ -49,40 +49,21 @@ public class UI_Build : UI_Base
     GameObject panel;
     GameObject matGrid;
 
-    enum Texts
-    {
-        Name,
-        Hp,
-        Dmg,
-        AtkCool,
-        Range,
-        Coin
-    }
-
-    enum Images
-    {
-        Icon,
-        Upgrade,
-        Close,
-        Collect
-    }
 
     public override void Init()
     {
-        Bind<Image>(typeof(Images));
-        Bind<Text>(typeof(Texts));
 
-        nameT = Get<Text>((int)Texts.Name);
-        hpT = Get<Text>((int)Texts.Hp);
-        dmgT = Get<Text>((int)Texts.Dmg);
-        atkCoolT = Get<Text>((int)Texts.AtkCool);
-        rangeT = Get<Text>((int)Texts.Range);
-        coinT = Get<Text>((int)Texts.Coin);
+        nameT = Util.FindChild<Text>(gameObject, "Name", true);
+        hpT = Util.FindChild<Text>(gameObject, "Hp", true);
+        dmgT = Util.FindChild<Text>(gameObject, "Dmg", true);
+        atkCoolT = Util.FindChild<Text>(gameObject, "AtkCool", true);
+        rangeT = Util.FindChild<Text>(gameObject, "Range", true);
+        coinT = Util.FindChild<Text>(gameObject, "Coin", true);
 
-        icon = Get<Image>((int)Images.Icon);
-        upgrade = Get<Image>((int)Images.Upgrade);
-        close = Get<Image>((int)Images.Close);
-        collect = Get<Image>((int)Images.Collect);
+        icon = Util.FindChild<Image>(gameObject, "Icon", true);
+        upgrade = Util.FindChild<Image>(gameObject, "Upgrade", true);
+        close = Util.FindChild<Image>(gameObject, "Close", true);
+        collect = Util.FindChild<Image>(gameObject, "Collect", true);
 
         matGrid = Util.FindChild(gameObject, "MatterGrid", true);
         panel = Util.FindChild(gameObject, "Panel", true);
