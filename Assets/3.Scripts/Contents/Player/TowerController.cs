@@ -33,7 +33,6 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
         buildEffect = Util.FindChild(gameObject, "BuildEffect", true);
         MapManager.building = build;
         MapManager.tower = Util.FindChild(gameObject,"Tower",true).GetComponent<Tilemap>();
-        TimeController.nightEvent += ForceInstall;
 
         canInteractSign = Util.FindChild(gameObject, "Sign");
         canInteractSign.SetActive(false);
@@ -43,8 +42,11 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie,IInteractObject
 
         stat = GetComponent<Stat>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
-
+    public void SetAction()
+    {
+        TimeController.nightEvent += ForceInstall;
     }
 
     public void Interact()

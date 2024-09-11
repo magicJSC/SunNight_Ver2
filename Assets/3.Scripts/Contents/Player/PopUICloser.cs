@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class PopUICloser : MonoBehaviour
 {
-    GameObject gameMenuUI;
+    public GameObject gameMenuUI;
 
-    private void Start()
-    {
-        gameMenuUI = Managers.UI.ShowUI("UI_GameMenu");
-    }
-
-    void OnClosePopUI()
+    public void OnClosePopUI()
     {
         int count = Managers.UI.PopUIList.Count;
         if (count > 0)

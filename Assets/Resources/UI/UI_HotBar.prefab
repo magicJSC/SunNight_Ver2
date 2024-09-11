@@ -30,7 +30,7 @@ RectTransform:
   m_GameObject: {fileID: 1937664680192647037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 988952361296411951}
@@ -63,7 +63,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &7583041664080243304
 MonoBehaviour:
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 988952361296411951}
   - component: {fileID: 2939717247611358305}
   m_Layer: 5
-  m_Name: HotBar
+  m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,13 +211,13 @@ MonoBehaviour:
   m_Padding:
     m_Left: -340
     m_Right: 0
-    m_Top: 400
+    m_Top: 455
     m_Bottom: -490
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 1
   m_CellSize: {x: 120, y: 120}
-  m_Spacing: {x: 40, y: 0}
+  m_Spacing: {x: 15.8, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &6176858279883405454

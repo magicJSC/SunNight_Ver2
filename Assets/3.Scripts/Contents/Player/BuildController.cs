@@ -18,8 +18,13 @@ public class BuildController : MonoBehaviour
     {
         gridSign = GetComponent<SpriteRenderer>();
         buildItemIcon = Util.FindChild(gameObject, "Sample").GetComponent<SpriteRenderer>();
-        Managers.Inven.hotBarEvent += GetBuildItemInfo;
         StartCoroutine(UpdateCor());
+    }
+
+    public void SetAction()
+    {
+        Managers.Inven.hotBarEvent += GetBuildItemInfo;
+
     }
 
     private void OnEnable()

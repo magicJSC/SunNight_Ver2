@@ -41,29 +41,18 @@ public class UI_Inventory : UI_Base
 
     Vector3 startPos;
 
-    enum GameObjects 
-    {
-        Background,
-        Grid,
-        Hide,
-        Produce,
-        Coin,
-        Explain_Inven,
-    }
-
-
     public override void Init()
     {
         if (_init)
             return;
 
-        Bind<GameObject>(typeof(GameObjects));
-        back = Get<GameObject>((int)GameObjects.Background);
-        grid = Get<GameObject>((int)GameObjects.Grid);
-        hide = Get<GameObject>((int)GameObjects.Hide);
-        produce = Get<GameObject>((int)GameObjects.Produce);
-        coin = Get<GameObject>((int)GameObjects.Coin).GetComponent<Text>();
-        explain = Get<GameObject>((int)GameObjects.Explain_Inven);
+
+        back = Util.FindChild(gameObject, "Background", true);
+        grid = Util.FindChild(gameObject, "Grid", true);
+        hide = Util.FindChild(gameObject, "Hide", true);
+        produce = Util.FindChild(gameObject, "Produce", true);
+        coin = Util.FindChild<Text>(gameObject, "Coin", true);
+        explain = Util.FindChild(gameObject, "Explain_Inven", true);
         produceUIAsset.LoadAssetAsync().Completed += (obj) => 
         {
             produceUI = Instantiate(obj.Result).GetComponent<UI_Produce>();

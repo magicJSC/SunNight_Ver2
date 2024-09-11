@@ -127,6 +127,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e5a83d57fbdbf946af240298a3dd178
+    m_Address: UI/UI_GameMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce9d4a5022efdd14eb70a836b8246fdf
+    m_Address: Prefabs/Buff/HungerBuffer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9a368fece3badaa408b73453d1be7c74, type: 2}
   m_SchemaSet:

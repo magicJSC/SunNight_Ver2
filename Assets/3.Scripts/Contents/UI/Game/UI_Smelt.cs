@@ -32,33 +32,23 @@ public class UI_Smelt : UI_Base
 
     public ItemSO coalSO;
 
-    enum GameObjects
-    {
-        GrillingSlot,
-        CloseSmelt,
-        SmeltSlot,
-        DoSmelt,
-        CharcoalSlot,
-        ExplainSmelt,
-        Timer,
-        Background
-    }
-
+  
     public override void Init()
     {
         if (_init)
             return;
 
         _init = true;
-        Bind<GameObject>(typeof(GameObjects));
-        grillingSlot = Get<GameObject>((int)GameObjects.GrillingSlot).GetComponent<UI_GrillingSlot>();
-        close = Get<GameObject>((int)GameObjects.CloseSmelt);
+
+
+        grillingSlot = Util.FindChild<UI_GrillingSlot>(gameObject, "GrillingSlot",true);
+        close = Util.FindChild(gameObject, "CloseSmelt", true);
         back = Util.FindChild<RectTransform>(gameObject,"Background",true);
-        smeltSlot = Get<GameObject>((int)GameObjects.SmeltSlot).GetComponent<UI_SmeltSlot>();
-        doSmelt = Get<GameObject>((int)GameObjects.DoSmelt);
-        charcoalSlot = Get<GameObject>((int)GameObjects.CharcoalSlot).GetComponent<UI_CharcoalSlot>();
-        explain = Get<GameObject>((int)GameObjects.ExplainSmelt);
-        timer = Get<GameObject>((int)GameObjects.Timer).GetComponent<Image>();
+        smeltSlot = Util.FindChild<UI_SmeltSlot>(gameObject, "SmeltSlot", true);
+        doSmelt = Util.FindChild(gameObject, "DoSmelt", true);
+        charcoalSlot = Util.FindChild<UI_CharcoalSlot>(gameObject, "CharcoalSlot", true);
+        explain = Util.FindChild(gameObject, "ExplainSmelt", true);
+        timer = Util.FindChild<Image>(gameObject, "Timer", true);
 
         smeltSlot.smelt = this;
         smeltSlot.Init();
