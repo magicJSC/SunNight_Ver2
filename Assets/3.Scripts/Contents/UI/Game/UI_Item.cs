@@ -105,7 +105,7 @@ public class UI_Item : UI_Base
             count.text = $"{slotInfo.count}";
             icon.sprite = slotInfo.itemInfo.itemIcon;
 
-            if (slotInfo.itemInfo.itemType == Define.ItemType.Material)
+            if (slotInfo.itemInfo.itemType == Define.ItemType.Pick)
             {
                 if(materialIcon == null)
                 {

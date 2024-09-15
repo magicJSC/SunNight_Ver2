@@ -9,14 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
   m_Name: Coal
   m_EditorClassIdentifier: 
   idName: Coal
   itemName: "\uC11D\uD0C4"
   explain: "\uC11D\uD0C4\uC774\uB2E4"
-  itemIcon: {fileID: 1494248696, guid: ef4c13ca7ab71b343884c89ddde836d9, type: 3}
+  itemIcon: {fileID: 1590927557, guid: 15c1a23359c99764e8e3eecbecb0dd20, type: 3}
   itemType: 3
-  maxAmount: 99
-  smelt: {fileID: 0}
-  tile: {fileID: 11400000, guid: 7475041fe4fdcaf44b12f0755829be09, type: 2}
+  maxAmount: 64
+  itemPrefab: {fileID: 75889190033888497, guid: 40adb40bcc8785e43b954fb3f302595e,
+    type: 3}
+  buildTile: {fileID: 0}
+  canSmelt: 0
+  smeltedItem: {fileID: 0}
+  canBake: 0
+  bakeItemSO: {fileID: 0}
+  bakeTime: 0

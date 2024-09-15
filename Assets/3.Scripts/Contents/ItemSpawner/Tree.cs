@@ -15,7 +15,7 @@ public class Tree : MonoBehaviour
         {
             float x = Mathf.Round(transform.position.x + Random.Range(-2,3));
             float y = Mathf.Round(transform.position.y + Random.Range(-2,-3));
-            MapManager.matter.SetTile(new Vector3Int((int)x,(int)y),branch.tile);          
+            Managers.Game.SpawnItem(branch,1,new Vector2(x,y));          
         }
     }
 }

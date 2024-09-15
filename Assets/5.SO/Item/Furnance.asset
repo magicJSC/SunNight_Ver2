@@ -9,15 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
   m_Name: Furnance
   m_EditorClassIdentifier: 
   idName: Furnance
   itemName: "\uC6A9\uAD11\uB85C"
-  explain: "\uC6A9\uAD11\uB85C\uB2E4. \uC81C\uB828 \uD560 \uB54C \uC4F8\uC218 \uC788\uB2E4"
-  itemIcon: {fileID: 1278774658, guid: e8b51bf50eb958949aab8169e7bd7d66, type: 3}
-  itemType: 5
+  explain: "\uCCA0\uC744 \uC81C\uB828\uD55C\uB2E4"
+  itemIcon: {fileID: -538926202, guid: 15efa1fbc4e0dd94c97d6f29de766e23, type: 3}
+  itemType: 4
   maxAmount: 1
+  itemPrefab: {fileID: 0}
+  buildTile: {fileID: 11400000, guid: 3ba5ad1ba833490489b52f08ec930a48, type: 2}
   canSmelt: 0
-  smelt: {fileID: 0}
-  tile: {fileID: 11400000, guid: 3ba5ad1ba833490489b52f08ec930a48, type: 2}
+  smeltedItem: {fileID: 0}
+  canBake: 0
+  bakeItemSO: {fileID: 0}
+  bakeTime: 0

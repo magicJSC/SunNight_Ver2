@@ -9,16 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
   m_Name: Steak
   m_EditorClassIdentifier: 
   idName: Steak
-  itemName: "\uC2A4\uD14C\uC774\uD06C"
-  explain: "\uC2A4\uD14C\uC774\uD06C\uC774\uB2E4. \uBC30\uACE0\uD514\uC744 \uC99D\uAC00\uC2DC\uD0A8\uB2E4"
+  itemName: "\uAD6C\uC6B4 \uACE0\uAE30"
+  explain: "\uAD6C\uC6B4 \uACE0\uAE30. \uC2DD\uB7C9\uC73C\uB85C\uB294 \uC88B\uB2E4"
   itemIcon: {fileID: -1645561458, guid: fcf937f4d64a517488cbcd2a2fd9ec3d, type: 3}
-  itemType: 1
-  maxAmount: 32
-  tile: {fileID: 11400000, guid: 5c125055c89e5d2428a8eb2c5e34b933, type: 2}
-  smelt: {fileID: 0}
+  itemType: 3
+  maxAmount: 64
+  itemPrefab: {fileID: 6270228718425778996, guid: 450827721d077de4ebfdfcd9caf3c026,
+    type: 3}
+  buildTile: {fileID: 0}
+  canSmelt: 0
+  smeltedItem: {fileID: 0}
+  canBake: 0
   bakeItemSO: {fileID: 0}
   bakeTime: 0

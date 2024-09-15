@@ -5,10 +5,15 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 using UnityEngine.AddressableAssets;
+using UnityEditor.Animations;
 
 public class UI_Produce : UI_Base
 {
     public static Action tutorialEvent;
+
+    public AssetReferenceGameObject itemUIAsset;
+
+    GameObject itemUI;
 
     public AssetReferenceT<AudioClip> produceSoundAsset;
     public AssetReferenceT<AudioClip> showSoundAsset;
@@ -23,6 +28,13 @@ public class UI_Produce : UI_Base
     GameObject produceMaterialUI;
 
     [Serializable]
+    public struct ToMakeItem
+    {
+        public ItemSO toMakeItemSO;
+        public Materials[] materialList;
+    }
+
+    [Serializable]
     public struct Materials
     {
         public ItemSO itemSO;
@@ -30,11 +42,11 @@ public class UI_Produce : UI_Base
     }
 
     [Header("Produce")]
-    [HideInInspector]
     //item1 : 재료 idName, item2 : 필요 개수
-    public List<Materials> matters = new();
+    public List<ToMakeItem> toMakeItemList = new();
+
     [HideInInspector]
-    public ItemSO toMakeItemSO;
+    public ToMakeItem toMakeItem;
 
     [Header("UI")]
     Image toMake;
@@ -50,6 +62,7 @@ public class UI_Produce : UI_Base
     [HideInInspector]
     public GameObject explainItem;
 
+    Transform itemGrid;
     Text produceButtonText;
 
     Vector2 startPos;
@@ -80,6 +93,16 @@ public class UI_Produce : UI_Base
         {
             produceMaterialUI = obj.Result;
         };
+        itemUIAsset.LoadAssetAsync().Completed += (obj) =>
+        {
+            itemUI = obj.Result;
+            for (int i = 0; i < toMakeItemList.Count; i++)
+            {
+                UI_Produce_Item item = Instantiate(itemUI,contentItem.transform).GetComponent<UI_Produce_Item>();
+                item.produce = this;
+                item.toMakeItem = toMakeItemList[i];
+            }
+        };
 
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
         evt._OnDrag += (PointerEventData p) =>
@@ -96,13 +119,6 @@ public class UI_Produce : UI_Base
 
         evt = hideRect.GetComponent<UI_EventHandler>();
         evt._OnClick += (PointerEventData p) => { gameObject.SetActive(false); };
-
-        for (int i = 0; i < contentItem.transform.childCount; i++)
-        {
-            UI_Produce_Item it = contentItem.transform.GetChild(i).GetComponentInChildren<UI_Produce_Item>();
-            it.produce = this;
-            it.Init();
-        }
 
         produceSoundAsset.LoadAssetAsync().Completed += (clip) =>
         {
@@ -150,18 +166,17 @@ public class UI_Produce : UI_Base
         back.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
     }
 
-    public void Set_ToMake(ItemSO itemSo)
+    public void Set_ToMake(ToMakeItem toMakeItem)
     {
         toMake.gameObject.SetActive(true);
-        toMakeItemSO = itemSo;
-        toMake.sprite = toMakeItemSO.itemIcon;
-        contentMat.GetComponent<RectTransform>().offsetMax = new Vector2(100 * matters.Count - 200, 0);
+        toMake.sprite = toMakeItem.toMakeItemSO.itemIcon;
+        contentMat.GetComponent<RectTransform>().offsetMax = new Vector2(100 * toMakeItem.materialList.Length - 200, 0);
 
-        for (int i = 0; i < matters.Count; i++)
+        for (int i = 0; i < toMakeItem.materialList.Length; i++)
         {
             UI_Produce_Material ma = Instantiate(produceMaterialUI, contentMat.transform).GetComponent<UI_Produce_Material>();
             ma.produce = this;
-            ma.Init(matters[i].itemSO, matters[i].count);
+            ma.material = toMakeItem.materialList[i];
         }
 
     }
@@ -173,33 +188,32 @@ public class UI_Produce : UI_Base
         {
             Destroy(contentMat.transform.GetChild(i).gameObject);
         }
-        matters.Clear();
     }
 
 
     //List -> item1 : 인벤 index, item2 : 필요 개수
-    Dictionary<ItemSO, List<(UI_Item, int)>> inven_m = new();
-    List<(UI_Item, int)> info_m;
-
+    Dictionary<ItemSO, List<UI_Item>> itemUIList = new();
     void OnProduce()
     {
-        if (matters.Count == 0)
+        if (toMakeItem.materialList.Length == 0)
             return;
 
         if (CanProduce())
         {
-            for (int i = 0; i < matters.Count; i++)
+            for (int i = 0; i < toMakeItem.materialList.Length; i++)
             {
-                for (int j = 0; j < inven_m[matters[i].itemSO].Count; j++)
+                List<UI_Item> _itemUIList = itemUIList[toMakeItem.materialList[i].itemSO];
+                int count = toMakeItem.materialList[i].count;
+                for (int j = 0; j < _itemUIList.Count; j++)
                 {
-                    int count = matters[i].count;
-                    Managers.Inven.SetSlot(matters[i].itemSO, inven_m[matters[i].itemSO][j].Item1, Mathf.Clamp(info_m[j].Item2 - count, 0, matters[i].count));
-                    count -= info_m[j].Item2;
+                    int amount = _itemUIList[i].slotInfo.count;
+                    Managers.Inven.SetSlot(toMakeItem.materialList[i].itemSO, _itemUIList[i], Mathf.Clamp(_itemUIList[i].slotInfo.count - count, 0, toMakeItem.materialList[i].count));
+                    count -= amount;
                 }
             }
             if (!Managers.Game.completeTutorial)
                 tutorialEvent.Invoke();
-            Managers.Inven.AddOneItem(toMakeItemSO);
+            Managers.Inven.AddOneItem(toMakeItem.toMakeItemSO);
             if(produceSound != null)
                 Managers.Sound.Play(Define.Sound.Effect, produceSound);
 
@@ -220,52 +234,48 @@ public class UI_Produce : UI_Base
 
     bool CanProduce()
     {
-        inven_m.Clear();
-        for (int i = 0; i < matters.Count; i++)
+        itemUIList.Clear();
+        bool canProduce = false;
+        for (int i = 0; i < toMakeItem.materialList.Length; i++)
         {
-            int _count = 0;
+            int count = 0;
+            itemUIList.Add(toMakeItem.materialList[i].itemSO,new());
             for (int j = 0; j < Managers.Inven.inventorySlotInfo.Length - 1; j++)
             {
+                if (canProduce)
+                    break;
                 UI_Item itemUI = Managers.Inven.inventoryUI.slotList[j].itemUI;
                 if (itemUI.slotInfo.itemInfo == null)
                     continue;
                
-                if (matters[i].itemSO.idName == itemUI.slotInfo.itemInfo.idName)
+                if (toMakeItem.materialList[i].itemSO.idName == itemUI.slotInfo.itemInfo.idName)
                 {
-                    _count += itemUI.slotInfo.count;
-                    info_m = new()
-                    {
-                        (itemUI, itemUI.slotInfo.count)
-                    };
+                    count += itemUI.slotInfo.count;
+                    itemUIList[itemUI.slotInfo.itemInfo].Add(itemUI);
 
-                    if (_count >= matters[i].count)
-                    {
-                        inven_m.Add(matters[i].itemSO, info_m);
-                        return true;
-                    }
+                    if (count >= toMakeItem.materialList[i].count)
+                        canProduce =  true;
                 }
             }
             for (int j = 0; j < Managers.Inven.hotBarSlotInfo.Length - 1; j++)
             {
+                if (canProduce)
+                    break;
                 UI_Item itemUI = Managers.Inven.hotBarUI.slotList[j].itemUI;
                 if (itemUI.slotInfo.itemInfo == null)
                     continue;
-                if (matters[i].itemSO == itemUI.slotInfo.itemInfo)
+                if (toMakeItem.materialList[i].itemSO == itemUI.slotInfo.itemInfo)
                 {
-                    _count += itemUI.slotInfo.count;
-                    info_m = new()
-                    {
-                        (itemUI, itemUI.slotInfo.count)
-                    };
+                    count += itemUI.slotInfo.count;
+                    itemUIList[itemUI.slotInfo.itemInfo].Add(itemUI);
 
-                    if (_count >= matters[i].count)
-                    {
-                        inven_m.Add(matters[i].itemSO, info_m);
-                        return true;
-                    }
+                    if (count >= toMakeItem.materialList[i].count)
+                        canProduce = true;
                 }
             }
+            if(!canProduce)
+                return false;
         }
-        return false;
+        return true;
     }
 }

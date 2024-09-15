@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -24,4 +22,9 @@ public class GameManager : MonoBehaviour
 
     public bool isOpeningStory = false;
     public bool canBuild;
+
+    public void SpawnItem(ItemSO item,int amount,Vector2 pos)
+    {
+        Instantiate(item.itemPrefab, pos, Quaternion.identity).GetComponent<Item_Pick>().Count = amount;
+    }
 }

@@ -9,17 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
   idName: Sword
   itemName: "\uAC80"
-  explain: "\uAC80\uC774\uB2E4"
-  itemIcon: {fileID: -3548928026839867271, guid: 896be884da5dcc449acadcfdc9075f0b,
+  explain: "\uAC80\uC744 \uD718\uB458\uB7EC \uB370\uBBF8\uC9C0\uB97C \uC904 \uC218
+    \uC788\uB2E4 "
+  itemIcon: {fileID: -5576168233181342510, guid: 26219afe650eca349a89f642aec6aaf2,
     type: 3}
   itemType: 2
   maxAmount: 1
-  tile: {fileID: 0}
-  smelt: {fileID: 0}
+  itemPrefab: {fileID: 0}
+  buildTile: {fileID: 0}
+  canSmelt: 0
+  smeltedItem: {fileID: 0}
+  canBake: 0
   bakeItemSO: {fileID: 0}
   bakeTime: 0

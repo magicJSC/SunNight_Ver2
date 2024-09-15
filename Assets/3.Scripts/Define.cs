@@ -25,10 +25,8 @@ public class Define : MonoBehaviour
         None,           // 없음
         Consumable,     // 소모품
         Tool,           // 장비
-        Material,       // 재료
-        Food,           // 음식
+        Pick,       // 재료
         Building,        // 건축
-        Tower,
         Etc,            // 기타
     }
 
