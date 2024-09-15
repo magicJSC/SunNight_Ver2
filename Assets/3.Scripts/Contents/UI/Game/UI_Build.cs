@@ -166,7 +166,7 @@ public class UI_Build : UI_Base
         Debug.Log("업그레이드 성공");
         Managers.Inven.Coin -= expension;
         Vector2 tower = Managers.Game.tower.transform.position; //기지 위치 받아오기
-        MapManager.building.SetTile(new Vector3Int((int)(transform.parent.position.x - tower.x), (int)(transform.parent.position.y - tower.y), 0), nextLevelItem.tile);
+        MapManager.building.SetTile(new Vector3Int((int)(transform.parent.position.x - tower.x), (int)(transform.parent.position.y - tower.y), 0), nextLevelItem.buildTile);
     }
 
     void Collect(PointerEventData p)

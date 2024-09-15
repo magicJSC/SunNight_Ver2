@@ -83,7 +83,7 @@ public class PlayerStat : MonoBehaviour
             if (Hunger <= 0)
                 continue;
 
-            Hunger -= Time.deltaTime * maxHunger;
+            Hunger -= Time.deltaTime * maxHunger / 300;
         }
     }
 

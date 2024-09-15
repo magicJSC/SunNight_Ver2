@@ -9,15 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
   m_Name: Fence
   m_EditorClassIdentifier: 
   idName: Fence
-  itemName: "\uC6B8\uD0C0\uB9AC"
-  explain: "\uB098\uBB34 \uC6B8\uD0C0\uB9AC\uC774\uB2E4"
-  itemIcon: {fileID: -2144266079, guid: 3ee0a21dff5b37c4691e606ce336d6ea, type: 3}
-  itemType: 5
-  maxAmount: 64
+  itemName: "\uCCA0\uCC3D"
+  explain: "\uC27D\uAC8C \uC798\uB9AC\uC9C0 \uC54A\uB294 \uCCA0\uCC3D\uC774\uB2E4"
+  itemIcon: {fileID: 626672719, guid: 15efa1fbc4e0dd94c97d6f29de766e23, type: 3}
+  itemType: 4
+  maxAmount: 16
+  itemPrefab: {fileID: 0}
+  buildTile: {fileID: 11400000, guid: 1d642f2b034d0bc4ba5f979f8443b431, type: 2}
   canSmelt: 0
-  smelt: {fileID: 0}
-  tile: {fileID: 11400000, guid: 1d642f2b034d0bc4ba5f979f8443b431, type: 2}
+  smeltedItem: {fileID: 0}
+  canBake: 0
+  bakeItemSO: {fileID: 0}
+  bakeTime: 0

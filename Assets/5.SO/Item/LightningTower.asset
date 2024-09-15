@@ -9,16 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
   m_Name: LightningTower
   m_EditorClassIdentifier: 
   idName: LightningTower
   itemName: "\uB1CC\uC804\uD0D1"
-  explain: "3\uBC88\uC758 \uC5F0\uC1C4 \uACF5\uACA9\uC744 \uC900\uB2E4."
+  explain: "\uB1CC\uC804\uD0D1\uC774\uB2E4. \uC804\uAE30\uB85C \uC5EC\uB7EC \uC801\uC744
+    \uACF5\uACA9\uD55C\uB2E4"
   itemIcon: {fileID: -783043910, guid: 9f33593f0c0332c4b9338c471f408dcd, type: 3}
-  itemType: 5
-  maxAmount: 8
-  tile: {fileID: 11400000, guid: 7b3ac2d0fa0e66e4094cf1cb982a95c3, type: 2}
-  smelt: {fileID: 0}
+  itemType: 4
+  maxAmount: 16
+  itemPrefab: {fileID: 0}
+  buildTile: {fileID: 11400000, guid: 7b3ac2d0fa0e66e4094cf1cb982a95c3, type: 2}
+  canSmelt: 0
+  smeltedItem: {fileID: 0}
+  canBake: 0
   bakeItemSO: {fileID: 0}
   bakeTime: 0

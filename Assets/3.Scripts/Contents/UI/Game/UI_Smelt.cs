@@ -116,9 +116,9 @@ public class UI_Smelt : UI_Base
         if (isSmelting)
             return;
         _slotInfo = grillingSlot.GetComponentInChildren<UI_Item>().slotInfo;
-        if (_slotInfo != null)
+        if (!_slotInfo.itemInfo.canBake)
         {
-            if (_slotInfo.itemInfo.smelt == null)
+            if (_slotInfo.itemInfo.smeltedItem == null)
             {
                 Debug.Log("제련 할 수 있는 아이템이 아이템이 아닙니다");
                 return;
@@ -156,7 +156,7 @@ public class UI_Smelt : UI_Base
         UI_Item grillItem = grillingSlot.GetComponentInChildren<UI_Item>();
         UI_Item smeltItem = smeltSlot.GetComponentInChildren<UI_Item>();
 
-        smeltItem.slotInfo.itemInfo = grillItem.slotInfo.itemInfo.smelt;
+        smeltItem.slotInfo.itemInfo = grillItem.slotInfo.itemInfo.smeltedItem;
         smeltItem.slotInfo.count++;
         charcoalSlot.charcoalCount--;
 

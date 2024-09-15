@@ -43,7 +43,6 @@ public class Item_Pick : Item
     {
         Instantiate(effect,transform.position, Quaternion.identity);
         Managers.Sound.Play(Define.Sound.Effect, sound);
-        MapManager.matter.SetTile(new Vector3Int((int)transform.position.x, (int)transform.position.y), null);
     }
 
     void SetCountText()

@@ -9,16 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
   m_Name: Meat
   m_EditorClassIdentifier: 
   idName: Meat
-  itemName: "\uACE0\uAE30"
-  explain: "\uC0DD\uACE0\uAE30\uC774\uB2E4"
+  itemName: "\uC0DD\uACE0\uAE30"
+  explain: "\uC0DD\uACE0\uAE30\uC774\uB2E4. \uADF8\uB0E5 \uBA39\uC744 \uC218\uB294
+    \uC5C6\uB2E4"
   itemIcon: {fileID: -2065710499, guid: fcf937f4d64a517488cbcd2a2fd9ec3d, type: 3}
-  itemType: 1
-  maxAmount: 32
-  tile: {fileID: 11400000, guid: d3f7c534f7c24d64fa3c3366ffbc7a61, type: 2}
-  smelt: {fileID: 0}
-  bakeItemSO: {fileID: 11400000, guid: 40f9b220ac9546240b63c41de9d2c70c, type: 2}
-  bakeTime: 6
+  itemType: 3
+  maxAmount: 64
+  itemPrefab: {fileID: 6270228718425778996, guid: 1398bda02d629d44e98b512c4c9f36f8,
+    type: 3}
+  buildTile: {fileID: 0}
+  canSmelt: 0
+  smeltedItem: {fileID: 0}
+  canBake: 0
+  bakeItemSO: {fileID: 0}
+  bakeTime: 0

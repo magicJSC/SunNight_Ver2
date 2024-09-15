@@ -13,36 +13,35 @@ public class UI_Produce_Material : UI_Base
 
     Text count;
 
-    GameObject explain;
+    RectTransform explain;
+    RectTransform rectTransform;
     Text explainText;
     Text nameText;
 
-    ItemSO itemInfo;
+    public UI_Produce.Materials material;
 
-    public void Init(ItemSO itemSO,int cnt)
+    public override void Init()
     {
-        itemInfo = itemSO;
-
         icon = GetComponent<Image>();
-        count = Util.FindChild(gameObject, "Count",true).GetComponent<Text>();
-
-        explain = produce.explainMat;
-        explainText = Util.FindChild(explain, "ExplainText", true).GetComponent<Text>();
-        nameText = Util.FindChild(explain, "NameText", true).GetComponent<Text>();
+        count = Util.FindChild<Text>(gameObject, "Count",true);
+        rectTransform = GetComponent<RectTransform>();
+        explain = produce.explainMat.GetComponent<RectTransform>();
+        explainText = Util.FindChild<Text>(explain.gameObject, "ExplainText", true);
+        nameText = Util.FindChild<Text>(explain.gameObject, "NameText", true);
 
         UI_EventHandler evt = icon.GetComponent<UI_EventHandler>();
-        evt._OnEnter += (PointerEventData p) => { Set_Explain(); explain.SetActive(true); };
-        evt._OnExit += (PointerEventData p) => { explain.SetActive(false); };
+        evt._OnEnter += (PointerEventData p) => { Set_Explain(); explain.gameObject.SetActive(true); };
+        evt._OnExit += (PointerEventData p) => { explain.gameObject.SetActive(false); };
 
 
-        icon.sprite = itemInfo.itemIcon;
-        count.text = cnt.ToString();
+        icon.sprite = material.itemSO.itemIcon;
+        count.text = $"{material.count}";
     }
 
     public void Set_Explain()
     {
-        explain.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + new Vector2(-390, 225);
-        explainText.text = itemInfo.explain;
-        nameText.text = itemInfo.itemName;
+        explain.anchoredPosition = rectTransform.anchoredPosition + new Vector2(-390, 225);
+        explainText.text = material.itemSO.explain;
+        nameText.text = material.itemSO.itemName;
     }
 }
