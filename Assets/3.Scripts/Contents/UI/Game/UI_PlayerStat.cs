@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class UI_PlayerStat : UI_Base
 {
     Image hpImage;
-    Image energyImage;
     Image hungerImage;
 
     PlayerStat playerStat;
@@ -18,18 +17,15 @@ public class UI_PlayerStat : UI_Base
     public override void Init()
     {
         hpImage = Util.FindChild<Image>(gameObject, "HP", true);
-        energyImage = Util.FindChild<Image>(gameObject, "Energy", true);
         hungerImage = Util.FindChild<Image>(gameObject, "Hunger", true);
 
         anim = GetComponent<Animator>();
         playerStat = GetComponentInParent<PlayerStat>();
         playerStat.hpBarEvent += SetHpBar;
-        playerStat.energyBarEvent += SetEnergyBar;
         playerStat.hungerBarEvent += SetHungerBar;
         playerStat.damageEvent += GetDamageEffect;
 
         playerStat.Hp = playerStat.maxHP;
-        playerStat.Energy = playerStat.maxEnergy;
         playerStat.Hunger = playerStat.maxHunger;
 
     }
@@ -57,12 +53,6 @@ public class UI_PlayerStat : UI_Base
                 yield break;
             hpImage.fillAmount = Mathf.Lerp(hpImage.fillAmount, ratio,0.1f);
         }
-    }
-
-
-    void SetEnergyBar(float ratio)
-    {
-        energyImage.fillAmount = ratio;
     }
 
     void SetHungerBar(float ratio)
