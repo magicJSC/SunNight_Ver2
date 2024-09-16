@@ -8,7 +8,6 @@ public class PlayerStat : MonoBehaviour
 {
     public Action damageEvent;
     public Action<float> hpBarEvent;
-    public Action<float> energyBarEvent;
     public Action<float> hungerBarEvent;
 
     CameraController cam;
@@ -27,12 +26,6 @@ public class PlayerStat : MonoBehaviour
     int hp;
 
     public int maxHP;
-
-    public float Energy { get { return energy; } set { energy = Mathf.Clamp(value, 0, value);  energyBarEvent.Invoke(energy / maxEnergy); } }
-    float energy;
-
-   
-    public float maxEnergy;
 
     public float Hunger { get { return hunger; } 
         set
