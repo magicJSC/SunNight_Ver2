@@ -14,6 +14,11 @@ public class EditorInspector : Editor
     SerializedProperty itemType_Prop;
     SerializedProperty itemPrefab_Prop;
     SerializedProperty buildTile_Prop;
+    SerializedProperty canSmelt_Prop;
+    SerializedProperty smeltItem_Prop;
+    SerializedProperty canBake_Prop;
+    SerializedProperty bakeItem_Prop;
+    SerializedProperty bakeTime_Prop;
 
     private void Awake()
     {
@@ -25,6 +30,11 @@ public class EditorInspector : Editor
         maxAmount_Prop = serializedObject.FindProperty("maxAmount");
         itemPrefab_Prop = serializedObject.FindProperty("itemPrefab");
         buildTile_Prop = serializedObject.FindProperty("buildTile");
+        canSmelt_Prop = serializedObject.FindProperty("canSmelt");
+        smeltItem_Prop = serializedObject.FindProperty("smeltItem");
+        canBake_Prop = serializedObject.FindProperty("canBake");
+        bakeItem_Prop = serializedObject.FindProperty("bakeItem");
+        bakeTime_Prop = serializedObject.FindProperty("bakeTime");
         
     }
 
@@ -45,6 +55,21 @@ public class EditorInspector : Editor
         {
             EditorGUILayout.PropertyField(buildTile_Prop);
         }
+
+        EditorGUILayout.PropertyField(canSmelt_Prop);
+        if (canSmelt_Prop.boolValue)
+        {
+            EditorGUILayout.PropertyField(smeltItem_Prop);
+        }
+
+        EditorGUILayout.PropertyField(canBake_Prop);
+        if(canBake_Prop.boolValue)
+        {
+            EditorGUILayout.PropertyField(bakeItem_Prop);
+            EditorGUILayout.PropertyField(bakeItem_Prop);
+        }
+
+
 
         serializedObject.ApplyModifiedProperties();
     }

@@ -1,41 +1,113 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static StorageManager;
 
 public class UI_CharcoalSlot : UI_BaseSlot
 {
-    public int charcoalCount;
+    public ItemSO coalSO;
+    private SlotInfo _slotInfo;
 
-    Image icon;
-    Text count;
+    [HideInInspector]
+    public UI_Smelt smelt;
+    [HideInInspector]
+    public UI_Item itemUI;
 
-    public new void Init()
+    GameObject explain;
+    Text explainText;
+    Text nameText;
+    RectTransform background;
+
+    public override void Init()
     {
-        icon = Util.FindChild(gameObject, "Icon",true).GetComponent<Image>();
-        count = Util.FindChild(gameObject, "Count",true).GetComponent<Text>();
-        icon.sprite = Resources.Load<Item>("Prefabs/Items/Coal").itemSo.itemIcon; 
-    }
+        explain = smelt.explain;
+        explainText = Util.FindChild<Text>(explain, "ExplainText", true);
+        nameText = Util.FindChild<Text>(explain, "NameText", true);
 
-    public void SetSlot()
-    {
-        if (charcoalCount == 0)
+        background = GetComponentInParent<RectTransform>();
+        UI_EventHandler evt = GetComponent<UI_EventHandler>();
+        evt._OnEnter += ShowSlotInfo;
+
+        evt._OnExit += (PointerEventData p) =>
         {
-            SetEmptySlot();
+            explain.SetActive(false);
+        };
+
+        itemUI = transform.GetComponentInChildren<UI_Item>();
+        itemUI.slotInfo = Managers.Inven.coalSlotInfo;
+        itemUI.Init();
+        _init = true;
+        FillCharcoal();
+    }
+
+    private void OnEnable()
+    {
+        if (!_init || UI_Smelt.isSmelting)
             return;
+        FillCharcoal();
+    }
+
+    private void OnDisable()
+    {
+        if (!_init || UI_Smelt.isSmelting)
+            return;
+
+        Managers.Inven.AddItems(coalSO, Managers.Inven.smeltUI.charcoalSlot.itemUI.slotInfo.count);
+        Managers.Inven.smeltUI.charcoalSlot.itemUI.slotInfo.count = 0;
+        Managers.Inven.smeltUI.charcoalSlot.itemUI.SetInfo();
+    }
+
+    private void ShowSlotInfo(PointerEventData data)
+    {
+        if (itemUI.slotInfo.keyType == Define.KeyType.Empty)
+            return;
+        explain.SetActive(true);
+        SetExplain();
+    }
+
+    public void SetExplain()
+    {
+        int x, y;
+        if (background.anchoredPosition.x <= -510)
+            x = 266;
+        else
+            x = -254;
+
+        if (background.anchoredPosition.y >= 150)
+            y = -123;
+        else
+            y = 257;
+
+        explain.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+        explainText.text = itemUI.slotInfo.itemInfo.explain;
+        nameText.text = itemUI.slotInfo.itemInfo.itemName;
+    }
+
+    void FillCharcoal()
+    {
+        int totalCount = 0;
+        for (int i = 0; i < Managers.Inven.inventoryUI.slotList.Length; i++)
+        {
+            _slotInfo = Managers.Inven.inventoryUI.slotList[i].itemUI.slotInfo;
+            if (_slotInfo.itemInfo != null)
+            {
+                if (_slotInfo.itemInfo == coalSO)
+                {
+                    totalCount += _slotInfo.count;
+                    if (totalCount > coalSO.maxAmount)
+                    {
+                        Managers.Inven.AddItems(_slotInfo.itemInfo, totalCount - _slotInfo.itemInfo.maxAmount);
+                        totalCount = _slotInfo.itemInfo.maxAmount;
+                        break;
+                    }
+                    Managers.Inven.inventoryUI.slotList[i].itemUI.MakeEmptySlot();
+                }
+            }
+            else continue;
         }
-        count.text = charcoalCount.ToString();
-    }
-
-    public void SetExistSlot()
-    {
-        icon.gameObject.SetActive(true);
-        count.gameObject.SetActive(charcoalCount != 1);
-    }
-
-    public void SetEmptySlot()
-    {
-        icon.gameObject.SetActive(false);
-        count.gameObject.SetActive(false);
+        Managers.Inven.smeltUI.charcoalSlot.itemUI.slotInfo = new SlotInfo(totalCount,"Coal");
+        Managers.Inven.smeltUI.charcoalSlot.itemUI.SetInfo();
     }
 }

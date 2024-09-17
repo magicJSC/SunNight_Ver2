@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using static Define;
 
 public class StorageManager : MonoBehaviour
@@ -23,6 +20,7 @@ public class StorageManager : MonoBehaviour
     public SlotInfo[] inventorySlotInfo = new SlotInfo[24];
     public SlotInfo smeltSlotInfo = new SlotInfo(0);
     public SlotInfo grillingSlotInfo = new SlotInfo(0);
+    public SlotInfo coalSlotInfo = new SlotInfo(0);
 
     public class SlotInfo
     {
@@ -59,6 +57,7 @@ public class StorageManager : MonoBehaviour
         smeltUI = Managers.UI.ShowInvenUI("UI_Smelting").GetComponent<UI_Smelt>();
         smeltUI.Init();
     }
+
 
     #region 인벤토리
     public UI_HotBar hotBarUI;

@@ -8,7 +8,7 @@ public class ItemBaker : MonoBehaviour
     public IEnumerator Bake(ItemSO item)
     {
         yield return new WaitForSeconds(item.bakeTime);
-        MakeBakedItem(item.bakeItemSO);
+        MakeBakedItem(item.bakeItem);
     }
 
     void MakeBakedItem(ItemSO bakedItem)
