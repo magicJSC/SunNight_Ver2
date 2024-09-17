@@ -18,10 +18,10 @@ public class ItemSO : ScriptableObject
 
     [Header("Á¦·Ã")]
     public bool canSmelt;
-    public ItemSO smeltedItem;
+    public ItemSO smeltItem;
 
     [Header("±Á±â")]
     public bool canBake;
-    public ItemSO bakeItemSO;
+    public ItemSO bakeItem;
     public float bakeTime;
 }

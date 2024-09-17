@@ -18,10 +18,11 @@ MonoBehaviour:
   itemIcon: {fileID: 486335542, guid: 15c1a23359c99764e8e3eecbecb0dd20, type: 3}
   itemType: 3
   maxAmount: 64
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 75889190033888497, guid: 3c0c56325420c904f9bede6c7a90a710,
+    type: 3}
   buildTile: {fileID: 0}
-  canSmelt: 0
-  smeltedItem: {fileID: 0}
+  canSmelt: 1
+  smeltItem: {fileID: 11400000, guid: 8e58cbffd25e9414fb81859dc04e7c89, type: 2}
   canBake: 0
-  bakeItemSO: {fileID: 0}
+  bakeItem: {fileID: 0}
   bakeTime: 0

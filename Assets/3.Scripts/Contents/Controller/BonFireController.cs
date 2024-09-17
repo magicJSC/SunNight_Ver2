@@ -45,7 +45,7 @@ public class BonFireController : MonoBehaviour, IInteractObject
         choicingItemUI = Managers.Inven.hotBarUI.slotList[Managers.Inven.choiceIndex].itemUI;
         if (choicingItemUI.slotInfo.itemInfo != null)
         {
-            if (choicingItemUI.slotInfo.itemInfo.bakeItemSO != null && BakingCount < maxCanBakeCount)
+            if (choicingItemUI.slotInfo.itemInfo.bakeItem != null && BakingCount < maxCanBakeCount)
             {
                 itemBakers.Add(Instantiate(itemBakerObj, transform).GetComponent<ItemBaker>());
                 choicingItemUI.slotInfo.count -= 1;

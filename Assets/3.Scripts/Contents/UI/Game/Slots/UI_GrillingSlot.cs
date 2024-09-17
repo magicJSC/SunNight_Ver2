@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using static StorageManager;
 
 public class UI_GrillingSlot : UI_BaseSlot,IDragable,IDroppable
 {
@@ -17,11 +18,11 @@ public class UI_GrillingSlot : UI_BaseSlot,IDragable,IDroppable
 
     RectTransform background;
 
-    public new void Init()
+    public override void Init()
     {
         explain = smelt.explain;
-        explainText = Util.FindChild(explain, "ExplainText", true).GetComponent<Text>();
-        nameText = Util.FindChild(explain, "NameText", true).GetComponent<Text>();
+        explainText = Util.FindChild<Text>(explain, "ExplainText", true);
+        nameText = Util.FindChild<Text>(explain, "NameText", true);
 
         background = GetComponentInParent<RectTransform>();
          
@@ -41,6 +42,23 @@ public class UI_GrillingSlot : UI_BaseSlot,IDragable,IDroppable
         };
 
         itemUI = transform.GetComponentInChildren<UI_Item>();
+        itemUI.slotInfo = Managers.Inven.grillingSlotInfo;
+        itemUI.Init();
+        itemUI.SetInfo();
+        _init = true;
+    }
+
+    private void OnDisable()
+    {
+        if (!_init || UI_Smelt.isSmelting)
+            return;
+
+        if (itemUI.slotInfo.itemInfo != null)
+        {
+            Managers.Inven.AddItems(itemUI.slotInfo.itemInfo, itemUI.slotInfo.count);
+            itemUI.MakeEmptySlot();
+        }
+        itemUI.SetInfo();
     }
 
     private void ShowSlotInfo(PointerEventData data)
@@ -67,5 +85,7 @@ public class UI_GrillingSlot : UI_BaseSlot,IDragable,IDroppable
         explain.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
         explainText.text = itemUI.slotInfo.itemInfo.explain;
         nameText.text = itemUI.slotInfo.itemInfo.itemName;
+
+       
     }
 }

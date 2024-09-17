@@ -166,6 +166,7 @@ public class UI_Item : UI_Base
     {
         slotInfo.count = 0;
         slotInfo.itemInfo = null;
+        slotInfo.keyType = Define.KeyType.Empty;
         SetEmptyItem();
     }
 

@@ -206,8 +206,8 @@ public class UI_Produce : UI_Base
                 int count = toMakeItem.materialList[i].count;
                 for (int j = 0; j < _itemUIList.Count; j++)
                 {
-                    int amount = _itemUIList[i].slotInfo.count;
-                    Managers.Inven.SetSlot(toMakeItem.materialList[i].itemSO, _itemUIList[i], Mathf.Clamp(_itemUIList[i].slotInfo.count - count, 0, toMakeItem.materialList[i].count));
+                    int amount = _itemUIList[j].slotInfo.count;
+                    Managers.Inven.SetSlot(toMakeItem.materialList[i].itemSO, _itemUIList[j], Mathf.Clamp(_itemUIList[j].slotInfo.count - count, 0, _itemUIList[j].slotInfo.count));
                     count -= amount;
                 }
             }
@@ -235,10 +235,10 @@ public class UI_Produce : UI_Base
     bool CanProduce()
     {
         itemUIList.Clear();
-        bool canProduce = false;
         for (int i = 0; i < toMakeItem.materialList.Length; i++)
         {
             int count = 0;
+            bool canProduce = false;
             itemUIList.Add(toMakeItem.materialList[i].itemSO,new());
             for (int j = 0; j < Managers.Inven.inventorySlotInfo.Length - 1; j++)
             {
