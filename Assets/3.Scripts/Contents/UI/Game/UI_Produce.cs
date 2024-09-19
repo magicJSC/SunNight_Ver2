@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 using UnityEngine.AddressableAssets;
-using UnityEditor.Animations;
 
 public class UI_Produce : UI_Base
 {

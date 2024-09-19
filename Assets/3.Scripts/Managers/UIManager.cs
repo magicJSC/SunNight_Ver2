@@ -26,10 +26,10 @@ public class UIManager : MonoBehaviour
         inven.transform.SetParent(Root.transform);
     }
 
-    public GameObject ShowUI(string path)
+    public GameObject ShowUI(GameObject go)
     {
-        GameObject go =  Instantiate(Resources.Load<GameObject>($"UI/{path}"),Root.transform);
-        return go;
+        GameObject Go =  Instantiate(go,Root.transform);
+        return Go;
     }
 
     public GameObject ShowInvenUI(string path)

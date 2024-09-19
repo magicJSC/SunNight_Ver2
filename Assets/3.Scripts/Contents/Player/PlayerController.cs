@@ -31,6 +31,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
 
     public AssetReferenceGameObject statUIAsset;
     public AssetReferenceGameObject DieUIAsset;
+    public AssetReferenceGameObject miniMapAsset;
     public AssetReferenceGameObject gameMenuUIAsset;
 
     public AssetReferenceGameObject graveAsset;
@@ -60,9 +61,10 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
         };
         gameMenuUIAsset.LoadAssetAsync().Completed += (obj) =>
         {
-            Managers.UI.ShowUI<GameObject>(obj.Result);
-            GetComponent<PopUICloser>().gameMenuUI = obj.Result;
+            GameObject go = Managers.UI.ShowUI(obj.Result);
+            GetComponent<PopUICloser>().gameMenuUI = go;
         };
+        miniMapAsset.InstantiateAsync();
         StartCoroutine(Move());
     }
 
