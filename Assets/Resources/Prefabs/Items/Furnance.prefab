@@ -181,6 +181,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fa85d32d8e2f4446ac57c75ff57c26c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smeltUIAsset:
+    m_AssetGUID: 79fec2a08d598434bb83ec0bad7a997a
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   smeltTime: 10
 --- !u!1 &5074897941951204497
 GameObject:

@@ -56,4 +56,12 @@ public class UIManager : MonoBehaviour
         go.transform.localScale = new Vector2(1, 1);
         return go;
     }
+
+    public T ShowInvenUI<T>(GameObject go)
+    {
+        go = Instantiate(go, Inven.transform);
+        go.GetComponent<RectTransform>().anchoredPosition += new Vector2(960, 540);
+        go.transform.localScale = new Vector2(1, 1);
+        return go.GetComponent<T>();
+    }
 }

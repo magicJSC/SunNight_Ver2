@@ -30,7 +30,7 @@ public class UI_Smelt : UI_Base
 
     [HideInInspector]
     public FurnanceController furnanace;
-    public static bool isSmelting;
+    public bool isSmelting;
 
     private SlotInfo _slotInfo;
 
@@ -53,11 +53,11 @@ public class UI_Smelt : UI_Base
         explain = Util.FindChild(gameObject, "ExplainSmelt", true);
         timer = Util.FindChild<Image>(gameObject, "Timer", true);
 
-        smeltSlot.smelt = this;
+        smeltSlot.smeltUI = this;
 
-        grillingSlot.smelt = this;
+        grillingSlot.smeltUI = this;
 
-        charcoalSlot.smelt = this;
+        charcoalSlot.smeltUI = this;
 
         UI_EventHandler evt = doSmelt.GetComponent<UI_EventHandler>();
         evt._OnClick += (PointerEventData p)=> { CheckCanSmelt(); };
@@ -74,6 +74,8 @@ public class UI_Smelt : UI_Base
             back.anchoredPosition = new Vector2(x, y);
         };
         evt._OnDown += (PointerEventData p) => { startPos = back.transform.position - Input.mousePosition; };
+
+        furnanace.SetTimer();
 
         explain.SetActive(false);
         gameObject.SetActive(false);
@@ -100,19 +102,15 @@ public class UI_Smelt : UI_Base
         if (isSmelting)
             return;
         _slotInfo = grillingSlot.GetComponentInChildren<UI_Item>().slotInfo;
-        if (!_slotInfo.itemInfo.canBake)
+        if (_slotInfo.keyType == Define.KeyType.Empty)
+            return;
+        if (!_slotInfo.itemInfo.canSmelt)
         {
-            if (_slotInfo.itemInfo.smeltItem == null)
-            {
-                Debug.Log("제련 할 수 있는 아이템이 아이템이 아닙니다");
-                return;
-            }
-        }
-        else
-        { 
-            Debug.Log("슬롯에 제련 할 아이템이 없습니다");
+            Debug.Log("제련 할 수 있는 아이템이 아이템이 아닙니다");
             return;
         }
+        if (isSmelting)
+            return;
         if(charcoalSlot.itemUI.slotInfo.count <= 0)
         {
             Debug.Log("석탄이 부족합니다");
@@ -145,6 +143,8 @@ public class UI_Smelt : UI_Base
         smeltItem.slotInfo.count++;
         charcoalSlot.itemUI.slotInfo.count--;
 
+        isSmelting = false;
+
         grillItem.slotInfo.count -= 1;
         if (grillItem.slotInfo.count <= 0)
         {
@@ -154,6 +154,8 @@ public class UI_Smelt : UI_Base
         coalItem.SetInfo();
         grillItem.SetInfo();
         smeltItem.SetInfo();
+
+        CheckCanSmelt();
     }
 
     void Close(PointerEventData p)

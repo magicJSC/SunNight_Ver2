@@ -11,7 +11,7 @@ public class UI_CharcoalSlot : UI_BaseSlot
     private SlotInfo _slotInfo;
 
     [HideInInspector]
-    public UI_Smelt smelt;
+    public UI_Smelt smeltUI;
     [HideInInspector]
     public UI_Item itemUI;
 
@@ -22,7 +22,7 @@ public class UI_CharcoalSlot : UI_BaseSlot
 
     public override void Init()
     {
-        explain = smelt.explain;
+        explain = smeltUI.explain;
         explainText = Util.FindChild<Text>(explain, "ExplainText", true);
         nameText = Util.FindChild<Text>(explain, "NameText", true);
 
@@ -44,19 +44,19 @@ public class UI_CharcoalSlot : UI_BaseSlot
 
     private void OnEnable()
     {
-        if (!_init || UI_Smelt.isSmelting)
+        if (!_init || smeltUI.isSmelting)
             return;
         FillCharcoal();
     }
 
     private void OnDisable()
     {
-        if (!_init || UI_Smelt.isSmelting)
+        if (!_init || smeltUI.isSmelting)
             return;
 
-        Managers.Inven.AddItems(coalSO, Managers.Inven.smeltUI.charcoalSlot.itemUI.slotInfo.count);
-        Managers.Inven.smeltUI.charcoalSlot.itemUI.slotInfo.count = 0;
-        Managers.Inven.smeltUI.charcoalSlot.itemUI.SetInfo();
+        Managers.Inven.AddItems(coalSO, smeltUI.charcoalSlot.itemUI.slotInfo.count);
+        smeltUI.charcoalSlot.itemUI.slotInfo.count = 0;
+        smeltUI.charcoalSlot.itemUI.SetInfo();
     }
 
     private void ShowSlotInfo(PointerEventData data)
@@ -107,7 +107,7 @@ public class UI_CharcoalSlot : UI_BaseSlot
             }
             else continue;
         }
-        Managers.Inven.smeltUI.charcoalSlot.itemUI.slotInfo = new SlotInfo(totalCount,"Coal");
-        Managers.Inven.smeltUI.charcoalSlot.itemUI.SetInfo();
+        smeltUI.charcoalSlot.itemUI.slotInfo = new SlotInfo(totalCount,"Coal");
+        smeltUI.charcoalSlot.itemUI.SetInfo();
     }
 }

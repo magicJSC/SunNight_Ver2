@@ -8,7 +8,7 @@ using static StorageManager;
 public class UI_GrillingSlot : UI_BaseSlot,IDragable,IDroppable
 {
     [HideInInspector]
-    public UI_Smelt smelt;
+    public UI_Smelt smeltUI;
     [HideInInspector]
     public UI_Item itemUI;
 
@@ -20,7 +20,7 @@ public class UI_GrillingSlot : UI_BaseSlot,IDragable,IDroppable
 
     public override void Init()
     {
-        explain = smelt.explain;
+        explain = smeltUI.explain;
         explainText = Util.FindChild<Text>(explain, "ExplainText", true);
         nameText = Util.FindChild<Text>(explain, "NameText", true);
 
@@ -50,7 +50,7 @@ public class UI_GrillingSlot : UI_BaseSlot,IDragable,IDroppable
 
     private void OnDisable()
     {
-        if (!_init || UI_Smelt.isSmelting)
+        if (!_init || smeltUI.isSmelting)
             return;
 
         if (itemUI.slotInfo.itemInfo != null)
