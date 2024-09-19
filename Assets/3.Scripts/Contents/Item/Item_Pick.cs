@@ -42,6 +42,7 @@ public class Item_Pick : Item
     public void DestroyThis()
     {
         Instantiate(effect,transform.position, Quaternion.identity);
+        Destroy(gameObject);
         Managers.Sound.Play(Define.Sound.Effect, sound);
     }
 
