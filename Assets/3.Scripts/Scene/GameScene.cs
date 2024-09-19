@@ -24,9 +24,9 @@ public class GameScene : BaseScene
         Managers.Game.mouse.Init();
         Managers.Game.tower.Init();
         Managers.Inven.Init();
+        Managers.Data.Init();
         Managers.Game.build.Init(); //수정 중
         Managers.Game.player.Init();
-
 
         //플레이어 시작 지점에 위치설정
         Managers.Game.player.transform.position = new Vector3(-67.5f, 55.39f);

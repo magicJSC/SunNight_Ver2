@@ -4,6 +4,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
 using System.Text;
+using static StorageManager;
 
 public class PlayerDatas
 {
@@ -15,8 +16,8 @@ public class PlayerDatas
     public int Hp { get; set; }
     [JsonProperty("hunger")]
     public float Hunger { get; set; }
-    [JsonProperty("location")]
-    public Vector2 Location { get; set; }
+    //[JsonProperty("location")]
+    //public Vector2 Location { get; set; }
 }
 
 public class DataManager : MonoBehaviour
@@ -43,23 +44,20 @@ public class DataManager : MonoBehaviour
 
         for (int i = 0; i < items.Length; i++)
         {
-            if (!(hotBarSlot[i] && invenSlot[i]))
-                return;
-
             if (i <= 23)
             {
                 if (invenSlot[i].itemUI.slotInfo.itemInfo != null)
                 {
-                    items[i] = invenSlot[i].itemUI.slotInfo.itemInfo.itemName;
+                    items[i] = invenSlot[i].itemUI.slotInfo.itemInfo.idName;
                     amount[i] = invenSlot[i].itemUI.slotInfo.count;
                 }
             }
             else
             {
-                if (hotBarSlot[i].itemUI.slotInfo.itemInfo != null)
+                if (hotBarSlot[i - 24].itemUI.slotInfo.itemInfo != null)
                 {
-                    items[i] = hotBarSlot[i].itemUI.slotInfo.itemInfo.itemName;
-                    amount[i] = hotBarSlot[i].itemUI.slotInfo.count;
+                    items[i] = hotBarSlot[i - 24].itemUI.slotInfo.itemInfo.idName;
+                    amount[i] = hotBarSlot[i - 24].itemUI.slotInfo.count;
                 }
             }
         }
@@ -83,15 +81,17 @@ public class DataManager : MonoBehaviour
         {
             using (var file = File.Create("userdata.json"))
             {
-                file.Write(Encoding.UTF8.GetBytes(path));
+                file.Write(Encoding.UTF8.GetBytes(json));
             }
         }
         else
         {
             var file = new FileStream(path, FileMode.Open);
-            file.Write(Encoding.UTF8.GetBytes(path));
+            file.Write(Encoding.UTF8.GetBytes(json));
             file.Close();
         }
+
+        Debug.Log("Complete to Save");
     }
 
     public void Load()
@@ -99,7 +99,7 @@ public class DataManager : MonoBehaviour
         var items = Resources.LoadAll<ItemSO>("ItemSO");
         foreach (var item in items)
         {
-            dic.Add(item.itemName, item);
+            dic.Add(item.idName, item);
         }
 
         if (!File.Exists(path))
@@ -127,8 +127,8 @@ public class DataManager : MonoBehaviour
             return;
         }
 
-        stat.Hp = datas.Hp;
-        stat.Hunger = datas.Hunger;
+        //stat.Hp = datas.Hp;
+        //stat.Hunger = datas.Hunger;
 
         var hotBarSlot = Managers.Inven.hotBarUI.slotList;
         var invenSlot = Managers.Inven.inventoryUI.slotList;
@@ -145,11 +145,13 @@ public class DataManager : MonoBehaviour
                 }
                 else // ÇÖ¹Ù
                 {
-                    hotBarSlot[i].itemUI.slotInfo.itemInfo = data;
-                    hotBarSlot[i].itemUI.slotInfo.itemInfo.itemIcon = data.itemIcon;
-                    hotBarSlot[i].itemUI.slotInfo.count = datas.Amount[i];
+                    hotBarSlot[i - 24].itemUI.slotInfo.itemInfo = data;
+                    hotBarSlot[i - 24].itemUI.slotInfo.itemInfo.itemIcon = data.itemIcon;
+                    hotBarSlot[i - 24].itemUI.slotInfo.count = datas.Amount[i];
                 }
             }
         }
+
+        Debug.Log("datas inputed");
     }
 }
