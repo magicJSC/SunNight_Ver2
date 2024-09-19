@@ -39,6 +39,7 @@ public class DataManager : MonoBehaviour
 
     public void Save()
     {
+
         var hotBarSlot = Managers.Inven.hotBarUI.slotList;
         var invenSlot = Managers.Inven.inventoryUI.slotList;
 
@@ -51,6 +52,11 @@ public class DataManager : MonoBehaviour
                     items[i] = invenSlot[i].itemUI.slotInfo.itemInfo.idName;
                     amount[i] = invenSlot[i].itemUI.slotInfo.count;
                 }
+                else
+                {
+                    items[i] = null;
+                    amount[i] = 0;
+                }
             }
             else
             {
@@ -59,6 +65,11 @@ public class DataManager : MonoBehaviour
                     items[i] = hotBarSlot[i - 24].itemUI.slotInfo.itemInfo.idName;
                     amount[i] = hotBarSlot[i - 24].itemUI.slotInfo.count;
                 }
+                else
+                {
+                    items[i] = null;
+                    amount[i] = 0;
+                }
             }
         }
         datas = new PlayerDatas()
@@ -66,7 +77,8 @@ public class DataManager : MonoBehaviour
             ItemName = items,
             Amount = amount,
             Hp = stat.Hp,
-            Hunger = stat.Hunger
+            Hunger = stat.Hunger,
+            //Location = stat.transform.position
         };
 
         var json = JsonConvert.SerializeObject(datas, Formatting.None, new JsonSerializerSettings()
@@ -97,9 +109,12 @@ public class DataManager : MonoBehaviour
     public void Load()
     {
         var items = Resources.LoadAll<ItemSO>("ItemSO/Item");
-        foreach (var item in items)
+        if (dic.Count == 0)
         {
-            dic.Add(item.idName, item);
+            foreach (var item in items)
+            {
+                dic.Add(item.idName, item);
+            }
         }
 
         if (!File.Exists(path))
@@ -127,27 +142,38 @@ public class DataManager : MonoBehaviour
             return;
         }
 
-        //stat.Hp = datas.Hp;
-        //stat.Hunger = datas.Hunger;
+        stat = Managers.Game.player.GetComponent<PlayerStat>();
+        stat.Hp = datas.Hp;
+        stat.Hunger = datas.Hunger;
 
-        var hotBarSlot = Managers.Inven.hotBarUI.slotList;
-        var invenSlot = Managers.Inven.inventoryUI.slotList;
+        //stat.transform.position = datas.Location;
+
+        var hotBarSlot = Managers.Inven.hotBarSlotInfo;
+        var invenSlot = Managers.Inven.inventorySlotInfo;
+
+        for (int i = 0; i < 4; i++)
+        {
+            Managers.Inven.hotBarSlotInfo[i] = new SlotInfo(0);
+        }
+        for (int i = 0; i < 24; i++)
+        {
+            Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);
+        }
         for (int i = 0; i < items.Length; i++)
         {
-            ItemSO data;
-            if (datas.ItemName[i] != null && dic.TryGetValue(datas.ItemName[i], out data))
+            if (datas.ItemName[i] != null && dic.TryGetValue(datas.ItemName[i], out var data))
             {
                 if (i <= 23) // ÀÎº¥
                 {
-                    invenSlot[i].itemUI.slotInfo.itemInfo = data;
-                    invenSlot[i].itemUI.slotInfo.itemInfo.itemIcon = data.itemIcon;
-                    invenSlot[i].itemUI.slotInfo.count = datas.Amount[i];
+                    invenSlot[i].itemInfo = data;
+                    invenSlot[i].itemInfo.itemIcon = data.itemIcon;
+                    invenSlot[i].count = datas.Amount[i];
                 }
                 else // ÇÖ¹Ù
                 {
-                    hotBarSlot[i - 24].itemUI.slotInfo.itemInfo = data;
-                    hotBarSlot[i - 24].itemUI.slotInfo.itemInfo.itemIcon = data.itemIcon;
-                    hotBarSlot[i - 24].itemUI.slotInfo.count = datas.Amount[i];
+                    hotBarSlot[i - 24].itemInfo = data;
+                    hotBarSlot[i - 24].itemInfo.itemIcon = data.itemIcon;
+                    hotBarSlot[i - 24].count = datas.Amount[i];
                 }
             }
         }

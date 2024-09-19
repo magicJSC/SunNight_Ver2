@@ -47,13 +47,13 @@ public class StorageManager : MonoBehaviour
     public void Init()
     {
         hotBarEvent = null;
-        
+
         hotBarUI = Managers.UI.ShowInvenUI("UI_HotBar").GetComponent<UI_HotBar>();
         hotBarUI.Init();
-      
+
         inventoryUI = Managers.UI.ShowInvenUI("UI_Inven").GetComponent<UI_Inventory>();
         inventoryUI.Init();
-     
+
     }
 
 
@@ -319,7 +319,7 @@ public class StorageManager : MonoBehaviour
         return count;
     }
 
-    public void RemoveItem(ItemSO itemSO,int count)
+    public void RemoveItem(ItemSO itemSO, int count)
     {
         int remainCount = count;
         for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)

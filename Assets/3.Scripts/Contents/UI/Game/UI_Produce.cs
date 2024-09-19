@@ -239,7 +239,7 @@ public class UI_Produce : UI_Base
             int count = 0;
             bool canProduce = false;
             itemUIList.Add(toMakeItem.materialList[i].itemSO,new());
-            for (int j = 0; j < Managers.Inven.inventorySlotInfo.Length - 1; j++)
+            for (int j = 0; j < 24; j++)
             {
                 if (canProduce)
                     break;
@@ -256,7 +256,7 @@ public class UI_Produce : UI_Base
                         canProduce =  true;
                 }
             }
-            for (int j = 0; j < Managers.Inven.hotBarSlotInfo.Length - 1; j++)
+            for (int j = 0; j < 4; j++)
             {
                 if (canProduce)
                     break;
