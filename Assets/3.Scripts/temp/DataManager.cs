@@ -96,7 +96,7 @@ public class DataManager : MonoBehaviour
 
     public void Load()
     {
-        var items = Resources.LoadAll<ItemSO>("ItemSO");
+        var items = Resources.LoadAll<ItemSO>("ItemSO/Item");
         foreach (var item in items)
         {
             dic.Add(item.idName, item);
