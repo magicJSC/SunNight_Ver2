@@ -53,16 +53,13 @@ public class StorageManager : MonoBehaviour
       
         inventoryUI = Managers.UI.ShowInvenUI("UI_Inven").GetComponent<UI_Inventory>();
         inventoryUI.Init();
-      
-        smeltUI = Managers.UI.ShowInvenUI("UI_Smelting").GetComponent<UI_Smelt>();
-        smeltUI.Init();
+     
     }
 
 
     #region 인벤토리
     public UI_HotBar hotBarUI;
     public UI_Inventory inventoryUI;
-    public UI_Smelt smeltUI;
 
     public int choiceIndex = 0;
     public bool choicingTower = false;
