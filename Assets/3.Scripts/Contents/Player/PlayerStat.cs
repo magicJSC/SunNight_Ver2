@@ -20,7 +20,7 @@ public class PlayerStat : MonoBehaviour
             else if(hp < value)
                 OnHillEvent();
             hp = Mathf.Clamp(value, 0, value);
-            hpBarEvent.Invoke(((float)Hp / (float)maxHP));
+            hpBarEvent?.Invoke(((float)Hp / (float)maxHP));
         }
     }
     int hp;
@@ -34,14 +34,14 @@ public class PlayerStat : MonoBehaviour
             if (hunger <= maxHunger / 7)
             {
                 if(hungerBuff == null)
-                 hungerBuff = Instantiate(hungerBuffPrefab, transform);
+                 GetHungerBuff();
             }
             else
             {
                 if (hungerBuff != null)
                     Destroy(hungerBuff);
             }
-            hungerBarEvent.Invoke(hunger / maxHunger);
+            hungerBarEvent?.Invoke(hunger / maxHunger);
         }
     }
     float hunger;
@@ -56,15 +56,31 @@ public class PlayerStat : MonoBehaviour
     GameObject hungerBuffPrefab;
     GameObject hungerBuff;
 
+    bool isGetting;
+
     private void Start()
     {
         cam = Camera.main.GetComponent<CameraController>();
-        hungerBuffAsset.LoadAssetAsync().Completed += (obj) =>
-        {
-            hungerBuffPrefab = obj.Result;
-        };
+       
 
         StartCoroutine(ReduceHunger());
+    }
+
+    void GetHungerBuff()
+    {
+        if (hungerBuffPrefab == null)
+        {
+            if (isGetting)
+                return;
+            isGetting = true;
+            hungerBuffAsset.LoadAssetAsync().Completed += (obj) =>
+            {
+                hungerBuffPrefab = obj.Result;
+                hungerBuff = Instantiate(hungerBuffPrefab, transform);
+            };
+        }
+        else
+            hungerBuff = Instantiate(hungerBuffPrefab, transform);
     }
 
 

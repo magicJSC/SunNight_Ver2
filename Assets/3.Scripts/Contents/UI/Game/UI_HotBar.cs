@@ -26,7 +26,6 @@ public class UI_HotBar : UI_Base
         choice = Util.FindChild(gameObject, "Choice", true).GetComponent<Image>();
         grid = Util.FindChild(gameObject, "Grid", true);
 
-        GetData();
         MakeKeys();
     }
 
@@ -73,19 +72,18 @@ public class UI_HotBar : UI_Base
 
     void MakeKeys()
     {
-        slotList = new UI_HotbarSlot[Managers.Inven.hotBarSlotInfo.Length];
+        slotList = new UI_HotbarSlot[5];
         hotBarSlotAsset.LoadAssetAsync().Completed += (slot) =>
         {
             towerSlotAsset.LoadAssetAsync().Completed += (obj) =>
             {
-                for (int i = 0; i < Managers.Inven.hotBarSlotInfo.Length - 1; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     UI_HotbarSlot hotBarSlot = Instantiate(slot.Result, grid.transform).GetComponent<UI_HotbarSlot>();
-
                     slotList[i] = hotBarSlot;
-                    hotBarSlot.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.hotBarSlotInfo[i];
+                    slotList[i].Init();
+                    slotList[i].itemUI.slotInfo = Managers.Inven.hotBarSlotInfo[i];
                     hotBarSlot.GetComponentInChildren<UI_Item>().Init();
-                    slotList[i].GetComponent<UI_HotbarSlot>().Init();
                 }
                 towerSlot = Instantiate(obj.Result, grid.transform).GetComponent<UI_TowerSlot>();
                 towerSlot.Init();
@@ -122,7 +120,7 @@ public class UI_HotBar : UI_Base
 
     public void CheckChoice()
     {
-        bool choiceTower = choiceIndex == Managers.Inven.hotBarSlotInfo.Length - 1;
+        bool choiceTower = choiceIndex == 4;
         if (!choiceTower)
             Managers.Inven.CheckHotBarChoice();
         else
@@ -133,22 +131,13 @@ public class UI_HotBar : UI_Base
             Managers.Game.tower.gameObject.SetActive(choiceTower);
     }
 
-    #region 아이템 관련
-    //값 가져오기
-    public void GetData()
-    {
-        for (int i = 0; i < Managers.Inven.hotBarSlotInfo.Length; i++)
-        {
-            Managers.Inven.hotBarSlotInfo[i] = new StorageManager.SlotInfo(0);
-        }
-    }
-    #endregion
+   
 
     #region 기지 관련
 
     public void GetTower()
     {
-        Managers.Inven.hotBarSlotInfo[slotList.Length - 1].keyType = Define.KeyType.Exist;
+        Managers.Inven.hotBarUI.slotList[4].itemUI.slotInfo.keyType = Define.KeyType.Exist;
     }
     #endregion
 }

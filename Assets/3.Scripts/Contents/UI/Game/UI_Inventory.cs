@@ -105,7 +105,6 @@ public class UI_Inventory : UI_Base
             hideSound = clip.Result;
         };
 
-        GetData();
         MakeKeys();
 
         SetCoin();
@@ -144,26 +143,18 @@ public class UI_Inventory : UI_Base
         gameObject.SetActive(false);
     }
 
-    void GetData()
-    {
-        for (int i = 0; i < Managers.Inven.inventorySlotInfo.Length; i++)
-        {
-            Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);
-        }
-    }
-
     void MakeKeys()
     {
-        slotList = new UI_InventorySlot[Managers.Inven.inventorySlotInfo.Length];
+        slotList = new UI_InventorySlot[24];
         invenSlotAsset.LoadAssetAsync().Completed += (slot) => 
         {
-            for (int i = 0; i < Managers.Inven.inventorySlotInfo.Length; i++)
+            for (int i = 0; i < 24; i++)
             {
                 UI_InventorySlot go = Instantiate(slot.Result, grid.transform).GetComponent<UI_InventorySlot>();
                 slotList[i] = go;
                 go.inven = this;
                 go.Init();
-                go.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.inventorySlotInfo[i];
+                slotList[i].itemUI.slotInfo = Managers.Inven.inventorySlotInfo[i];
                 go.GetComponentInChildren<UI_Item>().Init();
             }
         };
