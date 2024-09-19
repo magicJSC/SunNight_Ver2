@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UI_SmeltSlot : UI_BaseSlot,IDragable
 {
     [HideInInspector]
-    public UI_Smelt smelt;
+    public UI_Smelt smeltUI;
     [HideInInspector]
     public UI_Item itemUI;
 
@@ -17,11 +17,11 @@ public class UI_SmeltSlot : UI_BaseSlot,IDragable
     Text explainText;
     Text nameText;
 
-    public new void Init()
+    public override void Init()
     {
-        explain = smelt.explain;
-        explainText = Util.FindChild(explain, "ExplainText", true).GetComponent<Text>();
-        nameText = Util.FindChild(explain, "NameText", true).GetComponent<Text>();
+        explain = smeltUI.explain;
+        explainText = Util.FindChild<Text>(explain, "ExplainText", true);
+        nameText = Util.FindChild<Text>(explain, "NameText", true);
 
         UI_EventHandler evt = GetComponent<UI_EventHandler>();
         evt._OnEnter += ShowSlotInfo;
@@ -34,6 +34,24 @@ public class UI_SmeltSlot : UI_BaseSlot,IDragable
         };
 
         itemUI = transform.GetComponentInChildren<UI_Item>();
+        itemUI.slotInfo = Managers.Inven.smeltSlotInfo;
+        itemUI.Init();
+        itemUI.SetInfo();
+
+        _init = true;
+    }
+
+    private void OnDisable()
+    {
+        if (!_init || smeltUI.isSmelting)
+            return;
+
+        if (itemUI.slotInfo.itemInfo != null)
+        {
+            Managers.Inven.AddItems(itemUI.slotInfo.itemInfo, itemUI.slotInfo.count);
+            itemUI.MakeEmptySlot();
+        }
+        itemUI.SetInfo();
     }
 
     private void ShowSlotInfo(PointerEventData data)

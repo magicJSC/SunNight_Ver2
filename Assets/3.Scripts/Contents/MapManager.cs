@@ -14,11 +14,9 @@ public class MapManager : MonoBehaviour
 {
     public Grid CurrentGrid { get; private set; }
 
-    static List<Vector3Int> directList = new List<Vector3Int>();
 
     public static List<Vector3Int> buildData = new List<Vector3Int>();
 
-    public static Tilemap matter;
     public static Tilemap building;
     public static Tilemap cantBuild;
     public static Tilemap tower;
@@ -26,14 +24,8 @@ public class MapManager : MonoBehaviour
     public void Init()
     {
         buildData.Clear();
-        GameObject go = Util.FindChild(gameObject, "Matter");
-        matter = go.GetComponent<Tilemap>();
-        go = Util.FindChild(gameObject, "CantBuild");
+        GameObject go = Util.FindChild(gameObject, "CantBuild");
         cantBuild = go.GetComponent<Tilemap>();
-        directList.Add(Vector3Int.right);
-        directList.Add(Vector3Int.up);
-        directList.Add(Vector3Int.down);
-        directList.Add(Vector3Int.left);
     }
 
     public bool CheckCanUseTile(Vector3Int pos)
@@ -45,8 +37,6 @@ public class MapManager : MonoBehaviour
         if (building.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))
             return false;
         else if (tower.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))
-            return false;
-        else if (matter.HasTile(pos))
             return false;
         else if (cantBuild.HasTile(pos))
             return false;
@@ -67,57 +57,7 @@ public class MapManager : MonoBehaviour
         go.GetComponent<Item_Buliding>().buildUI.SetActive(true);
     }
 
-    public void SpawnItem(ItemSO itemSO, int count, Vector3Int pos)
-    {
-        pos = FindSpawnSpot(pos, itemSO);
-        GameObject go = matter.GetInstantiatedObject(pos);
-        if (go == null)
-        {
-            matter.SetTile(pos, itemSO.tile);
-            matter.GetInstantiatedObject(pos).GetComponent<Item_Pick>().Count = count;
-        }
-        else
-        {
-            Item_Pick item = matter.GetInstantiatedObject(pos).GetComponent<Item_Pick>();
-            item.Count += count;
-            if (item.Count > item.itemSo.maxAmount)
-            {
-                SpawnItem(itemSO, item.Count - item.itemSo.maxAmount, pos);
-                item.Count = item.itemSo.maxAmount;
-            }
-        }
-    }
-
-    Vector3Int FindSpawnSpot(Vector3Int pos, ItemSO itemSO)
-    {
-        Vector3Int nextPos = pos;
-        while (true)
-        {
-            int index = 0;
-            pos = nextPos;
-            for (int i = 0; i < directList.Count; i++)
-            {
-                if (!CheckCanUseTile(directList[i] + pos))
-                {
-                    if (matter.HasTile(pos + directList[i]))
-                    {
-                        if (itemSO.idName == matter.GetInstantiatedObject(pos + directList[i]).GetComponent<Item>().itemSo.idName)
-                        {
-                            return pos + directList[i];
-                        }
-                    }
-                    index++;
-                    if (index > 5)
-                        break;
-                    nextPos = pos + directList[i];
-                    if (cantBuild.HasTile(pos))
-                        continue;
-                }
-                else
-                    return pos + directList[i];
-            }
-        }
-    }
+  
 
     public void LoadMap(int mapId)
     {

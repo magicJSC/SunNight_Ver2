@@ -8,7 +8,7 @@ public class ItemBaker : MonoBehaviour
     public IEnumerator Bake(ItemSO item)
     {
         yield return new WaitForSeconds(item.bakeTime);
-        MakeBakedItem(item.bakeItemSO);
+        MakeBakedItem(item.bakeItem);
     }
 
     void MakeBakedItem(ItemSO bakedItem)
@@ -17,6 +17,6 @@ public class ItemBaker : MonoBehaviour
         bonfire.itemBakers.Add(this);
         bonfire.BakingCount--;
         Vector2 pos = bonfire.transform.position + Managers.Game.tower.transform.position;
-        Managers.Map.SpawnItem(bakedItem,1,new Vector3Int((int)pos.x,(int)pos.y));
+        Managers.Game.SpawnItem(bakedItem,1,pos);
     }
 }

@@ -9,15 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
   m_Name: Gun
   m_EditorClassIdentifier: 
-  idName: Gun
-  itemName: "\uCD1D"
-  explain: "\uCD1D\uC774\uB2E4"
-  itemIcon: {fileID: -2114830539, guid: c7198cf7fc0cfb54b90a8ffeefc122cf, type: 3}
-  itemType: 2
-  maxAmount: 1
+  idName: 
+  itemName: 
+  explain: 
+  itemIcon: {fileID: 0}
+  itemType: 0
+  maxAmount: 0
+  prefab: {fileID: 0}
   tile: {fileID: 0}
   smelt: {fileID: 0}
   bakeItemSO: {fileID: 0}

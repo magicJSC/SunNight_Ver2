@@ -7,48 +7,47 @@ using UnityEngine.UI;
 
 public class UI_Produce_Item : UI_Base
 {
-
     [Header("Produce")]
-    public ItemSO itemSO;
-    public List<UI_Produce.Materials> materialList = new List<UI_Produce.Materials>();
+    public UI_Produce.ToMakeItem toMakeItem;
 
 
     [HideInInspector]
     public UI_Produce produce;
 
-    GameObject explain;
+    Image icon;
+
+    RectTransform explain;
+    RectTransform rectTransform;
+
     Text explainText;
     Text nameText;
+    
 
-
-    public new void Init()
+    public override void Init()
     {
-        if (_init)
-            return;
+        explain = produce.explainItem.GetComponent<RectTransform>();
+        rectTransform = GetComponent<RectTransform>();
+        explainText = Util.FindChild<Text>(explain.gameObject, "ExplainText", true);
+        nameText = Util.FindChild<Text>(explain.gameObject, "NameText", true);
 
-        _init = true;
-        explain = produce.explainItem;
-        explainText = Util.FindChild(explain, "ExplainText", true).GetComponent<Text>();
-        nameText = Util.FindChild(explain, "NameText", true).GetComponent<Text>();
+        icon = Util.FindChild<Image>(gameObject, "Icon", true);
+        icon.sprite = toMakeItem.toMakeItemSO.itemIcon;
 
         UI_EventHandler evt = GetComponent<UI_EventHandler>();
-        evt._OnEnter += (PointerEventData p) => { explain.SetActive(true); Set_Explain(); };
-        evt._OnExit += (PointerEventData p) => { explain.SetActive(false); };
-        evt._OnClick += (PointerEventData p) => 
+        evt._OnEnter += (PointerEventData p) => { explain.gameObject.SetActive(true); Set_Explain(); };
+        evt._OnExit += (PointerEventData p) => { explain.gameObject.SetActive(false); };
+        evt._OnClick += (PointerEventData p) =>
         {
             produce.Remove_ToMake();
-            for(int i = 0; i < materialList.Count; i++)
-            {
-                produce.matters.Add(materialList[i]);
-            }
-            produce.Set_ToMake(itemSO); 
+            produce.Set_ToMake(toMakeItem);
+            produce.toMakeItem = toMakeItem;
         };
     }
 
     public void Set_Explain()
     {
-        explain.GetComponent<RectTransform>().anchoredPosition = transform.parent.GetComponent<RectTransform>().anchoredPosition + new Vector2(-515, 450);
-        explainText.text = itemSO.explain;
-        nameText.text = itemSO.itemName;
+        explain.anchoredPosition = rectTransform.anchoredPosition + new Vector2(-515, 450);
+        explainText.text = toMakeItem.toMakeItemSO.explain;
+        nameText.text = toMakeItem.toMakeItemSO.itemName;
     }
 }

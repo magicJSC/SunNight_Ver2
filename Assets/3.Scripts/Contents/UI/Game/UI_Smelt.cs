@@ -10,11 +10,15 @@ using static StorageManager;
 /// </summary>
 public class UI_Smelt : UI_Base
 {
-    UI_GrillingSlot grillingSlot;
+    [HideInInspector]
+    public UI_GrillingSlot grillingSlot;
+    [HideInInspector]
+    public UI_SmeltSlot smeltSlot;
+    [HideInInspector]
+    public UI_CharcoalSlot charcoalSlot;
+
     GameObject close;
-    UI_SmeltSlot smeltSlot;
     GameObject doSmelt;
-    UI_CharcoalSlot charcoalSlot;
     RectTransform back;
 
     Vector3 startPos;
@@ -26,11 +30,10 @@ public class UI_Smelt : UI_Base
 
     [HideInInspector]
     public FurnanceController furnanace;
-    public static bool isSmelting;
+    public bool isSmelting;
 
     private SlotInfo _slotInfo;
 
-    public ItemSO coalSO;
 
   
     public override void Init()
@@ -50,13 +53,11 @@ public class UI_Smelt : UI_Base
         explain = Util.FindChild(gameObject, "ExplainSmelt", true);
         timer = Util.FindChild<Image>(gameObject, "Timer", true);
 
-        smeltSlot.smelt = this;
-        smeltSlot.Init();
+        smeltSlot.smeltUI = this;
 
-        grillingSlot.smelt = this;
-        grillingSlot.Init();
+        grillingSlot.smeltUI = this;
 
-        charcoalSlot.Init();
+        charcoalSlot.smeltUI = this;
 
         UI_EventHandler evt = doSmelt.GetComponent<UI_EventHandler>();
         evt._OnClick += (PointerEventData p)=> { CheckCanSmelt(); };
@@ -74,10 +75,7 @@ public class UI_Smelt : UI_Base
         };
         evt._OnDown += (PointerEventData p) => { startPos = back.transform.position - Input.mousePosition; };
 
-        SetData();
-
-        Managers.Game.tower.forceInstallEvent -= CancelSmelt;
-        Managers.Game.tower.forceInstallEvent += CancelSmelt;
+        furnanace.SetTimer();
 
         explain.SetActive(false);
         gameObject.SetActive(false);
@@ -88,7 +86,6 @@ public class UI_Smelt : UI_Base
         if (!_init)
             return;
         Managers.Inven.inventoryUI.gameObject.SetActive(true);
-        FillCharcoal();
         Managers.UI.PopUIList.Add(gameObject);
     }
 
@@ -100,36 +97,21 @@ public class UI_Smelt : UI_Base
         Managers.UI.PopUIList.Remove(gameObject);
     }
 
-    void SetData()
-    {
-        smeltSlot.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.smeltSlotInfo;
-        smeltSlot.GetComponentInChildren<UI_Item>().Init();
-
-        grillingSlot.GetComponentInChildren<UI_Item>().slotInfo = Managers.Inven.grillingSlotInfo;
-        grillingSlot.GetComponentInChildren<UI_Item>().Init();
-    }
-
-
-
     void CheckCanSmelt()
     {
         if (isSmelting)
             return;
         _slotInfo = grillingSlot.GetComponentInChildren<UI_Item>().slotInfo;
-        if (_slotInfo != null)
+        if (_slotInfo.keyType == Define.KeyType.Empty)
+            return;
+        if (!_slotInfo.itemInfo.canSmelt)
         {
-            if (_slotInfo.itemInfo.smelt == null)
-            {
-                Debug.Log("제련 할 수 있는 아이템이 아이템이 아닙니다");
-                return;
-            }
-        }
-        else
-        { 
-            Debug.Log("슬롯에 제련 할 아이템이 없습니다");
+            Debug.Log("제련 할 수 있는 아이템이 아이템이 아닙니다");
             return;
         }
-        if(charcoalSlot.charcoalCount <= 0)
+        if (isSmelting)
+            return;
+        if(charcoalSlot.itemUI.slotInfo.count <= 0)
         {
             Debug.Log("석탄이 부족합니다");
             return;
@@ -155,10 +137,13 @@ public class UI_Smelt : UI_Base
     {
         UI_Item grillItem = grillingSlot.GetComponentInChildren<UI_Item>();
         UI_Item smeltItem = smeltSlot.GetComponentInChildren<UI_Item>();
+        UI_Item coalItem = charcoalSlot.GetComponentInChildren<UI_Item>();
 
-        smeltItem.slotInfo.itemInfo = grillItem.slotInfo.itemInfo.smelt;
+        smeltItem.slotInfo.itemInfo = grillItem.slotInfo.itemInfo.smeltItem;
         smeltItem.slotInfo.count++;
-        charcoalSlot.charcoalCount--;
+        charcoalSlot.itemUI.slotInfo.count--;
+
+        isSmelting = false;
 
         grillItem.slotInfo.count -= 1;
         if (grillItem.slotInfo.count <= 0)
@@ -166,69 +151,15 @@ public class UI_Smelt : UI_Base
             grillItem.MakeEmptySlot();
         }
 
-        charcoalSlot.SetSlot();
+        coalItem.SetInfo();
         grillItem.SetInfo();
         smeltItem.SetInfo();
-    }
 
-    void FillCharcoal()
-    {
-        int totalCount = 0;
-        for (int i = 0; i < Managers.Inven.inventoryUI.slotList.Length; i++)
-        {
-            _slotInfo  = Managers.Inven.inventoryUI.slotList[i].itemUI.slotInfo;
-            if (_slotInfo.itemInfo != null)
-            {
-                if (_slotInfo.itemInfo == coalSO)
-                {
-                    totalCount += _slotInfo.count;
-                    if (totalCount > _slotInfo.itemInfo.maxAmount)
-                    {
-                        Managers.Inven.AddItems(_slotInfo.itemInfo,totalCount - _slotInfo.itemInfo.maxAmount);
-                        charcoalSlot.charcoalCount = _slotInfo.itemInfo.maxAmount;
-                        break;
-                    }
-                    Managers.Inven.inventoryUI.slotList[i].itemUI.MakeEmptySlot();
-                    charcoalSlot.charcoalCount = totalCount;
-                }
-            }
-            else continue;
-        }
-        charcoalSlot.SetExistSlot();
-        charcoalSlot.SetSlot();
-    }
-
-    void CancelSmelt()
-    {
-        ReturnItems();
-    }
-
-    void ReturnItems()
-    {
-        if (charcoalSlot.charcoalCount != 0)
-        {
-            Managers.Inven.AddItems(coalSO, charcoalSlot.charcoalCount);
-            charcoalSlot.charcoalCount = 0;
-            charcoalSlot.SetEmptySlot();
-        }
-        _slotInfo = grillingSlot.itemUI.slotInfo;
-        if(_slotInfo.itemInfo != null)
-        {
-            Managers.Inven.AddItems(_slotInfo.itemInfo, _slotInfo.count);
-            grillingSlot.itemUI.MakeEmptySlot();
-        }
-        _slotInfo = smeltSlot.itemUI.slotInfo;
-        if (_slotInfo.itemInfo != null)
-        {
-            Managers.Inven.AddItems(_slotInfo.itemInfo, _slotInfo.count);
-            smeltSlot.itemUI.MakeEmptySlot();
-        }
+        CheckCanSmelt();
     }
 
     void Close(PointerEventData p)
     {
-        if (!isSmelting)
-            ReturnItems();
         gameObject.SetActive(false);
     }
 }

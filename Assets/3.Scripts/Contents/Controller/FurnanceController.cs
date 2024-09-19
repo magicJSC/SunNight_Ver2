@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class FurnanceController : MonoBehaviour, IInteractObject
 {
 
     public GameObject canInteractSign { get; set; }
+
+    public AssetReferenceGameObject smeltUIAsset;
 
     UI_Smelt smeltUI;
 
@@ -14,21 +17,24 @@ public class FurnanceController : MonoBehaviour, IInteractObject
 
     public void Start()
     {
-        smeltUI = Managers.Inven.smeltUI;
-        smeltUI.furnanace = this;
+        smeltUIAsset.LoadAssetAsync().Completed += (obj)=>
+        {
+            smeltUI = Managers.UI.ShowInvenUI<UI_Smelt>(obj.Result);
+            smeltUI.furnanace = this;
+        };
         canInteractSign = Util.FindChild(gameObject, "Sign",true);
         canInteractSign.SetActive(false);
     }
 
     public void StartSmelt()
     {
-        UI_Smelt.isSmelting = true;
+        smeltUI.isSmelting = true;
         StartCoroutine(SmeltItem());
     }
 
     public void CancelSmelt()
     {
-        UI_Smelt.isSmelting = false;
+        smeltUI.isSmelting = false;
         StopCoroutine(SmeltItem());
         _smeltCurTime = 0;
         SetTimer();
@@ -38,14 +44,13 @@ public class FurnanceController : MonoBehaviour, IInteractObject
     {
         while(_smeltCurTime < smeltTime)
         {
-            _smeltCurTime++;
-            yield return new WaitForSeconds(1);
+            yield return null;
+            _smeltCurTime += Time.deltaTime;
             SetTimer();
         }
-        smeltUI.FinishSmelt();
-        UI_Smelt.isSmelting = false;
         _smeltCurTime = 0;
         SetTimer();
+        smeltUI.FinishSmelt();
     }
 
     public void SetTimer()

@@ -9,14 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
   m_Name: IronOre
   m_EditorClassIdentifier: 
   idName: IronOre
-  itemName: "\uCCA0 \uC6D0\uC11D"
-  explain: "\uCCA0 \uC6D0\uC11D\uC774\uB2E4"
+  itemName: "\uACE0\uCCA0"
+  explain: "\uD754\uD558\uAC8C \uBCFC \uC218 \uC788\uB294 \uACE0\uCCA0\uB369\uC5B4\uB9AC\uB2E4"
   itemIcon: {fileID: 486335542, guid: 15c1a23359c99764e8e3eecbecb0dd20, type: 3}
   itemType: 3
-  maxAmount: 32
-  smelt: {fileID: 11400000, guid: 8e58cbffd25e9414fb81859dc04e7c89, type: 2}
-  tile: {fileID: 11400000, guid: 77eb33bafeabe3740927821344a3dfe7, type: 2}
+  maxAmount: 64
+  itemPrefab: {fileID: 75889190033888497, guid: 3c0c56325420c904f9bede6c7a90a710,
+    type: 3}
+  buildTile: {fileID: 0}
+  canSmelt: 1
+  smeltItem: {fileID: 11400000, guid: 8e58cbffd25e9414fb81859dc04e7c89, type: 2}
+  canBake: 0
+  bakeItem: {fileID: 0}
+  bakeTime: 0

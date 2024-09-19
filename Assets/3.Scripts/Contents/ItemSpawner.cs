@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemSpawner : MonoBehaviour
 {
     [SerializeField]
-    ItemSO itemSO;
+    GameObject item;
 
     public int itemCount;
 
@@ -23,7 +23,7 @@ public class ItemSpawner : MonoBehaviour
         for(int i = 0; i < itemCount; i++)
         {
             Vector3Int pos = new Vector3Int((int)(transform.position.x + Random.Range(-range, range)), (int)(transform.position.y + Random.Range(-range, range)));
-           Managers.Map.SpawnItem(itemSO,1,pos);
+            Instantiate(item,pos,Quaternion.identity);
         }
     }
 

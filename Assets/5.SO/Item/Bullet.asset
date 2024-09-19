@@ -9,16 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aeff9e2acaeaa74da466dee5e11a435, type: 3}
+  m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
   m_Name: Bullet
   m_EditorClassIdentifier: 
   idName: Bullet
   itemName: "\uCD1D\uC54C"
-  explain: "\uCD1D\uC54C\uC774\uB2E4"
-  itemIcon: {fileID: 772028866, guid: 4fafee73d9204f746b9d2b4fd4ce17d2, type: 3}
+  explain: "\uCD1D\uC744 \uC3D8\uB294\uB370 \uD544\uC694\uD55C \uCD1D\uC54C\uC774\uB2E4"
+  itemIcon: {fileID: 0}
   itemType: 3
-  maxAmount: 50
-  tile: {fileID: 0}
-  smelt: {fileID: 0}
+  maxAmount: 64
+  itemPrefab: {fileID: 3688767379772173983, guid: 46f410e9ca3116c49bd137228bf16ab9,
+    type: 3}
+  buildTile: {fileID: 0}
+  canSmelt: 0
+  smeltedItem: {fileID: 0}
+  canBake: 0
   bakeItemSO: {fileID: 0}
   bakeTime: 0
