@@ -18,7 +18,7 @@ public class UI_GameMenu : UI_Base
         evt._OnClick += (PointerEventData p) => { Close(); };
 
         evt = main.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { Time.timeScale = 1; SceneManager.LoadScene("MainScene");  };
+        evt._OnClick += (PointerEventData p) => { Time.timeScale = 1; Managers.Data.Save(); SceneManager.LoadScene("MainScene");  };
 
         Close();
     }

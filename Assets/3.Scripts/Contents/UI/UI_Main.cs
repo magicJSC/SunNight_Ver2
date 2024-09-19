@@ -50,7 +50,7 @@ public class UI_Main : UI_Base
         evt._OnExit += (PointerEventData p) => { optionText.color = Color.black; };
 
         evt = exit.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { Application.Quit(); Managers.Data.Save(); };
+        evt._OnClick += (PointerEventData p) => { Application.Quit(); };
         evt._OnEnter += (PointerEventData p) => { exitText.color = Color.red; Managers.Sound.Play(Define.Sound.Effect, enterSound); };
         evt._OnExit += (PointerEventData p) => { exitText.color = Color.black; };
 
