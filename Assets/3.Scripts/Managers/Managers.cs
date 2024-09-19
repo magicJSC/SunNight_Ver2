@@ -24,12 +24,14 @@ public class Managers : MonoBehaviour
     SceneManagerEx _scene = new();
     MapManager _map = new();
     SoundManager _sound = new();
+    DataManager _datas = new();
 
     public static UIManager UI { get { return Instance._ui; } }
     public static MapManager Map { get { return Instance._map; } }
     public static InputManager Input { get { return Instance._input; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
     public static SoundManager Sound { get { return Instance._sound; } }
+    public static DataManager Data { get { return Instance._datas; } }
 
     public static void Init()
     {
@@ -43,6 +45,7 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
             instance = go.GetComponent<Managers>();
 
+            instance._datas.Init();
             instance._network.Init();
             instance._sound.Init();        
         }
