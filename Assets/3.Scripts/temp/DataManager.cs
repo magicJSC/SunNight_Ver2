@@ -77,8 +77,7 @@ public class DataManager : MonoBehaviour
             ItemName = items,
             Amount = amount,
             Hp = stat.Hp,
-            Hunger = stat.Hunger,
-            //Location = stat.transform.position
+            Hunger = stat.Hunger
         };
 
         var json = JsonConvert.SerializeObject(datas, Formatting.None, new JsonSerializerSettings()
