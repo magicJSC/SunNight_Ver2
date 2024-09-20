@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
   m_Name: HpPotion
   m_EditorClassIdentifier: 
-  idName: 
+  idName: HpPotion
   itemName: 
   explain: 
   itemIcon: {fileID: 0}
   itemType: 0
   maxAmount: 0
-  prefab: {fileID: 0}
-  tile: {fileID: 0}
-  smelt: {fileID: 0}
-  bakeItemSO: {fileID: 0}
+  itemPrefab: {fileID: 0}
+  buildTile: {fileID: 0}
+  canSmelt: 0
+  smeltItem: {fileID: 0}
+  canBake: 0
+  bakeItem: {fileID: 0}
   bakeTime: 0
