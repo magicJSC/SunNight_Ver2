@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
   m_Name: Gunpowder
   m_EditorClassIdentifier: 
-  idName: 
+  idName: Gunpowder
   itemName: 
   explain: 
   itemIcon: {fileID: 0}
