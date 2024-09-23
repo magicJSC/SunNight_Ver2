@@ -16,8 +16,10 @@ public class PlayerDatas
     public int Hp { get; set; }
     [JsonProperty("hunger")]
     public float Hunger { get; set; }
-    //[JsonProperty("location")]
-    //public Vector2 Location { get; set; }
+    [JsonProperty("playerLocation")]
+    public Vector2 PlayerLocation { get; set; }
+    [JsonProperty("towerLocation")]
+    public Vector2 TowerLocation { get; set; }
 }
 
 public class DataManager : MonoBehaviour
@@ -32,14 +34,10 @@ public class DataManager : MonoBehaviour
 
     Dictionary<string, ItemSO> dic = new();
 
-    public void Init()
-    {
-        Load();
-    }
+    public void Init() { Load(); }
 
     public void Save()
     {
-
         var hotBarSlot = Managers.Inven.hotBarUI.slotList;
         var invenSlot = Managers.Inven.inventoryUI.slotList;
 
@@ -72,12 +70,19 @@ public class DataManager : MonoBehaviour
                 }
             }
         }
+        var player = Managers.Game.player;
+        Vector2 tower = new Vector2();
+        if (!Managers.Game.isKeepingTower)
+            tower = Managers.Game.tower.gameObject.transform.position;
+
         datas = new PlayerDatas()
         {
             ItemName = items,
             Amount = amount,
             Hp = stat.Hp,
-            Hunger = stat.Hunger
+            Hunger = stat.Hunger,
+            PlayerLocation = player.gameObject.transform.position,
+            TowerLocation = tower
         };
 
         var json = JsonConvert.SerializeObject(datas, Formatting.None, new JsonSerializerSettings()
@@ -91,9 +96,7 @@ public class DataManager : MonoBehaviour
         if (!File.Exists(path))
         {
             using (var file = File.Create("userdata.json"))
-            {
                 file.Write(Encoding.UTF8.GetBytes(json));
-            }
         }
         else
         {
@@ -111,15 +114,11 @@ public class DataManager : MonoBehaviour
         if (dic.Count == 0)
         {
             foreach (var item in items)
-            {
                 dic.Add(item.idName, item);
-            }
         }
 
         if (!File.Exists(path))
-        {
             Debug.Log("userdata.json is not found.");
-        }
         else
         {
             var file = File.Open(path, FileMode.Open);
@@ -144,20 +143,17 @@ public class DataManager : MonoBehaviour
         stat = Managers.Game.player.GetComponent<PlayerStat>();
         stat.Hp = datas.Hp;
         stat.Hunger = datas.Hunger;
-
-        //stat.transform.position = datas.Location;
+        stat.gameObject.transform.position = datas.PlayerLocation;
+        if (!Managers.Game.isKeepingTower)
+            Managers.Game.tower.gameObject.transform.position = datas.TowerLocation;
 
         var hotBarSlot = Managers.Inven.hotBarSlotInfo;
         var invenSlot = Managers.Inven.inventorySlotInfo;
 
         for (int i = 0; i < 4; i++)
-        {
             Managers.Inven.hotBarSlotInfo[i] = new SlotInfo(0);
-        }
         for (int i = 0; i < 24; i++)
-        {
             Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);
-        }
         for (int i = 0; i < items.Length; i++)
         {
             if (datas.ItemName[i] != null && dic.TryGetValue(datas.ItemName[i], out var data))
