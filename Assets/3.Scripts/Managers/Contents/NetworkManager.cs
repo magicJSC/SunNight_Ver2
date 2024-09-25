@@ -17,7 +17,11 @@ public class NetworkManager : MonoBehaviour
         IPHostEntry ipHost = Dns.GetHostEntry(host);
         for (int i = 0; ipHost.AddressList.Length > i; i++)
         {
-            _ipAddr = ipHost.AddressList[i];
+            if (ipHost.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
+            {
+                _ipAddr = ipHost.AddressList[i];
+                break;
+            }
         }
 
         _ipEndPoint = new IPEndPoint(_ipAddr, 7777);
