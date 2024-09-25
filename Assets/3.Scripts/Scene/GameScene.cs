@@ -28,8 +28,6 @@ public class GameScene : BaseScene
         Managers.Game.player.Init();
         Managers.Data.Init();
 
-        //플레이어 시작 지점에 위치설정
-        Managers.Game.player.transform.position = new Vector3(-67.5f, 55.39f);
 
 
         //if (!Managers.Game.isOpeningStory)

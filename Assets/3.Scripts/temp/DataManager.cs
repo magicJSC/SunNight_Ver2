@@ -16,10 +16,14 @@ public class PlayerDatas
     public int Hp { get; set; }
     [JsonProperty("hunger")]
     public float Hunger { get; set; }
-    [JsonProperty("playerLocation")]
-    public Vector2 PlayerLocation { get; set; }
-    [JsonProperty("towerLocation")]
-    public Vector2 TowerLocation { get; set; }
+    [JsonProperty("playerLocationX")]
+    public float PlayerLocationX { get; set; }
+    [JsonProperty("playerLocationY")]
+    public float PlayerLocationY { get; set; }
+    [JsonProperty("towerLocationX")]
+    public float TowerLocationX { get; set; }
+    [JsonProperty("towerLocationY")]
+    public float TowerLocationY { get; set; }
 }
 
 public class DataManager : MonoBehaviour
@@ -34,7 +38,10 @@ public class DataManager : MonoBehaviour
 
     Dictionary<string, ItemSO> dic = new();
 
-    public void Init() { Load(); }
+    public void Init() 
+    { 
+        Load();
+    }
 
     public void Save()
     {
@@ -70,7 +77,7 @@ public class DataManager : MonoBehaviour
                 }
             }
         }
-        var player = Managers.Game.player;
+        Vector2 player = Managers.Game.player.transform.position;
         Vector2 tower = new Vector2();
         if (!Managers.Game.isKeepingTower)
             tower = Managers.Game.tower.gameObject.transform.position;
@@ -81,8 +88,10 @@ public class DataManager : MonoBehaviour
             Amount = amount,
             Hp = stat.Hp,
             Hunger = stat.Hunger,
-            PlayerLocation = player.gameObject.transform.position,
-            TowerLocation = tower
+            PlayerLocationX = player.x,
+            PlayerLocationY = player.y,
+            TowerLocationX = tower.x,
+            TowerLocationY = tower.y
         };
 
         var json = JsonConvert.SerializeObject(datas, Formatting.None, new JsonSerializerSettings()
@@ -143,11 +152,12 @@ public class DataManager : MonoBehaviour
         stat = Managers.Game.player.GetComponent<PlayerStat>();
         stat.Hp = datas.Hp;
         stat.Hunger = datas.Hunger;
-        stat.gameObject.transform.position = datas.PlayerLocation;
+        stat.gameObject.transform.position = new Vector2(datas.PlayerLocationX,datas.PlayerLocationY);
         if (!Managers.Game.isKeepingTower)
-            Managers.Game.tower.gameObject.transform.position = datas.TowerLocation;
+            Managers.Game.tower.gameObject.transform.position = new Vector2(datas.PlayerLocationX, datas.PlayerLocationY);
 
         var hotBarSlot = Managers.Inven.hotBarSlotInfo;
+        Debug.Log(stat.gameObject.transform.position);
         var invenSlot = Managers.Inven.inventorySlotInfo;
 
         for (int i = 0; i < 4; i++)
