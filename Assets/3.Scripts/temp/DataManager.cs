@@ -157,7 +157,6 @@ public class DataManager : MonoBehaviour
             Managers.Game.tower.gameObject.transform.position = new Vector2(datas.PlayerLocationX, datas.PlayerLocationY);
 
         var hotBarSlot = Managers.Inven.hotBarSlotInfo;
-        Debug.Log(stat.gameObject.transform.position);
         var invenSlot = Managers.Inven.inventorySlotInfo;
 
         for (int i = 0; i < 4; i++)
