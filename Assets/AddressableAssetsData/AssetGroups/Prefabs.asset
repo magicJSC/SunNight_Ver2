@@ -92,11 +92,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2fa26846a9b78c3438ba62991ff8aadd
-    m_Address: UI/UI_GamePlay
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c058501afad36f44c861ebbb42318bab
     m_Address: Assets/1.Asset/Audio/TypingSound.mp3
     m_ReadOnly: 0

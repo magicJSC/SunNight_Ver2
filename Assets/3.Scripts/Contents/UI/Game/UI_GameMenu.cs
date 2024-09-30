@@ -9,8 +9,12 @@ public class UI_GameMenu : UI_Base
     GameObject continueButton;
     GameObject main;
 
+    Animator anim;
+
     public override void Init()
     {
+        anim = GetComponent<Animator>();
+
         continueButton = Util.FindChild(gameObject, "Continue", true);
         main = Util.FindChild(gameObject, "Main", true);
 
@@ -18,7 +22,7 @@ public class UI_GameMenu : UI_Base
         evt._OnClick += (PointerEventData p) => { Close(); };
 
         evt = main.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { Time.timeScale = 1; Managers.Data.Save(); SceneManager.LoadScene("MainScene");  };
+        evt._OnClick += (PointerEventData p) => { Time.timeScale = 1; Managers.Data.Save(); anim.Play("MainScene");  };
 
         Close();
     }
@@ -39,5 +43,10 @@ public class UI_GameMenu : UI_Base
     {
         Time.timeScale = 1;
         gameObject.SetActive(false);
+    }
+
+    public void MainScene()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }
