@@ -7,17 +7,25 @@ using UnityEngine.UI;
 public class UI_Time : UI_Base
 {
     Text timeText;
+    Text dayText;
 
     public static Animator anim;
 
     public override void Init()
     {
-        timeText = Util.FindChild(gameObject,"Time",true).GetComponent<Text>();
+        timeText = Util.FindChild<Text>(gameObject,"Time",true);
+        dayText = Util.FindChild<Text>(gameObject,"Day",true);
 
         TimeController.nightEvent += ShowBattleSign;
         TimeController.timeEvent += SetTimeText;
+        TimeController.dayEvent += SetDayText;
 
         anim = GetComponent<Animator>();
+    }
+
+    void SetDayText(int day)
+    {
+        dayText.text = $"Day : {day}";
     }
 
     void SetTimeText(float time)

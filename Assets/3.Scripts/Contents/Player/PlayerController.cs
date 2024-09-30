@@ -156,8 +156,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
             Managers.Game.build.BuildItem();
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent<Item_Pick>(out var item))
         {

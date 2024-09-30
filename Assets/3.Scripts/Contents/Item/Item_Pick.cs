@@ -24,8 +24,11 @@ public class Item_Pick : Item
 
     int count = 1;
 
+    Rigidbody2D rigid;
+
     private void Start()
     {
+        rigid = GetComponent<Rigidbody2D>();
         GetCountText();
         countText.text = $"{count}";
         SetCountText();
@@ -37,7 +40,21 @@ public class Item_Pick : Item
         {
             sound = clip.Result;
         };
+        StartCoroutine(StopSelf());
+        Destroy(gameObject, 60);
     }
+
+    IEnumerator StopSelf()
+    {
+        while(true) 
+        {
+            if(rigid.velocity != Vector2.zero)
+            {
+                Vector2.Lerp(rigid.velocity,Vector2.zero,0.1f);
+            }
+        }
+    }
+    
 
     public void DestroyThis()
     {

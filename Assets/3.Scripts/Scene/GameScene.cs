@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameScene : BaseScene
 {
-    public GameObject openingStory;
+    GameObject monsterSpawner;
 
     protected override bool Init()
     {
@@ -28,16 +29,16 @@ public class GameScene : BaseScene
         Managers.Game.player.Init();
         Managers.Data.Init();
 
-
-
-        //if (!Managers.Game.isOpeningStory)
-        //{
-        //    Instantiate(openingStory);
-        //    Managers.Game.isOpeningStory = true;
-        //}
         return true;
     }
 
+    private void OnDisable()
+    {
+        TimeController.morningEvent = null;
+        TimeController.nightEvent = null;
+        TimeController.timeEvent = null;
+        TimeController.dayEvent = null;
+    }
 
     void InstantiateOrLoad()
     {
@@ -48,6 +49,7 @@ public class GameScene : BaseScene
         Managers.Game.build = Instantiate(Resources.Load<GameObject>("Prefabs/Builder")).GetComponent<BuildController>();
         Managers.Game.tower = Instantiate(Resources.Load<GameObject>("Prefabs/Tower")).GetComponent<TowerController>();
         Managers.Game.player = Instantiate(Resources.Load<GameObject>("Prefabs/Player")).GetComponent<PlayerController>();
+        Instantiate(Resources.Load<GameObject>("Prefabs/NightMonsterSpawner"));
     }
 
     void SetActions()

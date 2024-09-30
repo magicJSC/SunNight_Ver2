@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeController : BaseController
+public class TimeController : MonoBehaviour
 {
     public static Action tutorialEvent;
     public static Action<float> timeEvent;
+    public static Action<int> dayEvent;
     public static Action morningEvent;
     public static Action nightEvent;
-    public static Action battleEvent;
 
     public AudioClip morningAudio;
     public AudioClip nightAudio;
@@ -20,12 +20,12 @@ public class TimeController : BaseController
 
     static bool init = false;
 
+    public static int day = 0;
 
     public enum TimeType
     {
         Morning,
         Night,
-        Battle
     }
 
     public static TimeType timeType { get { return _timeType; }
@@ -34,32 +34,28 @@ public class TimeController : BaseController
             _timeType = value;
 
             if (_timeType == TimeType.Morning)
-                morningEvent?.Invoke();
-            else if (_timeType == TimeType.Battle)
             {
-                battleEvent?.Invoke();
+                morningEvent?.Invoke();
+                day++;
+                dayEvent.Invoke(day);
+            }
+            else if (_timeType == TimeType.Night)
+            {
                 nightEvent?.Invoke();
             }
         }
     }
     static TimeType _timeType = TimeType.Morning;
 
-    protected override void Init()
+    public void Start()
     {
-        SetMorningBGM();
         TimeAmount = 360;
         morningEvent += SetMorningBGM;
         nightEvent += SetNightBGM;
         StartCoroutine(StartTime());
     }
 
-    private void OnDisable()
-    {
-        morningEvent = null;
-        nightEvent = null;
-        battleEvent = null;
-        timeEvent = null;
-    }
+    
 
     IEnumerator StartTime()
     {
@@ -67,17 +63,16 @@ public class TimeController : BaseController
         {
             TimeAmount += Time.deltaTime * timeSpeed;
             if (TimeAmount >= 1080 && timeType == TimeType.Morning)
-                timeType = TimeType.Battle;
-            else if (TimeAmount >= 360 && TimeAmount < 1080 && timeType == TimeType.Night)
-            {
-                timeType = TimeType.Morning;
-            }
-            else if (TimeAmount >= 1440 && timeType == TimeType.Battle)
             {
                 timeType = TimeType.Night;
                 if (!Managers.Game.completeTutorial)
                     tutorialEvent.Invoke();
             }
+            else if (TimeAmount >= 360 && TimeAmount < 1080 && timeType == TimeType.Night)
+            {
+                timeType = TimeType.Morning;
+            }
+           
             if (TimeAmount >= 1440)
                 TimeAmount = 0;
             yield return null;
