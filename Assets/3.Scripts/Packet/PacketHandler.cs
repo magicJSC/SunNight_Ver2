@@ -47,6 +47,14 @@ class PacketHandler
         ServerSession serverSession = session as ServerSession;
     }
 
+    public static void CChatHandler(ServerSession session, IMessage packet)
+    {
+        C_CHAT chatPacket = packet as C_CHAT;
+        ServerSession serverSession = session as ServerSession;
+
+        Debug.Log(chatPacket.Msg);
+    }
+
     public static void SChatHandler(PacketSession session, IMessage packet)
     {
         S_CHAT chatPacket = packet as S_CHAT;
@@ -54,4 +62,5 @@ class PacketHandler
 
         Debug.Log(chatPacket.Msg);
     }
+
 }
