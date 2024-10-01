@@ -142,6 +142,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d254d92b97ac77442bb6c2c7e5e4aeee
+    m_Address: Prefabs/NavMesh
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9a368fece3badaa408b73453d1be7c74, type: 2}
   m_SchemaSet:

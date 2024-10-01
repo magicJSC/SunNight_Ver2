@@ -1,9 +1,11 @@
+using NavMeshPlus.Components;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
 
 public interface IFly
@@ -18,6 +20,8 @@ public interface IWalk
 
 public class MonsterController : MonoBehaviour, IMonster
 {
+    public AssetReferenceGameObject navMeshAsset;
+
     public Action<GameObject> dieEvent;
 
     [Header("아이템 드랍")]
@@ -34,6 +38,9 @@ public class MonsterController : MonoBehaviour, IMonster
     public List<Transform> targetList = new List<Transform>();
 
     NavMeshAgent agent;
+    NavMeshSurface navMesh;
+
+    Vector2 navMeshPos;
 
     protected Animator anim;
 
@@ -93,10 +100,18 @@ public class MonsterController : MonoBehaviour, IMonster
         agent.updateUpAxis = false;
         agent.speed = stat.Speed;
 
+        navMeshAsset.LoadAssetAsync().Completed += (obj) =>
+        {
+            navMesh = Instantiate(obj.Result).GetComponent<NavMeshSurface>();
+            navMesh.size = new Vector3(stat.lookRange,stat.lookRange);
+            navMeshPos = navMesh.transform.position;
+            navMesh.BuildNavMesh();
+            agent.enabled = false;
+        };
+
         curAtkCool = stat.attackCool;
         StartCoroutine(UpdateCor());
     }
-
 
     IEnumerator UpdateCor()
     {
@@ -179,14 +194,21 @@ public class MonsterController : MonoBehaviour, IMonster
             return;
         }
 
+        if((transform.position - navMesh.transform.position).magnitude >= stat.lookRange / 1.5f)
+        {
+            navMesh.transform.position = transform.position;
+            //navMesh.BuildNavMesh();
+        }
         CheckObstacle();
 
         if (agent != null && agent.isActiveAndEnabled)
         {
-            if (!agent.SetDestination(target.transform.position))
-            {
-                Destroy(gameObject);
-            }
+
+            agent.SetDestination(target.transform.position);
+            //if (!agent.SetDestination(target.transform.position))
+            //{
+            //    Destroy(gameObject);
+            //}
         }
         if ((target.transform.position - transform.position).magnitude < stat.attackRange)
             State = Define.State.Idle;
@@ -242,5 +264,11 @@ public class MonsterController : MonoBehaviour, IMonster
         Managers.Inven.Coin += coin;
         dieEvent?.Invoke(gameObject);
         Destroy(gameObject);
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position,8);
     }
 }

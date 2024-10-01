@@ -90,7 +90,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
         if (dir != Vector2.zero)
         {
             if (!Managers.Game.completeTutorial)
-                tutorial1Event.Invoke();
+                tutorial1Event?.Invoke();
 
             anim.Play("Move");
             if (dir.x != 0)

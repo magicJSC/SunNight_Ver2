@@ -1,1 +1,10 @@
-{"items":["Coal",null,null,"Iron",null,null,null,null,null,null,null,null,"IronOre",null,null,null,null,null,null,"Furnance",null,null,null,null,"Fence","Cannon","Sword",null],"amount":[4,0,0,1,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,1,0,0,0,0,7,3,1,0],"hp":100,"hunger":27.3982582,"playerLocationX":-68.08786,"playerLocationY":103.162193,"towerLocationX":0.0,"towerLocationY":0.0}
+{
+  "items": [ "Coal", null, null, "Iron", null, null, null, null, null, null, null, null, "IronOre", null, null, null, null, null, null, "Furnance", null, null, null, null, "Fence", "Cannon", "Sword", null ],
+  "amount": [ 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 6, 3, 1, 0 ],
+  "hp": 100,
+  "hunger": 25.0514622,
+  "playerLocationX": -14.8,
+  "playerLocationY": 6.06001949,
+  "towerLocationX": 0.0,
+  "towerLocationY": 0.0
+}

@@ -19,12 +19,4 @@ public class Close_Monster : MonsterController,IWalk
             }
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        if (target == null)
-            return;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(transform.position + (target.position - transform.position) / 2, new Vector2(stat.attackRange, stat.attackRange));
-    }
 }

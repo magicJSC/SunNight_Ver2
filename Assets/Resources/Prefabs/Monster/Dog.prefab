@@ -202,6 +202,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a9c6c13f2ff23e4d81be86ab7d91001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshAsset:
+    m_AssetGUID: d254d92b97ac77442bb6c2c7e5e4aeee
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   luck: 40
   meat: {fileID: 11400000, guid: 1e8a1a00c16e47b4aaf86b1d2532639b, type: 2}
   coin: 50
