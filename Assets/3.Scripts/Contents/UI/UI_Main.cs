@@ -38,7 +38,6 @@ public class UI_Main : UI_Base
         optionText = option.GetComponentInChildren<Text>();
         exitText = exit.GetComponentInChildren<Text>();
 
-
         UI_EventHandler evt = start.GetComponent<UI_EventHandler>();
         evt._OnClick += (PointerEventData p)=> { anim.Play("GamePlay"); Managers.Sound.Play(Define.Sound.Effect, clickSound); };
         evt._OnEnter += (PointerEventData p) => { startText.color = Color.red; Managers.Sound.Play(Define.Sound.Effect, enterSound); };
