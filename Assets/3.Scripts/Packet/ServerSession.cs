@@ -88,7 +88,7 @@ public class ServerSession : PacketSession
             case PacketId.PktCChat:
                 C_CHAT cChatPkt = new C_CHAT();
                 cChatPkt.MergeFrom(buffer.Array, buffer.Offset + 4, buffer.Count - 4);
-                PacketHandler.SChatHandler(this, cChatPkt);
+                PacketHandler.CChatHandler(this, cChatPkt);
                 break;
             case PacketId.PktSChat:
                 S_CHAT sChatPkt = new S_CHAT();
