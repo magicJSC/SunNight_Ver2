@@ -84,5 +84,19 @@ public class TrashFileController : MonoBehaviour,IInteractObject
             num += getItemList[i].probability;
         }
         canFind = false;
+        HideInteractSign();
+    }
+
+    public void ShowInteractSign()
+    {
+        if (!canFind)
+            return;
+
+        canInteractSign.SetActive(true);
+    }
+
+    public void HideInteractSign()
+    {
+        canInteractSign.SetActive(false);
     }
 }

@@ -6,6 +6,9 @@ using UnityEngine;
 public interface IInteractObject
 {
     public GameObject canInteractSign { get; }
+
+    public void ShowInteractSign();
+    public void HideInteractSign();
     public void Interact();
 }
 

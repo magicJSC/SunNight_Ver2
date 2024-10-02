@@ -66,4 +66,14 @@ public class FurnanceController : MonoBehaviour, IInteractObject
             return;
         smeltUI.gameObject.SetActive(true);
     }
+
+    public void ShowInteractSign()
+    {
+        canInteractSign.SetActive(true);
+    }
+
+    public void HideInteractSign()
+    {
+        canInteractSign.SetActive(false);
+    }
 }

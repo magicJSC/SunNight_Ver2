@@ -40,7 +40,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
     Animator anim;
     SpriteRenderer sprite;
 
-    public List<BaseBuffGiver> buffList { get => new(); }
+    public List<BaseBuffGiver> buffList { get; private set; }
 
     public void Init()
     {
@@ -64,6 +64,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
             GameObject go = Managers.UI.ShowUI(obj.Result);
             GetComponent<PopUICloser>().gameMenuUI = go;
         };
+        buffList = new List<BaseBuffGiver>();
         miniMapAsset.InstantiateAsync();
         StartCoroutine(Move());
     }
@@ -76,6 +77,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
         stat.Hp = stat.maxHP;
         Camera.main.transform.parent = transform;
         Camera.main.transform.position = Camera.main.transform.parent.position + new Vector3(0, 0, -10);
+        dir = Vector2.zero;
         StartCoroutine(Move());
         StartCoroutine(UpdateBuff());
         if (toolParent.transform.GetChild(0) != null)
@@ -136,24 +138,18 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
             else if (Vector2.Distance(canInteractObj.transform.position, transform.position) > Vector2.Distance(interactObjectList[i].transform.position, transform.position))
                 canInteractObj = interactObjectList[i];
 
-            interactObjectList[i].GetComponent<IInteractObject>().canInteractSign.SetActive(false);
+            interactObjectList[i].GetComponent<IInteractObject>().HideInteractSign();
         }
         if (canInteractObj)
-            canInteractObj.GetComponent<IInteractObject>().canInteractSign.SetActive(true);
+            canInteractObj.GetComponent<IInteractObject>().ShowInteractSign();
     }
 
-    void OnBuild()
+    public void OnBuild()
     {
         if (Managers.Game.isHandleUI)
             return;
 
-        if (Managers.Inven.choicingTower && Managers.Game.isKeepingTower)
-        {
-            if (Managers.Game.canBuild)
-                Managers.Game.build.BuildTower();
-        }
-        else
-            Managers.Game.build.BuildItem();
+        Managers.Game.build.BuildItem();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -226,8 +222,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
 
     public void GetBuff(BaseBuffGiver buff)
     {
-        if(!buff.buffSO.noCool)
-         buffList.Add(buff);
+        buffList.Add(buff);
         for(int i = 0;i < buff.buffSO.buffList.Count; i++)
         {
             switch (buff.buffSO.buffList[i].buffType)
@@ -241,7 +236,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
             }
         }
     }
-
+    
     public void StopBuff(BaseBuffGiver buff)
     {
         for (int i = 0; i < buffList.Count; i++)
@@ -256,5 +251,6 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
                     break;
             }
         }
+        buffList.Remove(buff);
     }
 }

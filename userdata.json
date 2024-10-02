@@ -1,6 +1,6 @@
 {
-  "items": [ "Coal", null, null, "Iron", null, null, null, null, null, null, null, null, "IronOre", null, null, null, null, null, null, "Furnance", null, null, null, null, "Fence", "Cannon", "Sword", null ],
-  "amount": [ 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 6, 3, 1, 0 ],
+  "items": [ "Coal", null, null, "Iron", null, null, null, null, null, null, null, null, "IronOre", null, null, null, null, null, null, "Furnance", null, null, null, null, "Fence", "Cannon", "Sword", null, null ],
+  "amount": [ 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 6, 3, 1, 0, 0 ],
   "hp": 100,
   "hunger": 25.0514622,
   "playerLocationX": -14.8,

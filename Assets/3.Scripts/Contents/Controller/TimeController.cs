@@ -45,16 +45,19 @@ public class TimeController : MonoBehaviour
             }
         }
     }
-    static TimeType _timeType = TimeType.Morning;
+    static TimeType _timeType = TimeType.Night;
 
     public void Start()
     {
         TimeAmount = 360;
-        morningEvent += SetMorningBGM;
-        nightEvent += SetNightBGM;
         StartCoroutine(StartTime());
     }
 
+    public void SetAction()
+    {
+        morningEvent += SetMorningBGM;
+        nightEvent += SetNightBGM;
+    }
     
 
     IEnumerator StartTime()

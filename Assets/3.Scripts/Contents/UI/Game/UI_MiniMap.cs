@@ -25,13 +25,21 @@ public class UI_MiniMap : MonoBehaviour
         while (true)
         {
             yield return null;
-            if (tower == null || player == null || Managers.Game.isKeepingTower || (Mathf.Abs(tower.transform.position.y) - Mathf.Abs(player.transform.position.y) < 7 && Mathf.Abs(tower.transform.position.x) - Mathf.Abs(player.transform.position.x) < 10))
+            if(towerSign.gameObject.activeSelf)
             {
-                towerSign.gameObject.SetActive(false);
-                continue;
+                if (tower == null || player == null || (Mathf.Max(tower.transform.position.y, player.transform.position.y) - Mathf.Min(tower.transform.position.y, player.transform.position.y) < 6 || (Mathf.Max(tower.transform.position.x, player.transform.position.x) - Mathf.Min(tower.transform.position.x, player.transform.position.x) < 10)))
+                {
+                    towerSign.gameObject.SetActive(false);
+                    continue;
+                }
             }
             else
-                towerSign.gameObject.SetActive(true);
+            {
+                if ((Mathf.Max(tower.transform.position.y, player.transform.position.y) - Mathf.Min(tower.transform.position.y, player.transform.position.y) > 6 && (Mathf.Max(tower.transform.position.x, player.transform.position.x) - Mathf.Min(tower.transform.position.x, player.transform.position.x) > 10)))
+                {
+                      towerSign.gameObject.SetActive(true);
+                }
+            }
 
             float angle = Mathf.Atan2(tower.position.y - player.position.y,tower.position.x - player.position.x) * Mathf.Rad2Deg;
             arrowSign.rotation = Quaternion.Euler(0,0,angle);
