@@ -40,8 +40,6 @@ public class MonsterController : MonoBehaviour, IMonster
     NavMeshAgent agent;
     NavMeshSurface navMesh;
 
-    Vector2 navMeshPos;
-
     protected Animator anim;
 
     public Define.State State
@@ -103,8 +101,7 @@ public class MonsterController : MonoBehaviour, IMonster
         navMeshAsset.LoadAssetAsync().Completed += (obj) =>
         {
             navMesh = Instantiate(obj.Result).GetComponent<NavMeshSurface>();
-            navMesh.size = new Vector3(stat.lookRange,stat.lookRange);
-            navMeshPos = navMesh.transform.position;
+            navMesh.size = new Vector3(stat.lookRange * 2,10,stat.lookRange * 2);
             navMesh.BuildNavMesh();
             agent.enabled = false;
         };
@@ -196,8 +193,7 @@ public class MonsterController : MonoBehaviour, IMonster
 
         if((transform.position - navMesh.transform.position).magnitude >= stat.lookRange / 1.5f)
         {
-            navMesh.transform.position = transform.position;
-            //navMesh.BuildNavMesh();
+            navMesh.transform.position = (Vector2)transform.position;
         }
         CheckObstacle();
 
@@ -205,10 +201,6 @@ public class MonsterController : MonoBehaviour, IMonster
         {
 
             agent.SetDestination(target.transform.position);
-            //if (!agent.SetDestination(target.transform.position))
-            //{
-            //    Destroy(gameObject);
-            //}
         }
         if ((target.transform.position - transform.position).magnitude < stat.attackRange)
             State = Define.State.Idle;

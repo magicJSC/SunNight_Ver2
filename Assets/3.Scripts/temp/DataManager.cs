@@ -33,8 +33,8 @@ public class DataManager : MonoBehaviour
 
     string path = @"userdata.json";
 
-    string[] items = new string[28];
-    int[] amount = new int[28];
+    string[] items = new string[29];
+    int[] amount = new int[29];
 
     Dictionary<string, ItemSO> dic = new();
 
@@ -159,7 +159,7 @@ public class DataManager : MonoBehaviour
         var hotBarSlot = Managers.Inven.hotBarSlotInfo;
         var invenSlot = Managers.Inven.inventorySlotInfo;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
             Managers.Inven.hotBarSlotInfo[i] = new SlotInfo(0);
         for (int i = 0; i < 24; i++)
             Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);

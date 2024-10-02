@@ -73,4 +73,14 @@ public class GraveStoneController : MonoBehaviour,IInteractObject
         else
             Debug.Log("인벤이 차서 가져갈수 없습니다");
     }
+
+    public void ShowInteractSign()
+    {
+        canInteractSign.SetActive(true);
+    }
+
+    public void HideInteractSign()
+    {
+        canInteractSign.SetActive(true);
+    }
 }

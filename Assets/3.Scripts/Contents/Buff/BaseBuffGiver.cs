@@ -30,6 +30,6 @@ public class BaseBuffGiver : MonoBehaviour
     public void StopBuff()
     {
         transform.parent.TryGetComponent<IBuffReciever>(out var buffReciever);
-        buffReciever.StopBuff(this);
+          buffReciever.StopBuff(this);
     }
 }

@@ -15,6 +15,8 @@ public class UI_HotBar : UI_Base
     [HideInInspector]
     public UI_TowerSlot towerSlot;
     Image choice;
+
+    RectTransform choiceRect;
     GameObject grid;
 
     int choiceIndex = -1;
@@ -25,6 +27,7 @@ public class UI_HotBar : UI_Base
         _init = true;
         choice = Util.FindChild(gameObject, "Choice", true).GetComponent<Image>();
         grid = Util.FindChild(gameObject, "Grid", true);
+        choiceRect = choice.GetComponent<RectTransform>();
 
         MakeKeys();
     }
@@ -77,7 +80,7 @@ public class UI_HotBar : UI_Base
         {
             towerSlotAsset.LoadAssetAsync().Completed += (obj) =>
             {
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     UI_HotbarSlot hotBarSlot = Instantiate(slot.Result, grid.transform).GetComponent<UI_HotbarSlot>();
                     slotList[i] = hotBarSlot;
@@ -85,15 +88,9 @@ public class UI_HotBar : UI_Base
                     slotList[i].itemUI.slotInfo = Managers.Inven.hotBarSlotInfo[i];
                     hotBarSlot.GetComponentInChildren<UI_Item>().Init();
                 }
-                towerSlot = Instantiate(obj.Result, grid.transform).GetComponent<UI_TowerSlot>();
-                towerSlot.Init();
                 ChangeChoice(0);
 
-                Managers.Game.isKeepingTower = true;
                 Managers.Inven.hotBarUI.CheckChoice();
-                Managers.Inven.hotBarUI.towerSlot.ShowTowerIcon();
-                Managers.Game.tower.transform.SetParent(Managers.Game.build.transform);
-                Managers.Game.tower.transform.position = Managers.Game.build.transform.position;
             };
         };
         
@@ -112,7 +109,7 @@ public class UI_HotBar : UI_Base
         if (!Managers.Game.completeTutorial)
             tutorialEvent.Invoke(); 
         choiceIndex = change;
-        choice.GetComponent<RectTransform>().anchoredPosition = new Vector2(-305 + change * 135, -475);
+        choiceRect.anchoredPosition = new Vector2(-305 + change * 135, -475);
 
         Managers.Inven.choiceIndex = change;
         CheckChoice();
@@ -120,15 +117,7 @@ public class UI_HotBar : UI_Base
 
     public void CheckChoice()
     {
-        bool choiceTower = choiceIndex == 4;
-        if (!choiceTower)
-            Managers.Inven.CheckHotBarChoice();
-        else
-            Managers.Inven.CheckHotBarTowerSlot();
-
-        Managers.Inven.choicingTower = choiceTower;
-        if (Managers.Game.isKeepingTower)
-            Managers.Game.tower.gameObject.SetActive(choiceTower);
+        Managers.Inven.CheckHotBarChoice();
     }
 
    

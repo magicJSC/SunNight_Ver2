@@ -7,6 +7,8 @@ public class GameScene : BaseScene
 {
     GameObject monsterSpawner;
 
+    TimeController timeController;
+
     protected override bool Init()
     {
         if (base.Init() == false)
@@ -15,8 +17,8 @@ public class GameScene : BaseScene
         Managers.Game.isKeepingTower = false;
         PlayerController.isDie = false;
         Managers.Game.completeTutorial = true;
-        //TimeController.timeSpeed = 1.2f;
-        TimeController.timeSpeed = 20;
+        TimeController.timeSpeed = 1.2f;
+        //TimeController.timeSpeed = 20;
         Managers.UI.PopUIList.Clear();
 
         InstantiateOrLoad();
@@ -43,7 +45,7 @@ public class GameScene : BaseScene
 
     void InstantiateOrLoad()
     {
-        Instantiate(Resources.Load<GameObject>("UI/UI_Time"));
+        timeController = Instantiate(Resources.Load<GameObject>("UI/UI_Time")).GetComponent<TimeController>();
         Managers.Game.lightController = Instantiate(Resources.Load<GameObject>("Prefabs/Light")).GetComponent<LightController>();
         Managers.Game.grid = FindObjectOfType<MapManager>();
         Managers.Game.mouse = Instantiate(Resources.Load<GameObject>("Prefabs/MouseController").GetComponent<MouseController>());
@@ -55,7 +57,7 @@ public class GameScene : BaseScene
 
     void SetActions()
     {
-        Managers.Game.tower.SetAction();
         Managers.Game.build.SetAction();
+        timeController.SetAction();
     }
 }

@@ -64,6 +64,14 @@ public class BonFireController : MonoBehaviour, IInteractObject
         else
             countText.text = "";
     }
-    
 
+    public void ShowInteractSign()
+    {
+        canInteractSign.SetActive(true);
+    }
+
+    public void HideInteractSign()
+    {
+        canInteractSign.SetActive(false);
+    }
 }

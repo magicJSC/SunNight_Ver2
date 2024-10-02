@@ -98,26 +98,6 @@ public class StorageManager : MonoBehaviour
         }
     }
 
-    public void CheckHotBarTowerSlot()
-    {
-        if (Managers.Game.weapon != null)
-            Destroy(Managers.Game.weapon);
-
-        if (!Managers.Game.isKeepingTower)
-        {
-            Managers.Game.mouse.CursorType = CursorType.Normal;
-            hotBarUI.towerSlot.HideTowerIcon();
-            Managers.Game.tower.AfterInstallTower();
-        }
-        else
-        {
-            Managers.Game.build.buildItemIcon.gameObject.SetActive(false);
-            Managers.Game.build.gridSign.size = new Vector2(2, 2);
-            Managers.Game.mouse.CursorType = CursorType.Builder;
-            Managers.Game.tower.BeforeInstallTower();
-        }
-    }
-
     public bool AddOneItem(ItemSO item)
     {
         if (item.itemType != ItemType.Tool)   //재료 아이템일때

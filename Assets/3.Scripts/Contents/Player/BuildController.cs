@@ -59,55 +59,16 @@ public class BuildController : MonoBehaviour
         if (buildItemIcon == null)
             return;
 
-        if (!Managers.Inven.choicingTower)
+        if (Managers.Map.CheckCanUseTile(new Vector3Int((int)(mousePosition.x), (int)(mousePosition.y), 0)))
         {
-            if (Managers.Map.CheckCanUseTile(new Vector3Int((int)(mousePosition.x), (int)(mousePosition.y), 0)))
-            {
-                buildItemIcon.color = new Color(1, 1, 1, 0.6f);
-            }
-            else
-            {
-                buildItemIcon.color = new Color(1, 0.5f, 0.5f, 0.6f);
-            }
+            buildItemIcon.color = new Color(1, 1, 1, 0.6f);
         }
         else
         {
-            if (!Managers.Game.isKeepingTower)
-                return;
-            Vector2 tower = Managers.Game.tower.transform.position;
-            for (int x = -1; x <= 1; x++)
-            {
-                for (int y = -1; y <= 1; y++)
-                {
-                    if (MapManager.cantBuild.HasTile(new Vector3Int((int)(tower.x + x), (int)(tower.y + y), 0)))
-                    {
-                        Managers.Game.canBuild = false;
-                        Managers.Game.tower.transform.GetComponent<TowerController>().CantInstallTower();
-                         return;
-                    }
-                }
-            }
-            for (int i = 0; i < MapManager.buildData.Count; i++)
-            {
-                if (MapManager.cantBuild.HasTile(MapManager.buildData[i] + new Vector3Int((int)tower.x, (int)tower.y, 0)))
-                {
-                    Managers.Game.canBuild = false;
-                    Managers.Game.tower.transform.GetComponent<TowerController>().CantInstallTower();
-                    return;
-                }
-            }
-            Managers.Game.canBuild = true;
-            Managers.Game.tower.GetComponent<TowerController>().BeforeInstallTower();
+            buildItemIcon.color = new Color(1, 0.5f, 0.5f, 0.6f);
         }
     }
 
-    public void BuildTower()
-    {
-        Managers.Game.tower.transform.parent = null;
-        Managers.Game.isKeepingTower = false;
-        Managers.Inven.hotBarUI.CheckChoice();
-
-    }
 
     public void BuildItem()
     {
