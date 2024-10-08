@@ -34,13 +34,13 @@ public class MapManager : MonoBehaviour
         if (Managers.Game.tower == null)
             return false;
         Vector2 towerPos = Managers.Game.tower.transform.position;
-        if (building.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))
+        if (building.HasTile(pos))
             return false;
-        else if (tower.HasTile(new Vector3Int(pos.x - (int)towerPos.x, pos.y - (int)towerPos.y)))
+        else if (tower.HasTile(pos))
             return false;
         else if (cantBuild.HasTile(pos))
             return false;
-        else if ((pos - new Vector3Int((int)towerPos.x, (int)towerPos.y)) == Vector3Int.zero)
+        else if ((pos == Vector3Int.zero))
             return false;
 
         return true;

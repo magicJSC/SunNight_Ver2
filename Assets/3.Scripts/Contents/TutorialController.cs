@@ -8,144 +8,104 @@ public class TutorialController : MonoBehaviour
 {
     public AssetReferenceT<AudioClip> completeSoundAsset;
 
-    public ItemSO cannon;
-    public GameObject monsterSpawner;
-
     AudioClip completeSound;
 
-    GameObject timeController;
+    public static GameObject timeController;
 
-    int tutorialIndex = 0;
+    GameObject moveHelp;
+    GameObject invenHelp;
+    GameObject interactHelp;
+    GameObject produceHelp;
 
-    List<GameObject> tutorialList = new List<GameObject>();
+    GameObject interactHelpWall;
+    GameObject invenHelpWall;
 
     private void Start()
     {
-
         Transform tutorialUI = Util.FindChild<Transform>(gameObject, "UI_Tutorial", true);
-        for(int i = 0; i < tutorialUI.childCount; i++)
-        {
-            tutorialList.Add(tutorialUI.GetChild(i).gameObject);
-        }
-        tutorialList[0].SetActive(true);
+
+        moveHelp = Util.FindChild(gameObject, "Move", true);
+        invenHelp = Util.FindChild(gameObject, "Inventory", true);
+        interactHelp = Util.FindChild(gameObject, "Interact", true);
+        produceHelp = Util.FindChild(gameObject, "Produce", true);
+        interactHelpWall = Util.FindChild(gameObject, "InteractHelpWall");
+        invenHelpWall = Util.FindChild(gameObject, "InvenHelpWall");
+
+        invenHelp.SetActive(false);
+        interactHelp.SetActive(false);
+        produceHelp.SetActive(false);
 
         PlayerController.tutorial1Event = Move;
-        PlayerController.tutorial2Event = Pick;
         UI_Inventory.tutorial1Event = Inventory;
-        UI_Inventory.tutorial2Event = Produce1;
-        UI_Produce.tutorialEvent = Produce2;
-        TowerController.tutorial1Event = MoveTower;
-        UI_HotBar.tutorialEvent = ChoiceHotBar;
-        TowerController.tutorial2Event = InstallTower;
-        BuildController.tutorialEvent = InstallBuildItem;
-        TimeController.tutorialEvent = Survive;
-        TowerController.tutorial3Event = Sleep;
+        CanInteractChecker.interactCheckerEvent = ShowInteractHelp;
+        TrashPileController.interactEvent = Interact;
+        //UI_Inventory.tutorial2Event = Produce1;
+        //UI_Produce.tutorialEvent = Produce2;
+        //TowerController.tutorial1Event = MoveTower;
+        //UI_HotBar.tutorialEvent = ChoiceHotBar;
+        //TowerController.tutorial2Event = InstallTower;
+        //BuildController.tutorialEvent = InstallBuildItem;
+        //TimeController.tutorialEvent = Survive;
+        //TowerController.tutorial3Event = Sleep;
 
         completeSoundAsset.LoadAssetAsync().Completed += (clip) =>
         {
             completeSound = clip.Result;
         };
-
-        timeController = (GameObject)Instantiate(Resources.Load("UI/UI_Time"));
-        timeController.SetActive(false);
-        monsterSpawner.SetActive(false);
     }
 
     void Move()
     {
-        if(tutorialIndex == 0)
-            Clear();
+        if (moveHelp.activeSelf)
+            Clear(moveHelp, invenHelp);
+        else
+            return;
+
+        PlayerController.tutorial1Event = null;
     }
 
-    void Pick()
+    void ShowInteractHelp()
     {
-        if (tutorialIndex == 1)
-            Clear();
+        interactHelp.SetActive(true);
+    }
+
+    void Interact()
+    {
+        if (interactHelp.activeSelf)
+            Clear(interactHelp, produceHelp);
+        else
+            return;
+
+        CanInteractChecker.interactCheckerEvent = null;
+        TrashPileController.interactEvent = null;
+        Destroy(interactHelpWall);
     }
 
     void Inventory()
     {
-        if (tutorialIndex == 2)
-            Clear();
+        if (invenHelp.activeSelf)
+            Clear(invenHelp, produceHelp);
+        else
+            return;
+
+        UI_Inventory.tutorial1Event = null;
+        Destroy(invenHelpWall);
     }
 
-    void Produce1()
-    {
-        if (tutorialIndex == 3)
-            Clear();
-    }
 
-    void Produce2()
-    {
-        if (tutorialIndex == 4)
-            Clear();
-    }
+    
 
-    void MoveTower()
+    void Clear(GameObject currentHelp,GameObject nextHelp)
     {
-        if (tutorialIndex == 5)
-            Clear();
-    }
-
-    void ChoiceHotBar()
-    {
-        if (tutorialIndex == 6)
-        {
-            Clear();
-        }
-    }
-
-    void InstallTower()
-    {
-        if (tutorialIndex == 7)
-        {
-            Clear();
-            Managers.Inven.AddOneItem(cannon);
-        }
-    }
-
-    void InstallBuildItem()
-    {
-        if (tutorialIndex == 8)
-        {
-            Clear();
-            timeController.SetActive(true);
-            monsterSpawner.SetActive(true);
-            TimeController.timeSpeed = 15;
-        }
-    }
-
-    void Survive()
-    {
-        if (tutorialIndex == 9)
-        {
-            Clear();
-            TimeController.timeSpeed = 0;
-        }
-    }
-
-    void Sleep()
-    {
-        if (tutorialIndex == 10)
-        {
-            Clear();
-
-            GetComponent<Animator>().Play("End");
-        }
-    }
-
-    void Clear()
-    {
-        tutorialIndex++;
-        tutorialList[tutorialIndex - 1].GetComponent<Animator>().Play("Hide");
+        currentHelp.GetComponent<Animator>().Play("Hide");
         Managers.Sound.Play(Define.Sound.Effect, completeSound);
-        StartCoroutine(Next());
+        //StartCoroutine(Next(nextHelp));
     }
 
-    public IEnumerator Next()
+    public IEnumerator Next(GameObject nextHelp)
     {
         yield return new WaitForSeconds(1.5f);
-        tutorialList[tutorialIndex].SetActive(true);
+        nextHelp.SetActive(true);
     }
 
     void End()

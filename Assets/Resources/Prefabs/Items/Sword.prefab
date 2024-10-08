@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8000275495142118774}
   - component: {fileID: 4333762963981403954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1638512547782497891}
   - component: {fileID: 7149648164200156556}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

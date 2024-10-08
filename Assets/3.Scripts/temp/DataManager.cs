@@ -154,7 +154,7 @@ public class DataManager : MonoBehaviour
         stat.Hunger = datas.Hunger;
         stat.gameObject.transform.position = new Vector2(datas.PlayerLocationX,datas.PlayerLocationY);
         if (!Managers.Game.isKeepingTower)
-            Managers.Game.tower.gameObject.transform.position = new Vector2(datas.PlayerLocationX, datas.PlayerLocationY);
+            Managers.Game.tower.gameObject.transform.position = new Vector2(datas.TowerLocationX, datas.TowerLocationY);
 
         var hotBarSlot = Managers.Inven.hotBarSlotInfo;
         var invenSlot = Managers.Inven.inventorySlotInfo;

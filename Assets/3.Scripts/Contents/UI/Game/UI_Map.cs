@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UI_Map : MonoBehaviour
-{ 
-    private void Start()
+{
+    public GameObject[] towerSpot;
+
+    public void OnEnable()
     {
-        
+        for(int i = 0;i < towerSpot.Length; i++)
+        {
+            towerSpot[i].gameObject.SetActive(Managers.Game.isUnlockTowerPos[i]);
+        }
     }
 }

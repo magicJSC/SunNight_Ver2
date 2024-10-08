@@ -2,32 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.Playables;
+using UnityEngine.UI;
 
 public class BaseTimeline : MonoBehaviour
 {
-    [SerializeField]
-    AudioClip clip;
+    [SerializeField] float skipTime;
+    float curTime = 0;
 
-    RectTransform skip;
+    bool cancel = false;
+
+    Image skipGauge;
+    GameObject skipUI;
 
     private void Start()
     {
-        skip = Util.FindChild<RectTransform>(gameObject, "Skip", true);
-        UI_EventHandler evt = skip.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => EndTimeline();
-        evt._OnEnter += (PointerEventData p) => { skip.sizeDelta = new Vector3(200,200); };
-        evt._OnExit += (PointerEventData p) => { skip.sizeDelta = new Vector3(130,130); };
+        skipGauge = Util.FindChild<Image>(gameObject, "SkipGauge",true);
+        skipUI = Util.FindChild(gameObject, "SkipUI", true);
+        skipUI.SetActive(false);
     }
 
     public void StartTimeline()
     {
-        Time.timeScale = 0;
+        Managers.Game.isCantPlay = true;
     }
 
     public void EndTimeline()
     {
-        Time.timeScale = 1;
-        Managers.Sound.Play(Define.Sound.Bgm,clip);
-        Destroy(gameObject);
+        Managers.Game.isCantPlay = false;
+    }
+
+    public void ActionSkip(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            skipUI.SetActive(true);
+            cancel = false;
+            StartCoroutine(FillSkipGauge());
+        }
+        else if(context.canceled)
+        {
+            cancel = true;
+            curTime = 0;
+            SetGauge();
+            skipUI.SetActive(false);
+        }
+    }
+
+    IEnumerator FillSkipGauge()
+    {
+        while (curTime < skipTime)
+        {
+            yield return null;
+            if (cancel)
+                yield break;
+            curTime += Time.deltaTime;
+            SetGauge();
+        }
+        Skip();
+    }
+
+    void SetGauge()
+    {
+        skipGauge.fillAmount = curTime / skipTime;
+    }
+
+    void Skip()
+    {
+        EndTimeline();
+       Destroy(gameObject);
     }
 }

@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 938186424891672818}
   - component: {fileID: 359639060667376291}
   - component: {fileID: 6850915976471593024}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Coala
   m_TagString: Untagged
   m_Icon: {fileID: 0}

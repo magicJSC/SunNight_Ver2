@@ -113,8 +113,8 @@ GameObject:
   - component: {fileID: 7924660273021586972}
   - component: {fileID: 8546981842108451853}
   - component: {fileID: 2681134758017424783}
-  - component: {fileID: 9172983123310737036}
   - component: {fileID: -1886937468793660057}
+  - component: {fileID: 3825259387474322961}
   m_Layer: 0
   m_Name: Iron
   m_TagString: Untagged
@@ -132,7 +132,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.905025, y: 3.9667664, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1583506518540320817}
@@ -219,7 +219,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -235,19 +235,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1.15}
   m_EdgeRadius: 0
---- !u!114 &9172983123310737036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 75889190033888497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6066a4a4a83f9c43a8d3b930c947a03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemSo: {fileID: 11400000, guid: 8e58cbffd25e9414fb81859dc04e7c89, type: 2}
 --- !u!50 &-1886937468793660057
 Rigidbody2D:
   serializedVersion: 4
@@ -275,6 +262,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3825259387474322961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75889190033888497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a23427672fc6c247a02a431a6c39f5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSo: {fileID: 11400000, guid: 8e58cbffd25e9414fb81859dc04e7c89, type: 2}
+  effectAsset:
+    m_AssetGUID: 37bf83344e0915a4d970ec8995dc3fb5
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  soundAsset:
+    m_AssetGUID: d3611e9ee2658cf4a99c4a0ecd6e2985
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  countText: {fileID: 0}
 --- !u!1 &8708263712816673707
 GameObject:
   m_ObjectHideFlags: 0

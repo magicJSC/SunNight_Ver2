@@ -24,7 +24,6 @@ public class BuildController : MonoBehaviour
     public void SetAction()
     {
         Managers.Inven.hotBarEvent += GetBuildItemInfo;
-
     }
 
     private void OnEnable()
@@ -51,15 +50,16 @@ public class BuildController : MonoBehaviour
 
     public void MoveBuilder()
     {
+        if (Managers.Game.isCantPlay)
+            return;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition = new Vector2(Mathf.Round(mousePosition.x), Mathf.Round(mousePosition.y));
-        transform.position = mousePosition;
-
+        Vector3Int gridPostion = MapManager.building.WorldToCell(mousePosition);
+        transform.position = MapManager.building.CellToWorld(gridPostion);
 
         if (buildItemIcon == null)
             return;
 
-        if (Managers.Map.CheckCanUseTile(new Vector3Int((int)(mousePosition.x), (int)(mousePosition.y), 0)))
+        if (Managers.Map.CheckCanUseTile(gridPostion))
         {
             buildItemIcon.color = new Color(1, 1, 1, 0.6f);
         }
@@ -72,19 +72,18 @@ public class BuildController : MonoBehaviour
 
     public void BuildItem()
     {
-        Vector2 tower = Managers.Game.tower.transform.position; //기지 위치 받아오기
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition = new Vector2(Mathf.Round(mousePosition.x), Mathf.Round(mousePosition.y));
-        if (Managers.Map.CheckCanUseTile(new Vector3Int((int)(mousePosition.x), (int)(mousePosition.y), 0)))
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3Int gridPostion = MapManager.building.WorldToCell(mousePosition);
+        if (Managers.Map.CheckCanUseTile(gridPostion))
         {
             if (!gameObject.activeSelf)
                 return;
 
             if (!Managers.Game.completeTutorial)
-                tutorialEvent.Invoke();
+                tutorialEvent?.Invoke();
             if (itemUI == null)
                 return;
-            MapManager.building.SetTile(new Vector3Int((int)(transform.position.x - tower.x), (int)(transform.position.y - tower.y), 0), itemUI.slotInfo.itemInfo.buildTile); 
+            MapManager.building.SetTile(gridPostion, itemUI.slotInfo.itemInfo.buildTile); 
             itemUI.slotInfo.count--;
             if (itemUI.slotInfo.count <= 0)
             {
@@ -97,9 +96,8 @@ public class BuildController : MonoBehaviour
         }
         else
         {
-            Vector3Int pos = new Vector3Int((int)(mousePosition.x), (int)(mousePosition.y), 0);
-            if (MapManager.building.HasTile(new Vector3Int(pos.x - (int)tower.x, pos.y - (int)tower.y)))
-                Managers.Map.ShowBuildUI(new Vector3Int(pos.x - (int)tower.x, pos.y - (int)tower.y));
+            if (MapManager.building.HasTile(gridPostion))
+                Managers.Map.ShowBuildUI(gridPostion);
         }
     }
 

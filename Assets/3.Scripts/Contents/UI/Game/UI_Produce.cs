@@ -162,7 +162,7 @@ public class UI_Produce : UI_Base
     {
         float x = Mathf.Clamp(backR.anchoredPosition.x, -665, 665);
         float y = Mathf.Clamp(backR.anchoredPosition.y, -135, 135);
-        back.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+        backR.anchoredPosition = new Vector2(x, y);
     }
 
     public void Set_ToMake(ToMakeItem toMakeItem)

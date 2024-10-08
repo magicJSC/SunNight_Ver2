@@ -19,11 +19,15 @@ public class UI_PlayerStat : UI_Base
         hpImage = Util.FindChild<Image>(gameObject, "HP", true);
         hungerImage = Util.FindChild<Image>(gameObject, "Hunger", true);
 
+        GetComponent<Canvas>().worldCamera = Camera.main;
+
         anim = GetComponent<Animator>();
         playerStat = GetComponentInParent<PlayerStat>();
         playerStat.hpBarEvent += SetHpBar;
         playerStat.hungerBarEvent += SetHungerBar;
         playerStat.damageEvent += GetDamageEffect;
+
+        playerStat.Hp = playerStat.maxHP;
     }
 
     void GetDamageEffect()

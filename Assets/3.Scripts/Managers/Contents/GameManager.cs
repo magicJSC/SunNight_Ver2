@@ -22,9 +22,16 @@ public class GameManager : MonoBehaviour
 
     public bool isOpeningStory = false;
     public bool canBuild;
+    public bool isCantPlay;
+
+    public bool[] isUnlockTowerPos = new bool[6];
+
 
     public void SpawnItem(ItemSO item,int amount,Vector2 pos)
     {
-        Instantiate(item.itemPrefab, pos, Quaternion.identity).GetComponent<Item_Pick>().Count = amount;
+        if (item.itemPrefab != null)
+            Instantiate(item.itemPrefab, pos, Quaternion.identity).GetComponent<Item_Pick>().Count = amount;
+        else
+            Managers.Inven.AddOneItem(item);
     }
 }

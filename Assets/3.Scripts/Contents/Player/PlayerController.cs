@@ -7,10 +7,9 @@ using UnityEngine.InputSystem;
 
 
 
-public class PlayerController : CreatureController, IPlayer, IBuffReciever
+public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMonsterTarget
 {
     public static Action tutorial1Event;
-    public static Action tutorial2Event;
     public Action escEvent;
 
     PlayerStat stat;
@@ -66,6 +65,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
         };
         buffList = new List<BaseBuffGiver>();
         miniMapAsset.InstantiateAsync();
+
         StartCoroutine(Move());
     }
 
@@ -73,12 +73,12 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
     {
         if (!init)
             return;
+        StartCoroutine(Move());
         isDie = false;
         stat.Hp = stat.maxHP;
         Camera.main.transform.parent = transform;
         Camera.main.transform.position = Camera.main.transform.parent.position + new Vector3(0, 0, -10);
         dir = Vector2.zero;
-        StartCoroutine(Move());
         StartCoroutine(UpdateBuff());
         if (toolParent.transform.GetChild(0) != null)
             Destroy(toolParent.transform.GetChild(0).gameObject);
@@ -87,12 +87,17 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
 
     void OnMove(InputValue value)
     {
-        dir = value.Get<Vector2>();
+        if (Managers.Game.isCantPlay)
+        {
+            anim.Play("Idle");
+            dir = Vector2.zero;
+            return;
+        }
+         dir = value.Get<Vector2>();
 
         if (dir != Vector2.zero)
         {
-            if (!Managers.Game.completeTutorial)
-                tutorial1Event?.Invoke();
+            tutorial1Event?.Invoke();
 
             anim.Play("Move");
             if (dir.x != 0)
@@ -106,20 +111,27 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
     {
         while (true)
         {
-            rigid.velocity = dir * stat.Speed;
+            if (!Managers.Game.isCantPlay)
+                rigid.velocity = dir * stat.Speed;
+            else
+                rigid.velocity = Vector2.zero;
             yield return null;
         }
     }
 
     void OnShowInventory()
     {
-        if (Time.timeScale == 0)
+        if (Managers.Game.isCantPlay)
+            return;
+            if (Time.timeScale == 0)
             return;
         Managers.Inven.inventoryUI.gameObject.SetActive(!Managers.Inven.inventoryUI.gameObject.activeSelf);
     }
 
     void OnInteract()
     {
+        if (Managers.Game.isCantPlay)
+            return;
         if (Time.timeScale == 0)
             return;
         if (!canInteractObj)
@@ -146,6 +158,8 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
 
     public void OnBuild()
     {
+        if (Managers.Game.isCantPlay)
+            return;
         if (Managers.Game.isHandleUI)
             return;
 
@@ -158,9 +172,6 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
         {
             if (Managers.Inven.AddItems(item.itemSo, item.Count))
             {
-                if (!Managers.Game.completeTutorial)
-                    tutorial2Event.Invoke();
-
                 item.DestroyThis();
             }
         }
@@ -252,5 +263,6 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever
             }
         }
         buffList.Remove(buff);
+        Destroy(buff.gameObject);
     }
 }

@@ -13,8 +13,8 @@ public class Item_Pick : Item
     public AssetReferenceT<AudioClip> soundAsset;
 
 
-    AudioClip sound;
-    GameObject effect;  
+    static AudioClip sound;
+    static GameObject effect;  
 
     [HideInInspector]
     public Text countText;
@@ -32,14 +32,20 @@ public class Item_Pick : Item
         GetCountText();
         countText.text = $"{count}";
         SetCountText();
-        effectAsset.LoadAssetAsync().Completed += (obj) =>
+        if (effect == null)
         {
-            effect = obj.Result;
-        };
-        soundAsset.LoadAssetAsync().Completed += (clip) =>
+            effectAsset.LoadAssetAsync().Completed += (obj) =>
+            {
+                effect = obj.Result;
+            };
+        }
+        if (soundAsset == null)
         {
-            sound = clip.Result;
-        };
+            soundAsset.LoadAssetAsync().Completed += (clip) =>
+            {
+                sound = clip.Result;
+            };
+        }
         StartCoroutine(StopSelf());
         Destroy(gameObject, 60);
     }
@@ -48,6 +54,7 @@ public class Item_Pick : Item
     {
         while(true) 
         {
+            yield return null;
             if(rigid.velocity != Vector2.zero)
             {
                 Vector2.Lerp(rigid.velocity,Vector2.zero,0.1f);
@@ -58,9 +65,11 @@ public class Item_Pick : Item
 
     public void DestroyThis()
     {
-        Instantiate(effect,transform.position, Quaternion.identity);
+        if(effect != null)
+            Instantiate(effect,transform.position, Quaternion.identity);
         Destroy(gameObject);
-        Managers.Sound.Play(Define.Sound.Effect, sound);
+        if (sound != null)
+            Managers.Sound.Play(Define.Sound.Effect, sound);
     }
 
     void SetCountText()

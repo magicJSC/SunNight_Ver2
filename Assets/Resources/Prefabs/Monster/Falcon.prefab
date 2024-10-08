@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8147673388963610845}
   - component: {fileID: 2438407941585000864}
   - component: {fileID: 7211939703519072772}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Falcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

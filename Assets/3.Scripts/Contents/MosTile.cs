@@ -30,7 +30,7 @@ public class MosTile : MonoBehaviour
     {
         if (collision.TryGetComponent<IBuffReciever>(out var reciever))
         {
-            Destroy(mosBuff);
+            mosBuff.SetActive(false);
         }
     }
 }

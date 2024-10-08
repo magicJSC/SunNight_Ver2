@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IMonsterTarget
+{
+
+}
+
 public class MonsterTargetChekcer : MonoBehaviour
 {
     MonsterController monsterController;
@@ -18,13 +23,13 @@ public class MonsterTargetChekcer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<IGetDamage>() != null && collision.GetComponent<IMonster>() == null)
+        if (collision.GetComponent<IMonsterTarget>() != null)
             monsterController.targetList.Add(collision.transform);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<IGetDamage>() != null && collision.GetComponent<IMonster>() == null)
+        if (collision.GetComponent<IMonsterTarget>() != null)
             monsterController.targetList.Remove(collision.transform);
 
         monsterController.target = monsterController.SetTarget();
