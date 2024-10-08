@@ -8,15 +8,16 @@ public class Dialog
 {
     public string Massage;
     public float PausePerLetter;
-    public AudioClip PerLetterSound;
     public bool Timeline;
     public string Name;
+    public Sprite Profill;
 }
 
 public class DialogAnimator : MonoBehaviour
 {
     [SerializeField] Text dialogText;
     [SerializeField] Text nameText;
+    [SerializeField] Image profillImage;
 
     
 
@@ -32,6 +33,7 @@ public class DialogAnimator : MonoBehaviour
     {
         dialogText.text = "";
         dialogMassage = "";
+        profillImage.sprite = dialog.Profill;
         int index = 0;
         bool isColor = false;
         while (index < dialog.Massage.Length)
@@ -59,7 +61,6 @@ public class DialogAnimator : MonoBehaviour
                 }
             }
             index++;
-            Managers.Sound.Play(Define.Sound.Effect, dialog.PerLetterSound);
             yield return new WaitForSecondsRealtime(dialog.PausePerLetter);
         }
     }

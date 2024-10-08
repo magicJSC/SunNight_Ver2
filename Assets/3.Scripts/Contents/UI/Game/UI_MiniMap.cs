@@ -10,6 +10,11 @@ public class UI_MiniMap : MonoBehaviour
     Transform tower;
     Transform player;
 
+    private void Awake()
+    {
+        GetComponent<Canvas>().worldCamera = Camera.main;
+    }
+
     private void Start()
     {
         towerSign = Util.FindChild<RectTransform>(gameObject,"TowerSign",true);

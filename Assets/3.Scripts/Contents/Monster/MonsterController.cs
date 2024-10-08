@@ -102,6 +102,7 @@ public class MonsterController : MonoBehaviour, IMonster
         {
             navMesh = Instantiate(obj.Result).GetComponent<NavMeshSurface>();
             navMesh.size = new Vector3(stat.lookRange * 2,10,stat.lookRange * 2);
+            navMesh.transform.position = transform.position;
             navMesh.BuildNavMesh();
             agent.enabled = false;
         };
@@ -194,6 +195,7 @@ public class MonsterController : MonoBehaviour, IMonster
         if((transform.position - navMesh.transform.position).magnitude >= stat.lookRange / 1.5f)
         {
             navMesh.transform.position = (Vector2)transform.position;
+            navMesh.BuildNavMesh();
         }
         CheckObstacle();
 

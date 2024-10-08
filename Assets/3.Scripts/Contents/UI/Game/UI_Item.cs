@@ -66,7 +66,7 @@ public class UI_Item : UI_Base
         {
             if (p.pointerDrag.transform.parent.GetComponentInParent<IDragable>() != null)
                 return;
-            transform.position = Input.mousePosition;
+            transform.position = new Vector3(Camera.main.ScreenToWorldPoint(p.position).x, Camera.main.ScreenToWorldPoint(p.position).y);
         };
         evt._OnEndDrag += (PointerEventData p) =>
         {

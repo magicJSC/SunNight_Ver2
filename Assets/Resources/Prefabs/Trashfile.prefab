@@ -573,13 +573,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   getItemList:
-  - item: {fileID: 11400000, guid: fc67ba33656a8ed4fa9615139f4afaf7, type: 2}
-    count: 3
-    probability: 10
-  - item: {fileID: 11400000, guid: 209835d44adc74944aec8c3a71c90dd7, type: 2}
+  - item: {fileID: 11400000, guid: f42bb57683464b14c8b19fb9aedf4a0f, type: 2}
     count: 1
-    probability: 90
-  coolTime: 4
+    probability: 100
+  coolTime: 3
 --- !u!1 &7628283092370583312
 GameObject:
   m_ObjectHideFlags: 0

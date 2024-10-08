@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CanInteractChecker : MonoBehaviour,ICheckCanInteract
 {
+    public static Action interactCheckerEvent;
     
     IInteractObject interactObject;
 
@@ -27,8 +29,10 @@ public class CanInteractChecker : MonoBehaviour,ICheckCanInteract
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.TryGetComponent<PlayerController>(out var player))
         {
+            interactCheckerEvent?.Invoke();
             EnterPlayer(player);
         }
     }

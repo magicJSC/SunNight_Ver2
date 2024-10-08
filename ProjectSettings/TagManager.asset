@@ -11,14 +11,14 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Character
   - Bullet
   - Arrange
   - MonsterTarget
   - MapObject
   - Map
-  - 
-  - 
+  - CutScene
+  - Outline
   - 
   - 
   - 
@@ -41,12 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Layer 1
+  - name: Background
     uniqueID: 2425651459
     locked: 0
-  - name: Layer 2
-    uniqueID: 4250941897
-    locked: 0
-  - name: Layer 3
-    uniqueID: 4189426099
+  - name: Deco
+    uniqueID: 3076842179
     locked: 0

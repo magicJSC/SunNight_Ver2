@@ -29,6 +29,8 @@ public class UI_HotBar : UI_Base
         grid = Util.FindChild(gameObject, "Grid", true);
         choiceRect = choice.GetComponent<RectTransform>();
 
+        GetComponent<Canvas>().worldCamera = Camera.main;
+
         MakeKeys();
     }
 
@@ -88,7 +90,10 @@ public class UI_HotBar : UI_Base
                     slotList[i].itemUI.slotInfo = Managers.Inven.hotBarSlotInfo[i];
                     hotBarSlot.GetComponentInChildren<UI_Item>().Init();
                 }
-                ChangeChoice(0);
+                choiceIndex = 0;
+                choiceRect.anchoredPosition = new Vector2(-305, -475);
+                Managers.Inven.choiceIndex = 0;
+                CheckChoice();
 
                 Managers.Inven.hotBarUI.CheckChoice();
             };
@@ -105,11 +110,12 @@ public class UI_HotBar : UI_Base
             return;
         if (choiceIndex == change)
             return;
-
-        if (!Managers.Game.completeTutorial)
-            tutorialEvent.Invoke(); 
+        if (Managers.Game.isCantPlay)
+            return;
         choiceIndex = change;
         choiceRect.anchoredPosition = new Vector2(-305 + change * 135, -475);
+
+
 
         Managers.Inven.choiceIndex = change;
         CheckChoice();

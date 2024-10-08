@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370e9dd3ff240cb41b6e203ce0cfac88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spotPostion: {x: 169, y: 868}
+  spotPostion: {x: 186, y: 816}
 --- !u!1 &177831599108762986
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370e9dd3ff240cb41b6e203ce0cfac88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spotPostion: {x: 0, y: 0}
+  spotPostion: {x: 962, y: 462}
 --- !u!1 &2145963778405413599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,7 +1116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370e9dd3ff240cb41b6e203ce0cfac88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spotPostion: {x: 0, y: 0}
+  spotPostion: {x: 49, y: 22}
 --- !u!1 &5009297258232084219
 GameObject:
   m_ObjectHideFlags: 0

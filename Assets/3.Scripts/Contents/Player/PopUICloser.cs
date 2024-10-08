@@ -9,6 +9,8 @@ public class PopUICloser : MonoBehaviour
     public void OnClosePopUI()
     {
         int count = Managers.UI.PopUIList.Count;
+        if (Managers.Game.isCantPlay)
+            return;
         if (count > 0)
         {
             Managers.UI.PopUIList[count - 1].SetActive(false);

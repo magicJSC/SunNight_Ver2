@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static StorageManager;
 
 public class UI_Inventory : UI_Base
 {
@@ -28,7 +27,7 @@ public class UI_Inventory : UI_Base
     GameObject hide;
     GameObject produce;
     [HideInInspector]
-    public GameObject back;
+    public RectTransform back;
     [HideInInspector]
     public GameObject explain;
     UI_Produce produceUI;
@@ -47,7 +46,7 @@ public class UI_Inventory : UI_Base
             return;
 
 
-        back = Util.FindChild(gameObject, "Background", true);
+        back = Util.FindChild<RectTransform>(gameObject, "Background", true);
         grid = Util.FindChild(gameObject, "Grid", true);
         hide = Util.FindChild(gameObject, "Hide", true);
         produce = Util.FindChild(gameObject, "Produce", true);
@@ -63,12 +62,16 @@ public class UI_Inventory : UI_Base
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
         evt._OnDrag += (PointerEventData p) =>
         {
-            back.transform.position =startPos+Input.mousePosition;
-            float x = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.x,-640,680);
-            float y = Mathf.Clamp(back.GetComponent<RectTransform>().anchoredPosition.y,-60,110);
-            back.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+            back.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(p.position).x + startPos.x, Camera.main.ScreenToWorldPoint(p.position).y + startPos.y);
+
+            float x = Mathf.Clamp(back.anchoredPosition.x,-640,680);
+            float y = Mathf.Clamp(back.anchoredPosition.y,-60,110);
+            back.anchoredPosition = new Vector2(x, y);
         };
-        evt._OnDown += (PointerEventData p) => { startPos = back.transform.position - Input.mousePosition; };
+        evt._OnDown += (PointerEventData p) =>
+        {
+            startPos = new Vector3(back.transform.position.x - Camera.main.ScreenToWorldPoint(p.position).x, back.transform.position.y - Camera.main.ScreenToWorldPoint(p.position).y);
+        };
         evt._OnEnter += (PointerEventData p) =>
         {
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
@@ -105,6 +108,8 @@ public class UI_Inventory : UI_Base
             hideSound = clip.Result;
         };
 
+        GetComponent<Canvas>().worldCamera = Camera.main;
+
         MakeKeys();
 
         SetCoin();
@@ -120,7 +125,7 @@ public class UI_Inventory : UI_Base
         if (_init)
         {
             if (!Managers.Game.completeTutorial)
-                tutorial1Event.Invoke();
+                tutorial1Event?.Invoke();
 
             Managers.Sound.Play(Define.Sound.Effect, showSound);
             Managers.UI.PopUIList.Add(gameObject);
@@ -175,7 +180,7 @@ public class UI_Inventory : UI_Base
         }
 
         if (!Managers.Game.completeTutorial)
-            tutorial2Event.Invoke();
+            tutorial2Event?.Invoke();
         produceUI.gameObject.SetActive(true);
         RectTransform r = produceUI.back.GetComponent<RectTransform>();
         RectTransform bb = back.GetComponent<RectTransform>();

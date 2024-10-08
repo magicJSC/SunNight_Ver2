@@ -22,7 +22,9 @@ public class UIManager : MonoBehaviour
     {
         inven = new GameObject();
         inven.name = "Inven";
-        inven.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+        inven.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+        inven.GetComponent<Canvas>().worldCamera = Camera.main;
+        inven.GetComponent<Canvas>().sortingOrder = 4;
         inven.transform.SetParent(Root.transform);
     }
 

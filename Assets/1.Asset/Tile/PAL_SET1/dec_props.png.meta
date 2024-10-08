@@ -144,69 +144,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dec_props_1
-      rect:
-        serializedVersion: 2
-        x: 229
-        y: 128
-        width: 22
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 72efd261bcc9a30419a88a71226ebfcd
-      internalID: 626672719
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dec_props_2
-      rect:
-        serializedVersion: 2
-        x: 260
-        y: 128
-        width: 28
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4a27162211797ed41b432086491ddc26
-      internalID: -1920679068
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dec_props_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 128
-        width: 28
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b136bce13c39e7c46a8e980319369313
-      internalID: -1483708205
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: dec_props_4
       rect:
         serializedVersion: 2
@@ -257,7 +194,7 @@ TextureImporter:
         width: 26
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -265,6 +202,27 @@ TextureImporter:
       bones: []
       spriteID: 4e3b45a9797c93647afdc3b76092e355
       internalID: -91640913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dec_props_7
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 263
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bba5b7c06cb8fd4499bfb6bc6d46d580
+      internalID: -265537228
       vertices: []
       indices: 
       edges: []

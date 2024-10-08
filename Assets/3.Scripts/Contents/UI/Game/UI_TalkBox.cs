@@ -6,67 +6,70 @@ using UnityEngine.UI;
 
 public class UI_TalkBox : MonoBehaviour
 {
-    public AssetReferenceT<AudioClip> typingSoundAsset;
+    public TalkSO talkSO;
 
-    AudioClip typingSound;
+    TalkSO.Talk talk;
 
-
-    [SerializeField]
     float delayTime;
-    float beforeDelayTime;
     Text talkText;
+    Text nameText;
+    Image profill;
 
     GameObject nextSign;
+
+    int talkIndex = 0;
 
     string talkString;
     int index = 0;
 
-    public void Bind()
+    public void Start()
     {
         talkText = Util.FindChild<Text>(gameObject, "TalkText", true);
+        nameText = Util.FindChild<Text>(gameObject, "NameText", true);
+        profill = Util.FindChild<Image>(gameObject, "Profill", true);
         nextSign = Util.FindChild(gameObject, "NextSign", true);
-        talkString = talkText.text;
-        beforeDelayTime = delayTime;
+        talk = talkSO.groups[0];
 
-        typingSoundAsset.LoadAssetAsync().Completed += (clip) =>
-        {
-            typingSound = clip.Result;
-        };
-        nextSign.SetActive(false);
+        StartCoroutine(TypingText());
     }
 
     public IEnumerator TypingText()
     {
         talkText.text = "";
-        gameObject.SetActive(true);
+        talkString = talk.talkText;
+        nameText.text = talk.nameText;
+        profill.sprite = talk.illust;
+        delayTime = talk.perTypingDelay;
+        nextSign.SetActive(false);
+        Managers.Game.isCantPlay = true;
+
         while (index < talkString.Length)
         {
             string s = talkString.Substring(index, 1);
             index++;
-            if (s == "%")   //전체띄우기(문장 앞에 띄울것)
+            talkText.text += s;
+            if(delayTime != 0)
+                yield return new WaitForSecondsRealtime(delayTime);
+        }
+        nextSign.SetActive(true);
+       
+    }
+
+    public void OnNextTalk()
+    {
+        if (nextSign.activeSelf)
+        {
+            if (talk.isFinish)
             {
-                delayTime = 0;
-            }
-            else if (s == "/")  //끝에 있을때 대화가 끝난다
-            {
-                break;
-            }
-            else if (s == "<")  //색깔이나 폰트나 글자 크기를 바꿀때 쓰는 꺽쇠
-            {
-                talkText.text += s;
-                delayTime = 0;
-            }
-            else if (s == ">")
-            {
-                talkText.text += s;
-                delayTime = beforeDelayTime;
+                Managers.Game.isCantPlay = false;
+                Destroy(gameObject);
+                return;
             }
             else
-                talkText.text += s;
-            Managers.Sound.Play(Define.Sound.Effect, typingSound);
-            yield return new WaitForSecondsRealtime(delayTime);
+            {
+                talk = talkSO.groups[talkIndex++];
+                StartCoroutine(TypingText());
+            }
         }
-        transform.GetComponentInParent<TalkController>().canNextTalk = true;
-        nextSign.SetActive(true);
     }
 }
