@@ -4,23 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Time : UI_Base
+public class UI_Time : MonoBehaviour
 {
     Text timeText;
     Text dayText;
 
     public static Animator anim;
 
-    public override void Init()
+    public void Init()
     {
         timeText = Util.FindChild<Text>(gameObject,"Time",true);
         dayText = Util.FindChild<Text>(gameObject,"Day",true);
 
+        GetComponent<Canvas>().worldCamera = Camera.main;
+
+       
+
+        anim = GetComponent<Animator>();
+    }
+
+    public void SetAction()
+    {
         TimeController.nightEvent += ShowBattleSign;
         TimeController.timeEvent += SetTimeText;
         TimeController.dayEvent += SetDayText;
-
-        anim = GetComponent<Animator>();
+        Init();
     }
 
     void SetDayText(int day)

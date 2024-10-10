@@ -5,10 +5,9 @@ using UnityEngine.Rendering.Universal;
 
 public class LightController : MonoBehaviour
 {
-    Light2D lights;
-
     Animator anim;
 
+    bool init;
     public void Start()
     {
         Init();
@@ -16,21 +15,34 @@ public class LightController : MonoBehaviour
 
     public void Init()
     {
-        lights = GetComponent<Light2D>();
-        lights.color = Color.white;
         anim = GetComponent<Animator>();
+    }
 
+    public void SetAction()
+    {
         TimeController.nightEvent += SetNight;
         TimeController.morningEvent += SetMorning;
     }
 
     public void SetNight()
     {
-        anim.Play("Night");
+        if(init)
+         anim.Play("Night");
+        else
+        {
+            init = true;
+            anim.Play("isNight");
+        }
     }
 
     public void SetMorning()
     {
-        anim.Play("Morning");
+        if (init)
+            anim.Play("Morning");
+        else
+        {
+            init = true;
+            anim.Play("isMorning");
+        }
     }
 }

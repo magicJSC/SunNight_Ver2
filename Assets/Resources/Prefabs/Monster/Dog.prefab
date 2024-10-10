@@ -227,7 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 50
   _defence: 5
-  _damage: 15
+  _damage: 5
   attackCool: 1.5
   attackRange: 3.5
   lookRange: 8

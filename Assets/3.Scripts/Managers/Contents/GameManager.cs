@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public BuildController build;
     public MouseController mouse;
     public MapManager grid;
+    public TimeController timeController;
    
     public LightController lightController;
 
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     public bool isOpeningStory = false;
     public bool canBuild;
     public bool isCantPlay;
+
+    public ChangeSceneEffecter changeSceneEffecter;
 
     public bool[] isUnlockTowerPos = new bool[6];
 

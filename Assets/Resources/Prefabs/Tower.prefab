@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 4335106695171314865}
   - component: {fileID: 8979357665540923787}
   - component: {fileID: 4317502921279271353}
+  - component: {fileID: 5893419872498237751}
   m_Layer: 6
   m_Name: Tower
   m_TagString: Untagged
@@ -192,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bdf76400c7b7304a9f164a458b4d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 3000
+  maxHP: 250
 --- !u!114 &4317502921279271353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +212,27 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+--- !u!95 &5893419872498237751
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4019757366945778683}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e4368aca51fb95e4299e644521aeca54, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5231550080572374259
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,11 +521,11 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - m_RefCount: 2
-    m_Data: {r: 0.9052361, g: 0.57082003, b: 0.6103555, a: 1}
+    m_Data: {r: 0.8996185, g: 0.47311524, b: 0.50779146, a: 1}
   - m_RefCount: 7
-    m_Data: {r: 0.9848077, g: 0.41448578, b: 0.54381955, a: 1}
+    m_Data: {r: 0.932994, g: 0.42594212, b: 0.47028866, a: 1}
   - m_RefCount: 0
-    m_Data: {r: 1.14601e-40, g: 1.14601e-40, b: 1.14601e-40, a: 1.14601e-40}
+    m_Data: {r: 1.12376e-40, g: 1.12376e-40, b: 1.12376e-40, a: 1.12376e-40}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 0}

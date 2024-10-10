@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,17 +6,15 @@ using UnityEngine.AddressableAssets;
 
 public class TowerPosUnLock : MonoBehaviour
 {
-    public AssetReferenceGameObject unlockTowerPosUIAsset;
+    public static Action unlockEvent;
 
-    GameObject unlockTowerPosUI;
+    Animator anim;
 
     private void Start()
     {
-        unlockTowerPosUIAsset.LoadAssetAsync().Completed += (obj) =>
-        {
-            unlockTowerPosUI = Instantiate(obj.Result);
-            unlockTowerPosUI.SetActive(false);
-        };
+        anim = GetComponent<Animator>();
+        if (Managers.Game.isUnlockTowerPos[index])
+            anim.Play("Unlock");
     }
 
     [SerializeField] int index;
@@ -26,7 +25,16 @@ public class TowerPosUnLock : MonoBehaviour
             return;
         if(collision.GetComponent<IPlayer>() != null)
         {
-            unlockTowerPosUI.SetActive(true);
+            if (!Managers.Game.completeTutorial)
+                unlockEvent?.Invoke();
+
+            Unlock();
         }
+    }
+    public void Unlock()
+    {
+      
+        Managers.Game.isUnlockTowerPos[index] = true;
+        anim.Play("Unlock");
     }
 }

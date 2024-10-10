@@ -9,33 +9,42 @@ using UnityEngine.UI;
 public class BaseTimeline : MonoBehaviour
 {
     [SerializeField] float skipTime;
+    [SerializeField] float endTime;
     float curTime = 0;
 
     bool cancel = false;
 
+    bool ispPlaying;
+
     Image skipGauge;
     GameObject skipUI;
+
+
 
     private void Start()
     {
         skipGauge = Util.FindChild<Image>(gameObject, "SkipGauge",true);
         skipUI = Util.FindChild(gameObject, "SkipUI", true);
-        skipUI.SetActive(false);
+        if(skipUI != null)
+            skipUI.SetActive(false);
     }
 
     public void StartTimeline()
     {
+        ispPlaying = true;
         Managers.Game.isCantPlay = true;
     }
 
     public void EndTimeline()
     {
+        ispPlaying = false;
+        Destroy(gameObject);
         Managers.Game.isCantPlay = false;
     }
 
     public void ActionSkip(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && ispPlaying)
         {
             skipUI.SetActive(true);
             cancel = false;
@@ -70,7 +79,6 @@ public class BaseTimeline : MonoBehaviour
 
     void Skip()
     {
-        EndTimeline();
-       Destroy(gameObject);
+        GetComponent<PlayableDirector>().time = endTime;
     }
 }

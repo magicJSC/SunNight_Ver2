@@ -9,6 +9,8 @@ public class TalkBoxTrigger : MonoBehaviour
 
     public AssetReferenceGameObject talkUIAsset;
 
+    public bool oneTime;
+
     GameObject talkUIPrefab;
 
     private void Start()
@@ -25,6 +27,8 @@ public class TalkBoxTrigger : MonoBehaviour
         if (collision.gameObject.GetComponent<IPlayer>() != null)
         {
             Instantiate(talkUIPrefab).GetComponent<UI_TalkBox>().talkSO = talkSO;
+            if(oneTime)
+                Destroy(gameObject);
         }
     }
 }

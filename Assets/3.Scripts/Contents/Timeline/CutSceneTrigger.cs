@@ -6,6 +6,7 @@ using UnityEngine.Playables;
 public class CutSceneTrigger : MonoBehaviour
 {
     [SerializeField] PlayableDirector director;
+    
 
     bool finishedPlay;
 

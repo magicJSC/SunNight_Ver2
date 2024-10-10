@@ -5,14 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class TowerController : MonoBehaviour,IGetDamage,IDie
 {
-    public static Action tutorial1Event;
-    public static Action tutorial2Event;
-    public static Action tutorial3Event;
     public Action forceInstallEvent;
-
-
-    LayerMask buildLayer;
-    LayerMask inviLayer;
 
     [HideInInspector]
     public Tilemap build;
@@ -27,10 +20,6 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie
         build = Util.FindChild(gameObject,"Building",true).GetComponent<Tilemap>();
         MapManager.building = build;
         MapManager.tower = Util.FindChild(gameObject,"Tower",true).GetComponent<Tilemap>();
-
-        inviLayer.value = 8;
-        buildLayer.value = 9;
-
         stat = GetComponent<Stat>();
     }
 
@@ -54,4 +43,5 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie
             Camera.main.transform.position = Camera.main.transform.parent.position + new Vector3(0, 0, -10);
         };
     }
+
 }

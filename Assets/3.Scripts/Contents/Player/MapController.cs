@@ -19,6 +19,7 @@ public class MapController : MonoBehaviour
 
     public void OnMap()
     {
-        mapUI.SetActive(!mapUI.activeSelf);
+        if(!Managers.Game.isCantPlay && Managers.Game.completeTutorial)
+            mapUI.SetActive(!mapUI.activeSelf);
     }
 }

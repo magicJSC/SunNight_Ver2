@@ -44,7 +44,6 @@ public class TrashPileController : MonoBehaviour,IInteractObject
 
     public void Interact()
     {
-
         if(canFind && !isFinding)
             StartCoroutine(FindItem());
     }

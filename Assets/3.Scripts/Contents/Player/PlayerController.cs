@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 
@@ -73,6 +74,11 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
     {
         if (!init)
             return;
+        if (!Managers.Game.completeTutorial)
+        {
+            SceneManager.LoadScene("TutorialScene");
+            return;
+        }
         StartCoroutine(Move());
         isDie = false;
         stat.Hp = stat.maxHP;
@@ -163,6 +169,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
         if (Managers.Game.isHandleUI)
             return;
 
+        if(Managers.Game.build != null)
         Managers.Game.build.BuildItem();
     }
 

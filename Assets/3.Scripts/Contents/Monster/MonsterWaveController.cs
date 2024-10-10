@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class NightMonsterSpawner : MonoBehaviour
+public class MonsterWaveController : MonoBehaviour
 {
+    public static Action surviveEvent;
+
     [SerializeField]
     float range;
 
@@ -32,14 +35,14 @@ public class NightMonsterSpawner : MonoBehaviour
 
     IEnumerator SpawnMonster()
     {
-        for(int i = 0; i < waveSO[TimeController.day].groups.Count; i++)
+        for(int i = 0; i < waveSO[TimeController.day - 1].groups.Count; i++)
         {
-            for(int j = 0;j < waveSO[TimeController.day].groups[i].count; j++)
+            for(int j = 0;j < waveSO[TimeController.day - 1].groups[i].count; j++)
             {
-                NightSpawn(waveSO[TimeController.day].groups[i].monster);
-                yield return new WaitForSeconds(waveSO[TimeController.day].groups[i].spawnDelay);
+                NightSpawn(waveSO[TimeController.day - 1].groups[i].monster);
+                yield return new WaitForSeconds(waveSO[TimeController.day - 1].groups[i].spawnDelay);
             }
-            yield return new WaitForSeconds(waveSO[TimeController.day].groups[i].groupDelay);
+            yield return new WaitForSeconds(waveSO[TimeController.day - 1].groups[i].groupDelay);
         }
     }
 
@@ -67,6 +70,7 @@ public class NightMonsterSpawner : MonoBehaviour
 
         MonsterController monster = Instantiate(monsterPrefab, spawnPos, Quaternion.identity).GetComponent<MonsterController>();
         monster.targetType = MonsterController.TargetType.Tower;
+        monList.Add(monster.gameObject);
         monster.dieEvent += RemoveMonster;
     }
 
@@ -75,7 +79,22 @@ public class NightMonsterSpawner : MonoBehaviour
         monList.Remove(monster);
         if(monList.Count == 0)
         {
-            Debug.Log("Wave ³¡");
+            StartCoroutine(ClearWave());
+           surviveEvent?.Invoke();
         }
+    }
+
+    IEnumerator ClearWave()
+    {
+        Managers.Game.changeSceneEffecter.StartChangeScene();
+        yield return new WaitForSeconds(3);
+        TimeController.day++;
+        TimeController.TimeAmount = 360;
+        Managers.Game.changeSceneEffecter.EndChangeScene();
+    }
+
+    void Reward()
+    {
+
     }
 }
