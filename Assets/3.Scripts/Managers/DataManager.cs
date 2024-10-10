@@ -107,19 +107,19 @@ public class DataManager : MonoBehaviour
 
         Debug.Log(json);
 
-        //if (!File.Exists(path))
-        //{
-        //    using (var file = File.Create("userdata.json"))
-        //        file.Write(Encoding.UTF8.GetBytes(json));
-        //}
-        //else
-        //{
-        //    var file = new FileStream(path, FileMode.Open);
-        //    file.Write(Encoding.UTF8.GetBytes(json));
-        //    file.Close();
-        //}
+        /*if (!File.Exists(path))
+        {
+            using (var file = File.Create("userdata.json"))
+                file.Write(Encoding.UTF8.GetBytes(json));
+        }
+        else
+        {
+            var file = new FileStream(path, FileMode.Open);
+            file.Write(Encoding.UTF8.GetBytes(json));
+            file.Close();
+        }*/
 
-        if(!Directory.Exists(path))
+        if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
         }
@@ -142,7 +142,7 @@ public class DataManager : MonoBehaviour
                 dic.Add(item.idName, item);
         }
 
-        if (!File.Exists(path))
+        /*if (!File.Exists(path))
             Debug.Log("userdata.json is not found.");
         else
         {
@@ -154,6 +154,17 @@ public class DataManager : MonoBehaviour
             Set();
 
             file.Close();
+        }*/
+
+        if(!File.Exists(path))
+        {
+            Debug.Log("userdata.json is not found.");
+        }
+        else
+        {
+            byte[] buffer = File.ReadAllBytes(path);
+            datas = JsonConvert.DeserializeObject<PlayerDatas>(Encoding.UTF8.GetString(buffer));
+            Set();
         }
     }
 
