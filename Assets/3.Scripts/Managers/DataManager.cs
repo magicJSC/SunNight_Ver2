@@ -142,18 +142,30 @@ public class DataManager : MonoBehaviour
                 dic.Add(item.idName, item);
         }
 
-        if (!File.Exists(path))
+        //if (!File.Exists(path))
+        //    Debug.Log("userdata.json is not found.");
+        //else
+        //{
+        //    var file = File.Open(path, FileMode.Open);
+        //    byte[] buffer = new byte[1024];
+        //    file.Read(buffer);
+        //    datas = JsonConvert.DeserializeObject<PlayerDatas>(Encoding.UTF8.GetString(buffer));
+
+        //    Set();
+
+        //    file.Close();
+        //}
+
+        if(!File.Exists(path))
+        {
             Debug.Log("userdata.json is not found.");
+        }
         else
         {
-            var file = File.Open(path, FileMode.Open);
-            byte[] buffer = new byte[1024];
-            file.Read(buffer);
+            byte[] buffer = File.ReadAllBytes(path);
             datas = JsonConvert.DeserializeObject<PlayerDatas>(Encoding.UTF8.GetString(buffer));
 
             Set();
-
-            file.Close();
         }
     }
 
