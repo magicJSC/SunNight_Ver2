@@ -23,6 +23,7 @@ public class TutorialController : MonoBehaviour
     GameObject unlockHelp;
     GameObject surviveHelp;
     GameObject buildHelp;
+    GameObject laborlatoryHelp;
 
     GameObject interactHelpWall;
     GameObject invenHelpWall;
@@ -44,6 +45,7 @@ public class TutorialController : MonoBehaviour
         findHelp = Util.FindChild(gameObject, "Find", true);
         surviveHelp = Util.FindChild(gameObject, "Survive", true);
         buildHelp = Util.FindChild(gameObject, "Build", true);
+        laborlatoryHelp = Util.FindChild(gameObject, "Laboratory", true);
         findHelpWall = Util.FindChild<TriggerEvent>(gameObject, "FindCut", true);
         interactHelpWall = Util.FindChild(gameObject, "InteractHelpWall",true);
         invenHelpWall = Util.FindChild(gameObject, "InvenHelpWall",true);
@@ -69,7 +71,8 @@ public class TutorialController : MonoBehaviour
         findHelp.SetActive(false);
         unlockHelp.SetActive(false);
         surviveHelp.SetActive(false);
-        buildHelp.SetActive(false); 
+        buildHelp.SetActive(false);
+        laborlatoryHelp.SetActive(false);
 
         BuildController.tutorialEvent = Build;
         MonsterWaveController.surviveEvent = Survive;
