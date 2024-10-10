@@ -31,7 +31,12 @@ public class DataManager : MonoBehaviour
     public static PlayerDatas datas = new PlayerDatas();
     public PlayerStat stat = new PlayerStat();
 
-    string path = @"userdata.json";
+    const string fileName = "userdata.json";
+#if UNITY_EDITOR
+    string path = Path.Combine(Application.dataPath + fileName);
+#else
+    string path = Path.Combine(Application.persistentDataPath + fileName);
+#endif
 
     string[] items = new string[29];
     int[] amount = new int[29];
@@ -39,7 +44,7 @@ public class DataManager : MonoBehaviour
     Dictionary<string, ItemSO> dic = new();
 
     public void Init() 
-    { 
+    {
         Load();
     }
 
@@ -102,16 +107,27 @@ public class DataManager : MonoBehaviour
 
         Debug.Log(json);
 
-        if (!File.Exists(path))
+        //if (!File.Exists(path))
+        //{
+        //    using (var file = File.Create("userdata.json"))
+        //        file.Write(Encoding.UTF8.GetBytes(json));
+        //}
+        //else
+        //{
+        //    var file = new FileStream(path, FileMode.Open);
+        //    file.Write(Encoding.UTF8.GetBytes(json));
+        //    file.Close();
+        //}
+
+        if(!Directory.Exists(path))
         {
-            using (var file = File.Create("userdata.json"))
-                file.Write(Encoding.UTF8.GetBytes(json));
+            Directory.CreateDirectory(path);
         }
         else
         {
-            var file = new FileStream(path, FileMode.Open);
-            file.Write(Encoding.UTF8.GetBytes(json));
-            file.Close();
+            string filePath = Path.Combine(path, fileName);
+            byte[] bytes = Encoding.UTF8.GetBytes(json);
+            File.WriteAllBytes(path, bytes);
         }
 
         Debug.Log("Complete to Save");
