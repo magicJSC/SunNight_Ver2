@@ -13,16 +13,16 @@ public class TowerPosUnLock : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        if (Managers.Game.isUnlockTowerPos[index])
-            anim.Play("Unlock");
+        //if (Managers.Game.isUnlockTowerPos[index])
+          //  anim.Play("Unlock");
     }
 
     [SerializeField] int index;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Managers.Game.isUnlockTowerPos[index])
-            return;
+        //if (Managers.Game.isUnlockTowerPos[index])
+         //   return;
         if(collision.GetComponent<IPlayer>() != null)
         {
             if (!Managers.Game.completeTutorial)

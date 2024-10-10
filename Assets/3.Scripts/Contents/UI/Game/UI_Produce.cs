@@ -191,7 +191,7 @@ public class UI_Produce : UI_Base
 
 
     //List -> item1 : 인벤 index, item2 : 필요 개수
-    Dictionary<ItemSO, List<UI_Item>> itemUIList = new();
+    Dictionary<string, List<UI_Item>> itemUIList = new();
     void OnProduce()
     {
         if (toMakeItem.materialList.Length == 0)
@@ -201,7 +201,7 @@ public class UI_Produce : UI_Base
         {
             for (int i = 0; i < toMakeItem.materialList.Length; i++)
             {
-                List<UI_Item> _itemUIList = itemUIList[toMakeItem.materialList[i].itemSO];
+                List<UI_Item> _itemUIList = itemUIList[toMakeItem.materialList[i].itemSO.itemName];
                 int count = toMakeItem.materialList[i].count;
                 for (int j = 0; j < _itemUIList.Count; j++)
                 {
@@ -238,7 +238,7 @@ public class UI_Produce : UI_Base
         {
             int count = 0;
             bool canProduce = false;
-            itemUIList.Add(toMakeItem.materialList[i].itemSO,new());
+            itemUIList.Add(toMakeItem.materialList[i].itemSO.itemName,new());
             for (int j = 0; j < 24; j++)
             {
                 if (canProduce)
@@ -250,7 +250,7 @@ public class UI_Produce : UI_Base
                 if (toMakeItem.materialList[i].itemSO.idName == itemUI.slotInfo.itemInfo.idName)
                 {
                     count += itemUI.slotInfo.count;
-                    itemUIList[itemUI.slotInfo.itemInfo].Add(itemUI);
+                    itemUIList[itemUI.slotInfo.itemInfo.itemName].Add(itemUI);
 
                     if (count >= toMakeItem.materialList[i].count)
                         canProduce =  true;
@@ -266,7 +266,7 @@ public class UI_Produce : UI_Base
                 if (toMakeItem.materialList[i].itemSO == itemUI.slotInfo.itemInfo)
                 {
                     count += itemUI.slotInfo.count;
-                    itemUIList[itemUI.slotInfo.itemInfo].Add(itemUI);
+                    itemUIList[itemUI.slotInfo.itemInfo.itemName].Add(itemUI);
 
                     if (count >= toMakeItem.materialList[i].count)
                         canProduce = true;
