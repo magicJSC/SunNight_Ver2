@@ -72,7 +72,7 @@ public class TutorialController : MonoBehaviour
         unlockHelp.SetActive(false);
         surviveHelp.SetActive(false);
         buildHelp.SetActive(false);
-        laborlatoryHelp.SetActive(false);
+        laborlatoryHelp.SetActive(false);   
 
         BuildController.tutorialEvent = Build;
         MonsterWaveController.surviveEvent = Survive;
@@ -101,7 +101,7 @@ public class TutorialController : MonoBehaviour
     void Interact()
     {
         if (interactHelp.activeSelf)
-            Clear(interactHelp);
+            Clear(interactHelp, produceHelp);
         else
             return;
 
@@ -128,7 +128,6 @@ public class TutorialController : MonoBehaviour
         else
             return;
         findHelpWall.triggerEvent = null;
-
     }
     void Unlock()
     {
@@ -160,7 +159,7 @@ public class TutorialController : MonoBehaviour
     void Produce()
     {
         if (produceHelp.activeSelf)
-            Clear(produceHelp,buildHelp);
+            Clear(produceHelp);
         else
             return;
 
