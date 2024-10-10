@@ -276,10 +276,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 70
   _defence: 7
-  _damage: 35
+  _damage: 5
   attackCool: 5
   attackRange: 2
-  lookRange: 10
+  lookRange: 7
   _speed: 3
 --- !u!1 &2363316927817470926
 GameObject:

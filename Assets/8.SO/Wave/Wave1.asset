@@ -17,4 +17,14 @@ MonoBehaviour:
       type: 3}
     count: 4
     spawnDelay: 1
+    groupDelay: 5
+  - monster: {fileID: 702318616690200231, guid: d6864f6af7a89b048876f1948823d8a9,
+      type: 3}
+    count: 2
+    spawnDelay: 1
+    groupDelay: 6
+  - monster: {fileID: 1893510008698799187, guid: 540c2004c3883ca49a315fdcf9a6e156,
+      type: 3}
+    count: 3
+    spawnDelay: 1
     groupDelay: 0

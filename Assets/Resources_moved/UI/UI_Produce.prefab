@@ -819,7 +819,7 @@ MonoBehaviour:
   - toMakeItemSO: {fileID: 11400000, guid: 8622e0bd8b84c174da889dcd9bb92917, type: 2}
     materialList:
     - itemSO: {fileID: 11400000, guid: 209835d44adc74944aec8c3a71c90dd7, type: 2}
-      count: 2
+      count: 1
   - toMakeItemSO: {fileID: 11400000, guid: d2508dddc87dd3c42b6498ef10ad4247, type: 2}
     materialList:
     - itemSO: {fileID: 11400000, guid: 8e58cbffd25e9414fb81859dc04e7c89, type: 2}
@@ -841,7 +841,7 @@ MonoBehaviour:
   - toMakeItemSO: {fileID: 11400000, guid: ec541345b08d09e40972f5c3d72ff230, type: 2}
     materialList:
     - itemSO: {fileID: 11400000, guid: 8e58cbffd25e9414fb81859dc04e7c89, type: 2}
-      count: 10
+      count: 3
   toMakeItem:
     toMakeItemSO: {fileID: 0}
     materialList: []

@@ -9,7 +9,7 @@ public class TowerPosUnLock : MonoBehaviour
     public static Action unlockEvent;
 
     Animator anim;
-
+    bool unlocked;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -22,7 +22,9 @@ public class TowerPosUnLock : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //if (Managers.Game.isUnlockTowerPos[index])
-         //   return;
+        //   return;
+        if (unlocked)
+            return;
         if(collision.GetComponent<IPlayer>() != null)
         {
             if (!Managers.Game.completeTutorial)
@@ -33,7 +35,7 @@ public class TowerPosUnLock : MonoBehaviour
     }
     public void Unlock()
     {
-      
+        unlocked = true;
         Managers.Game.isUnlockTowerPos[index] = true;
         anim.Play("Unlock");
     }
