@@ -26,8 +26,6 @@ public class UI_PlayerStat : UI_Base
         playerStat.hpBarEvent += SetHpBar;
         playerStat.hungerBarEvent += SetHungerBar;
         playerStat.damageEvent += GetDamageEffect;
-
-        playerStat.Hp = playerStat.maxHP;
     }
 
     void GetDamageEffect()

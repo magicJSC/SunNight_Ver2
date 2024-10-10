@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6576c42ea59afa049bcdd0dfd85a62ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerSpot: []
 --- !u!1 &122182404001156561
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,8 +182,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cea34f2002dc14085aa8c546ab573884, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: d43590e83a5754a709346e5044e11579, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -527,8 +528,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cea34f2002dc14085aa8c546ab573884, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: d43590e83a5754a709346e5044e11579, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1094,8 +1095,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cea34f2002dc14085aa8c546ab573884, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: d43590e83a5754a709346e5044e11579, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

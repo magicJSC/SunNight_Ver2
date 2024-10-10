@@ -20,14 +20,15 @@ public class SceneManagerEx : MonoBehaviour
 
     public BaseScene CurrentScene { get { return GameObject.FindObjectOfType<BaseScene>(); } }
 
-    public void ChangeScene(Define.SceneType type)
+    public IEnumerator ChangeScene(Define.SceneType type)
     {
-        Debug.Log(CurrentScene);
         CurrentScene.Clear();
 
         _curSceneType = type;
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene(GetSceneName(type));
     }
+
 
     string GetSceneName(Define.SceneType type)
     {

@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_UnlockTowerPos : MonoBehaviour
+public class UI_UnlockTower : MonoBehaviour
 {
+    public static Action unlockEvent;
+
     [HideInInspector]
     public int index;
 
@@ -19,7 +22,7 @@ public class UI_UnlockTowerPos : MonoBehaviour
         UI_EventHandler evt = correct.GetComponent<UI_EventHandler>();
         evt._OnEnter += (PointerEventData p) => { correct.sizeDelta = new Vector2(130,130); };
         evt._OnExit += (PointerEventData p) => { correct.sizeDelta = new Vector2(100,100); };
-        evt._OnClick += (PointerEventData p) => { Managers.Game.isUnlockTowerPos[index] = true; gameObject.SetActive(false); };
+        evt._OnClick += (PointerEventData p) => { Managers.Game.isUnlockTowerPos[index] = true; if(!Managers.Game.completeTutorial)unlockEvent?.Invoke(); gameObject.SetActive(false); };
 
         evt = reject.GetComponent<UI_EventHandler>();
         evt._OnEnter += (PointerEventData p) => { reject.sizeDelta = new Vector2(130, 130); };

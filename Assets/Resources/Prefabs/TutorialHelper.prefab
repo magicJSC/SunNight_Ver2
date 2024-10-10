@@ -727,6 +727,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  material: {fileID: 11400000, guid: 209835d44adc74944aec8c3a71c90dd7, type: 2}
 --- !u!95 &7590151134814769670
 Animator:
   serializedVersion: 5

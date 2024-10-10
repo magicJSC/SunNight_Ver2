@@ -119,7 +119,7 @@ public class DataManager : MonoBehaviour
 
     public void Load()
     {
-        var items = Resources.LoadAll<ItemSO>("ItemSO/Item");
+        var items = Resources.LoadAll<ItemSO>("Item");
         if (dic.Count == 0)
         {
             foreach (var item in items)
@@ -153,7 +153,7 @@ public class DataManager : MonoBehaviour
         stat.Hp = datas.Hp;
         stat.Hunger = datas.Hunger;
         stat.gameObject.transform.position = new Vector2(datas.PlayerLocationX,datas.PlayerLocationY);
-        if (!Managers.Game.isKeepingTower)
+        if (Managers.Game.tower != null)
             Managers.Game.tower.gameObject.transform.position = new Vector2(datas.TowerLocationX, datas.TowerLocationY);
 
         var hotBarSlot = Managers.Inven.hotBarSlotInfo;

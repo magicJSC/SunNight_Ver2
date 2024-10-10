@@ -61,7 +61,8 @@ public class DialogAnimator : MonoBehaviour
                 }
             }
             index++;
-            yield return new WaitForSecondsRealtime(dialog.PausePerLetter);
+            if(dialog.PausePerLetter != 0)
+                yield return new WaitForSecondsRealtime(dialog.PausePerLetter);
         }
     }
 

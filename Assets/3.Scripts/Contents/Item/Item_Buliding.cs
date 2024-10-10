@@ -17,12 +17,9 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
     Stat stat;
     public SpriteRenderer[] bodySprites;
 
-    LayerMask buildLayer;
-    LayerMask inviLayer;
     private void Start()
     {
-        Vector2 thisPos = transform.position - Managers.Game.tower.transform.position;
-        pos = new Vector3Int((int)thisPos.x, (int)thisPos.y);
+        pos = Managers.Game.tower.build.WorldToCell(transform.position);
         buildUI = Util.FindChild(gameObject, "UI_Build",true);
         buildEffect = Util.FindChild(gameObject, "BuildEffect", true);
 
@@ -30,8 +27,6 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
 
         MapManager.buildData.Add(pos);
 
-        inviLayer.value = 8;
-        buildLayer.value = 9;
     }
 
     private void OnDisable()
@@ -56,7 +51,6 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
     public void ChangeColorBeforeIntall()
     {
         buildEffect.SetActive(false);
-        gameObject.layer = inviLayer;
         for(int i=0;i< bodySprites.Length;i++)
         {
             bodySprites[i].color = new Color(1,1,1,0.3f);
@@ -66,7 +60,6 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
     public void CantInstallColor()
     {
         buildEffect.SetActive(false);
-        gameObject.layer = inviLayer;
         for (int i = 0; i < bodySprites.Length; i++)
         {
             bodySprites[i].color = new Color(1, 0.5f, 0.5f, 0.3f);
@@ -85,7 +78,6 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
         }
 
         buildEffect.SetActive(true);
-        gameObject.layer = buildLayer;
         for (int i = 0; i < bodySprites.Length; i++)
         {
             bodySprites[i].color = new Color(1, 1, 1, 1);

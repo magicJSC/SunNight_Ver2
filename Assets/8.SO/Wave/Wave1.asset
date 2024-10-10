@@ -15,6 +15,6 @@ MonoBehaviour:
   groups:
   - monster: {fileID: 3263040771799250074, guid: 86b99bbc60a021a4a89bf9435519a572,
       type: 3}
-    count: 10
+    count: 4
     spawnDelay: 1
     groupDelay: 0

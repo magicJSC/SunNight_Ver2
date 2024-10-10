@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class UI_HotBar : UI_Base
 {
-    public static Action tutorialEvent;
-
     public AssetReferenceGameObject hotBarSlotAsset;
     public AssetReferenceGameObject towerSlotAsset;
 

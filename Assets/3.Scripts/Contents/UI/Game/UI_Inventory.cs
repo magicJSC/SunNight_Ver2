@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class UI_Inventory : UI_Base
 {
     public static Action tutorial1Event;
-    public static Action tutorial2Event;
 
     public AssetReferenceT<AudioClip> showSoundAsset;
     public AssetReferenceT<AudioClip> hideSoundAsset;
@@ -178,9 +177,6 @@ public class UI_Inventory : UI_Base
             produceUI.gameObject.SetActive(false);
             return;
         }
-
-        if (!Managers.Game.completeTutorial)
-            tutorial2Event?.Invoke();
         produceUI.gameObject.SetActive(true);
         RectTransform r = produceUI.back.GetComponent<RectTransform>();
         RectTransform bb = back.GetComponent<RectTransform>();

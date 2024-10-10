@@ -52,13 +52,19 @@ public class BuildController : MonoBehaviour
     {
         if (Managers.Game.isCantPlay)
             return;
+        if (MapManager.building == null)
+            return;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int gridPostion = MapManager.building.WorldToCell(mousePosition);
         transform.position = MapManager.building.CellToWorld(gridPostion);
 
         if (buildItemIcon == null)
             return;
-
+        if (!Managers.Game.tower.gameObject.activeSelf)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
         if (Managers.Map.CheckCanUseTile(gridPostion))
         {
             buildItemIcon.color = new Color(1, 1, 1, 0.6f);
@@ -74,6 +80,9 @@ public class BuildController : MonoBehaviour
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int gridPostion = MapManager.building.WorldToCell(mousePosition);
+
+        if (!Managers.Game.tower.gameObject.activeSelf)
+            return;
         if (Managers.Map.CheckCanUseTile(gridPostion))
         {
             if (!gameObject.activeSelf)

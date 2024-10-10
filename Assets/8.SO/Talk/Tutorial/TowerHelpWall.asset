@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groups:
   - nameText: "\uB9AC\uC554"
-    talkText: "\uC800\uAE30 \uBB54\uAC00 \uC788\uC5B4.."
+    talkText: "\uC548\uC804\uD55C \uACF3\uC774 \uD544\uC694\uD574.."
     perTypingDelay: 0
     noIllust: 0
     illust: {fileID: 21300000, guid: fa084d40b74b76548a0b75f3577c1a4b, type: 3}

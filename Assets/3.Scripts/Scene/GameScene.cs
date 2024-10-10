@@ -18,7 +18,6 @@ public class GameScene : BaseScene
         PlayerController.isDie = false;
         Managers.Game.completeTutorial = true;
         TimeController.timeSpeed = 1.2f;
-        //TimeController.timeSpeed = 20;
         Managers.UI.PopUIList.Clear();
 
         InstantiateOrLoad();

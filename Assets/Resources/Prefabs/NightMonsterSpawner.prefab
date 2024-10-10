@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1549301430412851584}
-  - component: {fileID: 2361046598733240794}
+  - component: {fileID: 7626534717696483482}
   m_Layer: 0
   m_Name: NightMonsterSpawner
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2361046598733240794
+--- !u!114 &7626534717696483482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6658484291155290767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98a4142f4ec0d29479e0c22ec80ecd9e, type: 3}
+  m_Script: {fileID: 11500000, guid: a2395054f8fbb6d4ca569e81ac609f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   range: 25
   waveSO:
   - {fileID: 11400000, guid: dbc76503cb941df41ad60b8ba314f00b, type: 2}
-  distance: 6
+  distance: 0

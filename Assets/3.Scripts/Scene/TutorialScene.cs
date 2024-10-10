@@ -5,8 +5,6 @@ using static StorageManager;
 
 public class TutorialScene : BaseScene
 {
-    TimeController timeController;
-
     public ItemSO fence;
     public ItemSO Cannon;
 
@@ -30,21 +28,33 @@ public class TutorialScene : BaseScene
             Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);
 
         Managers.Inven.hotBarSlotInfo[0].itemInfo = fence;
-        Managers.Inven.hotBarSlotInfo[0].count = 15;
+        Managers.Inven.hotBarSlotInfo[0].count = 5;
         Managers.Inven.hotBarSlotInfo[1].itemInfo = Cannon;
-        Managers.Inven.hotBarSlotInfo[1].count = 3;
+        Managers.Inven.hotBarSlotInfo[1].count = 1;
 
         Managers.Game.player.transform.position = new Vector2(-14,20);
-        TutorialController.timeController = timeController.gameObject;
-        timeController.gameObject.SetActive(false);
+        TutorialController.timeController = Managers.Game.timeController.gameObject;
+        Managers.Game.timeController.gameObject.SetActive(false);
+        Managers.Game.player.GetComponent<PlayerStat>().Hp = 100;
+        Managers.Game.player.GetComponent<PlayerStat>().Hunger = 30;
 
-        Managers.Game.tower.transform.position = new Vector3(-60, -140);
-
+        Managers.Game.tower.transform.position = new Vector3(-60, -143);
+        Managers.Game.tower.gameObject.SetActive(false);
         return true;
     }
+
+    private void OnDisable()
+    {
+        TimeController.morningEvent = null;
+        TimeController.nightEvent = null;
+        TimeController.timeEvent = null;
+        TimeController.dayEvent = null;
+        Managers.Data.Save();
+    }
+
     void InstantiateOrLoad()
     {
-        timeController = Instantiate(Resources.Load<GameObject>("UI/UI_Time")).GetComponent<TimeController>();
+        Managers.Game.timeController = Instantiate(Resources.Load<GameObject>("UI/UI_Time")).GetComponent<TimeController>();
         Managers.Game.lightController = Instantiate(Resources.Load<GameObject>("Prefabs/Light")).GetComponent<LightController>();
         Managers.Game.grid = FindObjectOfType<MapManager>();
         Managers.Game.mouse = Instantiate(Resources.Load<GameObject>("Prefabs/MouseController").GetComponent<MouseController>());
@@ -57,7 +67,9 @@ public class TutorialScene : BaseScene
     void SetActions()
     {
         Managers.Game.build.SetAction();
-        timeController.SetAction();
+        Managers.Game.timeController.SetAction();
+        Managers.Game.timeController.GetComponent<UI_Time>().SetAction();
+        Managers.Game.lightController.SetAction();
     }
 
 }

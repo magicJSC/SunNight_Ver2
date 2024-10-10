@@ -10,7 +10,8 @@ public class Define : MonoBehaviour
         None,
         MainScene,
         GameScene,
-        TutorialScene
+        TutorialScene,
+        LaboratoryScene
     }
 
 

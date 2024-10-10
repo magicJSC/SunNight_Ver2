@@ -39,7 +39,7 @@ public class UI_Main : UI_Base
         exitText = exit.GetComponentInChildren<Text>();
 
         UI_EventHandler evt = start.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p)=> { anim.Play("GamePlay"); Managers.Sound.Play(Define.Sound.Effect, clickSound); };
+        evt._OnClick += (PointerEventData p)=> { StartCoroutine(PlayGame()); Managers.Sound.Play(Define.Sound.Effect, clickSound); };
         evt._OnEnter += (PointerEventData p) => { startText.color = Color.red; Managers.Sound.Play(Define.Sound.Effect, enterSound); };
         evt._OnExit += (PointerEventData p) => { startText.color = Color.black; };
 
@@ -69,8 +69,10 @@ public class UI_Main : UI_Base
     }
 
 
-    void PlayeGame()
+    IEnumerator PlayGame()
     {
-        SceneManager.LoadScene("GameScene");
+        Managers.Game.changeSceneEffecter.StartChangeScene();
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("TutorialScene");
     }
 }

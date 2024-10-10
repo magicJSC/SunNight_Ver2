@@ -152,8 +152,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 56a670fb422c58d42ad4032101c39200
-    m_Address: UI/UI_UnlockTowerPos
+  - m_GUID: b2565b5c75f6fa247bf904d902ae83ad
+    m_Address: UI/UI_Journal
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
