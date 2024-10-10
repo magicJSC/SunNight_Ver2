@@ -22,7 +22,7 @@ public class UI_GameMenu : UI_Base
         evt._OnClick += (PointerEventData p) => { Close(); };
 
         evt = main.GetComponent<UI_EventHandler>();
-        evt._OnClick += (PointerEventData p) => { Time.timeScale = 1; Managers.Data.Save(); anim.Play("MainScene");  };
+        evt._OnClick += (PointerEventData p) => { Time.timeScale = 1; Managers.Data.Save(); StartCoroutine(MainScene()); };
 
         Close();
     }
@@ -45,8 +45,10 @@ public class UI_GameMenu : UI_Base
         gameObject.SetActive(false);
     }
 
-    public void MainScene()
+    public IEnumerator MainScene()
     {
+        Managers.Game.changeSceneEffecter.StartChangeScene();
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("MainScene");
     }
 }
