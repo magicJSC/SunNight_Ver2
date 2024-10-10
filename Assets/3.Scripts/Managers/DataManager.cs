@@ -31,15 +31,20 @@ public class DataManager : MonoBehaviour
     public static PlayerDatas datas = new PlayerDatas();
     public PlayerStat stat = new PlayerStat();
 
-    string path = @"userdata.json";
+    const string fileName = "userdata.json";
+#if UNITY_EDITOR
+    string path = Path.Combine(Application.dataPath + fileName);
+#else
+    string path = Path.Combine(Application.persistentDataPath + fileName);
+#endif
 
     string[] items = new string[29];
     int[] amount = new int[29];
 
     Dictionary<string, ItemSO> dic = new();
 
-    public void Init() 
-    { 
+    public void Init()
+    {
         Load();
     }
 
@@ -102,7 +107,7 @@ public class DataManager : MonoBehaviour
 
         Debug.Log(json);
 
-        if (!File.Exists(path))
+        /*if (!File.Exists(path))
         {
             using (var file = File.Create("userdata.json"))
                 file.Write(Encoding.UTF8.GetBytes(json));
@@ -112,6 +117,17 @@ public class DataManager : MonoBehaviour
             var file = new FileStream(path, FileMode.Open);
             file.Write(Encoding.UTF8.GetBytes(json));
             file.Close();
+        }*/
+
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        else
+        {
+            string filePath = Path.Combine(path, fileName);
+            byte[] bytes = Encoding.UTF8.GetBytes(json);
+            File.WriteAllBytes(path, bytes);
         }
 
         Debug.Log("Complete to Save");
@@ -119,25 +135,37 @@ public class DataManager : MonoBehaviour
 
     public void Load()
     {
-        var items = Resources.LoadAll<ItemSO>("Item");
+        var items = Resources.LoadAll<ItemSO>("ItemSO/Item");
         if (dic.Count == 0)
         {
             foreach (var item in items)
                 dic.Add(item.idName, item);
         }
 
-        if (!File.Exists(path))
+        /*if (!File.Exists(path))
             Debug.Log("userdata.json is not found.");
         else
         {
             var file = File.Open(path, FileMode.Open);
             byte[] buffer = new byte[1024];
             file.Read(buffer);
-            datas = JsonConvert.DeserializeObject<PlayerDatas>(Encoding.UTF8.GetString(buffer));
+            datas = JsonConvert.DeserializeObject<PlayerDatas>(Encoding.UTF8.GetString(buffer))
 
             Set();
 
             file.Close();
+        }*/
+
+        if (!File.Exists(path))
+        {
+            Debug.Log("userdata.json is not found.");
+        }
+        else
+        {
+            byte[] buffer = File.ReadAllBytes(path);
+            datas = JsonConvert.DeserializeObject<PlayerDatas>(Encoding.UTF8.GetString(buffer));
+
+            Set();
         }
     }
 
@@ -152,8 +180,8 @@ public class DataManager : MonoBehaviour
         stat = Managers.Game.player.GetComponent<PlayerStat>();
         stat.Hp = datas.Hp;
         stat.Hunger = datas.Hunger;
-        stat.gameObject.transform.position = new Vector2(datas.PlayerLocationX,datas.PlayerLocationY);
-        if (Managers.Game.tower != null)
+        stat.gameObject.transform.position = new Vector2(datas.PlayerLocationX, datas.PlayerLocationY);
+        if (!Managers.Game.isKeepingTower)
             Managers.Game.tower.gameObject.transform.position = new Vector2(datas.TowerLocationX, datas.TowerLocationY);
 
         var hotBarSlot = Managers.Inven.hotBarSlotInfo;
