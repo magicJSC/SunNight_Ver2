@@ -8,6 +8,8 @@ public class MonsterWaveController : MonoBehaviour
 {
     public static Action surviveEvent;
 
+    bool isfinal;
+
     [SerializeField]
     float range;
 
@@ -35,6 +37,7 @@ public class MonsterWaveController : MonoBehaviour
 
     IEnumerator SpawnMonster()
     {
+        isfinal = false;
         for(int i = 0; i < waveSO[TimeController.day - 1].groups.Count; i++)
         {
             for(int j = 0;j < waveSO[TimeController.day - 1].groups[i].count; j++)
@@ -44,6 +47,7 @@ public class MonsterWaveController : MonoBehaviour
             }
             yield return new WaitForSeconds(waveSO[TimeController.day - 1].groups[i].groupDelay);
         }
+        isfinal = true;
     }
 
     void NightSpawn(GameObject monsterPrefab)
@@ -77,7 +81,7 @@ public class MonsterWaveController : MonoBehaviour
     void RemoveMonster(GameObject monster)
     {
         monList.Remove(monster);
-        if(monList.Count == 0)
+        if(monList.Count == 0 && isfinal)
         {
             StartCoroutine(ClearWave());
            surviveEvent?.Invoke();
@@ -89,12 +93,9 @@ public class MonsterWaveController : MonoBehaviour
         Managers.Game.changeSceneEffecter.StartChangeScene();
         yield return new WaitForSeconds(3);
         TimeController.day++;
+        TimeController.dayEvent.Invoke(TimeController.day);
         TimeController.TimeAmount = 360;
         Managers.Game.changeSceneEffecter.EndChangeScene();
     }
 
-    void Reward()
-    {
-
-    }
 }

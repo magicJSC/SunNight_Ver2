@@ -74,4 +74,14 @@ public class BonFireController : MonoBehaviour, IInteractObject
     {
         canInteractSign.SetActive(false);
     }
+
+    public void SetAction(PlayerInteract playerInteract)
+    {
+        playerInteract.interactAction += Interact;
+    }
+
+    public void CancelAction(PlayerInteract playerInteract)
+    {
+        playerInteract.interactAction -= Interact;
+    }
 }

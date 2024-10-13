@@ -9,15 +9,10 @@ public interface IInteractObject
 
     public void ShowInteractSign();
     public void HideInteractSign();
-    public void Interact();
-}
+    public void SetAction(PlayerInteract playerInteract);
 
-public interface ICheckCanInteract
-{
-    public void EnterPlayer(PlayerController player);
-    public void ExitPlayer(PlayerController player);
+    public void CancelAction(PlayerInteract playerInteract);
 }
-
 
 public class NPC : MonoBehaviour
 {

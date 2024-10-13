@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2.Scenes/LaboratoryScene.unity
     guid: 603360bfdec40fc4e98560cdf2654166
+  - enabled: 1
+    path: Assets/2.Scenes/EndingScene.unity
+    guid: a13c9908f6c2d8343b1cc3250c6a409a
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 6067c373806873d4ba84765909cd48e2,
       type: 2}

@@ -43,7 +43,6 @@ public class TimeController : MonoBehaviour
             if (_timeType == TimeType.Morning)
             {
                 morningEvent?.Invoke();
-                dayEvent.Invoke(day);
             }
             else if (_timeType == TimeType.Night)
             {
@@ -92,7 +91,8 @@ public class TimeController : MonoBehaviour
 
             if (TimeAmount >= 1440)
             {
-                TimeAmount = 0;
+                day++;
+                dayEvent.Invoke(day);
             }
             yield return null;
         }

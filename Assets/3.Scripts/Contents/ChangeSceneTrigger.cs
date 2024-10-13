@@ -10,7 +10,14 @@ public class ChangeSceneTrigger : MonoBehaviour
     {
         if(collision.GetComponent<IPlayer>() != null)
         {
-            SceneManager.LoadScene(sceneName);
+            StartCoroutine(ChangeScene());
         }
+    }
+
+    IEnumerator ChangeScene()
+    {
+        Managers.Game.changeSceneEffecter.StartChangeScene();
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(sceneName);
     }
 }

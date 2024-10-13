@@ -47,7 +47,7 @@
                     "id": "97c50778-1143-4871-8705-2cfacb7810ed",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 },
                 {
@@ -81,6 +81,15 @@
                     "name": "Map",
                     "type": "Button",
                     "id": "c3c1e4ac-a95b-410e-9cb0-4258a58129d7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "b74dffa2-be09-4d12-b7bb-514225480514",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -228,6 +237,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Map",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80cd6f5e-8ef6-47ef-8f7d-cff0c5b7157a",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

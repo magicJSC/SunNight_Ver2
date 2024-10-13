@@ -19,6 +19,7 @@ public class UI_MiniMap : MonoBehaviour
 
     private void Start()
     {
+        isTargeting = false;
         targetSign = Util.FindChild<RectTransform>(gameObject,"TargetSign",true);
         arrowSign = Util.FindChild<RectTransform>(gameObject,"ArrowSign",true);
 

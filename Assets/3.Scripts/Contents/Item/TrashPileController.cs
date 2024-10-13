@@ -22,55 +22,52 @@ public class TrashPileController : MonoBehaviour,IInteractObject
     [SerializeField] float coolTime;
 
     public GameObject canInteractSign { get; private set; }
-
+    GameObject canFindEffect;
 
     bool canFind = true;
-    bool isFinding;
+    bool cancel;
     Image amount;
     GameObject actGageUI;
-
-    Rigidbody2D playerRIgid;
-
     void Start()
     {
         canInteractSign = Util.FindChild(gameObject,"Sign", true);
+        canFindEffect = Util.FindChild(gameObject, "CanFindEffect", true);
         canInteractSign.SetActive(false);
         actGageUI = Util.FindChild(gameObject, "UI_ActGage", true);
         amount = Util.FindChild<Image>(gameObject, "Amount", true);
         actGageUI.SetActive(false);
-        playerRIgid = Managers.Game.player.GetComponent<Rigidbody2D>();
 
     }
 
     public void Interact()
     {
-        if(canFind && !isFinding)
+        if(canFind)
             StartCoroutine(FindItem());
     }
 
     IEnumerator FindItem()
     {
         float curTime = 0;
-        isFinding = true;
+        cancel = false;
         actGageUI.SetActive(true);
+        Managers.Game.isCantPlay = true;
         while (curTime < coolTime)
         {
             curTime += Time.deltaTime;
             amount.fillAmount = curTime / coolTime;
-            if (playerRIgid.velocity != Vector2.zero)
-            {
-                Cancel();
+            if(cancel)
                 yield break;
-            }
             yield return null;
         }
+        Managers.Game.isCantPlay = false;
         actGageUI.SetActive(false);
         GetRandomItem();
     }
 
     void Cancel()
     {
-        isFinding = false;
+        cancel = true;
+        Managers.Game.isCantPlay = false;
         actGageUI.SetActive(false);
     }
 
@@ -88,6 +85,7 @@ public class TrashPileController : MonoBehaviour,IInteractObject
             }
             num += getItemList[i].probability;
         }
+        canFindEffect.SetActive(false);
         canFind = false;
         HideInteractSign();
     }
@@ -103,5 +101,17 @@ public class TrashPileController : MonoBehaviour,IInteractObject
     public void HideInteractSign()
     {
         canInteractSign.SetActive(false);
+    }
+
+    public void SetAction(PlayerInteract playerInteract)
+    {
+        playerInteract.interactAction += Interact;
+        playerInteract.cancelAction += Cancel;
+    }
+
+    public void CancelAction(PlayerInteract playerInteract)
+    {
+        playerInteract.interactAction -= Interact;
+        playerInteract.cancelAction -= Cancel;
     }
 }

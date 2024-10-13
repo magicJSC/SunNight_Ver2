@@ -23,9 +23,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
     [HideInInspector]
     public GameObject toolParent;
 
-    [HideInInspector]
-    public List<GameObject> interactObjectList = new List<GameObject>();
-    GameObject canInteractObj;
+   
 
     public static bool isDie;
 
@@ -134,35 +132,11 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
         Managers.Inven.inventoryUI.gameObject.SetActive(!Managers.Inven.inventoryUI.gameObject.activeSelf);
     }
 
-    void OnInteract()
-    {
-        if (Managers.Game.isCantPlay)
-            return;
-        if (Time.timeScale == 0)
-            return;
-        if (!canInteractObj)
-            return;
+   
 
-        canInteractObj.GetComponent<IInteractObject>().Interact();
-    }
+    
 
-    public void SetInteractObj()
-    {
-        canInteractObj = null;
-        for (int i = 0; i < interactObjectList.Count; i++)
-        {
-            if (canInteractObj == null)
-                canInteractObj = interactObjectList[i];
-            else if (Vector2.Distance(canInteractObj.transform.position, transform.position) > Vector2.Distance(interactObjectList[i].transform.position, transform.position))
-                canInteractObj = interactObjectList[i];
-
-            interactObjectList[i].GetComponent<IInteractObject>().HideInteractSign();
-        }
-        if (canInteractObj)
-            canInteractObj.GetComponent<IInteractObject>().ShowInteractSign();
-    }
-
-    public void OnBuild()
+    public void BuildAction()
     {
         if (Managers.Game.isCantPlay)
             return;
@@ -183,15 +157,6 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
             }
         }
     }
-
-    void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<IInteractObject>() != null)
-        {
-            SetInteractObj();
-        }
-    }
-
     public void GetDamage(int damage)
     {
         if (isDie)
