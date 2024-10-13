@@ -30,6 +30,7 @@ public class TutorialController : MonoBehaviour
     TriggerEvent findHelpWall;
     GameObject towerHelp1Wall;
     GameObject towerHelp2Wall;
+    GameObject produceHelpWall;
 
     PlayableDirector towerCutScene;
     PlayableDirector surviveCutScene;
@@ -51,6 +52,7 @@ public class TutorialController : MonoBehaviour
         invenHelpWall = Util.FindChild(gameObject, "InvenHelpWall",true);
         towerHelp1Wall = Util.FindChild(gameObject, "TowerHelp1Wall", true);
         towerHelp2Wall = Util.FindChild(gameObject, "TowerHelp2Wall", true);
+        produceHelpWall = Util.FindChild(gameObject, "ProduceHelpWall", true);
         unlockHelp = Util.FindChild(gameObject, "Unlock",true);
 
         towerCutScene = Util.FindChild<PlayableDirector>(gameObject,"TowerCut", true);
@@ -58,7 +60,7 @@ public class TutorialController : MonoBehaviour
 
         PlayerController.tutorial1Event = Move;
         UI_Inventory.tutorial1Event = Inventory;
-        CanInteractChecker.interactCheckerEvent = ShowInteractHelp;
+        PlayerInteract.interactCheckerEvent = ShowInteractHelp;
         TrashPileController.interactEvent = Interact;
         findHelpWall.triggerEvent = Find;
         TowerPosUnLock.unlockEvent = Unlock;
@@ -105,7 +107,7 @@ public class TutorialController : MonoBehaviour
         else
             return;
 
-        CanInteractChecker.interactCheckerEvent = null;
+        PlayerInteract.interactCheckerEvent = null;
         TrashPileController.interactEvent = null;
         Destroy(interactHelpWall);
     }
@@ -163,6 +165,7 @@ public class TutorialController : MonoBehaviour
         else
             return;
 
+        Destroy(produceHelpWall);
         UI_Produce.tutorialEvent = null;
     }
 

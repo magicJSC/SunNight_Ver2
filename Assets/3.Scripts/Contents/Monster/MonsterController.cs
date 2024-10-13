@@ -185,7 +185,7 @@ public class MonsterController : MonoBehaviour, IMonster
     protected virtual void OnMove()
     {
 
-        if(target == null)
+        if(target == null || Managers.Game.isCantPlay)
         {
             State = Define.State.Idle;
             target = SetTarget();

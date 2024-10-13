@@ -115,6 +115,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce00f0653ddfb7f43b86c6cbf7c1e629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  talkSO: {fileID: 11400000, guid: 9d0db56ae1786f04b9008319b1707257, type: 2}
+  talkUIAsset:
+    m_AssetGUID: d56e85533ee68a44584166971a376ffa
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1 &4541904331437735619
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,11 +49,6 @@ public class GraveStoneController : MonoBehaviour,IInteractObject
             Destroy(gameObject);
     }
 
-    public void Interact()
-    {
-        GetItem();
-    }
-
     void GetItem()
     {
         int stack =0;
@@ -82,5 +77,15 @@ public class GraveStoneController : MonoBehaviour,IInteractObject
     public void HideInteractSign()
     {
         canInteractSign.SetActive(true);
+    }
+
+    public void SetAction(PlayerInteract playerInteract)
+    {
+        playerInteract.interactAction += ShowInteractSign;
+    }
+
+    public void CancelAction(PlayerInteract playerInteract)
+    {
+        playerInteract.interactAction -= ShowInteractSign;
     }
 }

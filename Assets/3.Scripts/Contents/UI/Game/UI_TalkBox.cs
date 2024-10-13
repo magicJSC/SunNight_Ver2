@@ -41,6 +41,7 @@ public class UI_TalkBox : MonoBehaviour
         profill.sprite = talk.illust;
         delayTime = talk.perTypingDelay;
         nextSign.SetActive(false);
+        index = 0;
         Managers.Game.isCantPlay = true;
 
         while (index < talkString.Length)
@@ -67,7 +68,7 @@ public class UI_TalkBox : MonoBehaviour
             }
             else
             {
-                talk = talkSO.groups[talkIndex++];
+                talk = talkSO.groups[++talkIndex];
                 StartCoroutine(TypingText());
             }
         }

@@ -12,6 +12,9 @@ public class Seller : MonoBehaviour, IInteractObject
     public Action buyEvent;
 
     int Time { get { return time; } set { time = value; timerEvent?.Invoke(time); } }
+
+    GameObject IInteractObject.canInteractSign => throw new NotImplementedException();
+
     int time;
 
     GameObject storeUI;
@@ -106,12 +109,12 @@ public class Seller : MonoBehaviour, IInteractObject
         }
     }
 
-    void IInteractObject.Interact()
-    {
-        timerEvent?.Invoke(time);
-        buyEvent?.Invoke();
-        storeUI.SetActive(true);
-    }
+    //void IInteractObject.Interact()
+    //{
+    //    timerEvent?.Invoke(time);
+    //    buyEvent?.Invoke();
+    //    storeUI.SetActive(true);
+    //}
 
     public void ShowInteractSign()
     {
@@ -121,5 +124,15 @@ public class Seller : MonoBehaviour, IInteractObject
     public void HideInteractSign()
     {
         canInteractSign.SetActive(false);
+    }
+
+    public void SetAction(PlayerInteract playerInteract)
+    {
+        
+    }
+
+    void IInteractObject.CancelAction(PlayerInteract playerInteract)
+    {
+        throw new NotImplementedException();
     }
 }

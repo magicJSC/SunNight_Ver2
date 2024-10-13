@@ -15,6 +15,8 @@ public class PlayerStat : MonoBehaviour
     public int Hp { get { return hp; } 
         set 
         {
+            if (Managers.Game.isCantPlay)
+                return;
             if (hp > value)
                 OnDamageEvent();
             else if(hp < value)
@@ -92,7 +94,8 @@ public class PlayerStat : MonoBehaviour
             if (Hunger <= 0)
                 continue;
 
-            Hunger -= Time.deltaTime * maxHunger / 300;
+            if(Managers.Game.completeTutorial)
+                Hunger -= Time.deltaTime * maxHunger / 300;
         }
     }
 

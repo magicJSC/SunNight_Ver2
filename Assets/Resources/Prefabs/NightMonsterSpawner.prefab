@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2395054f8fbb6d4ca569e81ac609f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 25
+  range: 50
   waveSO:
   - {fileID: 11400000, guid: dbc76503cb941df41ad60b8ba314f00b, type: 2}
-  distance: 0
+  distance: 10

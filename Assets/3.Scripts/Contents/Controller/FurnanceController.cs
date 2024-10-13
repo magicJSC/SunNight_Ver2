@@ -8,6 +8,7 @@ public class FurnanceController : MonoBehaviour, IInteractObject
 
     public GameObject canInteractSign { get; set; }
 
+
     public AssetReferenceGameObject smeltUIAsset;
 
     UI_Smelt smeltUI;
@@ -75,5 +76,14 @@ public class FurnanceController : MonoBehaviour, IInteractObject
     public void HideInteractSign()
     {
         canInteractSign.SetActive(false);
+    }
+    public void SetAction(PlayerInteract playerInteract)
+    {
+        playerInteract.interactAction += Interact;
+    }
+
+    void IInteractObject.CancelAction(PlayerInteract playerInteract)
+    {
+        playerInteract.interactAction -= Interact;
     }
 }

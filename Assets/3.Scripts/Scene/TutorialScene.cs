@@ -16,6 +16,8 @@ public class TutorialScene : BaseScene
         InstantiateOrLoad();
         SetActions();
 
+        TimeController.day = 0;
+
         Managers.Game.grid.Init();
         Managers.Game.mouse.Init();
         Managers.Game.tower.Init();
@@ -49,7 +51,6 @@ public class TutorialScene : BaseScene
         TimeController.nightEvent = null;
         TimeController.timeEvent = null;
         TimeController.dayEvent = null;
-        Managers.Data.Save();
     }
 
     void InstantiateOrLoad()
