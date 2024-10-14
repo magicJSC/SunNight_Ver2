@@ -35,7 +35,7 @@ public class PlayerRun : MonoBehaviour
         {
             if (playerStat.Hunger > 0)
             {
-                playerStat.Hunger -= Time.deltaTime / 50;
+                playerStat.Hunger -= Time.deltaTime / 10;
             }
             else
                 break;

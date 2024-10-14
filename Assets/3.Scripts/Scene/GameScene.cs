@@ -5,8 +5,6 @@ using UnityEngine.Rendering;
 
 public class GameScene : BaseScene
 {
-    GameObject monsterSpawner;
-
     TimeController timeController;
 
     protected override bool Init()

@@ -212,7 +212,7 @@ public class UI_Produce : UI_Base
             }
             if (!Managers.Game.completeTutorial)
                 tutorialEvent?.Invoke();
-            Managers.Inven.AddOneItem(toMakeItem.toMakeItemSO);
+            Managers.Inven.AddItems(toMakeItem.toMakeItemSO,1);
             if(produceSound != null)
                 Managers.Sound.Play(Define.Sound.Effect, produceSound);
 

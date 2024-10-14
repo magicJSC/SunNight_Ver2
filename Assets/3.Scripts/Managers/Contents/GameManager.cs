@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -32,9 +33,8 @@ public class GameManager : MonoBehaviour
 
     public void SpawnItem(ItemSO item,int amount,Vector2 pos)
     {
-        if (item.itemPrefab != null)
-            Instantiate(item.itemPrefab, pos, Quaternion.identity).GetComponent<Item_Pick>().Count = amount;
-        else
-            Managers.Inven.AddOneItem(item);
+         int leftCount = Managers.Inven.AddItems(item,amount);
+        if(leftCount > 0)
+            Instantiate(item, pos, Quaternion.identity).GetComponent<Item_Pick>().SetInfo(item,amount);
     }
 }
