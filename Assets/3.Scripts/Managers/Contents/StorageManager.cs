@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using static Define;
 
 public class StorageManager : MonoBehaviour
@@ -44,6 +45,8 @@ public class StorageManager : MonoBehaviour
         }
     }
 
+    GameObject itemSign;
+
     public void Init()
     {
         hotBarEvent = null;
@@ -54,6 +57,10 @@ public class StorageManager : MonoBehaviour
         inventoryUI = Managers.UI.ShowInvenUI("UI_Inven").GetComponent<UI_Inventory>();
         inventoryUI.Init();
 
+        Addressables.LoadAssetAsync<GameObject>("UI/ItemSign").Completed += (obj) =>
+        {
+            itemSign = obj.Result;
+        };
     }
 
 
@@ -98,72 +105,40 @@ public class StorageManager : MonoBehaviour
         }
     }
 
-    public bool AddOneItem(ItemSO item)
+    
+    public int AddItems(ItemSO item, int count)
     {
-        if (item.itemType != ItemType.Tool)   //재료 아이템일때
-        {
-            UI_Item emptySlot = null;
-            for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
-            {
-                UI_Item itemUI = inventoryUI.slotList[i].itemUI;
-                if (itemUI.slotInfo.itemInfo == null)
-                {
-                    if (emptySlot == null)
-                        emptySlot = itemUI;
-                    continue;
-                }
-
-                if (item.idName == itemUI.slotInfo.itemInfo.idName && itemUI.slotInfo.count < itemUI.slotInfo.itemInfo.maxAmount)
-                {
-                    SetSlot(item, itemUI, itemUI.slotInfo.count + 1);
-                    return true;
-                }
-            }
-            for (int i = 0; i < hotBarUI.slotList.Length - 1; i++)
-            {
-                UI_Item itemUI = hotBarUI.slotList[i].itemUI;
-                if (itemUI.slotInfo.itemInfo == null)
-                {
-                    if (emptySlot == null)
-                        emptySlot = itemUI;
-                    continue;
-                }
-
-                if (item.idName == itemUI.slotInfo.itemInfo.idName && itemUI.slotInfo.count < itemUI.slotInfo.itemInfo.maxAmount)
-                {
-                    SetSlot(item, itemUI, itemUI.slotInfo.count + 1);
-                    return true;
-                }
-            }
-            //추가 하지 못했다면 비어있는 칸에 넣기
-            if (emptySlot != null)
-            {
-                SetSlot(item, emptySlot, 1);
-                return true;
-            }
-
-            //추가 하지 못했는데 비어있는 칸도 없을때
-            return false;
-        }
-        else //도구 아이템일때
-        {
-            for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
-            {
-                UI_Item itemUI = inventoryUI.slotList[i].itemUI;
-                if (KeyType.Empty == itemUI.slotInfo.keyType)
-                {
-                    SetSlot(item, itemUI, 1);
-                    return true;
-                }
-            }
-
-            return false;
-        }
-    }
-
-    public bool AddItems(ItemSO item, int count)
-    {
+        int addCount = 0;
         UI_Item emptySlot = null;
+        for (int i = 0; i < hotBarUI.slotList.Length - 1; i++)
+        {
+            UI_Item itemUI = hotBarUI.slotList[i].itemUI;
+            if (itemUI.slotInfo.itemInfo == null)
+            {
+                if (emptySlot == null)
+                    emptySlot = itemUI;
+                continue;
+            }
+
+            if (item.idName == itemUI.slotInfo.itemInfo.idName)
+            {
+                if (itemUI.slotInfo.count + count > itemUI.slotInfo.itemInfo.maxAmount)
+                {
+                    int lefting = itemUI.slotInfo.count + count - itemUI.slotInfo.itemInfo.maxAmount;
+                    SetSlot(item, itemUI, itemUI.slotInfo.itemInfo.maxAmount);
+                    addCount += count - lefting;
+                    count = lefting;
+                    continue;
+                }
+                else
+                {
+                    SetSlot(item, itemUI, itemUI.slotInfo.count + count);
+                    addCount += count;
+                    ShowItemSign(item, addCount);
+                    return 0;
+                }
+            }
+        }
         for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
         {
             UI_Item itemUI = inventoryUI.slotList[i].itemUI;
@@ -182,65 +157,47 @@ public class StorageManager : MonoBehaviour
                 {
                     int lefting = itemUI.slotInfo.count + count - itemUI.slotInfo.itemInfo.maxAmount;
                     SetSlot(item, itemUI, itemUI.slotInfo.itemInfo.maxAmount);
-                    AddItems(item, lefting);
-                    return true;
+                    addCount += count - lefting;
+                    count = lefting;
+                    continue;
                 }
                 else
                 {
                     SetSlot(item, itemUI, itemUI.slotInfo.count + count);
-                    return true;
+                    addCount += count;
+                    ShowItemSign(item, addCount);
+                    return 0;
                 }
             }
         }
-        for (int i = 0; i < hotBarUI.slotList.Length - 1; i++)
-        {
-            UI_Item itemUI = hotBarUI.slotList[i].itemUI;
-            if (itemUI.slotInfo.itemInfo == null)
-            {
-                if (emptySlot == null)
-                    emptySlot = itemUI;
-                continue;
-            }
 
-            if (item.idName == itemUI.slotInfo.itemInfo.idName)
-            {
-                if (itemUI.slotInfo.count + count > itemUI.slotInfo.itemInfo.maxAmount)
-                {
-                    int lefting = itemUI.slotInfo.count + count - itemUI.slotInfo.itemInfo.maxAmount;
-                    SetSlot(item, itemUI, itemUI.slotInfo.itemInfo.maxAmount);
-                    AddItems(item, lefting);
-                    return true;
-                }
-                else
-                {
-                    SetSlot(item, itemUI, itemUI.slotInfo.count + count);
-                    return true;
-                }
-            }
-        }
         //추가 하지 못했다면 비어있는 칸에 넣기
         if (emptySlot != null)
         {
             SetSlot(item, emptySlot, count);
-            return true;
+            ShowItemSign(item, addCount);
+            return 0;
         }
         else
-            return false;
+        {
+            return count;
+        }
     }
     #endregion
 
     public void EmptyInvenAndHotBar()
     {
-        UI_InventorySlot[] invenSlots = inventoryUI.slotList;
-        foreach (UI_InventorySlot slot in invenSlots)
-        {
-            slot.itemUI.MakeEmptySlot();
-        }
         UI_HotbarSlot[] hotbarSlots = hotBarUI.slotList;
         for (int i = 0; i < hotbarSlots.Length - 1; i++)
         {
             hotbarSlots[i].itemUI.MakeEmptySlot();
         }
+        UI_InventorySlot[] invenSlots = inventoryUI.slotList;
+        foreach (UI_InventorySlot slot in invenSlots)
+        {
+            slot.itemUI.MakeEmptySlot();
+        }
+       
         CheckHotBarChoice();
     }
 
@@ -280,14 +237,6 @@ public class StorageManager : MonoBehaviour
     public int GetItemCount(ItemSO itemSO)
     {
         int count = 0;
-        for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
-        {
-            UI_Item itemUI = inventoryUI.slotList[i].itemUI;
-            if (itemUI.slotInfo.itemInfo == itemSO)
-            {
-                count += itemUI.slotInfo.count;
-            }
-        }
         for (int i = 0; i < hotBarUI.slotList.Length - 1; i++)
         {
             UI_Item itemUI = hotBarUI.slotList[i].itemUI;
@@ -296,12 +245,40 @@ public class StorageManager : MonoBehaviour
                 count += itemUI.slotInfo.count;
             }
         }
+        for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
+        {
+            UI_Item itemUI = inventoryUI.slotList[i].itemUI;
+            if (itemUI.slotInfo.itemInfo == itemSO)
+            {
+                count += itemUI.slotInfo.count;
+            }
+        }
+        
         return count;
     }
 
     public void RemoveItem(ItemSO itemSO, int count)
     {
         int remainCount = count;
+        for (int i = 0; i < hotBarUI.slotList.Length - 1; i++)
+        {
+            UI_Item itemUI = hotBarUI.slotList[i].itemUI;
+            if (itemUI.slotInfo.itemInfo == itemSO)
+            {
+                remainCount -= itemUI.slotInfo.count;
+                if (remainCount < 0)
+                {
+                    itemUI.slotInfo.count = -remainCount;
+                    return;
+                }
+                else
+                {
+                    itemUI.MakeEmptySlot();
+                    if (remainCount == 0)
+                        return;
+                }
+            }
+        }
         for (int i = 0; i < inventoryUI.slotList.Length - 1; i++)
         {
             UI_Item itemUI = inventoryUI.slotList[i].itemUI;
@@ -322,25 +299,12 @@ public class StorageManager : MonoBehaviour
                 }
             }
         }
-        for (int i = 0; i < hotBarUI.slotList.Length - 1; i++)
-        {
-            UI_Item itemUI = hotBarUI.slotList[i].itemUI;
-            if (itemUI.slotInfo.itemInfo == itemSO)
-            {
-                remainCount -= itemUI.slotInfo.count;
-                if (remainCount < 0)
-                {
-                    itemUI.slotInfo.count = -remainCount;
-                    return;
-                }
-                else
-                {
-                    itemUI.MakeEmptySlot();
-                    if (remainCount == 0)
-                        return;
-                }
-            }
-        }
+        
+    }
+
+    void ShowItemSign(ItemSO itemSO,int count)
+    {
+        Instantiate(itemSign, Managers.Game.player.transform.position, Quaternion.identity).GetComponent<ItemSign>().SetItem(itemSO,count);
     }
 }
 

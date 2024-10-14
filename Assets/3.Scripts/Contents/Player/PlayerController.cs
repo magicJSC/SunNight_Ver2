@@ -151,7 +151,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
     {
         if (collision.gameObject.TryGetComponent<Item_Pick>(out var item))
         {
-            if (Managers.Inven.AddItems(item.itemSo, item.Count))
+            if (Managers.Inven.AddItems(item.itemSo, item.Count) == 0)
             {
                 item.DestroyThis();
             }

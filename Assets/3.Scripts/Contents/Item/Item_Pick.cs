@@ -50,6 +50,12 @@ public class Item_Pick : Item
         Destroy(gameObject, 60);
     }
 
+    public void SetInfo(ItemSO itemSO,int count)
+    {
+        itemSo = itemSO;
+        this.count = count;
+    }
+
     IEnumerator StopSelf()
     {
         while(true) 
