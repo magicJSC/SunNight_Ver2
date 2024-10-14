@@ -63,4 +63,11 @@ class PacketHandler
         Debug.Log(chatPacket.Msg);
     }
 
+    public static void CLoginHandler(PacketSession session, IMessage packet)
+    {
+        C_LOGIN loginPacket = packet as C_LOGIN;
+        ServerSession serverSession = session as ServerSession;
+
+        Debug.Log("C_LoginHandler");
+    }
 }

@@ -26,15 +26,15 @@ namespace Protocol {
           string.Concat(
             "CgpFbnVtLnByb3RvEghQcm90b2NvbCpoCgpQbGF5ZXJUeXBlEhQKEFBMQVlF",
             "Ul9UWVBFX05PTkUQABIWChJQTEFZRVJfVFlQRV9LTklHSFQQARIUChBQTEFZ",
-            "RVJfVFlQRV9NQUdFEAISFgoSUExBWUVSX1RZUEVfQVJDSEVSEAMq1AEKCFBh",
+            "RVJfVFlQRV9NQUdFEAISFgoSUExBWUVSX1RZUEVfQVJDSEVSEAMq5QEKCFBh",
             "Y2tldElkEgwKCFBLVF9OT05FEAASFAoQUEtUX0NfRU5URVJfR0FNRRABEhQK",
             "EFBLVF9TX0VOVEVSX0dBTUUQAhIUChBQS1RfQ19MRUFWRV9HQU1FEAMSFAoQ",
             "UEtUX1NfTEVBVkVfR0FNRRAEEg8KC1BLVF9TX1NQQVdOEAUSEQoNUEtUX1Nf",
             "REVTUEFXThAGEg4KClBLVF9DX01PVkUQBxIOCgpQS1RfU19NT1ZFEAgSDgoK",
-            "UEtUX0NfQ0hBVBAJEg4KClBLVF9TX0NIQVQQCio7Cg1DcmVhdHVyZVN0YXRl",
-            "EggKBElETEUQABIKCgZNT1ZJTkcQARIKCgZBVFRBQ0sQAhIICgRERUFEEAMq",
-            "OgoHTW92ZURpchIICgROT05FEAASBgoCVVAQARIICgRET1dOEAISCAoETEVG",
-            "VBADEgkKBVJJR0hUEARiBnByb3RvMw=="));
+            "UEtUX0NfQ0hBVBAJEg4KClBLVF9TX0NIQVQQChIPCgtQS1RfQ19MT0dJThAL",
+            "KjsKDUNyZWF0dXJlU3RhdGUSCAoESURMRRAAEgoKBk1PVklORxABEgoKBkFU",
+            "VEFDSxACEggKBERFQUQQAyo6CgdNb3ZlRGlyEggKBE5PTkUQABIGCgJVUBAB",
+            "EggKBERPV04QAhIICgRMRUZUEAMSCQoFUklHSFQQBGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Protocol.PlayerType), typeof(global::Protocol.PacketId), typeof(global::Protocol.CreatureState), typeof(global::Protocol.MoveDir), }, null, null));
@@ -62,6 +62,7 @@ namespace Protocol {
     [pbr::OriginalName("PKT_S_MOVE")] PktSMove = 8,
     [pbr::OriginalName("PKT_C_CHAT")] PktCChat = 9,
     [pbr::OriginalName("PKT_S_CHAT")] PktSChat = 10,
+    [pbr::OriginalName("PKT_C_LOGIN")] PktCLogin = 11,
   }
 
   public enum CreatureState {

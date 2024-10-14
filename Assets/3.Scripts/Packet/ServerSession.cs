@@ -95,6 +95,11 @@ public class ServerSession : PacketSession
                 sChatPkt.MergeFrom(buffer.Array, buffer.Offset + 4, buffer.Count - 4);
                 PacketHandler.SChatHandler(this, sChatPkt);
                 break;
+            case PacketId.PktCLogin:
+                C_LOGIN cLoginPkt = new C_LOGIN();
+                cLoginPkt.MergeFrom(buffer.Array, buffer.Offset + 4, buffer.Count - 4);
+                PacketHandler.CLoginHandler(this, cLoginPkt);
+                break;
             default:
                 break;
         }
