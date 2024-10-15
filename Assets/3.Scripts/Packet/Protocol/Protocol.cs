@@ -36,7 +36,8 @@ namespace Protocol {
             "Q0hBVBILCgNtc2cYASABKAkiPwoGU19DSEFUEigKCnBsYXllckluZm8YASAB",
             "KAsyFC5Qcm90b2NvbC5QbGF5ZXJJbmZvEgsKA21zZxgCIAEoCSI1CgdDX0xP",
             "R0lOEgoKAmlkGAEgASgJEgwKBG5hbWUYAiABKAkSEAoIcGFzc3dvcmQYAyAB",
-            "KAkiFAoSUkVRVUVTVF9FTlRFUl9HQU1FYgZwcm90bzM="));
+            "KAkiPAoSUkVRVUVTVF9FTlRFUl9HQU1FEiYKBnBhY2tldBgBIAEoCzIWLlBy",
+            "b3RvY29sLkNfRU5URVJfR0FNRWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, global::Protocol.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -51,7 +52,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_CHAT), global::Protocol.C_CHAT.Parser, new[]{ "Msg" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_CHAT), global::Protocol.S_CHAT.Parser, new[]{ "PlayerInfo", "Msg" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_LOGIN), global::Protocol.C_LOGIN.Parser, new[]{ "Id", "Name", "Password" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.REQUEST_ENTER_GAME), global::Protocol.REQUEST_ENTER_GAME.Parser, null, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.REQUEST_ENTER_GAME), global::Protocol.REQUEST_ENTER_GAME.Parser, new[]{ "Packet" }, null, null, null, null)
           }));
     }
     #endregion
@@ -2270,6 +2271,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public REQUEST_ENTER_GAME(REQUEST_ENTER_GAME other) : this() {
+      packet_ = other.packet_ != null ? other.packet_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2277,6 +2279,18 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public REQUEST_ENTER_GAME Clone() {
       return new REQUEST_ENTER_GAME(this);
+    }
+
+    /// <summary>Field number for the "packet" field.</summary>
+    public const int PacketFieldNumber = 1;
+    private global::Protocol.C_ENTER_GAME packet_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Protocol.C_ENTER_GAME Packet {
+      get { return packet_; }
+      set {
+        packet_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2294,6 +2308,7 @@ namespace Protocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (!object.Equals(Packet, other.Packet)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2301,6 +2316,7 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (packet_ != null) hash ^= Packet.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2319,6 +2335,10 @@ namespace Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (packet_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Packet);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2329,6 +2349,10 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (packet_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Packet);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2339,6 +2363,9 @@ namespace Protocol {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (packet_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Packet);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -2350,6 +2377,12 @@ namespace Protocol {
     public void MergeFrom(REQUEST_ENTER_GAME other) {
       if (other == null) {
         return;
+      }
+      if (other.packet_ != null) {
+        if (packet_ == null) {
+          Packet = new global::Protocol.C_ENTER_GAME();
+        }
+        Packet.MergeFrom(other.Packet);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2366,6 +2399,13 @@ namespace Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 10: {
+            if (packet_ == null) {
+              Packet = new global::Protocol.C_ENTER_GAME();
+            }
+            input.ReadMessage(Packet);
+            break;
+          }
         }
       }
     #endif
@@ -2381,6 +2421,13 @@ namespace Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
+          case 10: {
+            if (packet_ == null) {
+              Packet = new global::Protocol.C_ENTER_GAME();
+            }
+            input.ReadMessage(Packet);
+            break;
+          }
         }
       }
     }
