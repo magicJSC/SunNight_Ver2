@@ -697,8 +697,8 @@ TextureImporter:
         y: 473
         width: 54
         height: 41
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.55613494, y: 0.42823976}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -802,8 +802,8 @@ TextureImporter:
         y: 441
         width: 30
         height: 55
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.29619485, y: 0.49465832}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -865,8 +865,8 @@ TextureImporter:
         y: 377
         width: 30
         height: 55
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.7537569, y: 0.49669024}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -887,7 +887,7 @@ TextureImporter:
         width: 27
         height: 64
       alignment: 9
-      pivot: {x: 0.51319575, y: 0.1993885}
+      pivot: {x: 0.33, y: 0.23}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -908,7 +908,7 @@ TextureImporter:
         width: 27
         height: 64
       alignment: 9
-      pivot: {x: 0.48680454, y: 0.19103813}
+      pivot: {x: 0.67, y: 0.23}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -929,7 +929,7 @@ TextureImporter:
         width: 27
         height: 58
       alignment: 9
-      pivot: {x: 0.5, y: 0.2082188}
+      pivot: {x: 0.38, y: 0.2082188}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -950,7 +950,7 @@ TextureImporter:
         width: 27
         height: 58
       alignment: 9
-      pivot: {x: 0.5, y: 0.20207582}
+      pivot: {x: 0.65, y: 0.2020758}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1075,8 +1075,8 @@ TextureImporter:
         y: 324
         width: 37
         height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.50317836, y: 0.2190857}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1097,7 +1097,7 @@ TextureImporter:
         width: 25
         height: 43
       alignment: 9
-      pivot: {x: 0.4954541, y: 0.25419936}
+      pivot: {x: 0.38, y: 0.25419936}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2798,7 +2798,7 @@ TextureImporter:
         width: 36
         height: 17
       alignment: 9
-      pivot: {x: 0.5019124, y: 0.33397898}
+      pivot: {x: 0.5019124, y: 0.26}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3482,6 +3482,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: buildings_furnitures_160
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 311
+        width: 16
+        height: 36
+      alignment: 9
+      pivot: {x: 0.49999905, y: 0.13462321}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81246cd0171539049bebc2c3609805f6
+      internalID: 1271068442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_furnitures_161
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 311
+        width: 16
+        height: 36
+      alignment: 9
+      pivot: {x: 0.52221775, y: 0.13462321}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e7c6629665eca447823e9378ddf6d96
+      internalID: -14176073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buildings_furnitures_162
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 302
+        width: 16
+        height: 32
+      alignment: 9
+      pivot: {x: 0.49999905, y: 0.105615616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8731a94100460d146bafcd036f80de0f
+      internalID: 1080783040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -3562,6 +3625,9 @@ TextureImporter:
       buildings_furnitures_158: 2064699797
       buildings_furnitures_159: 1187482164
       buildings_furnitures_16: 514204625
+      buildings_furnitures_160: 1271068442
+      buildings_furnitures_161: -14176073
+      buildings_furnitures_162: 1080783040
       buildings_furnitures_17: -306188334
       buildings_furnitures_18: -159407733
       buildings_furnitures_19: 1625174300
