@@ -49,6 +49,8 @@ public class PlayerInteract : MonoBehaviour
     public void SetInteractObj()
     {
         canInteractObj = null;
+        interactAction = null;
+        cancelAction = null;
         for (int i = 0; i < interactObjectList.Count; i++)
         {
             if (canInteractObj == null)
@@ -60,8 +62,6 @@ public class PlayerInteract : MonoBehaviour
         }
         if (canInteractObj != null)
         {
-            interactAction = null;
-            cancelAction = null;
             canInteractObj.GetComponent<IInteractObject>().ShowInteractSign();
             canInteractObj.GetComponent<IInteractObject>().SetAction(this);
         }
