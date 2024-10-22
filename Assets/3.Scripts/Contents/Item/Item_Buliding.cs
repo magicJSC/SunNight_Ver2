@@ -17,6 +17,9 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
     Stat stat;
     public SpriteRenderer[] bodySprites;
 
+    Transform towerTransform;
+
+    BoxCollider2D boxCollider;
     private void Start()
     {
         pos = Managers.Game.tower.build.WorldToCell(transform.position);
@@ -24,7 +27,9 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
         buildEffect = Util.FindChild(gameObject, "BuildEffect", true);
 
         stat = GetComponent<Stat>();
+        boxCollider = GetComponent<BoxCollider2D>();
 
+        towerTransform = Managers.Game.tower.transform;
         MapManager.buildData.Add(pos);
 
     }
@@ -48,39 +53,33 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
     }
 
     //설치 전 색깔로 변경
-    public void ChangeColorBeforeIntall()
+    public void ChangeBeforeIntall()
     {
         buildEffect.SetActive(false);
+        boxCollider.enabled = false;
         for(int i=0;i< bodySprites.Length;i++)
         {
-            bodySprites[i].color = new Color(1,1,1,0.3f);
+            bodySprites[i].color = new Color(1,1,1,0.5f);
         }
     }
 
-    public void CantInstallColor()
+   
+    public bool ChangeAfterIntall()
     {
-        buildEffect.SetActive(false);
-        for (int i = 0; i < bodySprites.Length; i++)
-        {
-            bodySprites[i].color = new Color(1, 0.5f, 0.5f, 0.3f);
-        }
-    }
-
-    //설치 후 색깔로 변경
-    public void ChangeColorAfterIntall()
-    {
-        if (MapManager.cantBuild.HasTile(new Vector3Int((int)(transform.position.x), (int)(transform.position.y), 0)))
+        if (MapManager.cantBuild.HasTile(MapManager.building.WorldToCell(new Vector3(transform.position.x + towerTransform.position.x,transform.position.y + towerTransform.position.y))))
         {
             Item_Buliding building = GetComponentInParent<Item_Buliding>();
             Managers.Inven.AddItems(building.itemSo, 1);
             building.DeleteBuilding();
-            return;
+            return false;
         }
 
         buildEffect.SetActive(true);
+        boxCollider.enabled = true;
         for (int i = 0; i < bodySprites.Length; i++)
         {
             bodySprites[i].color = new Color(1, 1, 1, 1);
         }
+        return true;
     }
 }

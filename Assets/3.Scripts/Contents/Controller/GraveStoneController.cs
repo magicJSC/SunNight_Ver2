@@ -7,7 +7,7 @@ public class GraveStoneController : MonoBehaviour,IInteractObject
     public GameObject canInteractSign { get; private set; }
 
     [HideInInspector]
-    public List<StorageManager.SlotInfo> slotInfoList = new List<StorageManager.SlotInfo>();
+    public List<InvenManager.SlotInfo> slotInfoList = new List<InvenManager.SlotInfo>();
 
     void Start()
     {
@@ -24,7 +24,7 @@ public class GraveStoneController : MonoBehaviour,IInteractObject
         {
             if(info.itemUI.slotInfo.itemInfo != null)
             {
-                StorageManager.SlotInfo slotInfo = new StorageManager.SlotInfo(info.itemUI.slotInfo.count, info.itemUI.slotInfo.itemInfo.idName);
+                InvenManager.SlotInfo slotInfo = new InvenManager.SlotInfo(info.itemUI.slotInfo.count, info.itemUI.slotInfo.itemInfo.idName);
                 slotInfoList.Add(slotInfo);
             }
         }
@@ -33,7 +33,7 @@ public class GraveStoneController : MonoBehaviour,IInteractObject
         {
             if (hotbarSlotInfo[i].itemUI.slotInfo.itemInfo != null)
             {
-                StorageManager.SlotInfo slotInfo = new StorageManager.SlotInfo(hotbarSlotInfo[i].itemUI.slotInfo.count, hotbarSlotInfo[i].itemUI.slotInfo.itemInfo.idName);
+                InvenManager.SlotInfo slotInfo = new InvenManager.SlotInfo(hotbarSlotInfo[i].itemUI.slotInfo.count, hotbarSlotInfo[i].itemUI.slotInfo.itemInfo.idName);
                 slotInfoList.Add(slotInfo); 
             }
         }

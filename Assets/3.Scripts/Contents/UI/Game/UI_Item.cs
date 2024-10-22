@@ -12,7 +12,7 @@ public class UI_Item : UI_Base
     [HideInInspector]
     public Transform dropingSlot;
     [HideInInspector]
-    public StorageManager.SlotInfo slotInfo;
+    public InvenManager.SlotInfo slotInfo;
 
     [SerializeField]
     AssetReferenceT<Sprite> buildIconAsset;
@@ -104,10 +104,12 @@ public class UI_Item : UI_Base
             SetExistItem();
             count.text = $"{slotInfo.count}";
             icon.sprite = slotInfo.itemInfo.itemIcon;
+            itemTypeIcon.gameObject.SetActive(false);
 
             if (slotInfo.itemInfo.itemType == Define.ItemType.Pick)
             {
-                if(materialIcon == null)
+                itemTypeIcon.gameObject.SetActive(true);
+                if (materialIcon == null)
                 {
                     materialIconAsset.LoadAssetAsync().Completed += (sprite) =>
                     {
@@ -120,6 +122,7 @@ public class UI_Item : UI_Base
             }
             else if (slotInfo.itemInfo.itemType == Define.ItemType.Tool)
             {
+                itemTypeIcon.gameObject.SetActive(true);
                 if (weaponIcon == null)
                 {
                     weaponIconAsset.LoadAssetAsync().Completed += (sprite) =>
@@ -133,6 +136,7 @@ public class UI_Item : UI_Base
             }
             else if (slotInfo.itemInfo.itemType == Define.ItemType.Building)
             {
+                itemTypeIcon.gameObject.SetActive(true);
                 if (buildIcon == null)
                 {
                     buildIconAsset.LoadAssetAsync().Completed += (sprite) =>
@@ -146,6 +150,7 @@ public class UI_Item : UI_Base
             }
             else if (slotInfo.itemInfo.itemType == Define.ItemType.Consumable)
             {
+                itemTypeIcon.gameObject.SetActive(true);
                 if (consumeIcon == null)
                 {
                     consumeIconAsset.LoadAssetAsync().Completed += (sprite) =>
@@ -216,7 +221,7 @@ public class UI_Item : UI_Base
 
     void AbandonItem()
     {
-        if (!StorageManager.canAbandon)
+        if (!InvenManager.canAbandon)
             return;
         abandonUIAsset.InstantiateAsync().Completed += (obj) =>
         {

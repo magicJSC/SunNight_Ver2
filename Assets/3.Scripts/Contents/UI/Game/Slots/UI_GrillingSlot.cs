@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using static StorageManager;
+using static InvenManager;
 
 public class UI_GrillingSlot : UI_BaseSlot,IDragable,IDroppable
 {

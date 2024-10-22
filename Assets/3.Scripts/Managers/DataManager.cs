@@ -4,7 +4,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
 using System.Text;
-using static StorageManager;
+using static InvenManager;
 
 public class PlayerDatas
 {

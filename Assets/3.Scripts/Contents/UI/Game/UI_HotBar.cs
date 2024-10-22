@@ -10,8 +10,6 @@ public class UI_HotBar : UI_Base
 
     [HideInInspector]
     public UI_HotbarSlot[] slotList;
-    [HideInInspector]
-    public UI_TowerSlot towerSlot;
     Image choice;
 
     RectTransform choiceRect;
@@ -123,14 +121,4 @@ public class UI_HotBar : UI_Base
     {
         Managers.Inven.CheckHotBarChoice();
     }
-
-   
-
-    #region 기지 관련
-
-    public void GetTower()
-    {
-        Managers.Inven.hotBarUI.slotList[4].itemUI.slotInfo.keyType = Define.KeyType.Exist;
-    }
-    #endregion
 }

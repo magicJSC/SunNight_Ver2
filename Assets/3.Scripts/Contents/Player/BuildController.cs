@@ -6,18 +6,18 @@ using static Define;
 
 public class BuildController : MonoBehaviour
 {
-    public static Action tutorialEvent;
-
     [HideInInspector]
     public UI_Item itemUI;
 
     public SpriteRenderer buildItemIcon;
+    public SpriteRenderer buildTile;
     public SpriteRenderer gridSign;
 
     public void Init()
     {
         gridSign = GetComponent<SpriteRenderer>();
         buildItemIcon = Util.FindChild(gameObject, "Sample").GetComponent<SpriteRenderer>();
+        buildTile = GetComponent<SpriteRenderer>();
         StartCoroutine(UpdateCor());
     }
 
@@ -28,6 +28,7 @@ public class BuildController : MonoBehaviour
 
     private void OnEnable()
     {
+        Managers.Map.SetCanBuildTile();
         StartCoroutine(UpdateCor());
     }
 
@@ -51,12 +52,16 @@ public class BuildController : MonoBehaviour
     public void MoveBuilder()
     {
         if (Managers.Game.isCantPlay)
+        {
+            gameObject.SetActive(false);
+            MapManager.canBuild.gameObject.SetActive(false);
             return;
+        }
         if (MapManager.building == null)
             return;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int gridPostion = MapManager.building.WorldToCell(mousePosition);
-        transform.position = MapManager.building.CellToWorld(gridPostion);
+        transform.position = MapManager.building.CellToWorld(gridPostion) + new Vector3(0.5f,0.5f);
 
         if (buildItemIcon == null)
             return;
@@ -67,11 +72,11 @@ public class BuildController : MonoBehaviour
         }
         if (Managers.Map.CheckCanUseTile(gridPostion))
         {
-            buildItemIcon.color = new Color(1, 1, 1, 0.6f);
+            buildTile.color = new Color(0.7f, 1, 0.6f, 0.4f);
         }
         else
         {
-            buildItemIcon.color = new Color(1, 0.5f, 0.5f, 0.6f);
+            buildTile.color = new Color(1, 0.4f, 0.4f, 0.4f);
         }
     }
 
@@ -87,18 +92,17 @@ public class BuildController : MonoBehaviour
         {
             if (!gameObject.activeSelf)
                 return;
-
-            if (!Managers.Game.completeTutorial)
-                tutorialEvent?.Invoke();
             if (itemUI == null)
                 return;
             MapManager.building.SetTile(gridPostion, itemUI.slotInfo.itemInfo.buildTile); 
             itemUI.slotInfo.count--;
+            Managers.Map.SetCanBuildTile();
             if (itemUI.slotInfo.count <= 0)
             {
                 itemUI.MakeEmptySlot();
                 itemUI.SetEmptyItem();
                 Managers.Game.mouse.CursorType = CursorType.Normal;
+                Managers.Inven.CheckHotBarChoice();
             }
             else
                 itemUI.SetInfo();

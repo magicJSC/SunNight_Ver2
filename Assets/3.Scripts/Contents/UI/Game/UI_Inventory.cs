@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class UI_Inventory : UI_Base
 {
-    public static Action tutorial1Event;
-
     public AssetReferenceT<AudioClip> showSoundAsset;
     public AssetReferenceT<AudioClip> hideSoundAsset;
 
@@ -75,7 +73,7 @@ public class UI_Inventory : UI_Base
         {
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
             {
-                StorageManager.canAbandon = false;
+                InvenManager.canAbandon = false;
                 return; 
             }
             Managers.Game.mouse.CursorType = Define.CursorType.UI;
@@ -84,7 +82,7 @@ public class UI_Inventory : UI_Base
         {
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
             {
-                StorageManager.canAbandon = true;
+                InvenManager.canAbandon = true;
                 return; 
             }
             Managers.Inven.CheckHotBarChoice();
@@ -123,9 +121,6 @@ public class UI_Inventory : UI_Base
     {
         if (_init)
         {
-            if (!Managers.Game.completeTutorial)
-                tutorial1Event?.Invoke();
-
             Managers.Sound.Play(Define.Sound.Effect, showSound);
             Managers.UI.PopUIList.Add(gameObject);
         }

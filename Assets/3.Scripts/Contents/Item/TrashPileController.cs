@@ -7,8 +7,6 @@ using Random = UnityEngine.Random;
 
 public class TrashPileController : MonoBehaviour,IInteractObject
 {
-    public static Action interactEvent;
-
     [Serializable]
     public struct GetItem
     {
@@ -73,14 +71,13 @@ public class TrashPileController : MonoBehaviour,IInteractObject
 
     void GetRandomItem()
     {
-        interactEvent?.Invoke();
         int randomIndex = Random.Range(1, 101);
         float num = 0;
         for(int i = 0; i < getItemList.Count; i++)
         {
             if(num < randomIndex && randomIndex <= num + getItemList[i].probability)
             {
-                Managers.Game.SpawnItem(getItemList[i].item, getItemList[i].count,transform.position);
+                Managers.Game.GetItem(getItemList[i].item, getItemList[i].count,transform.position);
                 break;
             }
             num += getItemList[i].probability;

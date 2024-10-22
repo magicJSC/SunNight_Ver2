@@ -38,6 +38,12 @@ public class ToolController : MonoBehaviour
     {
         while (true)
         {
+            if(Managers.Game.isCantPlay)
+            {
+                Destroy(gameObject);
+                yield break;
+            }
+
             point = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10);
             if (!isWorking)
             {
