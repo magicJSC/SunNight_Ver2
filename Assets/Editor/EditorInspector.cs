@@ -44,13 +44,14 @@ public class EditorInspector : Editor
         EditorGUILayout.PropertyField(maxAmount_Prop);
 
         EditorGUILayout.PropertyField(itemType_Prop);
-        if((Define.ItemType)itemType_Prop.enumValueIndex == Define.ItemType.Pick)
-        {
-            EditorGUILayout.PropertyField(itemPrefab_Prop);
-        }
+     
         if ((Define.ItemType)itemType_Prop.enumValueIndex == Define.ItemType.Building)
         {
             EditorGUILayout.PropertyField(buildTile_Prop);
+        }
+        else
+        {
+            EditorGUILayout.PropertyField(itemPrefab_Prop);
         }
 
         EditorGUILayout.PropertyField(canSmelt_Prop);
@@ -63,7 +64,7 @@ public class EditorInspector : Editor
         if(canBake_Prop.boolValue)
         {
             EditorGUILayout.PropertyField(bakeItem_Prop);
-            EditorGUILayout.PropertyField(bakeItem_Prop);
+            EditorGUILayout.PropertyField(bakeTime_Prop);
         }
 
 

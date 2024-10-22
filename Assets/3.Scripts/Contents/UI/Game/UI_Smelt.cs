@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using static StorageManager;
+using static InvenManager;
 
 /// <summary>
 /// 제련 할 때 생성되는 UI입니다

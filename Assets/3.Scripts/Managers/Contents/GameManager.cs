@@ -31,10 +31,12 @@ public class GameManager : MonoBehaviour
     public bool[] isUnlockTowerPos = new bool[6];
 
 
-    public void SpawnItem(ItemSO item,int amount,Vector3 pos)
+    public void GetItem(ItemSO item,int amount,Vector3 pos)
     {
          int leftCount = Managers.Inven.AddItems(item,amount);
         if(leftCount > 0)
             Instantiate(item, pos, Quaternion.identity).GetComponent<Item_Pick>().SetInfo(item,amount);
+
+        Managers.Inven.CheckHotBarChoice();
     }
 }

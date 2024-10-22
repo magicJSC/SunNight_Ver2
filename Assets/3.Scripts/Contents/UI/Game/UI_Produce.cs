@@ -8,8 +8,6 @@ using UnityEngine.AddressableAssets;
 
 public class UI_Produce : UI_Base
 {
-    public static Action tutorialEvent;
-
     public AssetReferenceGameObject itemUIAsset;
 
     GameObject itemUI;
@@ -52,9 +50,9 @@ public class UI_Produce : UI_Base
 
     [HideInInspector]
     public GameObject back;
-    GameObject contentMat;
+    RectTransform contentMat;
     GameObject contentItem;
-    GameObject produce;
+    Image produce;
     RectTransform hideRect;
     [HideInInspector]
     public GameObject explainMat;
@@ -68,17 +66,18 @@ public class UI_Produce : UI_Base
 
     RectTransform backR;
 
-   
+    bool canProduce;
+
     public override void Init()
     {
         if (_init)
             return;
 
-        back = Util.FindChild(gameObject, "Background", true); 
-        contentMat = Util.FindChild(gameObject, "Content_Mat", true); 
+        back = Util.FindChild(gameObject, "Background", true);
+        contentMat = Util.FindChild<RectTransform>(gameObject, "Content_Mat", true);
         contentItem = Util.FindChild(gameObject, "Content_Item", true);
         toMake = Util.FindChild<Image>(gameObject, "ToMake", true);
-        produce = Util.FindChild(gameObject, "Produce", true);
+        produce = Util.FindChild<Image>(gameObject, "Produce", true);
         hideRect = Util.FindChild<RectTransform>(gameObject, "Hide", true);
         explainMat = Util.FindChild(gameObject, "Explain_Mat", true);
         explainItem = Util.FindChild(gameObject, "Explain_Item", true);
@@ -88,7 +87,7 @@ public class UI_Produce : UI_Base
 
         backR = back.GetComponent<RectTransform>();
 
-        produceMaterialUIAsset.LoadAssetAsync().Completed += (obj) => 
+        produceMaterialUIAsset.LoadAssetAsync().Completed += (obj) =>
         {
             produceMaterialUI = obj.Result;
         };
@@ -97,7 +96,7 @@ public class UI_Produce : UI_Base
             itemUI = obj.Result;
             for (int i = 0; i < toMakeItemList.Count; i++)
             {
-                UI_Produce_Item item = Instantiate(itemUI,contentItem.transform).GetComponent<UI_Produce_Item>();
+                UI_Produce_Item item = Instantiate(itemUI, contentItem.transform).GetComponent<UI_Produce_Item>();
                 item.produce = this;
                 item.toMakeItem = toMakeItemList[i];
             }
@@ -169,7 +168,7 @@ public class UI_Produce : UI_Base
     {
         toMake.gameObject.SetActive(true);
         toMake.sprite = toMakeItem.toMakeItemSO.itemIcon;
-        contentMat.GetComponent<RectTransform>().offsetMax = new Vector2(100 * toMakeItem.materialList.Length - 200, 0);
+        contentMat.offsetMax = new Vector2(100 * toMakeItem.materialList.Length - 200, 0);
 
         for (int i = 0; i < toMakeItem.materialList.Length; i++)
         {
@@ -177,7 +176,16 @@ public class UI_Produce : UI_Base
             ma.produce = this;
             ma.material = toMakeItem.materialList[i];
         }
-
+        if (!CanProduce())
+        {
+            produce.color = new Color(0.5f,0.5f,0.5f);
+            canProduce = false;
+        }
+        else
+        {
+            produce.color = new Color(1f, 1f, 1f);
+            canProduce = true;
+        }
     }
 
     public void Remove_ToMake()
@@ -196,34 +204,28 @@ public class UI_Produce : UI_Base
     {
         if (toMakeItem.materialList.Length == 0)
             return;
-
-        if (CanProduce())
+        if (!canProduce)
+            return;
+        for (int i = 0; i < toMakeItem.materialList.Length; i++)
         {
-            for (int i = 0; i < toMakeItem.materialList.Length; i++)
+            List<UI_Item> _itemUIList = itemUIList[toMakeItem.materialList[i].itemSO.itemName];
+            int count = toMakeItem.materialList[i].count;
+            for (int j = 0; j < _itemUIList.Count; j++)
             {
-                List<UI_Item> _itemUIList = itemUIList[toMakeItem.materialList[i].itemSO.itemName];
-                int count = toMakeItem.materialList[i].count;
-                for (int j = 0; j < _itemUIList.Count; j++)
-                {
-                    int amount = _itemUIList[j].slotInfo.count;
-                    Managers.Inven.SetSlot(toMakeItem.materialList[i].itemSO, _itemUIList[j], Mathf.Clamp(_itemUIList[j].slotInfo.count - count, 0, _itemUIList[j].slotInfo.count));
-                    count -= amount;
-                }
+                int amount = _itemUIList[j].slotInfo.count;
+                Managers.Inven.SetSlot(toMakeItem.materialList[i].itemSO, _itemUIList[j], Mathf.Clamp(_itemUIList[j].slotInfo.count - count, 0, _itemUIList[j].slotInfo.count));
+                count -= amount;
             }
-            if (!Managers.Game.completeTutorial)
-                tutorialEvent?.Invoke();
-            Managers.Inven.AddItems(toMakeItem.toMakeItemSO,1);
-            if(produceSound != null)
-                Managers.Sound.Play(Define.Sound.Effect, produceSound);
-
         }
-        else
-            Debug.Log("재료가 부족합니다");
+        Managers.Inven.AddItems(toMakeItem.toMakeItemSO, 1);
+        if (produceSound != null)
+            Managers.Sound.Play(Define.Sound.Effect, produceSound);
     }
 
     void EnterProduceButton(PointerEventData p)
     {
-        produceButtonText.color = Color.red;
+        if(canProduce)
+            produceButtonText.color = Color.red;
     }
 
     void ExitProduceButton(PointerEventData p)
@@ -238,7 +240,7 @@ public class UI_Produce : UI_Base
         {
             int count = 0;
             bool canProduce = false;
-            itemUIList.Add(toMakeItem.materialList[i].itemSO.itemName,new());
+            itemUIList.Add(toMakeItem.materialList[i].itemSO.itemName, new());
             for (int j = 0; j < 24; j++)
             {
                 if (canProduce)
@@ -246,14 +248,14 @@ public class UI_Produce : UI_Base
                 UI_Item itemUI = Managers.Inven.inventoryUI.slotList[j].itemUI;
                 if (itemUI.slotInfo.itemInfo == null)
                     continue;
-               
+
                 if (toMakeItem.materialList[i].itemSO.idName == itemUI.slotInfo.itemInfo.idName)
                 {
                     count += itemUI.slotInfo.count;
                     itemUIList[itemUI.slotInfo.itemInfo.itemName].Add(itemUI);
 
                     if (count >= toMakeItem.materialList[i].count)
-                        canProduce =  true;
+                        canProduce = true;
                 }
             }
             for (int j = 0; j < 4; j++)
@@ -272,7 +274,7 @@ public class UI_Produce : UI_Base
                         canProduce = true;
                 }
             }
-            if(!canProduce)
+            if (!canProduce)
                 return false;
         }
         return true;

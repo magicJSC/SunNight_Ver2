@@ -25,14 +25,14 @@ public class UI_TowerSlot : UI_Base
         {
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
             {
-                StorageManager.canAbandon = false;
+                InvenManager.canAbandon = false;
             }
         };
         evt._OnExit += (PointerEventData p) =>
         {
             if (Managers.Game.mouse.CursorType == Define.CursorType.Drag)
             {
-                StorageManager.canAbandon = true;
+                InvenManager.canAbandon = true;
             }
         };
 

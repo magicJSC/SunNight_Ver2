@@ -19,31 +19,49 @@ public class MapManager : MonoBehaviour
 
     public static Tilemap building;
     public static Tilemap cantBuild;
+    public static Tilemap canBuild;
     public static Tilemap tower;
+
+    public Vector3Int startPos;
+    public Vector3Int sizeVector;
+    public TileBase canBuildTile;
 
     public void Init()
     {
         buildData.Clear();
         GameObject go = Util.FindChild(gameObject, "CantBuild");
         cantBuild = go.GetComponent<Tilemap>();
+        Managers.Map.sizeVector = sizeVector;
+        Managers.Map.startPos = startPos;
+        Managers.Map.canBuildTile = canBuildTile;
     }
 
     public bool CheckCanUseTile(Vector3Int pos)
     {
-
         if (Managers.Game.tower == null)
             return false;
-        Vector2 towerPos = Managers.Game.tower.transform.position;
-        if (building.HasTile(pos))
-            return false;
-        else if (tower.HasTile(pos))
-            return false;
-        else if (cantBuild.HasTile(pos))
-            return false;
-        else if ((pos == Vector3Int.zero))
-            return false;
+        return canBuild.HasTile(pos);
+    }
 
-        return true;
+    public void SetCanBuildTile()
+    {
+        Vector3 towerPos = Managers.Game.tower.transform.position;
+        for (int i = 0; i < sizeVector.x; i++)
+        {
+            for (int j = 0; j < sizeVector.y; j++) {
+                Vector3Int pos = new Vector3Int(i, -j) + startPos;
+
+                if (building.HasTile(pos))
+                    canBuild.SetTile(pos, null);
+                else if (tower.HasTile(pos))
+                    canBuild.SetTile(pos, null);
+                else if (cantBuild.HasTile(pos + new Vector3Int((int)towerPos.x, (int)towerPos.y, 0)))
+                    canBuild.SetTile(pos, null);
+                else
+                    canBuild.SetTile(pos, canBuildTile);
+            }
+        }
+
     }
 
     public void ShowBuildUI(Vector3Int pos)
@@ -57,6 +75,24 @@ public class MapManager : MonoBehaviour
         go.GetComponent<Item_Buliding>().buildUI.SetActive(true);
     }
 
+    public bool CheckCanBuild(Vector3Int startPos, Vector3 size,bool build = true)
+    {
+        Transform towerTransform = Managers.Game.tower.transform;
+        Vector3Int towerPos = new Vector3Int((int)towerTransform.position.x,(int)towerTransform.position.y);
+        for(int i = 0; i < size.x; i++)
+        {
+            for(int j = 0; j < size.y;j++)
+            {
+                if(cantBuild.HasTile(startPos+towerPos + new Vector3Int(i,-j)))
+                    return false;
+                if(build)
+                    if (tower.HasTile(new Vector3Int(i, -j) + startPos))
+                        return false;
+            }
+        }
+
+        return true;
+    }
   
 
     public void LoadMap(int mapId)

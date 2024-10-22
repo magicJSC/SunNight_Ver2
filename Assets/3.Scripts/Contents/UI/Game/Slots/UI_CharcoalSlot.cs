@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static StorageManager;
+using static InvenManager;
 
 public class UI_CharcoalSlot : UI_BaseSlot
 {

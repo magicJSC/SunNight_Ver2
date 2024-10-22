@@ -253,7 +253,7 @@ public class MonsterController : MonoBehaviour, IMonster
         float index = UnityEngine.Random.Range(0, 101);
         if (index <= luck)
         {
-           Managers.Game.SpawnItem(meat,1,transform.position);
+           Managers.Game.GetItem(meat,1,transform.position);
         }
         Managers.Inven.Coin += coin;
         dieEvent?.Invoke(gameObject);

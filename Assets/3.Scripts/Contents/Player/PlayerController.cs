@@ -10,7 +10,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMonsterTarget
 {
-    public static Action tutorial1Event;
     public Action escEvent;
 
     PlayerStat stat;
@@ -29,7 +28,6 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
 
     public AssetReferenceGameObject statUIAsset;
     public AssetReferenceGameObject DieUIAsset;
-    public AssetReferenceGameObject miniMapAsset;
     public AssetReferenceGameObject gameMenuUIAsset;
 
     public AssetReferenceGameObject graveAsset;
@@ -63,7 +61,6 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
             GetComponent<PopUICloser>().gameMenuUI = go;
         };
         buffList = new List<BaseBuffGiver>();
-        miniMapAsset.InstantiateAsync();
 
         StartCoroutine(Move());
     }
@@ -101,8 +98,6 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
 
         if (dir != Vector2.zero)
         {
-            tutorial1Event?.Invoke();
-
             anim.Play("Move");
             if (dir.x != 0)
                 sprite.flipX = dir.x > 0;
@@ -136,7 +131,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
 
     
 
-    public void BuildAction()
+    public void OnBuild()
     {
         if (Managers.Game.isCantPlay)
             return;

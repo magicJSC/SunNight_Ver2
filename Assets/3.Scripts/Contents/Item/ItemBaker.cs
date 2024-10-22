@@ -17,6 +17,6 @@ public class ItemBaker : MonoBehaviour
         bonfire.itemBakers.Add(this);
         bonfire.BakingCount--;
         Vector2 pos = bonfire.transform.position + Managers.Game.tower.transform.position;
-        Managers.Game.SpawnItem(bakedItem,1,pos);
+        Managers.Game.GetItem(bakedItem,1,pos);
     }
 }

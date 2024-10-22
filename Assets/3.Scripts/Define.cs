@@ -28,6 +28,7 @@ public class Define : MonoBehaviour
         Tool,           // 장비
         Pick,       // 재료
         Building,        // 건축
+        Tower,
         Etc,            // 기타
     }
 

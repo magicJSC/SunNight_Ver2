@@ -39,8 +39,8 @@ public class UI_Produce_Item : UI_Base
         evt._OnClick += (PointerEventData p) =>
         {
             produce.Remove_ToMake();
-            produce.Set_ToMake(toMakeItem);
             produce.toMakeItem = toMakeItem;
+            produce.Set_ToMake(toMakeItem);
         };
     }
 

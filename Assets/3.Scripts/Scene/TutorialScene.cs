@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static StorageManager;
+using static InvenManager;
 
 public class TutorialScene : BaseScene
 {
@@ -35,13 +35,11 @@ public class TutorialScene : BaseScene
         Managers.Inven.hotBarSlotInfo[1].count = 1;
 
         Managers.Game.player.transform.position = new Vector2(-14,20);
-        TutorialController.timeController = Managers.Game.timeController.gameObject;
         Managers.Game.timeController.gameObject.SetActive(false);
         Managers.Game.player.GetComponent<PlayerStat>().Hp = 100;
         Managers.Game.player.GetComponent<PlayerStat>().Hunger = 30;
 
         Managers.Game.tower.transform.position = new Vector3(-60, -143);
-        Managers.Game.tower.gameObject.SetActive(false);
         return true;
     }
 

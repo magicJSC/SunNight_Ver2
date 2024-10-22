@@ -2,7 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static StorageManager;
+using static InvenManager;
 
 public class LaboratoryScene : BaseScene
 {

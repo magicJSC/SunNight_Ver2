@@ -11,12 +11,12 @@ public class Managers : MonoBehaviour
     GameManager _game = new();
     ObjectMananger _obj = new();
     NetworkManager _network = new();
-    StorageManager _inven = new();
+    InvenManager _inven = new();
 
     public static ObjectMananger Object { get { return Instance._obj; } }
     public static NetworkManager Network { get { return Instance._network; } }
     public static GameManager Game { get { return Instance._game; } }
-    public static StorageManager Inven { get { return Instance._inven; } }
+    public static InvenManager Inven { get { return Instance._inven; } }
     #endregion
 
     UIManager _ui = new();
