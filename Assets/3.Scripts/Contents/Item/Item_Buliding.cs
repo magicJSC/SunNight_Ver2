@@ -43,6 +43,7 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
     {
         Managers.Game.tower.build.SetTile(pos,null);
         MapManager.buildData.Remove(pos);
+        Managers.Map.SetCanBuildTile();
     }
 
     public void GetDamage(int damage)

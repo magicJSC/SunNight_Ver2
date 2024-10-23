@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static InvenManager;
 
 public class GameScene : BaseScene
 {
-    TimeController timeController;
-
     protected override bool Init()
     {
         if (base.Init() == false)
@@ -15,34 +14,31 @@ public class GameScene : BaseScene
         Managers.Game.isKeepingTower = false;
         PlayerController.isDie = false;
         Managers.Game.completeTutorial = true;
-        TimeController.timeSpeed = 1.2f;
         Managers.UI.PopUIList.Clear();
+
+        for (int i = 0; i < 5; i++)
+            Managers.Inven.hotBarSlotInfo[i] = new SlotInfo(0);
+        for (int i = 0; i < 24; i++)
+            Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);
 
         InstantiateOrLoad();
         SetActions();
 
+        Managers.Game.timeController.timeSpeed = 2;
         Managers.Game.grid.Init();
         Managers.Game.mouse.Init();
         Managers.Game.tower.Init();
         Managers.Inven.Init();
         Managers.Game.build.Init(); //¼öÁ¤ Áß
         Managers.Game.player.Init();
-        Managers.Data.Init();
+        Managers.Game.lightController.Init();
 
         return true;
     }
 
-    private void OnDisable()
-    {
-        TimeController.morningEvent = null;
-        TimeController.nightEvent = null;
-        TimeController.timeEvent = null;
-        TimeController.dayEvent = null;
-    }
-
     void InstantiateOrLoad()
     {
-        timeController = Instantiate(Resources.Load<GameObject>("UI/UI_Time")).GetComponent<TimeController>();
+        Managers.Game.timeController = Instantiate(Resources.Load<GameObject>("UI/UI_Time")).GetComponent<TimeController>();
         Managers.Game.lightController = Instantiate(Resources.Load<GameObject>("Prefabs/Light")).GetComponent<LightController>();
         Managers.Game.grid = FindObjectOfType<MapManager>();
         Managers.Game.mouse = Instantiate(Resources.Load<GameObject>("Prefabs/MouseController").GetComponent<MouseController>());
@@ -55,6 +51,8 @@ public class GameScene : BaseScene
     void SetActions()
     {
         Managers.Game.build.SetAction();
-        timeController.SetAction();
+        Managers.Game.timeController.SetAction();
+        Managers.Game.timeController.GetComponent<UI_Time>().SetAction();
+        Managers.Game.lightController.SetAction();
     }
 }

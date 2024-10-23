@@ -23,6 +23,7 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie
         build = Util.FindChild(gameObject,"Building",true).GetComponent<Tilemap>();
         MapManager.building = build;
         MapManager.tower = Util.FindChild(gameObject,"Tower",true).GetComponent<Tilemap>();
+        MapManager.tower.gameObject.SetActive(false);
         MapManager.canBuild = Util.FindChild(gameObject,"CanBuild",true).GetComponent<Tilemap>();
         stat = GetComponent<Stat>();
         boxCollider = GetComponent<BoxCollider2D>();

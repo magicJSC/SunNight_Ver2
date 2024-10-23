@@ -20,8 +20,8 @@ public class LightController : MonoBehaviour
 
     public void SetAction()
     {
-        TimeController.nightEvent += SetNight;
-        TimeController.morningEvent += SetMorning;
+        Managers.Game.timeController.nightEvent += SetNight;
+        Managers.Game.timeController.morningEvent += SetMorning;
     }
 
     public void SetNight()

@@ -47,6 +47,7 @@ public class TowerMoveController : MonoBehaviour
                 Managers.Map.SetCanBuildTile();
                 MapManager.tower.gameObject.SetActive(false);
                 Managers.Game.isCantPlay = false;
+                Managers.Inven.CheckHotBarChoice();
             }
         }
     }

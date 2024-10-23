@@ -23,9 +23,12 @@ public class MonsterWaveController : MonoBehaviour
 
     List<GameObject> monList = new List<GameObject>();
 
+    TimeController timeController;
+
     private void Start()
     {
-        TimeController.nightEvent += StartSpawn;
+        timeController = Managers.Game.timeController;
+        timeController.nightEvent += StartSpawn;
         camHeight = Camera.main.orthographicSize * 2;
         camWidth = camHeight * Camera.main.aspect;
     }
@@ -38,14 +41,14 @@ public class MonsterWaveController : MonoBehaviour
     IEnumerator SpawnMonster()
     {
         isfinal = false;
-        for(int i = 0; i < waveSO[TimeController.day - 1].groups.Count; i++)
+        for(int i = 0; i < waveSO[timeController.day - 1].groups.Count; i++)
         {
-            for(int j = 0;j < waveSO[TimeController.day - 1].groups[i].count; j++)
+            for(int j = 0;j < waveSO[timeController.day - 1].groups[i].count; j++)
             {
-                NightSpawn(waveSO[TimeController.day - 1].groups[i].monster);
-                yield return new WaitForSeconds(waveSO[TimeController.day - 1].groups[i].spawnDelay);
+                NightSpawn(waveSO[timeController.day - 1].groups[i].monster);
+                yield return new WaitForSeconds(waveSO[timeController.day - 1].groups[i].spawnDelay);
             }
-            yield return new WaitForSeconds(waveSO[TimeController.day - 1].groups[i].groupDelay);
+            yield return new WaitForSeconds(waveSO[timeController.day - 1].groups[i].groupDelay);
         }
         isfinal = true;
     }
@@ -92,9 +95,9 @@ public class MonsterWaveController : MonoBehaviour
     {
         Managers.Game.changeSceneEffecter.StartChangeScene();
         yield return new WaitForSeconds(3);
-        TimeController.day++;
-        TimeController.dayEvent.Invoke(TimeController.day);
-        TimeController.TimeAmount = 360;
+        timeController.day++;
+        timeController.dayEvent.Invoke(timeController.day);
+        timeController.TimeAmount = 330;
         Managers.Game.changeSceneEffecter.EndChangeScene();
     }
 

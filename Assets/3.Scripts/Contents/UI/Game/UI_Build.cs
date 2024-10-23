@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class UI_Build : UI_Base
+public class UI_Build : MonoBehaviour
 {
     public AssetReferenceT<AudioClip> clickSoundAsset;
     public AssetReferenceT<AudioClip> upgradeSoundAsset;
@@ -46,11 +47,8 @@ public class UI_Build : UI_Base
     Image close;
     Image collect;
 
-    GameObject panel;
     GameObject matGrid;
-
-
-    public override void Init()
+    public void Start()
     {
 
         nameT = Util.FindChild<Text>(gameObject, "Name", true);
@@ -66,7 +64,6 @@ public class UI_Build : UI_Base
         collect = Util.FindChild<Image>(gameObject, "Collect", true);
 
         matGrid = Util.FindChild(gameObject, "MatterGrid", true);
-        panel = Util.FindChild(gameObject, "Panel", true);
 
         itemData = transform.GetComponentInParent<Item_Buliding>();
         buildStat = transform.GetComponentInParent<BuildStat>();
@@ -97,11 +94,13 @@ public class UI_Build : UI_Base
     private void OnEnable()
     {
         Managers.UI.PopUIList.Add(gameObject);
+        Managers.Game.buildUI = this;
     }
 
     private void OnDisable()
     {
         Managers.UI.PopUIList.Remove(gameObject);
+        Managers.Game.buildUI = null;
     }
 
     public void Disappear()
@@ -174,7 +173,6 @@ public class UI_Build : UI_Base
         Item_Buliding building = GetComponentInParent<Item_Buliding>();
         Managers.Inven.AddItems(building.itemSo, 1);
         Managers.Inven.CheckHotBarChoice();
-        Managers.Game.isHandleUI = false;
         building.DeleteBuilding();
         Managers.Sound.Play(Define.Sound.Effect, clickSound);
     }
@@ -225,5 +223,14 @@ public class UI_Build : UI_Base
                 ItemUIList[i].Item1.slotInfo.count = ItemUIList[i].Item2;
         }
         ItemUIList.Clear();
+    }
+
+    public void TryCollectAction()
+    {
+        Item_Buliding building = GetComponentInParent<Item_Buliding>();
+        Managers.Inven.AddItems(building.itemSo, 1);
+        Managers.Inven.CheckHotBarChoice();
+        building.DeleteBuilding();
+        Managers.Sound.Play(Define.Sound.Effect, clickSound);
     }
 }
