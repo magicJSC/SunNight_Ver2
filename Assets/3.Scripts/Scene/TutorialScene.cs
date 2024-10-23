@@ -16,7 +16,7 @@ public class TutorialScene : BaseScene
         InstantiateOrLoad();
         SetActions();
 
-        TimeController.day = 0;
+        Managers.Game.timeController.day = 0;
 
         Managers.Game.grid.Init();
         Managers.Game.mouse.Init();
@@ -41,14 +41,6 @@ public class TutorialScene : BaseScene
 
         Managers.Game.tower.transform.position = new Vector3(-60, -143);
         return true;
-    }
-
-    private void OnDisable()
-    {
-        TimeController.morningEvent = null;
-        TimeController.nightEvent = null;
-        TimeController.timeEvent = null;
-        TimeController.dayEvent = null;
     }
 
     void InstantiateOrLoad()

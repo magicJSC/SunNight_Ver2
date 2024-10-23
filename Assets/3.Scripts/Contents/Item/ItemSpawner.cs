@@ -14,7 +14,7 @@ public class ItemSpawner : MonoBehaviour
 
     private void Start()
     {
-        TimeController.morningEvent += SpawnItem;
+        Managers.Game.timeController.morningEvent += SpawnItem;
         SpawnItem();
     }
 

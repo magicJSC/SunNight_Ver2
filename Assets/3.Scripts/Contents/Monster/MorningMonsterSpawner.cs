@@ -15,7 +15,7 @@ public class MorningMonsterSpawner : MonoBehaviour
 
     private void Start()
     {
-        TimeController.morningEvent += NormalSpawn;
+        Managers.Game.timeController.morningEvent += NormalSpawn;
     }
 
 

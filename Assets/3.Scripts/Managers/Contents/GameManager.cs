@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public bool canBuild;
     public bool isCantPlay;
 
+    public UI_Build buildUI;
+
     public ChangeSceneEffecter changeSceneEffecter;
 
     public bool[] isUnlockTowerPos = new bool[6];

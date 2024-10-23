@@ -127,10 +127,6 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
         Managers.Inven.inventoryUI.gameObject.SetActive(!Managers.Inven.inventoryUI.gameObject.activeSelf);
     }
 
-   
-
-    
-
     public void OnBuild()
     {
         if (Managers.Game.isCantPlay)
@@ -181,7 +177,13 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
         };
     }
 
-   
+    public void TryCollectBuild(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Managers.Game.buildUI.TryCollectAction();
+        }
+    }
 
     public IEnumerator UpdateBuff()
     {

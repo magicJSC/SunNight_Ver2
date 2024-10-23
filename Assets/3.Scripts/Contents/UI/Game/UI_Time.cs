@@ -8,27 +8,37 @@ public class UI_Time : MonoBehaviour
 {
     Text timeText;
     Text dayText;
+    Text warningText;
 
-    public static Animator anim;
+    public Animator anim;
+    TimeController timeController;
 
-    public void Init()
+    public void Start()
     {
         timeText = Util.FindChild<Text>(gameObject,"Time",true);
         dayText = Util.FindChild<Text>(gameObject,"Day",true);
+        warningText = Util.FindChild<Text>(gameObject,"WarningSign",true);
 
         GetComponent<Canvas>().worldCamera = Camera.main;
 
-       
-
+        timeController = Managers.Game.timeController;
+        if(timeController.TimeAmount >= 1200 && timeController.TimeAmount < 1290)
+        {
+            WarningSign();
+        }
+        else
+        {
+            warningText.gameObject.SetActive(false);
+        }
         anim = GetComponent<Animator>();
     }
 
     public void SetAction()
     {
-        TimeController.nightEvent += ShowBattleSign;
-        TimeController.timeEvent += SetTimeText;
-        TimeController.dayEvent += SetDayText;
-        Init();
+        Managers.Game.timeController.nightEvent += ShowBattleSign;
+        Managers.Game.timeController.timeEvent += SetTimeText;
+        Managers.Game.timeController.dayEvent += SetDayText;
+        Managers.Game.timeController.warningEvent += WarningSign;
     }
 
     void SetDayText(int day)
@@ -48,8 +58,28 @@ public class UI_Time : MonoBehaviour
         anim.Play("BattleSign");
     }
 
+    void WarningSign()
+    {
+        if (warningText.gameObject.activeSelf)
+            return;
+        StartCoroutine(CountWarningTime());
+    }
+
+    IEnumerator CountWarningTime()
+    {
+        warningText.gameObject.SetActive(true);
+        warningText.text = $"밤까지 남은 시간 :\n{(int)(1290 - timeController.TimeAmount)}분전";
+        while (1290 > timeController.TimeAmount)
+        {
+            yield return null;
+            warningText.text = $"밤까지 남은 시간 :\n{(int)(1290 - timeController.TimeAmount)}분전";
+        }
+        warningText.gameObject.SetActive(false);
+    }
+
     void Sleep()
     {
-        TimeController.TimeAmount = 360;
+        Managers.Game.timeController.TimeAmount = 330;
     }
+
 }

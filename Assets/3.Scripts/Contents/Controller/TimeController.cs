@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class TimeController : MonoBehaviour
 {
-    public static Action surviveEvent;
-    public static Action<float> timeEvent;
-    public static Action<int> dayEvent;
-    public static Action morningEvent;
-    public static Action nightEvent;
+    public Action warningEvent;
+    public  Action<float> timeEvent;
+    public  Action<int> dayEvent;
+    public  Action morningEvent;
+    public  Action nightEvent;
 
     public AudioClip morningAudio;
     public AudioClip nightAudio;
 
-    public static float TimeAmount 
+    public float TimeAmount 
     { 
         get { return _time; }
         set
@@ -23,11 +23,11 @@ public class TimeController : MonoBehaviour
             timeEvent?.Invoke(_time);
         }
     }
-    static float _time = 0;
-    public static float timeSpeed;
+    float _time = 0;
+    public float timeSpeed;
      
 
-    public static int day = 1;
+    public int day = 1;
 
     public enum TimeType
     {
@@ -35,7 +35,7 @@ public class TimeController : MonoBehaviour
         Night,
     }
 
-    public static TimeType timeType { get { return _timeType; }
+    public TimeType timeType { get { return _timeType; }
         set
         {
             _timeType = value;
@@ -50,19 +50,20 @@ public class TimeController : MonoBehaviour
             }
         }
     }
-    static TimeType _timeType = TimeType.Night;
+    TimeType _timeType = TimeType.Night;
 
     public void Start()
     {
-        if (TimeAmount >= 1230)
+        if (TimeAmount >= 1290)
         {
             timeType = TimeType.Night;
         }
-        else if (TimeAmount >= 360 && TimeAmount < 1230)
+        else if (TimeAmount >= 330 && TimeAmount < 1230)
         {
             timeType = TimeType.Morning;
         }
-        StartCoroutine(StartTime());
+        TimeAmount = 330;
+        StartCoroutine(UpdateTime());
     }
 
     public void SetAction()
@@ -72,19 +73,17 @@ public class TimeController : MonoBehaviour
     }
     
 
-    IEnumerator StartTime()
+    IEnumerator UpdateTime()
     {
         while (true)
         {
             if(timeSpeed != 0)
                 TimeAmount += Time.deltaTime * timeSpeed;
-            if (TimeAmount >= 1230 && timeType == TimeType.Morning)
+            if (TimeAmount >= 1290 && timeType == TimeType.Morning)
             {
                 timeType = TimeType.Night;
-                if (!Managers.Game.completeTutorial)
-                    surviveEvent?.Invoke();
             }
-            else if (TimeAmount >= 360 && TimeAmount < 1230 && timeType == TimeType.Night)
+            else if (TimeAmount >= 330 && TimeAmount < 1290 && timeType == TimeType.Night)
             {
                 timeType = TimeType.Morning;
             }
@@ -92,24 +91,23 @@ public class TimeController : MonoBehaviour
             if (TimeAmount >= 1440)
             {
                 day++;
-                dayEvent.Invoke(day);
+                dayEvent?.Invoke(day);
+            }
+            if(TimeAmount >= 1200 && timeType == TimeType.Morning)
+            {
+                warningEvent?.Invoke();
             }
             yield return null;
         }
     }
 
-    public static void SetMorning()
-    {
-        UI_Time.anim.Play("Sleep");
-    }
-
     void SetNightBGM()
     {
-        Managers.Sound.Play(Define.Sound.Bgm,nightAudio);
+        //Managers.Sound.Play(Define.Sound.Bgm,nightAudio);
     }
 
     void SetMorningBGM()
     {
-        Managers.Sound.Play(Define.Sound.Bgm, morningAudio);
+        //Managers.Sound.Play(Define.Sound.Bgm, morningAudio);
     }
 }
