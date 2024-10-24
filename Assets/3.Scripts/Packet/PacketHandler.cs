@@ -70,4 +70,14 @@ class PacketHandler
 
         Debug.Log("C_LoginHandler");
     }
+
+    public static void SuccessLoginHandler(PacketSession session, IMessage packet)
+    {
+        SUCCESS_LOGIN successPakcet = packet as SUCCESS_LOGIN;
+        ServerSession serverSession = session as ServerSession;
+
+        Managers.Network.Init(6666);
+
+        C_ENTER_GAME enterPacket = packet as C_ENTER_GAME;
+    }
 }

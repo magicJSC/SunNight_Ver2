@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class NetworkManager : MonoBehaviour
@@ -11,7 +13,9 @@ public class NetworkManager : MonoBehaviour
     IPAddress _ipAddr;
     IPEndPoint _ipEndPoint;
 
-    public void Init()
+    static HttpClient client = new HttpClient();
+
+    public void Init(int port)
     {
         string host = Dns.GetHostName();
         IPHostEntry ipHost = Dns.GetHostEntry(host);
@@ -24,10 +28,21 @@ public class NetworkManager : MonoBehaviour
             }
         }
 
-        _ipEndPoint = new IPEndPoint(_ipAddr, 7777);
+        //_ipEndPoint = new IPEndPoint(_ipAddr, port);
 
-        _connector.Connect(_ipEndPoint,
-            () => { return _session; });
+        //_connector.Connect(_ipEndPoint,
+        //    () => { return _session; });
+
+        GetTask();
+    }
+
+    static async Task GetTask()
+    {
+        using HttpResponseMessage response = await client.GetAsync("http://localhost:3333/login");
+        response.EnsureSuccessStatusCode();
+        string responseBody = await response.Content.ReadAsStringAsync();
+      
+        Debug.Log(responseBody);
     }
 
     void OnApplicationQuit()
