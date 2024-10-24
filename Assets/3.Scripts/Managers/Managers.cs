@@ -45,7 +45,7 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
             instance = go.GetComponent<Managers>();
 
-            instance._network.Init();
+            instance._network.Init(3333);
             instance._sound.Init();        
         }
     }
