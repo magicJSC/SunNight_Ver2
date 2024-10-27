@@ -24,8 +24,7 @@ public class UIManager : MonoBehaviour
         inven.name = "Inven";
         inven.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
         inven.GetComponent<Canvas>().worldCamera = Camera.main;
-        inven.GetComponent<Canvas>().sortingOrder = 4;
-        inven.GetComponent<Canvas>().sortingLayerID = 3;
+        inven.GetComponent<Canvas>().sortingOrder = 7;
         inven.transform.SetParent(Root.transform);
     }
 

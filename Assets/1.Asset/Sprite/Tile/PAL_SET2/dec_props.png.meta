@@ -127,11 +127,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 225
-        y: 213
-        width: 46
-        height: 40
+        y: 212
+        width: 45
+        height: 41
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,6 +139,27 @@ TextureImporter:
       bones: []
       spriteID: c3b34a40d0fab3a4f930e3c7b1f9f14b
       internalID: 317367793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dec_props_1
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 454
+        width: 24
+        height: 33
+      alignment: 9
+      pivot: {x: 0.5, y: 0.23762558}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32ccdec4ecf24a94182e8af459f825e1
+      internalID: 458765041
       vertices: []
       indices: 
       edges: []
@@ -155,6 +176,8 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       dec_props_0: 317367793
+      dec_props_1: 458765041
+      dec_props_2: -684960172
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

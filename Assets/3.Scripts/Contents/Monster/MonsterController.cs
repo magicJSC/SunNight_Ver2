@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
@@ -214,6 +213,10 @@ public class MonsterController : MonoBehaviour, IMonster
             sprite.flipX = agent.velocity.x < 0; 
     }
 
+    public void GetDamage(int damage)
+    {
+        stat.GetDamage(damage);
+    }
     protected virtual void OnAttack()
     {
 
@@ -226,10 +229,8 @@ public class MonsterController : MonoBehaviour, IMonster
       
         foreach(RaycastHit2D hit in hits)
         {
-            if(hit.transform.GetComponent<IGetDamage>() != null)
+            if(hit.transform.GetComponent<IMonsterTarget>() != null)
             {
-                if (hit.transform.GetComponent<IMonster>() != null)
-                    continue;
                 target = hit.transform;
                 break;
             }
@@ -239,13 +240,6 @@ public class MonsterController : MonoBehaviour, IMonster
     void EndAtk()
     {
         State = Define.State.Idle;
-    }
-
-    public void GetDamage(int damage)
-    {
-        stat.Hp -= damage;
-        if (stat.Hp <= 0)
-            Die();
     }
 
     public void Die()
