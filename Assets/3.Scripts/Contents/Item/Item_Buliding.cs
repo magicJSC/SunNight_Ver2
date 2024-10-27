@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 
 
-public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
+public class Item_Buliding : Item,IBuilding,IMonsterTarget
 {
     [HideInInspector]
     public Vector3Int pos;
@@ -14,8 +14,9 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
     public GameObject buildUI;
     GameObject buildEffect;
 
-    Stat stat;
     public SpriteRenderer[] bodySprites;
+
+    Stat stat;
 
     Transform towerTransform;
 
@@ -25,6 +26,7 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
         pos = Managers.Game.tower.build.WorldToCell(transform.position);
         buildUI = Util.FindChild(gameObject, "UI_Build",true);
         buildEffect = Util.FindChild(gameObject, "BuildEffect", true);
+
 
         stat = GetComponent<Stat>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -46,11 +48,9 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
         Managers.Map.SetCanBuildTile();
     }
 
-    public void GetDamage(int damage)
+    public void Die()
     {
-        stat.Hp -= damage;
-        if (stat.Hp <= 0)
-           DeleteBuilding();
+        DeleteBuilding();
     }
 
     //설치 전 색깔로 변경
@@ -82,5 +82,10 @@ public class Item_Buliding : Item,IBuilding,IGetDamage,IMonsterTarget
             bodySprites[i].color = new Color(1, 1, 1, 1);
         }
         return true;
+    }
+
+    public void GetDamage(int damage)
+    {
+       stat.GetDamage(damage);
     }
 }

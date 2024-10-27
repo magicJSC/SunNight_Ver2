@@ -13,7 +13,7 @@ public class PlayerDatas
     [JsonProperty("amount")]
     public int[] Amount { get; set; }
     [JsonProperty("hp")]
-    public int Hp { get; set; }
+    public float Hp { get; set; }
     [JsonProperty("hunger")]
     public float Hunger { get; set; }
     [JsonProperty("playerLocationX")]

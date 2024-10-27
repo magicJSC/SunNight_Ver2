@@ -181,7 +181,8 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
     {
         if (context.performed)
         {
-            Managers.Game.buildUI.TryCollectAction();
+            if(Managers.Game.buildUI != null)
+                Managers.Game.buildUI.TryCollectAction();
         }
     }
 

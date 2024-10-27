@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Tilemaps;
 
-public class TowerController : MonoBehaviour,IGetDamage,IDie
+public class TowerController : MonoBehaviour, IMonsterTarget
 {
     public Action forceInstallEvent;
 
@@ -24,21 +24,15 @@ public class TowerController : MonoBehaviour,IGetDamage,IDie
         MapManager.building = build;
         MapManager.tower = Util.FindChild(gameObject,"Tower",true).GetComponent<Tilemap>();
         MapManager.tower.gameObject.SetActive(false);
+
         MapManager.canBuild = Util.FindChild(gameObject,"CanBuild",true).GetComponent<Tilemap>();
         stat = GetComponent<Stat>();
         boxCollider = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
+
+        stat.dieEvent += Die;
     }
 
-    public void GetDamage(int damage)
-    {
-        if (PlayerController.isDie)
-            return;
-        stat.Hp -= damage;
-        if (stat.Hp <= 0)
-            Die();
-    }
-  
     public void Die()
     {
         DieUIAsset.InstantiateAsync().Completed += (go) =>

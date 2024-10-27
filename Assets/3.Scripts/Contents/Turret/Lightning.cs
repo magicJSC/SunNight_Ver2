@@ -11,9 +11,9 @@ public class Lightning : MonoBehaviour
 
     private void Start()
     {
-        if(transform.parent.TryGetComponent<IMonster>(out var monster))
+        if(transform.parent.TryGetComponent<Stat>(out var stat))
         {
-            monster.GetDamage(damage);
+            stat.GetDamage(damage);
         }
     }
 

@@ -5,9 +5,6 @@ using static InvenManager;
 
 public class TutorialScene : BaseScene
 {
-    public ItemSO fence;
-    public ItemSO Cannon;
-
     protected override bool Init()
     {
         if (base.Init() == false)
@@ -29,17 +26,12 @@ public class TutorialScene : BaseScene
         for (int i = 0; i < 24; i++)
             Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);
 
-        Managers.Inven.hotBarSlotInfo[0].itemInfo = fence;
-        Managers.Inven.hotBarSlotInfo[0].count = 5;
-        Managers.Inven.hotBarSlotInfo[1].itemInfo = Cannon;
-        Managers.Inven.hotBarSlotInfo[1].count = 1;
-
-        Managers.Game.player.transform.position = new Vector2(-14,20);
+        Managers.Game.player.transform.position = new Vector2(-53,22);
         Managers.Game.timeController.gameObject.SetActive(false);
         Managers.Game.player.GetComponent<PlayerStat>().Hp = 100;
         Managers.Game.player.GetComponent<PlayerStat>().Hunger = 30;
 
-        Managers.Game.tower.transform.position = new Vector3(-60, -143);
+        Managers.Game.tower.transform.position = new Vector3(-37, 37);
         return true;
     }
 

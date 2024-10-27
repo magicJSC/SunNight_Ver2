@@ -4,30 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public class PlayerStat : MonoBehaviour
+public class PlayerStat : Stat
 {
-    public Action damageEvent;
-    public Action<float> hpBarEvent;
     public Action<float> hungerBarEvent;
 
     CameraController cam;
-
-    public int Hp { get { return hp; } 
-        set 
-        {
-            if (Managers.Game.isCantPlay)
-                return;
-            if (hp > value)
-                OnDamageEvent();
-            else if(hp < value)
-                OnHillEvent();
-            hp = Mathf.Clamp(value, 0, value);
-            hpBarEvent?.Invoke(((float)Hp / (float)maxHP));
-        }
-    }
-    int hp;
-
-    public int maxHP;
 
     public float Hunger { get { return hunger; } 
         set
@@ -63,7 +44,7 @@ public class PlayerStat : MonoBehaviour
     private void Start()
     {
         cam = Camera.main.GetComponent<CameraController>();
-       
+        damagedEvent += OnDamageEvent;
 
         StartCoroutine(ReduceHunger());
     }
@@ -102,7 +83,6 @@ public class PlayerStat : MonoBehaviour
     void OnDamageEvent()
     {
         cam.Shake(0.5f, 0.5f);
-        damageEvent?.Invoke();
     }
 
     void OnHillEvent()

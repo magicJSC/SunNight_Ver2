@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_PlayerStat : UI_Base
+public class UI_PlayerStat : MonoBehaviour
 {
     Image hpImage;
     Image hungerImage;
@@ -14,7 +14,7 @@ public class UI_PlayerStat : UI_Base
 
     Animator anim;
 
-    public override void Init()
+    public void Start()
     {
         hpImage = Util.FindChild<Image>(gameObject, "HP", true);
         hungerImage = Util.FindChild<Image>(gameObject, "Hunger", true);
@@ -23,9 +23,9 @@ public class UI_PlayerStat : UI_Base
 
         anim = GetComponent<Animator>();
         playerStat = GetComponentInParent<PlayerStat>();
-        playerStat.hpBarEvent += SetHpBar;
+        playerStat.hpEvent += SetHpBar;
         playerStat.hungerBarEvent += SetHungerBar;
-        playerStat.damageEvent += GetDamageEffect;
+        playerStat.damagedEvent += GetDamageEffect;
     }
 
     void GetDamageEffect()
@@ -33,23 +33,23 @@ public class UI_PlayerStat : UI_Base
         anim.Play("Damage",-1,0);
     }
 
-    void SetHpBar(float ratio)
+    void SetHpBar(Stat stat)
     {
-        StartCoroutine(UpdateHPBar(ratio));
+        StartCoroutine(UpdateHPBar(stat));
     }
 
-    IEnumerator UpdateHPBar(float ratio)
+    IEnumerator UpdateHPBar(Stat stat)
     {
         float hp = playerStat.Hp;
         while (true)
         {
             yield return null;
 
-            if(Mathf.Approximately(hpImage.fillAmount,ratio))
+            if(Mathf.Approximately(hpImage.fillAmount,stat.Hp / stat.maxHP))
                 yield break;
             if (hp != playerStat.Hp)
                 yield break;
-            hpImage.fillAmount = Mathf.Lerp(hpImage.fillAmount, ratio,0.1f);
+            hpImage.fillAmount = Mathf.Lerp(hpImage.fillAmount, stat.Hp / stat.maxHP, 0.1f);
         }
     }
 
