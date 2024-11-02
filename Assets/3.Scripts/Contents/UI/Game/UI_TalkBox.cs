@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class UI_TalkBox : MonoBehaviour
@@ -56,20 +57,23 @@ public class UI_TalkBox : MonoBehaviour
        
     }
 
-    public void OnNextTalk()
+    public void TalkBoxAction(InputAction.CallbackContext context)
     {
-        if (nextSign.activeSelf)
+        if (context.canceled)
         {
-            if (talk.isFinish)
+            if (nextSign.activeSelf)
             {
-                Managers.Game.isCantPlay = false;
-                Destroy(gameObject);
-                return;
-            }
-            else
-            {
-                talk = talkSO.groups[++talkIndex];
-                StartCoroutine(TypingText());
+                if (talk.isFinish)
+                {
+                    Managers.Game.isCantPlay = false;
+                    Destroy(gameObject);
+                    return;
+                }
+                else
+                {
+                    talk = talkSO.groups[++talkIndex];
+                    StartCoroutine(TypingText());
+                }
             }
         }
     }

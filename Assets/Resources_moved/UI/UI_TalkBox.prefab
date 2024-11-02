@@ -111,8 +111,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000059962, y: 1.6825}
-  m_SizeDelta: {x: 36.572, y: 37.0887}
+  m_AnchoredPosition: {x: -0.000063896, y: -0.000025272}
+  m_SizeDelta: {x: 65.21, y: 65.917}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4180058564382557582
 CanvasRenderer:
@@ -186,8 +186,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000025431, y: -148}
-  m_SizeDelta: {x: 198.961, y: 201.09}
+  m_AnchoredPosition: {x: -12.7, y: -149.2798}
+  m_SizeDelta: {x: 184.2305, y: 206.7302}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9073698497034662922
 CanvasRenderer:
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fa084d40b74b76548a0b75f3577c1a4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d61a3fc0f4e9d6468fb46aaa8cd47c4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -573,8 +573,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: 84.37874}
-  m_SizeDelta: {x: 198.961, y: 349.7084}
+  m_AnchoredPosition: {x: 4.9, y: 83.8}
+  m_SizeDelta: {x: 399.8317, y: 349.7084}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5394502234011951326
 CanvasRenderer:
@@ -747,7 +747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 553f3b6adcba19a429d1c9072f3a5358,
     type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -758,7 +758,23 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4707270211707520433}
+        m_TargetAssemblyTypeName: UI_TalkBox, Assembly-CSharp
+        m_MethodName: TalkBoxAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6c685c1e-cfd7-4c39-b074-264c3f2177d2
+    m_ActionName: Player/TalkBoxAction[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -888,8 +904,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 590, y: -475.1}
-  m_SizeDelta: {x: 40.4536, y: 40.4536}
+  m_AnchoredPosition: {x: 577.6221, y: -462.36847}
+  m_SizeDelta: {x: 65.2095, y: 65.9167}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8634418437257452575
 CanvasRenderer:

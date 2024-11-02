@@ -704,6 +704,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50edf4e1df5e1b04f8e9bab0569c9d5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  center: {x: 0, y: 0}
+  size: {x: 0, y: 0}
 --- !u!1 &7718570753865420746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,6 +1039,11 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   gameMenuUIAsset:
     m_AssetGUID: 0e5a83d57fbdbf946af240298a3dd178
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  produceUIAsset:
+    m_AssetGUID: 6e88d5ee14bb4bb468b97c06ae916b6a
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

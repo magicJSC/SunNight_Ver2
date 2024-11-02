@@ -22,16 +22,12 @@ public class UI_Inventory : UI_Base
 
     GameObject grid;
     GameObject hide;
-    GameObject produce;
     [HideInInspector]
     public RectTransform back;
     [HideInInspector]
     public GameObject explain;
-    UI_Produce produceUI;
     [HideInInspector]
     public Text coin;
-
-    Text produceText;
 
     public bool canAbandon;
 
@@ -46,15 +42,8 @@ public class UI_Inventory : UI_Base
         back = Util.FindChild<RectTransform>(gameObject, "Background", true);
         grid = Util.FindChild(gameObject, "Grid", true);
         hide = Util.FindChild(gameObject, "Hide", true);
-        produce = Util.FindChild(gameObject, "Produce", true);
         coin = Util.FindChild<Text>(gameObject, "Coin", true);
         explain = Util.FindChild(gameObject, "Explain_Inven", true);
-        produceUIAsset.LoadAssetAsync().Completed += (obj) => 
-        {
-            produceUI = Instantiate(obj.Result).GetComponent<UI_Produce>();
-        };
-
-        produceText = Util.FindChild(gameObject, "ProduceText", true).GetComponent<Text>();
 
         UI_EventHandler evt = back.GetComponent<UI_EventHandler>();
         evt._OnDrag += (PointerEventData p) =>
@@ -91,11 +80,6 @@ public class UI_Inventory : UI_Base
         evt = hide.GetComponent<UI_EventHandler>();
         evt._OnClick += (PointerEventData p) => { gameObject.SetActive(false); Managers.Game.isHandleUI = false; };
 
-        evt = produce.GetComponent<UI_EventHandler>();
-        evt._OnClick += ShowProduceUI;
-        evt._OnEnter += (PointerEventData p)=> { produceText.color = Color.red; };
-        evt._OnExit += (PointerEventData p) => { produceText.color = Color.white; };
-
         showSoundAsset.LoadAssetAsync().Completed += (clip) =>
         {
             showSound = clip.Result;
@@ -130,7 +114,6 @@ public class UI_Inventory : UI_Base
     {
         if (_init)
         {
-            produceUI.gameObject.SetActive(false);
             explain.SetActive(false);
             Managers.Sound.Play(Define.Sound.Effect, hideSound);
             Managers.UI.PopUIList.Remove(gameObject);
@@ -163,19 +146,5 @@ public class UI_Inventory : UI_Base
     public void SetCoin()
     {
         coin.text = $"ÄÚÀÎ : {Managers.Inven.Coin}";
-    }
-
-    void ShowProduceUI(PointerEventData p)
-    {
-        if (produceUI.gameObject.activeSelf)
-        {
-            produceUI.gameObject.SetActive(false);
-            return;
-        }
-        produceUI.gameObject.SetActive(true);
-        RectTransform r = produceUI.back.GetComponent<RectTransform>();
-        RectTransform bb = back.GetComponent<RectTransform>();
-        r.anchoredPosition = new Vector2(bb.anchoredPosition.x - 615, bb.anchoredPosition.y - 20);
-        produceUI.Set_Position();
     }
 }
