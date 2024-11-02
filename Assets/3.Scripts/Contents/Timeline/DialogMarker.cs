@@ -10,6 +10,8 @@ public class DialogMarker : Marker, INotification,INotificationOptionProvider
     [SerializeField] string nameText = "";
     [SerializeField] float pausePerLetter = 0.1f;
     [SerializeField] Sprite profill;
+    [SerializeField] bool pause = true;
+    [SerializeField] double nextTime;
 
     [Space(20)]
     [SerializeField] bool retroative = false;
@@ -20,6 +22,8 @@ public class DialogMarker : Marker, INotification,INotificationOptionProvider
     public float PausePerLetter => pausePerLetter;
     public Sprite Profill => profill;
     public string Name => nameText;
+    public bool Pause => pause;
+    public double NextTime => nextTime;
 
     public NotificationFlags flags => (retroative ? NotificationFlags.Retroactive : default)
         | (emitOnce ? NotificationFlags.TriggerOnce : default);

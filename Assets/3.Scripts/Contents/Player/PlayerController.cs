@@ -29,8 +29,11 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
     public AssetReferenceGameObject statUIAsset;
     public AssetReferenceGameObject DieUIAsset;
     public AssetReferenceGameObject gameMenuUIAsset;
+    public AssetReferenceGameObject produceUIAsset;
 
     public AssetReferenceGameObject graveAsset;
+
+    GameObject produceUI;
 
     Rigidbody2D rigid;
     Animator anim;
@@ -55,11 +58,17 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
         {
             Managers.UI.ShowUI<GameObject>(obj.Result, transform);
         };
+        produceUIAsset.LoadAssetAsync().Completed += (obj) =>
+        {
+            produceUI = Managers.UI.ShowUI(obj.Result);
+            GetComponent<PopUICloser>().gameMenuUI = produceUI;
+        };
         gameMenuUIAsset.LoadAssetAsync().Completed += (obj) =>
         {
             GameObject go = Managers.UI.ShowUI(obj.Result);
             GetComponent<PopUICloser>().gameMenuUI = go;
         };
+       
         buffList = new List<BaseBuffGiver>();
 
         StartCoroutine(Move());
@@ -77,8 +86,6 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
         StartCoroutine(Move());
         isDie = false;
         stat.Hp = stat.maxHP;
-        Camera.main.transform.parent = transform;
-        Camera.main.transform.position = Camera.main.transform.parent.position + new Vector3(0, 0, -10);
         dir = Vector2.zero;
         StartCoroutine(UpdateBuff());
         if (toolParent.transform.GetChild(0) != null)
@@ -119,12 +126,17 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
     }
 
     void OnShowInventory()
-    {
-        if (Managers.Game.isCantPlay)
-            return;
-            if (Time.timeScale == 0)
+    {  
+        if (Time.timeScale == 0)
             return;
         Managers.Inven.inventoryUI.gameObject.SetActive(!Managers.Inven.inventoryUI.gameObject.activeSelf);
+    }
+
+    void OnProduceUI()
+    {
+        if (Time.timeScale == 0)
+            return;
+        produceUI.SetActive(!produceUI.activeSelf);
     }
 
     public void OnBuild()

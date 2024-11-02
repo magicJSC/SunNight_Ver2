@@ -16,7 +16,9 @@ public class DialogReciever : MonoBehaviour, INotificationReceiver
                 Massage = dialogMarker.Message,
                 PausePerLetter = dialogMarker.PausePerLetter,
                 Name = dialogMarker.Name,
-                Profill = dialogMarker.Profill
+                Profill = dialogMarker.Profill,
+                Pause = dialogMarker.Pause,
+                NextTime = dialogMarker.NextTime,
             };
 
             dialogAnimator.AddDialog(newDialog);
