@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using static Define;
+using static UnityEditor.Progress;
 
 public class InvenManager : MonoBehaviour
 {
@@ -106,8 +107,15 @@ public class InvenManager : MonoBehaviour
         }
     }
 
+    public int GetItem(ItemSO item, int count)
+    {
+        if (item.itemType == ItemType.Tool)
+             return AddWeapon(item);
+        else
+            return AddItem(item, count);
+    }
     
-    public int AddItems(ItemSO item, int count)
+    int AddItem(ItemSO item, int count)
     {
         int addCount = 0;
         UI_Item emptySlot = null;
@@ -183,6 +191,33 @@ public class InvenManager : MonoBehaviour
         {
             return count;
         }
+    }
+
+    int AddWeapon(ItemSO item)
+    {
+        for (int i = 0; i < hotBarUI.slotList.Length; i++)
+        {
+            UI_Item itemUI = hotBarUI.slotList[i].itemUI;
+            if (itemUI.slotInfo.itemInfo == null)
+            {
+                SetSlot(item, itemUI, 1);
+                ShowItemSign(item, 1);
+                return 0;
+            }
+
+        }
+        for (int i = 0; i < inventoryUI.slotList.Length; i++)
+        {
+            UI_Item itemUI = inventoryUI.slotList[i].itemUI;
+            if (itemUI.slotInfo.itemInfo == null)
+            {
+                SetSlot(item, itemUI, 1);
+                ShowItemSign(item, 1);
+                return 0;
+            }
+        }
+
+        return 1;
     }
     #endregion
 

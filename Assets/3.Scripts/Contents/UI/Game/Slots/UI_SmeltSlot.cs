@@ -48,7 +48,7 @@ public class UI_SmeltSlot : UI_BaseSlot,IDragable
 
         if (itemUI.slotInfo.itemInfo != null)
         {
-            Managers.Inven.AddItems(itemUI.slotInfo.itemInfo, itemUI.slotInfo.count);
+            Managers.Inven.GetItem(itemUI.slotInfo.itemInfo, itemUI.slotInfo.count);
             itemUI.MakeEmptySlot();
         }
         itemUI.SetInfo();

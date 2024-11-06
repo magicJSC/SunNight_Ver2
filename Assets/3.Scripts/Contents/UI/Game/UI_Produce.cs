@@ -23,6 +23,9 @@ public class UI_Produce : UI_Base
     public AssetReferenceGameObject produceMaterialUIAsset;
 
     GameObject produceMaterialUI;
+    [HideInInspector]
+    public UI_Produce_Item produceItemUI;
+
 
     [Serializable]
     public struct ToMakeItem
@@ -59,7 +62,6 @@ public class UI_Produce : UI_Base
     [HideInInspector]
     public GameObject explainItem;
 
-    Transform itemGrid;
     Text produceButtonText;
 
     Vector2 startPos;
@@ -217,9 +219,20 @@ public class UI_Produce : UI_Base
                 count -= amount;
             }
         }
-        Managers.Inven.AddItems(toMakeItem.toMakeItemSO, 1);
+        Managers.Inven.GetItem(toMakeItem.toMakeItemSO, 1);
         if (produceSound != null)
             Managers.Sound.Play(Define.Sound.Effect, produceSound);
+
+        if (!CanProduce())
+        {
+            produce.color = new Color(0.5f, 0.5f, 0.5f);
+            canProduce = false;
+        }
+        else
+        {
+            produce.color = new Color(1f, 1f, 1f);
+            canProduce = true;
+        }
     }
 
     void EnterProduceButton(PointerEventData p)

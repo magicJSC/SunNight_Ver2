@@ -14,6 +14,7 @@ public class UI_Produce_Item : UI_Base
     [HideInInspector]
     public UI_Produce produce;
 
+    
     Image icon;
 
     RectTransform explain;
@@ -38,10 +39,16 @@ public class UI_Produce_Item : UI_Base
         evt._OnExit += (PointerEventData p) => { explain.gameObject.SetActive(false); };
         evt._OnClick += (PointerEventData p) =>
         {
-            produce.Remove_ToMake();
-            produce.toMakeItem = toMakeItem;
-            produce.Set_ToMake(toMakeItem);
+            SetProduce();
         };
+    }
+
+    public void SetProduce()
+    {
+        produce.Remove_ToMake();
+        produce.toMakeItem = toMakeItem;
+        produce.Set_ToMake(toMakeItem);
+        produce.produceItemUI = this;
     }
 
     public void Set_Explain()

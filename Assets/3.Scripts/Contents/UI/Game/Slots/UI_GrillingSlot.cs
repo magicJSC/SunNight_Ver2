@@ -55,7 +55,7 @@ public class UI_GrillingSlot : UI_BaseSlot,IDragable,IDroppable
 
         if (itemUI.slotInfo.itemInfo != null)
         {
-            Managers.Inven.AddItems(itemUI.slotInfo.itemInfo, itemUI.slotInfo.count);
+            Managers.Inven.GetItem(itemUI.slotInfo.itemInfo, itemUI.slotInfo.count);
             itemUI.MakeEmptySlot();
         }
         itemUI.SetInfo();

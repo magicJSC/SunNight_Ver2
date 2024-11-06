@@ -61,7 +61,7 @@ public class FurnanceController : MonoBehaviour, IInteractObject
 
     public void Interact()
     {
-        if (Managers.Game.isKeepingTower)
+        if (Managers.Game.isMovingTower)
             return;
         if (smeltUI.gameObject.activeSelf)
             return;

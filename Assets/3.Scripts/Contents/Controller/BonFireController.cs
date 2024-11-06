@@ -39,7 +39,7 @@ public class BonFireController : MonoBehaviour, IInteractObject
 
     public void Interact()
     {
-        if (Managers.Game.isKeepingTower)
+        if (Managers.Game.isMovingTower)
             return;
 
         choicingItemUI = Managers.Inven.hotBarUI.slotList[Managers.Inven.choiceIndex].itemUI;

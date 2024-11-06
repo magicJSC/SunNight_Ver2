@@ -9,11 +9,11 @@ public class Stat : MonoBehaviour, IGetDamage
     public Action damagedEvent;
     public Action dieEvent;
 
-    public float Hp { get { return _hp; } 
+    public float Hp { get { return _hp; }
         set
         { 
             if(_hp > value)
-                damagedEvent?.Invoke();
+               damagedEvent?.Invoke();
             _hp = Mathf.Clamp(value,0,value); 
             hpEvent?.Invoke(this);
         } 
@@ -22,7 +22,7 @@ public class Stat : MonoBehaviour, IGetDamage
 
     public float maxHP;
 
-    bool isDie;
+    protected bool isDie;
 
     private void Start()
     {

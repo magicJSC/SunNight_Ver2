@@ -47,6 +47,7 @@ public class TimeController : MonoBehaviour
             else if (_timeType == TimeType.Night)
             {
                 nightEvent?.Invoke();
+                Managers.Game.canMoveTower = false;
             }
         }
     }

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
    
     public LightController lightController;
 
-    public bool isKeepingTower;
+    public bool isMovingTower;
 
     public GameObject weapon;
 
@@ -22,20 +22,20 @@ public class GameManager : MonoBehaviour
 
     public bool completeTutorial = false;
 
+    public bool canMoveTower;
+
     public bool isOpeningStory = false;
-    public bool canBuild;
     public bool isCantPlay;
 
     public UI_Build buildUI;
 
     public ChangeSceneEffecter changeSceneEffecter;
 
-    public bool[] isUnlockTowerPos = new bool[6];
 
 
     public void GetItem(ItemSO item,int amount,Vector3 pos)
     {
-         int leftCount = Managers.Inven.AddItems(item,amount);
+         int leftCount = Managers.Inven.GetItem(item,amount);
         if(leftCount > 0)
             Instantiate(item, pos, Quaternion.identity).GetComponent<Item_Pick>().SetInfo(item,amount);
 

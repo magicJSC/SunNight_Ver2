@@ -14,7 +14,7 @@ public class CutSceneTrigger : MonoBehaviour
     {
         if (finishedPlay)
             return;
-        if(collision.GetComponent<IPlayer>() != null)
+        if(collision.GetComponent<PlayerController>() != null)
         {
             finishedPlay = true;
             director.Play();

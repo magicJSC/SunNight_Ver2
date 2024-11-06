@@ -12,6 +12,7 @@ public class CameraController : MonoBehaviour
     float height;
     float width;
 
+    bool shaking;
 
     private void Start()
     {
@@ -31,7 +32,7 @@ public class CameraController : MonoBehaviour
         {
             yield return null;
 
-            if (player == null)
+            if (player == null || shaking)
                 continue;
             transform.position = player.position;
             float lx = size.x * 0.5f - width;
@@ -45,9 +46,15 @@ public class CameraController : MonoBehaviour
 
     public void Shake(float duration,float strength)
     {
-        transform.DOShakePosition(duration, strength);
+        transform.parent = Managers.Game.player.transform;
+        shaking = true;
+        transform.DOShakePosition(duration, strength).onComplete += End;
     }
-
+    void End()
+    {
+        shaking = false;
+        transform.parent = null;
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

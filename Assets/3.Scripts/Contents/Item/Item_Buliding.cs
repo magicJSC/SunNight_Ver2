@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 
 
-public class Item_Buliding : Item,IBuilding,IMonsterTarget
+public class Item_Buliding : Item,IMonsterTarget,IGetMonsterDamage
 {
     [HideInInspector]
     public Vector3Int pos;
@@ -70,7 +70,7 @@ public class Item_Buliding : Item,IBuilding,IMonsterTarget
         if (MapManager.cantBuild.HasTile(MapManager.building.WorldToCell(new Vector3(transform.position.x + towerTransform.position.x,transform.position.y + towerTransform.position.y))))
         {
             Item_Buliding building = GetComponentInParent<Item_Buliding>();
-            Managers.Inven.AddItems(building.itemSo, 1);
+            Managers.Inven.GetItem(building.itemSo, 1);
             building.DeleteBuilding();
             return false;
         }

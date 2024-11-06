@@ -61,9 +61,9 @@ public class Item_Pick : Item
         while(true) 
         {
             yield return null;
-            if(rigid.velocity != Vector2.zero)
+            if((rigid.velocity).magnitude < 0.05f)
             {
-                Vector2.Lerp(rigid.velocity,Vector2.zero,0.1f);
+               rigid.velocity = Vector2.Lerp(rigid.velocity,Vector2.zero,0.1f);
             }
         }
     }

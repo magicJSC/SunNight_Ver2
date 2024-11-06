@@ -24,7 +24,7 @@ public class TalkBoxTrigger : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<IPlayer>() != null)
+        if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
             Instantiate(talkUIPrefab).GetComponent<UI_TalkBox>().talkSO = talkSO;
             if(oneTime)

@@ -73,7 +73,7 @@ public class UI_StoreSlot_Coin : MonoBehaviour
         if (curMoneyAmount >= needMoneyAmount)
         {
             Managers.Inven.Coin -= needMoneyAmount;
-            Managers.Inven.AddItems(changeItemSO, changeItemCount);
+            Managers.Inven.GetItem(changeItemSO, changeItemCount);
             canChangeCount--;
             seller.buyEvent.Invoke();
         }

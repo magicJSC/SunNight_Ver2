@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public class Sword : ToolController
+public class Bat : ToolController
 {
     [SerializeField]
     Vector2 size;
@@ -34,18 +34,17 @@ public class Sword : ToolController
         Collider2D[] cols = Physics2D.OverlapBoxAll(transform.GetChild(0).position + (point - transform.position).normalized, size, angle);
         foreach (Collider2D col in cols)
         {
-            if (col.TryGetComponent<IPlayer>(out var player) || col.TryGetComponent<IBuilding>(out var build))
+            if (col.TryGetComponent<IGetMonsterDamage>(out var player))
                 return;
 
-            if (col.TryGetComponent<IMonster>(out var monster))
+            if (col.TryGetComponent<IGetPlayerDamage>(out var monster))
             {
                 monster.GetDamage(_damage);
                 Instantiate(effect, col.transform.position, Quaternion.identity);
-            }
-            else if(col.TryGetComponent<IGetDamage>(out var get))
-            {
-                get.GetDamage(_damage);
-                Instantiate(effect, col.transform.position, Quaternion.identity);
+                if(col.TryGetComponent<IKnockBack>(out var knockBack))
+                {
+                    knockBack.StartKnockBack(transform);
+                }
             }
         }
     }

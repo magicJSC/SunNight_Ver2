@@ -10,7 +10,7 @@ public class VisibleTile_Roof : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<IPlayer>(out var player))
+        if (collision.TryGetComponent<PlayerController>(out var player))
         {
             DOVirtual.Color(roof.color, new Color(1, 1, 1, 0), 1, (value) =>
             {
@@ -21,7 +21,7 @@ public class VisibleTile_Roof : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<IPlayer>(out var player))
+        if (collision.TryGetComponent<PlayerController>(out var player))
         {
             DOVirtual.Color(roof.color, new Color(1, 1, 1, 1), 1, (value) =>
             {

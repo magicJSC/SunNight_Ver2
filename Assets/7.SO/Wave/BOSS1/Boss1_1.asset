@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: addb1d57726e5f443a5e0a53cd47229a, type: 3}
+  m_Name: Boss1_1
+  m_EditorClassIdentifier: 
+  groups:
+  - monster: {fileID: 3263040771799250074, guid: 86b99bbc60a021a4a89bf9435519a572,
+      type: 3}
+    count: 3
+    spawnDelay: 1
+    groupDelay: 2
+  - monster: {fileID: 702318616690200231, guid: d6864f6af7a89b048876f1948823d8a9,
+      type: 3}
+    count: 1
+    spawnDelay: 0
+    groupDelay: 0

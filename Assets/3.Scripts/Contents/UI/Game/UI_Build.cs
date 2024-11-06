@@ -171,7 +171,7 @@ public class UI_Build : MonoBehaviour
     void Collect(PointerEventData p)
     {
         Item_Buliding building = GetComponentInParent<Item_Buliding>();
-        Managers.Inven.AddItems(building.itemSo, 1);
+        Managers.Inven.GetItem(building.itemSo, 1);
         Managers.Inven.CheckHotBarChoice();
         building.DeleteBuilding();
         Managers.Sound.Play(Define.Sound.Effect, clickSound);
@@ -228,7 +228,7 @@ public class UI_Build : MonoBehaviour
     public void TryCollectAction()
     {
         Item_Buliding building = GetComponentInParent<Item_Buliding>();
-        Managers.Inven.AddItems(building.itemSo, 1);
+        Managers.Inven.GetItem(building.itemSo, 1);
         Managers.Inven.CheckHotBarChoice();
         building.DeleteBuilding();
         Managers.Sound.Play(Define.Sound.Effect, clickSound);

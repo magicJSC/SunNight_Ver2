@@ -30,6 +30,7 @@ public class Boss1Scene : BaseScene
         Managers.Game.player.GetComponent<PlayerStat>().Hunger = 30;
 
         Managers.Game.tower.transform.position = new Vector3(1, -2);
+        Managers.Game.player.transform.position = new Vector3(1.5f,-23);
         return true;
     }
 
