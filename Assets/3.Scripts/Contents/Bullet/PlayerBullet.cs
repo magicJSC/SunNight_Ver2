@@ -6,10 +6,10 @@ public class PlayerBullet : Bullet
 {
     protected override void Hit(Collider2D col)
     {
-        if (col.GetComponent<IPlayer>() != null)
+        if (col.GetComponent<IGetMonsterDamage>() != null)
             return;
 
-       if(col.TryGetComponent<IMonster>(out var monster))
+       if(col.TryGetComponent<IGetPlayerDamage>(out var monster))
         {
             monster.GetDamage(damage);
         }

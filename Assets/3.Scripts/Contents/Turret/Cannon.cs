@@ -32,7 +32,7 @@ public class Cannon : TurretController, IAttack, IRotate
     {
         if (_target == null)
             return;
-        _target.GetComponent<IMonster>().GetDamage(stat.Damage);
+        _target.GetComponent<IGetPlayerDamage>().GetDamage(stat.Damage);
     }
 
     public override void AddTarget(Collider2D collision)

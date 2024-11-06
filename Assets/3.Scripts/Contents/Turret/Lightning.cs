@@ -43,7 +43,7 @@ public class Lightning : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<IMonster>() != null && collision != transform.parent)
+        if(collision.GetComponent<IGetPlayerDamage>() != null && collision != transform.parent)
         {
             if (Util.FindChild(collision.gameObject, "Lightning"))
                 return;

@@ -4,8 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.AI;
 
 public interface IFly
 {
@@ -17,9 +15,8 @@ public interface IWalk
 
 }
 
-public class MonsterController : MonoBehaviour, IMonster
+public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
 {
-    public AssetReferenceGameObject navMeshAsset;
 
     public Action<GameObject> dieEvent;
 
@@ -36,9 +33,9 @@ public class MonsterController : MonoBehaviour, IMonster
     [HideInInspector]
     public List<Transform> targetList = new List<Transform>();
 
-    NavMeshAgent agent;
-    NavMeshSurface navMesh;
+    bool isKnockBack;
 
+    Rigidbody2D rigid;
     protected Animator anim;
 
     public Define.State State
@@ -53,14 +50,12 @@ public class MonsterController : MonoBehaviour, IMonster
             {
                 case Define.State.Idle:
                     anim.Play("Idle");
-                    agent.enabled = false;
+                    rigid.velocity = Vector2.zero;
                     break;
                 case Define.State.Move:
                     anim.Play("Move");
-                    agent.enabled = true;
                     break;
                 case Define.State.Attack:
-                    agent.enabled = false;
                     anim.Play("Attack");
                     break;
                 case Define.State.Die:
@@ -69,6 +64,11 @@ public class MonsterController : MonoBehaviour, IMonster
             }
         }
     }
+
+    public int endTime { get { return 1; } }
+
+    float curEndTime;
+
     Define.State _state = Define.State.Idle;
 
     public enum TargetType
@@ -91,21 +91,10 @@ public class MonsterController : MonoBehaviour, IMonster
     public virtual void Init()
     {
         stat = GetComponent<MonsterStat>();
+        stat.dieEvent += Die;
         sprite = Util.FindChild<SpriteRenderer>(gameObject, "Sprite", true);
-        agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
-        agent.speed = stat.Speed;
-
-        navMeshAsset.LoadAssetAsync().Completed += (obj) =>
-        {
-            navMesh = Instantiate(obj.Result).GetComponent<NavMeshSurface>();
-            navMesh.size = new Vector3(stat.lookRange * 2,10,stat.lookRange * 2);
-            navMesh.transform.position = transform.position;
-            navMesh.BuildNavMesh();
-            agent.enabled = false;
-        };
-
+      
+        rigid = GetComponent<Rigidbody2D>();
         curAtkCool = stat.attackCool;
         StartCoroutine(UpdateCor());
     }
@@ -150,10 +139,22 @@ public class MonsterController : MonoBehaviour, IMonster
         }
         else if (targetType == TargetType.Tower)
         {
-            if(Managers.Game.tower != null)
+            if (target == null)
+            {
                 return Managers.Game.tower.transform;
+            }
             else
-                return null;
+            {
+                for (int i = 0; i < count;)
+                {
+                    if (targetList[i] == null)
+                    {
+                        targetList.Remove(targetList[i]);
+                        continue;
+                    }
+                    return result = targetList[i];
+                }
+            }
         }
         return null;
     }
@@ -183,7 +184,8 @@ public class MonsterController : MonoBehaviour, IMonster
     }
     protected virtual void OnMove()
     {
-
+        if (isKnockBack)
+            return;
         if(target == null || Managers.Game.isCantPlay)
         {
             State = Define.State.Idle;
@@ -191,26 +193,18 @@ public class MonsterController : MonoBehaviour, IMonster
             return;
         }
 
-        if((transform.position - navMesh.transform.position).magnitude >= stat.lookRange / 1.5f)
-        {
-            navMesh.transform.position = (Vector2)transform.position;
-            navMesh.BuildNavMesh();
-        }
-        CheckObstacle();
+        rigid.velocity = (target.transform.position - transform.position).normalized * stat.Speed;
+        
 
-        if (agent != null && agent.isActiveAndEnabled)
-        {
-
-            agent.SetDestination(target.transform.position);
-        }
+      
         if ((target.transform.position - transform.position).magnitude < stat.attackRange)
             State = Define.State.Idle;
 
         if (curAtkCool < stat.attackCool)
             curAtkCool += Time.deltaTime;
 
-        if(agent.velocity.x != 0)
-            sprite.flipX = agent.velocity.x < 0; 
+        if (rigid.velocity.x != 0)
+            sprite.flipX = rigid.velocity.x < 0;
     }
 
     public void GetDamage(int damage)
@@ -220,21 +214,6 @@ public class MonsterController : MonoBehaviour, IMonster
     protected virtual void OnAttack()
     {
 
-    }
-
-    void CheckObstacle()
-    {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, (target.position - transform.position).normalized, stat.attackRange);
-        Debug.DrawRay(transform.position, (target.position - transform.position).normalized * stat.attackRange, Color.red);
-      
-        foreach(RaycastHit2D hit in hits)
-        {
-            if(hit.transform.GetComponent<IMonsterTarget>() != null)
-            {
-                target = hit.transform;
-                break;
-            }
-        }
     }
 
     void EndAtk()
@@ -258,5 +237,29 @@ public class MonsterController : MonoBehaviour, IMonster
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position,8);
+    }
+
+    public void StartKnockBack(Transform attacker)
+    {
+        curEndTime = 0;
+        rigid.velocity = (transform.position - attacker.position).normalized * 5;
+        StartCoroutine(KnockBack());
+    }
+
+    public IEnumerator KnockBack()
+    {
+        isKnockBack = true;
+        while (true)
+        {
+            yield return null;
+            if (rigid.velocity.magnitude > 0.01f && curEndTime < endTime)
+            {
+                rigid.velocity = Vector2.Lerp(rigid.velocity, Vector2.zero, 0.1f);
+                curEndTime += Time.deltaTime;
+            }
+            else
+                break;
+        }
+        isKnockBack = false;
     }
 }

@@ -7,8 +7,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
-    public static Action interactCheckerEvent;
-
     [HideInInspector]
     public List<GameObject> interactObjectList = new List<GameObject>();
     GameObject canInteractObj;
@@ -72,7 +70,6 @@ public class PlayerInteract : MonoBehaviour
     {
         if (collision.TryGetComponent<IInteractObject>(out var interact))
         {
-            interactCheckerEvent?.Invoke();
             interactObjectList.Add(collision.gameObject);
         }
     }

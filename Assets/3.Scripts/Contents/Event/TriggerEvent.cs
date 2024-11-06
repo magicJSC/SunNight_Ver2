@@ -10,7 +10,7 @@ public class TriggerEvent : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<IPlayer>() != null)
+        if(collision.GetComponent<PlayerController>() != null)
         {
             triggerEvent?.Invoke();
             if(once)

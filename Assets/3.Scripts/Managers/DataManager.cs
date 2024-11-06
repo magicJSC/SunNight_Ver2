@@ -84,7 +84,7 @@ public class DataManager : MonoBehaviour
         }
         Vector2 player = Managers.Game.player.transform.position;
         Vector2 tower = new Vector2();
-        if (!Managers.Game.isKeepingTower)
+        if (!Managers.Game.isMovingTower)
             tower = Managers.Game.tower.gameObject.transform.position;
 
         datas = new PlayerDatas()
@@ -181,7 +181,7 @@ public class DataManager : MonoBehaviour
         stat.Hp = datas.Hp;
         stat.Hunger = datas.Hunger;
         stat.gameObject.transform.position = new Vector2(datas.PlayerLocationX, datas.PlayerLocationY);
-        if (!Managers.Game.isKeepingTower)
+        if (!Managers.Game.isMovingTower)
             Managers.Game.tower.gameObject.transform.position = new Vector2(datas.TowerLocationX, datas.TowerLocationY);
 
         var hotBarSlot = Managers.Inven.hotBarSlotInfo;

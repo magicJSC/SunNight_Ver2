@@ -54,7 +54,7 @@ public class UI_CharcoalSlot : UI_BaseSlot
         if (!_init || smeltUI.isSmelting)
             return;
 
-        Managers.Inven.AddItems(coalSO, smeltUI.charcoalSlot.itemUI.slotInfo.count);
+        Managers.Inven.GetItem(coalSO, smeltUI.charcoalSlot.itemUI.slotInfo.count);
         smeltUI.charcoalSlot.itemUI.slotInfo.count = 0;
         smeltUI.charcoalSlot.itemUI.SetInfo();
     }
@@ -98,7 +98,7 @@ public class UI_CharcoalSlot : UI_BaseSlot
                     totalCount += _slotInfo.count;
                     if (totalCount > coalSO.maxAmount)
                     {
-                        Managers.Inven.AddItems(_slotInfo.itemInfo, totalCount - _slotInfo.itemInfo.maxAmount);
+                        Managers.Inven.GetItem(_slotInfo.itemInfo, totalCount - _slotInfo.itemInfo.maxAmount);
                         totalCount = _slotInfo.itemInfo.maxAmount;
                         break;
                     }

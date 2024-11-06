@@ -11,7 +11,7 @@ public class GameScene : BaseScene
         if (base.Init() == false)
             return false;
 
-        Managers.Game.isKeepingTower = false;
+        Managers.Game.isMovingTower = false;
         PlayerController.isDie = false;
         Managers.Game.completeTutorial = true;
         Managers.UI.PopUIList.Clear();

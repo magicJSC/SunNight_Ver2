@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 
 
-public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMonsterTarget
+public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReciever, IMonsterTarget
 {
     public Action escEvent;
 
@@ -154,7 +154,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
     {
         if (collision.gameObject.TryGetComponent<Item_Pick>(out var item))
         {
-            if (Managers.Inven.AddItems(item.itemSo, item.Count) == 0)
+            if (Managers.Inven.GetItem(item.itemSo, item.Count) == 0)
             {
                 item.DestroyThis();
             }
@@ -182,7 +182,7 @@ public class PlayerController : CreatureController, IPlayer, IBuffReciever, IMon
 
         DieUIAsset.InstantiateAsync().Completed += (go) =>
         {
-            if (!Managers.Game.isKeepingTower)
+            if (!Managers.Game.isMovingTower)
                 go.Result.GetComponent<Animator>().Play("Die");
             else
                 go.Result.GetComponent<Animator>().Play("GameOver");

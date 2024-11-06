@@ -55,7 +55,7 @@ public class GraveStoneController : MonoBehaviour,IInteractObject
         int count = slotInfoList.Count;
         for(int i = 0;i < count;i++)
         {
-            if (Managers.Inven.AddItems(slotInfoList[stack].itemInfo, slotInfoList[stack].count) == 0)
+            if (Managers.Inven.GetItem(slotInfoList[stack].itemInfo, slotInfoList[stack].count) == 0)
                 slotInfoList.RemoveAt(stack);
             else
                 stack++;

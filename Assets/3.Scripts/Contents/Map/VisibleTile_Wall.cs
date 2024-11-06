@@ -16,7 +16,7 @@ public class VisibleTile_Wall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent<IPlayer>(out var player))
+        if(collision.TryGetComponent<PlayerController>(out var player))
         {
             DOVirtual.Color(tile.color, new Color(1, 1, 1, 0.3f), 1,(value) =>
             {
@@ -34,7 +34,7 @@ public class VisibleTile_Wall : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<IPlayer>(out var player))
+        if (collision.TryGetComponent<PlayerController>(out var player))
         {
             DOVirtual.Color(tile.color, new Color(1, 1, 1, 1), 1, (value) =>
             {

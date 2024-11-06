@@ -77,7 +77,7 @@ public class UI_StoreSlot_Item : MonoBehaviour
         if (curItemCount >= needItemCount)
         {
             Managers.Inven.RemoveItem(needItemSO, needItemCount);
-            Managers.Inven.AddItems(changeItemSO, changeItemCount);
+            Managers.Inven.GetItem(changeItemSO, changeItemCount);
             canChangeCount--;
             seller.buyEvent.Invoke();
         }

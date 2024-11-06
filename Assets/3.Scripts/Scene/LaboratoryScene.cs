@@ -11,7 +11,7 @@ public class LaboratoryScene : BaseScene
         if (base.Init() == false)
             return false;
 
-        Managers.Game.isKeepingTower = false;
+        Managers.Game.isMovingTower = false;
         PlayerController.isDie = false;
         Managers.UI.PopUIList.Clear();
 

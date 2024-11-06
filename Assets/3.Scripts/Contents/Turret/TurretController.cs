@@ -48,7 +48,7 @@ public class TurretController : BaseController
     {
         while (true)
         {
-            if (Managers.Game.isKeepingTower)
+            if (Managers.Game.isMovingTower)
             {
                 yield return null;
                 continue;
@@ -82,7 +82,7 @@ public class TurretController : BaseController
         yield return new WaitForSeconds(termBeforeWork);
         while (true)
         {
-            if (Managers.Game.isKeepingTower)
+            if (Managers.Game.isMovingTower)
                 yield break;
             if (_target == null)
                 yield break;

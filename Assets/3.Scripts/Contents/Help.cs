@@ -14,7 +14,7 @@ public class Help : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<IPlayer>() != null)
+        if(collision.GetComponent<PlayerController>() != null)
         {
             help.transform.DOScaleX(1, 0.5f);
         }
@@ -22,7 +22,7 @@ public class Help : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<IPlayer>() != null)
+        if (collision.GetComponent<PlayerController>() != null)
         {
             help.transform.DOScaleX(0, 0.5f);
         }
