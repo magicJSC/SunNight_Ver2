@@ -811,6 +811,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  produceItemUI: {fileID: 0}
   toMakeItemList:
   - toMakeItemSO: {fileID: 11400000, guid: 7fb0ab4e01ce7104aa914f9c4cd458e4, type: 2}
     materialList:
@@ -840,8 +841,8 @@ MonoBehaviour:
       count: 1
   - toMakeItemSO: {fileID: 11400000, guid: ec541345b08d09e40972f5c3d72ff230, type: 2}
     materialList:
-    - itemSO: {fileID: 11400000, guid: 8e58cbffd25e9414fb81859dc04e7c89, type: 2}
-      count: 3
+    - itemSO: {fileID: 11400000, guid: 209835d44adc74944aec8c3a71c90dd7, type: 2}
+      count: 5
   toMakeItem:
     toMakeItemSO: {fileID: 0}
     materialList: []

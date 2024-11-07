@@ -25,6 +25,11 @@ public class Boss1Scene : BaseScene
         for (int i = 0; i < 24; i++)
             Managers.Inven.inventorySlotInfo[i] = new SlotInfo(0);
 
+        Managers.Inven.hotBarSlotInfo[0] = new SlotInfo(10, "Fence");
+        Managers.Inven.hotBarSlotInfo[1] = new SlotInfo(5, "Cannon");
+        Managers.Inven.hotBarSlotInfo[2] = new SlotInfo(3, "LightningTower");
+        Managers.Inven.hotBarSlotInfo[3] = new SlotInfo(1, "Bat");
+
         Managers.Game.player.transform.position = new Vector3(1, -9);
         Managers.Game.player.GetComponent<PlayerStat>().Hp = 100;
         Managers.Game.player.GetComponent<PlayerStat>().Hunger = 30;

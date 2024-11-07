@@ -146,6 +146,7 @@ public class UI_Produce : UI_Base
         {
             Remove_ToMake();
             Managers.Sound.Play(Define.Sound.Effect, showSound);
+            Managers.Inven.inventoryUI.gameObject.SetActive(true);
         }
     }
 

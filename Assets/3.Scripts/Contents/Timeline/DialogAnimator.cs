@@ -18,6 +18,7 @@ public class Dialog
 
 public class DialogAnimator : MonoBehaviour
 {
+    [SerializeField] GameObject textBox;
     [SerializeField] Text dialogText;
     [SerializeField] Text nameText;
     [SerializeField] Image profillImage;
@@ -29,6 +30,7 @@ public class DialogAnimator : MonoBehaviour
     {
         director = GetComponent<PlayableDirector>();
         nextSign = Util.FindChild(gameObject, "NextSign", true);
+        textBox.SetActive(false);
     }
 
     bool isEnd = false;
