@@ -2,6 +2,7 @@
 using Protocol;
 using ServerCore;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
@@ -14,6 +15,15 @@ public class ServerSession : PacketSession
             return;
 
         Debug.Log($"OnConnected : {endPoint}");
+
+        REQUEST_ENTER_GAME packet = new();
+        PacketId.PktRequestEnter packetId = new();
+        ushort size = (ushort)packet.CalculateSize();
+        byte[] sendBuffer = new byte[size + 4];
+        Array.Copy(BitConverter.GetBytes((ushort)(size + 4)), 0, sendBuffer, 0, sizeof(ushort));
+        Array.Copy(BitConverter.GetBytes((ushort)packetId), 0, sendBuffer, 2, sizeof(ushort));
+        Array.Copy(packet.ToByteArray(), 0, sendBuffer, 4, size);
+        Send(new ArraySegment<byte>(sendBuffer));
     }
 
     public override void OnDisconnected(EndPoint endPoint)
@@ -99,11 +109,6 @@ public class ServerSession : PacketSession
                 C_LOGIN cLoginPkt = new C_LOGIN();
                 cLoginPkt.MergeFrom(buffer.Array, buffer.Offset + 4, buffer.Count - 4);
                 PacketHandler.CLoginHandler(this, cLoginPkt);
-                break;
-            case PacketId.PktSuccessLogin:
-                SUCCESS_LOGIN successPkt = new SUCCESS_LOGIN();
-                successPkt.MergeFrom(buffer.Array, buffer.Offset + 4, buffer.Count - 4);
-                PacketHandler.SuccessLoginHandler(this, successPkt);
                 break;
             default:
                 break;
