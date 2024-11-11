@@ -100,11 +100,6 @@ public class ServerSession : PacketSession
                 cLoginPkt.MergeFrom(buffer.Array, buffer.Offset + 4, buffer.Count - 4);
                 PacketHandler.CLoginHandler(this, cLoginPkt);
                 break;
-            case PacketId.PktSuccessLogin:
-                SUCCESS_LOGIN successPkt = new SUCCESS_LOGIN();
-                successPkt.MergeFrom(buffer.Array, buffer.Offset + 4, buffer.Count - 4);
-                PacketHandler.SuccessLoginHandler(this, successPkt);
-                break;
             default:
                 break;
         }
