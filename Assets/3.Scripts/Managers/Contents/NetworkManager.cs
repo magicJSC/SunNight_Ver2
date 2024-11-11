@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class NetworkManager : MonoBehaviour
@@ -36,15 +38,27 @@ public class NetworkManager : MonoBehaviour
         GetTask();
     }
 
-    static async Task GetTask()
+    public async Task GetTask()
     {
-        using HttpResponseMessage response = await client.GetAsync("http://localhost:3333/login");
+        string id = "admin";
+        string pw = "1234";
+        HttpContent content = new StringContent($"{id}&{pw}");
+        using HttpResponseMessage response = await client.PostAsync("http://localhost:3333/login", content);
         response.EnsureSuccessStatusCode();
         string responseBody = await response.Content.ReadAsStringAsync();
-      
+        
         Debug.Log(responseBody);
-    }
 
+        if (responseBody == "success")
+        {
+            _ipEndPoint = new IPEndPoint(_ipAddr, 6666);
+            _connector.Connect(_ipEndPoint,
+                () => { return _session; });
+        }
+        else
+            Debug.Log("fail to login");
+    }
+    
     void OnApplicationQuit()
     {
         _connector.Disconnect();
