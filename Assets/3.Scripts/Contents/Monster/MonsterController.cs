@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public interface IFly
 {
@@ -20,11 +21,15 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
 
     public Action<GameObject> dieEvent;
 
-    [Header("아이템 드랍")]
-    [SerializeField]
-    float luck;
-    [SerializeField]
-    ItemSO meat;
+    [Serializable]
+    public struct GetItem
+    {
+        public ItemSO item;
+        public int count;
+        public float probability;
+    }
+
+    public List<GetItem> getItemList = new List<GetItem>();
     [SerializeField]
     int coin;
 
@@ -207,7 +212,7 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
             sprite.flipX = rigid.velocity.x < 0;
     }
 
-    public void GetDamage(int damage)
+    public void GetDamage(float damage)
     {
         stat.GetDamage(damage);
     }
@@ -223,10 +228,16 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
 
     public void Die()
     {
-        float index = UnityEngine.Random.Range(0, 101);
-        if (index <= luck)
+        int randomIndex = Random.Range(1, 101);
+        float num = 0;
+        for (int i = 0; i < getItemList.Count; i++)
         {
-           Managers.Game.GetItem(meat,1,transform.position);
+            if (num < randomIndex && randomIndex <= num + getItemList[i].probability)
+            {
+                Managers.Game.GetItem(getItemList[i].item, getItemList[i].count, transform.position);
+                break;
+            }
+            num += getItemList[i].probability;
         }
         Managers.Inven.Coin += coin;
         dieEvent?.Invoke(gameObject);

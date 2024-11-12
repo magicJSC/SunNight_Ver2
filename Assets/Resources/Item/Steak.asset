@@ -22,7 +22,9 @@ MonoBehaviour:
     type: 3}
   buildTile: {fileID: 0}
   canSmelt: 0
-  smeltedItem: {fileID: 0}
+  smeltItem: {fileID: 0}
   canBake: 0
-  bakeItemSO: {fileID: 0}
+  bakeItem: {fileID: 0}
   bakeTime: 0
+  canEat: 1
+  hungerAmount: 3

@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 4235527875989880963}
   - component: {fileID: 5041199641757534110}
   - component: {fileID: 7677310023323834505}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerInteract
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,6 +845,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f5058dbe-1804-423b-93f9-227006cf57c6
     m_ActionName: Player/TryBuildTower[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c5d57408-7fac-45fa-9a37-65375d489dd2
+    m_ActionName: Player/Collect[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: acb05f5d-9c05-448a-bef5-8f158dec8c95
+    m_ActionName: Player/ProduceUI[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

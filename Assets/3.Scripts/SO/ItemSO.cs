@@ -25,4 +25,8 @@ public class ItemSO : ScriptableObject
     public bool canBake;
     public ItemSO bakeItem;
     public float bakeTime;
+
+    [Header("¸Ô±â")]
+    public bool canEat;
+    public float hungerAmount;
 }

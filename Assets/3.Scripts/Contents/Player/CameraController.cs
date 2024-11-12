@@ -47,8 +47,9 @@ public class CameraController : MonoBehaviour
     public void Shake(float duration,float strength)
     {
         transform.parent = Managers.Game.player.transform;
+        if(!shaking)
+            transform.DOShakePosition(duration, strength).onComplete += End;
         shaking = true;
-        transform.DOShakePosition(duration, strength).onComplete += End;
     }
     void End()
     {

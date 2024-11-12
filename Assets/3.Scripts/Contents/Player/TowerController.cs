@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Tilemaps;
 
-public class TowerController : MonoBehaviour, IMonsterTarget
+public class TowerController : MonoBehaviour, IMonsterTarget,IGetMonsterDamage
 {
     public Action forceInstallEvent;
 
@@ -68,4 +68,8 @@ public class TowerController : MonoBehaviour, IMonsterTarget
         }
     }
 
+    public void GetDamage(float damage)
+    {
+        stat.GetDamage(damage);
+    }
 }

@@ -16,6 +16,8 @@ public class EditorInspector : Editor
     SerializedProperty canBake_Prop;
     SerializedProperty bakeItem_Prop;
     SerializedProperty bakeTime_Prop;
+    SerializedProperty canEat_Prop;
+    SerializedProperty hungerAmount_Prop;
 
     private void Awake()
     {
@@ -32,6 +34,8 @@ public class EditorInspector : Editor
         canBake_Prop = serializedObject.FindProperty("canBake");
         bakeItem_Prop = serializedObject.FindProperty("bakeItem");
         bakeTime_Prop = serializedObject.FindProperty("bakeTime");
+        canEat_Prop = serializedObject.FindProperty("canEat");
+        hungerAmount_Prop = serializedObject.FindProperty("hungerAmount");
         
     }
 
@@ -67,7 +71,11 @@ public class EditorInspector : Editor
             EditorGUILayout.PropertyField(bakeTime_Prop);
         }
 
-
+        EditorGUILayout.PropertyField(canEat_Prop);
+        if (canEat_Prop.boolValue)
+        {
+            EditorGUILayout.PropertyField(hungerAmount_Prop);
+        }
 
         serializedObject.ApplyModifiedProperties();
     }

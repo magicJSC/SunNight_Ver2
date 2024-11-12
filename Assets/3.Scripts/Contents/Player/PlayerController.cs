@@ -54,6 +54,7 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         stat = GetComponent<PlayerStat>();
+        stat.dieEvent += Die;
         statUIAsset.LoadAssetAsync().Completed += (obj) =>
         {
             Managers.UI.ShowUI<GameObject>(obj.Result, transform);
@@ -78,11 +79,6 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
     {
         if (!init)
             return;
-        if (!Managers.Game.completeTutorial)
-        {
-            SceneManager.LoadScene("TutorialScene");
-            return;
-        }
         StartCoroutine(Move());
         isDie = false;
         stat.Hp = stat.maxHP;
@@ -160,14 +156,11 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
             }
         }
     }
-    public void GetDamage(int damage)
+    public void GetDamage(float damage)
     {
         if (isDie)
             return;
-
-        stat.Hp -= damage;
-        if (stat.Hp <= 0)
-            Die();
+        stat.GetDamage(damage);
     }
 
     public void Die()

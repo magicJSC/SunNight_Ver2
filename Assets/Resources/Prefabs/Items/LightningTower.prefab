@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4317177514305091855}
   - component: {fileID: 7825441322956818515}
   - component: {fileID: 8002430732133005749}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: TargetChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
