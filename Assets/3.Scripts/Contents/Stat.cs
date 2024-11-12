@@ -22,23 +22,18 @@ public class Stat : MonoBehaviour, IGetDamage
 
     public float maxHP;
 
-    protected bool isDie;
-
     private void Start()
     {
         _hp = maxHP;
     }
 
-    public void GetDamage(int damage)
+    public void GetDamage(float damage)
     {
-        if (isDie)
-            return;
-
+       
         Hp -= damage;
         if(Hp <= 0)
         {
             dieEvent?.Invoke();
-            isDie = true;
         }
     }
 }

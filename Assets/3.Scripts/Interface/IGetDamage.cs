@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IGetDamage
 {
-    void GetDamage(int damage);
+    void GetDamage(float damage);
 }
 
 public interface IGetPlayerDamage : IGetDamage

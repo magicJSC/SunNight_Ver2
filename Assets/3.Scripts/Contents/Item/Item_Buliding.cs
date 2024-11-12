@@ -29,6 +29,7 @@ public class Item_Buliding : Item,IMonsterTarget,IGetMonsterDamage
 
 
         stat = GetComponent<Stat>();
+        stat.dieEvent += Die;
         boxCollider = GetComponent<BoxCollider2D>();
 
         towerTransform = Managers.Game.tower.transform;
@@ -84,7 +85,7 @@ public class Item_Buliding : Item,IMonsterTarget,IGetMonsterDamage
         return true;
     }
 
-    public void GetDamage(int damage)
+    public void GetDamage(float damage)
     {
        stat.GetDamage(damage);
     }

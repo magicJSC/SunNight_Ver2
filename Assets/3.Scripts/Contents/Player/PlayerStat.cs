@@ -74,9 +74,6 @@ public class PlayerStat : Stat
             yield return null;
             if (Hunger <= 0)
                 continue;
-
-            if(Managers.Game.completeTutorial)
-                Hunger -= Time.deltaTime * maxHunger / 300;
         }
     }
 

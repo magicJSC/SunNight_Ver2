@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
 
     public bool isHandleUI;
 
-    public bool completeTutorial = false;
-
     public bool canMoveTower;
 
     public bool isOpeningStory = false;

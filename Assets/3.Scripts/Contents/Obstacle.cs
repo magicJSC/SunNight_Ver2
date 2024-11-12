@@ -50,7 +50,7 @@ public class Obstacle : MonoBehaviour,IKnockBack,IGetPlayerDamage
         rigid.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
-    public void GetDamage(int damage)
+    public void GetDamage(float damage)
     {
         stat.GetDamage(damage);
     }

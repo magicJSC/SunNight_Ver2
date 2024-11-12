@@ -37,13 +37,6 @@ public class GraveStoneController : MonoBehaviour,IInteractObject
                 slotInfoList.Add(slotInfo); 
             }
         }
-        int index;
-        int count = slotInfoList.Count / 4;
-        for(int i = 0; i < count; i++)
-        {
-            index = Random.Range(0,slotInfoList.Count);
-            slotInfoList.Remove(slotInfoList[index]);
-        }
         Managers.Inven.EmptyInvenAndHotBar();
         if(slotInfoList.Count == 0)
             Destroy(gameObject);

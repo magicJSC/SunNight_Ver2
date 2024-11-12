@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 5739417971664703880}
   - component: {fileID: 1440211518975413966}
   - component: {fileID: 3889344663758086006}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: TargetChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

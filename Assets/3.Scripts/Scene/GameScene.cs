@@ -13,7 +13,6 @@ public class GameScene : BaseScene
 
         Managers.Game.isMovingTower = false;
         PlayerController.isDie = false;
-        Managers.Game.completeTutorial = true;
         Managers.UI.PopUIList.Clear();
 
         for (int i = 0; i < 5; i++)

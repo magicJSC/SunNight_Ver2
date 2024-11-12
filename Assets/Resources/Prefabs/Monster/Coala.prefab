@@ -183,8 +183,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a9c6c13f2ff23e4d81be86ab7d91001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  luck: 40
-  meat: {fileID: 11400000, guid: 1e8a1a00c16e47b4aaf86b1d2532639b, type: 2}
+  getItemList:
+  - item: {fileID: 11400000, guid: 1e8a1a00c16e47b4aaf86b1d2532639b, type: 2}
+    count: 2
+    probability: 30
+  - item: {fileID: 11400000, guid: 209835d44adc74944aec8c3a71c90dd7, type: 2}
+    count: 3
+    probability: 50
+  - item: {fileID: 11400000, guid: 209835d44adc74944aec8c3a71c90dd7, type: 2}
+    count: 5
+    probability: 20
   coin: 50
   target: {fileID: 0}
   targetList: []
@@ -303,7 +311,7 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 388
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
