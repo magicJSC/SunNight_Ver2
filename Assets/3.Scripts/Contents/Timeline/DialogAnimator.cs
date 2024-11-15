@@ -48,11 +48,14 @@ public class DialogAnimator : MonoBehaviour
     {
         dialogText.text = "";
         dialogMassage = "";
+
+        if(profillImage != null)
         profillImage.sprite = dialog.Profill;
         int index = 0;
         bool isColor = false;
         isEnd = false;
-        nextSign.SetActive(false);
+        if(nextSign != null)
+            nextSign.SetActive(false);
         while (index < dialog.Massage.Length)
         {
             string s = dialog.Massage.Substring(index, 1);
