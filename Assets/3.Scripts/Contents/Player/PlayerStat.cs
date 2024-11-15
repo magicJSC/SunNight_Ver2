@@ -13,7 +13,7 @@ public class PlayerStat : Stat
     public float Hunger { get { return hunger; } 
         set
         { 
-            hunger = Mathf.Clamp(value, 0, value);
+            hunger = Mathf.Clamp(value, 0, maxHunger);
             if (hunger <= maxHunger / 7)
             {
                 if(hungerBuff == null)

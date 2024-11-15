@@ -74,23 +74,26 @@ public class InvenManager : MonoBehaviour
 
     public Action<UI_Item> hotBarEvent;
 
+
+    public UI_Item currentItemUI;
+
     //선택한 값에 따라 다르게 실행
     public void CheckHotBarChoice()
     {
         if (!hotBarUI.slotList[choiceIndex])
             return;
-        ItemSO info = hotBarUI.slotList[choiceIndex].itemUI.slotInfo.itemInfo;
+        currentItemUI = hotBarUI.slotList[choiceIndex].itemUI;
         //체크할 때 플레이어의 검이 있을 때마다 지운다(수정 필요) -> 무기는 공격이 끝나면 사라져서 안보이고
         if (Managers.Game.weapon != null)
             Destroy(Managers.Game.weapon);
         MapManager.canBuild.gameObject.SetActive(false);
-        if (info == null)
+        if (currentItemUI.slotInfo.itemInfo == null)
         {
             Managers.Game.mouse.CursorType = CursorType.Normal;
             return;
         }
         hotBarEvent?.Invoke(hotBarUI.slotList[choiceIndex].itemUI);
-        switch (info.itemType)
+        switch (currentItemUI.slotInfo.itemInfo.itemType)
         {
             case ItemType.Building:
                 Managers.Game.mouse.CursorType = CursorType.Builder;
@@ -99,7 +102,7 @@ public class InvenManager : MonoBehaviour
                 break;
             case ItemType.Tool:
                 Managers.Game.mouse.CursorType = CursorType.Battle;
-                Managers.Game.weapon = Instantiate(info.itemPrefab, Managers.Game.player.toolParent.transform);
+                Managers.Game.weapon = Instantiate(currentItemUI.slotInfo.itemInfo.itemPrefab, Managers.Game.player.toolParent.transform);
                 break;
             default:
                 Managers.Game.mouse.CursorType = CursorType.Normal;

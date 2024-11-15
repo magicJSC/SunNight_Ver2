@@ -15,6 +15,7 @@ public class UI_HotBar : UI_Base
     RectTransform choiceRect;
     GameObject grid;
 
+
     int choiceIndex = -1;
 
     public override void Init()
@@ -94,8 +95,6 @@ public class UI_HotBar : UI_Base
                 Managers.Inven.hotBarUI.CheckChoice();
             };
         };
-        
-
     }
 
 

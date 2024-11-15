@@ -8,13 +8,8 @@ public class MonsterWaveController : MonoBehaviour
 {
     bool isfinal;
 
-    [SerializeField]
-    float range;
 
     public WaveSO[] waveSO;
-
-    float camWidth;
-    float camHeight;
 
     [SerializeField]
     float distance;
@@ -27,8 +22,6 @@ public class MonsterWaveController : MonoBehaviour
     {
         timeController = Managers.Game.timeController;
         timeController.nightEvent += StartSpawn;
-        camHeight = Camera.main.orthographicSize * 2;
-        camWidth = camHeight * Camera.main.aspect;
     }
 
     void StartSpawn()
@@ -39,14 +32,15 @@ public class MonsterWaveController : MonoBehaviour
     IEnumerator SpawnMonster()
     {
         isfinal = false;
-        for(int i = 0; i < waveSO[timeController.day - 1].groups.Count; i++)
+        int day = Mathf.Clamp(timeController.day - 1, 0, waveSO.Length - 1);
+        for(int i = 0; i < waveSO[day].groups.Count; i++)
         {
-            for(int j = 0;j < waveSO[timeController.day - 1].groups[i].count; j++)
+            for(int j = 0;j < waveSO[day].groups[i].count; j++)
             {
-                NightSpawn(waveSO[timeController.day - 1].groups[i].monster);
-                yield return new WaitForSeconds(waveSO[timeController.day - 1].groups[i].spawnDelay);
+                NightSpawn(waveSO[day].groups[i].monster);
+                yield return new WaitForSeconds(waveSO[day].groups[i].spawnDelay);
             }
-            yield return new WaitForSeconds(waveSO[timeController.day - 1].groups[i].groupDelay);
+            yield return new WaitForSeconds(waveSO[day].groups[i].groupDelay);
         }
         isfinal = true;
     }
@@ -59,15 +53,6 @@ public class MonsterWaveController : MonoBehaviour
 
         spawnPos += new Vector3(xAmount, yAmount) * distance;
 
-        Vector2 camPos = Camera.main.transform.position;
-        if (spawnPos.x < camPos.x + camWidth / 2 && spawnPos.x > camPos.x - camWidth / 2 && spawnPos.y < camPos.y + camHeight / 2 && spawnPos.y > camPos.y - camHeight / 2)
-        {
-            Vector3 direction = (spawnPos - Managers.Game.tower.transform.position).normalized;
-            if (direction.x > 0)
-                spawnPos += direction * distance;                                              
-            else
-                spawnPos -= direction * distance;
-        }
 
         MonsterController monster = Instantiate(monsterPrefab, spawnPos, Quaternion.identity).GetComponent<MonsterController>();
         monster.targetType = MonsterController.TargetType.Tower;
