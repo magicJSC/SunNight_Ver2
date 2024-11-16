@@ -13,7 +13,7 @@ public class UI_Time : MonoBehaviour
     public Animator anim;
     TimeController timeController;
 
-    public void Start()
+    public void Init()
     {
         timeText = Util.FindChild<Text>(gameObject,"Time",true);
         dayText = Util.FindChild<Text>(gameObject,"Day",true);

@@ -31,6 +31,8 @@ public class TutorialScene : BaseScene
         Managers.Game.player.GetComponent<PlayerStat>().Hp = 100;
         Managers.Game.player.GetComponent<PlayerStat>().Hunger = 30;
 
+        Managers.Game.timeController.timeSpeed = 2f;
+
         Managers.Game.tower.transform.position = new Vector3(-37, 37);
         return true;
     }
@@ -38,6 +40,7 @@ public class TutorialScene : BaseScene
     void InstantiateOrLoad()
     {
         Managers.Game.timeController = Instantiate(Resources.Load<GameObject>("UI/UI_Time")).GetComponent<TimeController>();
+        Managers.Game.timeController.GetComponent<UI_Time>().Init();
         Managers.Game.lightController = Instantiate(Resources.Load<GameObject>("Prefabs/Light")).GetComponent<LightController>();
         Managers.Game.grid = FindObjectOfType<MapManager>();
         Managers.Game.mouse = Instantiate(Resources.Load<GameObject>("Prefabs/MouseController").GetComponent<MouseController>());
