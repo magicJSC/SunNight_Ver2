@@ -651,11 +651,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChangeSceneEffecter
       objectReference: {fileID: 0}
-    - target: {fileID: 7371340472249063177, guid: 794a2fe84961501429c12ac208a9b29b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
