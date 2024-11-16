@@ -53,7 +53,7 @@ public class TimeController : MonoBehaviour
     }
     TimeType _timeType = TimeType.Night;
 
-    public void Start()
+    public void OnEnable()
     {
         if (TimeAmount >= 1290)
         {
