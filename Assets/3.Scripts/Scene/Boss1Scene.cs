@@ -5,10 +5,15 @@ using static InvenManager;
 
 public class Boss1Scene : BaseScene
 {
+    [SerializeField]
+    AudioClip mainAudio;
+
     protected override bool Init()
     {
         if (base.Init() == false)
             return false;
+
+        Managers.Sound.Play(Define.Sound.Bgm,mainAudio);
 
         InstantiateOrLoad();
         SetActions();

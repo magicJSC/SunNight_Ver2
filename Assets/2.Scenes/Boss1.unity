@@ -626,7 +626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &294216920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24080,7 +24080,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.99
+  m_Intensity: 0
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 0000000003819490c3e264b78d457f7d
@@ -47608,6 +47608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneType: 0
+  mainAudio: {fileID: 8300000, guid: 2dba75cd9947c7946b0f548e09f284a8, type: 3}
 --- !u!1 &2051458540
 GameObject:
   m_ObjectHideFlags: 0
