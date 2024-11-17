@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ec47352a5e85842beae4edf16846d4, type: 3}
   m_Name: Sound Marker
   m_EditorClassIdentifier: 
-  m_Time: 0.25
+  m_Time: 0.16666666666666666
   isPlayMark: 0
   isStopMark: 0
   playAudio: {fileID: 8300000, guid: ec0ac51ee13aeb645b9b0387ab4c9da1, type: 3}

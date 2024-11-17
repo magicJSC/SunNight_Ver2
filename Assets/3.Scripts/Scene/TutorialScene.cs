@@ -5,10 +5,14 @@ using static InvenManager;
 
 public class TutorialScene : BaseScene
 {
+    [SerializeField]
+    AudioClip mainSound;
     protected override bool Init()
     {
         if (base.Init() == false)
             return false;
+
+        Managers.Sound.Play(Define.Sound.Bgm, mainSound);
 
         InstantiateOrLoad();
         SetActions();

@@ -22,18 +22,17 @@ public class UI_Main : UI_Base
     GameObject start;
     GameObject option;
     GameObject exit;
+    GameObject boss;
     Text startText;
     Text optionText;
     Text exitText;
 
-    Animator anim;
-
     public override void Init()
     {
-        anim = GetComponent<Animator>();
         start = Util.FindChild(gameObject,"Start",true);
         option = Util.FindChild(gameObject,"Option",true);
         exit = Util.FindChild(gameObject,"Exit",true);
+        boss = Util.FindChild(gameObject,"Boss",true);
         startText = start.GetComponentInChildren<Text>();
         optionText = option.GetComponentInChildren<Text>();
         exitText = exit.GetComponentInChildren<Text>();
@@ -52,6 +51,10 @@ public class UI_Main : UI_Base
         evt._OnClick += (PointerEventData p) => { Application.Quit(); };
         evt._OnEnter += (PointerEventData p) => { exitText.color = Color.red; Managers.Sound.Play(Define.Sound.Effect, enterSound); };
         evt._OnExit += (PointerEventData p) => { exitText.color = Color.black; };
+
+        evt = boss.GetComponent<UI_EventHandler>();
+        evt._OnClick += (PointerEventData p) => {StartCoroutine(PlayBoss()); };
+        evt._OnEnter += (PointerEventData p) => { Managers.Sound.Play(Define.Sound.Effect, enterSound); };
 
         clickSoundAsset.LoadAssetAsync().Completed += (clip) =>
         {
@@ -74,5 +77,12 @@ public class UI_Main : UI_Base
         Managers.Game.changeSceneEffecter.StartChangeScene();
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("TutorialScene");
+    }
+
+    IEnumerator PlayBoss()
+    {
+        Managers.Game.changeSceneEffecter.StartChangeScene();
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("Boss1");
     }
 }
