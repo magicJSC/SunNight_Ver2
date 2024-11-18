@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public TimeController timeController;
    
     public LightController lightController;
+    public CameraController mainCam;
 
     public bool isMovingTower;
 

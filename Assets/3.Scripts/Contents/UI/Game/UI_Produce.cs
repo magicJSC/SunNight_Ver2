@@ -147,6 +147,7 @@ public class UI_Produce : UI_Base
             Remove_ToMake();
             Managers.Sound.Play(Define.Sound.Effect, showSound);
             Managers.Inven.inventoryUI.gameObject.SetActive(true);
+            Managers.UI.PopUIList.Add(gameObject);
         }
     }
 
@@ -157,6 +158,7 @@ public class UI_Produce : UI_Base
             Managers.Sound.Play(Define.Sound.Effect, hideSound);
             explainItem.SetActive(false);
             explainMat.SetActive(false);
+            Managers.UI.PopUIList.Remove(gameObject);
         }
     }
 
@@ -211,7 +213,7 @@ public class UI_Produce : UI_Base
             return;
         for (int i = 0; i < toMakeItem.materialList.Length; i++)
         {
-            List<UI_Item> _itemUIList = itemUIList[toMakeItem.materialList[i].itemSO.itemName];
+            List<UI_Item> _itemUIList = itemUIList[toMakeItem.materialList[i].itemSO.idName];
             int count = toMakeItem.materialList[i].count;
             for (int j = 0; j < _itemUIList.Count; j++)
             {
@@ -254,7 +256,7 @@ public class UI_Produce : UI_Base
         {
             int count = 0;
             bool canProduce = false;
-            itemUIList.Add(toMakeItem.materialList[i].itemSO.itemName, new());
+            itemUIList.Add(toMakeItem.materialList[i].itemSO.idName, new());
             for (int j = 0; j < 24; j++)
             {
                 if (canProduce)
@@ -266,23 +268,23 @@ public class UI_Produce : UI_Base
                 if (toMakeItem.materialList[i].itemSO.idName == itemUI.slotInfo.itemInfo.idName)
                 {
                     count += itemUI.slotInfo.count;
-                    itemUIList[itemUI.slotInfo.itemInfo.itemName].Add(itemUI);
+                    itemUIList[itemUI.slotInfo.itemInfo.idName].Add(itemUI);
 
                     if (count >= toMakeItem.materialList[i].count)
                         canProduce = true;
                 }
             }
-            for (int j = 0; j < 4; j++)
+            for (int j = 0; j < 5; j++)
             {
                 if (canProduce)
                     break;
                 UI_Item itemUI = Managers.Inven.hotBarUI.slotList[j].itemUI;
                 if (itemUI.slotInfo.itemInfo == null)
                     continue;
-                if (toMakeItem.materialList[i].itemSO == itemUI.slotInfo.itemInfo)
+                if (toMakeItem.materialList[i].itemSO.idName == itemUI.slotInfo.itemInfo.idName)
                 {
                     count += itemUI.slotInfo.count;
-                    itemUIList[itemUI.slotInfo.itemInfo.itemName].Add(itemUI);
+                    itemUIList[itemUI.slotInfo.itemInfo.idName].Add(itemUI);
 
                     if (count >= toMakeItem.materialList[i].count)
                         canProduce = true;

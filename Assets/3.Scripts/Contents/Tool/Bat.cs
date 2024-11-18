@@ -30,8 +30,10 @@ public class Bat : ToolController
 
     void Attack()
     {
+        if (Managers.Game.isCantPlay)
+            return;
         Managers.Sound.Play(Define.Sound.Effect, sound);
-        Collider2D[] cols = Physics2D.OverlapBoxAll(transform.GetChild(0).position + (point - transform.position).normalized, size, angle);
+        Collider2D[] cols = Physics2D.OverlapBoxAll(transform.GetChild(0).position + (point - transform.position).normalized / 2, size, angle);
         foreach (Collider2D col in cols)
         {
             if (col.TryGetComponent<IGetMonsterDamage>(out var player))
@@ -41,10 +43,10 @@ public class Bat : ToolController
             {
                 monster.GetDamage(_damage);
                 Instantiate(effect, col.transform.position, Quaternion.identity);
-                if(col.TryGetComponent<IKnockBack>(out var knockBack))
-                {
-                    knockBack.StartKnockBack(transform);
-                }
+            }
+            if (col.TryGetComponent<IKnockBack>(out var knockBack))
+            {
+                knockBack.StartKnockBack(transform);
             }
         }
     }

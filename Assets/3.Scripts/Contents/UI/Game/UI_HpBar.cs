@@ -24,6 +24,8 @@ public class UI_HpBar : UI_Base
 
     public void SetHp(Stat stat)
     {
+        if (stat == null)
+            return;
         StartCoroutine(UpdateHPBar(stat));
         anim.Play("Hited", -1, 0);
     }

@@ -62,7 +62,6 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
         produceUIAsset.LoadAssetAsync().Completed += (obj) =>
         {
             produceUI = Managers.UI.ShowUI(obj.Result);
-            GetComponent<PopUICloser>().gameMenuUI = produceUI;
         };
         gameMenuUIAsset.LoadAssetAsync().Completed += (obj) =>
         {
@@ -167,11 +166,11 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
     {
         Camera.main.transform.parent = null;
         isDie = true;
-        graveAsset.InstantiateAsync().Completed += (go) =>
-        {
-            go.Result.transform.position = transform.position;
-            gameObject.SetActive(false);
-        };
+        //graveAsset.InstantiateAsync().Completed += (go) =>
+        //{
+        //    go.Result.transform.position = transform.position;
+        //    gameObject.SetActive(false);
+        //};
 
         DieUIAsset.InstantiateAsync().Completed += (go) =>
         {
