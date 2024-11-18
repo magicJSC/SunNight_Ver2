@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using static Define;
-using static UnityEditor.Progress;
 
 public class InvenManager : MonoBehaviour
 {

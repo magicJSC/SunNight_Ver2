@@ -19,6 +19,8 @@ public class ToolController : MonoBehaviour
     }
     protected virtual void Init()
     {
+        if (Managers.Game.isCantPlay)
+            return;
         anim = GetComponent<Animator>();
         point = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10);
         if (transform.parent.position.x < point.x)
@@ -66,7 +68,8 @@ public class ToolController : MonoBehaviour
     {
         if (isWorking)
             return;
-
+        if (Managers.Game.isCantPlay)
+            return;
         anim.SetTrigger("Attack");
         isWorking = true;
     }

@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Boss1 : MonoBehaviour
 {
+    public GameObject energyBomb;
+
+    public GameObject timeline;
+
     Transform laserRotate;
+
+    Stat stat;
 
     GameObject laser;
     Animator anim;
@@ -13,11 +19,18 @@ public class Boss1 : MonoBehaviour
         anim = GetComponent<Animator>();
         laserRotate = Util.FindChild<Transform>(gameObject, "LaserRotate", true);
         laser = Util.FindChild(gameObject, "Laser", true);
+        stat = GetComponent<Stat>();
+        stat.dieEvent += Die;
     }
 
     private void OnEnable()
     {
         StartPatterns();
+    }
+
+    void Die()
+    {
+        Instantiate(timeline);
     }
 
     void StartPatterns()
@@ -40,14 +53,27 @@ public class Boss1 : MonoBehaviour
     IEnumerator Pattern1()
     {
         Debug.Log("½ºÅ³1");
-        anim.Play("Pattern1", -1, 0);
-        SetPoistion();
+        laser.SetActive(false);
+        
+        int index = SetPoistion();
         yield return new WaitForSeconds(2f);
         laser.SetActive(true);
         yield return new WaitForSeconds(3);
         laser.SetActive(false);
-        yield return new WaitForSeconds(2);
-        anim.Play("Idle");
+        
+        for(int i=0;i<3; i++)
+        {
+            SetBombPoistion(Instantiate(energyBomb).transform);
+        }
+
+        switch (index)
+        {
+            case 0:
+                anim.Play("DownIdle");
+                break;
+        }
+        anim.Play("DownIdle");
+        yield return new WaitForSeconds(6);
         StartPatterns();
     }
 
@@ -78,32 +104,36 @@ public class Boss1 : MonoBehaviour
         StartPatterns();
     }
 
-    void SetPoistion()
+    int SetPoistion()
     {
-        int posIndex = Random.Range(0,4);
+        int posIndex = Random.Range(0,3);
         float randomPos;
         switch (posIndex)
         {
             case 0:
-                randomPos = Random.Range(-12.4f, 17.4f);
+                randomPos = Random.Range(-3f, 8f);
                 transform.position = new Vector2(-14.2f,randomPos);
                 laserRotate.rotation = Quaternion.Euler(0,0,0);
+                anim.Play("DownPattern1", -1, 0);
                 break;
             case 1:
-                randomPos = Random.Range(-12.4f, 17.4f);
+                randomPos = Random.Range(-3f, 8);
                 transform.position = new Vector2(16, randomPos);
                 laserRotate.rotation = Quaternion.Euler(0, 0, 180);
+                anim.Play("DownPattern1", -1, 0);
                 break;
             case 2:
-                randomPos = Random.Range(-14.2f, 16f);
+                randomPos = Random.Range(-8, 3f);
                 transform.position = new Vector2(randomPos, 17.4f);
                 laserRotate.rotation = Quaternion.Euler(0, 0, 270);
-                break;
-            case 3:
-                randomPos = Random.Range(-14.2f, 16f);
-                transform.position = new Vector2(randomPos,-12.4f);
-                laserRotate.rotation = Quaternion.Euler(0, 0, 90);
+                anim.Play("DownPattern1", -1, 0);
                 break;
         }
+        return posIndex;
+    }
+
+    void SetBombPoistion(Transform bombTransform)
+    {
+        bombTransform.position = new Vector3(Random.Range(-3,8),Random.Range(-8f,3));
     }
 }

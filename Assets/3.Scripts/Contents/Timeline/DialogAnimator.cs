@@ -109,6 +109,7 @@ public class DialogAnimator : MonoBehaviour
         {
             if (isEnd)
             {
+                isEnd = false;
                 director.time = nextTime;
                 director.Resume();
             }

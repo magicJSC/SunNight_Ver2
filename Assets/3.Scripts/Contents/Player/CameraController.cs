@@ -16,6 +16,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        Managers.Game.mainCam = this;
         player = Managers.Game.player.transform;
         height = Camera.main.orthographicSize;
         width = height * Screen.width / Screen.height;

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BaseTimeline : MonoBehaviour
@@ -31,14 +32,15 @@ public class BaseTimeline : MonoBehaviour
 
     public void StartTimeline()
     {
+        Camera.main.gameObject.SetActive(false);
         ispPlaying = true;
         Managers.Game.isCantPlay = true;
     }
 
     public void EndTimeline()
     {
+        Managers.Game.mainCam.gameObject.SetActive(true);
         ispPlaying = false;
-        Destroy(gameObject);
         Managers.Game.isCantPlay = false;
     }
 
@@ -80,5 +82,22 @@ public class BaseTimeline : MonoBehaviour
     void Skip()
     {
         GetComponent<PlayableDirector>().time = endTime;
+    }
+
+    public void GoToMain()
+    {
+        StartCoroutine(StartGoMain());
+    }
+
+    IEnumerator StartGoMain()
+    {
+        Managers.Game.changeSceneEffecter.StartChangeScene();
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("MainScene");
+    }
+
+    public void Setestroy()
+    {
+        Destroy(gameObject);
     }
 }
