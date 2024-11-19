@@ -250,10 +250,10 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
         Gizmos.DrawWireSphere(transform.position,8);
     }
 
-    public void StartKnockBack(Transform attacker)
+    public void StartKnockBack(Vector2 dir)
     {
         curEndTime = 0;
-        rigid.velocity = (transform.position - attacker.position).normalized * 5;
+        rigid.velocity = dir.normalized * 5;
         StartCoroutine(KnockBack());
     }
 

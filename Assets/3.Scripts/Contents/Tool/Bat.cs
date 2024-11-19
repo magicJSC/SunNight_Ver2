@@ -14,6 +14,8 @@ public class Bat : ToolController
     GameObject effect;
     AudioClip sound;
 
+    List<Transform> damageList = new List<Transform>();
+
 
     protected override void Init()
     {
@@ -33,26 +35,38 @@ public class Bat : ToolController
         if (Managers.Game.isCantPlay)
             return;
         Managers.Sound.Play(Define.Sound.Effect, sound);
-        Collider2D[] cols = Physics2D.OverlapBoxAll(transform.GetChild(0).position + (point - transform.position).normalized / 2, size, angle);
-        foreach (Collider2D col in cols)
+       for(int i = 0;i< damageList.Count; i++) 
         {
-            if (col.TryGetComponent<IGetMonsterDamage>(out var player))
-                return;
-
-            if (col.TryGetComponent<IGetPlayerDamage>(out var monster))
+            if (damageList[i] == null)
             {
-                monster.GetDamage(_damage);
-                Instantiate(effect, col.transform.position, Quaternion.identity);
+                damageList.RemoveAt(i);
+                i--;
+                continue;
             }
-            if (col.TryGetComponent<IKnockBack>(out var knockBack))
+
+            damageList[i].GetComponent<IGetPlayerDamage>().GetDamage(_damage);
+            Instantiate(effect, damageList[i].transform.position, Quaternion.identity);
+            if (damageList[i].TryGetComponent<IKnockBack>(out var knockBack))
             {
-                knockBack.StartKnockBack(transform);
+                knockBack.StartKnockBack((point - transform.position).normalized);
             }
         }
+       
     }
-    private void OnDrawGizmos()
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.GetChild(0).position, size);
+        if(collision.GetComponent<IGetPlayerDamage>() != null)
+        {
+            damageList.Add(collision.transform);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<IGetPlayerDamage>() != null)
+        {
+            damageList.Remove(collision.transform);
+        }
     }
 }

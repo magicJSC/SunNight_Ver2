@@ -23,12 +23,12 @@ public class Obstacle : MonoBehaviour,IKnockBack,IGetPlayerDamage
         Destroy(gameObject);
     }
 
-    public void StartKnockBack(Transform attacker)
+    public void StartKnockBack(Vector2 dir)
     {
         curEndTime = 0;
         rigid.constraints = RigidbodyConstraints2D.None;
         rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
-        rigid.velocity = (transform.position - attacker.position).normalized * 5;
+        rigid.velocity = dir.normalized * 5;
         StartCoroutine(KnockBack());
     }
 

@@ -14,7 +14,7 @@ public class Stat : MonoBehaviour, IGetDamage
         { 
             if(_hp > value)
                damagedEvent?.Invoke();
-            _hp = Mathf.Clamp(value,0,value); 
+            _hp = Mathf.Clamp(value,0,maxHP); 
             hpEvent?.Invoke(this);
         } 
     }

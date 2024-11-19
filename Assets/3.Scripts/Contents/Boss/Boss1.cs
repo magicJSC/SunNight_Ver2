@@ -8,6 +8,9 @@ public class Boss1 : MonoBehaviour
 
     public GameObject timeline;
 
+    public GameObject changeEffect;
+    public GameObject dieEffect;
+
     Transform laserRotate;
 
     Stat stat;
@@ -31,6 +34,8 @@ public class Boss1 : MonoBehaviour
     void Die()
     {
         Instantiate(timeline);
+        Instantiate(dieEffect,transform.position,Quaternion.identity);
+        Destroy(gameObject);
     }
 
     void StartPatterns()
@@ -48,6 +53,7 @@ public class Boss1 : MonoBehaviour
                 StartCoroutine(Pattern3());
                 break;
         }
+        Instantiate(changeEffect, transform.position, Quaternion.identity);
     }
 
     IEnumerator Pattern1()

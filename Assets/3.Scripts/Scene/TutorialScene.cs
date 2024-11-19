@@ -37,7 +37,7 @@ public class TutorialScene : BaseScene
 
         Managers.Game.timeController.timeSpeed = 2f;
 
-        Managers.Game.tower.transform.position = new Vector3(-37, 37);
+        Managers.Game.tower.transform.position = new Vector3(-54, 16);
         return true;
     }
 

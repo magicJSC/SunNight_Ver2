@@ -92,6 +92,14 @@ public class UI_Item : UI_Base
         {
             changeSound = clip.Result;
         };
+
+        if (materialIcon == null)
+        {
+            materialIconAsset.LoadAssetAsync().Completed += (sprite) =>
+            {
+                materialIcon = sprite.Result;
+            };
+        }
     }
 
 
