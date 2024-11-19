@@ -42,6 +42,7 @@ public class BaseTimeline : MonoBehaviour
         Managers.Game.mainCam.gameObject.SetActive(true);
         ispPlaying = false;
         Managers.Game.isCantPlay = false;
+        Managers.Inven.CheckHotBarChoice();
     }
 
     public void ActionSkip(InputAction.CallbackContext context)

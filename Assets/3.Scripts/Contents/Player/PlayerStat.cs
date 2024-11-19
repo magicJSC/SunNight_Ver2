@@ -49,6 +49,20 @@ public class PlayerStat : Stat
         StartCoroutine(ReduceHunger());
     }
 
+    private void OnEnable()
+    {
+        StartCoroutine(FillStat());
+    }
+
+    IEnumerator FillStat()
+    {
+        while (true)
+        {
+            yield return null;
+            Hp += Time.deltaTime / 20;
+        }
+    }
+
     void GetHungerBuff()
     {
         if (hungerBuffPrefab == null)

@@ -169,9 +169,9 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
         //graveAsset.InstantiateAsync().Completed += (go) =>
         //{
         //    go.Result.transform.position = transform.position;
-        //    gameObject.SetActive(false);
         //};
 
+        gameObject.SetActive(false);
         DieUIAsset.InstantiateAsync().Completed += (go) =>
         {
             if (!Managers.Game.isMovingTower)

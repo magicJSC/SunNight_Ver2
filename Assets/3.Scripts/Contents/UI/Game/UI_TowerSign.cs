@@ -26,7 +26,7 @@ public class UI_TowerSign : MonoBehaviour
         while (true)
         {
             yield return null;
-            if(Mathf.Abs(tower.position.x - player.position.x) < 20 || Mathf.Abs(tower.position.y - player.position.y) < 12)
+            if(Mathf.Abs(tower.position.x - player.position.x) < 20 && Mathf.Abs(tower.position.y - player.position.y) < 12)
             {
                 background.gameObject.SetActive(false);
                 continue;

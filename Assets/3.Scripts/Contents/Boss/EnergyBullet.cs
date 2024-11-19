@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyBullet : MonoBehaviour,IKnockBack
+public class EnergyBullet : MonoBehaviour,IKnockBack,IGetPlayerDamage
 {
     public List<IGetDamage> getMonsterDamageList = new List<IGetDamage>();
 
@@ -24,7 +24,7 @@ public class EnergyBullet : MonoBehaviour,IKnockBack
         {
             if (getMonsterDamageList[i] != null)
             {
-                getMonsterDamageList[i].GetDamage(10);
+                getMonsterDamageList[i].GetDamage(6);
             }
         }
         Destroy(gameObject);
@@ -33,12 +33,17 @@ public class EnergyBullet : MonoBehaviour,IKnockBack
 
    
 
-    public void StartKnockBack(Transform attacker)
+    public void StartKnockBack(Vector2 dir)
     {
-        rigid.velocity = (transform.position - attacker.position).normalized * 10;
+        rigid.velocity = dir.normalized * 10;
     }
     public IEnumerator KnockBack()
     {
         yield return null;
+    }
+
+    public void GetDamage(float damage)
+    {
+
     }
 }

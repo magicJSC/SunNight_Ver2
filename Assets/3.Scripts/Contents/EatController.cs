@@ -26,8 +26,11 @@ public class EatController : MonoBehaviour
             {
                 stat.Hunger += itemUI.slotInfo.itemInfo.hungerAmount;
                 itemUI.slotInfo.count--;
-                if(itemUI.slotInfo.count == 0)
+                if (itemUI.slotInfo.count == 0)
+                {
                     itemUI.SetEmptyItem();
+                    Managers.Inven.CheckHotBarChoice();
+                }
             }
         }
     }

@@ -20,7 +20,7 @@ public interface IKnockBack
 {
     int endTime { get;  }
    
-    void StartKnockBack(Transform attacker);
+    void StartKnockBack(Vector2 dir);
 
     IEnumerator KnockBack();
 }
