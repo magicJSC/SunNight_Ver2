@@ -17,12 +17,17 @@ public class ServerSession : PacketSession
         Debug.Log($"OnConnected : {endPoint}");
 
         REQUEST_ENTER_GAME packet = new();
-        PacketId.PktRequestEnter packetId = new();
+        Send(packet, PacketId.PktRequestEnter);
+    }
+
+    void Send(IMessage packet, PacketId id)
+    {
         ushort size = (ushort)packet.CalculateSize();
         byte[] sendBuffer = new byte[size + 4];
         Array.Copy(BitConverter.GetBytes((ushort)(size + 4)), 0, sendBuffer, 0, sizeof(ushort));
-        Array.Copy(BitConverter.GetBytes((ushort)packetId), 0, sendBuffer, 2, sizeof(ushort));
+        Array.Copy(BitConverter.GetBytes((ushort)id), 0, sendBuffer, 2, sizeof(ushort));
         Array.Copy(packet.ToByteArray(), 0, sendBuffer, 4, size);
+        Debug.Log($"send packet : {BitConverter.ToString(sendBuffer)}");
         Send(new ArraySegment<byte>(sendBuffer));
     }
 

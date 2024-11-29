@@ -43,22 +43,29 @@ public class NetworkManager : MonoBehaviour
         string id = "admin";
         string pw = "1234";
         HttpContent content = new StringContent($"{id}&{pw}");
-        using HttpResponseMessage response = await client.PostAsync("http://localhost:3333/login", content);
-        response.EnsureSuccessStatusCode();
-        string responseBody = await response.Content.ReadAsStringAsync();
-        
-        Debug.Log(responseBody);
-
-        if (responseBody == "success")
+        try
         {
-            _ipEndPoint = new IPEndPoint(_ipAddr, 6666);
-            _connector.Connect(_ipEndPoint,
-                () => { return _session; });
+            using HttpResponseMessage response = await client.PostAsync("http://localhost:3333/login", content);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+
+            if (responseBody != "fail")
+            {
+                _ipEndPoint = new IPEndPoint(_ipAddr, 6666);
+                _connector.Connect(_ipEndPoint,
+                    () => { return _session; });
+                Debug.Log(responseBody);
+            }
+            else
+                Debug.Log("fail to login");
         }
-        else
-            Debug.Log("fail to login");
+        catch (HttpRequestException e)
+        {
+            Debug.Log($"Request Error : {e.Message}");
+        }
     }
-    
+
     void OnApplicationQuit()
     {
         _connector.Disconnect();
