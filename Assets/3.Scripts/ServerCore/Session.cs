@@ -43,7 +43,7 @@ namespace ServerCore
 
     public abstract class Session
     {
-        Socket _socket;
+        Socket _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         Protocol.PacketId _packetId = Protocol.PacketId.PktNone;
         int _disconnected = 0;
 
