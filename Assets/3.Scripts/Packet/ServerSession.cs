@@ -15,9 +15,6 @@ public class ServerSession : PacketSession
             return;
 
         Debug.Log($"OnConnected : {endPoint}");
-
-        REQUEST_ENTER_GAME packet = new();
-        Managers.Network.Send(packet, PacketId.PktRequestEnter);
     }
 
     public void Send(IMessage packet, PacketId id)

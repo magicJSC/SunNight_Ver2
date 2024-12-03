@@ -1,3 +1,5 @@
+using Google.Protobuf;
+using Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -64,6 +66,11 @@ public class NetworkManager : MonoBehaviour
         {
             Debug.Log($"Request Error : {e.Message}");
         }
+    }
+
+    public void Send(IMessage packet, PacketId id)
+    {
+        _session.Send(packet, id);
     }
 
     void OnApplicationQuit()

@@ -1,3 +1,4 @@
+using Protocol;
 using ServerCore;
 using System;
 using System.Net;
@@ -42,6 +43,9 @@ public class Connector
             Session session = _sessionFactory.Invoke();
             session.OnConnected(args.RemoteEndPoint);
             session.Start(args.ConnectSocket);
+
+            REQUEST_ENTER_GAME packet = new();
+            Managers.Network.Send(packet, PacketId.PktRequestEnter);
         }
         else
         {
