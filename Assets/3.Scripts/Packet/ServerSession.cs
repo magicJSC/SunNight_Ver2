@@ -17,10 +17,10 @@ public class ServerSession : PacketSession
         Debug.Log($"OnConnected : {endPoint}");
 
         REQUEST_ENTER_GAME packet = new();
-        Send(packet, PacketId.PktRequestEnter);
+        Managers.Network.Send(packet, PacketId.PktRequestEnter);
     }
 
-    void Send(IMessage packet, PacketId id)
+    public void Send(IMessage packet, PacketId id)
     {
         ushort size = (ushort)packet.CalculateSize();
         byte[] sendBuffer = new byte[size + 4];
