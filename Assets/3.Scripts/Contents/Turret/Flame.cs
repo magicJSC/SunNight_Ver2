@@ -17,7 +17,7 @@ public class Flame : MonoBehaviour
 
     private void Disappear()
     {
-        rigid.velocity = Vector3.zero;
+        rigid.linearVelocity = Vector3.zero;
         gameObject.SetActive(false);
         flameList.Add(gameObject);
     }

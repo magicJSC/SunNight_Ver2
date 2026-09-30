@@ -28,7 +28,7 @@ public class Obstacle : MonoBehaviour,IKnockBack,IGetPlayerDamage
         curEndTime = 0;
         rigid.constraints = RigidbodyConstraints2D.None;
         rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
-        rigid.velocity = dir.normalized * 5;
+        rigid.linearVelocity = dir.normalized * 5;
         StartCoroutine(KnockBack());
     }
 
@@ -37,9 +37,9 @@ public class Obstacle : MonoBehaviour,IKnockBack,IGetPlayerDamage
         while (true)
         {
             yield return null;
-            if (rigid.velocity.magnitude > 0.01f && curEndTime < endTime)
+            if (rigid.linearVelocity.magnitude > 0.01f && curEndTime < endTime)
             {
-               rigid.velocity = Vector2.Lerp(rigid.velocity, Vector2.zero, 0.05f);
+               rigid.linearVelocity = Vector2.Lerp(rigid.linearVelocity, Vector2.zero, 0.05f);
                 curEndTime += Time.deltaTime;
             }
             else

@@ -113,9 +113,9 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
         while (true)
         {
             if (!Managers.Game.isCantPlay)
-                rigid.velocity = dir * stat.Speed;
+                rigid.linearVelocity = dir * stat.Speed;
             else
-                rigid.velocity = Vector2.zero;
+                rigid.linearVelocity = Vector2.zero;
             yield return null;
         }
     }
