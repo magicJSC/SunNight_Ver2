@@ -19,7 +19,7 @@ public class Gun : ToolController
         asset.InstantiateAsync(transform.position, Quaternion.Euler(0,0,angle)).Completed += (obj) =>
         {
             bullet = obj.Result;
-            bullet.GetComponent<Rigidbody2D>().velocity = (point - transform.position).normalized * bulletSpeed;
+            bullet.GetComponent<Rigidbody2D>().linearVelocity = (point - transform.position).normalized * bulletSpeed;
             bullet.GetComponent<PlayerBullet>().damage = _damage;
         };
     }

@@ -35,7 +35,7 @@ public class EnergyBullet : MonoBehaviour,IKnockBack,IGetPlayerDamage
 
     public void StartKnockBack(Vector2 dir)
     {
-        rigid.velocity = dir.normalized * 10;
+        rigid.linearVelocity = dir.normalized * 10;
     }
     public IEnumerator KnockBack()
     {

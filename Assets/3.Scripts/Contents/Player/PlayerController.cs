@@ -38,6 +38,7 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
     Rigidbody2D rigid;
     Animator anim;
     SpriteRenderer sprite;
+    int lastBuildInputFrame = -1;
 
     public List<BaseBuffGiver> buffList { get; private set; }
 
@@ -87,8 +88,37 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
             Destroy(toolParent.transform.GetChild(0).gameObject);
     }
 
+    private void Update()
+    {
+        if (!init || Keyboard.current == null)
+            return;
+
+        bool up = Keyboard.current.wKey.isPressed;
+        bool down = Keyboard.current.sKey.isPressed;
+        bool left = Keyboard.current.aKey.isPressed;
+        bool right = Keyboard.current.dKey.isPressed;
+
+        if (up || down || left || right)
+        {
+            SetMoveDirection(new Vector2((right ? 1 : 0) - (left ? 1 : 0), (up ? 1 : 0) - (down ? 1 : 0)).normalized);
+        }
+        else if (Keyboard.current.wKey.wasReleasedThisFrame || Keyboard.current.sKey.wasReleasedThisFrame ||
+                 Keyboard.current.aKey.wasReleasedThisFrame || Keyboard.current.dKey.wasReleasedThisFrame)
+        {
+            SetMoveDirection(Vector2.zero);
+        }
+
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+            OnBuild();
+    }
+
 
     void OnMove(InputValue value)
+    {
+        SetMoveDirection(value.Get<Vector2>());
+    }
+
+    void SetMoveDirection(Vector2 moveDirection)
     {
         if (Managers.Game.isCantPlay)
         {
@@ -96,7 +126,7 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
             dir = Vector2.zero;
             return;
         }
-         dir = value.Get<Vector2>();
+        dir = moveDirection;
 
         if (dir != Vector2.zero)
         {
@@ -113,9 +143,9 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
         while (true)
         {
             if (!Managers.Game.isCantPlay)
-                rigid.velocity = dir * stat.Speed;
+                rigid.linearVelocity = dir * stat.Speed;
             else
-                rigid.velocity = Vector2.zero;
+                rigid.linearVelocity = Vector2.zero;
             yield return null;
         }
     }
@@ -136,6 +166,10 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
 
     public void OnBuild()
     {
+        if (lastBuildInputFrame == Time.frameCount)
+            return;
+        lastBuildInputFrame = Time.frameCount;
+
         if (Managers.Game.isCantPlay)
             return;
         if (Managers.Game.isHandleUI)

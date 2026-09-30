@@ -18,6 +18,7 @@ public class BuildController : MonoBehaviour
         gridSign = GetComponent<SpriteRenderer>();
         buildItemIcon = Util.FindChild(gameObject, "Sample").GetComponent<SpriteRenderer>();
         buildTile = GetComponent<SpriteRenderer>();
+        Managers.Map.SetCanBuildTile();
         StartCoroutine(UpdateCor());
     }
 
@@ -28,7 +29,8 @@ public class BuildController : MonoBehaviour
 
     private void OnEnable()
     {
-        Managers.Map.SetCanBuildTile();
+        if (Managers.Game.tower != null && MapManager.building != null && MapManager.tower != null && MapManager.canBuild != null && MapManager.cantBuild != null)
+            Managers.Map.SetCanBuildTile();
         StartCoroutine(UpdateCor());
     }
 
