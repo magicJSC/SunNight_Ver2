@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using static InvenManager;
 
 public class Boss1Scene : BaseScene
@@ -15,15 +16,21 @@ public class Boss1Scene : BaseScene
 
         Managers.Sound.Play(Define.Sound.Bgm,mainAudio);
 
+        Managers.Game.isCantPlay = false;
+        Managers.Game.isHandleUI = false;
+        Managers.Game.isMovingTower = false;
+        PlayerController.isDie = false;
+
         InstantiateOrLoad();
         SetActions();
+        HookBossCutscene();
 
 
         Managers.Game.grid.Init();
         Managers.Game.mouse.Init();
         Managers.Game.tower.Init();
         Managers.Inven.Init();
-        Managers.Game.build.Init(); //¼öÁ¤ Áß
+        Managers.Game.build.Init(); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         Managers.Game.player.Init();
         for (int i = 0; i < 5; i++)
             Managers.Inven.hotBarSlotInfo[i] = new SlotInfo(0);
@@ -46,7 +53,7 @@ public class Boss1Scene : BaseScene
 
     void InstantiateOrLoad()
     {
-        Managers.Game.grid = FindObjectOfType<MapManager>();
+        Managers.Game.grid = FindAnyObjectByType<MapManager>();
         Managers.Game.mouse = Instantiate(Resources.Load<GameObject>("Prefabs/MouseController").GetComponent<MouseController>());
         Managers.Game.build = Instantiate(Resources.Load<GameObject>("Prefabs/Builder")).GetComponent<BuildController>();
         Managers.Game.tower = Instantiate(Resources.Load<GameObject>("Prefabs/Tower")).GetComponent<TowerController>();
@@ -56,6 +63,36 @@ public class Boss1Scene : BaseScene
     void SetActions()
     {
         Managers.Game.build.SetAction();
+    }
+
+    void HookBossCutscene()
+    {
+        PlayableDirector[] directors = FindObjectsByType<PlayableDirector>(FindObjectsInactive.Include);
+        foreach (PlayableDirector director in directors)
+        {
+            if (director.playableAsset != null && director.playableAsset.name == "StartBoss1Cut")
+            {
+                director.stopped += StartBossBattle;
+                return;
+            }
+        }
+
+        Debug.LogError("StartBoss1Cut PlayableDirector was not found in the Boss1 scene.");
+    }
+
+    void StartBossBattle(PlayableDirector director)
+    {
+        Boss1 boss = FindAnyObjectByType<Boss1>();
+        Boss1BattleController battleController = FindAnyObjectByType<Boss1BattleController>(FindObjectsInactive.Include);
+
+        if (boss != null)
+            boss.StartBattle();
+
+        if (battleController != null)
+        {
+            battleController.gameObject.SetActive(true);
+            battleController.StartBattle();
+        }
     }
 
 }

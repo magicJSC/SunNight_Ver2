@@ -17,6 +17,7 @@ public class Boss1 : MonoBehaviour
 
     GameObject laser;
     Animator anim;
+    bool battleStarted;
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -26,8 +27,12 @@ public class Boss1 : MonoBehaviour
         stat.dieEvent += Die;
     }
 
-    private void OnEnable()
+    public void StartBattle()
     {
+        if (battleStarted)
+            return;
+
+        battleStarted = true;
         StartPatterns();
     }
 
@@ -58,7 +63,7 @@ public class Boss1 : MonoBehaviour
 
     IEnumerator Pattern1()
     {
-        Debug.Log("½ºÅ³1");
+        Debug.Log("ï¿½ï¿½Å³1");
         laser.SetActive(false);
         
         int index = SetPoistion();
@@ -85,7 +90,7 @@ public class Boss1 : MonoBehaviour
 
     IEnumerator Pattern2()
     {
-        Debug.Log("½ºÅ³2");
+        Debug.Log("ï¿½ï¿½Å³2");
         anim.Play("Pattern2",-1,0);
         transform.position = new Vector2(1.4f, 19.2f);
         yield return new WaitForSeconds(5);
@@ -96,7 +101,7 @@ public class Boss1 : MonoBehaviour
 
     IEnumerator Pattern3()
     {
-        Debug.Log("½ºÅ³3");
+        Debug.Log("ï¿½ï¿½Å³3");
         anim.Play("Pattern3", -1, 0);
         transform.position = new Vector2(1.4f,19.2f);
         laserRotate.rotation = Quaternion.Euler(new Vector3(0,0,-30));

@@ -7,8 +7,14 @@ public class Boss1BattleController : MonoBehaviour
     public WaveSO[] waveSO;
     public Transform[] spawnPosList;
 
-    private void OnEnable()
+    bool battleStarted;
+
+    public void StartBattle()
     {
+        if (battleStarted)
+            return;
+
+        battleStarted = true;
         StartBossBattle();
     }
 
