@@ -82,11 +82,7 @@ public class Boss1Scene : BaseScene
 
     void StartBossBattle(PlayableDirector director)
     {
-        Boss1 boss = FindAnyObjectByType<Boss1>();
         Boss1BattleController battleController = FindAnyObjectByType<Boss1BattleController>(FindObjectsInactive.Include);
-
-        if (boss != null)
-            boss.StartBattle();
 
         if (battleController != null)
         {
