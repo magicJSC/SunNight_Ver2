@@ -55,7 +55,7 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
             {
                 case Define.State.Idle:
                     anim.Play("Idle");
-                    rigid.velocity = Vector2.zero;
+                    rigid.linearVelocity = Vector2.zero;
                     break;
                 case Define.State.Move:
                     anim.Play("Move");
@@ -108,6 +108,8 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
     {
         while (true)
         {
+            if (TryGetComponent<FieldGuard>(out var fieldGuard) && fieldGuard.UpdateLeash(this))
+            { yield return null; continue; }
             switch (State)
             {
                 case Define.State.Idle:
@@ -124,7 +126,7 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
         }
     }
 
-    //Àú³á°ú ¾ÆÄ§ÀÌ ¸ñÇ¥ ¿ì¼±¼øÀ§¸¦ ´Ù¸£°Ô ÇÏ±â
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä§ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½
     public Transform SetTarget()
     {
         Transform result = null;
@@ -198,7 +200,7 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
             return;
         }
 
-        rigid.velocity = (target.transform.position - transform.position).normalized * stat.Speed;
+        rigid.linearVelocity = (target.transform.position - transform.position).normalized * stat.Speed;
         
 
       
@@ -208,12 +210,13 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
         if (curAtkCool < stat.attackCool)
             curAtkCool += Time.deltaTime;
 
-        if (rigid.velocity.x != 0)
-            sprite.flipX = rigid.velocity.x < 0;
+        if (rigid.linearVelocity.x != 0)
+            sprite.flipX = rigid.linearVelocity.x < 0;
     }
 
     public void GetDamage(float damage)
     {
+        if (TryGetComponent<FieldGuard>(out var guard) && guard.Returning) return;
         stat.GetDamage(damage);
     }
     protected virtual void OnAttack()
@@ -228,6 +231,7 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
 
     public void Die()
     {
+        if (FieldSession.Active || TryGetComponent<FieldGuard>(out _)) { dieEvent?.Invoke(gameObject); Destroy(gameObject); return; }
         int randomIndex = Random.Range(1, 101);
         float num = 0;
         for (int i = 0; i < getItemList.Count; i++)
@@ -253,7 +257,7 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
     public void StartKnockBack(Vector2 dir)
     {
         curEndTime = 0;
-        rigid.velocity = dir.normalized * 5;
+        rigid.linearVelocity = dir.normalized * 5;
         StartCoroutine(KnockBack());
     }
 
@@ -263,9 +267,9 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
         while (true)
         {
             yield return null;
-            if (rigid.velocity.magnitude > 0.01f && curEndTime < endTime)
+            if (rigid.linearVelocity.magnitude > 0.01f && curEndTime < endTime)
             {
-                rigid.velocity = Vector2.Lerp(rigid.velocity, Vector2.zero, 0.1f);
+                rigid.linearVelocity = Vector2.Lerp(rigid.linearVelocity, Vector2.zero, 0.1f);
                 curEndTime += Time.deltaTime;
             }
             else

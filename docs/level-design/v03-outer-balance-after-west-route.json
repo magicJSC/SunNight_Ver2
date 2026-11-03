@@ -1,0 +1,142 @@
+{
+  "label": "after-west",
+  "gameSeconds": 140.442459,
+  "wallSeconds": 70.2349548,
+  "simulationTimeScale": 2,
+  "distance": 620.0318,
+  "scrap": 8,
+  "parts": 1,
+  "food": 0,
+  "startHp": 100.0,
+  "endHp": 85.0,
+  "nearbyUnique": [
+    "P12",
+    "D1a",
+    "D1b"
+  ],
+  "aggroUnique": [
+    "P12",
+    "D1a",
+    "D1b"
+  ],
+  "longestQuietSeconds": 69.84265,
+  "encounterEvents": [
+    {
+      "seconds": 29.1277161,
+      "id": "P12",
+      "type": "within12",
+      "x": -74.9316559,
+      "y": -80.35387
+    },
+    {
+      "seconds": 29.6534729,
+      "id": "P12",
+      "type": "aggro",
+      "x": -77.62482,
+      "y": -80.5462646
+    },
+    {
+      "seconds": 56.36357,
+      "id": "D1a",
+      "type": "within12",
+      "x": -198.223328,
+      "y": -89.19623
+    },
+    {
+      "seconds": 57.0312347,
+      "id": "D1a",
+      "type": "aggro",
+      "x": -201.515472,
+      "y": -89.42092
+    },
+    {
+      "seconds": 66.43764,
+      "id": "D1b",
+      "type": "within12",
+      "x": -219.72142,
+      "y": -99.7054749
+    },
+    {
+      "seconds": 67.05049,
+      "id": "D1b",
+      "type": "aggro",
+      "x": -221.840866,
+      "y": -101.828812
+    }
+  ],
+  "run": {
+    "error": null,
+    "state": {
+      "phase": "latest-earned",
+      "seconds": 140.442459,
+      "scene": "TutorialScene",
+      "player": "(70.00, -70.00, 0.00)",
+      "hp": 85.0,
+      "hunger": 13.6855745,
+      "tower": "(-33.00, -19.00, 0.00)",
+      "towerHp": 500.0,
+      "inventory": [
+        {
+          "item": "Bat",
+          "count": 1
+        },
+        {
+          "item": "IronOre",
+          "count": 12
+        },
+        {
+          "item": "MaintenancePart",
+          "count": 1
+        }
+      ],
+      "research": [],
+      "kills": [
+        "P12",
+        "D1a",
+        "D1b"
+      ],
+      "facilities": [
+        {
+          "item": "Cannon",
+          "cell": "(-1, 1, 0)",
+          "hp": 20.0,
+          "max": 20.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(1, 1, 0)",
+          "hp": 20.0,
+          "max": 20.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(0, 1, 0)",
+          "hp": 20.0,
+          "max": 20.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(1, 2, 0)",
+          "hp": 30.0,
+          "max": 30.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(2, 1, 0)",
+          "hp": 19.0,
+          "max": 30.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(-1, 2, 0)",
+          "hp": 7.0,
+          "max": 30.0
+        }
+      ],
+      "boss": null,
+      "bossPhase": null,
+      "bossPattern": null,
+      "enemies": []
+    }
+  }
+}

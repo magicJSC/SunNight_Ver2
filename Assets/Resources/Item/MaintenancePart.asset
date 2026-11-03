@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 645d886fdfb92254d932890dbf57acad, type: 3}
+  m_Name: MaintenancePart
+  m_EditorClassIdentifier: Assembly-CSharp::ItemSO
+  idName: MaintenancePart
+  itemName: "\uC815\uBE44 \uBD80\uD488"
+  explain: "\uC57C\uC601\uC9C0 \uC5F0\uAD6C\uC5D0 \uC0AC\uC6A9\uD558\uB294 \uC815\uBC00
+    \uBD80\uD488. \uACBD\uBE44 \uBCF4\uC0C1 \uC0C1\uC790\uC5D0\uC11C \uD68D\uB4DD\uD569\uB2C8\uB2E4."
+  itemIcon: {fileID: 486335542, guid: 15c1a23359c99764e8e3eecbecb0dd20, type: 3}
+  itemType: 3
+  maxAmount: 64
+  itemPrefab: {fileID: 4453272255027861103, guid: 93bdb8e66cff6ac4b912f70dcbff0473,
+    type: 3}
+  buildTile: {fileID: 0}
+  canSmelt: 0
+  smeltItem: {fileID: 0}
+  canBake: 0
+  bakeItem: {fileID: 0}
+  bakeTime: 0
+  canEat: 0
+  hungerAmount: 0

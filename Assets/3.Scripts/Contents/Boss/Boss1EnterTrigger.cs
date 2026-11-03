@@ -29,6 +29,7 @@ public class Boss1EnterTrigger : MonoBehaviour
     {
         Managers.Game.changeSceneEffecter.StartChangeScene();
         yield return new WaitForSeconds(2);
+        if (FieldSession.Active && FieldInventory.Ready) FieldCheckpoint.TransferPreparation = FieldCheckpoint.Capture();
         SceneManager.LoadScene("Boss1");
     }
 

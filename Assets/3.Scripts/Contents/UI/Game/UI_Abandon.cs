@@ -35,6 +35,7 @@ public class UI_Abandon : UI_Base
 
     private void OnDisable()
     {
+        if (!Managers.HasInstance) return;
         Managers.UI.PopUIList.Remove(gameObject);
         Destroy(gameObject);
     }

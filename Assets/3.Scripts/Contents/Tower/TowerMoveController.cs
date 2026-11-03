@@ -7,9 +7,21 @@ public class TowerMoveController : MonoBehaviour
 {
     bool isMoving;
     bool canBuild;
+    int lastMoveToggleFrame = -1;
+    int lastBuildFrame = -1;
 
     Transform tower;
     Vector2 beforeTowerPos;
+
+    private void Update()
+    {
+        if (Keyboard.current != null && Keyboard.current.vKey.wasPressedThisFrame)
+            ToggleTowerMove();
+
+        if (isMoving && Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+            ConfirmTowerMove();
+    }
+
     private void Start()
     {
         tower = Managers.Game.tower.transform;
@@ -18,37 +30,53 @@ public class TowerMoveController : MonoBehaviour
     public void TryMoveTower(InputAction.CallbackContext context)
     {
         if (context.performed)
+            ToggleTowerMove();
+    }
+
+    void ToggleTowerMove()
+    {
+        if (FieldHUD.IsOpen) return;
+        if (!Managers.Game.canMoveTower || FieldFoxtonBattle.Active != null) return;
+        if (lastMoveToggleFrame == Time.frameCount)
+            return;
+
+        lastMoveToggleFrame = Time.frameCount;
+        if (!isMoving)
+            StartCoroutine(MoveTower());
+        else
         {
-            if (!isMoving)
-                StartCoroutine(MoveTower());
-            else
-            {
-                isMoving = false;
-                Managers.Game.tower.SetAfterBuild();
-                Managers.Map.SetCanBuildTile();
-                MapManager.tower.gameObject.SetActive(false);
-                Managers.Game.isCantPlay = false;
-                Managers.Game.tower.transform.position = beforeTowerPos;
-            }
+            isMoving = false;
+            Managers.Game.tower.SetAfterBuild();
+            Managers.Map.SetCanBuildTile();
+            MapManager.tower.gameObject.SetActive(false);
+            Managers.Game.isCantPlay = false;
+            Managers.Game.tower.transform.position = beforeTowerPos;
         }
     }
 
     public void TryBuildTowerAction(InputAction.CallbackContext context)
     {
-        if(context.performed)
-        {
-            if (isMoving)
-            {
-                if (!canBuild)
-                    return;
+        if (context.performed)
+            ConfirmTowerMove();
+    }
 
-                isMoving = false;
-                Managers.Game.tower.SetAfterBuild();
-                Managers.Map.SetCanBuildTile();
-                MapManager.tower.gameObject.SetActive(false);
-                Managers.Game.isCantPlay = false;
-                Managers.Inven.CheckHotBarChoice();
-            }
+    void ConfirmTowerMove()
+    {
+        if (lastBuildFrame == Time.frameCount)
+            return;
+
+        lastBuildFrame = Time.frameCount;
+        if (isMoving)
+        {
+            if (!canBuild)
+                return;
+
+            isMoving = false;
+            Managers.Game.tower.SetAfterBuild();
+            Managers.Map.SetCanBuildTile();
+            MapManager.tower.gameObject.SetActive(false);
+            Managers.Game.isCantPlay = false;
+            Managers.Inven.CheckHotBarChoice();
         }
     }
 
@@ -59,11 +87,13 @@ public class TowerMoveController : MonoBehaviour
         Managers.Game.isCantPlay = true;
         MapManager.tower.gameObject.SetActive(true);
         beforeTowerPos = tower.position;
-        Vector2 curTowerPos = tower.position;
+        Vector2 curTowerPos = Vector2.positiveInfinity;
+        canBuild = false;
         while (true)
         {
             yield return null;
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (!isMoving) yield break;
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current != null ? (Vector3)Mouse.current.position.ReadValue() : Input.mousePosition);
             Vector2 towerPos = new Vector2(Mathf.Round(mousePos.x),Mathf.Round(mousePos.y));
             if (curTowerPos != towerPos)
             {

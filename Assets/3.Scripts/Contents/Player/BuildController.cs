@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static Define;
 
 public class BuildController : MonoBehaviour
@@ -12,13 +13,20 @@ public class BuildController : MonoBehaviour
     public SpriteRenderer buildItemIcon;
     public SpriteRenderer buildTile;
     public SpriteRenderer gridSign;
+    bool initialized;
 
     public void Init()
     {
         gridSign = GetComponent<SpriteRenderer>();
         buildItemIcon = Util.FindChild(gameObject, "Sample").GetComponent<SpriteRenderer>();
         buildTile = GetComponent<SpriteRenderer>();
-        StartCoroutine(UpdateCor());
+        Managers.Map.SetCanBuildTile();
+        initialized = true;
+        if (isActiveAndEnabled)
+        {
+            StopAllCoroutines();
+            StartCoroutine(UpdateCor());
+        }
     }
 
     public void SetAction()
@@ -28,7 +36,10 @@ public class BuildController : MonoBehaviour
 
     private void OnEnable()
     {
-        Managers.Map.SetCanBuildTile();
+        // Instantiate invokes OnEnable before the scene has initialized the new map and tower.
+        if (!initialized) return;
+        if (Managers.Game.tower != null && MapManager.building != null && MapManager.tower != null && MapManager.canBuild != null && MapManager.cantBuild != null)
+            Managers.Map.SetCanBuildTile();
         StartCoroutine(UpdateCor());
     }
 
@@ -51,6 +62,8 @@ public class BuildController : MonoBehaviour
 
     public void MoveBuilder()
     {
+        if (MapManager.canBuild == null || MapManager.building == null || Managers.Game.tower == null || Camera.main == null)
+            return;
         if (Managers.Game.isCantPlay)
         {
             gameObject.SetActive(false);
@@ -59,7 +72,7 @@ public class BuildController : MonoBehaviour
         }
         if (MapManager.building == null)
             return;
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint((Mouse.current != null ? (Vector3)Mouse.current.position.ReadValue() : Input.mousePosition));
         Vector3Int gridPostion = MapManager.building.WorldToCell(mousePosition);
         transform.position = MapManager.building.CellToWorld(gridPostion) + new Vector3(0.5f,0.5f);
 
@@ -83,8 +96,15 @@ public class BuildController : MonoBehaviour
 
     public void BuildItem()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3Int gridPostion = MapManager.building.WorldToCell(mousePosition);
+        if (Camera.main == null) return;
+        BuildAtWorldPoint(Camera.main.ScreenToWorldPoint((Mouse.current != null ? (Vector3)Mouse.current.position.ReadValue() : Input.mousePosition)));
+    }
+
+    // Shared placement command: pointer input and automated gameplay checks use identical rules.
+    public void BuildAtWorldPoint(Vector3 worldPoint)
+    {
+        if (FieldHUD.IsOpen || FieldFoxtonBattle.Active != null || Managers.Game.isCantPlay || Managers.Game.isHandleUI) return;
+        Vector3Int gridPostion = MapManager.building.WorldToCell(worldPoint);
 
         if (!Managers.Game.tower.gameObject.activeSelf)
             return;
@@ -92,8 +112,10 @@ public class BuildController : MonoBehaviour
         {
             if (!gameObject.activeSelf)
                 return;
-            if (itemUI == null)
+            if (itemUI == null || itemUI.slotInfo.itemInfo == null || itemUI.slotInfo.count <= 0)
                 return;
+            if (FieldSession.Active && itemUI.slotInfo.itemInfo.idName.StartsWith("Cannon") && ExplorationEffects.CannonCount() >= FieldSession.CannonLimit)
+            { FieldHUD.Notify("대포 슬롯이 가득 찼습니다."); return; }
             MapManager.building.SetTile(gridPostion, itemUI.slotInfo.itemInfo.buildTile); 
             itemUI.slotInfo.count--;
             Managers.Map.SetCanBuildTile();

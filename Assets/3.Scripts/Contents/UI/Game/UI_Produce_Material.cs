@@ -40,8 +40,9 @@ public class UI_Produce_Material : UI_Base
 
     public void Set_Explain()
     {
-        explain.anchoredPosition = rectTransform.anchoredPosition + new Vector2(-390, 225);
+        explain.gameObject.SetActive(true);
         explainText.text = material.itemSO.explain;
         nameText.text = material.itemSO.itemName;
+        UIScreenPlacement.Tooltip(explain, rectTransform);
     }
 }

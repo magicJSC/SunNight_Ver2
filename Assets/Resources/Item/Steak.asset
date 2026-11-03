@@ -27,4 +27,4 @@ MonoBehaviour:
   bakeItem: {fileID: 0}
   bakeTime: 0
   canEat: 1
-  hungerAmount: 3
+  hungerAmount: 12

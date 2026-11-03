@@ -53,7 +53,7 @@ public class Flamethrower : TurretController, IAttack,IRotate
             flameList.Remove(flame);
             flame.SetActive(true);
             flame.transform.position = transform.position;
-            flame.GetComponent<Rigidbody2D>().velocity = targetDirection * attackSpeed;
+            flame.GetComponent<Rigidbody2D>().linearVelocity = targetDirection * attackSpeed;
             yield return new WaitForSeconds(0.2f);
         }
     }

@@ -1,0 +1,335 @@
+{
+  "policy": "Replay from the exact saved earned pre-night checkpoint, natural clock and actual combat. No resources or damage injected after restoration.",
+  "summary": {
+    "route": "postnight-replay-clockfix",
+    "phase": "first night cleared",
+    "seconds": 241.909042,
+    "clock": 330.0,
+    "position": [
+      -32.999897,
+      -23.18342
+    ],
+    "distance": 0.0,
+    "hp": 100.0,
+    "minHp": 100.0,
+    "hits": 0,
+    "hunger": 13.6855745,
+    "scrap": 4,
+    "food": 0,
+    "encounters": [],
+    "chaseSeconds": 0.0,
+    "maxNearby": 0,
+    "cannons": 3,
+    "walls": 3,
+    "towerHp": 500.0,
+    "day": 2,
+    "foodUsed": 1,
+    "minHunger": 7.99584675,
+    "minTowerHp": 500.0,
+    "nightSeconds": 86.34494,
+    "waveSpawned": 15,
+    "waveKilled": 15,
+    "peakWaveAlive": 5,
+    "firstNightCleared": true
+  },
+  "facilities": [
+    {
+      "item": "Fence",
+      "id": "568105589213743974",
+      "hp": 19.0,
+      "maxHp": 30.0
+    },
+    {
+      "item": "Cannon",
+      "id": "568105589213744918",
+      "hp": 20.0,
+      "maxHp": 20.0
+    },
+    {
+      "item": "Fence",
+      "id": "568105589213743676",
+      "hp": 7.0,
+      "maxHp": 30.0
+    },
+    {
+      "item": "Fence",
+      "id": "568105589213743378",
+      "hp": 0.0,
+      "maxHp": 30.0
+    },
+    {
+      "item": "Fence",
+      "id": "568105589213745220",
+      "hp": 0.0,
+      "maxHp": 30.0
+    },
+    {
+      "item": "Fence",
+      "id": "568105589213743080",
+      "hp": 30.0,
+      "maxHp": 30.0
+    },
+    {
+      "item": "Cannon",
+      "id": "568105589213744602",
+      "hp": 20.0,
+      "maxHp": 20.0
+    },
+    {
+      "item": "Cannon",
+      "id": "568105589213744286",
+      "hp": 20.0,
+      "maxHp": 20.0
+    },
+    {
+      "item": "Fence",
+      "id": "568105589213745518",
+      "hp": 0.0,
+      "maxHp": 30.0
+    }
+  ],
+  "events": [
+    {
+      "kind": "ate food",
+      "seconds": 110.94783,
+      "hungerBefore": 7.99584675,
+      "hungerAfter": 19.9799461,
+      "foodLeft": 0
+    },
+    {
+      "kind": "night began",
+      "state": {
+        "route": "postnight-replay-clockfix",
+        "phase": "first night",
+        "seconds": 150.560349,
+        "clock": 1290.0,
+        "position": [
+          -32.999897,
+          -23.18342
+        ],
+        "distance": 0.0,
+        "hp": 100.0,
+        "minHp": 100.0,
+        "hits": 0,
+        "hunger": 17.99926,
+        "scrap": 0,
+        "food": 0,
+        "encounters": [],
+        "chaseSeconds": 0.0,
+        "maxNearby": 0,
+        "cannons": 3,
+        "walls": 6,
+        "towerHp": 500.0,
+        "day": 1,
+        "foodUsed": 1,
+        "minHunger": 7.99584675,
+        "minTowerHp": 500.0,
+        "nightSeconds": 0.0,
+        "waveSpawned": 0,
+        "waveKilled": 0,
+        "peakWaveAlive": 0,
+        "firstNightCleared": false
+      }
+    },
+    {
+      "kind": "spawn",
+      "seconds": 155.583481,
+      "id": "568105589213742710",
+      "name": "Dog(Clone)",
+      "hp": 30.0,
+      "position": "(-33.00, -7.00, 0.00)"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 157.558258,
+      "id": "568105589213742652",
+      "name": "Dog(Clone)",
+      "hp": 30.0,
+      "position": "(-33.00, -7.00, 0.00)"
+    },
+    {
+      "kind": "kill",
+      "seconds": 158.9861,
+      "id": "568105589213742710"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 159.578857,
+      "id": "568105589213742594",
+      "name": "Dog(Clone)",
+      "hp": 30.0,
+      "position": "(-33.00, -7.06, 0.00)"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 161.558853,
+      "id": "568105589213742536",
+      "name": "Dog(Clone)",
+      "hp": 30.0,
+      "position": "(-33.00, -7.00, 0.00)"
+    },
+    {
+      "kind": "kill",
+      "seconds": 161.986664,
+      "id": "568105589213742652"
+    },
+    {
+      "kind": "kill",
+      "seconds": 164.987137,
+      "id": "568105589213742594"
+    },
+    {
+      "kind": "kill",
+      "seconds": 167.988022,
+      "id": "568105589213742536"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 177.996674,
+      "id": "568105589213742478",
+      "name": "Dog(Clone)",
+      "hp": 30.0,
+      "position": "(-33.00, -7.00, 0.00)"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 179.996216,
+      "id": "568105589213742420",
+      "name": "Dog(Clone)",
+      "hp": 30.0,
+      "position": "(-21.00, -19.00, 0.00)"
+    },
+    {
+      "kind": "kill",
+      "seconds": 181.40625,
+      "id": "568105589213742478"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 181.998978,
+      "id": "568105589213742362",
+      "name": "Dog(Clone)",
+      "hp": 30.0,
+      "position": "(-33.00, -7.00, 0.00)"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 184.0043,
+      "id": "568105589213742304",
+      "name": "Dog(Clone)",
+      "hp": 30.0,
+      "position": "(-21.06, -19.00, 0.00)"
+    },
+    {
+      "kind": "kill",
+      "seconds": 184.4063,
+      "id": "568105589213742420"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 186.005569,
+      "id": "568105589213742246",
+      "name": "Coala(Clone)",
+      "hp": 75.0,
+      "position": "(-33.00, -7.06, 0.00)"
+    },
+    {
+      "kind": "kill",
+      "seconds": 187.407242,
+      "id": "568105589213742362"
+    },
+    {
+      "kind": "kill",
+      "seconds": 190.408279,
+      "id": "568105589213742304"
+    },
+    {
+      "kind": "kill",
+      "seconds": 197.909714,
+      "id": "568105589213742246"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 207.940048,
+      "id": "568105589213742188",
+      "name": "Coala(Clone)",
+      "hp": 75.0,
+      "position": "(-33.00, -7.06, 0.00)"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 209.940643,
+      "id": "568105589213742130",
+      "name": "Dog(Clone)",
+      "hp": 30.0,
+      "position": "(-21.06, -19.00, 0.00)"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 211.939957,
+      "id": "568105589213742072",
+      "name": "Dog(Clone)",
+      "hp": 30.0,
+      "position": "(-33.00, -7.06, 0.00)"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 213.914139,
+      "id": "568105589213742014",
+      "name": "Coala(Clone)",
+      "hp": 75.0,
+      "position": "(-21.00, -19.00, 0.00)"
+    },
+    {
+      "kind": "kill",
+      "seconds": 215.827148,
+      "id": "568105589213742188"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 215.932144,
+      "id": "568105589213741956",
+      "name": "Dog(Clone)",
+      "hp": 30.0,
+      "position": "(-33.00, -7.06, 0.00)"
+    },
+    {
+      "kind": "spawn",
+      "seconds": 217.936661,
+      "id": "568105589213741898",
+      "name": "Dog(Clone)",
+      "hp": 30.0,
+      "position": "(-21.06, -19.00, 0.00)"
+    },
+    {
+      "kind": "kill",
+      "seconds": 218.828217,
+      "id": "568105589213742072"
+    },
+    {
+      "kind": "kill",
+      "seconds": 223.288483,
+      "id": "568105589213741956"
+    },
+    {
+      "kind": "kill",
+      "seconds": 226.289383,
+      "id": "568105589213742130"
+    },
+    {
+      "kind": "kill",
+      "seconds": 229.289948,
+      "id": "568105589213741898"
+    },
+    {
+      "kind": "kill",
+      "seconds": 229.289948,
+      "id": "568105589213741898"
+    },
+    {
+      "kind": "kill",
+      "seconds": 236.83255,
+      "id": "568105589213742014"
+    }
+  ]
+}

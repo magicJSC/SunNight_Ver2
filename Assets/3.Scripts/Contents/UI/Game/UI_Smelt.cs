@@ -91,6 +91,7 @@ public class UI_Smelt : UI_Base
 
     private void OnDisable()
     {
+        if (!Managers.HasInstance) return;
         if (!_init)
             return;
         explain.SetActive(false);

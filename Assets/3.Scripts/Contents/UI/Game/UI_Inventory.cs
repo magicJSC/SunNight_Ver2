@@ -105,6 +105,7 @@ public class UI_Inventory : UI_Base
     {
         if (_init)
         {
+            UIScreenPlacement.OpenInventory(back);
             Managers.Sound.Play(Define.Sound.Effect, showSound);
             Managers.UI.PopUIList.Add(gameObject);
         }
@@ -112,11 +113,15 @@ public class UI_Inventory : UI_Base
 
     private void OnDisable()
     {
+        if (!Managers.HasInstance) return;
         if (_init)
         {
             explain.SetActive(false);
             Managers.Sound.Play(Define.Sound.Effect, hideSound);
             Managers.UI.PopUIList.Remove(gameObject);
+            if (FieldInventory.Ready && Managers.Game.player != null && Managers.Game.mouse != null &&
+                MapManager.canBuild != null)
+                Managers.Inven.CheckHotBarChoice();
         }
     }
 

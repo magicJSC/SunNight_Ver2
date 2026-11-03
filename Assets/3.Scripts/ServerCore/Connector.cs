@@ -8,6 +8,9 @@ using UnityEngine;
 public class Connector
 {
     Func<Session> _sessionFactory;
+    readonly object _lifetimeLock = new object();
+    Session _connectedSession;
+    bool _stopping;
 
     public void Connect(IPEndPoint ipEndPoint, Func<Session> sessionFactory, int count = 1)
     {
@@ -38,24 +41,40 @@ public class Connector
 
     void OnConnectCompleted(object sender, SocketAsyncEventArgs args)
     {
-        if (args.SocketError == SocketError.Success)
+        lock (_lifetimeLock)
         {
-            Session session = _sessionFactory.Invoke();
-            session.OnConnected(args.RemoteEndPoint);
-            session.Start(args.ConnectSocket);
+            if (_stopping)
+            {
+                (args.UserToken as Socket)?.Dispose();
+                args.Dispose();
+                return;
+            }
+            if (args.SocketError == SocketError.Success)
+            {
+                Session session = _sessionFactory.Invoke();
+                session.OnConnected(args.RemoteEndPoint);
+                session.Start(args.ConnectSocket);
+                _connectedSession = session;
 
-            REQUEST_ENTER_GAME packet = new();
-            Managers.Network.Send(packet, PacketId.PktRequestEnter);
-        }
-        else
-        {
-            Debug.Log($"OnConnectCompleted Fail: {args.SocketError}");
+                REQUEST_ENTER_GAME packet = new();
+                Managers.Network.Send(packet, PacketId.PktRequestEnter);
+            }
+            else
+            {
+                Debug.Log($"OnConnectCompleted Fail: {args.SocketError}");
+                (args.UserToken as Socket)?.Dispose();
+            }
+            args.Dispose();
         }
     }
 
     public void Disconnect()
     {
-        Session session = _sessionFactory.Invoke();
-        session.Disconnect();
+        lock (_lifetimeLock)
+        {
+            _stopping = true;
+            _connectedSession?.Disconnect();
+            _connectedSession = null;
+        }
     }
 }

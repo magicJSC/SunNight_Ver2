@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "state": {
+    "layoutVersion": 3,
+    "firstNightCleared": true,
+    "research": [],
+    "killedGuards": [],
+    "claims": [
+      {
+        "id": "A1:0",
+        "amount": 1
+      },
+      {
+        "id": "A1_s2:0",
+        "amount": 1
+      },
+      {
+        "id": "A1_s1:0",
+        "amount": 1
+      },
+      {
+        "id": "A3:0",
+        "amount": 1
+      },
+      {
+        "id": "A2_s1:0",
+        "amount": 1
+      },
+      {
+        "id": "A2:0",
+        "amount": 1
+      },
+      {
+        "id": "A2_s2:0",
+        "amount": 1
+      },
+      {
+        "id": "B1_s2:0",
+        "amount": 1
+      },
+      {
+        "id": "B1_s1:0",
+        "amount": 1
+      },
+      {
+        "id": "B2:0",
+        "amount": 1
+      },
+      {
+        "id": "B3_s2:0",
+        "amount": 1
+      },
+      {
+        "id": "B3:0",
+        "amount": 1
+      },
+      {
+        "id": "B3_s1:0",
+        "amount": 1
+      },
+      {
+        "id": "A3_s1:0",
+        "amount": 1
+      },
+      {
+        "id": "N1:0",
+        "amount": 4
+      }
+    ]
+  },
+  "slots": [
+    {
+      "item": "Bat",
+      "count": 1
+    },
+    {
+      "item": "IronOre",
+      "count": 1
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    }
+  ],
+  "buildings": [
+    {
+      "x": 2,
+      "y": -1,
+      "item": "Fence",
+      "hp": 30.0
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "item": "Fence",
+      "hp": 30.0
+    },
+    {
+      "x": -1,
+      "y": 1,
+      "item": "Cannon",
+      "hp": 20.0
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "item": "Cannon",
+      "hp": 20.0
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "item": "Cannon",
+      "hp": 20.0
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "item": "Fence",
+      "hp": 19.0
+    },
+    {
+      "x": -1,
+      "y": 2,
+      "item": "Fence",
+      "hp": 7.0
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "item": "Fence",
+      "hp": 30.0
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "item": "Fence",
+      "hp": 30.0
+    }
+  ],
+  "playerX": -32.999897,
+  "playerY": -23.18342,
+  "towerX": -33.0,
+  "towerY": -19.0,
+  "hp": 100.0,
+  "hunger": 13.6855745,
+  "towerHp": 500.0,
+  "time": 330.0,
+  "day": 2,
+  "coin": 10000
+}

@@ -1,0 +1,421 @@
+{
+  "date": "2026-10-28",
+  "completePlaythrough": false,
+  "initialMovement": [
+    {
+      "phase": "walk (-54.00, 31.00)",
+      "time": 84.2225342,
+      "position": "(-53.98, 30.85, 0.00)",
+      "hp": 100.0,
+      "hunger": 30.0,
+      "towerHp": 500.0,
+      "clock": 330.0,
+      "inventory": [],
+      "research": [],
+      "firstNight": false
+    },
+    {
+      "phase": "walk (-54.00, 36.00)",
+      "time": 121.864464,
+      "position": "(-54.00, 35.85, 0.00)",
+      "hp": 100.0,
+      "hunger": 30.0,
+      "towerHp": 500.0,
+      "clock": 330.0,
+      "inventory": [],
+      "research": [],
+      "firstNight": false
+    },
+    {
+      "phase": "walk (-70.00, 36.00)",
+      "time": 125.042061,
+      "position": "(-69.80, 36.00, 0.00)",
+      "hp": 100.0,
+      "hunger": 30.0,
+      "towerHp": 500.0,
+      "clock": 330.0,
+      "inventory": [],
+      "research": [],
+      "firstNight": false
+    },
+    {
+      "phase": "walk (-70.00, 15.00)",
+      "time": 129.201538,
+      "position": "(-70.00, 15.20, 0.00)",
+      "hp": 100.0,
+      "hunger": 30.0,
+      "towerHp": 500.0,
+      "clock": 330.0,
+      "inventory": [],
+      "research": [],
+      "firstNight": false
+    },
+    {
+      "phase": "route complete",
+      "time": 129.201538,
+      "position": "(-70.00, 15.20, 0.00)",
+      "hp": 100.0,
+      "hunger": 30.0,
+      "towerHp": 500.0,
+      "clock": 330.0,
+      "inventory": [],
+      "research": [],
+      "firstNight": false
+    },
+    {
+      "phase": "collect Trashfile (10)",
+      "time": 135.681686,
+      "position": "(-70.00, 15.20, 0.00)",
+      "hp": 100.0,
+      "hunger": 30.0,
+      "towerHp": 500.0,
+      "clock": 330.0,
+      "inventory": [
+        {
+          "item": "IronOre",
+          "count": 20
+        }
+      ],
+      "research": [],
+      "firstNight": false
+    },
+    {
+      "phase": "baseline",
+      "time": 387.7855,
+      "position": "(-71.51, 15.17, 0.00)",
+      "hp": 100.0,
+      "hunger": 30.0,
+      "towerHp": 500.0,
+      "clock": 330.0,
+      "inventory": [
+        {
+          "item": "IronOre",
+          "count": 20
+        }
+      ],
+      "research": [],
+      "firstNight": false
+    },
+    {
+      "phase": "walk (-70.00, 10.00)",
+      "time": 778.8809,
+      "position": "(-70.05, 10.18, 0.00)",
+      "hp": 100.0,
+      "hunger": 30.0,
+      "towerHp": 500.0,
+      "clock": 330.0,
+      "inventory": [
+        {
+          "item": "IronOre",
+          "count": 20
+        }
+      ],
+      "research": [],
+      "firstNight": false
+    },
+    {
+      "phase": "walk (-70.00, 4.00)",
+      "time": 823.1647,
+      "position": "(-70.06, 4.16, 0.00)",
+      "hp": 100.0,
+      "hunger": 30.0,
+      "towerHp": 500.0,
+      "clock": 330.0,
+      "inventory": [
+        {
+          "item": "IronOre",
+          "count": 20
+        }
+      ],
+      "research": [],
+      "firstNight": false
+    },
+    {
+      "phase": "walk (-81.00, 4.00)",
+      "time": 825.349365,
+      "position": "(-80.82, 4.00, 0.00)",
+      "hp": 100.0,
+      "hunger": 30.0,
+      "towerHp": 500.0,
+      "clock": 330.0,
+      "inventory": [
+        {
+          "item": "IronOre",
+          "count": 20
+        }
+      ],
+      "research": [],
+      "firstNight": false
+    },
+    {
+      "phase": "walk (-81.00, 1.00)",
+      "time": 825.913635,
+      "position": "(-80.99, 1.21, 0.00)",
+      "hp": 100.0,
+      "hunger": 30.0,
+      "towerHp": 500.0,
+      "clock": 330.0,
+      "inventory": [
+        {
+          "item": "IronOre",
+          "count": 20
+        }
+      ],
+      "research": [],
+      "firstNight": false
+    },
+    {
+      "phase": "route complete",
+      "time": 825.913635,
+      "position": "(-80.99, 1.21, 0.00)",
+      "hp": 100.0,
+      "hunger": 30.0,
+      "towerHp": 500.0,
+      "clock": 330.0,
+      "inventory": [
+        {
+          "item": "IronOre",
+          "count": 20
+        }
+      ],
+      "research": [],
+      "firstNight": false
+    }
+  ],
+  "combatFixtures": [
+    {
+      "fixture": true,
+      "upgraded": false,
+      "dogs": 12,
+      "koalas": 3,
+      "seed": 7028,
+      "seconds": 66.45801,
+      "cleared": false,
+      "towerHp": 423.0,
+      "surviving": [
+        {
+          "name": "Dog(Clone)",
+          "hp": 30.0,
+          "pos": "(58.97, -69.97, 0.00)"
+        },
+        {
+          "name": "Coala(Clone)",
+          "hp": 65.0,
+          "pos": "(68.73, -71.49, 0.00)"
+        }
+      ],
+      "buildings": [
+        {
+          "item": "Cannon",
+          "hp": 5.0
+        },
+        {
+          "item": "Fence",
+          "hp": 5.0
+        },
+        {
+          "item": "Cannon",
+          "hp": 15.0
+        },
+        {
+          "item": "Fence",
+          "hp": 5.0
+        },
+        {
+          "item": "Fence",
+          "hp": 11.0
+        },
+        {
+          "item": "Fence",
+          "hp": 30.0
+        }
+      ]
+    },
+    {
+      "fixture": true,
+      "upgraded": false,
+      "dogs": 12,
+      "koalas": 3,
+      "seed": 7028,
+      "seconds": 30.82183,
+      "cleared": false,
+      "towerHp": 485.0,
+      "playerHp": 0.0,
+      "surviving": [
+        {
+          "name": "Dog(Clone)",
+          "hp": 10.0,
+          "pos": "(72.37, -69.74, 0.00)"
+        },
+        {
+          "name": "Dog(Clone)",
+          "hp": 30.0,
+          "pos": "(72.44, -69.74, 0.00)"
+        },
+        {
+          "name": "Dog(Clone)",
+          "hp": 30.0,
+          "pos": "(67.60, -71.01, 0.00)"
+        },
+        {
+          "name": "Dog(Clone)",
+          "hp": 30.0,
+          "pos": "(68.10, -71.93, 0.00)"
+        },
+        {
+          "name": "Dog(Clone)",
+          "hp": 10.0,
+          "pos": "(67.69, -70.79, 0.00)"
+        }
+      ],
+      "buildings": [
+        {
+          "item": "Fence",
+          "hp": 30.0
+        },
+        {
+          "item": "Fence",
+          "hp": 30.0
+        },
+        {
+          "item": "Cannon",
+          "hp": 20.0
+        },
+        {
+          "item": "Cannon",
+          "hp": 20.0
+        },
+        {
+          "item": "Fence",
+          "hp": 30.0
+        },
+        {
+          "item": "Fence",
+          "hp": 20.0
+        }
+      ]
+    },
+    {
+      "fixture": true,
+      "policy": "avoid enemies within 3; no player attacks",
+      "upgraded": false,
+      "dogs": 12,
+      "koalas": 3,
+      "seed": 7028,
+      "seconds": 87.5963,
+      "cleared": true,
+      "towerHp": 487.0,
+      "playerHp": 100.0,
+      "surviving": [],
+      "buildings": [
+        {
+          "item": "Fence",
+          "hp": 14.0
+        },
+        {
+          "item": "Fence",
+          "hp": 30.0
+        },
+        {
+          "item": "Cannon",
+          "hp": 20.0
+        },
+        {
+          "item": "Fence",
+          "hp": 30.0
+        },
+        {
+          "item": "Cannon",
+          "hp": 5.0
+        },
+        {
+          "item": "Cannon",
+          "hp": 10.0
+        },
+        {
+          "item": "Fence",
+          "hp": 5.0
+        }
+      ]
+    },
+    {
+      "fixture": true,
+      "policy": "avoid enemies within 3; no player attacks",
+      "upgraded": true,
+      "dogs": 12,
+      "koalas": 3,
+      "seed": 7028,
+      "seconds": 75.6366,
+      "cleared": true,
+      "towerHp": 492.0,
+      "playerHp": 100.0,
+      "surviving": [],
+      "buildings": [
+        {
+          "item": "Cannon",
+          "hp": 30.0
+        },
+        {
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "item": "Cannon",
+          "hp": 30.0
+        },
+        {
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "item": "Fence",
+          "hp": 30.0
+        },
+        {
+          "item": "Fence",
+          "hp": 30.0
+        },
+        {
+          "item": "Fence",
+          "hp": 45.0
+        }
+      ]
+    }
+  ],
+  "tutorialBefore": {
+    "fixture": true,
+    "seconds": 65.0858154,
+    "cleared": false,
+    "playerHp": 0.0,
+    "towerHp": 148.0,
+    "cannons": 0
+  },
+  "tutorialAfter": {
+    "fixture": true,
+    "seconds": 21.7697773,
+    "cleared": true,
+    "playerHp": 100.0,
+    "towerHp": 500.0,
+    "cannons": 1
+  },
+  "regression": [
+    "Legacy tutorial scrap total is 7; housing duplicates removed",
+    "Tutorial food total is 1",
+    "No free tutorial cannons bypass crafting",
+    "Complete field supply is 71 scrap / 6 parts / 4 food / 5 potions",
+    "All research costs 28 scrap and 6 parts",
+    "Repeated tutorial reward callback cannot duplicate scrap",
+    "Active first-day hunger drains at 0.05 per second",
+    "Waiting does not regenerate field player health",
+    "Cleared first night freezes day 2 at 05:30",
+    "Post-night exploration does not consume hunger",
+    "Factory transition consumes snapshot exactly once",
+    "Factory retains damaged tower health",
+    "Factory retains player damage and hunger",
+    "Factory retains relative placement, damage, and research",
+    "Field Foxton health is 1100",
+    "Boss cannot be damaged before battle",
+    "Boss accepts player damage after battle starts",
+    "Cannon can acquire Foxton collider"
+  ]
+}

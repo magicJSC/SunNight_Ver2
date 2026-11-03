@@ -53,8 +53,9 @@ public class UI_Produce_Item : UI_Base
 
     public void Set_Explain()
     {
-        explain.anchoredPosition = rectTransform.anchoredPosition + new Vector2(-515, 450);
+        explain.gameObject.SetActive(true);
         explainText.text = toMakeItem.toMakeItemSO.explain;
         nameText.text = toMakeItem.toMakeItemSO.itemName;
+        UIScreenPlacement.Tooltip(explain, rectTransform);
     }
 }

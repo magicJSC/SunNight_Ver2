@@ -24,6 +24,7 @@ public class Stat : MonoBehaviour, IGetDamage
 
     private void Start()
     {
+        ExplorationEffects.Apply(this);
         _hp = maxHP;
     }
 

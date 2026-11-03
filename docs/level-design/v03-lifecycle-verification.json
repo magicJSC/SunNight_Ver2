@@ -1,0 +1,54 @@
+{
+  "playModeSessions": 3,
+  "cycles": 9,
+  "fieldRestores": 21,
+  "factoryEntries": 9,
+  "saveWrites": 9,
+  "sessions": [
+    {
+      "label": "run1",
+      "completedCycles": 3,
+      "allDataChecksPassed": true,
+      "staleTweensAfterTransitions": 0,
+      "tweensBeforeStop": 7,
+      "dotweenRuntimeWarnings": 0,
+      "errors": 0,
+      "editorCompilerWarningsAfterStop": 0
+    },
+    {
+      "label": "run2",
+      "completedCycles": 3,
+      "allDataChecksPassed": true,
+      "staleTweensAfterTransitions": 0,
+      "tweensBeforeStop": 7,
+      "dotweenRuntimeWarnings": 0,
+      "errors": 0,
+      "editorCompilerWarningsAfterStop": 12
+    },
+    {
+      "label": "run3",
+      "completedCycles": 3,
+      "allDataChecksPassed": true,
+      "staleTweensAfterTransitions": 0,
+      "tweensBeforeStop": 7,
+      "dotweenRuntimeWarnings": 0,
+      "errors": 0,
+      "editorCompilerWarningsAfterStop": 0
+    }
+  ],
+  "finalStoppedObjects": {
+    "managerCount": 0,
+    "soundRoots": 0
+  },
+  "finalConsole": {
+    "sampledUtc": "2026-10-29T05:08:55.2674041Z",
+    "ageMs": 127,
+    "compilationFailed": false,
+    "compiling": false,
+    "consoleErrors": 0,
+    "consoleWarnings": 14,
+    "consoleLogs": 14,
+    "seeded": true
+  },
+  "remainingWarnings": "14 existing Missing Script warnings on returning to the original Editor scene. Startup MonoBehaviour-new warnings and legacy compiler warnings are outside the repaired DOTween/shutdown paths."
+}

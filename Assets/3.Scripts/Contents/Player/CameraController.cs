@@ -13,6 +13,14 @@ public class CameraController : MonoBehaviour
     float width;
 
     bool shaking;
+    Tween shakeTween;
+
+    void OnDisable()
+    {
+        shakeTween?.Kill(false);
+        shakeTween = null;
+        shaking = false;
+    }
 
     private void Start()
     {
@@ -47,9 +55,11 @@ public class CameraController : MonoBehaviour
 
     public void Shake(float duration,float strength)
     {
+        if (!isActiveAndEnabled || !Managers.HasInstance || Managers.Game.player == null) return;
         transform.parent = Managers.Game.player.transform;
         if(!shaking)
-            transform.DOShakePosition(duration, strength).onComplete += End;
+            shakeTween = transform.DOShakePosition(duration, strength).SetRecyclable(false)
+                .SetLink(gameObject, LinkBehaviour.KillOnDisable).OnComplete(End);
         shaking = true;
     }
     void End()

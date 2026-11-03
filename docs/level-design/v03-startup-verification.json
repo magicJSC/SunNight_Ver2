@@ -1,0 +1,236 @@
+{
+  "date": "2026-10-29",
+  "unity": "6000.5.10f1",
+  "branch": "feature/level-design",
+  "runtimeScope": [
+    "TutorialScene",
+    "Boss1"
+  ],
+  "playModeSessions": 3,
+  "factoryEntries": 9,
+  "checkpointRestoresInCycles": 21,
+  "checkpointSaveWritesInCycles": 9,
+  "sessions": [
+    {
+      "label": "run1",
+      "cycles": 3,
+      "nativeConsole": {
+        "sampledUtc": "2026-10-29T05:23:03.4376443Z",
+        "ageMs": 123,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 0,
+        "consoleLogs": 17,
+        "seeded": true
+      },
+      "capturedCounts": {
+        "error": 0,
+        "warn": 0,
+        "log": 566
+      },
+      "dropped": false,
+      "warningsAndErrors": [],
+      "initializationEvidence": [
+        "STARTUP_AUDIT manager components initialized on persistent root"
+      ],
+      "afterStop": {
+        "managerCount": 0,
+        "soundRoots": 0
+      }
+    },
+    {
+      "label": "run2",
+      "cycles": 3,
+      "nativeConsole": {
+        "sampledUtc": "2026-10-29T05:26:01.671791Z",
+        "ageMs": 148,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 0,
+        "consoleLogs": 16,
+        "seeded": true
+      },
+      "capturedCounts": {
+        "error": 0,
+        "warn": 0,
+        "log": 632
+      },
+      "dropped": false,
+      "warningsAndErrors": [],
+      "initializationEvidence": [],
+      "afterStop": {
+        "managerCount": 0,
+        "soundRoots": 0
+      }
+    },
+    {
+      "label": "run3",
+      "cycles": 3,
+      "nativeConsole": {
+        "sampledUtc": "2026-10-29T05:28:28.602667Z",
+        "ageMs": 70,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 0,
+        "consoleLogs": 16,
+        "seeded": true
+      },
+      "capturedCounts": {
+        "error": 0,
+        "warn": 0,
+        "log": 693
+      },
+      "dropped": false,
+      "warningsAndErrors": [],
+      "initializationEvidence": [],
+      "afterStop": {
+        "managerCount": 0,
+        "soundRoots": 0
+      }
+    }
+  ],
+  "compile": {
+    "counts": {
+      "error": 0,
+      "warn": 0,
+      "log": 0
+    },
+    "nativeConsole": {
+      "sampledUtc": "2026-10-29T05:26:53.5979013Z",
+      "ageMs": 224,
+      "compilationFailed": false,
+      "compiling": false,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "consoleLogs": 0,
+      "seeded": true
+    }
+  },
+  "removedComponents": {
+    "removed": 2,
+    "paths": [
+      "TutorialGrid/StartHouse/NoSortingWall_Back (1)",
+      "TutorialGrid/StartHouse/NoSortingWall_Back (2)"
+    ]
+  },
+  "finalOpenScene": [
+    {
+      "path": "Assets/2.Scenes/TutorialScene.unity",
+      "name": "TutorialScene",
+      "isDirty": false,
+      "missing": []
+    }
+  ],
+  "constructionRegression": {
+    "error": null,
+    "state": {
+      "phase": "latest-earned",
+      "seconds": 8.594772,
+      "scene": "TutorialScene",
+      "player": "(-33.00, -23.18, 0.00)",
+      "hp": 100,
+      "hunger": 13.6855745,
+      "tower": "(-33.00, -19.00, 0.00)",
+      "towerHp": 500,
+      "inventory": [
+        {
+          "item": "Bat",
+          "count": 1
+        },
+        {
+          "item": "IronOre",
+          "count": 1
+        }
+      ],
+      "research": [],
+      "kills": [],
+      "facilities": [
+        {
+          "item": "Cannon",
+          "cell": "(0, 1, 0)",
+          "hp": 20,
+          "max": 20
+        },
+        {
+          "item": "Fence",
+          "cell": "(2, 0, 0)",
+          "hp": 30,
+          "max": 30
+        },
+        {
+          "item": "Cannon",
+          "cell": "(-1, 1, 0)",
+          "hp": 20,
+          "max": 20
+        },
+        {
+          "item": "Fence",
+          "cell": "(2, -1, 0)",
+          "hp": 30,
+          "max": 30
+        },
+        {
+          "item": "Fence",
+          "cell": "(-1, 2, 0)",
+          "hp": 7,
+          "max": 30
+        },
+        {
+          "item": "Fence",
+          "cell": "(1, 2, 0)",
+          "hp": 30,
+          "max": 30
+        },
+        {
+          "item": "Fence",
+          "cell": "(2, 1, 0)",
+          "hp": 19,
+          "max": 30
+        },
+        {
+          "item": "Cannon",
+          "cell": "(1, 1, 0)",
+          "hp": 20,
+          "max": 20
+        },
+        {
+          "item": "Fence",
+          "cell": "(0, 2, 0)",
+          "hp": 30,
+          "max": 30
+        }
+      ],
+      "boss": null,
+      "bossPhase": null,
+      "bossPattern": null,
+      "enemies": []
+    }
+  },
+  "tileCellsUnchanged": true,
+  "tilemapCount": 43,
+  "unresolvedLegacyReferencesOutsideTestRoute": [
+    {
+      "path": "Assets/2.Scenes/GameScene.unity",
+      "guid": "9809bf1345abc5648af68b3a82653f08"
+    },
+    {
+      "path": "Assets/Resources/Prefabs/Items/TranshCan.prefab",
+      "guid": "6bc5323e37e287a40850389d91acde84"
+    },
+    {
+      "path": "Assets/Resources/Prefabs/ProduceMatter/Tree.prefab",
+      "guid": "de3122b3c2411634099b39723065eadf"
+    },
+    {
+      "path": "Assets/Resources_moved/Prefabs/GraveStone.prefab",
+      "guid": "6bc5323e37e287a40850389d91acde84"
+    },
+    {
+      "path": "Assets/Resources/Prefabs/Seller.prefab",
+      "guid": "6bc5323e37e287a40850389d91acde84"
+    }
+  ]
+}

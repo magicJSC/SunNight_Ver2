@@ -41,7 +41,7 @@ public class LaboratoryScene : BaseScene
     {
         Managers.Game.mouse = Instantiate(Resources.Load<GameObject>("Prefabs/MouseController").GetComponent<MouseController>());
         Managers.Game.player = Instantiate(Resources.Load<GameObject>("Prefabs/Player")).GetComponent<PlayerController>();
-        Managers.Game.grid = FindObjectOfType<MapManager>();
+        Managers.Game.grid = FindAnyObjectByType<MapManager>();
         Managers.Game.mouse = Instantiate(Resources.Load<GameObject>("Prefabs/MouseController").GetComponent<MouseController>());
         Managers.Game.build = Instantiate(Resources.Load<GameObject>("Prefabs/Builder")).GetComponent<BuildController>();
         Managers.Game.player.transform.position = new Vector3();

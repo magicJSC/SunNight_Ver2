@@ -26,7 +26,40 @@ public class MonsterWaveController : MonoBehaviour
 
     void StartSpawn()
     {
+        if (FieldSession.Active && FieldSession.State.firstNightCleared) return;
+        if (FieldSession.Active) { StartCoroutine(SpawnFirstFieldNight()); return; }
         StartCoroutine(SpawnMonster());
+    }
+
+    IEnumerator SpawnFirstFieldNight()
+    {
+        var content=Resources.Load<ExplorationContent>("Exploration/Content");
+        if(content==null) { Debug.LogError("First night content missing"); yield break; }
+        isfinal=false;
+        var rounds=new[] {
+            new[]{false,false,false,false},
+            new[]{false,false,false,false,true},
+            new[]{true,false,false,true,false,false}};
+        yield return new WaitForSeconds(5);
+        for(int round=0;round<rounds.Length;round++)
+        {
+            for(int i=0;i<rounds[round].Length;i++)
+            {
+                if(PlayerController.isDie || Managers.Game.tower.GetComponent<Stat>().Hp<=0) yield break;
+                NightSpawn(rounds[round][i] ? content.coala : content.dog,
+                    round==0 || i%2==0 ? Vector2.up : Vector2.right);
+                if(i<rounds[round].Length-1) yield return new WaitForSeconds(2);
+            }
+            while(monList.Count>0)
+            {
+                if(PlayerController.isDie || Managers.Game.tower.GetComponent<Stat>().Hp<=0) yield break;
+                yield return null;
+            }
+            if(round<rounds.Length-1) yield return new WaitForSeconds(10);
+        }
+        isfinal=true;
+        Debug.Log("FIELD_BALANCE: first night 12 dogs / 3 koalas cleared");
+        CompleteIfCleared();
     }
 
     IEnumerator SpawnMonster()
@@ -43,15 +76,16 @@ public class MonsterWaveController : MonoBehaviour
             yield return new WaitForSeconds(waveSO[day].groups[i].groupDelay);
         }
         isfinal = true;
+        CompleteIfCleared();
     }
 
-    void NightSpawn(GameObject monsterPrefab)
+    void NightSpawn(GameObject monsterPrefab, Vector2? approach = null)
     {
         Vector3 spawnPos = Managers.Game.tower.transform.position;
-        float xAmount = Random.Range(-1, 1);
-        float yAmount = Random.Range(-1,1);
-
-        spawnPos += new Vector3(xAmount, yAmount) * distance;
+        // Integer Range(-1,1) only yielded -1 or 0, including a spawn on the tower.
+        Vector2 direction = approach ?? Random.insideUnitCircle;
+        if (direction.sqrMagnitude < .001f) direction = Vector2.up;
+        spawnPos += (Vector3)(direction.normalized * (approach.HasValue ? 12 : distance));
 
 
         MonsterController monster = Instantiate(monsterPrefab, spawnPos, Quaternion.identity).GetComponent<MonsterController>();
@@ -63,9 +97,15 @@ public class MonsterWaveController : MonoBehaviour
     void RemoveMonster(GameObject monster)
     {
         monList.Remove(monster);
-        if(monList.Count == 0 && isfinal)
+        CompleteIfCleared();
+    }
+
+    void CompleteIfCleared()
+    {
+        if(monList.Count == 0 && isfinal && !PlayerController.isDie && Managers.Game.tower.GetComponent<Stat>().Hp>0)
         {
             Managers.Game.canMoveTower = true;
+            if (FieldSession.Active && !FieldSession.State.firstNightCleared) ExplorationRuntime.GrantFirstNightReward();
         }
     }
 

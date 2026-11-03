@@ -22,7 +22,7 @@ public class Arrow : MonoBehaviour
 
     private void Disappear()
     {
-        rigid.velocity = Vector3.zero;
+        rigid.linearVelocity = Vector3.zero;
         gameObject.SetActive(false);
         arrowList.Add(gameObject);
     }
@@ -32,7 +32,7 @@ public class Arrow : MonoBehaviour
         gameObject.SetActive(true);
         arrowList.Remove(gameObject);
         this.damage = damage;
-        rigid.velocity = direct * attackSpeed;
+        rigid.linearVelocity = direct * attackSpeed;
         float rot = Mathf.Atan2(-direct.y, -direct.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot+90);
     }

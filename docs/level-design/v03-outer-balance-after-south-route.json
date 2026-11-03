@@ -1,0 +1,154 @@
+{
+  "label": "after-south",
+  "gameSeconds": 97.27655,
+  "wallSeconds": 48.65352,
+  "simulationTimeScale": 2,
+  "distance": 403.896149,
+  "scrap": 8,
+  "parts": 1,
+  "food": 0,
+  "startHp": 100.0,
+  "endHp": 85.0,
+  "nearbyUnique": [
+    "P11",
+    "P05",
+    "D2a",
+    "D2b"
+  ],
+  "aggroUnique": [
+    "P11",
+    "D2a",
+    "D2b"
+  ],
+  "longestQuietSeconds": 46.8824463,
+  "encounterEvents": [
+    {
+      "seconds": 13.8493958,
+      "id": "P11",
+      "type": "within12",
+      "x": 79.74484,
+      "y": -138.205856
+    },
+    {
+      "seconds": 14.6329651,
+      "id": "P11",
+      "type": "aggro",
+      "x": 80.310524,
+      "y": -142.165817
+    },
+    {
+      "seconds": 22.3919373,
+      "id": "P05",
+      "type": "within12",
+      "x": 87.91949,
+      "y": -164.607468
+    },
+    {
+      "seconds": 35.5722351,
+      "id": "D2a",
+      "type": "within12",
+      "x": 93.70142,
+      "y": -230.250046
+    },
+    {
+      "seconds": 36.25287,
+      "id": "D2a",
+      "type": "aggro",
+      "x": 93.9995956,
+      "y": -233.636765
+    },
+    {
+      "seconds": 46.14676,
+      "id": "D2b",
+      "type": "within12",
+      "x": 105.946571,
+      "y": -251.753128
+    },
+    {
+      "seconds": 46.8114929,
+      "id": "D2b",
+      "type": "aggro",
+      "x": 108.834465,
+      "y": -253.547653
+    }
+  ],
+  "run": {
+    "error": null,
+    "state": {
+      "phase": "latest-earned",
+      "seconds": 97.27655,
+      "scene": "TutorialScene",
+      "player": "(70.03, -70.13, 0.00)",
+      "hp": 85.0,
+      "hunger": 13.6855745,
+      "tower": "(-33.00, -19.00, 0.00)",
+      "towerHp": 500.0,
+      "inventory": [
+        {
+          "item": "Bat",
+          "count": 1
+        },
+        {
+          "item": "IronOre",
+          "count": 12
+        },
+        {
+          "item": "MaintenancePart",
+          "count": 1
+        },
+        {
+          "item": "HpPotion",
+          "count": 1
+        }
+      ],
+      "research": [],
+      "kills": [
+        "P11",
+        "D2a",
+        "D2b"
+      ],
+      "facilities": [
+        {
+          "item": "Fence",
+          "cell": "(1, 2, 0)",
+          "hp": 30.0,
+          "max": 30.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(-1, 1, 0)",
+          "hp": 20.0,
+          "max": 20.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(1, 1, 0)",
+          "hp": 20.0,
+          "max": 20.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(2, 1, 0)",
+          "hp": 19.0,
+          "max": 30.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(0, 1, 0)",
+          "hp": 20.0,
+          "max": 20.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(-1, 2, 0)",
+          "hp": 7.0,
+          "max": 30.0
+        }
+      ],
+      "boss": null,
+      "bossPhase": null,
+      "bossPattern": null,
+      "enemies": []
+    }
+  }
+}

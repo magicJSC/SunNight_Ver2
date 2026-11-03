@@ -29,7 +29,7 @@ public class PlayerDatas
 public class DataManager : MonoBehaviour
 {
     public static PlayerDatas datas = new PlayerDatas();
-    public PlayerStat stat = new PlayerStat();
+    public PlayerStat stat;
 
     const string fileName = "userdata.json";
 #if UNITY_EDITOR
@@ -50,6 +50,7 @@ public class DataManager : MonoBehaviour
 
     public void Save()
     {
+        stat = Managers.Game.player.GetComponent<PlayerStat>();
         var hotBarSlot = Managers.Inven.hotBarUI.slotList;
         var invenSlot = Managers.Inven.inventoryUI.slotList;
 

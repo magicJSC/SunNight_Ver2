@@ -1,0 +1,269 @@
+{
+  "phase": "first night cleared",
+  "gameTime": 1835.871,
+  "position": [
+    -33.2228546,
+    -25.0367641
+  ],
+  "hp": 40.0,
+  "hunger": 14.5918493,
+  "towerHp": 500.0,
+  "clock": 330.0,
+  "day": 2,
+  "inventory": [
+    {
+      "item": "IronOre",
+      "count": 4
+    },
+    {
+      "item": "Bat",
+      "count": 1
+    },
+    {
+      "item": "Steak",
+      "count": 1
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    },
+    {
+      "item": null,
+      "count": 0
+    }
+  ],
+  "buildings": [
+    {
+      "x": 2,
+      "y": -2,
+      "item": "Fence",
+      "hp": 30.0
+    },
+    {
+      "x": 2,
+      "y": -1,
+      "item": "Cannon",
+      "hp": 7.0
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "item": "Fence",
+      "hp": 30.0
+    },
+    {
+      "x": -2,
+      "y": 2,
+      "item": "Fence",
+      "hp": 30.0
+    },
+    {
+      "x": -1,
+      "y": 2,
+      "item": "Cannon",
+      "hp": 20.0
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "item": "Fence",
+      "hp": 4.0
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "item": "Cannon",
+      "hp": 20.0
+    }
+  ],
+  "firstNight": true,
+  "claims": [
+    {
+      "id": "tutorial:Trashfile (10)",
+      "amount": 4
+    },
+    {
+      "id": "tutorial:Trashfile",
+      "amount": 1
+    },
+    {
+      "id": "tutorial:Trashfile (1)",
+      "amount": 1
+    },
+    {
+      "id": "tutorial:Trashfile (2)",
+      "amount": 1
+    },
+    {
+      "id": "tutorial:Trashfile (3)",
+      "amount": 1
+    },
+    {
+      "id": "tutorial:Trashfile (4)",
+      "amount": 1
+    },
+    {
+      "id": "A1:0",
+      "amount": 1
+    },
+    {
+      "id": "A1_s1:0",
+      "amount": 1
+    },
+    {
+      "id": "C1_s1:0",
+      "amount": 1
+    },
+    {
+      "id": "C1:0",
+      "amount": 1
+    },
+    {
+      "id": "C1_s2:0",
+      "amount": 1
+    },
+    {
+      "id": "C2:0",
+      "amount": 1
+    },
+    {
+      "id": "C2_s1:0",
+      "amount": 1
+    },
+    {
+      "id": "A2_s2:0",
+      "amount": 1
+    },
+    {
+      "id": "A2:0",
+      "amount": 1
+    },
+    {
+      "id": "A2_s1:0",
+      "amount": 1
+    },
+    {
+      "id": "A3:0",
+      "amount": 1
+    },
+    {
+      "id": "A1_s2:0",
+      "amount": 1
+    },
+    {
+      "id": "A3_s1:0",
+      "amount": 1
+    },
+    {
+      "id": "A3_s2:0",
+      "amount": 1
+    },
+    {
+      "id": "A4:0",
+      "amount": 1
+    },
+    {
+      "id": "N1:0",
+      "amount": 4
+    }
+  ],
+  "distance": 592.9817,
+  "waveSpawned": 15,
+  "waveKilled": 15
+}

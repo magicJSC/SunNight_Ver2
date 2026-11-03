@@ -1,0 +1,1 @@
+{"type":"Log","message":"LIFECYCLE_AUDIT managers shutting down","stack":"UnityEngine.Debug:Log (object)\nManagers:OnApplicationQuit () (at Assets/3.Scripts/Managers/Managers.cs:22)\n"}

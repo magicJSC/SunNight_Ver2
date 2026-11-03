@@ -147,18 +147,23 @@ public class UI_Produce : UI_Base
             Remove_ToMake();
             Managers.Sound.Play(Define.Sound.Effect, showSound);
             Managers.Inven.inventoryUI.gameObject.SetActive(true);
+            UIScreenPlacement.OpenCrafting(backR, Managers.Inven.inventoryUI.back);
             Managers.UI.PopUIList.Add(gameObject);
         }
     }
 
     private void OnDisable()
     {
+        if (!Managers.HasInstance) return;
         if (_init)
         {
             Managers.Sound.Play(Define.Sound.Effect, hideSound);
             explainItem.SetActive(false);
             explainMat.SetActive(false);
             Managers.UI.PopUIList.Remove(gameObject);
+            if (FieldInventory.Ready && Managers.Game.player != null && Managers.Game.mouse != null &&
+                MapManager.canBuild != null)
+                Managers.Inven.CheckHotBarChoice();
         }
     }
 

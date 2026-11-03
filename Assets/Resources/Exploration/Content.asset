@@ -1,0 +1,2573 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 657bc64e78256de409e7cf4d510333f1, type: 3}
+  m_Name: Content
+  m_EditorClassIdentifier: Assembly-CSharp::ExplorationContent
+  scrap: {fileID: 11400000, guid: 209835d44adc74944aec8c3a71c90dd7, type: 2}
+  parts: {fileID: 11400000, guid: d7e72b8f5c24ff44ab35f12a03d8eed9, type: 2}
+  food: {fileID: 11400000, guid: 40f9b220ac9546240b63c41de9d2c70c, type: 2}
+  potion: {fileID: 11400000, guid: ee810e66c77c1494aaf93174d822a9f8, type: 2}
+  chest: {fileID: 2064661790, guid: 15efa1fbc4e0dd94c97d6f29de766e23, type: 3}
+  workbench: {fileID: -1274620663, guid: e47a820362385c744996072b4c5a3a2f, type: 3}
+  salvage: {fileID: -1837376504, guid: 15efa1fbc4e0dd94c97d6f29de766e23, type: 3}
+  material: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  font: {fileID: 12800000, guid: d4db614da0c1ee64fac43e3d103e8fb1, type: 3}
+  dog: {fileID: 3263040771799250074, guid: 86b99bbc60a021a4a89bf9435519a572, type: 3}
+  coala: {fileID: 702318616690200231, guid: d6864f6af7a89b048876f1948823d8a9, type: 3}
+  rewards:
+  - id: A1
+    region: "\uC11C\uCABD \uACF5\uD130 \uACE0\uCCA0"
+    group: 
+    position: {x: -24, y: -57}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: A1
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: A1_s1
+    region: "\uC11C\uCABD \uACF5\uD130 \uACE0\uCCA0"
+    group: 
+    position: {x: -47, y: -67}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: A1
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: A1_s2
+    region: "\uC11C\uCABD \uACF5\uD130 \uACE0\uCCA0"
+    group: 
+    position: {x: -13, y: -50}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: A1
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: A2
+    region: "\uB0A8\uCABD \uACF5\uD130 \uACE0\uCCA0"
+    group: 
+    position: {x: 1, y: -78}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: A2
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: A2_s1
+    region: "\uB0A8\uCABD \uACF5\uD130 \uACE0\uCCA0"
+    group: 
+    position: {x: 24, y: -88}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: A2
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: A2_s2
+    region: "\uB0A8\uCABD \uACF5\uD130 \uACE0\uCCA0"
+    group: 
+    position: {x: 9, y: -105}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: A2
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: A3
+    region: "\uBD81\uCABD \uACF5\uD130 \uACE0\uCCA0"
+    group: 
+    position: {x: 28, y: -51}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: A3
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: A3_s1
+    region: "\uBD81\uCABD \uACF5\uD130 \uACE0\uCCA0"
+    group: 
+    position: {x: 55, y: -35}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: A3
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: A3_s2
+    region: "\uBD81\uCABD \uACF5\uD130 \uACE0\uCCA0"
+    group: 
+    position: {x: 62, y: -15}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: A3
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: A4
+    region: "\uACF5\uD130 \uC2DD\uB7C9"
+    group: 
+    position: {x: -4, y: -65}
+    items:
+    - Steak
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 4
+  - id: B1
+    region: "\uD3D0\uC8FC\uAC70\uC9C0 \uBD81\uCABD \uC794\uD574"
+    group: 
+    position: {x: -8, y: -119}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: B1
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: B1_s1
+    region: "\uD3D0\uC8FC\uAC70\uC9C0 \uBD81\uCABD \uC794\uD574"
+    group: 
+    position: {x: 19, y: -134}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: B1
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: B1_s2
+    region: "\uD3D0\uC8FC\uAC70\uC9C0 \uBD81\uCABD \uC794\uD574"
+    group: 
+    position: {x: 35, y: -113}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: B1
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: B2
+    region: "\uD3D0\uC8FC\uAC70\uC9C0 \uB3D9\uCABD \uC794\uD574"
+    group: 
+    position: {x: 9, y: -151}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: B2
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: B2_s1
+    region: "\uD3D0\uC8FC\uAC70\uC9C0 \uB3D9\uCABD \uC794\uD574"
+    group: 
+    position: {x: 31, y: -167}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: B2
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: B2_s2
+    region: "\uD3D0\uC8FC\uAC70\uC9C0 \uB3D9\uCABD \uC794\uD574"
+    group: 
+    position: {x: 52, y: -145}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: B2
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: B3
+    region: "\uD3D0\uC8FC\uAC70\uC9C0 \uB0A8\uCABD \uC794\uD574"
+    group: 
+    position: {x: -6, y: -182}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: B3
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: B3_s1
+    region: "\uD3D0\uC8FC\uAC70\uC9C0 \uB0A8\uCABD \uC794\uD574"
+    group: 
+    position: {x: 21, y: -191}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: B3
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: B3_s2
+    region: "\uD3D0\uC8FC\uAC70\uC9C0 \uB0A8\uCABD \uC794\uD574"
+    group: 
+    position: {x: 53, y: -177}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: B3
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: B4
+    region: "\uD3D0\uC8FC\uAC70\uC9C0 \uC2DD\uB7C9"
+    group: 
+    position: {x: 12, y: -171}
+    items:
+    - Steak
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 4
+  - id: C1
+    region: "\uC232 \uBD81\uCABD \uC794\uD574"
+    group: 
+    position: {x: -75, y: -94}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: C1
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: C1_s1
+    region: "\uC232 \uBD81\uCABD \uC794\uD574"
+    group: 
+    position: {x: -93, y: -76}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: C1
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: C1_s2
+    region: "\uC232 \uBD81\uCABD \uC794\uD574"
+    group: 
+    position: {x: -60, y: -105}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: C1
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: C2
+    region: "\uC232 \uB0A8\uCABD \uC794\uD574"
+    group: 
+    position: {x: -90, y: -127}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: C2
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: C2_s1
+    region: "\uC232 \uB0A8\uCABD \uC794\uD574"
+    group: 
+    position: {x: -65, y: -148}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: C2
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: C2_s2
+    region: "\uC232 \uB0A8\uCABD \uC794\uD574"
+    group: 
+    position: {x: -95, y: -169}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: C2
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: C3
+    region: "\uC232 \uC57C\uC601 \uD754\uC801"
+    group: 
+    position: {x: -73, y: -135}
+    items:
+    - Steak
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 4
+  - id: D0
+    region: "\uB0A8\uB3D9\uBD80 \uACE0\uCCA0 \uC794\uD574"
+    group: 
+    position: {x: 94, y: -116}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: D0
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: D0_s1
+    region: "\uB0A8\uB3D9\uBD80 \uACE0\uCCA0 \uC794\uD574"
+    group: 
+    position: {x: 107, y: -154}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: D0
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: D0_s2
+    region: "\uC11C\uBD80 \uC678\uACFD \uC794\uD574"
+    group: 
+    position: {x: -210, y: -90}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: D0
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: D0_s3
+    region: "\uC11C\uBD80 \uC678\uACFD \uC794\uD574"
+    group: 
+    position: {x: -222, y: -98}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: D0
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: D0_s4
+    region: "\uB0A8\uBD80 \uC57C\uC801\uC7A5 \uC794\uD574"
+    group: 
+    position: {x: 95, y: -245}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: D0
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: D0_s5
+    region: "\uB0A8\uBD80 \uC57C\uC801\uC7A5 \uC794\uD574"
+    group: 
+    position: {x: 108, y: -252}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: D0
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: D1
+    region: "\uC11C\uBD80 \uC678\uACFD \uC794\uD574"
+    group: D1
+    position: {x: -228, y: -99}
+    items:
+    - IronOre
+    - MaintenancePart
+    amounts: 0600000001000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 4
+  - id: D2
+    region: "\uB0A8\uBD80 \uC57C\uC801\uC7A5 \uC794\uD574"
+    group: D2
+    position: {x: 112, y: -253}
+    items:
+    - IronOre
+    - MaintenancePart
+    - HpPotion
+    amounts: 060000000100000001000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 4
+  - id: E0
+    region: "\uBD81\uBD80 \uC232 \uC794\uD574"
+    group: 
+    position: {x: 65, y: 135}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: E0
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: E0_s1
+    region: "\uBD81\uBD80 \uC232 \uC794\uD574"
+    group: 
+    position: {x: 78, y: 142}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: E0
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: E0_s2
+    region: "\uB3D9\uBD80 \uC0B0\uC5C5 \uC794\uD574"
+    group: 
+    position: {x: 340, y: 12}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: E0
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: E0_s3
+    region: "\uB3D9\uBD80 \uC0B0\uC5C5 \uC794\uD574"
+    group: 
+    position: {x: 353, y: 18}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: E0
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 2
+  - id: E1
+    region: "\uBD81\uBD80 \uC232 \uC794\uD574"
+    group: E1
+    position: {x: 82, y: 144}
+    items:
+    - IronOre
+    - MaintenancePart
+    - HpPotion
+    amounts: 040000000200000001000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 4
+  - id: E2
+    region: "\uB3D9\uBD80 \uC0B0\uC5C5 \uC794\uD574"
+    group: E2
+    position: {x: 358, y: 21}
+    items:
+    - IronOre
+    - MaintenancePart
+    - HpPotion
+    amounts: 040000000200000001000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 4
+  - id: F1
+    region: "F \uACF5\uC7A5 \uC678\uACFD"
+    group: F
+    position: {x: 235, y: -70}
+    items:
+    - IronOre
+    amounts: 03000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 4
+  - id: F2
+    region: "F \uACF5\uC7A5 \uC678\uACFD"
+    group: F
+    position: {x: 239, y: -63}
+    items:
+    - IronOre
+    amounts: 03000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 4
+  - id: F3
+    region: "F \uACF5\uC7A5 \uC678\uACFD"
+    group: F
+    position: {x: 233, y: -78}
+    items:
+    - HpPotion
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 4
+  - id: N1
+    region: "\uCCAB\uBC24 \uC644\uB8CC \uBCF4\uAE09"
+    group: 
+    position: {x: 58, y: -74}
+    items:
+    - IronOre
+    - HpPotion
+    amounts: 0400000001000000
+    requiresFirstNight: 1
+    legacySource: 
+    salvageFragments: 0
+    sceneryPath: 
+    collectSeconds: 4
+  guards:
+  - id: D1a
+    group: D1
+    position: {x: -210, y: -89}
+    ranged: 0
+    patrolRadius: 0
+  - id: D1b
+    group: D1
+    position: {x: -228, y: -108}
+    ranged: 0
+    patrolRadius: 0
+  - id: D2a
+    group: D2
+    position: {x: 94, y: -242}
+    ranged: 0
+    patrolRadius: 0
+  - id: D2b
+    group: D2
+    position: {x: 116, y: -258}
+    ranged: 0
+    patrolRadius: 0
+  - id: E1a
+    group: E1
+    position: {x: 73, y: 134}
+    ranged: 0
+    patrolRadius: 0
+  - id: E1b
+    group: E1
+    position: {x: 87, y: 145}
+    ranged: 1
+    patrolRadius: 0
+  - id: E2a
+    group: E2
+    position: {x: 341, y: 10}
+    ranged: 0
+    patrolRadius: 0
+  - id: E2b
+    group: E2
+    position: {x: 362, y: 24}
+    ranged: 1
+    patrolRadius: 0
+  - id: Fa
+    group: F
+    position: {x: 222, y: -87}
+    ranged: 0
+    patrolRadius: 0
+  - id: Fb
+    group: F
+    position: {x: 226, y: -89}
+    ranged: 0
+    patrolRadius: 0
+  - id: Fc
+    group: F
+    position: {x: 230, y: -89}
+    ranged: 1
+    patrolRadius: 0
+  - id: P01
+    group: 
+    position: {x: -82, y: -55}
+    ranged: 0
+    patrolRadius: 3
+  - id: P02
+    group: 
+    position: {x: -97, y: -149}
+    ranged: 0
+    patrolRadius: 3
+  - id: P03
+    group: 
+    position: {x: -45, y: -115}
+    ranged: 0
+    patrolRadius: 3
+  - id: P04
+    group: 
+    position: {x: 20, y: -145}
+    ranged: 0
+    patrolRadius: 3
+  - id: P05
+    group: 
+    position: {x: 76, y: -172}
+    ranged: 0
+    patrolRadius: 3
+  - id: P06
+    group: 
+    position: {x: 53, y: 20}
+    ranged: 0
+    patrolRadius: 3
+  - id: P07
+    group: 
+    position: {x: 119, y: 51}
+    ranged: 0
+    patrolRadius: 3
+  - id: P08
+    group: 
+    position: {x: 70, y: 42}
+    ranged: 1
+    patrolRadius: 3
+  - id: P09
+    group: 
+    position: {x: 235, y: 50}
+    ranged: 0
+    patrolRadius: 3
+  - id: P10
+    group: 
+    position: {x: 180, y: -84}
+    ranged: 1
+    patrolRadius: 3
+  - id: P11
+    group: 
+    position: {x: 88, y: -145}
+    ranged: 0
+    patrolRadius: 3
+  - id: P12
+    group: 
+    position: {x: -85, y: -81}
+    ranged: 0
+    patrolRadius: 3
+  - id: P13
+    group: 
+    position: {x: -42, y: -185}
+    ranged: 0
+    patrolRadius: 3
+  - id: P14
+    group: 
+    position: {x: 18, y: -23}
+    ranged: 0
+    patrolRadius: 3
+  outerSalvage:
+  - id: OS_Island_001
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -234.73135, y: -52.181137}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_001/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_002
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 129.97668, y: -278.7376}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_002/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_003
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -286.26093, y: -113.81292}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_003/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_004
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 36.113735, y: 83.80676}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_004/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_005
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 12.213446, y: -222.76735}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_005/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_006
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -170.587, y: -20.153103}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_006/Debris_13
+    collectSeconds: 1
+  - id: OS_Island_007
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -12.439487, y: 119.583855}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_007/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_008
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 177.84425, y: 125.79498}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_008/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_009
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -70.749855, y: 69.543045}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_009/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_010
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 127.45771, y: 148.11697}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_010/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_011
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -233.77203, y: -132.50645}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_011/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_012
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 122.83676, y: 172.62178}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_012/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_013
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 103.39256, y: 102.09979}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_013/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_014
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 122.75764, y: 57.072025}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_014/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_015
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 35.88219, y: -212.05612}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_015/Debris_2
+    collectSeconds: 1
+  - id: OS_Island_016
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -247.05212, y: -11.483189}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_016/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_017
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 304.16, y: -5.1175795}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_017/Debris_10
+    collectSeconds: 1
+  - id: OS_Island_018
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 49.159393, y: -290.49875}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_018/Debris_1
+    collectSeconds: 1
+  - id: OS_Island_019
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 322.7996, y: -53.109116}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_019/Debris_3
+    collectSeconds: 1
+  - id: OS_Island_020
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 61.94037, y: 224.64359}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_020/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_021
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -283.1382, y: -43.78558}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_021/Debris_10
+    collectSeconds: 1
+  - id: OS_Island_022
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -10.54668, y: 92.53523}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_022/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_023
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 145.34177, y: -221.87346}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_023/Debris_3
+    collectSeconds: 1
+  - id: OS_Island_024
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 61.559055, y: 111.765175}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_024/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_025
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -149.5598, y: -72.3733}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_025/Debris_13
+    collectSeconds: 1
+  - id: OS_Island_026
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 29.31491, y: 196.56909}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_026/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_027
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -150.90186, y: 54.29534}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_027/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_028
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 348.2879, y: -9.50281}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_028/Debris_3
+    collectSeconds: 1
+  - id: OS_Island_029
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -126.17764, y: -62.25002}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_029/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_030
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -1.7634983, y: 165.90025}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_030/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_031
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 181.51909, y: 183.94978}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_031/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_032
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -155.49274, y: -208.5992}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_032/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_033
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -154.62679, y: 30.63102}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_033/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_034
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -201.71022, y: 33.192448}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_034/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_035
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 310.12964, y: -74.03709}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_035/Debris_4
+    collectSeconds: 1
+  - id: OS_Island_036
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -177.28017, y: -177.0848}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_036/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_037
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -234.60297, y: -98.003914}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_037/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_038
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -56.978466, y: 52.71843}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_038/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_039
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 178.17657, y: 58.43587}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_039/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_040
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -197.46736, y: -3.5084128}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_040/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_041
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -260.2066, y: -102.127525}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_041/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_042
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 181.46646, y: -257.68768}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_042/Debris_3
+    collectSeconds: 1
+  - id: OS_Island_043
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 159.5147, y: 132.78423}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_043/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_044
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -296.05493, y: -86.11149}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_044/Debris_10
+    collectSeconds: 1
+  - id: OS_Island_045
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -41.477173, y: 124.95538}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_045/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_046
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 237.02869, y: 127.28181}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_046/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_047
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -312.1527, y: -133.76367}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_047/Debris_10
+    collectSeconds: 1
+  - id: OS_Island_048
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 307.09592, y: 29.996708}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_048/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_049
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -10.970485, y: 213.0245}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_049/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_050
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -258.18503, y: 9.882362}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_050/Debris_13
+    collectSeconds: 1
+  - id: OS_Island_051
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 147.37675, y: 96.37743}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_051/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_052
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 236.70453, y: 79.25301}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_052/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_053
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 257.55508, y: 108.68292}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_053/Debris_10
+    collectSeconds: 1
+  - id: OS_Island_054
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -171.05583, y: -106.42881}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_054/Debris_15
+    collectSeconds: 1
+  - id: OS_Island_055
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 102.78783, y: -219.06772}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_055/Debris_4
+    collectSeconds: 1
+  - id: OS_Island_056
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 70.46301, y: 144.66847}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_056/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_057
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -205.39017, y: -144.58537}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_057/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_058
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 374.11655, y: 50.877857}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_058/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_059
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 19.498741, y: -237.43442}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_059/Debris_3
+    collectSeconds: 1
+  - id: OS_Island_060
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -238.75334, y: -169.42575}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_060/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_061
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 107.4064, y: -245.88437}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_061/Debris_3
+    collectSeconds: 1
+  - id: OS_Island_062
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 291.39618, y: 76.975716}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_062/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_063
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 182.40833, y: -223.41238}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_063/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_064
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -149.86238, y: -42.515755}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_064/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_065
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 177.03087, y: 94.79934}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_065/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_066
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 280.08807, y: -99.13957}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_066/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_067
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -199.22935, y: -28.701584}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_067/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_068
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -125.63041, y: -101.66635}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_068/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_069
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -59.17199, y: 88.36875}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_069/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_070
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 377.32632, y: 25.10318}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_070/Debris_4
+    collectSeconds: 1
+  - id: OS_Island_071
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -130.32054, y: -179.55225}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_071/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_072
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 161.8604, y: 160.97516}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_072/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_073
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -140.08267, y: -3.7202365}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_073/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_074
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -239.60406, y: 48.756516}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_074/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_075
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -192.73277, y: -107.10237}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_075/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_076
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -284.61823, y: -66.52331}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_076/Debris_13
+    collectSeconds: 1
+  - id: OS_Island_077
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -92.83209, y: 62.40671}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_077/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_078
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -127.42627, y: -127.49889}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_078/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_079
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -187.93791, y: 59.68445}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_079/Debris_10
+    collectSeconds: 1
+  - id: OS_Island_080
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 68.43208, y: -229.46478}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_080/Debris_13
+    collectSeconds: 1
+  - id: OS_Island_081
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 77.16086, y: 204.1365}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_081/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_082
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -203.03993, y: -79.64707}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_082/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_083
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -336.10968, y: -86.81072}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_083/Debris_10
+    collectSeconds: 1
+  - id: OS_Island_084
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -264.9872, y: -75.69275}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_084/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_085
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 10.564983, y: 124.74269}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_085/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_086
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -273.6926, y: -143.51451}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_086/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_087
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 60.97348, y: -260.9106}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_087/Debris_2
+    collectSeconds: 1
+  - id: OS_Island_088
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 336.04132, y: 13.89271}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_088/Debris_13
+    collectSeconds: 1
+  - id: OS_Island_089
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 92.33006, y: -291.2762}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_089/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_090
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -129.06406, y: -212.73428}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_090/Debris_13
+    collectSeconds: 1
+  - id: OS_Island_091
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 6.9373484, y: 197.68837}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_091/Debris_10
+    collectSeconds: 1
+  - id: OS_Island_092
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -202.1052, y: -175.33504}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_092/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_093
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -175.31857, y: -56.384575}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_093/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_094
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 354.02716, y: 59.421978}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_094/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_095
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 18.835567, y: 155.70757}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_095/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_096
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -302.2869, y: -54.83111}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_096/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_097
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -110.59939, y: 16.829308}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_097/Debris_2
+    collectSeconds: 1
+  - id: OS_Island_098
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -81.0404, y: 106.0245}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_098/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_099
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 119.13858, y: 117.76631}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_099/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_100
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 206.43475, y: 155.1411}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_100/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_101
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 66.68666, y: 89.86561}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_101/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_102
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 155.20201, y: -248.06966}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_102/Debris_10
+    collectSeconds: 1
+  - id: OS_Island_103
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 335.25165, y: 38.900677}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_103/Debris_3
+    collectSeconds: 1
+  - id: OS_Island_104
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -219.3366, y: -105.86197}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_104/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_105
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 200.01797, y: 73.94887}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_105/Debris_14
+    collectSeconds: 1
+  - id: OS_Island_106
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 326.3157, y: -26.155558}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_106/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_107
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -131.88087, y: 80.79095}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_107/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_108
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 82.845276, y: 108.9166}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_108/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_109
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 89.4503, y: -261.09143}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_109/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_110
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -221.20924, y: -32.13066}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_110/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_111
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -330.33453, y: -126.87216}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_111/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_112
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -100.497604, y: 105.117325}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_112/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_113
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -176.02016, y: 23.797413}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_113/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_114
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -126.60977, y: -152.62033}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_114/Debris_12
+    collectSeconds: 1
+  - id: OS_Island_115
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 93.12096, y: 135.05708}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_115/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_116
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -160.18684, y: -133.56087}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_116/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_117
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 81.58627, y: 171.96115}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_117/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_118
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -14.216697, y: 188.63345}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_118/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_119
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 59.877113, y: 172.82314}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_119/Debris_13
+    collectSeconds: 1
+  - id: OS_Island_120
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -115.12424, y: -5.574008}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_120/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_121
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 121.09259, y: 81.38701}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_121/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_122
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -3.1690674, y: 69.27615}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_122/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_123
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 150.00128, y: 190.22238}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_123/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_124
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -215.88948, y: -157.876}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_124/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_125
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 33.240734, y: 171.38704}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_125/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_126
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -40.864902, y: 74.32584}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_126/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_127
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -56.861988, y: 127.73449}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_127/Debris_11
+    collectSeconds: 1
+  - id: OS_Island_128
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 371.49347, y: -1.4488684}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_128/Debris_10
+    collectSeconds: 1
+  - id: OS_Island_129
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -209.39012, y: -52.70745}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_129/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_130
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -224.27036, y: 13.309046}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_130/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_131
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 404.2946, y: 21.218102}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_131/Debris_4
+    collectSeconds: 1
+  - id: OS_Island_132
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 196.58994, y: 115.15314}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_132/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_133
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 72.112946, y: -285.09503}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: South_Salvage/Island_133/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_134
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 103.78664, y: 212.16722}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_134/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_135
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 16.938644, y: 97.729164}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_135/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_136
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -251.33455, y: 28.879461}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_136/Debris_14
+    collectSeconds: 1
+  - id: OS_Island_137
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 400.14395, y: 51.226406}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_137/Debris_4
+    collectSeconds: 1
+  - id: OS_Island_138
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 222.72073, y: 104.17773}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_138/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_139
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 126.27391, y: 197.74568}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_139/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_140
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 277.59174, y: 111.89313}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_140/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_141
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 11.112324, y: 222.22481}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_141/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_142
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 318.36423, y: 66.51104}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_142/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_143
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 254.4348, y: 78.09857}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_143/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_144
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 304.6732, y: -25.958143}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_144/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_145
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 159.34007, y: 67.87261}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_145/Debris_7
+    collectSeconds: 1
+  - id: OS_Island_146
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 83.58804, y: 226.02446}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_146/Debris_5
+    collectSeconds: 1
+  - id: OS_Island_147
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 102.28634, y: 77.07547}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_147/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_148
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -112.600746, y: 54.17481}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_148/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_149
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 89.49965, y: -206.26762}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_149/Debris_4
+    collectSeconds: 1
+  - id: OS_Island_150
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -170.73831, y: -151.6563}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_150/Debris_10
+    collectSeconds: 1
+  - id: OS_Island_151
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -204.1035, y: 68.17704}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_151/Debris_8
+    collectSeconds: 1
+  - id: OS_Island_152
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 48.196075, y: 134.96819}
+    items:
+    - IronOre
+    amounts: 05000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_152/Debris_6
+    collectSeconds: 1
+  - id: OS_Island_153
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 57.425777, y: -209.40656}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: East_Industrial/Island_153/Debris_4
+    collectSeconds: 1
+  - id: OS_Island_154
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: 142.03691, y: 170.12859}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_154/Debris_9
+    collectSeconds: 1
+  - id: OS_Island_155
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -153.56909, y: 73.67951}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: North_Woodland/Island_155/Debris_4
+    collectSeconds: 1
+  - id: OS_Island_156
+    region: "\uC870\uC0AC \uAC00\uB2A5\uD55C \uC794\uD574"
+    group: 
+    position: {x: -229.10298, y: -189.34683}
+    items:
+    - IronOre
+    amounts: 01000000
+    requiresFirstNight: 0
+    legacySource: 
+    salvageFragments: 1
+    sceneryPath: West_Overgrowth/Island_156/Debris_13
+    collectSeconds: 1
