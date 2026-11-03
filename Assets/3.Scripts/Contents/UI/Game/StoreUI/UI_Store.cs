@@ -43,6 +43,7 @@ public class UI_Store : UI_Base
 
     private void OnDisable()
     {
+        if (!Managers.HasInstance) return;
         Managers.UI.PopUIList.Remove(gameObject);
     }
 

@@ -35,6 +35,8 @@ public class TowerMoveController : MonoBehaviour
 
     void ToggleTowerMove()
     {
+        if (FieldHUD.IsOpen) return;
+        if (!Managers.Game.canMoveTower || FieldFoxtonBattle.Active != null) return;
         if (lastMoveToggleFrame == Time.frameCount)
             return;
 
@@ -85,11 +87,13 @@ public class TowerMoveController : MonoBehaviour
         Managers.Game.isCantPlay = true;
         MapManager.tower.gameObject.SetActive(true);
         beforeTowerPos = tower.position;
-        Vector2 curTowerPos = tower.position;
+        Vector2 curTowerPos = Vector2.positiveInfinity;
+        canBuild = false;
         while (true)
         {
             yield return null;
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (!isMoving) yield break;
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current != null ? (Vector3)Mouse.current.position.ReadValue() : Input.mousePosition);
             Vector2 towerPos = new Vector2(Mathf.Round(mousePos.x),Mathf.Round(mousePos.y));
             if (curTowerPos != towerPos)
             {

@@ -59,7 +59,7 @@ public class PlayerStat : Stat
         while (true)
         {
             yield return null;
-            Hp += Time.deltaTime / 20;
+            if (!FieldSession.Active) Hp += Time.deltaTime / 20;
         }
     }
 
@@ -86,6 +86,11 @@ public class PlayerStat : Stat
         while(true)
         {
             yield return null;
+            if (FieldBalance.HungerActive)
+            {
+                if (Hunger > 0) Hunger -= Time.deltaTime * .05f;
+                else GetDamage(Time.deltaTime * 2);
+            }
             if (Hunger <= 0)
                 continue;
         }

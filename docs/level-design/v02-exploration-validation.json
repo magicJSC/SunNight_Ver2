@@ -1,0 +1,41 @@
+{
+  "unityVersion": "6000.5.10f1",
+  "compileErrors": 0,
+  "interactionResearch": [
+    "Play Mode initialized",
+    "Player loop advances",
+    "21 reward containers spawned",
+    "11 regional guards spawned",
+    "Existing player interaction component",
+    "Physics trigger registers reward with player",
+    "Cancelled collection grants nothing",
+    "Full bag accepts only one and keeps two in chest",
+    "Remaining reward can be collected",
+    "Depleted chest cannot duplicate rewards",
+    "Combat reward locked before guards die",
+    "Only defeated guard group unlocks",
+    "Camp research panel opens",
+    "Research locked before first night",
+    "Movement cancels research without cost",
+    "U1 spends exactly 6 scrap and 1 part",
+    "Purchased research cannot be bought twice",
+    "All research costs total 28 scrap and 6 parts",
+    "U4 raises max HP and slots without healing"
+  ],
+  "facilitiesPersistence": [
+    "Ready for persistence tests",
+    "Base cannon and wall health",
+    "Existing buildings upgraded without healing",
+    "New cannon starts with research stats",
+    "RuleTile cannon slots counted including attached facilities",
+    "Transport retains reserved cannon slots",
+    "Disk snapshot includes buildings and research",
+    "Atomic replacement preserves previous save",
+    "Inventory, depletion and kills restored together",
+    "Building health and research restored without healing",
+    "Boss transition inventory transfer"
+  ],
+  "freshSceneResume": "PASS: fresh TutorialScene resume restores inventory/research/buildings/depleted chests/dead guards; cleared-night load does not restart wave",
+  "fullPlaythrough": false,
+  "captureNote": "Camera-rendered UI fixture; batch screen capture unavailable"
+}

@@ -50,6 +50,7 @@ public class UI_GrillingSlot : UI_BaseSlot,IDragable,IDroppable
 
     private void OnDisable()
     {
+        if (!Managers.HasInstance) return;
         if (!_init || smeltUI.isSmelting)
             return;
 

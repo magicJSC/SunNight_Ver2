@@ -24,21 +24,25 @@ public class TrashPileController : MonoBehaviour,IInteractObject
 
     bool canFind = true;
     bool cancel;
+    string explorationClaim;
     Image amount;
     GameObject actGageUI;
     void Start()
     {
+        explorationClaim = FieldBalance.Configure(this);
         canInteractSign = Util.FindChild(gameObject,"Sign", true);
         canFindEffect = Util.FindChild(gameObject, "CanFindEffect", true);
         canInteractSign.SetActive(false);
         actGageUI = Util.FindChild(gameObject, "UI_ActGage", true);
         amount = Util.FindChild<Image>(gameObject, "Amount", true);
         actGageUI.SetActive(false);
+        if (getItemList.Count == 0) { canFind = false; canFindEffect.SetActive(false); }
 
     }
 
     public void Interact()
     {
+        RefreshExplorationClaim();
         if(canFind)
             StartCoroutine(FindItem());
     }
@@ -71,6 +75,15 @@ public class TrashPileController : MonoBehaviour,IInteractObject
 
     void GetRandomItem()
     {
+        if (explorationClaim != null && getItemList.Count > 0)
+        {
+            var reward = getItemList[0];
+            int remaining = Mathf.Max(0, reward.count - FieldSession.State.Claimed(explorationClaim));
+            int accepted = FieldInventory.Give(reward.item, remaining);
+            FieldSession.State.AddClaim(explorationClaim, accepted);
+            RefreshExplorationClaim();
+            return;
+        }
         int randomIndex = Random.Range(1, 101);
         float num = 0;
         for(int i = 0; i < getItemList.Count; i++)
@@ -89,6 +102,7 @@ public class TrashPileController : MonoBehaviour,IInteractObject
 
     public void ShowInteractSign()
     {
+        RefreshExplorationClaim();
         if (!canFind)
             return;
 
@@ -98,6 +112,15 @@ public class TrashPileController : MonoBehaviour,IInteractObject
     public void HideInteractSign()
     {
         canInteractSign.SetActive(false);
+    }
+
+    void RefreshExplorationClaim()
+    {
+        if (explorationClaim == null || getItemList.Count == 0) return;
+        if (FieldSession.State.Claimed(explorationClaim) < getItemList[0].count) return;
+        canFind = false;
+        canFindEffect.SetActive(false);
+        HideInteractSign();
     }
 
     public void SetAction(PlayerInteract playerInteract)

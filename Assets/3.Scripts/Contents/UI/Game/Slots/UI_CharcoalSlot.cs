@@ -51,6 +51,7 @@ public class UI_CharcoalSlot : UI_BaseSlot
 
     private void OnDisable()
     {
+        if (!Managers.HasInstance) return;
         if (!_init || smeltUI.isSmelting)
             return;
 

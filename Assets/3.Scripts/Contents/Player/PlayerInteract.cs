@@ -39,29 +39,38 @@ public class PlayerInteract : MonoBehaviour
         }
         else if (context.canceled)
         {
-           cancelAction?.Invoke();
+            cancelAction?.Invoke();
         }
         
     }
 
     public void SetInteractObj()
     {
-        canInteractObj = null;
-        interactAction = null;
-        cancelAction = null;
-        for (int i = 0; i < interactObjectList.Count; i++)
+        interactObjectList.RemoveAll(obj => obj == null || !obj.activeInHierarchy);
+        GameObject nearest = null;
+        foreach (var candidate in interactObjectList)
         {
-            if (canInteractObj == null)
-                canInteractObj = interactObjectList[i];
-            else if ((canInteractObj.transform.position - transform.position).magnitude > (interactObjectList[i].transform.position- transform.position).magnitude)
-                canInteractObj = interactObjectList[i];
-
-            interactObjectList[i].GetComponent<IInteractObject>().HideInteractSign();
+            if (nearest == null || (candidate.transform.position - transform.position).sqrMagnitude <
+                (nearest.transform.position - transform.position).sqrMagnitude)
+                nearest = candidate;
         }
+        if (ReferenceEquals(nearest, canInteractObj)) return;
+
+        if (canInteractObj != null) cancelAction?.Invoke();
         if (canInteractObj != null)
         {
-            canInteractObj.GetComponent<IInteractObject>().ShowInteractSign();
-            canInteractObj.GetComponent<IInteractObject>().SetAction(this);
+            var previous = canInteractObj.GetComponent<IInteractObject>();
+            previous.CancelAction(this);
+            previous.HideInteractSign();
+        }
+        canInteractObj = nearest;
+        interactAction = null;
+        cancelAction = null;
+        if (canInteractObj != null)
+        {
+            var current = canInteractObj.GetComponent<IInteractObject>();
+            current.ShowInteractSign();
+            current.SetAction(this);
         }
     }
 
@@ -70,7 +79,8 @@ public class PlayerInteract : MonoBehaviour
     {
         if (collision.TryGetComponent<IInteractObject>(out var interact))
         {
-            interactObjectList.Add(collision.gameObject);
+            if (!interactObjectList.Contains(collision.gameObject))
+                interactObjectList.Add(collision.gameObject);
         }
     }
 
@@ -79,7 +89,7 @@ public class PlayerInteract : MonoBehaviour
         if (collision.TryGetComponent<IInteractObject>(out var interact))
         {
             interactObjectList.Remove(collision.gameObject);
-            interact.HideInteractSign();
+            SetInteractObj();
         }
     }
 }

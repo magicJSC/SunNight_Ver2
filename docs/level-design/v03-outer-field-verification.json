@@ -1,0 +1,267 @@
+{
+  "rewards": [
+    {
+      "id": "D0_s2",
+      "before": {
+        "x": 124.0,
+        "y": -182.0
+      },
+      "after": {
+        "x": -210.0,
+        "y": -90.0
+      },
+      "region": "서부 외곽 잔해"
+    },
+    {
+      "id": "D0_s3",
+      "before": {
+        "x": 153.0,
+        "y": -183.0
+      },
+      "after": {
+        "x": -222.0,
+        "y": -98.0
+      },
+      "region": "서부 외곽 잔해"
+    },
+    {
+      "id": "D0_s4",
+      "before": {
+        "x": 187.0,
+        "y": -176.0
+      },
+      "after": {
+        "x": 95.0,
+        "y": -245.0
+      },
+      "region": "남부 야적장 잔해"
+    },
+    {
+      "id": "D0_s5",
+      "before": {
+        "x": 201.0,
+        "y": -144.0
+      },
+      "after": {
+        "x": 108.0,
+        "y": -252.0
+      },
+      "region": "남부 야적장 잔해"
+    },
+    {
+      "id": "E0",
+      "before": {
+        "x": 91.0,
+        "y": 0.0
+      },
+      "after": {
+        "x": 65.0,
+        "y": 135.0
+      },
+      "region": "북부 숲 잔해"
+    },
+    {
+      "id": "E0_s1",
+      "before": {
+        "x": 101.0,
+        "y": 47.0
+      },
+      "after": {
+        "x": 78.0,
+        "y": 142.0
+      },
+      "region": "북부 숲 잔해"
+    },
+    {
+      "id": "E0_s2",
+      "before": {
+        "x": 159.0,
+        "y": 46.0
+      },
+      "after": {
+        "x": 340.0,
+        "y": 12.0
+      },
+      "region": "동부 산업 잔해"
+    },
+    {
+      "id": "E0_s3",
+      "before": {
+        "x": 181.0,
+        "y": 13.0
+      },
+      "after": {
+        "x": 353.0,
+        "y": 18.0
+      },
+      "region": "동부 산업 잔해"
+    }
+  ],
+  "guards": [
+    {
+      "id": "P08",
+      "before": {
+        "x": 173.0,
+        "y": 34.0
+      },
+      "after": {
+        "x": 75.0,
+        "y": 124.0
+      },
+      "region": null
+    },
+    {
+      "id": "P09",
+      "before": {
+        "x": 192.0,
+        "y": -27.0
+      },
+      "after": {
+        "x": 348.0,
+        "y": -2.0
+      },
+      "region": null
+    },
+    {
+      "id": "P11",
+      "before": {
+        "x": 218.0,
+        "y": -137.0
+      },
+      "after": {
+        "x": 105.0,
+        "y": -263.0
+      },
+      "region": null
+    },
+    {
+      "id": "P12",
+      "before": {
+        "x": 110.0,
+        "y": -188.0
+      },
+      "after": {
+        "x": -218.0,
+        "y": -110.0
+      },
+      "region": null
+    }
+  ],
+  "totals": {
+    "IronOre": 64,
+    "Steak": 3,
+    "MaintenancePart": 6,
+    "HpPotion": 5
+  },
+  "stableIdsAndRewards": true,
+  "layout": {
+    "scene": "Assets/2.Scenes/TutorialScene.unity",
+    "sceneDirty": false,
+    "sprites": 2113,
+    "sectors": [
+      {
+        "name": "North_Woodland",
+        "clusters": 65,
+        "sprites": 835
+      },
+      {
+        "name": "West_Overgrowth",
+        "clusters": 56,
+        "sprites": 731
+      },
+      {
+        "name": "South_Salvage",
+        "clusters": 16,
+        "sprites": 208
+      },
+      {
+        "name": "East_Industrial",
+        "clusters": 26,
+        "sprites": 339
+      }
+    ],
+    "colliders": 0,
+    "rewards": 45,
+    "guards": 25
+  },
+  "play": {
+    "outerRewardSpawns": 8,
+    "patrolHomes": 4,
+    "patrolMovement": true,
+    "collectedScrap": 1,
+    "duplicateBlocked": true,
+    "runtimeRewards": 45,
+    "runtimeGuards": 25
+  },
+  "connectivity": {
+    "spacing": 4,
+    "bodyRadius": 0.7,
+    "reachableCells": 15498,
+    "rewards": 45,
+    "unreachable": []
+  },
+  "consoleCounts": {
+    "error": 0,
+    "warn": 6,
+    "log": 15
+  },
+  "warnings": [
+    {
+      "seq": 14,
+      "timestampUtc": "2026-11-02T00:52:54.6494921Z",
+      "level": "warn",
+      "logType": "Warning",
+      "message": "Cannot find matching control scheme for PlayerRun (all control schemes are already paired to matching devices)",
+      "stackTrace": "UnityEngine.Object:Instantiate<UnityEngine.GameObject> (UnityEngine.GameObject)\nTutorialScene:InstantiateOrLoad () (at Assets/3.Scripts/Scene/TutorialScene.cs:58)\nTutorialScene:Init () (at Assets/3.Scripts/Scene/TutorialScene.cs:17)\nBaseScene:Awake () (at Assets/3.Scripts/Scene/BaseScene.cs:13)\n",
+      "seeded": false
+    },
+    {
+      "seq": 15,
+      "timestampUtc": "2026-11-02T00:52:54.6510521Z",
+      "level": "warn",
+      "logType": "Warning",
+      "message": "Cannot find matching control scheme for PlayerInteract (all control schemes are already paired to matching devices)",
+      "stackTrace": "UnityEngine.Object:Instantiate<UnityEngine.GameObject> (UnityEngine.GameObject)\nTutorialScene:InstantiateOrLoad () (at Assets/3.Scripts/Scene/TutorialScene.cs:58)\nTutorialScene:Init () (at Assets/3.Scripts/Scene/TutorialScene.cs:17)\nBaseScene:Awake () (at Assets/3.Scripts/Scene/BaseScene.cs:13)\n",
+      "seeded": false
+    },
+    {
+      "seq": 16,
+      "timestampUtc": "2026-11-02T00:52:54.6510521Z",
+      "level": "warn",
+      "logType": "Warning",
+      "message": "Cannot find matching control scheme for CollectBuild (all control schemes are already paired to matching devices)",
+      "stackTrace": "UnityEngine.Object:Instantiate<UnityEngine.GameObject> (UnityEngine.GameObject)\nTutorialScene:InstantiateOrLoad () (at Assets/3.Scripts/Scene/TutorialScene.cs:58)\nTutorialScene:Init () (at Assets/3.Scripts/Scene/TutorialScene.cs:17)\nBaseScene:Awake () (at Assets/3.Scripts/Scene/BaseScene.cs:13)\n",
+      "seeded": false
+    },
+    {
+      "seq": 17,
+      "timestampUtc": "2026-11-02T00:52:54.6510521Z",
+      "level": "warn",
+      "logType": "Warning",
+      "message": "Cannot find matching control scheme for Eat (all control schemes are already paired to matching devices)",
+      "stackTrace": "UnityEngine.Object:Instantiate<UnityEngine.GameObject> (UnityEngine.GameObject)\nTutorialScene:InstantiateOrLoad () (at Assets/3.Scripts/Scene/TutorialScene.cs:58)\nTutorialScene:Init () (at Assets/3.Scripts/Scene/TutorialScene.cs:17)\nBaseScene:Awake () (at Assets/3.Scripts/Scene/BaseScene.cs:13)\n",
+      "seeded": false
+    },
+    {
+      "seq": 18,
+      "timestampUtc": "2026-11-02T00:52:54.6711475Z",
+      "level": "warn",
+      "logType": "Warning",
+      "message": "Cannot find matching control scheme for UI_HotBar(Clone) (all control schemes are already paired to matching devices)",
+      "stackTrace": "UnityEngine.Object:Instantiate<UnityEngine.GameObject> (UnityEngine.GameObject,UnityEngine.Transform)\nUIManager:ShowInvenUI (string) (at Assets/3.Scripts/Managers/UIManager.cs:39)\nInvenManager:Init () (at Assets/3.Scripts/Managers/Contents/InvenManager.cs:55)\nTutorialScene:Init () (at Assets/3.Scripts/Scene/TutorialScene.cs:29)\nBaseScene:Awake () (at Assets/3.Scripts/Scene/BaseScene.cs:13)\n",
+      "seeded": false
+    },
+    {
+      "seq": 30,
+      "timestampUtc": "2026-11-02T00:52:55.5847246Z",
+      "level": "warn",
+      "logType": "Warning",
+      "message": "The referenced script (Unknown) on this Behaviour is missing!",
+      "stackTrace": "UnityEngine.ResourceManagement.Util.DelayedActionManager:LateUpdate ()\n",
+      "seeded": false
+    }
+  ],
+  "runtimeConfirmation": [
+    "OUTER_FIELD_VERIFIED: 8 reward positions, 4 patrol homes/movement, actual collection and duplicate prevention."
+  ]
+}

@@ -29,6 +29,8 @@ public class UI_Main : UI_Base
 
     public override void Init()
     {
+        var explorationContent = Resources.Load<ExplorationContent>("Exploration/Content");
+        if (explorationContent != null) FieldCheckpoint.AddContinueButton(transform, explorationContent.font);
         start = Util.FindChild(gameObject,"Start",true);
         option = Util.FindChild(gameObject,"Option",true);
         exit = Util.FindChild(gameObject,"Exit",true);
@@ -76,6 +78,7 @@ public class UI_Main : UI_Base
     {
         Managers.Game.changeSceneEffecter.StartChangeScene();
         yield return new WaitForSeconds(3f);
+        if (!FieldSession.ResumeRequested) FieldSession.NewRun();
         SceneManager.LoadScene("TutorialScene");
     }
 
@@ -83,6 +86,7 @@ public class UI_Main : UI_Base
     {
         Managers.Game.changeSceneEffecter.StartChangeScene();
         yield return new WaitForSeconds(3f);
+        FieldSession.Active = false; FieldCheckpoint.Transfer = null;
         SceneManager.LoadScene("Boss1");
     }
 }

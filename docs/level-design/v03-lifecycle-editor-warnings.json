@@ -1,0 +1,168 @@
+{
+  "success": true,
+  "command": "command console get",
+  "data": {
+    "command": "console get",
+    "parameters": {
+      "tail": "100",
+      "level": "warn"
+    },
+    "result": {
+      "entries": [
+        {
+          "seq": 500581,
+          "timestampUtc": "2026-10-29T05:07:20.1019829Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500582,
+          "timestampUtc": "2026-10-29T05:07:20.1797565Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500595,
+          "timestampUtc": "2026-10-29T05:07:24.3214041Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500596,
+          "timestampUtc": "2026-10-29T05:07:24.4287185Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500689,
+          "timestampUtc": "2026-10-29T05:07:32.1748935Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500690,
+          "timestampUtc": "2026-10-29T05:07:32.9806982Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500704,
+          "timestampUtc": "2026-10-29T05:07:36.1049503Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500705,
+          "timestampUtc": "2026-10-29T05:07:36.3059937Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500830,
+          "timestampUtc": "2026-10-29T05:07:43.8143884Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500831,
+          "timestampUtc": "2026-10-29T05:07:44.1017567Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500845,
+          "timestampUtc": "2026-10-29T05:07:46.5661361Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500846,
+          "timestampUtc": "2026-10-29T05:07:46.6829195Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500988,
+          "timestampUtc": "2026-10-29T05:07:54.2120358Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 500989,
+          "timestampUtc": "2026-10-29T05:07:54.4160236Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "The referenced script (Unknown) on this Behaviour is missing!",
+          "stackTrace": "",
+          "seeded": false
+        }
+      ],
+      "cursor": 501002,
+      "session": "a578ffbb243a42aaae01d13c26d0dc50",
+      "returned": 14,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 0,
+        "warn": 14,
+        "log": 408
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-29T05:09:09.3215239Z",
+        "ageMs": 241,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 14,
+        "consoleLogs": 14,
+        "seeded": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\SSAFY\\Desktop\\SunNight"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

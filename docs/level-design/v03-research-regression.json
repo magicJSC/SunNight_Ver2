@@ -1,0 +1,21 @@
+[
+  "Play Mode initialized",
+  "Player loop advances",
+  "Configured reward containers spawned",
+  "Configured regional guards and patrols spawned",
+  "Existing player interaction component",
+  "Physics trigger registers reward with player",
+  "Cancelled collection grants nothing",
+  "Full bag accepts only one and keeps two in chest",
+  "Remaining reward can be collected",
+  "Depleted chest cannot duplicate rewards",
+  "Combat reward locked before guards die",
+  "Only defeated guard group unlocks",
+  "Camp research panel opens",
+  "Research locked before first night",
+  "Movement cancels research without cost",
+  "U1 spends exactly 6 scrap and 1 part",
+  "Purchased research cannot be bought twice",
+  "All research costs total 28 scrap and 6 parts",
+  "U4 raises max HP and slots without healing"
+]

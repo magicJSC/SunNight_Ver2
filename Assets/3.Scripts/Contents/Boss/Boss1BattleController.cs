@@ -22,13 +22,40 @@ public class Boss1BattleController : MonoBehaviour
 
     private void OnDisable()
     {
+        if (!Managers.HasInstance) return;
         Managers.Game.canMoveTower = true;
     }
 
     void StartBossBattle()
     {
         Managers.Game.canMoveTower = false;
-        StartCoroutine(RunRounds());
+        StartCoroutine(FieldSession.Active ? RunFieldRounds() : RunRounds());
+    }
+
+    IEnumerator RunFieldRounds()
+    {
+        var content=Resources.Load<ExplorationContent>("Exploration/Content");
+        if(content==null || content.dog==null || content.coala==null)
+        {Debug.LogError("First-field boss encounter content is missing.");yield break;}
+        yield return new WaitForSeconds(5);
+        for(int round=0;round<3;round++)
+        {
+            bool[] ranged=round==0?new[]{false}:round==1?new[]{false,false,false}:new[]{true,false,true,false,false};
+            for(int i=0;i<ranged.Length;i++)
+            {
+                Vector2 offset=i%2==0?Vector2.up*12:Vector2.right*12;
+                var go=Instantiate(ranged[i]?content.coala:content.dog,(Vector2)Managers.Game.tower.transform.position+offset,Quaternion.identity);
+                var stat=go.GetComponent<MonsterStat>();stat.maxHP=ranged[i]?75:30;
+                stat.Damage=ranged[i]?3:5;stat.attackCool=ranged[i]?5:1.5f;stat.Speed=3;
+                var monster=go.GetComponent<MonsterController>();monster.targetType=MonsterController.TargetType.Tower;
+                monster.getItemList.Clear();aliveMonsters.Add(go);monster.dieEvent+=OnMonsterDied;
+                if(i<ranged.Length-1) yield return new WaitForSeconds(2);
+            }
+            yield return WaitForRoundClear();
+            if(round<2) yield return new WaitForSeconds(10);
+        }
+        var boss=FindAnyObjectByType<Boss1>();
+        if(boss!=null) boss.StartBattle();
     }
 
     IEnumerator RunRounds()

@@ -1,0 +1,147 @@
+{
+  "date": "2026-11-02",
+  "simulation": "Real Unity Play Mode physics/combat/interaction, timeScale 2; times are game seconds. Known destinations, camp start fixture only.",
+  "runs": [
+    {
+      "region": "north",
+      "before": {
+        "seconds": 100.611771,
+        "wallSeconds": 50.3248138,
+        "scrap": 2,
+        "parts": 0,
+        "potions": 0,
+        "scrapPerMinute": 1.1927033865649774,
+        "nearby": 1,
+        "pursuers": 1,
+        "hp": 94.0,
+        "firstNearbySeconds": 37.0181274
+      },
+      "after": {
+        "seconds": 120.452232,
+        "wallSeconds": 60.2434845,
+        "scrap": 6,
+        "parts": 2,
+        "potions": 1,
+        "scrapPerMinute": 2.9887366470718453,
+        "nearby": 3,
+        "pursuers": 3,
+        "hp": 83.0,
+        "firstNearbySeconds": 20.209343
+      }
+    },
+    {
+      "region": "west",
+      "before": {
+        "seconds": 122.24234,
+        "wallSeconds": 61.1322632,
+        "scrap": 2,
+        "parts": 0,
+        "potions": 0,
+        "scrapPerMinute": 0.9816566011416339,
+        "nearby": 0,
+        "pursuers": 0,
+        "hp": 100.0,
+        "firstNearbySeconds": null
+      },
+      "after": {
+        "seconds": 140.442459,
+        "wallSeconds": 70.2349548,
+        "scrap": 8,
+        "parts": 1,
+        "potions": 0,
+        "scrapPerMinute": 3.417769835545246,
+        "nearby": 3,
+        "pursuers": 3,
+        "hp": 85.0,
+        "firstNearbySeconds": 29.1277161
+      }
+    },
+    {
+      "region": "south",
+      "before": {
+        "seconds": 83.69864,
+        "wallSeconds": 41.861145,
+        "scrap": 2,
+        "parts": 0,
+        "potions": 0,
+        "scrapPerMinute": 1.433715052000845,
+        "nearby": 2,
+        "pursuers": 1,
+        "hp": 95.0,
+        "firstNearbySeconds": 19.0452576
+      },
+      "after": {
+        "seconds": 97.27655,
+        "wallSeconds": 48.65352,
+        "scrap": 8,
+        "parts": 1,
+        "potions": 1,
+        "scrapPerMinute": 4.934385522512877,
+        "nearby": 4,
+        "pursuers": 3,
+        "hp": 85.0,
+        "firstNearbySeconds": 13.8493958
+      }
+    },
+    {
+      "region": "east",
+      "before": {
+        "seconds": 142.7301,
+        "wallSeconds": 71.37756,
+        "scrap": 2,
+        "parts": 0,
+        "potions": 0,
+        "scrapPerMinute": 0.8407476769090753,
+        "nearby": 0,
+        "pursuers": 0,
+        "hp": 100.0,
+        "firstNearbySeconds": null
+      },
+      "after": {
+        "seconds": 166.137115,
+        "wallSeconds": 83.08066,
+        "scrap": 6,
+        "parts": 2,
+        "potions": 1,
+        "scrapPerMinute": 2.166884864950255,
+        "nearby": 3,
+        "pursuers": 3,
+        "hp": 84.0,
+        "firstNearbySeconds": 39.82657
+      }
+    }
+  ],
+  "saveCompatibility": {
+    "inventoryPreserved": true,
+    "rewardStatesChecked": 45,
+    "guardStatesChecked": 25,
+    "duplicateSupplies": false,
+    "killedGuardRespawns": false
+  },
+  "connectivity": {
+    "spacing": 4,
+    "bodyRadius": 0.7,
+    "reachableCells": 15498,
+    "rewards": 45,
+    "unreachable": []
+  },
+  "consoleCountsCumulative": {
+    "error": 0,
+    "warn": 72,
+    "log": 153
+  },
+  "warningTypes": {
+    "Cannot find matching control scheme for PlayerRun (all control schemes are already paired to matching devices)": 12,
+    "Cannot find matching control scheme for PlayerInteract (all control schemes are already paired to matching devices)": 12,
+    "Cannot find matching control scheme for CollectBuild (all control schemes are already paired to matching devices)": 12,
+    "Cannot find matching control scheme for Eat (all control schemes are already paired to matching devices)": 12,
+    "Cannot find matching control scheme for UI_HotBar(Clone) (all control schemes are already paired to matching devices)": 12,
+    "The referenced script (Unknown) on this Behaviour is missing!": 1,
+    "Cannot find matching control scheme for Bat(Clone) (all control schemes are already paired to matching devices)": 9,
+    "Assets\\Editor\\FirstFieldLevelDesign.cs(377,73): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'": 1,
+    "Assets\\Editor\\FirstFieldLevelDesign.cs(377,29): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'": 1
+  },
+  "originalSave": "docs/level-design/v03-postnight-earned-postnight.json",
+  "inventoryAndHpInjectedDuringRoutes": false,
+  "firstNightClearedClockAndHungerPausedByExistingGameRules": true
+}

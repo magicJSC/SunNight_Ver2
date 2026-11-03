@@ -18,7 +18,7 @@ public class SceneManagerEx : MonoBehaviour
         set { _curSceneType = value; }
     }
 
-    public BaseScene CurrentScene { get { return GameObject.FindObjectOfType<BaseScene>(); } }
+    public BaseScene CurrentScene { get { return GameObject.FindAnyObjectByType<BaseScene>(); } }
 
     public IEnumerator ChangeScene(Define.SceneType type)
     {

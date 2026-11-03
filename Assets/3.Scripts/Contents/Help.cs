@@ -6,6 +6,7 @@ using UnityEngine;
 public class Help : MonoBehaviour
 {
     RectTransform help;
+    void OnDisable() { if (help != null) help.DOKill(false); }
     private void Start()
     {
         help = Util.FindChild<RectTransform>(gameObject, "Help", true);
@@ -14,17 +15,19 @@ public class Help : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<PlayerController>() != null)
+        if(isActiveAndEnabled && help != null && !Managers.IsShuttingDown && collision.GetComponent<PlayerController>() != null)
         {
-            help.transform.DOScaleX(1, 0.5f);
+            help.DOKill(false);
+            help.DOScaleX(1, 0.5f).SetLink(help.gameObject, LinkBehaviour.KillOnDisable);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerController>() != null)
+        if (isActiveAndEnabled && help != null && !Managers.IsShuttingDown && collision.GetComponent<PlayerController>() != null)
         {
-            help.transform.DOScaleX(0, 0.5f);
+            help.DOKill(false);
+            help.DOScaleX(0, 0.5f).SetLink(help.gameObject, LinkBehaviour.KillOnDisable);
         }
     }
 }

@@ -1,0 +1,975 @@
+{
+  "referenceV02GroundTiles": 4588,
+  "groundTiles": 1541,
+  "roadTiles": 46,
+  "props": 404,
+  "rewards": 45,
+  "guards": 25,
+  "patrols": 14,
+  "sceneUnchanged": true,
+  "pickupChecks": [
+    {
+      "id": "A1",
+      "x": -24.0,
+      "y": -57.0,
+      "region": "서쪽 공터 고철",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "A1_s1",
+      "x": -47.0,
+      "y": -67.0,
+      "region": "서쪽 공터 고철",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "A1_s2",
+      "x": -13.0,
+      "y": -50.0,
+      "region": "서쪽 공터 고철",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "A2",
+      "x": 1.0,
+      "y": -78.0,
+      "region": "남쪽 공터 고철",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "A2_s1",
+      "x": 24.0,
+      "y": -88.0,
+      "region": "남쪽 공터 고철",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "A2_s2",
+      "x": 9.0,
+      "y": -105.0,
+      "region": "남쪽 공터 고철",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "A3",
+      "x": 28.0,
+      "y": -51.0,
+      "region": "북쪽 공터 고철",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "A3_s1",
+      "x": 55.0,
+      "y": -35.0,
+      "region": "북쪽 공터 고철",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "A3_s2",
+      "x": 62.0,
+      "y": -15.0,
+      "region": "북쪽 공터 고철",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "A4",
+      "x": -4.0,
+      "y": -65.0,
+      "region": "공터 식량",
+      "items": [
+        "Steak"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 4.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "B1",
+      "x": -8.0,
+      "y": -119.0,
+      "region": "폐주거지 북쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "B1_s1",
+      "x": 19.0,
+      "y": -134.0,
+      "region": "폐주거지 북쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "B1_s2",
+      "x": 35.0,
+      "y": -113.0,
+      "region": "폐주거지 북쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "B2",
+      "x": 9.0,
+      "y": -151.0,
+      "region": "폐주거지 동쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "B2_s1",
+      "x": 31.0,
+      "y": -167.0,
+      "region": "폐주거지 동쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "B2_s2",
+      "x": 52.0,
+      "y": -145.0,
+      "region": "폐주거지 동쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "B3",
+      "x": -6.0,
+      "y": -182.0,
+      "region": "폐주거지 남쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "B3_s1",
+      "x": 21.0,
+      "y": -191.0,
+      "region": "폐주거지 남쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "B3_s2",
+      "x": 53.0,
+      "y": -177.0,
+      "region": "폐주거지 남쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "B4",
+      "x": 12.0,
+      "y": -171.0,
+      "region": "폐주거지 식량",
+      "items": [
+        "Steak"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 4.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "C1",
+      "x": -75.0,
+      "y": -94.0,
+      "region": "숲 북쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "C1_s1",
+      "x": -93.0,
+      "y": -76.0,
+      "region": "숲 북쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "C1_s2",
+      "x": -60.0,
+      "y": -105.0,
+      "region": "숲 북쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "C2",
+      "x": -90.0,
+      "y": -127.0,
+      "region": "숲 남쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "C2_s1",
+      "x": -65.0,
+      "y": -148.0,
+      "region": "숲 남쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "C2_s2",
+      "x": -95.0,
+      "y": -169.0,
+      "region": "숲 남쪽 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "C3",
+      "x": -73.0,
+      "y": -135.0,
+      "region": "숲 야영 흔적",
+      "items": [
+        "Steak"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 4.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "D0",
+      "x": 94.0,
+      "y": -116.0,
+      "region": "남동부 고철 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "D0_s1",
+      "x": 107.0,
+      "y": -154.0,
+      "region": "남동부 고철 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "D0_s2",
+      "x": 124.0,
+      "y": -182.0,
+      "region": "남동부 고철 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "D0_s3",
+      "x": 153.0,
+      "y": -183.0,
+      "region": "남동부 고철 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "D0_s4",
+      "x": 187.0,
+      "y": -176.0,
+      "region": "남동부 고철 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "D0_s5",
+      "x": 201.0,
+      "y": -144.0,
+      "region": "남동부 고철 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "D1",
+      "x": 121.0,
+      "y": -157.0,
+      "region": "D 서쪽 경비 보상",
+      "items": [
+        "IronOre",
+        "MaintenancePart"
+      ],
+      "amounts": [
+        6,
+        1
+      ],
+      "group": "D1",
+      "collectSeconds": 4.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "D2",
+      "x": 181.0,
+      "y": -159.0,
+      "region": "D 동쪽 경비 보상",
+      "items": [
+        "IronOre",
+        "MaintenancePart",
+        "HpPotion"
+      ],
+      "amounts": [
+        6,
+        1,
+        1
+      ],
+      "group": "D2",
+      "collectSeconds": 4.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "E0",
+      "x": 91.0,
+      "y": 0.0,
+      "region": "북동부 기계 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "E0_s1",
+      "x": 101.0,
+      "y": 47.0,
+      "region": "북동부 기계 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "E0_s2",
+      "x": 159.0,
+      "y": 46.0,
+      "region": "북동부 기계 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "E0_s3",
+      "x": 181.0,
+      "y": 13.0,
+      "region": "북동부 기계 잔해",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "",
+      "collectSeconds": 2.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "E1",
+      "x": 107.0,
+      "y": 21.0,
+      "region": "E 서쪽 작업장",
+      "items": [
+        "IronOre",
+        "MaintenancePart",
+        "HpPotion"
+      ],
+      "amounts": [
+        4,
+        2,
+        1
+      ],
+      "group": "E1",
+      "collectSeconds": 4.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "E2",
+      "x": 145.0,
+      "y": 19.0,
+      "region": "E 동쪽 작업장",
+      "items": [
+        "IronOre",
+        "MaintenancePart",
+        "HpPotion"
+      ],
+      "amounts": [
+        4,
+        2,
+        1
+      ],
+      "group": "E2",
+      "collectSeconds": 4.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "F1",
+      "x": 235.0,
+      "y": -70.0,
+      "region": "F 공장 외곽",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        3
+      ],
+      "group": "F",
+      "collectSeconds": 4.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "F2",
+      "x": 239.0,
+      "y": -63.0,
+      "region": "F 공장 외곽",
+      "items": [
+        "IronOre"
+      ],
+      "amounts": [
+        3
+      ],
+      "group": "F",
+      "collectSeconds": 4.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "F3",
+      "x": 233.0,
+      "y": -78.0,
+      "region": "F 공장 외곽",
+      "items": [
+        "HpPotion"
+      ],
+      "amounts": [
+        1
+      ],
+      "group": "F",
+      "collectSeconds": 4.0,
+      "blocked": false,
+      "approaches": 4
+    },
+    {
+      "id": "N1",
+      "x": 58.0,
+      "y": -74.0,
+      "region": "첫밤 완료 보급",
+      "items": [
+        "IronOre",
+        "HpPotion"
+      ],
+      "amounts": [
+        4,
+        1
+      ],
+      "group": "",
+      "collectSeconds": 4.0,
+      "blocked": false,
+      "approaches": 4
+    }
+  ],
+  "patrolChecks": [
+    {
+      "id": "D1a",
+      "x": 119.0,
+      "y": -164.0,
+      "group": "D1",
+      "ranged": false,
+      "patrolRadius": 0.0,
+      "blocked": false
+    },
+    {
+      "id": "D1b",
+      "x": 122.0,
+      "y": -166.0,
+      "group": "D1",
+      "ranged": false,
+      "patrolRadius": 0.0,
+      "blocked": false
+    },
+    {
+      "id": "D2a",
+      "x": 181.0,
+      "y": -167.0,
+      "group": "D2",
+      "ranged": false,
+      "patrolRadius": 0.0,
+      "blocked": false
+    },
+    {
+      "id": "D2b",
+      "x": 184.0,
+      "y": -169.0,
+      "group": "D2",
+      "ranged": false,
+      "patrolRadius": 0.0,
+      "blocked": false
+    },
+    {
+      "id": "E1a",
+      "x": 108.0,
+      "y": 26.0,
+      "group": "E1",
+      "ranged": false,
+      "patrolRadius": 0.0,
+      "blocked": false
+    },
+    {
+      "id": "E1b",
+      "x": 110.0,
+      "y": 30.0,
+      "group": "E1",
+      "ranged": true,
+      "patrolRadius": 0.0,
+      "blocked": false
+    },
+    {
+      "id": "E2a",
+      "x": 147.0,
+      "y": 25.0,
+      "group": "E2",
+      "ranged": false,
+      "patrolRadius": 0.0,
+      "blocked": false
+    },
+    {
+      "id": "E2b",
+      "x": 149.0,
+      "y": 29.0,
+      "group": "E2",
+      "ranged": true,
+      "patrolRadius": 0.0,
+      "blocked": false
+    },
+    {
+      "id": "Fa",
+      "x": 222.0,
+      "y": -87.0,
+      "group": "F",
+      "ranged": false,
+      "patrolRadius": 0.0,
+      "blocked": false
+    },
+    {
+      "id": "Fb",
+      "x": 226.0,
+      "y": -89.0,
+      "group": "F",
+      "ranged": false,
+      "patrolRadius": 0.0,
+      "blocked": false
+    },
+    {
+      "id": "Fc",
+      "x": 230.0,
+      "y": -89.0,
+      "group": "F",
+      "ranged": true,
+      "patrolRadius": 0.0,
+      "blocked": false
+    },
+    {
+      "id": "P01",
+      "x": -82.0,
+      "y": -55.0,
+      "group": "",
+      "ranged": false,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P02",
+      "x": -97.0,
+      "y": -149.0,
+      "group": "",
+      "ranged": false,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P03",
+      "x": -45.0,
+      "y": -115.0,
+      "group": "",
+      "ranged": false,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P04",
+      "x": 20.0,
+      "y": -145.0,
+      "group": "",
+      "ranged": false,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P05",
+      "x": 76.0,
+      "y": -172.0,
+      "group": "",
+      "ranged": false,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P06",
+      "x": 53.0,
+      "y": 20.0,
+      "group": "",
+      "ranged": false,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P07",
+      "x": 119.0,
+      "y": 51.0,
+      "group": "",
+      "ranged": false,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P08",
+      "x": 173.0,
+      "y": 34.0,
+      "group": "",
+      "ranged": true,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P09",
+      "x": 192.0,
+      "y": -27.0,
+      "group": "",
+      "ranged": false,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P10",
+      "x": 180.0,
+      "y": -84.0,
+      "group": "",
+      "ranged": true,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P11",
+      "x": 218.0,
+      "y": -137.0,
+      "group": "",
+      "ranged": false,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P12",
+      "x": 110.0,
+      "y": -188.0,
+      "group": "",
+      "ranged": false,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P13",
+      "x": -42.0,
+      "y": -185.0,
+      "group": "",
+      "ranged": false,
+      "patrolRadius": 3.0,
+      "blocked": false
+    },
+    {
+      "id": "P14",
+      "x": 18.0,
+      "y": -23.0,
+      "group": "",
+      "ranged": false,
+      "patrolRadius": 3.0,
+      "blocked": false
+    }
+  ]
+}

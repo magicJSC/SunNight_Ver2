@@ -35,22 +35,21 @@ public class Bat : ToolController
         if (Managers.Game.isCantPlay)
             return;
         Managers.Sound.Play(Define.Sound.Effect, sound);
-       for(int i = 0;i< damageList.Count; i++) 
+       // Death can synchronously remove contacts. Iterate a stable, distinct swing snapshot.
+       foreach(var target in new HashSet<Transform>(damageList))
         {
-            if (damageList[i] == null)
-            {
-                damageList.RemoveAt(i);
-                i--;
-                continue;
-            }
-
-            damageList[i].GetComponent<IGetPlayerDamage>().GetDamage(_damage);
-            Instantiate(effect, damageList[i].transform.position, Quaternion.identity);
-            if (damageList[i].TryGetComponent<IKnockBack>(out var knockBack))
+            if(target==null) continue;
+            Vector3 hitPosition=target.position;
+            target.GetComponent<IGetPlayerDamage>().GetDamage(FieldSession.Active ? (FieldSession.State.Has("U1") ? 9 : 6) : _damage);
+            if(effect!=null) Instantiate(effect,hitPosition,Quaternion.identity);
+            if (target!=null && target.gameObject.activeInHierarchy &&
+                (!target.TryGetComponent<Stat>(out var targetStat) || targetStat.Hp>0) &&
+                target.TryGetComponent<IKnockBack>(out var knockBack))
             {
                 knockBack.StartKnockBack((point - transform.position).normalized);
             }
         }
+        damageList.RemoveAll(target=>target==null);
        
     }
 

@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">SunNight 탐색과 강화 중심 첫 필드 배치도 v0.2</title>
+  <desc id="desc">튜토리얼에서 출구 수집지와 서쪽 주거지·숲을 탐색한 뒤 첫밤을 방어한다. 중앙 야영지에서 북쪽 정비소와 남쪽 야적장을 자유롭게 탐색하고 귀환하여 강화한다. 공장 외곽은 탐색지에서 갈라지는 선택 목적지다. 지역 연결 개념도이며 거리와 지형은 비례하지 않는다.</desc>
+  <style>
+    text {font-family:'Malgun Gothic','Arial',sans-serif;fill:#263735}
+    .title {font-size:29px;font-weight:700}
+    .sub {font-size:16px;fill:#536763}
+    .name {font-size:19px;font-weight:700;text-anchor:middle}
+    .loot {font-size:15px;text-anchor:middle}
+    .note {font-size:13px;fill:#536763;text-anchor:middle}
+    .road {fill:none;stroke:#73948b;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+    .loop {fill:none;stroke:#347c9a;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    .approach {fill:none;stroke:#a58260;stroke-width:3;stroke-dasharray:9 8;stroke-linecap:round}
+    .safe {fill:#e5efe5;stroke:#8faa98;stroke-width:1.5}
+    .risk {fill:#f6ead7;stroke:#b49a70;stroke-width:1.5}
+    .hard {fill:#f5e2da;stroke:#bf9989;stroke-width:1.5}
+  </style>
+  <rect width="1200" height="900" fill="#fbfaf6"/>
+  <text x="48" y="55" class="title">탐색하고, 돌아와 강화하고, 폭스턴에 도전한다</text>
+  <text x="48" y="86" class="sub">첫 필드 레벨디자인 v0.2 · 2026-10-28 · 지역 연결 개념도 / 거리 비례 아님 / Unity 미반영</text>
+  <path d="M48 115H1152" stroke="#d4ddd5"/>
+  <path d="M48 139H91" class="road"/><text x="103" y="145" class="sub">첫날 생활권</text>
+  <path d="M300 139H343" class="loop"/><text x="355" y="145" class="sub">귀환·탐색 순환망</text>
+  <path d="M580 139H623" class="approach"/><text x="635" y="145" class="sub">선택 공장 접근</text>
+
+  <path d="M130 230 C145 275 185 315 230 350 L360 350 L590 470" class="road"/>
+  <path d="M230 350 L105 525 L105 675 L320 710 L270 520 Z" class="road"/>
+  <path d="M360 350 L405 530 L320 710" class="road"/>
+  <path d="M590 470 L710 235 L870 315 L880 575 L820 710 L590 470" class="loop"/>
+  <path d="M820 710 L575 754 L320 710 L405 530 L360 350 L590 470" class="loop"/>
+  <path d="M710 235 Q935 255 1030 435" class="approach"/>
+  <path d="M820 710 L1000 635 L1030 435 L1090 235" class="approach"/>
+
+  <circle cx="230" cy="350" r="7" fill="#73948b"/>
+  <text x="245" y="285" class="note">출구 분기 J</text>
+  <text x="176" y="625" class="note">첫날 보급 순환</text>
+  <text x="568" y="294" class="note">북쪽 부품 탐색</text>
+  <text x="630" y="620" class="note">남쪽 고철 탐색</text>
+  <text x="535" y="783" class="note">주거지를 거쳐 돌아오는 보급길</text>
+  <text x="1090" y="540" class="note">준비되면 공장으로</text>
+
+  <g transform="translate(130 215)">
+    <rect x="-95" y="-42" width="190" height="84" rx="7" fill="#ecebe4" stroke="#b5b8ad"/>
+    <text y="-12" class="name">T 튜토리얼</text><text y="13" class="loot">고철 7 · 음식 1</text><text y="34" class="note">시작 거점 / 첫밤 방어</text>
+  </g>
+  <g transform="translate(360 350)">
+    <rect x="-92" y="-44" width="184" height="88" rx="7" class="safe"/>
+    <text y="-15" class="name">A 출구 수집지</text><text y="12" class="loot">고철 9 · 음식 1</text><text y="34" class="note">첫날 기본 제작 재료</text>
+  </g>
+  <g transform="translate(105 525)">
+    <rect x="-90" y="-44" width="180" height="88" rx="7" class="safe"/>
+    <text y="-15" class="name">C 숲 가장자리</text><text y="12" class="loot">고철 6 · 음식 1</text><text y="34" class="note">선택 보급 / 강제 전투 없음</text>
+  </g>
+  <g transform="translate(320 710)">
+    <rect x="-95" y="-44" width="190" height="88" rx="7" class="safe"/>
+    <text y="-15" class="name">B 폐주거지</text><text y="12" class="loot">고철 9 · 음식 1</text><text y="34" class="note">Event1 주변 / 외부 보급</text>
+  </g>
+  <g transform="translate(590 470)">
+    <rect x="-100" y="-58" width="200" height="116" rx="9" fill="#dcecf1" stroke="#347c9a" stroke-width="2.5"/>
+    <text y="-25" class="name">H 중앙 야영지</text><text y="3" class="loot">귀환 → 연구 · 수리</text><text y="27" class="note">첫밤 이후 거점 이동 / C4</text><text y="47" class="note">무료 회복·재화 지급 없음</text>
+  </g>
+  <g transform="translate(820 710)">
+    <rect x="-105" y="-52" width="210" height="104" rx="7" class="risk"/>
+    <text y="-24" class="name">D 고철 야적장</text><text y="3" class="loot">고철 18 · 부품 2 · 약 1</text><text y="25" class="note">Event2 주변 / 개 2 + 개 2</text><text y="44" class="note">한 무리만 공략해도 첫 강화</text>
+  </g>
+  <g transform="translate(710 235)">
+    <rect x="-105" y="-52" width="210" height="104" rx="7" class="hard"/>
+    <text y="-24" class="name">E 폐정비소</text><text y="3" class="loot">고철 12 · 부품 4 · 약 2</text><text y="25" class="note">개 1 + 코알라 1씩 두 작업장</text><text y="44" class="note">추가 강화 / 순서 선택 가능</text>
+  </g>
+  <g transform="translate(1030 435)">
+    <rect x="-100" y="-49" width="200" height="98" rx="7" class="risk"/>
+    <text y="-19" class="name">F 공장 외곽</text><text y="7" class="loot">고철 6 · 약 1</text><text y="30" class="note">개 2 + 코알라 1 / 전력 확인</text>
+  </g>
+  <g transform="translate(1090 235)">
+    <rect x="-95" y="-48" width="190" height="96" rx="7" fill="#344b50"/>
+    <text y="-17" class="name" style="fill:#fff">X 폭스턴 공장</text><text y="10" class="loot" style="fill:#fff">선행전 → 폭스턴</text><text y="33" class="note" style="fill:#dbe5e3">전 지역 방문·강화는 선택</text>
+  </g>
+
+  <path d="M48 815H1152" stroke="#d4ddd5"/>
+  <text x="48" y="846" class="sub">모든 길은 양방향 · H에서 D와 E 중 다음 탐색지를 선택 · 정비 부품은 확정 획득</text>
+  <text x="48" y="875" class="sub">첫밤 완료 보상: 고철 4 + 구조 보급 약 1 (1회) · 공장 직행을 강제하는 길·연속 화살표는 제거</text>
+</svg>

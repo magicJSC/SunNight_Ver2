@@ -99,6 +99,7 @@ public class UI_Build : MonoBehaviour
 
     private void OnDisable()
     {
+        if (!Managers.HasInstance) return;
         Managers.UI.PopUIList.Remove(gameObject);
         Managers.Game.buildUI = null;
     }
@@ -148,6 +149,7 @@ public class UI_Build : MonoBehaviour
 
     void UpgradeStat(PointerEventData p)
     {
+        if (FieldSession.Active) { FieldHUD.Notify("중앙 야영지 작업대에서 연구하세요."); return; }
         if (nextLevelItem == null)
             return;
 
@@ -170,6 +172,7 @@ public class UI_Build : MonoBehaviour
 
     void Collect(PointerEventData p)
     {
+        if (FieldFoxtonBattle.Active != null) return;
         Item_Buliding building = GetComponentInParent<Item_Buliding>();
         Managers.Inven.GetItem(building.itemSo, 1);
         Managers.Inven.CheckHotBarChoice();
