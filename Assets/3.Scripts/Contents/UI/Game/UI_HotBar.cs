@@ -56,7 +56,7 @@ public class UI_HotBar : UI_Base
         ChangeChoice(4);
     }
 
-    void OnUpScroll()
+    void OnDownScroll()
     {
         int index = choiceIndex + 1;
         if (index > 4)
@@ -64,7 +64,7 @@ public class UI_HotBar : UI_Base
         ChangeChoice(index);
     }
 
-    void OnDownScroll()
+    void OnUpScroll()
     {
         int index = choiceIndex - 1;
         if (index < 0)
