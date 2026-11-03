@@ -5,7 +5,7 @@ public static class UIScreenPlacement
 {
     static Camera CameraFor(RectTransform rect)
     {
-        var canvas = rect.GetComponentInParent<Canvas>();
+        var canvas = rect.GetComponentInParent<Canvas>().rootCanvas;
         return canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
     }
 
@@ -59,6 +59,16 @@ public static class UIScreenPlacement
 
     public static void Tooltip(RectTransform tooltip, RectTransform source)
     {
+        var parentCanvas = tooltip.parent.GetComponentInParent<Canvas>();
+        var canvas = tooltip.GetComponent<Canvas>();
+        if (canvas == null) canvas = tooltip.gameObject.AddComponent<Canvas>();
+        canvas.overrideSorting = true;
+        canvas.sortingLayerID = parentCanvas.sortingLayerID;
+        canvas.sortingOrder = 100;
+        var group = tooltip.GetComponent<CanvasGroup>();
+        if (group == null) group = tooltip.gameObject.AddComponent<CanvasGroup>();
+        group.blocksRaycasts = false;
+        group.interactable = false;
         Canvas.ForceUpdateCanvases();
         var item = Bounds(source);
         var tip = Bounds(tooltip);
