@@ -7,6 +7,7 @@ public sealed class ExplorationRuntime : MonoBehaviour
 {
     public static ExplorationRuntime Instance { get; private set; }
     public ExplorationContent content;
+    GameObject basementTerminal;
     public static void Create()
     {
         if (Instance != null) return;
@@ -22,6 +23,9 @@ public sealed class ExplorationRuntime : MonoBehaviour
         MigrateClaims(FieldSession.State,content);
         OuterSalvageLedger.Migrate(FieldSession.State,content);
         FieldHUD.Create(content.font);
+        basementTerminal=Prop("BasementTerminal",new Vector2(-38,-32),content.workbench,new Color(.65f,1f,.95f));
+        basementTerminal.AddComponent<BasementTerminal>();
+        basementTerminal.SetActive(FieldSession.State.HasBasementMap);
         foreach(var reward in content.rewards)
         {
             var go=Prop("Reward_"+reward.id,reward.position,
@@ -89,14 +93,23 @@ public sealed class ExplorationRuntime : MonoBehaviour
         var trigger=go.AddComponent<CircleCollider2D>(); trigger.radius=2; trigger.isTrigger=true;
         return go;
     }
+    public static void GrantBasementMap()
+    {
+        if (!FieldSession.Active || FieldSession.State.HasBasementMap) return;
+        FieldSession.State.basementMapReceived = true;
+        if (Instance != null && Instance.basementTerminal != null) Instance.basementTerminal.SetActive(true);
+        FieldHUD.ShowStory(FieldHUD.StoryPage.Map);
+    }
     public static void GrantFirstNightReward()
     {
+        bool firstVictory = !FieldSession.State.firstNightCleared;
         FieldSession.State.firstNightCleared=true;
         if (Managers.Game.timeController != null)
         {
             Managers.Game.timeController.RestoreClock(2,330);
             Managers.Game.lightController.SetMorning();
         }
+        if (firstVictory) FieldHUD.ShowStory(FieldHUD.StoryPage.Signal);
         if (Instance==null || !FieldInventory.Ready) return;
         int remaining=Mathf.Max(0,4-FieldSession.State.Claimed("N1:0"));
         int given=FieldInventory.Give(Instance.content.scrap,remaining);

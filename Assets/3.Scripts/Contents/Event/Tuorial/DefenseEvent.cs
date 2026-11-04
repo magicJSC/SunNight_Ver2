@@ -105,6 +105,7 @@ public class DefenseEvent : MonoBehaviour
         Managers.Game.canMoveTower = true;
         close.SetActive(false);
         open.SetActive(true);
+        ExplorationRuntime.GrantBasementMap();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
