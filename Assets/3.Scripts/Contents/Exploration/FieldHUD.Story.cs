@@ -58,7 +58,7 @@ public sealed partial class FieldHUD
         var state = FieldSession.State;
         storyObjective.text = !state.HasBasementMap ? (state.basementMapDropped ? "로봇이 떨어뜨린 지도 줍기 · F" : "") : state.sunNightJournalRead
             ? (FieldLaboratory.PlayerInside ? "공장 파괴 0/3 · 남쪽 계단으로 지상 복귀   [M] 지도" : "공장 파괴 0/3 · 동쪽 폭스턴 공장 찾기   [M] 지도")
-            : FieldLaboratory.PlayerInside ? "지하 연구실 · 북쪽 단말 조사   [M] 지도" : "남쪽 출구 너머 열린 공터에서 연구실 찾기   [M] 지도";
+            : FieldLaboratory.PlayerInside ? "지하 연구실 · 북쪽 단말 조사   [M] 지도" : "남쪽 폐주거지에서 연구소 찾기   [M] 지도";
         if ((!state.HasBasementMap && !state.firstNightCleared) || Keyboard.current == null || !Keyboard.current.mKey.wasPressedThisFrame) return;
         if (storyCard.activeSelf) storyCard.SetActive(false);
         else ShowStory(state.HasBasementMap ? StoryPage.Map : StoryPage.Signal);
@@ -89,7 +89,7 @@ public sealed partial class FieldHUD
                 bool restored = state.sunNightJournalRead;
                 hud.survey.texture = Resources.Load<Texture2D>(restored ? "Story/DistrictSurvey" : "Story/LabApproach");
                 hud.storyTitle.text = restored ? "복원된 지구도 · 동부 공장" : "접힌 지도 · 연구실 수색 구역";
-                hud.storyText.text = restored ? "야영지는 연구실 동쪽, 폭스턴 공장은 야영지에서 동북쪽이다." : "훈련장을 남쪽으로 나가자. 열린 공터의 붉은 표식이 연구실 계단이다.";
+                hud.storyText.text = restored ? "야영지는 연구실 북동쪽, 폭스턴 공장은 야영지에서 동북쪽이다." : "남문을 나와 폐주거지로 가자. 연구소 건물 남쪽 계단에 붉은 표식이 있다.";
                 break;
             case StoryPage.Journal:
                 hud.storyTitle.text = "PROJECT SUNNIGHT · 연구 일지";
