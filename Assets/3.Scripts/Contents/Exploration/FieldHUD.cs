@@ -81,16 +81,19 @@ public sealed partial class FieldHUD : MonoBehaviour
         Button("Close",rect,"닫기 / 연구 취소 (Esc)",()=>Close(),40);
         panel.SetActive(false);
         BuildStoryHud();
-        var entry = Rect("LaboratoryEntry", transform);
-        entry.anchorMin = entry.anchorMax = new Vector2(.5f,.5f);
-        entry.sizeDelta = new Vector2(360,172);
-        entryPanel = entry.gameObject;
-        entryPanel.AddComponent<UnityEngine.UI.Image>().color = new Color(.055f,.075f,.08f,.98f);
-        var stack = entryPanel.AddComponent<UnityEngine.UI.VerticalLayoutGroup>();
-        stack.padding = new RectOffset(16,16,12,12); stack.spacing = 6;
-        Layout(Label("Title",entry,"폐주거지 연구소에 들어갈까요?",22).transform,48);
-        Button("Enter",entry,"들어가기",()=> { var lab = offeredLab; CloseLabEntry(); if (lab) lab.Enter(); },40);
-        Button("Return",entry,"돌아가기",CloseLabEntry,40);
+        entryPanel = Instantiate(Resources.Load<GameObject>("UI/FacilityEntrance"));
+        entryPanel.name = "LaboratoryEntry";
+        entryPanel.GetComponent<Canvas>().sortingOrder = canvas.sortingOrder + 1;
+        var frame = entryPanel.transform.Find("Panel/Image");
+        frame.Find("Title").GetComponent<UnityEngine.UI.Text>().text = "폐주거지 연구소";
+        frame.Find("Prompt").GetComponent<UnityEngine.UI.Text>().text = "연구소에 들어갈까요?";
+        frame.Find("Enter").GetComponent<UI_EventHandler>()._OnClick += _ =>
+        {
+            var lab = offeredLab;
+            CloseLabEntry();
+            if (lab) lab.Enter();
+        };
+        frame.Find("Return").GetComponent<UI_EventHandler>()._OnClick += _ => CloseLabEntry();
         entryPanel.SetActive(false);
     }
     public static void OfferLabEntry(FieldLaboratory lab)
@@ -169,5 +172,10 @@ public sealed partial class FieldHUD : MonoBehaviour
     {
         panel.SetActive(false); Managers.UI.PopUIList.Remove(panel);
     }
-    void OnDestroy() { if(panel!=null && Managers.HasInstance) Managers.UI.PopUIList.Remove(panel); if(instance==this) { CloseLabEntry(); instance=null; } }
+    void OnDestroy()
+    {
+        if(panel!=null && Managers.HasInstance) Managers.UI.PopUIList.Remove(panel);
+        if(instance==this) { CloseLabEntry(); instance=null; }
+        if(entryPanel) Destroy(entryPanel);
+    }
 }
