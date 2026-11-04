@@ -275,12 +275,13 @@ public static class FirstDayFieldAudit
                 {
                     float hunger=Stat.Hunger,hp=Stat.Hp,towerHp=Managers.Game.tower.GetComponent<Stat>().Hp;
                     int scrap=Count("IronOre");
+                    float clearedAt=Managers.Game.timeController.TimeAmount;
                     await Wait(5);
-                    bool stable=Managers.Game.timeController.day==2 && Managers.Game.timeController.TimeAmount==330 &&
+                    bool stable=Managers.Game.timeController.day==2 && Managers.Game.timeController.TimeAmount>clearedAt &&
                         Mathf.Abs(Stat.Hunger-hunger)<.01f && Stat.Hp==hp && Managers.Game.tower.GetComponent<Stat>().Hp==towerHp &&
                         Count("IronOre")==scrap && waveIds.Count==15;
                     postClearCheck=new{secondsObserved=5,stable,hunger,hp,towerHp,scrap};
-                    if(!stable) throw new Exception("Post-clear clock, hunger or reward changed");
+                    if(!stable) throw new Exception("Day 2 clock failed to advance or defense rewards/stats changed");
                 }
             }
             finally {action.Disable();InputSystem.RemoveDevice(keyboard);InputSystem.settings.backgroundBehavior=previousBackground;InputSystem.settings.editorInputBehaviorInPlayMode=previousEditorInput;Player.SendMessage("SetMoveDirection",Vector2.zero);}

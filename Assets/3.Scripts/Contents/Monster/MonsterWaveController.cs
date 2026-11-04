@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class MonsterWaveController : MonoBehaviour
 {
     bool isfinal;
+    bool waveRunning;
 
 
     public WaveSO[] waveSO;
@@ -26,12 +27,13 @@ public class MonsterWaveController : MonoBehaviour
 
     void StartSpawn()
     {
-        if (FieldSession.Active && FieldSession.State.firstNightCleared) return;
-        if (FieldSession.Active) { StartCoroutine(SpawnFirstFieldNight()); return; }
+        if (waveRunning) return;
+        waveRunning = true;
+        if (FieldSession.Active) { StartCoroutine(SpawnFieldNight()); return; }
         StartCoroutine(SpawnMonster());
     }
 
-    IEnumerator SpawnFirstFieldNight()
+    IEnumerator SpawnFieldNight()
     {
         var content=Resources.Load<ExplorationContent>("Exploration/Content");
         if(content==null) { Debug.LogError("First night content missing"); yield break; }
@@ -58,7 +60,7 @@ public class MonsterWaveController : MonoBehaviour
             if(round<rounds.Length-1) yield return new WaitForSeconds(10);
         }
         isfinal=true;
-        Debug.Log("FIELD_BALANCE: first night 12 dogs / 3 koalas cleared");
+        Debug.Log("FIELD_BALANCE: field night 12 dogs / 3 koalas cleared");
         CompleteIfCleared();
     }
 
@@ -104,6 +106,7 @@ public class MonsterWaveController : MonoBehaviour
     {
         if(monList.Count == 0 && isfinal && !PlayerController.isDie && Managers.Game.tower.GetComponent<Stat>().Hp>0)
         {
+            waveRunning = false;
             Managers.Game.canMoveTower = true;
             if (FieldSession.Active && !FieldSession.State.firstNightCleared) ExplorationRuntime.GrantFirstNightReward();
         }
