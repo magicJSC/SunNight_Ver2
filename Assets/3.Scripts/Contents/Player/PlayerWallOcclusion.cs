@@ -15,6 +15,7 @@ public sealed class PlayerWallOcclusion : MonoBehaviour
 
     static readonly int Area = Shader.PropertyToID("_FadeArea");
     static readonly int Amount = Shader.PropertyToID("_FadeAmount");
+    const float FadePadding = 1.75f;
     readonly List<Surface> surfaces = new List<Surface>();
     SpriteRenderer body;
     Shader shader;
@@ -44,7 +45,8 @@ public sealed class PlayerWallOcclusion : MonoBehaviour
             bool overlaps = surface.renderer.enabled && surface.map.gameObject.activeInHierarchy && surface.renderer.bounds.Intersects(bounds) &&
                 (Occupied(surface.map, bounds.center) ||
                  Occupied(surface.map, bounds.center + Vector3.right * bounds.extents.x * .6f) ||
-                 Occupied(surface.map, bounds.center - Vector3.right * bounds.extents.x * .6f));
+                 Occupied(surface.map, bounds.center - Vector3.right * bounds.extents.x * .6f) ||
+                 Occupied(surface.map, bounds.center - Vector3.up * bounds.extents.y * .8f));
             float target = overlaps ? .77f : 0;
             if (surface.amount == 0 && target == 0) continue;
             surface.amount = Mathf.MoveTowards(surface.amount, target, Time.deltaTime * 4);
@@ -57,7 +59,7 @@ public sealed class PlayerWallOcclusion : MonoBehaviour
                 surface.faded = new Material(surface.original) { shader = shader, hideFlags = HideFlags.DontSave };
             if (surface.renderer.sharedMaterial != surface.faded) surface.renderer.sharedMaterial = surface.faded;
             surface.faded.SetVector(Area, new Vector4(bounds.center.x, bounds.center.y,
-                bounds.extents.x + 1.25f, bounds.extents.y + 1.25f));
+                bounds.extents.x + FadePadding, bounds.extents.y + FadePadding));
             surface.faded.SetFloat(Amount, surface.amount);
         }
     }
