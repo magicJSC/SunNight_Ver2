@@ -2,17 +2,23 @@ using UnityEngine;
 
 public sealed class FieldLaboratory : MonoBehaviour
 {
-    public static readonly Vector2 Entrance = new Vector2(-22, -138);
+    public static Vector2 Entrance { get; private set; }
     public static readonly Vector2 Center = new Vector2(-520, 350);
     public static bool PlayerInside => Managers.Game.player != null &&
         Vector2.Distance(Managers.Game.player.transform.position, Center) < 15;
     GameObject room;
+    bool atDoor;
 
     public void Build(ExplorationRuntime field)
     {
         var stairs = Resources.Load<Sprite>("Story/ResearchStairs");
-        var hatch = field.Prop("LaboratoryEntrance", Entrance, stairs, Color.white);
-        hatch.AddComponent<LabInteraction>().Configure("폐주거지 연구소 · F 지하로 내려가기", Enter);
+        var door = GameObject.Find("Event1/Build/Door").GetComponent<BoxCollider2D>().bounds;
+        Entrance = new Vector2(door.center.x, door.min.y);
+        transform.position = Entrance;
+        var approach = gameObject.AddComponent<BoxCollider2D>();
+        approach.isTrigger = true;
+        approach.size = new Vector2(door.size.x, 1.5f);
+        approach.offset = Vector2.down * .75f;
 
         room = new GameObject("UndergroundLaboratory");
         room.transform.SetParent(transform);
@@ -42,13 +48,27 @@ public sealed class FieldLaboratory : MonoBehaviour
         wall.transform.localPosition = offset;
         wall.AddComponent<BoxCollider2D>().size = size;
     }
-    void Enter()
+    void OnTriggerEnter2D(Collider2D other)
     {
+        if (!other.TryGetComponent<PlayerController>(out _) || PlayerInside) return;
+        atDoor = true;
         if (!FieldSession.State.HasBasementMap)
         {
-            FieldHUD.Notify("잠긴 계단이다. 훈련장의 로봇이 단서를 가지고 있을지도 모른다.");
+            FieldHUD.Notify("잠긴 연구소 정문이다. 훈련장의 로봇이 단서를 가지고 있을지도 모른다.");
             return;
         }
+        FieldHUD.OfferLabEntry(this);
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (!other.TryGetComponent<PlayerController>(out _)) return;
+        atDoor = false;
+        FieldHUD.CloseLabEntry();
+    }
+    public void Enter()
+    {
+        if (!atDoor || !FieldSession.State.HasBasementMap || PlayerController.isDie || Managers.Game.isCantPlay) return;
+        atDoor = false;
         room.SetActive(true);
         MovePlayer(Center + new Vector2(0, -1));
         FieldHUD.Notify("지하 연구실 · 북쪽 책상의 단말을 조사하자.");

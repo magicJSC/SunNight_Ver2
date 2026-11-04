@@ -89,7 +89,7 @@ public sealed partial class FieldHUD
                 bool restored = state.sunNightJournalRead;
                 hud.survey.texture = Resources.Load<Texture2D>(restored ? "Story/DistrictSurvey" : "Story/LabApproach");
                 hud.storyTitle.text = restored ? "복원된 지구도 · 동부 공장" : "접힌 지도 · 연구실 수색 구역";
-                hud.storyText.text = restored ? "야영지는 연구실 북동쪽, 폭스턴 공장은 야영지에서 동북쪽이다." : "남문을 나와 폐주거지로 가자. 연구소 건물 남쪽 계단에 붉은 표식이 있다.";
+                hud.storyText.text = restored ? "야영지는 연구실 북동쪽, 폭스턴 공장은 야영지에서 동북쪽이다." : "남문을 나와 폐주거지로 가자. 연구소 남쪽 정문에 다가가 입장을 선택하자.";
                 break;
             case StoryPage.Journal:
                 hud.storyTitle.text = "PROJECT SUNNIGHT · 연구 일지";

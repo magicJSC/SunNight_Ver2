@@ -5,7 +5,9 @@ using UnityEngine.InputSystem;
 public sealed partial class FieldHUD : MonoBehaviour
 {
     static FieldHUD instance;
-    public static bool IsOpen => instance != null && instance.panel.activeSelf;
+    public static bool IsOpen => instance != null && (instance.panel.activeSelf || instance.entryPanel.activeSelf);
+    GameObject entryPanel;
+    FieldLaboratory offeredLab;
     UnityEngine.UI.Text prompt, notice, status;
     UnityEngine.UI.Button[] researchButtons;
     UnityEngine.UI.Text[] researchLabels;
@@ -79,12 +81,39 @@ public sealed partial class FieldHUD : MonoBehaviour
         Button("Close",rect,"닫기 / 연구 취소 (Esc)",()=>Close(),40);
         panel.SetActive(false);
         BuildStoryHud();
+        var entry = Rect("LaboratoryEntry", transform);
+        entry.anchorMin = entry.anchorMax = new Vector2(.5f,.5f);
+        entry.sizeDelta = new Vector2(360,172);
+        entryPanel = entry.gameObject;
+        entryPanel.AddComponent<UnityEngine.UI.Image>().color = new Color(.055f,.075f,.08f,.98f);
+        var stack = entryPanel.AddComponent<UnityEngine.UI.VerticalLayoutGroup>();
+        stack.padding = new RectOffset(16,16,12,12); stack.spacing = 6;
+        Layout(Label("Title",entry,"폐주거지 연구소에 들어갈까요?",22).transform,48);
+        Button("Enter",entry,"들어가기",()=> { var lab = offeredLab; CloseLabEntry(); if (lab) lab.Enter(); },40);
+        Button("Return",entry,"돌아가기",CloseLabEntry,40);
+        entryPanel.SetActive(false);
+    }
+    public static void OfferLabEntry(FieldLaboratory lab)
+    {
+        if (!instance || IsOpen || PlayerController.isDie || Managers.Game.isCantPlay) return;
+        CloseStory();
+        instance.offeredLab = lab;
+        instance.entryPanel.SetActive(true);
+        Managers.UI.PopUIList.Add(instance.entryPanel);
+    }
+    public static void CloseLabEntry()
+    {
+        if (!instance || !instance.entryPanel) return;
+        instance.entryPanel.SetActive(false);
+        instance.offeredLab = null;
+        if (Managers.HasInstance) Managers.UI.PopUIList.Remove(instance.entryPanel);
     }
     void Update()
     {
         UpdateStoryHud();
         if(Time.unscaledTime>noticeUntil) notice.text="";
-        if(!IsOpen) { Managers.UI.PopUIList.Remove(panel); return; }
+        if(entryPanel.activeSelf && (PlayerController.isDie || Keyboard.current?.escapeKey.wasPressedThisFrame == true)) CloseLabEntry();
+        if(!panel.activeSelf) { Managers.UI.PopUIList.Remove(panel); return; }
         if(workbench==null || Managers.Game.player==null || PlayerController.isDie ||
             Vector2.Distance(workbench.transform.position,Managers.Game.player.transform.position)>2.2f ||
             Keyboard.current!=null && Keyboard.current.escapeKey.wasPressedThisFrame) { Close(); return; }
@@ -140,5 +169,5 @@ public sealed partial class FieldHUD : MonoBehaviour
     {
         panel.SetActive(false); Managers.UI.PopUIList.Remove(panel);
     }
-    void OnDestroy() { if(panel!=null && Managers.HasInstance) Managers.UI.PopUIList.Remove(panel); if(instance==this) instance=null; }
+    void OnDestroy() { if(panel!=null && Managers.HasInstance) Managers.UI.PopUIList.Remove(panel); if(instance==this) { CloseLabEntry(); instance=null; } }
 }

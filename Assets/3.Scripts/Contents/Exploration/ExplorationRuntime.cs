@@ -22,7 +22,9 @@ public sealed class ExplorationRuntime : MonoBehaviour
         MigrateClaims(FieldSession.State,content);
         OuterSalvageLedger.Migrate(FieldSession.State,content);
         FieldHUD.Create(content.font);
-        gameObject.AddComponent<FieldLaboratory>().Build(this);
+        var doorway = new GameObject("ResidentialLaboratoryDoor");
+        doorway.transform.SetParent(transform);
+        doorway.AddComponent<FieldLaboratory>().Build(this);
         var state = FieldSession.State;
         // Pre-drop checkpoints after the first night already gave the player a map.
         if (state.firstNightCleared && !state.basementMapDropped) state.basementMapReceived = true;
