@@ -39,7 +39,7 @@ public class DefenseEvent : MonoBehaviour
         var content=Resources.Load<ExplorationContent>("Exploration/Content");
         for(int i=0;i<2;i++)
         {
-            SpawnMonster(content.dog);
+            SpawnMonster(content.dog, dropsMap: i == 1);
             while(monList.Count>0)
             {
                 if(PlayerController.isDie || Managers.Game.tower.GetComponent<Stat>().Hp<=0) yield break;
@@ -74,7 +74,7 @@ public class DefenseEvent : MonoBehaviour
     }
 
 
-    void SpawnMonster(GameObject monsterPrefab)
+    void SpawnMonster(GameObject monsterPrefab, bool dropsMap = false)
     {
         int index = Random.Range(0, spawnPos.Count);
 
@@ -82,6 +82,7 @@ public class DefenseEvent : MonoBehaviour
         MonsterController monster = Instantiate(monsterPrefab, position, Quaternion.identity).GetComponent<MonsterController>();
         monster.targetType = MonsterController.TargetType.Tower;
         monList.Add(monster.gameObject);
+        if (dropsMap) monster.dieEvent += ExplorationRuntime.DropBasementMap;
         monster.dieEvent += RemoveMonster;
     }
 

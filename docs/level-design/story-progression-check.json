@@ -1,0 +1,20 @@
+{
+  "trained": true,
+  "mapDropped": true,
+  "mapPickedUpWithF": true,
+  "surfaceTerminal": false,
+  "mapArtwork": true,
+  "enteredLab": true,
+  "terminalReadWithF": true,
+  "returnedToField": true,
+  "quest": "공장 파괴 0/3 · 동쪽 폭스턴 공장 찾기   [M] 기록",
+  "signal": "미등록 거점의 생존 신호를 확인했다. SUN 단계 승인을 보류한다.\n\n발신지: 동쪽 공장\n\n날이 밝았다. 공장은 우리가 살아 있다는 걸 안다.",
+  "day": 2,
+  "time": 331.7067,
+  "nightEvents": 1,
+  "spawned": 15,
+  "killed": 15,
+  "savedStory": true,
+  "setup": "Restored earned facilities, then fought training dogs, picked up the drop with F, walked to stairs, read the journal indoors and returned. Only daytime waiting was accelerated.",
+  "restore": "PASS: collected map and journal restored without duplicate drop or exposed terminal. F tap cancels gathering; held F collects. Laboratory re-entry and map reopening passed."
+}

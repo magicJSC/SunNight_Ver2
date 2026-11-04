@@ -40,7 +40,7 @@ public static class BalanceRegression
         float clock=Managers.Game.timeController.TimeAmount;
         float hunger=Managers.Game.player.GetComponent<PlayerStat>().Hunger;
         await Task.Delay(1100);
-        Check(clock==330 && Managers.Game.timeController.TimeAmount==330 && Managers.Game.timeController.day==2,"Cleared first night freezes day 2 at 05:30");
+        Check(clock==330 && Managers.Game.timeController.TimeAmount>clock && Managers.Game.timeController.day==2,"Day 2 starts at 05:30 and its clock advances");
         Check(Managers.Game.player.GetComponent<PlayerStat>().Hunger==hunger,"Post-night exploration does not consume hunger");
         MapManager.building.ClearAllTiles();
         MapManager.building.SetTile(new Vector3Int(1,0,0),Resources.Load<ItemSO>("Item/Cannon").buildTile);

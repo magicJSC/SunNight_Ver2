@@ -8,6 +8,11 @@ public sealed class ExplorationState
     // Missing in v0.2 saves: keep zero so migration can identify them.
     public int layoutVersion;
     public bool firstNightCleared;
+    public bool basementMapReceived;
+    public bool sunNightJournalRead;
+    public bool basementMapDropped;
+    public float mapDropX, mapDropY;
+    public bool HasBasementMap => basementMapReceived || sunNightJournalRead;
     public List<string> research = new List<string>();
     public List<string> killedGuards = new List<string>();
     public List<ExplorationClaim> claims = new List<ExplorationClaim>();

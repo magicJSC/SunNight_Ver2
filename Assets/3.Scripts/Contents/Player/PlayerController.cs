@@ -76,6 +76,7 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        gameObject.AddComponent<PlayerWallOcclusion>();
         stat = GetComponent<PlayerStat>();
         stat.dieEvent += Die;
         statUIAsset.LoadAssetAsync().Completed += (obj) =>

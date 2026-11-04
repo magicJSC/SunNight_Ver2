@@ -91,7 +91,7 @@ public class TimeController : MonoBehaviour
             // decide completion. Player hunger still runs on its own active-game coroutine.
             bool firstDefenseInProgress = FieldSession.Active && day == 1 &&
                 timeType == TimeType.Night && TimeAmount >= 1290;
-            if (FieldSession.Active && (FieldSession.State.firstNightCleared || firstDefenseInProgress))
+            if (firstDefenseInProgress)
             { yield return null; continue; }
             if(timeSpeed != 0)
                 TimeAmount += Time.deltaTime * timeSpeed;

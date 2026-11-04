@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public sealed class FieldHUD : MonoBehaviour
+public sealed partial class FieldHUD : MonoBehaviour
 {
     static FieldHUD instance;
     public static bool IsOpen => instance != null && instance.panel.activeSelf;
@@ -78,9 +78,11 @@ public sealed class FieldHUD : MonoBehaviour
         Button("Save",rect,"안전한 야영지에서 탐색 진행 저장",()=>Save(),40);
         Button("Close",rect,"닫기 / 연구 취소 (Esc)",()=>Close(),40);
         panel.SetActive(false);
+        BuildStoryHud();
     }
     void Update()
     {
+        UpdateStoryHud();
         if(Time.unscaledTime>noticeUntil) notice.text="";
         if(!IsOpen) { Managers.UI.PopUIList.Remove(panel); return; }
         if(workbench==null || Managers.Game.player==null || PlayerController.isDie ||
