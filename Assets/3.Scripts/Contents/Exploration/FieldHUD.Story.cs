@@ -8,7 +8,8 @@ public sealed partial class FieldHUD
 
     GameObject storyCard;
     Text storyObjective, storyTitle, storyText;
-    Button journalTab, signalTab;
+    RawImage survey;
+    Button mapTab, journalTab, signalTab;
 
     void BuildStoryHud()
     {
@@ -31,6 +32,11 @@ public sealed partial class FieldHUD
         layout.childForceExpandHeight = false;
         storyTitle = Label("Title", rect, "", 22);
         Layout(storyTitle.transform, 32);
+        survey = Rect("DistrictSurvey", rect).gameObject.AddComponent<RawImage>();
+        survey.texture = Resources.Load<Texture2D>("Story/DistrictSurvey");
+        survey.raycastTarget = false;
+        Layout(survey.transform, 400);
+        survey.gameObject.SetActive(false);
         storyText = Label("Record", rect, "", 18);
         storyText.alignment = TextAnchor.MiddleLeft;
         storyText.resizeTextForBestFit = true;
@@ -40,7 +46,7 @@ public sealed partial class FieldHUD
         var tabs = Rect("Tabs", rect);
         Layout(tabs, 36);
         tabs.gameObject.AddComponent<HorizontalLayoutGroup>().spacing = 4;
-        Button("Map", tabs, "지도", () => ShowStory(StoryPage.Map), 36);
+        mapTab = Button("Map", tabs, "지도", () => ShowStory(StoryPage.Map), 36);
         journalTab = Button("Journal", tabs, "일지", () => ShowStory(StoryPage.Journal), 36);
         signalTab = Button("Signal", tabs, "신호", () => ShowStory(StoryPage.Signal), 36);
         Button("Dismiss", tabs, "닫기", () => storyCard.SetActive(false), 36);
@@ -51,26 +57,38 @@ public sealed partial class FieldHUD
     void UpdateStoryHud()
     {
         var state = FieldSession.State;
-        storyObjective.text = !state.HasBasementMap ? "" : state.sunNightJournalRead
+        storyObjective.text = !state.HasBasementMap ? (state.basementMapDropped ? "로봇이 떨어뜨린 지도 줍기 · F" : "") : state.sunNightJournalRead
             ? "공장 파괴 0/3 · 동쪽 폭스턴 공장 찾기   [M] 기록"
-            : "지하실 지도 · 훈련장 남서쪽 단말 조사   [M] 지도";
-        if (!state.HasBasementMap || Keyboard.current == null || !Keyboard.current.mKey.wasPressedThisFrame) return;
+            : FieldLaboratory.PlayerInside ? "지하 연구실 · 북쪽 단말 조사   [M] 지도" : "훈련장 남서쪽 지하 계단 찾기   [M] 지도";
+        if ((!state.HasBasementMap && !state.firstNightCleared) || Keyboard.current == null || !Keyboard.current.mKey.wasPressedThisFrame) return;
         if (storyCard.activeSelf) storyCard.SetActive(false);
-        else ShowStory(state.sunNightJournalRead ? StoryPage.Journal : StoryPage.Map);
+        else ShowStory(state.HasBasementMap ? StoryPage.Map : StoryPage.Signal);
     }
+    public static void CloseStory() { if (instance != null) instance.storyCard.SetActive(false); }
 
     public static void ShowStory(StoryPage page)
     {
         if (instance == null || instance.storyCard == null) return;
         var hud = instance;
         var state = FieldSession.State;
+        bool map = page == StoryPage.Map;
+        if (map && !state.HasBasementMap || page == StoryPage.Journal && !state.sunNightJournalRead ||
+            page == StoryPage.Signal && !state.firstNightCleared) return;
+        var rect = (RectTransform)hud.storyCard.transform;
+        rect.anchorMin = rect.anchorMax = rect.pivot = map ? new Vector2(.5f,1) : Vector2.up;
+        rect.anchoredPosition = map ? new Vector2(0,-52) : new Vector2(18,-52);
+        rect.sizeDelta = map ? new Vector2(732,558) : new Vector2(400,315);
+        hud.survey.gameObject.SetActive(map);
+        var body = hud.storyText.GetComponent<LayoutElement>();
+        body.minHeight = body.preferredHeight = map ? 38 : 205;
+        hud.mapTab.interactable = state.HasBasementMap;
         hud.journalTab.interactable = state.sunNightJournalRead;
         hud.signalTab.interactable = state.firstNightCleared;
         switch (page)
         {
             case StoryPage.Map:
-                hud.storyTitle.text = "획득한 지도 · 지하 연구실";
-                hud.storyText.text = "훈련장 거점\n    │ 남쪽\n    └ 서쪽: 지하실 단말\n\n남쪽 출구를 넘기 전, 왼편의 청록색 단말을 F로 조사하자.";
+                hud.storyTitle.text = "접힌 지도 · 폐도시 지구도";
+                hud.storyText.text = "훈련장 남서쪽, 남쪽 출구 왼편의 계단으로 내려가자.";
                 break;
             case StoryPage.Journal:
                 hud.storyTitle.text = "PROJECT SUNNIGHT · 연구 일지";

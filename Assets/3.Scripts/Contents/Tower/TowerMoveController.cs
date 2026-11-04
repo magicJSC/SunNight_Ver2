@@ -35,7 +35,7 @@ public class TowerMoveController : MonoBehaviour
 
     void ToggleTowerMove()
     {
-        if (FieldHUD.IsOpen) return;
+        if (FieldHUD.IsOpen || FieldLaboratory.PlayerInside) return;
         if (!Managers.Game.canMoveTower || FieldFoxtonBattle.Active != null) return;
         if (lastMoveToggleFrame == Time.frameCount)
             return;

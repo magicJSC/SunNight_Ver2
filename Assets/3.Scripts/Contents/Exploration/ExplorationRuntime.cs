@@ -7,7 +7,6 @@ public sealed class ExplorationRuntime : MonoBehaviour
 {
     public static ExplorationRuntime Instance { get; private set; }
     public ExplorationContent content;
-    GameObject basementTerminal;
     public static void Create()
     {
         if (Instance != null) return;
@@ -23,9 +22,12 @@ public sealed class ExplorationRuntime : MonoBehaviour
         MigrateClaims(FieldSession.State,content);
         OuterSalvageLedger.Migrate(FieldSession.State,content);
         FieldHUD.Create(content.font);
-        basementTerminal=Prop("BasementTerminal",new Vector2(-38,-32),content.workbench,new Color(.65f,1f,.95f));
-        basementTerminal.AddComponent<BasementTerminal>();
-        basementTerminal.SetActive(FieldSession.State.HasBasementMap);
+        gameObject.AddComponent<FieldLaboratory>().Build(this);
+        var state = FieldSession.State;
+        // Pre-drop checkpoints after the first night already gave the player a map.
+        if (state.firstNightCleared && !state.basementMapDropped) state.basementMapReceived = true;
+        if (state.basementMapDropped && !state.HasBasementMap)
+            CreateMapPickup(new Vector2(state.mapDropX, state.mapDropY));
         foreach(var reward in content.rewards)
         {
             var go=Prop("Reward_"+reward.id,reward.position,
@@ -83,7 +85,7 @@ public sealed class ExplorationRuntime : MonoBehaviour
         state.layoutVersion=3;
         Debug.Log("OPEN_FIELD_CLAIMS: migrated v0.2 supply claims without granting inventory");
     }
-    GameObject Prop(string label,Vector2 position,Sprite sprite,Color color)
+    internal GameObject Prop(string label,Vector2 position,Sprite sprite,Color color)
     {
         var go=new GameObject(label); go.transform.SetParent(transform); go.transform.position=position;
         var visual=new GameObject("Visual"); visual.transform.SetParent(go.transform,false);
@@ -93,11 +95,31 @@ public sealed class ExplorationRuntime : MonoBehaviour
         var trigger=go.AddComponent<CircleCollider2D>(); trigger.radius=2; trigger.isTrigger=true;
         return go;
     }
-    public static void GrantBasementMap()
+    public static void DropBasementMap(GameObject dog)
+    {
+        var state = FieldSession.State;
+        if (Instance == null || state.basementMapDropped || state.HasBasementMap) return;
+        var at = dog.transform.position;
+        state.basementMapDropped = true;
+        state.mapDropX = at.x;
+        state.mapDropY = at.y;
+        Instance.CreateMapPickup(at);
+        FieldHUD.Notify("로봇 잔해에서 접힌 지도가 떨어졌다.");
+    }
+    void CreateMapPickup(Vector2 at)
+    {
+        var drop = Prop("DroppedBasementMap", at, Resources.Load<Sprite>("Story/DroppedSurvey"), Color.white);
+        drop.AddComponent<LabInteraction>().Configure("떨어진 지도 · F 줍기", () =>
+        {
+            GrantBasementMap();
+            drop.SetActive(false);
+            Destroy(drop);
+        });
+    }
+    static void GrantBasementMap()
     {
         if (!FieldSession.Active || FieldSession.State.HasBasementMap) return;
         FieldSession.State.basementMapReceived = true;
-        if (Instance != null && Instance.basementTerminal != null) Instance.basementTerminal.SetActive(true);
         FieldHUD.ShowStory(FieldHUD.StoryPage.Map);
     }
     public static void GrantFirstNightReward()

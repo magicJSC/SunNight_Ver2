@@ -10,7 +10,7 @@ public sealed class BasementTerminal : MonoBehaviour, IInteractObject
 
     void Read()
     {
-        if (!FieldSession.State.HasBasementMap || FieldHUD.IsOpen) return;
+        if (!FieldLaboratory.PlayerInside || !FieldSession.State.HasBasementMap || FieldHUD.IsOpen) return;
         FieldSession.State.sunNightJournalRead = true;
         FieldHUD.ShowStory(FieldHUD.StoryPage.Journal);
     }
