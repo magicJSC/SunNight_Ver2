@@ -2,7 +2,7 @@ using UnityEngine;
 
 public sealed class FieldLaboratory : MonoBehaviour
 {
-    public static readonly Vector2 Entrance = new Vector2(-38, -32);
+    public static readonly Vector2 Entrance = new Vector2(-9, -58);
     public static readonly Vector2 Center = new Vector2(-520, 350);
     public static bool PlayerInside => Managers.Game.player != null &&
         Vector2.Distance(Managers.Game.player.transform.position, Center) < 15;
@@ -57,6 +57,8 @@ public sealed class FieldLaboratory : MonoBehaviour
     {
         MovePlayer(Entrance + Vector2.up * 3.5f);
         room.SetActive(false);
+        if (FieldSession.State.sunNightJournalRead)
+            FieldHUD.Notify("지상으로 돌아왔다. M으로 야영지와 동쪽 공장의 위치를 확인하자.");
     }
     static void MovePlayer(Vector2 destination)
     {

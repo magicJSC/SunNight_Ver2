@@ -11,6 +11,8 @@ public sealed class BasementTerminal : MonoBehaviour, IInteractObject
     void Read()
     {
         if (!FieldLaboratory.PlayerInside || !FieldSession.State.HasBasementMap || FieldHUD.IsOpen) return;
+        if (!FieldSession.State.sunNightJournalRead)
+            FieldHUD.Notify("단말에서 지구도를 복원했다. 지도에 야영지와 폭스턴 공장을 표시했다.");
         FieldSession.State.sunNightJournalRead = true;
         FieldHUD.ShowStory(FieldHUD.StoryPage.Journal);
     }

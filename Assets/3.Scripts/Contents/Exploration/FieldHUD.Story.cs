@@ -33,7 +33,6 @@ public sealed partial class FieldHUD
         storyTitle = Label("Title", rect, "", 22);
         Layout(storyTitle.transform, 32);
         survey = Rect("DistrictSurvey", rect).gameObject.AddComponent<RawImage>();
-        survey.texture = Resources.Load<Texture2D>("Story/DistrictSurvey");
         survey.raycastTarget = false;
         Layout(survey.transform, 400);
         survey.gameObject.SetActive(false);
@@ -58,8 +57,8 @@ public sealed partial class FieldHUD
     {
         var state = FieldSession.State;
         storyObjective.text = !state.HasBasementMap ? (state.basementMapDropped ? "로봇이 떨어뜨린 지도 줍기 · F" : "") : state.sunNightJournalRead
-            ? "공장 파괴 0/3 · 동쪽 폭스턴 공장 찾기   [M] 기록"
-            : FieldLaboratory.PlayerInside ? "지하 연구실 · 북쪽 단말 조사   [M] 지도" : "훈련장 남서쪽 지하 계단 찾기   [M] 지도";
+            ? (FieldLaboratory.PlayerInside ? "공장 파괴 0/3 · 남쪽 계단으로 지상 복귀   [M] 지도" : "공장 파괴 0/3 · 동쪽 폭스턴 공장 찾기   [M] 지도")
+            : FieldLaboratory.PlayerInside ? "지하 연구실 · 북쪽 단말 조사   [M] 지도" : "남쪽 출구 너머 열린 공터에서 연구실 찾기   [M] 지도";
         if ((!state.HasBasementMap && !state.firstNightCleared) || Keyboard.current == null || !Keyboard.current.mKey.wasPressedThisFrame) return;
         if (storyCard.activeSelf) storyCard.SetActive(false);
         else ShowStory(state.HasBasementMap ? StoryPage.Map : StoryPage.Signal);
@@ -87,12 +86,14 @@ public sealed partial class FieldHUD
         switch (page)
         {
             case StoryPage.Map:
-                hud.storyTitle.text = "접힌 지도 · 폐도시 지구도";
-                hud.storyText.text = "훈련장 남서쪽, 남쪽 출구 왼편의 계단으로 내려가자.";
+                bool restored = state.sunNightJournalRead;
+                hud.survey.texture = Resources.Load<Texture2D>(restored ? "Story/DistrictSurvey" : "Story/LabApproach");
+                hud.storyTitle.text = restored ? "복원된 지구도 · 동부 공장" : "접힌 지도 · 연구실 수색 구역";
+                hud.storyText.text = restored ? "야영지는 연구실 동쪽, 폭스턴 공장은 야영지에서 동북쪽이다." : "훈련장을 남쪽으로 나가자. 열린 공터의 붉은 표식이 연구실 계단이다.";
                 break;
             case StoryPage.Journal:
                 hud.storyTitle.text = "PROJECT SUNNIGHT · 연구 일지";
-                hud.storyText.text = "로봇들이 나를 쫓고 있다. 내가 남긴 방어 거점을 찾아라.\n\nNIGHT 명령 — 지상 생존 거점 제거\nSUN 단계 기상 예정 인원 — 2명\n전환 조건 — 지상 생존 거점 0개\n\n지도에 표시된 첫 공장은 동쪽에 있다.";
+                hud.storyText.text = "로봇들이 나를 쫓고 있다. 내가 남긴 방어 거점을 찾아라.\n\nNIGHT 명령 — 지상 생존 거점 제거\nSUN 단계 기상 예정 인원 — 2명\n전환 조건 — 지상 생존 거점 0개\n\n지구도 복원 완료. 지도 탭에서 야영지와 폭스턴 공장의 위치를 확인하자.";
                 break;
             case StoryPage.Signal:
                 hud.storyTitle.text = "거점 수신기 · 첫밤 이후 05:30";
