@@ -23,10 +23,7 @@ public class UI_Item : UI_Base
     [SerializeField]
     AssetReferenceT<Sprite> consumeIconAsset;
 
-    Sprite buildIcon;
-    Sprite materialIcon;
-    Sprite weaponIcon;
-    Sprite consumeIcon;
+    AssetReferenceT<Sprite> displayedTypeIcon;
 
     [SerializeField]
     AssetReferenceT<AudioClip> changeSoundAsset;
@@ -93,15 +90,7 @@ public class UI_Item : UI_Base
             changeSound = clip.Result;
         };
 
-        if (materialIcon == null)
-        {
-            materialIconAsset.LoadAssetAsync().Completed += (sprite) =>
-            {
-                materialIcon = sprite.Result;
-            };
-        }
     }
-
 
     public void SetInfo()
     {
@@ -112,67 +101,42 @@ public class UI_Item : UI_Base
             SetExistItem();
             count.text = $"{slotInfo.count}";
             icon.sprite = slotInfo.itemInfo.itemIcon;
-            itemTypeIcon.gameObject.SetActive(false);
-
-            if (slotInfo.itemInfo.itemType == Define.ItemType.Pick)
+            ShowTypeIcon(slotInfo.itemInfo.itemType switch
             {
-                itemTypeIcon.gameObject.SetActive(true);
-                if (materialIcon == null)
-                {
-                    materialIconAsset.LoadAssetAsync().Completed += (sprite) =>
-                    {
-                        materialIcon = sprite.Result;
-                        itemTypeIcon.sprite = materialIcon;
-                    };
-                }
-                else
-                    itemTypeIcon.sprite = materialIcon;
-            }
-            else if (slotInfo.itemInfo.itemType == Define.ItemType.Tool)
-            {
-                itemTypeIcon.gameObject.SetActive(true);
-                if (weaponIcon == null)
-                {
-                    weaponIconAsset.LoadAssetAsync().Completed += (sprite) =>
-                    {
-                        weaponIcon = sprite.Result;
-                        itemTypeIcon.sprite = weaponIcon;
-                    };
-                }
-                else
-                    itemTypeIcon.sprite = weaponIcon;
-            }
-            else if (slotInfo.itemInfo.itemType == Define.ItemType.Building)
-            {
-                itemTypeIcon.gameObject.SetActive(true);
-                if (buildIcon == null)
-                {
-                    buildIconAsset.LoadAssetAsync().Completed += (sprite) =>
-                    {
-                        buildIcon = sprite.Result;
-                        itemTypeIcon.sprite = buildIcon;
-                    };
-                }
-                else
-                    itemTypeIcon.sprite = buildIcon;
-            }
-            else if (slotInfo.itemInfo.itemType == Define.ItemType.Consumable)
-            {
-                itemTypeIcon.gameObject.SetActive(true);
-                if (consumeIcon == null)
-                {
-                    consumeIconAsset.LoadAssetAsync().Completed += (sprite) =>
-                    {
-                        consumeIcon = sprite.Result;
-                        itemTypeIcon.sprite = consumeIcon;
-                    };
-                }
-                else
-                    itemTypeIcon.sprite = consumeIcon;
-            }
+                Define.ItemType.Pick => materialIconAsset,
+                Define.ItemType.Tool => weaponIconAsset,
+                Define.ItemType.Building => buildIconAsset,
+                Define.ItemType.Consumable => consumeIconAsset,
+                _ => null
+            });
 
             rect.anchoredPosition = Vector2.zero;
         }
+    }
+
+    void ShowTypeIcon(AssetReferenceT<Sprite> asset)
+    {
+        displayedTypeIcon = asset;
+        itemTypeIcon.sprite = asset?.Asset as Sprite;
+        itemTypeIcon.gameObject.SetActive(itemTypeIcon.sprite != null);
+
+        // SetInfo can run several times during a save restore while the first load is pending.
+        if (asset == null || asset.IsValid()) return;
+        asset.LoadAssetAsync().Completed += handle =>
+        {
+            if (!this || !itemTypeIcon || displayedTypeIcon != asset) return;
+            itemTypeIcon.sprite = handle.Result;
+            itemTypeIcon.gameObject.SetActive(handle.Result != null);
+        };
+    }
+
+    void OnDestroy()
+    {
+        displayedTypeIcon = null;
+        if (materialIconAsset?.IsValid() == true) materialIconAsset.ReleaseAsset();
+        if (weaponIconAsset?.IsValid() == true) weaponIconAsset.ReleaseAsset();
+        if (buildIconAsset?.IsValid() == true) buildIconAsset.ReleaseAsset();
+        if (consumeIconAsset?.IsValid() == true) consumeIconAsset.ReleaseAsset();
     }
 
     public void MakeEmptySlot()
@@ -187,13 +151,12 @@ public class UI_Item : UI_Base
     {
         icon.gameObject.SetActive(false);
         count.gameObject.SetActive(false);
-        itemTypeIcon.gameObject.SetActive(false);
+        ShowTypeIcon(null);
     }
 
     public void SetExistItem()
     {
         icon.gameObject.SetActive(true);
-        itemTypeIcon.gameObject.SetActive(true);
         if (slotInfo.count != 1)
             count.gameObject.SetActive(true);
         else

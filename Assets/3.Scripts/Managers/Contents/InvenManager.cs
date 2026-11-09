@@ -5,6 +5,8 @@ using static Define;
 
 public class InvenManager : MonoBehaviour
 {
+    public const int BaseSlotIndex = 4;
+
     public int Coin
     {
         get { return _coin; }
@@ -87,7 +89,8 @@ public class InvenManager : MonoBehaviour
         if (Managers.Game.weapon != null)
             Destroy(Managers.Game.weapon);
         MapManager.canBuild.gameObject.SetActive(false);
-        if (currentItemUI.slotInfo.itemInfo == null)
+        if (currentItemUI.slotInfo.itemInfo == null ||
+            Managers.Game.isMovingTower && currentItemUI.slotInfo.itemInfo.itemType == ItemType.Building)
         {
             Managers.Game.mouse.CursorType = CursorType.Normal;
             return;
@@ -122,7 +125,7 @@ public class InvenManager : MonoBehaviour
     {
         int addCount = 0;
         UI_Item emptySlot = null;
-        for (int i = 0; i < hotBarUI.slotList.Length; i++)
+        for (int i = 0; i < BaseSlotIndex; i++)
         {
             UI_Item itemUI = hotBarUI.slotList[i].itemUI;
             if (itemUI.slotInfo.itemInfo == null)
@@ -198,7 +201,7 @@ public class InvenManager : MonoBehaviour
 
     int AddWeapon(ItemSO item)
     {
-        for (int i = 0; i < hotBarUI.slotList.Length; i++)
+        for (int i = 0; i < BaseSlotIndex; i++)
         {
             UI_Item itemUI = hotBarUI.slotList[i].itemUI;
             if (itemUI.slotInfo.itemInfo == null)
@@ -276,7 +279,7 @@ public class InvenManager : MonoBehaviour
     public int GetItemCount(ItemSO itemSO)
     {
         int count = 0;
-        for (int i = 0; i < hotBarUI.slotList.Length; i++)
+        for (int i = 0; i < BaseSlotIndex; i++)
         {
             UI_Item itemUI = hotBarUI.slotList[i].itemUI;
             if (itemUI.slotInfo.itemInfo == itemSO)
@@ -299,7 +302,7 @@ public class InvenManager : MonoBehaviour
     public void RemoveItem(ItemSO itemSO, int count)
     {
         int remainCount = count;
-        for (int i = 0; i < hotBarUI.slotList.Length; i++)
+        for (int i = 0; i < BaseSlotIndex; i++)
         {
             UI_Item itemUI = hotBarUI.slotList[i].itemUI;
             if (itemUI.slotInfo.itemInfo == itemSO)

@@ -56,32 +56,18 @@ public class DataManager : MonoBehaviour
 
         for (int i = 0; i < items.Length; i++)
         {
-            if (i <= 23)
-            {
-                if (invenSlot[i].itemUI.slotInfo.itemInfo != null)
-                {
-                    items[i] = invenSlot[i].itemUI.slotInfo.itemInfo.idName;
-                    amount[i] = invenSlot[i].itemUI.slotInfo.count;
-                }
-                else
-                {
-                    items[i] = null;
-                    amount[i] = 0;
-                }
-            }
+            InvenManager.SlotInfo saved;
+            if (i < invenSlot.Length)
+                saved = invenSlot[i].itemUI.slotInfo;
             else
             {
-                if (hotBarSlot[i - 24].itemUI.slotInfo.itemInfo != null)
-                {
-                    items[i] = hotBarSlot[i - 24].itemUI.slotInfo.itemInfo.idName;
-                    amount[i] = hotBarSlot[i - 24].itemUI.slotInfo.count;
-                }
-                else
-                {
-                    items[i] = null;
-                    amount[i] = 0;
-                }
+                int hotBarIndex = i - invenSlot.Length;
+                saved = hotBarIndex == InvenManager.BaseSlotIndex
+                    ? Managers.Inven.hotBarSlotInfo[hotBarIndex]
+                    : hotBarSlot[hotBarIndex].itemUI.slotInfo;
             }
+            items[i] = saved?.itemInfo?.idName;
+            amount[i] = saved?.count ?? 0;
         }
         Vector2 player = Managers.Game.player.transform.position;
         Vector2 tower = new Vector2();

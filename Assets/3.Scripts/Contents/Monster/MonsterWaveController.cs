@@ -8,6 +8,7 @@ public class MonsterWaveController : MonoBehaviour
 {
     bool isfinal;
     bool waveRunning;
+    bool unlockAtDawn;
 
 
     public WaveSO[] waveSO;
@@ -23,6 +24,21 @@ public class MonsterWaveController : MonoBehaviour
     {
         timeController = Managers.Game.timeController;
         timeController.nightEvent += StartSpawn;
+        timeController.morningEvent += UnlockAfterNight;
+    }
+
+    void OnDestroy()
+    {
+        if (!timeController) return;
+        timeController.nightEvent -= StartSpawn;
+        timeController.morningEvent -= UnlockAfterNight;
+    }
+
+    void UnlockAfterNight()
+    {
+        if (!unlockAtDawn) return;
+        unlockAtDawn = false;
+        Managers.Game.canMoveTower = true;
     }
 
     void StartSpawn()
@@ -107,8 +123,9 @@ public class MonsterWaveController : MonoBehaviour
         if(monList.Count == 0 && isfinal && !PlayerController.isDie && Managers.Game.tower.GetComponent<Stat>().Hp>0)
         {
             waveRunning = false;
-            Managers.Game.canMoveTower = true;
             if (FieldSession.Active && !FieldSession.State.firstNightCleared) ExplorationRuntime.GrantFirstNightReward();
+            unlockAtDawn = timeController.timeType == TimeController.TimeType.Night;
+            Managers.Game.canMoveTower = !unlockAtDawn;
         }
     }
 

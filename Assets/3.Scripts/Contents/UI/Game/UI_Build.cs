@@ -170,15 +170,7 @@ public class UI_Build : MonoBehaviour
         MapManager.building.SetTile(new Vector3Int((int)(transform.parent.position.x - tower.x), (int)(transform.parent.position.y - tower.y), 0), nextLevelItem.buildTile);
     }
 
-    void Collect(PointerEventData p)
-    {
-        if (FieldFoxtonBattle.Active != null) return;
-        Item_Buliding building = GetComponentInParent<Item_Buliding>();
-        Managers.Inven.GetItem(building.itemSo, 1);
-        Managers.Inven.CheckHotBarChoice();
-        building.DeleteBuilding();
-        Managers.Sound.Play(Define.Sound.Effect, clickSound);
-    }
+    void Collect(PointerEventData p) => TryCollectAction();
 
     void Close(PointerEventData p)
     {
@@ -230,8 +222,9 @@ public class UI_Build : MonoBehaviour
 
     public void TryCollectAction()
     {
-        Item_Buliding building = GetComponentInParent<Item_Buliding>();
-        Managers.Inven.GetItem(building.itemSo, 1);
+        if (FieldFoxtonBattle.Active != null || Managers.Game.isMovingTower || TowerMoveController.IsHandling) return;
+        var building = GetComponentInParent<Item_Buliding>();
+        if (Managers.Inven.GetItem(building.itemSo, 1) != 0) return;
         Managers.Inven.CheckHotBarChoice();
         building.DeleteBuilding();
         Managers.Sound.Play(Define.Sound.Effect, clickSound);

@@ -9,6 +9,7 @@ public class UI_HotbarSlot : UI_BaseSlot,IDroppable,IDragable
 {
     [HideInInspector]
     public UI_Item itemUI;
+    public bool IsBaseSlot { get; set; }
 
     public override void Init()
     {
@@ -20,9 +21,8 @@ public class UI_HotbarSlot : UI_BaseSlot,IDroppable,IDragable
 
     void OnDrop(PointerEventData p)
     {
-        GameObject item = p.pointerDrag;
-
-        if (item.transform.GetComponentInParent<UI_Item>() != null)
-            item.transform.GetComponentInParent<UI_Item>().dropingSlot = transform;
+        var item = p.pointerDrag != null ? p.pointerDrag.GetComponentInParent<UI_Item>() : null;
+        if (item != null)
+            item.dropingSlot = IsBaseSlot ? item.parDragBefore : transform;
     }
 }

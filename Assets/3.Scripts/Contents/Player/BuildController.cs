@@ -103,7 +103,8 @@ public class BuildController : MonoBehaviour
     // Shared placement command: pointer input and automated gameplay checks use identical rules.
     public void BuildAtWorldPoint(Vector3 worldPoint)
     {
-        if (FieldHUD.IsOpen || FieldFoxtonBattle.Active != null || Managers.Game.isCantPlay || Managers.Game.isHandleUI) return;
+        if (FieldHUD.IsOpen || FieldFoxtonBattle.Active != null || Managers.Game.isCantPlay || Managers.Game.isHandleUI ||
+            Managers.Game.isMovingTower || TowerMoveController.IsHandling) return;
         Vector3Int gridPostion = MapManager.building.WorldToCell(worldPoint);
 
         if (!Managers.Game.tower.gameObject.activeSelf)

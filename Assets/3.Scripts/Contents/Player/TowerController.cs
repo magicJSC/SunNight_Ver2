@@ -70,6 +70,6 @@ public class TowerController : MonoBehaviour, IMonsterTarget,IGetMonsterDamage
 
     public void GetDamage(float damage)
     {
-        stat.GetDamage(damage);
+        if (gameObject.activeInHierarchy) stat.GetDamage(damage);
     }
 }

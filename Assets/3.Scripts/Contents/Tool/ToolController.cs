@@ -55,7 +55,7 @@ public class ToolController : MonoBehaviour
     {
         if (anim == null || isWorking || PlayerController.isDie)
             return;
-        if (Managers.Game.isCantPlay)
+        if (Managers.Game.isCantPlay || TowerMoveController.IsHandling)
             return;
         if (FieldHUD.IsOpen) return;
         anim.SetTrigger("Attack");
