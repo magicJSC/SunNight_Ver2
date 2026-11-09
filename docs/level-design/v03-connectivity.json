@@ -1,0 +1,7 @@
+{
+  "sampleSpacing": 2,
+  "bodyRadius": 0.7,
+  "reachableCells": 25024,
+  "reachableRewards": 45,
+  "unreachable": []
+}

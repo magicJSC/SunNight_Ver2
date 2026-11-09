@@ -1,0 +1,19 @@
+[
+  "Actual game frames advance",
+  "45 live gathering sites",
+  "All gathering sites have a visible supply marker",
+  "25 live field enemies",
+  "All 14 patrols move using real Rigidbody physics",
+  "Fully claimed v0.2 bundles remain depleted; night reward unchanged",
+  "Partial claim migration is lossless and idempotent",
+  "Cancelled small salvage gives nothing",
+  "Held interaction collects one scrap from a scattered site",
+  "Depleted salvage hides its supply marker",
+  "Collected site cannot duplicate supply",
+  "Patrol detects the player through normal detection triggers",
+  "Patrol drops distant chase and returns to its territory",
+  "Camp retains an enemy-free buffer",
+  "Patrol death recorded in save state (injected test damage)",
+  "Recorded patrol does not respawn on scene recreation",
+  "Claimed scattered supply stays empty on scene recreation"
+]

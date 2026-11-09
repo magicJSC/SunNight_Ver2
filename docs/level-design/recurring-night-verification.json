@@ -1,0 +1,25 @@
+{
+  "setup": "Restored earned first-night checkpoint. Clock accelerated during waits; normal clock and combat speed from before dusk through each defense.",
+  "firstAttempt": "Without active melee defense the tower was destroyed during the second night.",
+  "nightEvents": 2,
+  "morningEvents": 2,
+  "clears": [
+    {
+      "night": 2,
+      "spawnedTotal": 15,
+      "killedTotal": 15,
+      "playerHP": 40.0,
+      "towerHP": 490.0
+    },
+    {
+      "night": 3,
+      "spawnedTotal": 30,
+      "killedTotal": 30,
+      "playerHP": 15.0,
+      "towerHP": 355.0
+    }
+  ],
+  "finalDay": 4,
+  "finalClockMinutes": 344.186981,
+  "firstNightRewardClaim": 4
+}

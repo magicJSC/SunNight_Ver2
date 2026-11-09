@@ -29,7 +29,27 @@ public class DefenseEvent : MonoBehaviour
     {
         Managers.Game.canMoveTower = false;
         chain.SetActive(false);
-        StartSpawn();
+        if (FieldSession.Active) StartCoroutine(TrainingDefense());
+        else StartSpawn();
+    }
+
+    IEnumerator TrainingDefense()
+    {
+        isFinal=false;
+        var content=Resources.Load<ExplorationContent>("Exploration/Content");
+        for(int i=0;i<2;i++)
+        {
+            SpawnMonster(content.dog, dropsMap: i == 1);
+            while(monList.Count>0)
+            {
+                if(PlayerController.isDie || Managers.Game.tower.GetComponent<Stat>().Hp<=0) yield break;
+                yield return null;
+            }
+            if(i==0) yield return new WaitForSeconds(3);
+        }
+        isFinal=true;
+        Debug.Log("FIELD_BALANCE: tutorial training 2 dogs cleared");
+        CompleteIfCleared();
     }
 
     void StartSpawn()
@@ -50,24 +70,33 @@ public class DefenseEvent : MonoBehaviour
             yield return new WaitForSeconds(waveSO.groups[i].groupDelay);
         }
         isFinal = true;
+        CompleteIfCleared();
     }
 
 
-    void SpawnMonster(GameObject monsterPrefab)
+    void SpawnMonster(GameObject monsterPrefab, bool dropsMap = false)
     {
         int index = Random.Range(0, spawnPos.Count);
 
-        MonsterController monster = Instantiate(monsterPrefab, spawnPos[index].position, Quaternion.identity).GetComponent<MonsterController>();
+        Vector3 position=FieldSession.Active ? Managers.Game.tower.transform.position + Vector3.up*12 : spawnPos[index].position;
+        MonsterController monster = Instantiate(monsterPrefab, position, Quaternion.identity).GetComponent<MonsterController>();
         monster.targetType = MonsterController.TargetType.Tower;
         monList.Add(monster.gameObject);
+        if (dropsMap) monster.dieEvent += ExplorationRuntime.DropBasementMap;
         monster.dieEvent += RemoveMonster;
     }
 
     void RemoveMonster(GameObject monster)
     {
         monList.Remove(monster);
+        CompleteIfCleared();
+    }
+
+    void CompleteIfCleared()
+    {
         if (monList.Count == 0 && isFinal)
         {
+            isFinal = false;
             ClearTutorial();
         }
     }

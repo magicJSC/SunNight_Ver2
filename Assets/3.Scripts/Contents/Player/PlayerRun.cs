@@ -33,11 +33,12 @@ public class PlayerRun : MonoBehaviour
     {
         while (!cancel)
         {
-            if (playerStat.Hunger > 0)
+            if (playerStat.Hunger > 0 && (!FieldSession.Active || FieldBalance.HungerActive) &&
+                playerStat.GetComponent<Rigidbody2D>().linearVelocity.sqrMagnitude > .01f)
             {
                 playerStat.Hunger -= Time.deltaTime / 10;
             }
-            else
+            else if (playerStat.Hunger <= 0)
                 break;
             yield return null;
         }

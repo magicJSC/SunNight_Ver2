@@ -23,6 +23,7 @@ public class Long_Monster : MonsterController
 
     void Atk()
     {
+        if (target == null || bullet == null || (TryGetComponent<FieldGuard>(out var guard) && guard.Returning)) return;
         GameObject g = Instantiate(bullet,transform.position,Quaternion.identity);
         Rigidbody2D r = g.GetComponent<Rigidbody2D>();
         r.linearVelocity = (target.position - transform.position).normalized * bulletSpeed;

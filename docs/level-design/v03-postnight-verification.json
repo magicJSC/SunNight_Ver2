@@ -1,0 +1,323 @@
+{
+  "method": "Automated real-time Unity Play Mode inputs, real animation and collision. Known routes and telegraph reaction; not human blind play.",
+  "checkpoint_limitation": "Prior exact post-night save unavailable. Replayed earned pre-night save. Three walls survived, versus two in the earlier session report.",
+  "checks": {
+    "paid_resource_ledger": true,
+    "three_optional_researches": true,
+    "transition_inventory_unchanged": true,
+    "transition_player_hp_unchanged": true,
+    "transition_tower_hp_unchanged": true,
+    "transition_facilities_unchanged": true,
+    "no_boss_body_facility_damage": true,
+    "hunger_preserved_through_clear": true,
+    "clear_inventory_unchanged": true,
+    "all_nine_facilities_survive": true,
+    "final_console_no_errors": true
+  },
+  "research_U3": {
+    "reloadPreserves": {
+      "state": true,
+      "slots": true,
+      "buildings": true,
+      "hp": true,
+      "hunger": true,
+      "towerHp": true,
+      "coin": true
+    },
+    "paidU3CapacityAddedOnce": true,
+    "scrapBefore": 13,
+    "scrapAfter": 7,
+    "partsBefore": 1,
+    "partsAfter": 0
+  },
+  "research_U4_separate_trial": {
+    "state": true,
+    "slots": true,
+    "buildings": true,
+    "hp": true,
+    "hunger": true,
+    "towerHp": true,
+    "coin": true,
+    "U4_paid_8_scrap_2_parts": true,
+    "U4_tower_500_to_650": true,
+    "U4_other_facilities_unchanged": true
+  },
+  "boss_seconds_before_bat_fix": 116.2166,
+  "boss_seconds_after_bat_fix": 116.2261,
+  "factory_entry_to_clear_seconds": 195.902237,
+  "final": {
+    "phase": "latest-earned",
+    "seconds": 195.902237,
+    "scene": "Boss1",
+    "player": "(0.89, 5.32, 0.00)",
+    "hp": 91.0,
+    "hunger": 13.6855745,
+    "tower": "(1.00, -2.00, 0.00)",
+    "towerHp": 500.0,
+    "inventory": [
+      {
+        "item": "Bat",
+        "count": 1
+      },
+      {
+        "item": "IronOre",
+        "count": 14
+      },
+      {
+        "item": "MaintenancePart",
+        "count": 2
+      },
+      {
+        "item": "HpPotion",
+        "count": 1
+      },
+      {
+        "item": "HpPotion",
+        "count": 1
+      },
+      {
+        "item": "HpPotion",
+        "count": 1
+      }
+    ],
+    "research": [
+      "U1",
+      "U3",
+      "U2"
+    ],
+    "kills": [
+      "D1a",
+      "D1b",
+      "D2a",
+      "D2b",
+      "E1a",
+      "E1b",
+      "E2a",
+      "E2b",
+      "Fa",
+      "Fb",
+      "Fc"
+    ],
+    "facilities": [
+      {
+        "item": "Fence",
+        "cell": "(1, 2, 0)",
+        "hp": 45.0,
+        "max": 45.0
+      },
+      {
+        "item": "Fence",
+        "cell": "(2, 1, 0)",
+        "hp": 34.0,
+        "max": 45.0
+      },
+      {
+        "item": "Fence",
+        "cell": "(2, -1, 0)",
+        "hp": 45.0,
+        "max": 45.0
+      },
+      {
+        "item": "Cannon",
+        "cell": "(0, 1, 0)",
+        "hp": 30.0,
+        "max": 30.0
+      },
+      {
+        "item": "Fence",
+        "cell": "(0, 2, 0)",
+        "hp": 24.0,
+        "max": 45.0
+      },
+      {
+        "item": "Cannon",
+        "cell": "(1, 1, 0)",
+        "hp": 30.0,
+        "max": 30.0
+      },
+      {
+        "item": "Fence",
+        "cell": "(-1, 2, 0)",
+        "hp": 22.0,
+        "max": 45.0
+      },
+      {
+        "item": "Cannon",
+        "cell": "(-1, 1, 0)",
+        "hp": 30.0,
+        "max": 30.0
+      },
+      {
+        "item": "Fence",
+        "cell": "(2, 0, 0)",
+        "hp": 20.0,
+        "max": 45.0
+      }
+    ],
+    "boss": null,
+    "bossPhase": null,
+    "bossPattern": null,
+    "enemies": []
+  },
+  "console": {
+    "sampledUtc": "2026-10-29T04:40:32.2290419Z",
+    "ageMs": 37,
+    "compilationFailed": false,
+    "compiling": false,
+    "consoleErrors": 0,
+    "consoleWarnings": 25,
+    "consoleLogs": 38,
+    "seeded": true
+  },
+  "controlled_mistakes": {
+    "hits": [
+      {
+        "event": "controlled actual hit pattern=1 damage=20",
+        "hp": 68.0
+      },
+      {
+        "event": "controlled actual hit pattern=2 damage=30",
+        "hp": 38.0
+      },
+      {
+        "event": "controlled actual hit pattern=3 damage=20",
+        "hp": 38.0
+      }
+    ],
+    "final": {
+      "phase": "latest-earned",
+      "seconds": 195.8948,
+      "scene": "Boss1",
+      "player": "(0.90, 5.33, 0.00)",
+      "hp": 58.0,
+      "hunger": 13.6855745,
+      "tower": "(1.00, -2.00, 0.00)",
+      "towerHp": 500.0,
+      "inventory": [
+        {
+          "item": "Bat",
+          "count": 1
+        },
+        {
+          "item": "IronOre",
+          "count": 14
+        },
+        {
+          "item": "MaintenancePart",
+          "count": 2
+        },
+        {
+          "item": "HpPotion",
+          "count": 1
+        }
+      ],
+      "research": [
+        "U1",
+        "U3",
+        "U2"
+      ],
+      "kills": [
+        "D1a",
+        "D1b",
+        "D2a",
+        "D2b",
+        "E1a",
+        "E1b",
+        "E2a",
+        "E2b",
+        "Fa",
+        "Fb",
+        "Fc"
+      ],
+      "facilities": [
+        {
+          "item": "Fence",
+          "cell": "(2, 0, 0)",
+          "hp": 25.0,
+          "max": 45.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(-1, 1, 0)",
+          "hp": 30.0,
+          "max": 30.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(2, -1, 0)",
+          "hp": 45.0,
+          "max": 45.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(2, 1, 0)",
+          "hp": 34.0,
+          "max": 45.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(0, 1, 0)",
+          "hp": 30.0,
+          "max": 30.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(0, 2, 0)",
+          "hp": 24.0,
+          "max": 45.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(1, 2, 0)",
+          "hp": 45.0,
+          "max": 45.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(-1, 2, 0)",
+          "hp": 22.0,
+          "max": 45.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(1, 1, 0)",
+          "hp": 30.0,
+          "max": 30.0
+        }
+      ],
+      "boss": null,
+      "bossPhase": null,
+      "bossPattern": null,
+      "enemies": []
+    },
+    "boss_seconds": 116.2573,
+    "console_before_reload_fix": {
+      "sampledUtc": "2026-10-29T04:44:50.1789466Z",
+      "ageMs": 93,
+      "compilationFailed": false,
+      "compiling": false,
+      "consoleErrors": 2,
+      "consoleWarnings": 37,
+      "consoleLogs": 50,
+      "seeded": true
+    }
+  },
+  "reload_after_fix_console": {
+    "sampledUtc": "2026-10-29T04:49:06.9803862Z",
+    "ageMs": 239,
+    "compilationFailed": false,
+    "compiling": false,
+    "consoleErrors": 0,
+    "consoleWarnings": 10,
+    "consoleLogs": 16,
+    "seeded": true
+  },
+  "reload_then_paid_wall_construction": true,
+  "final_compile_after_removing_temporary_logs": {
+    "status": "completed",
+    "failed": false,
+    "errors": [],
+    "compilationFailed": false
+  },
+  "remaining_shutdown_issue": "After stopping Play Mode, one cleanup error named @Managers and @SoundRoot. This is separate from the zero-error combat/reload runs; global manager shutdown lifetime was not changed."
+}

@@ -1,0 +1,16 @@
+{
+  "reloadPreserves": {
+    "state": true,
+    "slots": true,
+    "buildings": true,
+    "hp": true,
+    "hunger": true,
+    "towerHp": true,
+    "coin": true
+  },
+  "paidU3CapacityAddedOnce": true,
+  "scrapBefore": 13,
+  "scrapAfter": 7,
+  "partsBefore": 1,
+  "partsAfter": 0
+}

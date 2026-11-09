@@ -50,21 +50,8 @@ public class UI_InventorySlot : UI_Base,IDragable,IDroppable
 
     public void Set_Explain()
     {
-        int x, y;
-        if (inven.back.GetComponent<RectTransform>().anchoredPosition.x < -290)
-            x = -25;
-        else
-            x = -545;
-
-        if (inven.back.GetComponent<RectTransform>().anchoredPosition.y > -40)
-            y = 180;
-        else
-            y = 565;
-
-
-        explain.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition + new Vector2(x, y);
-
         explainText.text = itemUI.slotInfo.itemInfo.explain;
         nameText.text = itemUI.slotInfo.itemInfo.itemName;
+        UIScreenPlacement.Tooltip(explain.GetComponent<RectTransform>(), GetComponent<RectTransform>());
     }
 }

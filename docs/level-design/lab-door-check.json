@@ -1,0 +1,12 @@
+{
+  "door": "(-22.50, -136.00)",
+  "storageSignRemoved": true,
+  "oldHatchRemoved": true,
+  "lockedWithoutMap": true,
+  "approachPrompt": true,
+  "cancel": true,
+  "closedOnWalkAway": true,
+  "entryClick": true,
+  "journal": true,
+  "exit": true
+}

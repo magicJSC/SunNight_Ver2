@@ -1,0 +1,340 @@
+{
+  "fixture": "C1: Bat1, Steak1, cannon1, walls2, HP100 hunger30 at 05:30. No grants or teleport after fixture.",
+  "policy": "Known-coordinate walking at base speed; actual held collection, UI crafting, placement. 3s inspection per node, 2s recipe selection, 5s placement included. No attacks or sprint.",
+  "error": "System.Exception: Survey finished without 14 visible scrap\r\n  at FirstDayFieldAudit.SearchVisibleSupplies () [0x005e8] in C:\\Users\\SSAFY\\Desktop\\SunNight\\Tools\\FirstDayFieldAudit.cs:179 \r\n  at FirstDayFieldAudit.Run (System.String route) [0x00137] in C:\\Users\\SSAFY\\Desktop\\SunNight\\Tools\\FirstDayFieldAudit.cs:191 ",
+  "success": false,
+  "summary": {
+    "route": "search-final",
+    "phase": "failed: Survey finished without 14 visible scrap",
+    "seconds": 267.55188,
+    "clock": 865.096436,
+    "position": [
+      -9.670599,
+      -19.9987526
+    ],
+    "distance": 993.7946,
+    "hp": 100.0,
+    "minHp": 100.0,
+    "hits": 0,
+    "hunger": 16.62246,
+    "scrap": 13,
+    "food": 1,
+    "encounters": [
+      "P14"
+    ],
+    "chaseSeconds": 3.55734253,
+    "maxNearby": 1,
+    "cannons": 1,
+    "walls": 2
+  },
+  "steps": [
+    {
+      "route": "search-final",
+      "phase": "C1 fixture",
+      "seconds": 0.0,
+      "clock": 330.001556,
+      "position": [
+        -33.0,
+        -42.0
+      ],
+      "distance": 0.0,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 30.0,
+      "scrap": 0,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 0,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect A1",
+      "seconds": 9.200277,
+      "clock": 348.402374,
+      "position": [
+        -24.1749916,
+        -56.8372536
+      ],
+      "distance": 19.5698872,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 29.53999,
+      "scrap": 1,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 0,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect A1_s1",
+      "seconds": 19.4498177,
+      "clock": 368.901428,
+      "position": [
+        -46.78546,
+        -66.91976
+      ],
+      "distance": 44.3697548,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 29.0277138,
+      "scrap": 2,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 0,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect A3",
+      "seconds": 41.7540131,
+      "clock": 413.510681,
+      "position": [
+        28.0465183,
+        -51.15235
+      ],
+      "distance": 129.396225,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 27.91263,
+      "scrap": 3,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 0,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect A2_s1",
+      "seconds": 68.0288239,
+      "clock": 466.062378,
+      "position": [
+        24.2362671,
+        -87.83264
+      ],
+      "distance": 234.295288,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 26.5987949,
+      "scrap": 4,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 0,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect A2",
+      "seconds": 78.3792,
+      "clock": 486.762024,
+      "position": [
+        1.24037325,
+        -78.14989
+      ],
+      "distance": 259.5951,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 26.0811272,
+      "scrap": 5,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 0,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect A2_s2",
+      "seconds": 94.633194,
+      "clock": 519.2706,
+      "position": [
+        8.898506,
+        -104.997314
+      ],
+      "distance": 314.351563,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 25.2684155,
+      "scrap": 6,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 0,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect B1_s2",
+      "seconds": 105.613373,
+      "clock": 541.2284,
+      "position": [
+        34.90886,
+        -112.936584
+      ],
+      "distance": 342.852448,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 24.7194614,
+      "scrap": 7,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 0,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect B1_s1",
+      "seconds": 131.344131,
+      "clock": 592.685,
+      "position": [
+        19.12158,
+        -133.955582
+      ],
+      "distance": 445.157684,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 23.4329815,
+      "scrap": 8,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 0,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect B2",
+      "seconds": 145.3816,
+      "clock": 620.764038,
+      "position": [
+        8.888694,
+        -150.877426
+      ],
+      "distance": 488.959442,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 22.7309647,
+      "scrap": 9,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 0,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect B3_s2",
+      "seconds": 172.952042,
+      "clock": 675.8998,
+      "position": [
+        53.13463,
+        -177.0331
+      ],
+      "distance": 600.105469,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 21.3524437,
+      "scrap": 10,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 1,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect B3",
+      "seconds": 190.067642,
+      "clock": 710.126343,
+      "position": [
+        -5.76495934,
+        -181.952255
+      ],
+      "distance": 659.3038,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 20.4965115,
+      "scrap": 11,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 1,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect B3_s1",
+      "seconds": 201.3532,
+      "clock": 732.6931,
+      "position": [
+        20.7735519,
+        -190.825409
+      ],
+      "distance": 689.295349,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 19.9322948,
+      "scrap": 12,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 1,
+      "cannons": 1,
+      "walls": 2
+    },
+    {
+      "route": "search-final",
+      "phase": "collect A3_s2",
+      "seconds": 251.593033,
+      "clock": 833.1772,
+      "position": [
+        62.07972,
+        -15.1856966
+      ],
+      "distance": 913.9969,
+      "hp": 100.0,
+      "minHp": 100.0,
+      "hits": 0,
+      "hunger": 17.4205379,
+      "scrap": 13,
+      "food": 1,
+      "encounters": [],
+      "chaseSeconds": 0.0,
+      "maxNearby": 1,
+      "cannons": 1,
+      "walls": 2
+    }
+  ]
+}

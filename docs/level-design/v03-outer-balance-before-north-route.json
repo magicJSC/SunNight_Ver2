@@ -1,0 +1,104 @@
+{
+  "label": "before-north",
+  "gameSeconds": 100.611771,
+  "wallSeconds": 50.3248138,
+  "simulationTimeScale": 2,
+  "distance": 443.042969,
+  "scrap": 2,
+  "parts": 0,
+  "food": 0,
+  "startHp": 100.0,
+  "endHp": 94.0,
+  "nearbyUnique": [
+    "P08"
+  ],
+  "aggroUnique": [
+    "P08"
+  ],
+  "longestQuietSeconds": 53.32611,
+  "encounterEvents": [
+    {
+      "seconds": 37.0181274,
+      "id": "P08",
+      "type": "within12",
+      "x": 65.49876,
+      "y": 114.544586
+    },
+    {
+      "seconds": 38.2078247,
+      "id": "P08",
+      "type": "aggro",
+      "x": 65.3525162,
+      "y": 120.542664
+    }
+  ],
+  "run": {
+    "error": null,
+    "state": {
+      "phase": "latest-earned",
+      "seconds": 100.611771,
+      "scene": "TutorialScene",
+      "player": "(70.01, -69.82, 0.00)",
+      "hp": 94.0,
+      "hunger": 13.6855745,
+      "tower": "(-33.00, -19.00, 0.00)",
+      "towerHp": 500.0,
+      "inventory": [
+        {
+          "item": "Bat",
+          "count": 1
+        },
+        {
+          "item": "IronOre",
+          "count": 6
+        }
+      ],
+      "research": [],
+      "kills": [
+        "P08"
+      ],
+      "facilities": [
+        {
+          "item": "Fence",
+          "cell": "(2, 1, 0)",
+          "hp": 19.0,
+          "max": 30.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(-1, 2, 0)",
+          "hp": 7.0,
+          "max": 30.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(0, 1, 0)",
+          "hp": 20.0,
+          "max": 20.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(1, 1, 0)",
+          "hp": 20.0,
+          "max": 20.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(-1, 1, 0)",
+          "hp": 20.0,
+          "max": 20.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(1, 2, 0)",
+          "hp": 30.0,
+          "max": 30.0
+        }
+      ],
+      "boss": null,
+      "bossPhase": null,
+      "bossPattern": null,
+      "enemies": []
+    }
+  }
+}

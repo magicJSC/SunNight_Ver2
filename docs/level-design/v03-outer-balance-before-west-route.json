@@ -1,0 +1,83 @@
+{
+  "label": "before-west",
+  "gameSeconds": 122.24234,
+  "wallSeconds": 61.1322632,
+  "simulationTimeScale": 2,
+  "distance": 587.5973,
+  "scrap": 2,
+  "parts": 0,
+  "food": 0,
+  "startHp": 100.0,
+  "endHp": 100.0,
+  "nearbyUnique": [],
+  "aggroUnique": [],
+  "longestQuietSeconds": 122.24234,
+  "encounterEvents": [],
+  "run": {
+    "error": null,
+    "state": {
+      "phase": "latest-earned",
+      "seconds": 122.24234,
+      "scene": "TutorialScene",
+      "player": "(69.74, -70.02, 0.00)",
+      "hp": 100.0,
+      "hunger": 13.6855745,
+      "tower": "(-33.00, -19.00, 0.00)",
+      "towerHp": 500.0,
+      "inventory": [
+        {
+          "item": "Bat",
+          "count": 1
+        },
+        {
+          "item": "IronOre",
+          "count": 6
+        }
+      ],
+      "research": [],
+      "kills": [],
+      "facilities": [
+        {
+          "item": "Cannon",
+          "cell": "(-1, 1, 0)",
+          "hp": 20.0,
+          "max": 20.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(2, 1, 0)",
+          "hp": 19.0,
+          "max": 30.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(1, 2, 0)",
+          "hp": 30.0,
+          "max": 30.0
+        },
+        {
+          "item": "Fence",
+          "cell": "(-1, 2, 0)",
+          "hp": 7.0,
+          "max": 30.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(1, 1, 0)",
+          "hp": 20.0,
+          "max": 20.0
+        },
+        {
+          "item": "Cannon",
+          "cell": "(0, 1, 0)",
+          "hp": 20.0,
+          "max": 20.0
+        }
+      ],
+      "boss": null,
+      "bossPhase": null,
+      "bossPattern": null,
+      "enemies": []
+    }
+  }
+}

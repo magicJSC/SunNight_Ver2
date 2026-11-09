@@ -67,6 +67,15 @@ public class TimeController : MonoBehaviour
         StartCoroutine(UpdateTime());
     }
 
+    // Loading a cleared night must not fire nightEvent and spawn the same wave again.
+    public void RestoreClock(int savedDay, float savedTime)
+    {
+        day = savedDay;
+        _timeType = savedTime >= 330 && savedTime < 1290 ? TimeType.Morning : TimeType.Night;
+        TimeAmount = savedTime;
+        dayEvent?.Invoke(day);
+    }
+
     public void SetAction()
     {
         morningEvent += SetMorningBGM;
@@ -78,10 +87,21 @@ public class TimeController : MonoBehaviour
     {
         while (true)
         {
+            // The first defense owns the night-to-morning transition. Its enemies, not midnight,
+            // decide completion. Player hunger still runs on its own active-game coroutine.
+            bool firstDefenseInProgress = FieldSession.Active && day == 1 &&
+                timeType == TimeType.Night && TimeAmount >= 1290;
+            if (firstDefenseInProgress)
+            { yield return null; continue; }
             if(timeSpeed != 0)
                 TimeAmount += Time.deltaTime * timeSpeed;
             if (TimeAmount >= 1290 && timeType == TimeType.Morning)
             {
+                if (FieldSession.Active && day == 1)
+                {
+                    TimeAmount = 1290;
+                    Debug.Log("FIRST_NIGHT_CLOCK: holding day 1 at 21:30 until defense clear; hunger remains active");
+                }
                 timeType = TimeType.Night;
             }
             else if (TimeAmount >= 330 && TimeAmount < 1290 && timeType == TimeType.Night)
@@ -91,6 +111,7 @@ public class TimeController : MonoBehaviour
 
             if (TimeAmount >= 1440)
             {
+                TimeAmount -= 1440;
                 day++;
                 dayEvent?.Invoke(day);
             }

@@ -1,0 +1,84 @@
+{
+  "phase": "latest-earned",
+  "seconds": 103.13446,
+  "scene": "Boss1",
+  "player": "(0.80, 11.53, 0.00)",
+  "hp": 0.0,
+  "hunger": 13.6855745,
+  "tower": "(1.00, -2.00, 0.00)",
+  "towerHp": 471.000732,
+  "inventory": [
+    {
+      "item": "Bat",
+      "count": 1
+    },
+    {
+      "item": "IronOre",
+      "count": 14
+    },
+    {
+      "item": "MaintenancePart",
+      "count": 2
+    },
+    {
+      "item": "HpPotion",
+      "count": 1
+    },
+    {
+      "item": "HpPotion",
+      "count": 1
+    }
+  ],
+  "research": [
+    "U1",
+    "U3",
+    "U2"
+  ],
+  "kills": [
+    "D1a",
+    "D1b",
+    "D2a",
+    "D2b",
+    "E1a",
+    "E1b",
+    "E2a",
+    "E2b",
+    "Fa",
+    "Fb",
+    "Fc"
+  ],
+  "facilities": [
+    {
+      "item": "Cannon",
+      "cell": "(0, 1, 0)",
+      "hp": 3.99912453,
+      "max": 30.0
+    },
+    {
+      "item": "Fence",
+      "cell": "(2, 0, 0)",
+      "hp": 37.52292,
+      "max": 45.0
+    },
+    {
+      "item": "Cannon",
+      "cell": "(1, 1, 0)",
+      "hp": 20.0,
+      "max": 30.0
+    },
+    {
+      "item": "Fence",
+      "cell": "(0, 2, 0)",
+      "hp": 23.0171318,
+      "max": 45.0
+    },
+    {
+      "item": "Fence",
+      "cell": "(1, 2, 0)",
+      "hp": 15.9353828,
+      "max": 45.0
+    }
+  ],
+  "boss": 974.0,
+  "enemies": []
+}

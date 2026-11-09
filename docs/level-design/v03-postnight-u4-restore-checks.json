@@ -1,0 +1,12 @@
+{
+  "state": true,
+  "slots": true,
+  "buildings": true,
+  "hp": true,
+  "hunger": true,
+  "towerHp": true,
+  "coin": true,
+  "U4_paid_8_scrap_2_parts": true,
+  "U4_tower_500_to_650": true,
+  "U4_other_facilities_unchanged": true
+}

@@ -43,6 +43,7 @@ public class UI_SmeltSlot : UI_BaseSlot,IDragable
 
     private void OnDisable()
     {
+        if (!Managers.HasInstance) return;
         if (!_init || smeltUI.isSmelting)
             return;
 

@@ -1,0 +1,8 @@
+{
+  "clusters": 156,
+  "pieces": 280,
+  "totalScrap": 64,
+  "migrationCases": 29,
+  "saveRoundTrips": 4524,
+  "fullBagPreservesReward": true
+}

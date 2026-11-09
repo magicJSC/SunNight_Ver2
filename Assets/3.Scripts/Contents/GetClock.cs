@@ -13,7 +13,10 @@ public class GetClock : MonoBehaviour
 
         if(collision.GetComponent<PlayerController>() != null)
         {
-            Managers.Game.timeController.gameObject.SetActive(true);
+            var clock = Managers.Game.timeController;
+            clock.gameObject.SetActive(true);
+            if (FieldSession.Active && clock.day == 0)
+                clock.RestoreClock(1, 330);
             isComplete = true;
         }
     }

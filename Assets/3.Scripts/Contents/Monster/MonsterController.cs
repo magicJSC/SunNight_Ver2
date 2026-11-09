@@ -108,6 +108,8 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
     {
         while (true)
         {
+            if (TryGetComponent<FieldGuard>(out var fieldGuard) && fieldGuard.UpdateLeash(this))
+            { yield return null; continue; }
             switch (State)
             {
                 case Define.State.Idle:
@@ -214,6 +216,7 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
 
     public void GetDamage(float damage)
     {
+        if (TryGetComponent<FieldGuard>(out var guard) && guard.Returning) return;
         stat.GetDamage(damage);
     }
     protected virtual void OnAttack()
@@ -228,6 +231,7 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
 
     public void Die()
     {
+        if (FieldSession.Active || TryGetComponent<FieldGuard>(out _)) { dieEvent?.Invoke(gameObject); Destroy(gameObject); return; }
         int randomIndex = Random.Range(1, 101);
         float num = 0;
         for (int i = 0; i < getItemList.Count; i++)

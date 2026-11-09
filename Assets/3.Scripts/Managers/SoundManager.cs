@@ -39,6 +39,7 @@ public class SoundManager
     public void Play(Define.Sound type)
     {
         AudioSource audioSource = _audioSources[(int)type];
+        if (Managers.IsShuttingDown || audioSource == null) return;
         audioSource.Play();
     }
 
@@ -47,6 +48,7 @@ public class SoundManager
     public void Play(Define.Sound type, AudioClip audioClip, float pitch = 1.0f)
     {
         AudioSource audioSource = _audioSources[(int)type];
+        if (Managers.IsShuttingDown || audioSource == null || audioClip == null) return;
 
         if (type == Define.Sound.Bgm)
         {
@@ -102,12 +104,14 @@ public class SoundManager
     public void Stop(Define.Sound type)
     {
         AudioSource audioSource = _audioSources[(int)type];
+        if (Managers.IsShuttingDown || audioSource == null) return;
         audioSource.Stop();
     }
 
     public void SetVolume(Define.Sound type, float ratio)
     {
         AudioSource audioSource = _audioSources[(int)type];
+        if (Managers.IsShuttingDown || audioSource == null) return;
         audioSource.volume = ratio;
     }
 }

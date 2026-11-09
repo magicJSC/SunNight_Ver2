@@ -1,0 +1,558 @@
+[
+  {
+    "label": "fade reversal",
+    "data": {
+      "roofAlpha": 0.0,
+      "wallAlpha": -1.0
+    }
+  },
+  {
+    "label": "cycle 0",
+    "data": {
+      "cutsceneLocked": true,
+      "managers": 1,
+      "inventory": [
+        {
+          "item": "Bat",
+          "count": 1
+        },
+        {
+          "item": "IronOre",
+          "count": 14
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": "MaintenancePart",
+          "count": 2
+        },
+        {
+          "item": "HpPotion",
+          "count": 1
+        },
+        {
+          "item": "HpPotion",
+          "count": 1
+        },
+        {
+          "item": "HpPotion",
+          "count": 1
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        }
+      ],
+      "buildings": [
+        {
+          "x": -1,
+          "y": 1,
+          "item": "Cannon",
+          "hp": 30.0
+        },
+        {
+          "x": -1,
+          "y": 2,
+          "item": "Fence",
+          "hp": 22.0
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "item": "Cannon",
+          "hp": 30.0
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "item": "Cannon",
+          "hp": 30.0
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "x": 2,
+          "y": -1,
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "item": "Fence",
+          "hp": 34.0
+        }
+      ]
+    }
+  },
+  {
+    "label": "cycle 1",
+    "data": {
+      "cutsceneLocked": true,
+      "managers": 1,
+      "inventory": [
+        {
+          "item": "Bat",
+          "count": 1
+        },
+        {
+          "item": "IronOre",
+          "count": 14
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": "MaintenancePart",
+          "count": 2
+        },
+        {
+          "item": "HpPotion",
+          "count": 1
+        },
+        {
+          "item": "HpPotion",
+          "count": 1
+        },
+        {
+          "item": "HpPotion",
+          "count": 1
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        }
+      ],
+      "buildings": [
+        {
+          "x": -1,
+          "y": 1,
+          "item": "Cannon",
+          "hp": 30.0
+        },
+        {
+          "x": -1,
+          "y": 2,
+          "item": "Fence",
+          "hp": 22.0
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "item": "Cannon",
+          "hp": 30.0
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "item": "Cannon",
+          "hp": 30.0
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "x": 2,
+          "y": -1,
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "item": "Fence",
+          "hp": 34.0
+        }
+      ]
+    }
+  },
+  {
+    "label": "cycle 2",
+    "data": {
+      "cutsceneLocked": true,
+      "managers": 1,
+      "inventory": [
+        {
+          "item": "Bat",
+          "count": 1
+        },
+        {
+          "item": "IronOre",
+          "count": 14
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": "MaintenancePart",
+          "count": 2
+        },
+        {
+          "item": "HpPotion",
+          "count": 1
+        },
+        {
+          "item": "HpPotion",
+          "count": 1
+        },
+        {
+          "item": "HpPotion",
+          "count": 1
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        },
+        {
+          "item": null,
+          "count": 0
+        }
+      ],
+      "buildings": [
+        {
+          "x": -1,
+          "y": 1,
+          "item": "Cannon",
+          "hp": 30.0
+        },
+        {
+          "x": -1,
+          "y": 2,
+          "item": "Fence",
+          "hp": 22.0
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "item": "Cannon",
+          "hp": 30.0
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "item": "Cannon",
+          "hp": 30.0
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "x": 2,
+          "y": -1,
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "item": "Fence",
+          "hp": 45.0
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "item": "Fence",
+          "hp": 34.0
+        }
+      ]
+    }
+  },
+  {
+    "label": "ready for Play Mode stop",
+    "data": {
+      "cycles": 3
+    }
+  }
+]

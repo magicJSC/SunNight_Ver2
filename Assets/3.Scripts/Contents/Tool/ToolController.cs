@@ -19,20 +19,7 @@ public class ToolController : MonoBehaviour
     }
     protected virtual void Init()
     {
-        if (Managers.Game.isCantPlay)
-            return;
         anim = GetComponent<Animator>();
-        point = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10);
-        if (transform.parent.position.x < point.x)
-        {
-            angle = Mathf.Atan2(-(point.y - transform.position.y), point.x - transform.position.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 180, angle + 180);
-        }
-        else
-        {
-            angle = Mathf.Atan2(point.y - transform.position.y, point.x - transform.position.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-        }
         StartCoroutine(RotateToPoint());
     }
 
@@ -40,13 +27,13 @@ public class ToolController : MonoBehaviour
     {
         while (true)
         {
-            if(Managers.Game.isCantPlay)
+            if (Managers.Game.isCantPlay || Camera.main == null)
             {
-                Destroy(gameObject);
-                yield break;
+                yield return null;
+                continue;
             }
 
-            point = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10);
+            point = Camera.main.ScreenToWorldPoint(Mouse.current != null ? (Vector3)Mouse.current.position.ReadValue() : Input.mousePosition) + new Vector3(0, 0, 10);
             if (!isWorking)
             {
                 if (transform.parent.position.x < point.x)
@@ -66,10 +53,11 @@ public class ToolController : MonoBehaviour
 
     protected virtual void OnAttack()
     {
-        if (isWorking)
+        if (anim == null || isWorking || PlayerController.isDie)
             return;
         if (Managers.Game.isCantPlay)
             return;
+        if (FieldHUD.IsOpen) return;
         anim.SetTrigger("Attack");
         isWorking = true;
     }

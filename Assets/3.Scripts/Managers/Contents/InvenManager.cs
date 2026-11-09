@@ -23,6 +23,7 @@ public class InvenManager : MonoBehaviour
     public SlotInfo grillingSlotInfo = new SlotInfo(0);
     public SlotInfo coalSlotInfo = new SlotInfo(0);
 
+    [Serializable]
     public class SlotInfo
     {
         public ItemSO itemInfo;

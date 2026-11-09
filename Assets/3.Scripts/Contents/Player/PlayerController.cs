@@ -38,6 +38,27 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
     Rigidbody2D rigid;
     Animator anim;
     SpriteRenderer sprite;
+    PlayerInput mainInput;
+
+    // Equipment, interaction triggers and UI are separate PlayerInputs for the same local player.
+    void LateUpdate()
+    {
+        if (mainInput == null || mainInput.currentControlScheme != "Keyboard&Mouse")
+            return;
+        var keyboard = mainInput.GetDevice<Keyboard>();
+        var mouse = mainInput.GetDevice<Mouse>();
+        if (keyboard == null || mouse == null)
+            return;
+        foreach (var input in PlayerInput.all)
+        {
+            if (input == mainInput || !input.user.valid || input.actions == null ||
+                !input.actions.FindControlScheme("Keyboard&Mouse").HasValue)
+                continue;
+            if (input.GetDevice<Keyboard>() != keyboard || input.GetDevice<Mouse>() != mouse)
+                input.SwitchCurrentControlScheme("Keyboard&Mouse", keyboard, mouse);
+        }
+    }
+
     int lastBuildInputFrame = -1;
 
     public List<BaseBuffGiver> buffList { get; private set; }
@@ -47,6 +68,7 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
         if (init)
             return;
 
+        mainInput = GetComponent<PlayerInput>();
         init = true;
         Camera.main.transform.parent = transform;
         Camera.main.transform.position = Camera.main.transform.parent.position + new Vector3(0, 0, -10);
@@ -54,6 +76,7 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        gameObject.AddComponent<PlayerWallOcclusion>();
         stat = GetComponent<PlayerStat>();
         stat.dieEvent += Die;
         statUIAsset.LoadAssetAsync().Completed += (obj) =>
@@ -84,7 +107,7 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
         stat.Hp = stat.maxHP;
         dir = Vector2.zero;
         StartCoroutine(UpdateBuff());
-        if (toolParent.transform.GetChild(0) != null)
+        if (toolParent.transform.childCount > 0)
             Destroy(toolParent.transform.GetChild(0).gameObject);
     }
 

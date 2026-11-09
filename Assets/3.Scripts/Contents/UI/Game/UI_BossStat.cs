@@ -7,19 +7,26 @@ using UnityEngine.UI;
 public class UI_BossStat : MonoBehaviour
 {
     Image fillImage;
+    Stat owner;
+    Tween introTween;
+
+    void OnDisable() { introTween?.Kill(false); introTween = null; }
+    void OnDestroy() { if (owner != null) owner.hpEvent -= SetHp; }
 
 
     private void Start()
     {
         fillImage = Util.FindChild<Image>(gameObject, "Hp", true);
-        transform.GetComponentInParent<Stat>().hpEvent += SetHp;
+        owner = transform.GetComponentInParent<Stat>();
+        owner.hpEvent += SetHp;
         fillImage.fillAmount = 0;
-        fillImage.DOFillAmount(1f, 2f);
+        introTween = fillImage.DOFillAmount(1f, 2f).SetRecyclable(false)
+            .SetLink(fillImage.gameObject, LinkBehaviour.KillOnDisable);
     }
 
     public void SetHp(Stat stat)
     {
-        if (stat == null)
+        if (stat == null || !isActiveAndEnabled)
             return;
         StartCoroutine(UpdateHPBar(stat));
     }
