@@ -30,7 +30,13 @@ public static class FieldCheckpoint
         Read(Resources.Load<ExplorationContent>("Exploration/Content"),source);
         FieldSession.NewRun(); FieldSession.ResumeRequested=true; resumeSource=source;
     }
-    public static FieldSlot[] CaptureInventory() => FieldInventory.Slots.Select(x=>new FieldSlot { item=x.slotInfo.itemInfo?.idName,count=x.slotInfo.count }).ToArray();
+    public static FieldSlot[] CaptureInventory()
+    {
+        var slots = FieldInventory.Slots.Select(x => x.slotInfo).ToList();
+        // Retain the v1 layout (5 hotbar + 24 bag) and any legacy overflow.
+        slots.Insert(InvenManager.BaseSlotIndex, Managers.Inven.hotBarSlotInfo[InvenManager.BaseSlotIndex]);
+        return slots.Select(x => new FieldSlot { item = x?.itemInfo?.idName, count = x?.count ?? 0 }).ToArray();
+    }
     public static FieldSave Capture()
     {
         var game=Managers.Game;
@@ -107,10 +113,21 @@ public static class FieldCheckpoint
         int i=0;
         foreach(var ui in FieldInventory.Slots)
         {
+            if (i == InvenManager.BaseSlotIndex) i++;
             var saved=slots[i++];
             if(saved.item==null || saved.count<=0) ui.MakeEmptySlot();
             else Managers.Inven.SetSlot(content.Item(saved.item),ui,saved.count);
         }
+        var oldBaseSlot = slots[InvenManager.BaseSlotIndex];
+        var legacy = new InvenManager.SlotInfo(0);
+        if (oldBaseSlot.item != null && oldBaseSlot.count > 0)
+        {
+            legacy.itemInfo = content.Item(oldBaseSlot.item);
+            legacy.count = oldBaseSlot.count;
+            legacy.keyType = Define.KeyType.Exist;
+        }
+        Managers.Inven.hotBarSlotInfo[InvenManager.BaseSlotIndex] = legacy;
+        FieldInventory.RestoreLegacyStack(legacy);
     }
     public static IEnumerator RestoreTransfer()
     {

@@ -214,7 +214,7 @@ public class UI_Produce : UI_Base
     {
         if (toMakeItem.materialList.Length == 0)
             return;
-        if (!canProduce)
+        if (!CanProduce())
             return;
         for (int i = 0; i < toMakeItem.materialList.Length; i++)
         {
@@ -257,6 +257,8 @@ public class UI_Produce : UI_Base
     bool CanProduce()
     {
         itemUIList.Clear();
+        if (Managers.Game.isMovingTower && toMakeItem.toMakeItemSO.buildTile != null)
+            return false;
         for (int i = 0; i < toMakeItem.materialList.Length; i++)
         {
             int count = 0;
@@ -279,7 +281,7 @@ public class UI_Produce : UI_Base
                         canProduce = true;
                 }
             }
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < InvenManager.BaseSlotIndex; j++)
             {
                 if (canProduce)
                     break;

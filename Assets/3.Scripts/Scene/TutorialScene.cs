@@ -24,6 +24,7 @@ public class TutorialScene : BaseScene
         Managers.Game.tower.Init();
         FieldSession.Active = true;
         Managers.Game.canMoveTower = true;
+        Managers.Game.isMovingTower = false;
         Managers.Game.isCantPlay = false;
         Managers.Game.isHandleUI = false;
         PlayerController.isDie = false;

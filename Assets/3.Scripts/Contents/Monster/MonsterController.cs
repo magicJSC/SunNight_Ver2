@@ -108,6 +108,11 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
     {
         while (true)
         {
+            if (target && !target.gameObject.activeInHierarchy)
+            {
+                target = SetTarget();
+                State = Define.State.Idle;
+            }
             if (TryGetComponent<FieldGuard>(out var fieldGuard) && fieldGuard.UpdateLeash(this))
             { yield return null; continue; }
             switch (State)
@@ -129,41 +134,29 @@ public class MonsterController : MonoBehaviour, IGetPlayerDamage, IKnockBack
     //����� ��ħ�� ��ǥ �켱������ �ٸ��� �ϱ�
     public Transform SetTarget()
     {
-        Transform result = null;
-        int count = targetList.Count;
-        targetList = targetList.OrderBy(target => (target.position - transform.position).magnitude).ToList();
-        if (targetType == TargetType.Player)
+        if (!Managers.HasInstance) return null;
+        var game = Managers.Game;
+        if (targetType == TargetType.Tower && (!target || !target.gameObject.activeInHierarchy))
+            return game.isMovingTower ? game.player.transform : game.tower.transform;
+
+        Transform closest = null;
+        float bestDistance = float.PositiveInfinity;
+        for (int i = targetList.Count - 1; i >= 0; i--)
         {
-            for (int i = 0; i < count;)
+            var candidate = targetList[i];
+            if (!candidate || !candidate.gameObject.activeInHierarchy)
             {
-                if (targetList[i] == null)
-                {
-                    targetList.Remove(targetList[i]);
-                    continue;
-                }  
-                return result = targetList[i];
+                targetList.RemoveAt(i);
+                continue;
+            }
+            float distance = (candidate.position - transform.position).sqrMagnitude;
+            if (distance < bestDistance)
+            {
+                closest = candidate;
+                bestDistance = distance;
             }
         }
-        else if (targetType == TargetType.Tower)
-        {
-            if (target == null)
-            {
-                return Managers.Game.tower.transform;
-            }
-            else
-            {
-                for (int i = 0; i < count;)
-                {
-                    if (targetList[i] == null)
-                    {
-                        targetList.Remove(targetList[i]);
-                        continue;
-                    }
-                    return result = targetList[i];
-                }
-            }
-        }
-        return null;
+        return closest;
     }
 
     protected virtual void OnIdle()

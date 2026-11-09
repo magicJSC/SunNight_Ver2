@@ -9,8 +9,18 @@ public static class FieldInventory
         Managers.Inven.hotBarUI.slotList != null && Managers.Inven.inventoryUI.slotList != null &&
         Managers.Inven.hotBarUI.slotList.All(x => x != null && x.itemUI != null && x.itemUI.slotInfo != null) &&
         Managers.Inven.inventoryUI.slotList.All(x => x != null && x.itemUI != null && x.itemUI.slotInfo != null);
-    public static IEnumerable<UI_Item> Slots => Managers.Inven.hotBarUI.slotList.Select(x => x.itemUI)
+    public static IEnumerable<UI_Item> Slots => Managers.Inven.hotBarUI.slotList.Take(InvenManager.BaseSlotIndex).Select(x => x.itemUI)
         .Concat(Managers.Inven.inventoryUI.slotList.Select(x => x.itemUI));
+    public static void RestoreLegacyStack(InvenManager.SlotInfo legacy)
+    {
+        if (legacy == null || legacy.itemInfo == null || !Ready) return;
+        legacy.count -= Give(legacy.itemInfo, legacy.count);
+        if (legacy.count == 0)
+        {
+            legacy.itemInfo = null;
+            legacy.keyType = Define.KeyType.Empty;
+        }
+    }
     public static int Count(ItemSO item) => Ready ? Slots.Where(x => x.slotInfo.itemInfo == item).Sum(x => x.slotInfo.count) : 0;
     // Returns accepted count. A full inventory never consumes the unaccepted reward.
     public static int Give(ItemSO item, int amount)

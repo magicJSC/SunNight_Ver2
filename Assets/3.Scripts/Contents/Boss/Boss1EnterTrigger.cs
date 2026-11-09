@@ -27,10 +27,24 @@ public class Boss1EnterTrigger : MonoBehaviour
 
     IEnumerator EnterFactory()
     {
+        if (!BaseReadyForEntry()) yield break;
         Managers.Game.changeSceneEffecter.StartChangeScene();
         yield return new WaitForSeconds(2);
+        if (!BaseReadyForEntry())
+        {
+            Managers.Game.changeSceneEffecter.EndChangeScene();
+            yield break;
+        }
         if (FieldSession.Active && FieldInventory.Ready) FieldCheckpoint.TransferPreparation = FieldCheckpoint.Capture();
         SceneManager.LoadScene("Boss1");
+    }
+
+    bool BaseReadyForEntry()
+    {
+        if (!Managers.Game.isMovingTower && !TowerMoveController.IsHandling) return true;
+        enterUI.SetActive(false);
+        FieldHUD.Notify("거점을 설치한 뒤 공장에 들어가세요.");
+        return false;
     }
 
 

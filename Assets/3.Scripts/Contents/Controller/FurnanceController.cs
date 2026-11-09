@@ -30,25 +30,21 @@ public class FurnanceController : MonoBehaviour, IInteractObject
     public void StartSmelt()
     {
         smeltUI.isSmelting = true;
-        StartCoroutine(SmeltItem());
     }
 
     public void CancelSmelt()
     {
         smeltUI.isSmelting = false;
-        StopCoroutine(SmeltItem());
         _smeltCurTime = 0;
         SetTimer();
     }
 
-    IEnumerator SmeltItem()
+    void Update()
     {
-        while(_smeltCurTime < smeltTime)
-        {
-            yield return null;
-            _smeltCurTime += Time.deltaTime;
-            SetTimer();
-        }
+        if (!smeltUI || !smeltUI.isSmelting) return;
+        _smeltCurTime += Time.deltaTime;
+        SetTimer();
+        if (_smeltCurTime < smeltTime) return;
         _smeltCurTime = 0;
         SetTimer();
         smeltUI.FinishSmelt();

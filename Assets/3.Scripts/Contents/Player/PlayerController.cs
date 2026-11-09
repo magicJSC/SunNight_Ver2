@@ -13,6 +13,7 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
     public Action escEvent;
 
     PlayerStat stat;
+    PlayerRun sprint;
     bool init;
 
 
@@ -78,6 +79,7 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
         sprite = GetComponent<SpriteRenderer>();
         gameObject.AddComponent<PlayerWallOcclusion>();
         stat = GetComponent<PlayerStat>();
+        sprint = GetComponentInChildren<PlayerRun>(true);
         stat.dieEvent += Die;
         statUIAsset.LoadAssetAsync().Completed += (obj) =>
         {
@@ -165,8 +167,11 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
     {
         while (true)
         {
-            if (!Managers.Game.isCantPlay)
-                rigid.linearVelocity = dir * stat.Speed;
+            if (!Managers.Game.isCantPlay && !TowerMoveController.IsHandling)
+            {
+                float movementScale = Managers.Game.isMovingTower ? .6f : sprint != null && sprint.IsRunning ? 1.5f : 1f;
+                rigid.linearVelocity = dir * (stat.Speed * movementScale);
+            }
             else
                 rigid.linearVelocity = Vector2.zero;
             yield return null;

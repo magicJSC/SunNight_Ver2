@@ -39,7 +39,7 @@ public class Item_Buliding : Item,IMonsterTarget,IGetMonsterDamage
 
     private void OnDisable()
     {
-        buildUI.SetActive(false);
+        if (buildUI) buildUI.SetActive(false);
     }
 
     public void DeleteBuilding()
@@ -87,6 +87,6 @@ public class Item_Buliding : Item,IMonsterTarget,IGetMonsterDamage
 
     public void GetDamage(float damage)
     {
-       stat.GetDamage(damage);
+       if (gameObject.activeInHierarchy) stat.GetDamage(damage);
     }
 }

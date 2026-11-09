@@ -28,6 +28,29 @@ public class TurretController : BaseController
     protected GameObject _target;
 
     protected bool isWorking = false;
+    bool packed;
+    float nextAttack;
+    float cooldownWhenPacked;
+
+    public void PauseForTransport()
+    {
+        if (packed) return;
+        packed = true;
+        cooldownWhenPacked = Mathf.Max(0, nextAttack - Time.time);
+        StopAllCoroutines();
+        anim.Rebind();
+        _target = null;
+        isWorking = false;
+    }
+
+    public void ResumeAfterTransport()
+    {
+        if (!packed) return;
+        packed = false;
+        nextAttack = Time.time + Mathf.Max(termBeforeWork, cooldownWhenPacked);
+        if (isActiveAndEnabled) StartCoroutine(UpdateCor());
+    }
+
 
     protected override void Init()
     {
@@ -41,18 +64,13 @@ public class TurretController : BaseController
 
     private void OnEnable()
     {
-        StartCoroutine(UpdateCor());
+        if (!packed) StartCoroutine(UpdateCor());
     }
 
     IEnumerator UpdateCor()
     {
         while (true)
         {
-            if (Managers.Game.isMovingTower)
-            {
-                yield return null;
-                continue;
-            }
             CheckTarget();
             yield return null;
         }
@@ -79,14 +97,13 @@ public class TurretController : BaseController
 
     protected IEnumerator Work()
     {
-        yield return new WaitForSeconds(termBeforeWork);
+        yield return new WaitForSeconds(Mathf.Max(termBeforeWork, nextAttack - Time.time));
         while (true)
         {
-            if (Managers.Game.isMovingTower)
-                yield break;
             if (_target == null)
                 yield break;
             isWorking = true;
+            nextAttack = Time.time + stat.attackCool;
             anim.Play("Work");
             yield return new WaitForSeconds(stat.attackCool);
         }

@@ -32,11 +32,6 @@ public class BonFireController : MonoBehaviour, IInteractObject
         countText.text = "";
     }
 
-    public void OnDisable()
-    {
-        bakingCount = 0;
-    }
-
     public void Interact()
     {
         if (Managers.Game.isMovingTower)
@@ -47,11 +42,11 @@ public class BonFireController : MonoBehaviour, IInteractObject
         {
             if (choicingItemUI.slotInfo.itemInfo.bakeItem != null && BakingCount < maxCanBakeCount)
             {
-                itemBakers.Add(Instantiate(itemBakerObj, transform).GetComponent<ItemBaker>());
+                var baker = itemBakers.Count == 0 ? Instantiate(itemBakerObj, transform) : itemBakers[0];
+                itemBakers.Remove(baker);
+                baker.Bake(choicingItemUI.slotInfo.itemInfo);
                 choicingItemUI.slotInfo.count -= 1;
-                StartCoroutine(itemBakers[0].Bake(choicingItemUI.slotInfo.itemInfo));
                 choicingItemUI.SetInfo();
-                itemBakers.Remove(itemBakers[0]);
                 BakingCount++;
             }
         }

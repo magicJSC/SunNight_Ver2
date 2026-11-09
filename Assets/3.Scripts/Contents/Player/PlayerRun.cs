@@ -1,46 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerRun : MonoBehaviour
 {
     PlayerStat playerStat;
+    Rigidbody2D body;
+    bool sprintHeld;
 
-    bool cancel;
+    public bool IsRunning => sprintHeld && !Managers.Game.isMovingTower && !TowerMoveController.IsHandling;
 
-    private void Start()
+    void Awake()
     {
         playerStat = GetComponentInParent<PlayerStat>();
+        body = playerStat.GetComponent<Rigidbody2D>();
     }
 
     public void RunAction(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            cancel = false;
-            playerStat.Speed *= 1.5f;
-            StartCoroutine(ReduceHunger());
-        }
-        else if (context.canceled)
-        {
-            playerStat.Speed /= 1.5f;
-            cancel = true;
-        }
+        if (context.performed) sprintHeld = true;
+        else if (context.canceled) sprintHeld = false;
     }
 
-    IEnumerator ReduceHunger()
+    void OnDisable() => sprintHeld = false;
+
+    void Update()
     {
-        while (!cancel)
-        {
-            if (playerStat.Hunger > 0 && (!FieldSession.Active || FieldBalance.HungerActive) &&
-                playerStat.GetComponent<Rigidbody2D>().linearVelocity.sqrMagnitude > .01f)
-            {
-                playerStat.Hunger -= Time.deltaTime / 10;
-            }
-            else if (playerStat.Hunger <= 0)
-                break;
-            yield return null;
-        }
+        if (IsRunning && playerStat.Hunger > 0 && (!FieldSession.Active || FieldBalance.HungerActive) &&
+            body.linearVelocity.sqrMagnitude > .01f)
+            playerStat.Hunger -= Time.deltaTime / 10;
     }
 }
