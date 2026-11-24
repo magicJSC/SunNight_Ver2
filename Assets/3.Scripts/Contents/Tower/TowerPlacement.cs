@@ -49,7 +49,8 @@ internal sealed class TowerPlacement
         exits.AddRange(unique);
     }
 
-    bool HasGround(Vector2 point) => !ground || ground.HasTile(ground.WorldToCell(point));
+    bool HasGround(Vector2 point) => !ground || ground.HasTile(ground.WorldToCell(point)) ||
+        NorthwestMarsh.HasGround(point);
 
     bool Clear(Vector2 point, Vector2 size)
     {

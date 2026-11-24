@@ -49,6 +49,7 @@ public class Boss1Scene : BaseScene
         Managers.Game.tower.transform.position = new Vector3(1, -2);
         Managers.Game.player.transform.position = new Vector3(1.5f,-23);
         StartCoroutine(FieldCheckpoint.RestoreTransfer());
+        if (FieldSession.Active) FieldHUD.Create(Resources.Load<ExplorationContent>("Exploration/Content").font);
         return true;
     }
 

@@ -47,7 +47,7 @@ public class TowerMoveController : MonoBehaviour
         bool night = clock && clock.isActiveAndEnabled && clock.day > 0 && clock.timeType == TimeController.TimeType.Night;
         return game.player && game.tower && game.canMoveTower && !game.isCantPlay && !night &&
             game.mouse && game.mouse.CursorType != Define.CursorType.Drag &&
-            !PlayerController.isDie && !FieldHUD.IsOpen && !FieldLaboratory.PlayerInside &&
+            !PlayerController.isDie && !FieldHUD.IsOpen && !FieldLaboratory.PlayerInside && !MecamossReceivingHall.PlayerInside &&
             FieldFoxtonBattle.Active == null && Managers.UI.PopUIList.Count == 0 && Time.timeScale > 0;
     }
 

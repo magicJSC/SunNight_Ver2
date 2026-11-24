@@ -163,6 +163,14 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
             anim.Play("Idle");
     }
 
+    public void WarpTo(Vector2 destination)
+    {
+        rigid.linearVelocity = Vector2.zero;
+        rigid.position = destination;
+        transform.position = destination;
+        Physics2D.SyncTransforms();
+    }
+
     IEnumerator Move()
     {
         while (true)
@@ -170,7 +178,7 @@ public class PlayerController : CreatureController, IGetMonsterDamage, IBuffReci
             if (!Managers.Game.isCantPlay && !TowerMoveController.IsHandling)
             {
                 float movementScale = Managers.Game.isMovingTower ? .6f : sprint != null && sprint.IsRunning ? 1.5f : 1f;
-                rigid.linearVelocity = dir * (stat.Speed * movementScale);
+                rigid.linearVelocity = dir * (stat.Speed * movementScale * NorthwestMarsh.WalkSpeedAt(rigid.position));
             }
             else
                 rigid.linearVelocity = Vector2.zero;

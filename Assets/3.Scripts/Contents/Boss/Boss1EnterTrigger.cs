@@ -35,7 +35,11 @@ public class Boss1EnterTrigger : MonoBehaviour
             Managers.Game.changeSceneEffecter.EndChangeScene();
             yield break;
         }
-        if (FieldSession.Active && FieldInventory.Ready) FieldCheckpoint.TransferPreparation = FieldCheckpoint.Capture();
+        if (FieldSession.Active && FieldInventory.Ready)
+        {
+            FieldCheckpoint.FactoryEntrance = FieldCheckpoint.Capture();
+            FieldCheckpoint.TransferPreparation = FieldCheckpoint.FactoryEntrance;
+        }
         SceneManager.LoadScene("Boss1");
     }
 
@@ -52,6 +56,11 @@ public class Boss1EnterTrigger : MonoBehaviour
     {
         if(collision.transform.GetComponent<PlayerController>() != null)
         {
+            if (FieldSession.Active && FieldSession.State.foxtonFactoryDestroyed)
+            {
+                FieldHUD.Notify("폭스턴 공장은 이미 파괴되었습니다.");
+                return;
+            }
             enterUI.SetActive(true);
         }
     }

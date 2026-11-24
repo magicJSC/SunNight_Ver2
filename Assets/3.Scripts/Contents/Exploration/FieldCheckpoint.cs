@@ -24,6 +24,7 @@ public static class FieldCheckpoint
     public static bool Exists => File.Exists(PathName);
     public static FieldSlot[] Transfer;
     public static FieldSave TransferPreparation;
+    public static FieldSave FactoryEntrance, SurfaceReturn;
     static string resumeSource;
     public static void RequestResume(string source = null)
     {
@@ -38,13 +39,16 @@ public static class FieldCheckpoint
         return slots.Select(x => new FieldSlot { item = x?.itemInfo?.idName, count = x?.count ?? 0 }).ToArray();
     }
     public static FieldSave Capture()
+        => Capture(Managers.Game.timeController.day, Managers.Game.timeController.TimeAmount);
+
+    static FieldSave Capture(int day, float time)
     {
         var game=Managers.Game;
         var player=game.player.GetComponent<PlayerStat>();
         var data=new FieldSave { state=FieldSession.State,slots=CaptureInventory(),hp=player.Hp,hunger=player.Hunger,
             playerX=player.transform.position.x,playerY=player.transform.position.y,towerX=game.tower.transform.position.x,
             towerY=game.tower.transform.position.y,towerHp=game.tower.GetComponent<Stat>().Hp,
-            day=game.timeController.day,time=game.timeController.TimeAmount,coin=Managers.Inven.Coin };
+            day=day,time=time,coin=Managers.Inven.Coin };
         foreach(var cell in MapManager.building.cellBounds.allPositionsWithin)
         {
             var prefab=ExplorationEffects.TilePrefab(MapManager.building.GetTile(cell));
@@ -55,6 +59,20 @@ public static class FieldCheckpoint
                 hp=placed!=null ? placed.GetComponent<Stat>().Hp : prefab.GetComponent<Stat>().maxHP });
         }
         return data;
+    }
+    public static bool PrepareVictoryReturn()
+    {
+        var entrance = FactoryEntrance;
+        if (!FieldSession.Active || !FieldSession.State.foxtonFactoryDestroyed ||
+            !FieldSession.State.foxtonReturnSlipCollected || entrance == null) return false;
+        var result = Capture(entrance.day, entrance.time);
+        result.playerX = entrance.playerX;
+        result.playerY = entrance.playerY - 2;
+        result.towerX = entrance.towerX;
+        result.towerY = entrance.towerY;
+        SurfaceReturn = result;
+        FactoryEntrance = null;
+        return true;
     }
     public static void Save(string destination = null)
     {
@@ -75,6 +93,8 @@ public static class FieldCheckpoint
             if(slot==null || slot.count<0 || slot.item!=null && content.Item(slot.item)==null) throw new InvalidDataException("알 수 없는 아이템입니다.");
         foreach(var b in data.buildings)
             if(content.Item(b.item)?.buildTile==null) throw new InvalidDataException("알 수 없는 시설입니다.");
+        // Disk checkpoints are taken on the surface. Earlier clears returned there without a pickup.
+        if (data.state.foxtonFactoryDestroyed) data.state.foxtonReturnSlipCollected = true;
         return data;
     }
     public static IEnumerator Restore(ExplorationContent content, string source = null)
@@ -84,6 +104,10 @@ public static class FieldCheckpoint
         catch(Exception error) { Debug.LogException(error); }
         FieldSession.ResumeRequested=false; resumeSource=null;
         if(data==null) { FieldSession.NewRun(); yield break; }
+        yield return RestoreSurface(content, data);
+    }
+    public static IEnumerator RestoreSurface(ExplorationContent content, FieldSave data)
+    {
         FieldSession.State=data.state;
         ApplyInventory(data.slots,content);
         var game=Managers.Game;

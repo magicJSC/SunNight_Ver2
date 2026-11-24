@@ -2,7 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
-public class Boss1 : MonoBehaviour, IGetPlayerDamage
+public class Boss1 : MonoBehaviour
 {
     public GameObject energyBomb;
 
@@ -19,14 +19,6 @@ public class Boss1 : MonoBehaviour, IGetPlayerDamage
     GameObject[] pattern2Lasers;
     Animator anim;
     bool battleStarted;
-    FieldFoxtonBattle fieldBattle;
-    public bool CanBeTargeted => battleStarted && stat.Hp > 0 &&
-        (fieldBattle == null || fieldBattle.IsCoreExposed);
-    public void GetDamage(float damage)
-    {
-        if (!CanBeTargeted) return;
-        stat.GetDamage(damage);
-    }
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -67,15 +59,21 @@ public class Boss1 : MonoBehaviour, IGetPlayerDamage
             return;
 
         battleStarted = true;
-        if (FieldSession.Active)
-            fieldBattle = gameObject.AddComponent<FieldFoxtonBattle>();
-        else StartPatterns();
+        StartPatterns();
     }
 
     void Die()
     {
-        if (fieldBattle != null) fieldBattle.StopBattle();
-        Instantiate(timeline);
+        stat.dieEvent -= Die;
+        if (FieldSession.Active)
+        {
+            FieldSession.State.foxtonFactoryDestroyed = true;
+            foreach (var bomb in FindObjectsByType<EnergyBullet>())
+                Destroy(bomb.gameObject);
+            FoxtonReturnSlip.Drop(timeline);
+        }
+        else
+            Instantiate(timeline);
         Instantiate(dieEffect,transform.position,Quaternion.identity);
         Destroy(gameObject);
     }

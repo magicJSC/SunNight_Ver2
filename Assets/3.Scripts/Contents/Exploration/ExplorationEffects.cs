@@ -15,7 +15,6 @@ public static class ExplorationEffects
         }
         else if (IsWall(stat)) stat.maxHP = FieldSession.State.Has("U3") ? 45 : 30;
         else if (stat.GetComponent<TowerController>() != null) stat.maxHP = FieldSession.State.Has("U4") ? 650 : 500;
-        else if (stat.GetComponent<Boss1>() != null) stat.maxHP = 1100;
     }
     public static void ApplyAll()
     {

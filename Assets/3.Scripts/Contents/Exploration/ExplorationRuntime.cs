@@ -18,10 +18,27 @@ public sealed class ExplorationRuntime : MonoBehaviour
         content=Resources.Load<ExplorationContent>("Exploration/Content");
         if (content == null) { Debug.LogError("Exploration content missing. Run Build Exploration Content."); yield break; }
         while (!FieldInventory.Ready) yield return null;
+        bool returnedWithSlip = false;
         if (FieldSession.ResumeRequested) yield return FieldCheckpoint.Restore(content);
+        else if (FieldCheckpoint.SurfaceReturn != null)
+        {
+            var victory = FieldCheckpoint.SurfaceReturn;
+            FieldCheckpoint.SurfaceReturn = null;
+            yield return FieldCheckpoint.RestoreSurface(content, victory);
+            returnedWithSlip = victory.state.foxtonReturnSlipCollected;
+            var training = FindAnyObjectByType<DefenseEvent>();
+            if (training != null)
+            {
+                training.close.SetActive(false);
+                training.chain.SetActive(false);
+                training.open.SetActive(true);
+            }
+        }
         MigrateClaims(FieldSession.State,content);
         OuterSalvageLedger.Migrate(FieldSession.State,content);
         FieldHUD.Create(content.font);
+        if (returnedWithSlip)
+            FieldHUD.Notify("일지에 반송 전표를 끼웠다. 지도에 북서 늪지 인수장을 표시했다.");
         var doorway = new GameObject("ResidentialLaboratoryDoor");
         doorway.transform.SetParent(transform);
         doorway.AddComponent<FieldLaboratory>().Build(this);

@@ -17,12 +17,10 @@ public class Cannon : TurretController, IAttack, IRotate
     {
         if(FieldSession.Active && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name=="Boss1")
         {
-            // Teleporting/closed cores must not leave multiple Work coroutines or a stale target.
             _target=null;
             foreach(var candidate in targets)
             {
                 if(candidate==null || Vector2.Distance(transform.position,candidate.transform.position)>stat.range) continue;
-                if(candidate.TryGetComponent<Boss1>(out var boss) && !boss.CanBeTargeted) continue;
                 if(_target==null || Vector2.Distance(transform.position,candidate.transform.position)<Vector2.Distance(transform.position,_target.transform.position)) _target=candidate;
             }
             if(_target==null) return;
@@ -50,18 +48,12 @@ public class Cannon : TurretController, IAttack, IRotate
         if (_target == null)
             return;
         if(FieldSession.Active && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name=="Boss1" &&
-            (Vector2.Distance(transform.position,_target.transform.position)>stat.range ||
-             _target.TryGetComponent<Boss1>(out var boss) && !boss.CanBeTargeted)) return;
+            Vector2.Distance(transform.position,_target.transform.position)>stat.range) return;
         _target.GetComponent<IGetPlayerDamage>().GetDamage(FieldSession.Active ? (FieldSession.State.Has("U2") ? 7 : 5) : stat.Damage);
     }
 
     public override void AddTarget(Collider2D collision)
     {
-        if (collision.GetComponent<Boss1>() != null)
-        {
-            if (!targets.Contains(collision.gameObject)) targets.Add(collision.gameObject);
-            return;
-        }
         if (collision.GetComponent<MonsterController>() != null)
         {
             if(collision.GetComponent<IWalk>() != null)
@@ -71,7 +63,6 @@ public class Cannon : TurretController, IAttack, IRotate
 
     public override void RemoveTarget(Collider2D collision)
     {
-        if (collision.GetComponent<Boss1>() != null) { targets.Remove(collision.gameObject); return; }
         if (collision.GetComponent<MonsterController>() != null)
         {
             if (collision.GetComponent<IWalk>() != null)
