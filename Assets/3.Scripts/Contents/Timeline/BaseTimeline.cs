@@ -94,7 +94,8 @@ public class BaseTimeline : MonoBehaviour
     {
         Managers.Game.changeSceneEffecter.StartChangeScene();
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene("MainScene");
+        bool returnToField = SceneManager.GetActiveScene().name == "Boss1" && FieldCheckpoint.PrepareVictoryReturn();
+        SceneManager.LoadScene(returnToField ? "TutorialScene" : "MainScene");
     }
 
     public void Setestroy()

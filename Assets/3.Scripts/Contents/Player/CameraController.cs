@@ -48,6 +48,11 @@ public class CameraController : MonoBehaviour
                 transform.position = new Vector3(FieldLaboratory.Center.x, FieldLaboratory.Center.y, -10);
                 continue;
             }
+            if (MecamossReceivingHall.PlayerInside)
+            {
+                transform.position = MecamossReceivingHall.Current.CameraPosition(player.position, Camera.main);
+                continue;
+            }
             transform.position = player.position;
             float lx = size.x * 0.5f - width;
             float clampX = Mathf.Clamp(transform.position.x,-lx + center.x,lx + center.x);

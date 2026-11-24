@@ -8,11 +8,22 @@ public sealed class ExplorationState
     // Missing in v0.2 saves: keep zero so migration can identify them.
     public int layoutVersion;
     public bool firstNightCleared;
+    public bool foxtonFactoryDestroyed;
+    public bool foxtonReturnSlipCollected;
+    public bool northwestFactoryGateDiscovered;
+    public bool mecamossEncountered;
+    public bool mecamossDefeated;
     public bool basementMapReceived;
     public bool sunNightJournalRead;
     public bool basementMapDropped;
     public float mapDropX, mapDropY;
     public bool HasBasementMap => basementMapReceived || sunNightJournalRead;
+    public bool DiscoverNorthwestFactoryGate()
+    {
+        if (!foxtonReturnSlipCollected || northwestFactoryGateDiscovered) return false;
+        northwestFactoryGateDiscovered = true;
+        return true;
+    }
     public List<string> research = new List<string>();
     public List<string> killedGuards = new List<string>();
     public List<ExplorationClaim> claims = new List<ExplorationClaim>();
@@ -47,7 +58,7 @@ public static class FieldSession
     public static bool Active;
     public static bool ResumeRequested;
     public static int CannonLimit => State.Has("U4") ? 4 : 3;
-    public static void NewRun() { State = new ExplorationState(); Active = true; ResumeRequested = false; FieldCheckpoint.Transfer = null; FieldCheckpoint.TransferPreparation = null; }
+    public static void NewRun() { State = new ExplorationState(); Active = true; ResumeRequested = false; FieldCheckpoint.Transfer = null; FieldCheckpoint.TransferPreparation = null; FieldCheckpoint.FactoryEntrance = null; FieldCheckpoint.SurfaceReturn = null; }
     public static bool CanBuy(FieldResearch research, int scrap, int parts) =>
         State.firstNightCleared && !State.Has(research.id) && scrap >= research.scrap && parts >= research.parts;
 }

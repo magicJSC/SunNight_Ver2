@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public sealed partial class FieldHUD : MonoBehaviour
 {
     static FieldHUD instance;
-    public static bool IsOpen => instance != null && (instance.panel.activeSelf || instance.entryPanel.activeSelf);
+    public static bool IsOpen => instance != null && (instance.panel.activeSelf || instance.entryPanel.activeSelf || instance.storyCard.activeSelf);
     GameObject entryPanel;
     FieldLaboratory offeredLab;
     UnityEngine.UI.Text prompt, notice, status;
@@ -98,7 +98,7 @@ public sealed partial class FieldHUD : MonoBehaviour
     }
     public static void OfferLabEntry(FieldLaboratory lab)
     {
-        if (!instance || IsOpen || PlayerController.isDie || Managers.Game.isCantPlay) return;
+        if (!instance || instance.panel.activeSelf || instance.entryPanel.activeSelf || PlayerController.isDie || Managers.Game.isCantPlay) return;
         CloseStory();
         instance.offeredLab = lab;
         instance.entryPanel.SetActive(true);
@@ -175,7 +175,7 @@ public sealed partial class FieldHUD : MonoBehaviour
     void OnDestroy()
     {
         if(panel!=null && Managers.HasInstance) Managers.UI.PopUIList.Remove(panel);
-        if(instance==this) { CloseLabEntry(); instance=null; }
+        if(instance==this) { CloseStory(); CloseLabEntry(); instance=null; }
         if(entryPanel) Destroy(entryPanel);
     }
 }
