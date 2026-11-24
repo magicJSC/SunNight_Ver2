@@ -25,6 +25,9 @@ public sealed class MecamossReceivingHall : MonoBehaviour
     MecamossAlarm alarm;
     public static bool PlayerInside => Current && Managers.Game.player && Current.Contains(Managers.Game.player.transform.position);
 
+    CircleCollider2D cargoTrigger;
+    LabInteraction cargoInteraction;
+    SpriteRenderer cargoArt;
     Vector2 outside;
     static readonly int Burrow = Animator.StringToHash("Base Layer.Burrow");
     Vector3 cargoStart, foremanStart;
@@ -36,6 +39,12 @@ public sealed class MecamossReceivingHall : MonoBehaviour
     void Awake()
     {
         cargoStart = cargo.localPosition;
+        cargoArt = cargo.GetComponent<SpriteRenderer>();
+        cargoInteraction = cargo.gameObject.AddComponent<LabInteraction>();
+        cargoTrigger = cargo.gameObject.AddComponent<CircleCollider2D>();
+        cargoTrigger.isTrigger = true;
+        cargoTrigger.radius = 1.6f;
+        cargoTrigger.enabled = false;
         foremanStart = foreman.transform.localPosition;
         body = foreman.GetComponent<MecamossBody>();
         strike = new MecamossDiveStrike(foreman, body, foremanAnimator, transform);
@@ -65,9 +74,27 @@ public sealed class MecamossReceivingHall : MonoBehaviour
         Current = this;
         playerFeet = Managers.Game.player.GetComponent<BoxCollider2D>();
         body.ResetAttempt();
+        RefreshCargo();
         SetSurfaced(FieldSession.State.mecamossEncountered);
         Managers.Game.player.GetComponent<PlayerController>().WarpTo(arrival.position);
         FieldHUD.Notify(FieldSession.State.mecamossEncountered ? "북서 공장 · 반송품 하역장" : "하역장 안쪽, 늪에 잠긴 반송품이 흔들린다.");
+    }
+
+    void RefreshCargo()
+    {
+        var state = FieldSession.State;
+        cargoTrigger.enabled = state.mecamossDefeated;
+        cargoArt.color = state.mecamossCargoOpened ? new Color(.62f, .58f, .52f) : Color.white;
+        cargoInteraction.Configure(state.mecamossCargoOpened ? "빈 운송함" : "봉인된 운송함 · F 열기", OpenCargo);
+    }
+
+    void OpenCargo()
+    {
+        if (!PlayerInside || !FieldSession.State.OpenMecamossCargo()) return;
+        RefreshCargo();
+        cargoInteraction.ShowInteractSign();
+        FieldHUD.Notify("동부 약도와 손상된 절연 장치를 챙겼다.");
+        FieldHUD.ShowStory(FieldHUD.StoryPage.SouthboundManifest);
     }
 
     void Leave()
@@ -102,6 +129,7 @@ public sealed class MecamossReceivingHall : MonoBehaviour
     {
         if (body.Defeated)
         {
+            if (!cargoTrigger.enabled) RefreshCargo();
             if (Transitioning || introduction != null || strike.Running || Charge.Stage != MecamossDockCharge.Phase.Off || Slam.Running)
             {
                 CancelEncounter();
