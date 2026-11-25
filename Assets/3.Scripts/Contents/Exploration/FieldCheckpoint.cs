@@ -49,6 +49,11 @@ public static class FieldCheckpoint
             playerX=player.transform.position.x,playerY=player.transform.position.y,towerX=game.tower.transform.position.x,
             towerY=game.tower.transform.position.y,towerHp=game.tower.GetComponent<Stat>().Hp,
             day=day,time=time,coin=Managers.Inven.Coin };
+        if (SurgeFactoryHall.PlayerInside)
+        {
+            data.playerX = SurgeFactoryHall.Current.Outside.x;
+            data.playerY = SurgeFactoryHall.Current.Outside.y;
+        }
         foreach(var cell in MapManager.building.cellBounds.allPositionsWithin)
         {
             var prefab=ExplorationEffects.TilePrefab(MapManager.building.GetTile(cell));

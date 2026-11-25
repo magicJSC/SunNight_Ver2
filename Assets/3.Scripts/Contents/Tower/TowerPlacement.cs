@@ -50,7 +50,7 @@ internal sealed class TowerPlacement
     }
 
     bool HasGround(Vector2 point) => !ground || ground.HasTile(ground.WorldToCell(point)) ||
-        NorthwestMarsh.HasGround(point);
+        NorthwestMarsh.HasGround(point) || SouthwestSwitchyard.HasGround(point);
 
     bool Clear(Vector2 point, Vector2 size)
     {

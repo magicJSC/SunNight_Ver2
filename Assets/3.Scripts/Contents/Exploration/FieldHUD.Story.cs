@@ -34,8 +34,9 @@ public sealed partial class FieldHUD
     float missionChangedAt;
     bool inFoxtonFactory;
     RawImage survey;
-    RectTransform eastSearchArea;
-    RectTransform dockStamp, gateStamp;
+    RectTransform eastSearchArea, eastGateStamp;
+    RectTransform dockStamp, gateStamp, surgeStamp;
+    bool HasSurgeMap => !inFoxtonFactory && FieldSession.State.southwestGateDiscovered;
     bool HasDockMap => !inFoxtonFactory && FieldSession.State.foxtonReturnSlipCollected;
     Button mapTab, journalTab, signalTab;
     RectTransform notebook, bookmarkMark;
@@ -123,6 +124,8 @@ public sealed partial class FieldHUD
             new Vector2(-209, 147), 4, 85, new Color32(55, 82, 70, 255));
         gateStamp = BuildSurveyStamp("NorthwestFactoryGate", "5", "공장 정문",
             new Vector2(-222, 153), -17, 58, RedInk);
+        surgeStamp = BuildSurveyStamp("SouthwestGate", "6", "남서 송전 공장",
+            new Vector2(SouthwestSwitchyard.GateX, SouthwestSwitchyard.GateY), -15, 80, RedInk);
 
         eastSearchArea = Rect("EastSearchArea", survey.transform);
         OnPaper(eastSearchArea, 135, 86, 29, 19);
@@ -133,6 +136,8 @@ public sealed partial class FieldHUD
         border.effectColor = RedInk;
         border.effectDistance = new Vector2(2, -2);
         eastSearchArea.gameObject.SetActive(false);
+
+        eastGateStamp = BuildSurveyStamp("EastRefugeGate", "7", "거점 입구", EasternRefuge.Entrance, -16, 51, RedInk);
 
         Color tabInk = new Color32(255, 238, 198, 255);
         journalTab = PaperButton("Journal", "일지", () => ShowStory(AvailableNotes()), 68, 1, 54, 17, tabInk);
@@ -190,7 +195,7 @@ public sealed partial class FieldHUD
         FieldSession.State.foxtonReturnSlipCollected ? StoryPage.ReturnSlip :
         FieldSession.State.sunNightJournalRead ? StoryPage.Journal : StoryPage.FieldNotes;
     StoryPage AvailableMap() => FieldSession.State.mecamossCargoOpened ? StoryPage.EasternSketch :
-        HasDockMap || FieldSession.State.sunNightJournalRead ? StoryPage.RestoredMap : StoryPage.Map;
+        HasDockMap || HasSurgeMap || FieldSession.State.sunNightJournalRead ? StoryPage.RestoredMap : StoryPage.Map;
 
     Button PageArrow(string name, int x, int direction, Texture2D texture)
     {
@@ -215,7 +220,7 @@ public sealed partial class FieldHUD
     bool CanRead(StoryPage page) => page switch
     {
         StoryPage.Map => FieldSession.State.HasBasementMap,
-        StoryPage.RestoredMap => FieldSession.State.sunNightJournalRead || HasDockMap,
+        StoryPage.RestoredMap => FieldSession.State.sunNightJournalRead || HasDockMap || HasSurgeMap,
         StoryPage.Journal => FieldSession.State.sunNightJournalRead,
         StoryPage.ReturnSlip => FieldSession.State.foxtonReturnSlipCollected,
         StoryPage.SouthboundManifest or StoryPage.EasternSketch => FieldSession.State.mecamossCargoOpened,
@@ -239,8 +244,10 @@ public sealed partial class FieldHUD
         var oldMap = survey.texture;
         var oldCrop = survey.uvRect;
         bool oldDockStamp = dockStamp.gameObject.activeSelf;
+        bool oldEastGate = eastGateStamp.gameObject.activeSelf;
         bool oldEastArea = eastSearchArea.gameObject.activeSelf;
         bool oldGateStamp = gateStamp.gameObject.activeSelf;
+        bool oldSurgeStamp = surgeStamp.gameObject.activeSelf;
         var oldSlipTitle = slipTitle.text;
         var oldSlip = slipText.text;
         var oldFolio = folio.text;
@@ -254,6 +261,8 @@ public sealed partial class FieldHUD
             dockStamp.gameObject.SetActive(oldDockStamp);
             gateStamp.gameObject.SetActive(oldGateStamp);
             eastSearchArea.gameObject.SetActive(oldEastArea);
+            eastGateStamp.gameObject.SetActive(oldEastGate);
+            surgeStamp.gameObject.SetActive(oldSurgeStamp);
             folio.text = oldFolio;
         }
         else
@@ -315,7 +324,13 @@ public sealed partial class FieldHUD
                 : FieldLaboratory.PlayerInside ? "북쪽 단말 조사하기 · F" : "남쪽 폐주거지에서 연구소 찾기";
         if (HasDockMap)
         {
-            if (state.mecamossDefeated) objective = state.mecamossCargoOpened ? "동쪽 생존자 거점 찾기" : "하역장의 운송함 조사하기";
+            if (state.surgeDefeated) objective = "남서 송전 공장 파괴 완료";
+            else if (state.surgeEncountered) objective = "공장장 서지 처치";
+            else if (state.southwestGateOpen) objective = "남서 공장 조사하기";
+            else if (state.hasRepairedInsulator) objective = state.southwestGateDiscovered ? "남서 공장 진입하기" : "남서쪽 서지 공장 찾기";
+            else if (state.insulatorRepairRequested) objective = "절연 장치 수리하기";
+            else if (state.mecamossCargoOpened) objective = state.eastRefugeDiscovered ? "정비사에게 절연 장치 보여주기" : "동쪽 생존자 거점 찾기";
+            else if (state.mecamossDefeated) objective = "하역장의 운송함 조사하기";
             else if (state.mecamossEncountered) objective = "공장장 메카모스 처치";
             else objective = state.northwestFactoryGateDiscovered ? "북서 공장 조사하기" : "북서 늪지 공장 찾기";
         }
@@ -326,7 +341,8 @@ public sealed partial class FieldHUD
         if (objective != storyObjective.text)
         {
             storyObjective.text = objective;
-            missionCaption.text = state.mecamossDefeated ? "현재 목표   ·   공장 파괴 2/3" :
+            missionCaption.text = state.surgeDefeated ? "현재 목표   ·   공장 파괴 3/3" :
+                state.mecamossDefeated ? "현재 목표   ·   공장 파괴 2/3" :
                 state.foxtonFactoryDestroyed ? "현재 목표   ·   공장 파괴 1/3" :
                 state.sunNightJournalRead || inFoxtonFactory ? "현재 목표   ·   공장 파괴 0/3" : "현재 목표   ·   [T] 생존 일지";
             missionChangedAt = Time.unscaledTime;
@@ -346,7 +362,7 @@ public sealed partial class FieldHUD
         if (storyCard.activeSelf) { CloseStory(); return; }
         if (Managers.Game.isCantPlay || Managers.UI.PopUIList.Count > 0) return;
         if (notes) ShowStory(AvailableNotes());
-        else if (state.HasBasementMap || HasDockMap) ShowStory(AvailableMap());
+        else if (state.HasBasementMap || HasDockMap || HasSurgeMap) ShowStory(AvailableMap());
         else if (state.firstNightCleared) ShowStory(StoryPage.Signal);
     }
 
@@ -368,7 +384,7 @@ public sealed partial class FieldHUD
         bool map = Section(page) == MapPages;
         hud.survey.gameObject.SetActive(map);
         hud.storyText.gameObject.SetActive(!map);
-        hud.mapTab.interactable = state.HasBasementMap || hud.HasDockMap;
+        hud.mapTab.interactable = state.HasBasementMap || hud.HasDockMap || hud.HasSurgeMap;
         hud.signalTab.interactable = state.firstNightCleared;
         RectTransform selected = (map ? hud.mapTab : page == StoryPage.Signal ? hud.signalTab : hud.journalTab).GetComponent<RectTransform>();
         OnPaper(hud.bookmarkMark, selected.anchoredPosition.x / 2 + 18, 15, 18, 1);
@@ -382,11 +398,14 @@ public sealed partial class FieldHUD
 
     void FillSpread(StoryPage page)
     {
-        bool shippingMap = page == StoryPage.RestoredMap && HasDockMap;
-        eastSearchArea.gameObject.SetActive(page == StoryPage.EasternSketch);
+        bool shippingMap = page == StoryPage.RestoredMap && (HasDockMap || HasSurgeMap);
+        bool eastGateKnown = FieldSession.State.eastRefugeDiscovered;
+        eastGateStamp.gameObject.SetActive(eastGateKnown && (page == StoryPage.EasternSketch || shippingMap));
+        eastSearchArea.gameObject.SetActive(page == StoryPage.EasternSketch && !eastGateKnown);
         bool gateRecorded = shippingMap && HasDockMap && FieldSession.State.northwestFactoryGateDiscovered;
         dockStamp.gameObject.SetActive(shippingMap && HasDockMap);
         gateStamp.gameObject.SetActive(gateRecorded);
+        surgeStamp.gameObject.SetActive(shippingMap && HasSurgeMap);
         switch (page)
         {
             case StoryPage.Map:
@@ -403,7 +422,13 @@ public sealed partial class FieldHUD
                     : restored
                     ? "①  폐주거지 연구소\n남쪽 계단으로 지상 복귀.\n\n②  중앙 야영지\n연구소 북동쪽. 정비와 강화.\n\n③  폭스턴 공장\n야영지에서 동북쪽으로."
                     : "①  훈련 거점\n남문을 나와 공터를 건넌다.\n\n②  폐주거지 연구소\n남쪽 정문에 다가가 들어가자.";
-                folio.text = gateRecorded ? "현장 기록 · 정문 위치 확인" : shippingMap ? "반송 전표의 도장을 옮겨 찍음" :
+                if (shippingMap && HasSurgeMap)
+                {
+                    storyTitle.text = "폐도시 · 화물 운송도";
+                    slipText.text = (HasDockMap ? slipText.text + "\n" : "") + "⑥  남서 송전 공장\n" +
+                        (FieldSession.State.southwestGateOpen ? "절연 장치를 연결해 정문을 열었다." : "쌍철탑 아래에 잠긴 정문이 있다.");
+                }
+                folio.text = gateRecorded || (shippingMap && HasSurgeMap) ? "현장 기록 · 정문 위치 확인" : shippingMap ? "반송 전표의 도장을 옮겨 찍음" :
                     restored ? "단말에서 복원한 지도" : "로봇 잔해에서 주운 지도";
                 break;
             case StoryPage.EasternSketch:
@@ -412,7 +437,14 @@ public sealed partial class FieldHUD
                 storyTitle.text = "동부 피난 거점 약도";
                 slipTitle.text = "정비사의 메모";
                 slipText.text = "붉게 칠한 곳은 동쪽 피난 구역이다.\n\n밤에는 안테나 아래 등불을 찾아라. 절연 장치를 가져오면 살펴보겠다.";
-                folio.text = "하역장 운송함 · 동부 수색 범위";
+                if (eastGateKnown)
+                {
+                    slipTitle.text = "동쪽 생존자 거점";
+                    slipText.text = "⑦  등불 사이로 난 입구.\n안테나 너머 차양에서 정비사가 일한다.";
+                    if (FieldSession.State.hasRepairedInsulator) slipText.text += "\n\n절연 장치를 고쳤다. 남서쪽 송전탑을 따라 서지 공장을 찾자.";
+                    else if (FieldSession.State.insulatorRepairRequested) slipText.text += $"\n\n수리 재료는 {EasternRefuge.Recipe}. 거점 남동쪽 폐정비소의 작업대와 부품함을 조사하자.";
+                }
+                folio.text = eastGateKnown ? "현장 기록 · 피난 거점 입구" : "하역장 운송함 · 동부 수색 범위";
                 break;
             case StoryPage.SouthboundManifest:
                 storyTitle.text = "남서행 운송 기록";
