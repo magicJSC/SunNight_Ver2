@@ -8,8 +8,11 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
     [SerializeField] AnimationClip dash;
     [SerializeField] SpriteRenderer lane;
     [SerializeField] Sprite quillCharge, quillRelease, quillProjectile;
+    [SerializeField] Sprite groundCast, groundWarning, groundBolt;
     SurgeQuillVolley volley;
-    bool quillsNext;
+    SurgeGroundStrike groundStrike;
+    enum Pattern { Dash, Quills, GroundStrike }
+    Pattern next;
     LineRenderer liveLine;
     // The hand drops on cel 6 and the braking pose begins on cel 10.
     const float Launch = 19f / 24f, Brake = 25f / 24f;
@@ -32,6 +35,7 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
         hurtbox = GetComponent<BoxCollider2D>();
         liveLine = lane.GetComponentInChildren<LineRenderer>();
         volley = new SurgeQuillVolley(art, quillCharge, quillRelease, quillProjectile, liveLine.sharedMaterial);
+        groundStrike = new SurgeGroundStrike(art, groundCast, groundWarning, groundBolt, liveLine.sharedMaterial);
         home = transform.position;
         Display(false);
     }
@@ -42,8 +46,9 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
         lane.enabled = liveLine.enabled = false;
         art.sprite = idle;
         attacking = false;
-        quillsNext = false;
+        next = Pattern.Dash;
         volley.Stop();
+        groundStrike.Stop();
         engaged = visible;
         rest = .65f;
         transform.position = home;
@@ -70,6 +75,12 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
             state.surgeEncountered = true;
         }
         var feet = player.GetComponent<BoxCollider2D>();
+        if (groundStrike.Running)
+        {
+            groundStrike.Tick(player,feet);
+            if (!groundStrike.Running) rest = 1.6f;
+            return;
+        }
         if (volley.Running)
         {
             volley.Tick(player,feet);
@@ -80,10 +91,16 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
         {
             rest -= Time.deltaTime;
             if (rest > 0) return;
-            if (quillsNext)
+            if (next == Pattern.Quills)
             {
-                quillsNext = false;
+                next = Pattern.GroundStrike;
                 volley.Begin(feet.bounds.center);
+                return;
+            }
+            if (next == Pattern.GroundStrike)
+            {
+                next = Pattern.Dash;
+                groundStrike.Begin(feet.bounds.center);
                 return;
             }
             Aim(feet.bounds.center);
@@ -115,7 +132,7 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
         if (clock < dash.length) return;
         art.sprite = idle;
         attacking = false;
-        quillsNext = true;
+        next = Pattern.Quills;
         rest = .55f;
     }
 
