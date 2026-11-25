@@ -7,6 +7,9 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
 {
     [SerializeField] AnimationClip dash;
     [SerializeField] SpriteRenderer lane;
+    [SerializeField] Sprite quillCharge, quillRelease, quillProjectile;
+    SurgeQuillVolley volley;
+    bool quillsNext;
     LineRenderer liveLine;
     // The hand drops on cel 6 and the braking pose begins on cel 10.
     const float Launch = 19f / 24f, Brake = 25f / 24f;
@@ -28,6 +31,7 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
         health = GetComponent<Stat>();
         hurtbox = GetComponent<BoxCollider2D>();
         liveLine = lane.GetComponentInChildren<LineRenderer>();
+        volley = new SurgeQuillVolley(art, quillCharge, quillRelease, quillProjectile, liveLine.sharedMaterial);
         home = transform.position;
         Display(false);
     }
@@ -38,6 +42,8 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
         lane.enabled = liveLine.enabled = false;
         art.sprite = idle;
         attacking = false;
+        quillsNext = false;
+        volley.Stop();
         engaged = visible;
         rest = .65f;
         transform.position = home;
@@ -64,10 +70,22 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
             state.surgeEncountered = true;
         }
         var feet = player.GetComponent<BoxCollider2D>();
+        if (volley.Running)
+        {
+            volley.Tick(player,feet);
+            if (!volley.Running) rest = .75f;
+            return;
+        }
         if (!attacking)
         {
             rest -= Time.deltaTime;
             if (rest > 0) return;
+            if (quillsNext)
+            {
+                quillsNext = false;
+                volley.Begin(feet.bounds.center);
+                return;
+            }
             Aim(feet.bounds.center);
         }
         clock += Time.deltaTime;
@@ -97,6 +115,7 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
         if (clock < dash.length) return;
         art.sprite = idle;
         attacking = false;
+        quillsNext = true;
         rest = .55f;
     }
 

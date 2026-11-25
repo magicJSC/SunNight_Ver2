@@ -2731,6 +2731,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SurgeDashAttack
   dash: {fileID: 7400000, guid: 7016a580e9441304c8334fe9876b174b, type: 2}
   lane: {fileID: 1584909296}
+  quillCharge: {fileID: 21300000, guid: bf4f8ae7ebea2064a91b3d2c53cd6fa8, type: 3}
+  quillRelease: {fileID: 21300000, guid: b6af2ac53edce794bb9c0df0d8fe71ec, type: 3}
+  quillProjectile: {fileID: 21300000, guid: 9b0fd83da34dbfb4288b8e600a6d9692, type: 3}
 --- !u!114 &2007744517
 MonoBehaviour:
   m_ObjectHideFlags: 0
