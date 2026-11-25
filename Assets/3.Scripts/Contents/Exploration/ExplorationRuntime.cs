@@ -39,6 +39,7 @@ public sealed class ExplorationRuntime : MonoBehaviour
         FieldHUD.Create(content.font);
         if (returnedWithSlip)
             FieldHUD.Notify("일지에 반송 전표를 끼웠다. 지도에 북서 늪지 인수장을 표시했다.");
+        Instantiate(Resources.Load<EasternRefuge>("EastRefuge/Camp"), EasternRefuge.Entrance, Quaternion.identity, transform);
         var doorway = new GameObject("ResidentialLaboratoryDoor");
         doorway.transform.SetParent(transform);
         doorway.AddComponent<FieldLaboratory>().Build(this);
@@ -47,13 +48,14 @@ public sealed class ExplorationRuntime : MonoBehaviour
         if (state.firstNightCleared && !state.basementMapDropped) state.basementMapReceived = true;
         if (state.basementMapDropped && !state.HasBasementMap)
             CreateMapPickup(new Vector2(state.mapDropX, state.mapDropY));
-        foreach(var reward in content.rewards)
+        var yard = SouthwestSwitchyard.Current;
+        foreach(var reward in yard ? content.rewards.Concat(yard.rewards) : content.rewards)
         {
             var go=Prop("Reward_"+reward.id,reward.position,
                 !string.IsNullOrEmpty(reward.legacySource) && content.salvage!=null ? content.salvage : content.chest,new Color(.95f,.85f,.5f));
             go.AddComponent<FieldReward>().Configure(reward,content);
         }
-        foreach(var guard in content.guards)
+        foreach(var guard in yard ? content.guards.Concat(yard.guards) : content.guards)
         {
             if (FieldSession.State.killedGuards.Contains(guard.id)) continue;
             var go=Instantiate(guard.ranged ? content.coala : content.dog,guard.position,Quaternion.identity,transform);

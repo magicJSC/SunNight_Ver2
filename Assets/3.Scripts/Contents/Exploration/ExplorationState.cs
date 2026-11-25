@@ -11,8 +11,24 @@ public sealed class ExplorationState
     public bool foxtonFactoryDestroyed;
     public bool foxtonReturnSlipCollected;
     public bool northwestFactoryGateDiscovered;
+    public bool southwestGateDiscovered;
+    public bool southwestGateOpen;
+    public bool surgeEncountered;
+    public bool surgeDefeated;
     public bool mecamossEncountered;
     public bool mecamossDefeated;
+    public bool mecamossCargoOpened;
+    public bool hasDamagedInsulator;
+    public bool eastRefugeDiscovered;
+    public bool insulatorRepairRequested;
+    public bool hasRepairedInsulator;
+    public bool OpenMecamossCargo()
+    {
+        if (!mecamossDefeated || mecamossCargoOpened) return false;
+        mecamossCargoOpened = true;
+        hasDamagedInsulator = true;
+        return true;
+    }
     public bool basementMapReceived;
     public bool sunNightJournalRead;
     public bool basementMapDropped;

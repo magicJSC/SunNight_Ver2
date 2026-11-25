@@ -48,6 +48,11 @@ public class CameraController : MonoBehaviour
                 transform.position = new Vector3(FieldLaboratory.Center.x, FieldLaboratory.Center.y, -10);
                 continue;
             }
+            if (SurgeFactoryHall.PlayerInside)
+            {
+                transform.position = SurgeFactoryHall.Current.CameraPosition(player.position, Camera.main);
+                continue;
+            }
             if (MecamossReceivingHall.PlayerInside)
             {
                 transform.position = MecamossReceivingHall.Current.CameraPosition(player.position, Camera.main);
