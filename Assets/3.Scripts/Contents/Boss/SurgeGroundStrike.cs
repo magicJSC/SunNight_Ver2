@@ -4,14 +4,15 @@ public sealed class SurgeGroundStrike
 {
     const float Tell = 1.15f, Flash = .32f, Radius = 2f;
     readonly SpriteRenderer boss, warning, bolt;
-    readonly Sprite cast, idle;
+    readonly AnimationClip castMotion;
+    readonly Sprite idle;
     float elapsed;
     public bool Running => warning.enabled || bolt.enabled;
 
-    public SurgeGroundStrike(SpriteRenderer boss, Sprite cast, Sprite marker, Sprite impact, Material unlit)
+    public SurgeGroundStrike(SpriteRenderer boss, AnimationClip castMotion, Sprite marker, Sprite impact, Material unlit)
     {
         this.boss = boss;
-        this.cast = cast;
+        this.castMotion = castMotion;
         idle = boss.sprite;
         SpriteRenderer Effect(string name, Sprite sprite, int order)
         {
@@ -32,7 +33,7 @@ public sealed class SurgeGroundStrike
     {
         elapsed = 0;
         boss.flipX = target.x > boss.transform.position.x;
-        boss.sprite = cast;
+        castMotion.SampleAnimation(boss.gameObject, 0);
         warning.transform.position = bolt.transform.position = target;
         warning.color = new Color(1,.8f,.55f,.72f);
         warning.enabled = true;
@@ -41,6 +42,7 @@ public sealed class SurgeGroundStrike
     public void Tick(PlayerController player, Collider2D feet)
     {
         elapsed += Time.deltaTime;
+        castMotion.SampleAnimation(boss.gameObject, Mathf.Min(elapsed,castMotion.length));
         if (elapsed < Tell)
         {
             warning.color = Color.Lerp(new Color(1,.8f,.55f,.72f), Color.white, elapsed/Tell);

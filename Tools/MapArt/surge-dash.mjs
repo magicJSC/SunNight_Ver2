@@ -59,7 +59,7 @@ function mapper(k) {
                 [x,y]=rotate(x,y,23,42,k.leadArm);
             }
             if(part==='hipArm') [x,y]=rotate(x,y,52,43,k.trailArm);
-            if(part==='head') [x,y]=rotate(x,y,36,32,-k.lean*.50);
+            if(part==='head' || part==='quills') [x,y]=rotate(x,y,36,32,-k.lean*.50);
             [x,y]=rotate(x,y,36,51,k.lean);
             y+=k.drop;
         }

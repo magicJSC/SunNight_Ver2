@@ -6,7 +6,9 @@ public sealed class SurgeQuillVolley
     const int Count = 5;
     const float Spread = 24f, ChargeTime = 1f, Speed = 7.5f, Range = 12f, Radius = .12f;
     readonly SpriteRenderer boss;
-    readonly Sprite charge, release, idle;
+    readonly AnimationClip sideMotion, upMotion, downMotion;
+    AnimationClip castMotion;
+    readonly Sprite idle;
     readonly SpriteRenderer[] quills = new SpriteRenderer[Count];
     readonly LineRenderer[] guides = new LineRenderer[Count];
     readonly Vector2[] directions = new Vector2[Count];
@@ -16,13 +18,15 @@ public sealed class SurgeQuillVolley
     Vector2 origin;
     float elapsed;
     bool dealtDamage;
+    bool faceRightAfterPivot;
     public bool Running { get; private set; }
 
-    public SurgeQuillVolley(SpriteRenderer boss, Sprite charge, Sprite release, Sprite quill, Material unlit)
+    public SurgeQuillVolley(SpriteRenderer boss, AnimationClip sideMotion, AnimationClip upMotion, AnimationClip downMotion, Sprite quill, Material unlit)
     {
         this.boss = boss;
-        this.charge = charge;
-        this.release = release;
+        this.sideMotion = sideMotion;
+        this.upMotion = upMotion;
+        this.downMotion = downMotion;
         idle = boss.sprite;
         for (int i=0; i<Count; i++)
         {
@@ -48,11 +52,21 @@ public sealed class SurgeQuillVolley
         }
     }
 
-    public void Begin(Vector2 target)
+    public void Begin(Vector2 bodyCenter, Vector2 target)
     {
-        boss.flipX = target.x > boss.transform.position.x;
-        origin = (Vector2)boss.transform.position + new Vector2(boss.flipX ? -.34f : .34f, 1.95f);
-        float aim = Mathf.Atan2(target.y-origin.y,target.x-origin.x)*Mathf.Rad2Deg;
+        origin = bodyCenter;
+        Vector2 offset = target - origin;
+        if (offset == Vector2.zero) offset = boss.flipX ? Vector2.right : Vector2.left;
+        if (Mathf.Abs(offset.y) > Mathf.Abs(offset.x))
+        {
+            castMotion = offset.y > 0 ? upMotion : downMotion;
+        }
+        else
+        {
+            castMotion = sideMotion;
+            faceRightAfterPivot = offset.x > 0;
+        }
+        float aim = Mathf.Atan2(offset.y,offset.x)*Mathf.Rad2Deg;
         for (int i=0; i<Count; i++)
         {
             var rotation = Quaternion.Euler(0,0,aim+(i-Count/2)*Spread);
@@ -69,7 +83,7 @@ public sealed class SurgeQuillVolley
             guides[i].enabled = length > 0;
             quills[i].transform.SetPositionAndRotation(origin,rotation);
         }
-        boss.sprite = charge;
+        castMotion.SampleAnimation(boss.gameObject, 0);
         elapsed = 0;
         dealtDamage = false;
         Running = true;
@@ -79,9 +93,12 @@ public sealed class SurgeQuillVolley
     {
         float previous = Mathf.Max(0,(elapsed-ChargeTime)*Speed);
         elapsed += Time.deltaTime;
+        // QuillCast_02 is a rear view; mirror there so the opening profile matches idle.
+        if (castMotion == sideMotion && elapsed >= .24f) boss.flipX = faceRightAfterPivot;
+        if (elapsed < ChargeTime+.24f) castMotion.SampleAnimation(boss.gameObject, elapsed);
+        else boss.sprite = idle;
         if (elapsed < ChargeTime) return;
         float distance = (elapsed-ChargeTime)*Speed;
-        boss.sprite = elapsed < ChargeTime+.24f ? release : idle;
         for (int i=0; i<Count; i++)
         {
             guides[i].enabled = false;

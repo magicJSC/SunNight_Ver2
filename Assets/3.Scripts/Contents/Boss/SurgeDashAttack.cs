@@ -7,8 +7,9 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
 {
     [SerializeField] AnimationClip dash;
     [SerializeField] SpriteRenderer lane;
-    [SerializeField] Sprite quillCharge, quillRelease, quillProjectile;
-    [SerializeField] Sprite groundCast, groundWarning, groundBolt;
+    [SerializeField] AnimationClip quillCastMotion, groundCastMotion;
+    [SerializeField] AnimationClip quillCastUp, quillCastDown;
+    [SerializeField] Sprite quillProjectile, groundWarning, groundBolt;
     SurgeQuillVolley volley;
     SurgeGroundStrike groundStrike;
     enum Pattern { Dash, Quills, GroundStrike }
@@ -34,8 +35,8 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
         health = GetComponent<Stat>();
         hurtbox = GetComponent<BoxCollider2D>();
         liveLine = lane.GetComponentInChildren<LineRenderer>();
-        volley = new SurgeQuillVolley(art, quillCharge, quillRelease, quillProjectile, liveLine.sharedMaterial);
-        groundStrike = new SurgeGroundStrike(art, groundCast, groundWarning, groundBolt, liveLine.sharedMaterial);
+        volley = new SurgeQuillVolley(art, quillCastMotion, quillCastUp, quillCastDown, quillProjectile, liveLine.sharedMaterial);
+        groundStrike = new SurgeGroundStrike(art, groundCastMotion, groundWarning, groundBolt, liveLine.sharedMaterial);
         home = transform.position;
         Display(false);
     }
@@ -94,7 +95,7 @@ public sealed class SurgeDashAttack : MonoBehaviour, IGetPlayerDamage
             if (next == Pattern.Quills)
             {
                 next = Pattern.GroundStrike;
-                volley.Begin(feet.bounds.center);
+                volley.Begin(hurtbox.bounds.center, feet.bounds.center);
                 return;
             }
             if (next == Pattern.GroundStrike)

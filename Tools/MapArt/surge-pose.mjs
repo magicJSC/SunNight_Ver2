@@ -70,7 +70,7 @@ export function drawSurge(pen, hex, map = (_, x, y) => [x,y]) {
     line('khaki','10,30 11,27 13,28 14,26 16,29 18,31');
     line('gold','10,29 11,27 13,28 14,26 16,29');dot('hot',14,27);
 
-    part = 'head';
+    part = 'quills';
     // Quills radiate from the crown and nape, ending above the shoulder blades.
     fill('deep','39,23 48,19 54,22 58,26 62,33 55,30 51,28 54,34 54,37 48,32 43,29',true);
     fill('quill','47,24 54,24 58,28 60,31 55,28 51,27');
@@ -87,6 +87,7 @@ export function drawSurge(pen, hex, map = (_, x, y) => [x,y]) {
     fill('khaki','33,10 36,7 38,6 36,9');
     fill('iron','40,4 44,3 47,3 44,5 41,7');line('silver','42,4 46,3');dot('glint',44,3);
 
+    part = 'head';
     // Long nose, low brow and round ears retain the hedgehog silhouette in three-quarter view.
     fill('fur','24,18 22,15 22,12 24,11 27,13 28,17',true);
     line('shadow','24,13 25,15');
